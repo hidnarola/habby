@@ -48,13 +48,13 @@
                             <div class="row">
 
                                 <div class="login_frm">
-                                    <form class="">
+                                    <form class="" role="form" method="post">
                                         <div class="form-group">
                                             <div class="col-sm-5 col-xs-12">
-                                                <input type="text" class="form-control" id="inputEmail" placeholder="Email or Phone">
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="Email or Phone" value="<?php echo set_value('email'); ?>">
                                             </div>
                                             <div class="col-sm-5 col-xs-12">
-                                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                                <input type="password" class="form-control" name="password" id="pwd" placeholder="Password">
                                             </div>
                                             <div class="col-sm-2 col-xs-12">
                                                 <input type="submit" class="login_btn" value="Log In">
@@ -64,22 +64,20 @@
                                             <div class="col-sm-5 col-xs-12">
                                                 <div class="checkbox logincheck">
                                                     <label class="keep_lgin">
-                                                        <input type="checkbox"> Keep me logged in
+                                                        <input type="checkbox" name="remember_me" value="1" <?php echo set_checkbox('remember_me', '1', TRUE); ?>> Keep me logged in
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-5 col-xs-12">
                                                 <label class="forgt_lnk">
-                                                    <a href="#">Forgot your password?</a>
+                                                    <a href="<?php echo base_url() . "/" ?>">Forgot your password?</a>
                                                 </label>
                                             </div>
                                         </div>
                                     </form>
                                     <div class="lang_sec lang-change">
                                         <select class="selectpicker" data-style="btn-info">
-                                            <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>>
-                                                <?php echo lang('English') ?>
-                                            </option>
+                                            <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
                                             <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
                                             <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
                                         </select>
