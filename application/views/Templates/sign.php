@@ -48,7 +48,19 @@
                             <div class="row">
 
                                 <div class="login_frm">
-                                    <form class="" role="form" method="post">
+                                    <form class="" role="form" method="post" action="<?php echo base_url() . "login" ?>">
+                                        <?php
+                                        $message = $this->session->flashdata('message');
+                                        if (!empty($message) && isset($message)) {
+                                            ($message['class'] != '') ? $message['class'] : '';
+                                            echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+                                        }
+
+                                        $all_errors = validation_errors();
+                                        if (isset($all_errors) && !empty($all_errors)) {
+                                            echo '<div class="alert alert-danger">' . $all_errors . '</div>';
+                                        }
+                                        ?>
                                         <div class="form-group">
                                             <div class="col-sm-5 col-xs-12">
                                                 <input type="text" class="form-control" name="email" id="email" placeholder="Email or Phone" value="<?php echo set_value('email'); ?>">

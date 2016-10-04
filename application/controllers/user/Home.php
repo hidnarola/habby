@@ -4,6 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        $this->load->model(array('Users_model'));
+    }
+
     /**
      * Index Page for this controller.
      *
@@ -20,7 +25,13 @@ class Home extends CI_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->template->load('front', 'user/home.php');
+        $session_data = $this->session->userdata('user');
+        $data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
+        if (empty($data['user_data'])) {
+            redirect('login');
+        } else {
+            $this->template->load('front', 'user/home.php');
+        }
     }
 
     public function change_lang() {
@@ -34,6 +45,14 @@ class Home extends CI_Controller {
                 $this->session->set_userdata('language', 'russian');
             }
         }
+    }
+
+    public function log_out() {
+        $this->session->sess_destroy();
+//        $this->session->unset_userdata('user');
+        delete_cookie('Remember_me');
+        $this->session->set_flashdata('message', array('message' => lang('Log out Successfully.'), 'class' => 'alert alert-success'));
+        redirect('login');
     }
 
 }

@@ -45,7 +45,7 @@
             <a href="smile-share.html">Smile Share</a>
             <a href="home-challenge.html">Challenge</a>
             <a href="treehole.html">Live life</a>
-            <a href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a>
+            <a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a>
         </nav>
         <!-- Mobile Toggle Menu end here -->
 
@@ -65,7 +65,7 @@
                                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
+                                        <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -217,6 +217,16 @@
         <!--Content Start-->
         <div class="container-fluid">
             <?php
+            $message = $this->session->flashdata('message');
+            if (!empty($message) && isset($message)) {
+                ($message['class'] != '') ? $message['class'] : '';
+                echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+            }
+
+            $all_errors = validation_errors();
+            if (isset($all_errors) && !empty($all_errors)) {
+                echo '<div class="alert alert-danger">' . $all_errors . '</div>';
+            }
             if (isset($body) && !empty($body)) {
                 echo $body;
             }
