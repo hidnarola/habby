@@ -3,7 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
     /**
      * Index Page for this controller.
      *
@@ -19,8 +18,46 @@ class Home extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
+    var $data;
+
+    public function __construct(){
+        parent::__construct();
+        $this->load->model('Common_functionality');
+        $this->load->model('Post');
+        $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
+    }
+
+    /*
+     * index method loads home page view with all required details
+     * develop by : ar
+     */
     public function index() {
-        $this->template->load('front', 'user/home.php');
+        $this->template->load('front', 'user/home.php',$this->data);
+    }
+
+    /*
+     * add_post method is used to add post in database
+     * develop by : ar
+     */
+    public function add_post()
+    {
+        if($this->input->post())
+        {
+            $this->form_validation->set_rules('description', 'description', 'required');
+            if(!($this->form_validation->run() == FALSE))
+            {
+                $post_arr['description'] = $this->input->post('description');
+                $post_arr['user_id'] = '1'; // need to retrive from session
+
+                $this->Post->add_post($post_arr);
+                $this->session->set_flashdata('msg','post added successfully');
+            }
+            else
+            {
+                $this->session->set_flashdata('msg','Invalid data entered for post');
+            }
+        }
+        redirect('home');
     }
 
     public function change_lang() {
@@ -35,5 +72,7 @@ class Home extends CI_Controller {
             }
         }
     }
+
+
 
 }

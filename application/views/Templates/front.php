@@ -268,7 +268,7 @@
                         <div class="Profl_addsec home_post">
                             <div class="row pst_here_sec">
                                 <!-- post start here -->
-                                <form>
+                                <form method="post" action="home/add_post">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="panel panel-default">
 
@@ -277,7 +277,7 @@
                                                 <div class="jst_txt">
                                                     <img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>pst_prfl_icon.png"> title /short description 
                                                 </div>
-                                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                                <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                                             </div>
                                             <!-- tittle or short description section end here -->
 
@@ -503,6 +503,13 @@
             });
 
         </script> 
+
+        <!-- My script code -->
+        <script>
+            $('document').ready(function(){
+                $('.flashmsg').fadeOut(6000);
+            });
+        </script>
     </body>
 </html>
 
