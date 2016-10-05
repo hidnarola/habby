@@ -46,4 +46,24 @@ $('document').ready(function(){
 			}
 		});
 	});
+
+	$('.post_section').on('click','.user_coin',function(){
+		var t = $(this);
+		post_id = t.parents('.pst_full_sec').data('post_id');
+
+		$.ajax({
+			url:base_url+'user/post/add_coin/'+post_id,
+			success: function(str){
+				var coin = parseInt(t.find('.coin_cnt').html());
+				if(str == "1")
+				{
+					t.find('.coin_cnt').html((coin+1));
+				}
+				else if(str == "2")
+				{
+					t.find('.coin_cnt').html((coin-1));
+				}
+			}
+		});
+	});
 });

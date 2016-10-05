@@ -84,9 +84,9 @@
 	                                                        </a>
 	                                                    </li>
 	                                                    <li>
-	                                                        <a href="#">
+	                                                        <a href="javascript:;" class="user_coin">
 	                                                            <img src="<?php echo DEFAULT_IMAGE_PATH; ?>coin_icon.png"/><br>
-	                                                            <span>
+	                                                            <span class="coin_cnt">
 	                                                                <?php echo $post['post_coin'] ?>
 	                                                            </span>
 	                                                        </a>

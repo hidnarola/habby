@@ -101,8 +101,12 @@ class Post_model extends CI_Model
 	}
 
 	/*
-	 *
-	 *
+	 * save_post is used to save post to user's personal page
+	 * @param $array array[] input fields
+	 * 
+	 * @return boolean	true, if success
+	 *					false, if fail
+	 * developed by : ar
 	 */
 	public function save_post($array)
 	{
@@ -111,6 +115,58 @@ class Post_model extends CI_Model
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	 * add_post_coin is used to add coin to given value
+	 * @param $array array[] input fields
+	 * 
+	 * @return boolean	true, if success
+	 *					false, if fail
+	 * developed by : ar
+	 */
+	public function add_post_coin($array)
+	{
+		if($this->db->insert('post_coin',$array))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * delete_post_coin is used to delete coin to given value
+	 * @param $post_coin_id int unique id field of post_coin table
+	 * 
+	 * @return boolean	true, if success
+	 *					false, if fail
+	 * developed by : ar
+	 */
+	public function delete_post_coin($post_coin_id)
+	{
+		if($this->db->delete('id',$post_coin_id))
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * user_coin_exist_for_post is used to check, if user has given like to particular post
+	 * @param $user_id	int 	specify user_id
+	 * @param $post_id 	int 	specify post_id
+	 *
+	 * @return boolean 	true, if user entry exist for post
+	 *					false, if not exist
+	 * developed by : ar
+	 */
+	public function user_coin_exist_for_post($user_id,$post_id)
+	{
+		$where['user_id'] = $user_id;
+		$where['post_id'] = $post_id;
+		$this->db->where($where);
+		return $this->db->get('post_coin')->row_array();
+		//return $this->db->where('user_id',$user_id)->where('post_id',$post_id)->count_all_results('post_like');
 	}
 }
 ?>

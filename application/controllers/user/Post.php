@@ -61,8 +61,12 @@ class Post extends CI_Controller {
 	}
 
 	/*
-	 *
-	 *
+	 * save_post is used to save post to the user personal page
+	 * @param $post_id int specify post_id that is going to share
+	 * 
+	 * echo '1', if post was saved
+	 *		'0', if post was failed
+	 * developed by : ar
 	 */
 	public function save_post($post_id)
 	{
@@ -75,6 +79,45 @@ class Post extends CI_Controller {
 		else
 		{
 			echo '0';
+		}
+	}
+
+	/*
+	 * add_coin is used to add coin to particular post
+	 * @param $post_id int specify post_id
+	 *
+	 * echo '1', if coin added
+	 *		'2', coin deleted
+	 *		'0', operation fail 
+	 */
+	public function add_coin($post_id)
+	{
+		$user_id = $this->session->user['id'];
+		if(!empty($coin = $this->Post_model->user_coin_exist_for_post($user_id,$post_id)))
+		{
+			// Update entry
+			if($this->Post_model->delete_post_coin($update_arr,$coin['id']))
+			{
+				echo '2';
+			}
+			else
+			{
+				echo '0';
+			}
+		}
+		else
+		{
+			// Insert entry
+			$insert_arr['user_id'] = $user_id;
+			$insert_arr['post_id'] = $post_id;
+			if($this->Post_model->add_post_coin($insert_arr))
+			{
+				echo '1';
+			}
+			else
+			{
+				echo '0';
+			}
 		}
 	}
 }
