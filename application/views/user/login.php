@@ -5,7 +5,7 @@
                 <h2 class="wlcm_habby">Welcome to Habby</h2>
                 <p class="cnnct_txt">Connect with friends and the world around you</p>
                 <div class="clearfix signup_frm">
-                    <form class="" >
+                    <form class="">
                         <div class="row form-group">
                             <div class="col-lg-12">
                                 <input type="text" class="form-control" id="inputEmail" placeholder="Display Name">

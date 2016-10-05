@@ -54,7 +54,7 @@ class Login extends CI_Controller {
                 $email = $this->input->post('email');
                 $password = $this->input->post('password');
                 $remember_me = $this->input->post('remember_me');
-                pr($this->input->post());
+//                pr($this->input->post());
 
                 //check_if_user_exist - three params 1->where condition 2->is get num_rows for query 3->is fetech single or all data
                 $user_data = $this->Users_model->check_if_user_exist(['email' => $email], false, true);
