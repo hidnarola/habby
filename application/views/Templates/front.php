@@ -69,7 +69,7 @@
                                 <ul class="list-inline hdr_ul1">
                                     <li><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive"></li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <a href="javascript:void(0)" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
                                             <img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
                                             <?php echo $user_data['name'] ?>
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
