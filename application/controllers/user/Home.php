@@ -3,6 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
+
     /**
      * Index Page for this controller.
      *
@@ -20,46 +21,42 @@ class Home extends CI_Controller {
      */
     var $data;
 
-    public function __construct(){
+    public function __construct() {
         parent::__construct();
-         $this->load->model(array('Users_model','Post','Common_functionality'));
+        $this->load->model(array('Users_model', 'Post', 'Common_functionality'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
+        $session_data = $this->session->userdata('user');
+        $data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
+        if (empty($data['user_data'])) {
+            redirect('login');
+        }
     }
 
     /*
      * index method loads home page view with all required details
      * develop by : ar
      */
+
     public function index() {
-        $session_data = $this->session->userdata('user');
-        $data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
-        if (empty($data['user_data'])) {
-            redirect('login');
-        } else {
-            $this->template->load('front', 'user/home.php',$this->data);
-        }
+        $this->template->load('front', 'user/home.php', $this->data);
     }
 
     /*
      * add_post method is used to add post in database
      * develop by : ar
      */
-    public function add_post()
-    {
-        if($this->input->post())
-        {
+
+    public function add_post() {
+        if ($this->input->post()) {
             $this->form_validation->set_rules('description', 'description', 'required');
-            if(!($this->form_validation->run() == FALSE))
-            {
+            if (!($this->form_validation->run() == FALSE)) {
                 $post_arr['description'] = $this->input->post('description');
                 $post_arr['user_id'] = '1'; // need to retrive from session
 
                 $this->Post->add_post($post_arr);
-                $this->session->set_flashdata('msg','post added successfully');
-            }
-            else
-            {
-                $this->session->set_flashdata('msg','Invalid data entered for post');
+                $this->session->set_flashdata('msg', 'post added successfully');
+            } else {
+                $this->session->set_flashdata('msg', 'Invalid data entered for post');
             }
         }
         redirect('home');
