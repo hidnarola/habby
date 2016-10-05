@@ -23,8 +23,8 @@ class Home extends CI_Controller {
      */
 
     public function index() {
-        $this->data['posts'] = $this->Post_model->display_post($data = array());
-        // pr($this->data['posts'],1);
+        $this->data['posts'] = $this->Post_model->display_post($data = array(),$this->session->user['id']);
+      //   pr($this->data['posts'],1);
         $this->template->load('front', 'user/home.php', $this->data);
     }
 
@@ -40,7 +40,7 @@ class Home extends CI_Controller {
                 $post_arr['description'] = $this->input->post('description');
                 $post_arr['user_id'] = '1'; // need to retrive from session
 
-                $this->Post->add_post($post_arr);
+                $this->Post_model->add_post($post_arr);
                 $this->session->set_flashdata('msg', 'post added successfully');
             } else {
                 $this->session->set_flashdata('msg', 'Invalid data entered for post');
