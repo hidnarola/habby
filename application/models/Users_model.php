@@ -21,7 +21,7 @@ class Users_model extends CI_Model {
                 $res_data = $this->db->get('users')->result_array();
             }
         }
-        echo $this->db->last_query();
+//        echo $this->db->last_query();
         return $res_data;
     }
 

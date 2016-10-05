@@ -63,20 +63,20 @@
                                         ?>
                                         <div class="form-group">
                                             <div class="col-sm-5 col-xs-12">
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="Email or Phone" value="<?php echo set_value('email'); ?>">
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="<?php echo lang('E-mail');?>" value="<?php echo set_value('email'); ?>">
                                             </div>
                                             <div class="col-sm-5 col-xs-12">
-                                                <input type="password" class="form-control" name="password" id="pwd" placeholder="Password">
+                                                <input type="password" class="form-control" name="password" id="pwd" placeholder="<?php echo lang('Password');?>">
                                             </div>
                                             <div class="col-sm-2 col-xs-12">
-                                                <input type="submit" class="login_btn" value="Log In">
+                                                <input type="submit" class="login_btn" value="<?php echo lang('Login');?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-5 col-xs-12">
                                                 <div class="checkbox logincheck">
                                                     <label class="keep_lgin">
-                                                        <input type="checkbox" name="remember_me" value="1" <?php echo set_checkbox('remember_me', '1', TRUE); ?>> Keep me logged in
+                                                        <input type="checkbox" name="remember_me" value="1" <?php echo set_checkbox('remember_me', '1', TRUE); ?>> <?php echo lang('Keep me logged in');?>
                                                     </label>
                                                 </div>
                                             </div>
@@ -123,7 +123,7 @@
                 $('.lang-change select').change(function () {
                     var lang = $(this).val();
                     $.ajax({
-                        url: '<?php echo base_url() . "home/change_lang"; ?>',
+                        url: '<?php echo base_url() . "login/change_lang"; ?>',
                         type: 'POST',
                         data: {lang: lang},
                         success: function (data) {

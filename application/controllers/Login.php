@@ -30,8 +30,12 @@ class Login extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function index() {
 
+    /**
+     * This function is used login.
+     * develop by : HPA
+     */
+    public function index() {
         if ($this->session->userdata('language') == FALSE) {
             $this->session->set_userdata('language', 'english');
         }
@@ -98,6 +102,10 @@ class Login extends CI_Controller {
         }
     }
 
+    /**
+     * This function is used to craete new user and send verification mail.
+     * develop by : HPA
+     */
     public function register() {
         if ($this->input->post()) {
             $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
@@ -147,13 +155,30 @@ class Login extends CI_Controller {
                     $ins_data_verify = [
                         'token' => $token
                     ];
-                    $this->Users_model->update_user_data($last_user_id,$ins_data_verify);
+                    $this->Users_model->update_user_data($last_user_id, $ins_data_verify);
                 }
                 $this->session->set_flashdata('message', array('message' => lang('You are Successfully Registered! Please confirm the mail sent to your Email-ID!!!'), 'class' => 'alert alert-success'));
                 redirect('login');
             }
         } else {
             $this->template->load('sign', 'user/login', $this->data);
+        }
+    }
+
+    /**
+     * This function is used to change language.
+     * develop by : HPA
+     */
+    public function change_lang() {
+        if ($this->input->post()) {
+            $lang = $this->input->post('lang');
+            if ($lang == 'eng') {
+                $this->session->set_userdata('language', 'english');
+            } else if ($lang == 'fr') {
+                $this->session->set_userdata('language', 'french');
+            } else if ($lang == 'ru') {
+                $this->session->set_userdata('language', 'russian');
+            }
         }
     }
 
