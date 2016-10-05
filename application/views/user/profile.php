@@ -248,3 +248,80 @@
         <!-- Personal Account content  ennd here -->
     </div>
 </div>
+<!--  Edit Profile Detail form modal start here -->
+<div class="modal mdl_frm" id="edit-profile" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button> 
+                    <b>Edit Your Profile</b>
+                </div>
+                <form class="" role="form" method="post" action="<?php echo base_url() . "register" ?>">
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo set_value('name'); ?>">
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo set_value('email'); ?>">
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <select name="country" class="form-control" id="country" >
+                                <?php
+                                if (!empty($all_countries)) {
+                                    foreach ($all_countries as $a_country) {
+                                        ?>
+                                        <option value="<?php echo $a_country['id']; ?>" <?php echo set_select('country', $a_country['id']); ?>>
+                                            <?php echo $a_country['nicename']; ?>
+                                        </option>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" id="gender" value="Male" <?php echo set_radio('gender', 'Male', TRUE); ?>><?php echo lang('Male'); ?>
+                                </label>
+                                <label>
+                                    <input type="radio" name="gender" id="gender" value="Female" <?php echo set_radio('gender', 'Female'); ?>><?php echo lang('Female'); ?>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" id="bio" name="bio" placeholder="<?php echo lang('Enter your Bio'); ?>" rows="20" cols="20" ><?php echo set_value('bio'); ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma'); ?>" rows="20" cols="20"><?php echo set_value('hobby'); ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12">
+                            <p class="policy_tag"><?php echo lang('By signing up, you agree to the'); ?> <a href="#"><?php echo lang('User Policy') ?></a></p>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix xs_mddle">
+                        <div class="col-lg-12">
+                            <div class="signbtnsec">
+                                <input type="submit" class="signupbtn" value="<?php echo lang('Sign Up for Habby'); ?>">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  Edit Profile Detail form modal end here -->

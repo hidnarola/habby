@@ -92,12 +92,12 @@ class User extends CI_Controller {
 
                 $path = base_url() . 'user/reset_password/' . $token;
                 $message = "<p>Welcome " . $res_data['name'] . "</p>";
-                $message .= "<p>You have requested to have your password reset on Drope.Please click the link below to reset your password now:</p>";
+                $message .= "<p>You have requested to have your password reset on Habby.Please click the link below to reset your password now:</p>";
                 $message .= "<p><a href='" . $path . "'>Click Here</a></p>";
                 $message .= "<p>Thanks</p>";
 
                 $this->email
-                        ->from('support@drope.ch', 'Drope')
+                        ->from('support@habby.ch', 'Habby')
                         ->to($res_data['email'])
                         ->subject('Change Password Request')
                         ->message($message);

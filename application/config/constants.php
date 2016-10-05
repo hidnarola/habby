@@ -85,8 +85,14 @@ defined('EXIT_DATABASE') OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN') OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX') OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-defined('Asset_path') OR define('Asset_path', 'http://habby/');
+$servername = $_SERVER['SERVER_NAME'];
+
+if ($servername == 'habby') {
+    defined('Asset_path') OR define('Asset_path', 'http://habby/');
+} else {
+    defined('Asset_path') OR define('Asset_path', 'http://clientapp.narola.online/HD/habby/');
+}
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code
 defined('DEFAULT_JS_PATH') OR define('DEFAULT_JS_PATH', Asset_path . 'public/front/js/'); // highest automatically-assigned error code
 defined('DEFAULT_CSS_PATH') OR define('DEFAULT_CSS_PATH', Asset_path . 'public/front/css/'); // highest automatically-assigned error code
-defined('USER_JS') or define('USER_JS',Asset_path.'public/front/includes/');
+defined('USER_JS') or define('USER_JS', Asset_path . 'public/front/includes/');

@@ -9,7 +9,7 @@ class Login extends CI_Controller {
         $this->load->model(array('Users_model'));
         $this->data['user_data'] = $this->session->userdata('user');
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
-        if (!empty($data['user_data'])) {
+        if (!empty($this->data['user_data'])) {
             $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
             redirect('home');
         }
