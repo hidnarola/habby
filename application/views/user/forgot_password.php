@@ -7,7 +7,7 @@
                     <form class="" role="form" method="post" action="<?php echo base_url() . "user/forgot_password" ?>">
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Your Email" value="<?php echo set_value('email'); ?>">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail');?>" value="<?php echo set_value('email'); ?>">
                             </div>
                         </div>
                         <div class="row form-group">

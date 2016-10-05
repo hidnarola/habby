@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * This function is used print array in proper format.
+ * develop by : HPA
+ */
 function pr($data, $is_die = null) {
     echo "<pre>";
     print_r($data);
@@ -9,14 +13,10 @@ function pr($data, $is_die = null) {
     }
 }
 
-function check_loggedin($data) {
-    $CI = & get_instance();
-    if (!empty($data['user_data'])) {
-        $CI->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
-        redirect('home');
-    }
-}
-
+/**
+ * This function is used to set details for send mail.
+ * develop by : HPA
+ */
 function mail_config() {
 
     $configs = array(
@@ -33,6 +33,17 @@ function mail_config() {
     );
 
     return $configs;
+}
+
+function get_country_name($c_id = null) {
+    if ($c_id != "") {
+        $CI = & get_instance();
+        $CI->db->select('nicename');
+        $CI->db->where('id', $c_id);
+        $res_data = $CI->db->get('country')->row_array();
+        return $res_data['nicename'];
+    }
+    return false;
 }
 
 ?>

@@ -41,7 +41,10 @@ class User extends CI_Controller {
         $this->template->load('front', 'user/home.php', $this->data);
     }
 
-    // Verify Email Address and update is_acrive to 1
+    /**
+     * This function is used Verify Email Address and update is_acrive to 1.
+     * develop by : HPA
+     */
     public function verify_email($token = null) {
         $email_user_data = $this->Users_model->fetch_email_token(['token' => $token]);
         if (!empty($email_user_data)) {
@@ -60,6 +63,10 @@ class User extends CI_Controller {
         }
     }
 
+    /**
+     * This function is used send Email for change password.
+     * develop by : HPA
+     */
     public function forgot_password() {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
 
@@ -107,10 +114,13 @@ class User extends CI_Controller {
         }
     }
 
+    /**
+     * This function is used for reset new password.
+     * develop by : HPA
+     */
     public function reset_password($token = null) {
         //Token base 64 encode and decode
         $fetch_token_data = $this->Users_model->fetch_email_token(['forgot_token' => $token]);
-        pr($fetch_token_data);
         if (empty($fetch_token_data)) {
             $this->session->set_flashdata('message', ['message' => lang('Invalid Token'), 'class' => 'alert alert-danger']);
             redirect('login');

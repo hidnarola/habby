@@ -49,25 +49,24 @@ class Home extends CI_Controller {
         redirect('home');
     }
 
-    public function change_lang() {
-        if ($this->input->post()) {
-            $lang = $this->input->post('lang');
-            if ($lang == 'eng') {
-                $this->session->set_userdata('language', 'english');
-            } else if ($lang == 'fr') {
-                $this->session->set_userdata('language', 'french');
-            } else if ($lang == 'ru') {
-                $this->session->set_userdata('language', 'russian');
-            }
-        }
-    }
-
+    /**
+     * This function is used to log out from account.
+     * develop by : HPA
+     */
     public function log_out() {
         $this->session->sess_destroy();
 //        $this->session->unset_userdata('user');
         delete_cookie('Remember_me');
         $this->session->set_flashdata('message', array('message' => lang('Log out Successfully.'), 'class' => 'alert alert-success'));
         redirect('login');
+    }
+
+    /**
+     * This function is used to display logged in user details.
+     * develop by : HPA
+     */
+    public function profile() {
+        $this->template->load('front', 'user/profile.php', $this->data);
     }
 
 }

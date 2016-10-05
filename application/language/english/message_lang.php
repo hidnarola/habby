@@ -19,6 +19,12 @@ $lang['E-mail'] = 'E-mail';
 $lang['Password'] = 'Password';
 $lang["I've forgotten my password"] = "I've forgotten my password";
 $lang['Not a member yet?'] = 'Not a member yet?';
+$lang['Keep me logged in'] = 'Keep me logged in';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+
 
 //---Register---
 $lang['Name'] = 'Name';
@@ -29,6 +35,16 @@ $lang['Male'] = 'Male';
 $lang['Female'] = 'Female';
 $lang['Sign Up'] = 'Sign Up';
 $lang['(min. 6 characters)'] = '(min. 6 characters)';
+$lang['Welcome to Habby'] = 'Welcome to Habby';
+$lang['Connect with friends and the world around you'] = 'Connect with friends and the world around you';
+$lang['Display Name'] = 'Display Name';
+$lang['Enter your Bio'] = 'Enter your Bio';
+$lang['Enter your hobby seprate by comma'] = 'Enter your hobby separated by comma';
+$lang['By signing up, you agree to the'] = 'By signing up, you agree to the';
+$lang['User Policy'] = 'User Policy';
+$lang['Sign Up for Habby'] = 'Sign Up for Habby';
+$lang['Create a Page'] = 'Create a Page';
+$lang['for a celebrity, band or bussiness.'] = 'for a celebrity, band or business.';
 
 //---Forgot Password---
 $lang['Forgot Password'] = 'Forgot Password';
@@ -50,12 +66,12 @@ $lang['Please enter same password'] = 'Please enter same password';
 $lang['Email is already exists'] = 'Email is already exists';
 
 //---Flash Message--
-$lang['Login Successfully'] = 'Login Successfully';
+$lang['Login Successfully'] = 'Login Successfully.';
 $lang['Password is incorrect.'] = 'Password is incorrect.';
 $lang['Username and password are incorrect.'] = 'Username and password are incorrect.';
 $lang['Log out Successfully.'] = 'Log out Successfully.';
 $lang['You are Successfully Registered! Please confirm the mail sent to your Email-ID!!!'] = 'You are Successfully Registered! Please confirm the mail sent to your Email-ID!!!';
-$lang['Email Verify Successfully.'] = 'Email Verify Successfully.';
+$lang['Email Verify Successfully.'] = 'Email Verified Successfully.';
 $lang['Invalid Email Token'] = 'Invalid Email Token';
 $lang['Email address already in use. Please try with another one.'] = 'Email address already in use. Please try with another one.';
 $lang['Insufficient detail to Login. Please try again.'] = 'Insufficient detail to Login. Please try again.';

@@ -39,6 +39,9 @@
         </div>-->
 
         <!-- Mobile Toggle Menu start here -->
+        <?php
+        $language = $this->session->userdata('language');
+        ?>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
             <div class="clearfix nav_logo">
                 <ul Class="list-inline mobile_chatsec">
@@ -60,31 +63,38 @@
                 <div class="hdr_sec1">
                     <div class="container my_nav">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 hidden-xs">
-                            <ul class="list-inline hdr_ul1">
-                                <li><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive"></li>
-                                <li class="dropdown">
-                                    <a href="personal_account.html" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
-                                        Lorem Ipsum
-                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#" data-toggle="modal" data-target="#msg_here">
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
-                                        Chat
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" data-toggle="modal" data-target="#post_here">
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_img.png" ?>">
-                                        Post
-                                    </a>
-                                </li>
-                            </ul>
+                            <?php
+                            if (isset($user_data) && !empty($user_data)) {
+                                ?>
+                                <ul class="list-inline hdr_ul1">
+                                    <li><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive"></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
+                                            <?php echo $user_data['name'] ?>
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="<?php echo base_url() . "home/profile" ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                            <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#msg_here">
+                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
+                                            Chat
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#post_here">
+                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_img.png" ?>">
+                                            Post
+                                        </a>
+                                    </li>
+                                </ul>
+                                <?php
+                            }
+                            ?>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="my_nav">
@@ -138,11 +148,11 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                        <div class="lang_sec">
+                                        <div class="lang_sec lang-change">
                                             <select class="selectpicker" data-style="btn-info">
-                                                <option>English</option>
-                                                <option>French</option>
-                                                <option>Russian</option>
+                                                <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
+                                                <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
+                                                <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
                                             </select>
                                         </div>
                                     </div><!-- /.navbar-collapse -->
@@ -289,7 +299,7 @@
                                             <!-- tittle or short description section satrt here -->
                                             <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
                                                 <div class="jst_txt">
-                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>pst_prfl_icon.png"> title /short description 
+                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_prfl_icon.png" ?>"> title /short description 
                                                 </div>
                                                 <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                                             </div>
@@ -519,8 +529,23 @@
 
         <!-- My script code -->
         <script>
-            $('document').ready(function(){
+            $('document').ready(function () {
                 $('.flashmsg').fadeOut(6000);
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('.lang-change select').change(function () {
+                    var lang = $(this).val();
+                    $.ajax({
+                        url: '<?php echo base_url() . "login/change_lang"; ?>',
+                        type: 'POST',
+                        data: {lang: lang},
+                        success: function (data) {
+                            window.location.reload();
+                        }
+                    });
+                });
             });
         </script>
     </body>

@@ -63,7 +63,6 @@ $route['user/(:any)'] = "user/user/$1";
 $route['user/reset_password/(:any)'] = "user/user/reset_password/$1";
 $route['user/verify_email/(:any)'] = "user/user/verify_email/$1";
 
-
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

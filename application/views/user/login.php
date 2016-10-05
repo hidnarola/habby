@@ -2,18 +2,18 @@
     <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-md-offset-3 col-sm-offset-2">
             <div class="signup_sec">
-                <h2 class="wlcm_habby">Welcome to Habby</h2>
-                <p class="cnnct_txt">Connect with friends and the world around you</p>
+                <h2 class="wlcm_habby"><?php echo lang('Welcome to Habby');?></h2>
+                <p class="cnnct_txt"><?php echo lang('Connect with friends and the world around you');?></p>
                 <div class="clearfix signup_frm">
                     <form class="" role="form" method="post" action="<?php echo base_url() . "register" ?>">
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Display Name" value="<?php echo set_value('name'); ?>">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name');?>" value="<?php echo set_value('name'); ?>">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Your Email" value="<?php echo set_value('email'); ?>">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail');?>" value="<?php echo set_value('email'); ?>">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -57,29 +57,29 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <textarea class="form-control" id="bio" name="bio" placeholder="Enter your Bio" rows="20" cols="20" ><?php echo set_value('bio'); ?></textarea>
+                                <textarea class="form-control" id="bio" name="bio" placeholder="<?php echo lang('Enter your Bio');?>" rows="20" cols="20" ><?php echo set_value('bio'); ?></textarea>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <textarea class="form-control" id="hobby" name="hobby" placeholder="Enter your hobby seprate by comma" rows="20" cols="20"><?php echo set_value('hobby'); ?></textarea>
+                                <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma');?>" rows="20" cols="20"><?php echo set_value('hobby'); ?></textarea>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <p class="policy_tag">By signing up, you agree to the <a href="#">User Policy</a></p>
+                                <p class="policy_tag"><?php echo lang('By signing up, you agree to the');?> <a href="#"><?php echo lang('User Policy')?></a></p>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
                                 <div class="signbtnsec">
-                                    <input type="submit" class="signupbtn" value="Sign Up for Habby">
+                                    <input type="submit" class="signupbtn" value="<?php echo lang('Sign Up for Habby');?>">
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <p class="frm_tag"><span>Create a Page</span> for a celebrity, band or bussiness.</p>
+                <p class="frm_tag"><span><?php echo lang('Create a Page');?></span> <?php echo lang('for a celebrity, band or bussiness.');?></p>
             </div>
         </div>
     </div>
