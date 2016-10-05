@@ -144,7 +144,8 @@ class Post_model extends CI_Model
 	 */
 	public function delete_post_coin($post_coin_id)
 	{
-		if($this->db->delete('id',$post_coin_id))
+		$where['id'] = $post_coin_id;
+		if($this->db->delete('post_coin',$where))
 		{
 			return true;
 		}
