@@ -19,5 +19,13 @@ class Post extends CI_Model
 			return false;
 		}
 	}
+
+	/*
+	 * display_post is used to display post according pagination
+	 */
+	public function display_post($data,$start,$limit)
+	{
+		return $this->db->get('post')->result_array();
+	}
 }
 ?>
