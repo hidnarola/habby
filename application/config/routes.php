@@ -51,13 +51,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |		my-controller/my-method	-> my_controller/my_method
  */
 // ------------------------------------------------------------------------
-
 // ------------------------------------------------------------------------
 $route['login'] = "login/index";
+$route['register'] = "login/register";
+
 $route["home"] = "user/home";
 $route["home/(:any)"] = "user/home/$1";
 $route['home/change_lang'] = "user/home/change_lang";
 $route['home/log_out'] = "user/home/log_out";
+
+$route['user/forgot_password'] = "user/user/forgot_password";
+$route['user/(:any)'] = "user/user/$1";
+$route['user/reset_password/(:any)'] = "user/user/reset_password/$1";
+$route['user/verify_email/(:any)'] = "user/user/verify_email/$1";
+
 
 $route['default_controller'] = 'login';
 $route['404_override'] = '';

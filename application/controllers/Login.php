@@ -7,6 +7,12 @@ class Login extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model'));
+        $this->data['user_data'] = $this->session->userdata('user');
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        if (!empty($data['user_data'])) {
+            $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
+            redirect('home');
+        }
     }
 
     /**
@@ -25,11 +31,7 @@ class Login extends CI_Controller {
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $data['user_data'] = $this->session->userdata('user');
-        if (!empty($data['user_data'])) {
-            $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
-            redirect('home');
-        }
+
         if ($this->session->userdata('language') == FALSE) {
             $this->session->set_userdata('language', 'english');
         }
@@ -49,23 +51,20 @@ class Login extends CI_Controller {
             $this->form_validation->set_rules('password', lang('Password'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
 
             if ($this->form_validation->run() == FALSE) {
-                $this->template->load('sign', 'user/login', $data);
+                $this->template->load('sign', 'user/login', $this->data);
             } else {
                 $email = $this->input->post('email');
                 $password = $this->input->post('password');
                 $remember_me = $this->input->post('remember_me');
-//                pr($this->input->post());
 
                 //check_if_user_exist - three params 1->where condition 2->is get num_rows for query 3->is fetech single or all data
                 $user_data = $this->Users_model->check_if_user_exist(['email' => $email], false, true);
                 if (!empty($user_data)) {
                     $db_pass = $this->encrypt->decode($user_data['password']);
-
                     if ($db_pass == $password) {
                         /* If remember Me Checkbox is clicked */
                         /* Set Cookie IF Start */
                         if ($remember_me == '1') {
-
                             $cookie = array(
                                 'name' => 'Remember_me',
                                 'value' => $this->encrypt->encode($user_data['id']),
@@ -93,24 +92,68 @@ class Login extends CI_Controller {
                     $this->session->set_flashdata('message', ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger']);
                     redirect('login');
                 }
-                exit;
             }
         } else {
-            $this->template->load('sign', 'user/login');
+            $this->template->load('sign', 'user/login', $this->data);
         }
     }
 
     public function register() {
-        $data['user_data'] = $this->session->userdata('user');
-        if (!empty($data['user_data'])) {
-            $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
-            redirect('user/dashboard');
-        }
-
         if ($this->input->post()) {
-            
+            $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail'), 'is_unique' => lang('Email is already exists')));
+            $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|matches[re_password]', array('required' => lang('Please fill the field') . ' %s .', 'min_length' => lang('Please enter password min 6 letter'), 'matches' => lang('Please enter same password')));
+            $this->form_validation->set_rules('re_password', lang('Repeat Password'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
+            if ($this->form_validation->run() == FALSE) {
+                $this->template->load('sign', 'user/login', $this->data);
+            } else {
+                $encode_pass = $this->encrypt->encode($this->input->post('password'));
+                $ins_data = array(
+                    'name' => $this->input->post('name'),
+                    'email' => $this->input->post('email'),
+                    'password' => $encode_pass,
+                    'gender' => $this->input->post('gender'),
+                    'country' => $this->input->post('country'),
+                    'bio' => $this->input->post('bio'),
+                    'hobby' => $this->input->post('hobby'),
+                    'user_image' => "profile_img.jpg",
+                    'modified_date' => date('Y-m-d H:i:s')
+                );
+                $last_user_id = $this->Users_model->insert_user_data($ins_data); // v!-q Insert Data into Users Table
+                if ($last_user_id != null) {
+
+                    $token = random_string('alnum', 20);
+
+                    // ------------------------------------------------------------------------						
+                    $email_config = mail_config();
+                    $this->email->initialize($email_config);
+
+                    $path = base_url() . 'user/verify_email/' . $token;
+
+                    $message = "<p>Hello " . $this->input->post('name') . "</p>";
+                    $message .= "<p>You recently entered a contact email address. To confirm your contact email, follow the link below: <br/><a href='" . $path . "'>Click Here</a></p>";
+                    $message .= "<p>Thanks</p>";
+
+
+                    $this->email
+                            ->from('support@habby.ch', 'Habby')
+                            ->to($this->input->post('email'))
+                            ->subject('Verify Email Request')
+                            ->message($message);
+
+                    $this->email->send();
+                    // ------------------------------------------------------------------------
+
+                    $ins_data_verify = [
+                        'token' => $token
+                    ];
+                    $this->Users_model->update_user_data($last_user_id,$ins_data_verify);
+                }
+                $this->session->set_flashdata('message', array('message' => lang('You are Successfully Registered! Please confirm the mail sent to your Email-ID!!!'), 'class' => 'alert alert-success'));
+                redirect('login');
+            }
         } else {
-            $this->template->load('sign', 'user/login');
+            $this->template->load('sign', 'user/login', $this->data);
         }
     }
 

@@ -36,7 +36,7 @@ class Users_model extends CI_Model {
     /* v! Insert data into users table */
 
     public function update_user_data($id, $data) {
-        //$data['modified_date'] = date('Y-m-d H:i:s');
+        $data['modified_date'] = date('Y-m-d H:i:s');
         if (is_array($id)) {
             $this->db->where($id);
         } else {
@@ -45,6 +45,20 @@ class Users_model extends CI_Model {
         $this->db->update('users', $data);
         $last_id = $this->db->affected_rows();
         return $last_id;
+    }
+
+    public function fetch_email_token($data = array()) {
+        $this->db->select('id,token,forgot_token');
+        $this->db->where($data);
+        $res_data = $this->db->get('users')->row_array();
+        return $res_data;
+    }
+
+    // --------------------------------------  Table - Country ----------------------------------------
+
+    public function get_all_countries() {
+        $res_data = $this->db->get('country')->result_array();
+        return $res_data;
     }
 
 }

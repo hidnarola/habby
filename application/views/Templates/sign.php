@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="col-sm-5 col-xs-12">
                                                 <label class="forgt_lnk">
-                                                    <a href="<?php echo base_url() . "/" ?>">Forgot your password?</a>
+                                                    <a href="<?php echo base_url() . "user/forgot_password" ?>"><?php echo lang("I've forgotten my password"); ?> </a>
                                                 </label>
                                             </div>
                                         </div>

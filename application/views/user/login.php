@@ -5,39 +5,64 @@
                 <h2 class="wlcm_habby">Welcome to Habby</h2>
                 <p class="cnnct_txt">Connect with friends and the world around you</p>
                 <div class="clearfix signup_frm">
-                    <form class="">
+                    <form class="" role="form" method="post" action="<?php echo base_url() . "register" ?>">
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Display Name">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Display Name" value="<?php echo set_value('name'); ?>">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Your Email">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Your Email" value="<?php echo set_value('email'); ?>">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="<?php echo lang('Password') . " " . lang('(min. 6 characters)'); ?>" value="">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Re-enter Password">
+                                <input type="password" class="form-control" id="re_password" name="re_password" placeholder="<?php echo lang('Confirm Password'); ?>" value="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-12">
+                                <select name="country" class="form-control" id="country" >
+                                    <?php
+                                    if (!empty($all_countries)) {
+                                        foreach ($all_countries as $a_country) {
+                                            ?>
+                                            <option value="<?php echo $a_country['id']; ?>" <?php echo set_select('country', $a_country['id']); ?>>
+                                                <?php echo $a_country['nicename']; ?>
+                                            </option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col-lg-12">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                        Female
+                                        <input type="radio" name="gender" id="gender" value="Male" <?php echo set_radio('gender', 'Male', TRUE); ?>><?php echo lang('Male'); ?>
                                     </label>
                                     <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        Male
+                                        <input type="radio" name="gender" id="gender" value="Female" <?php echo set_radio('gender', 'Female'); ?>><?php echo lang('Female'); ?>
                                     </label>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-12">
+                                <textarea class="form-control" id="bio" name="bio" placeholder="Enter your Bio" rows="20" cols="20" ><?php echo set_value('bio'); ?></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-12">
+                                <textarea class="form-control" id="hobby" name="hobby" placeholder="Enter your hobby seprate by comma" rows="20" cols="20"><?php echo set_value('hobby'); ?></textarea>
                             </div>
                         </div>
                         <div class="row form-group">
