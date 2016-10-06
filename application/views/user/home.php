@@ -61,8 +61,8 @@
 	                                        <div class="pst_inrsec">
 	                                            <!-- image -->
 
-	                                            <a class="fancybox"  href="<?php echo DEFAULT_IMAGE_PATH; ?>post_img.jpg" data-fancybox-group="gallery">
-	                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>post_img.jpg" class="img-responsive center-block">
+	                                            <a class="fancybox"  href="uploads/user_post/<?php echo $post['media']; ?>" data-fancybox-group="gallery">
+	                                                <img src="uploads/user_post/<?php echo $post['media']; ?>" class="img-responsive center-block">
 	                                            </a>
 
 	                                            <div class="cmnt_newsec">
@@ -85,7 +85,7 @@
 	                                                    </li>
 	                                                    <li>
 	                                                        <a href="javascript:;" class="user_coin">
-	                                                            <img src="<?php echo DEFAULT_IMAGE_PATH; ?>coin_icon.png"/><br>
+	                                                            <img class="img-coin" src="<?php echo DEFAULT_IMAGE_PATH; echo ($post['is_coined'])?'coined_icon.png':'coin_icon.png'; ?>"/><br>
 	                                                            <span class="coin_cnt">
 	                                                                <?php echo $post['post_coin'] ?>
 	                                                            </span>

@@ -55,15 +55,51 @@ $('document').ready(function(){
 			url:base_url+'user/post/add_coin/'+post_id,
 			success: function(str){
 				var coin = parseInt(t.find('.coin_cnt').html());
-				if(str == "1")
+				if(str == 1)
 				{
 					t.find('.coin_cnt').html((coin+1));
+					t.find('.img-coin').attr('src',base_url+'public/front/img/coined_icon.png');
 				}
-				else if(str == "2")
+				else if(str == 2)
 				{
 					t.find('.coin_cnt').html((coin-1));
+					t.find('.img-coin').attr('src',base_url+'public/front/img/coin_icon.png');
+				}
+				else
+				{
+					console.log('fail');
 				}
 			}
 		});
 	});
+
+	// Image uploading script
+    $("#uploadFile").on("change", function()
+    {
+    	console.log('on change fired');
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader){
+        	$('.message').html("No file selected.");
+        	$('.message').show();
+        	return; // no file selected, or no FileReader support
+        }
+        	
+ 
+        if (/^image/.test( files[0].type)){ // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+ 
+            reader.onloadend = function(){ // set image data as background of div
+            	$('.message').hide();
+                $("#imagePreview").css("background-image", "url("+this.result+")");
+                // $('#imagePreview').addClass('imagePreview');
+            }
+        }
+        else
+        {
+        	$('.message').html("Please select proper image");
+        	$('.message').show();
+        }
+    });
+
 });
