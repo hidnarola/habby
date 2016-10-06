@@ -139,7 +139,6 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                >>>>>>> b4589f0826d93652b44ef4ce2dc5cd7b3f731761
 
                                                 <div class="post_leftsec_hddn post_leftsec_hddn1 visible-xs">
                                                     <p class="cmn_txtnw"> Comment Here</p>

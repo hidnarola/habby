@@ -82,6 +82,9 @@ $lang['Your password is successfully changed! Please login to access your accoun
 $lang['User Profile has been updated successfully.'] = 'User Profile has been updated successfully.';
 $lang['Image has been uploaded successfully'] = 'Image has been uploaded successfully.';
 
+
+$lang['Topic added successfully'] = 'Topic added successfully';
+
 //---Profile---
 $lang['Save'] = 'Save';
 $lang['edit your profile'] = 'Edit your profile';
@@ -125,6 +128,11 @@ $lang['Send Message'] = 'Send Message';
 $lang['Chats'] = 'Chats';
 $lang['Write here...'] = 'Write here...';
 $lang['Send'] = 'Send';
+
+    //---Topichat---
+$lang['Create'] = 'Create';
+$lang['Notes'] = 'Notes';
+$lang[''] = '';
 $lang[''] = '';
 
 

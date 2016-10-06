@@ -71,7 +71,7 @@
                                     <li><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive"></li>
                                     <li class="dropdown">
                                         <a href="javascript:void(0)" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
+                                            <img src="<?php echo ($user_data['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
                                             <?php echo $user_data['name'] ?>
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
@@ -125,7 +125,7 @@
                                             <li class="dropdown">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('Social Network'); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="<?php echo base_url()."topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
+                                                    <li><a href="<?php echo base_url() . "topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
                                                     <li><a href="soulmate.html"><?php echo lang('Soulmate'); ?></a></li>
                                                     <li><a href="group_plan.html"><?php echo lang('Group Plan'); ?></a></li>
                                                     <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
@@ -232,7 +232,6 @@
         <!--Content Start-->
         <div class="container-fluid">
             <?php
-            
             if (isset($body) && !empty($body)) {
                 echo $body;
             }
@@ -402,7 +401,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="<?php echo lang('Write here...'); ?>">
                             <span class="input-group-btn">
-                                <input class="chat_btn" type="submit" value="<?php echo lang('Send')?>">
+                                <input class="chat_btn" type="submit" value="<?php echo lang('Send') ?>">
                             </span>
                         </div>
                     </div>
