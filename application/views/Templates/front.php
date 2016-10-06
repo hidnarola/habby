@@ -304,13 +304,13 @@
                                                         <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
                                                         <input type="file" name="uploadfile" class="upload" id="uploadFile"/>
                                                     </div>
-                                                    <div class="fileUpload up_img btn">
+                                                    <!--<div class="fileUpload up_img btn">
                                                         <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                                         <input type="file" class="upload" />
                                                     </div>
-
+                                                    -->
                                                 </div>
-                                                <div class="image_wrapper">
+                                                <div class="image_wrapper" >
                                                     <div id="imagePreview"></div>
                                                 </div>
                                             </div>
@@ -360,7 +360,7 @@
                                         <!-- message form section start here -->
                                         <form>
                                             <div class="panel-body">
-                                                <textarea class="form-control border0" rows="3" id="textArea" placeholder="<?php echo lang('What’s happening...'); ?>"></textarea>
+                                                <textarea class="form-control border0" rows="3" id="textArea" placeholder="<?php echo lang('Whatï¿½s happening...'); ?>"></textarea>
                                             </div>
                                             <div class="panel-body pnl_ftr">
                                                 <a href="#" class="pstbtn"><?php echo lang('Send Message'); ?></a>
@@ -502,9 +502,9 @@
         </script>
         <script>
 
-            $('#chat1').on('click', function () {
-                $(".post_leftsec_hddn1").toggleClass('clicked');
-                $(".mov_sec1").toggleClass('clicked2');
+            $('.chat1').on('click', function () {
+                $(this).parents(".post_leftsec").children(".post_leftsec_hddn1").toggleClass('clicked');
+                $(this).closest(".mov_sec1").toggleClass('clicked2');
             });
 
             $('#chat2').on('click', function () {
