@@ -50,10 +50,10 @@
                     <li class="pull-right "><button id="close_nav"> <img src="<?php echo DEFAULT_IMAGE_PATH . "nav-close-icon.png" ?>" class="cls_img"></button></li>
                 </ul>
             </div>
-            <a href="smile-share.html">Smile Share</a>
-            <a href="home-challenge.html">Challenge</a>
-            <a href="treehole.html">Live life</a>
-            <a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a>
+            <a href="smile-share.html"><?php echo lang(''); ?>Smile Share</a>
+            <a href="home-challenge.html"><?php echo lang(''); ?>Challenge</a>
+            <a href="treehole.html"><?php echo lang(''); ?>Live life</a>
+            <a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang(''); ?>Log Out</a>
         </nav>
         <!-- Mobile Toggle Menu end here -->
 
@@ -76,20 +76,20 @@
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a href="<?php echo base_url() . "home/profile" ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
-                                            <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> Log Out</a></li>
+                                            <li><a href="<?php echo base_url() . "home/profile" ?>"><i class="fa fa-user" aria-hidden="true"></i> <?php echo lang('Profile'); ?></a></li>
+                                            <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="#" data-toggle="modal" data-target="#msg_here">
                                             <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
-                                            Chat
+                                            <?php echo lang('Chat'); ?>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#" data-toggle="modal" data-target="#post_here">
                                             <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_img.png" ?>">
-                                            Post
+                                            <?php echo lang('Post'); ?>
                                         </a>
                                     </li>
                                 </ul>
@@ -114,25 +114,25 @@
                                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                         <ul class="nav navbar-nav custnav">
                                             <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle active  disabled" data-toggle="dropdown" role="button" aria-expanded="false">Home <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                                <a href="#" class="dropdown-toggle active  disabled" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('Home'); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="smile-share.html">Smile Share</a></li>
-                                                    <li><a href="home-challenge.html">Challenge</a></li>
+                                                    <li><a href="smile-share.html"><?php echo lang('Smile Share'); ?></a></li>
+                                                    <li><a href="home-challenge.html"><?php echo lang('Challenge'); ?></a></li>
                                                 </ul>
                                             </li>
 
 
                                             <li class="dropdown">
-                                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Social Network <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('Social Network'); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="topichat.html">Topichat</a></li>
-                                                    <li><a href="soulmate.html">Soulmate</a></li>
-                                                    <li><a href="group_plan.html">Group Plan</a></li>
-                                                    <li><a href="challenge_1.html">Challenge</a></li>
-                                                    <li><a href="league-and-alliance.html">League and Alliance</a></li>
+                                                    <li><a href="<?php echo base_url()."topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
+                                                    <li><a href="soulmate.html"><?php echo lang('Soulmate'); ?></a></li>
+                                                    <li><a href="group_plan.html"><?php echo lang('Group Plan'); ?></a></li>
+                                                    <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
+                                                    <li><a href="league-and-alliance.html"><?php echo lang('League and Alliance'); ?></a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="treehole.html">Live life</a></li>
+                                            <li><a href="treehole.html"><?php echo lang('Live life'); ?></a></li>
 
                                         </ul>
                                         <ul class="list-unstyled srch_sec hidden-xs">
@@ -175,11 +175,11 @@
                                                 <li class="dropdown">
                                                     <a href="" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false">Social Network <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="topichat.html">Topichat</a></li>
-                                                        <li><a href="soulmate.html">Soulmate</a></li>
-                                                        <li><a href="group_plan.html">Group Plan</a></li>
-                                                        <li><a href="challenge_1.html">Challenge</a></li>
-                                                        <li><a href="league-and-alliance.html">League and Alliance</a></li>
+                                                        <li><a href="topichat.html"><?php echo lang('Topichat'); ?></a></li>
+                                                        <li><a href="soulmate.html"><?php echo lang('Soulmate'); ?></a></li>
+                                                        <li><a href="group_plan.html"><?php echo lang('Group Plan'); ?></a></li>
+                                                        <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
+                                                        <li><a href="league-and-alliance.html"><?php echo lang('League and Alliance'); ?></a></li>
                                                     </ul>
                                                 </li>
 
@@ -232,16 +232,7 @@
         <!--Content Start-->
         <div class="container-fluid">
             <?php
-            $message = $this->session->flashdata('message');
-            if (!empty($message) && isset($message)) {
-                ($message['class'] != '') ? $message['class'] : '';
-                echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
-            }
-
-            $all_errors = validation_errors();
-            if (isset($all_errors) && !empty($all_errors)) {
-                echo '<div class="alert alert-danger">' . $all_errors . '</div>';
-            }
+            
             if (isset($body) && !empty($body)) {
                 echo $body;
             }
@@ -258,7 +249,7 @@
             <div class="row ftr_sec1">
                 <div class="container">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <p class="ftrtxt3">Follow us </p>
+                        <p class="ftrtxt3"><?php echo lang('Follow us'); ?> </p>
                         <ul class="list-inline ftr_ul">
                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                             <li><a href="#"><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
@@ -276,7 +267,7 @@
             <div class="row ftr_sec2">
                 <div class="container">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <p class="cpy_txt">Habby, LLC  &copy; All rights reserved.</p>
+                        <p class="cpy_txt"><?php echo lang('Habby, LLC'); ?>  &copy; <?php echo lang('All rights reserved.'); ?></p>
                     </div>
                 </div>
             </div>
@@ -300,7 +291,7 @@
                                             <!-- tittle or short description section satrt here -->
                                             <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
                                                 <div class="jst_txt">
-                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_prfl_icon.png" ?>"> title /short description 
+                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_prfl_icon.png" ?>"> <?php echo lang('title /short description'); ?> 
                                                 </div>
                                                 <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                                             </div>
@@ -310,11 +301,11 @@
                                             <div class="panel-body">
                                                 <div class="upld_sec">
                                                     <div class="fileUpload up_img btn">
-                                                        <span><i class="fa fa-picture-o" aria-hidden="true"></i> Images</span>
+                                                        <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
                                                         <input type="file" class="upload" />
                                                     </div>
                                                     <div class="fileUpload up_img btn">
-                                                        <span><i class="fa fa-video-camera" aria-hidden="true"></i> Videos</span>
+                                                        <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                                         <input type="file" class="upload" />
                                                     </div>
 
@@ -327,7 +318,7 @@
                                             <div class="panel-body pnl_ftr">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <button type="submit" class="pstbtn">POST</button>
+                                                        <button type="submit" class="pstbtn"><?php echo lang('Post'); ?></button>
                                                     </div>
 
                                                 </div>
@@ -359,17 +350,17 @@
                                         <!-- message tittle section start here -->
                                         <div class="panel-heading">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-                                            <b>TYPE YOUR MESSAGE</b>
+                                            <b><?php echo lang('TYPE YOUR MESSAGE'); ?></b>
                                         </div>
                                         <!-- message tittle section end here -->
 
                                         <!-- message form section start here -->
                                         <form>
                                             <div class="panel-body">
-                                                <textarea class="form-control border0" rows="3" id="textArea" placeholder="What’s happening..."></textarea>
+                                                <textarea class="form-control border0" rows="3" id="textArea" placeholder="<?php echo lang('What’s happening...'); ?>"></textarea>
                                             </div>
                                             <div class="panel-body pnl_ftr">
-                                                <a href="#" class="pstbtn">Send Message</a>
+                                                <a href="#" class="pstbtn"><?php echo lang('Send Message'); ?></a>
                                             </div>
                                         </form>
                                         <!-- message form section end here -->
@@ -391,7 +382,7 @@
             <div class="panel panel-default">
                 <!--  chat box header start-->
                 <div class="panel-heading">
-                    <p class="text-center show_chat"><img src="<?php echo DEFAULT_IMAGE_PATH . "ftr_chat_icon.png" ?>"> Chats</p>
+                    <p class="text-center show_chat"><img src="<?php echo DEFAULT_IMAGE_PATH . "ftr_chat_icon.png" ?>"> <?php echo lang('Chats'); ?></p>
                 </div>
                 <!--  chat box header end-->
 
@@ -405,9 +396,9 @@
                 <div class="panel-footer chat_smlr">
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Write here...">
+                            <input type="text" class="form-control" placeholder="<?php echo lang('Write here...'); ?>">
                             <span class="input-group-btn">
-                                <input class="chat_btn" type="submit" value="Send">
+                                <input class="chat_btn" type="submit" value="<?php echo lang('Send')?>">
                             </span>
                         </div>
                     </div>

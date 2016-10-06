@@ -2,14 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Topichat extends CI_Controller {
 
     var $data;
 
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model', 'Post_model', 'Common_functionality'));
-        $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
+        $this->data['banner_image'] = $this->Common_functionality->get_banner_image('topichat');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
         if (empty($this->data['user_data'])) {
@@ -18,22 +18,22 @@ class Home extends CI_Controller {
     }
 
     /*
-     * index method loads home page view with all required details
-     * develop by : ar
+     * index method loads topichat page view with all required details
+     * develop by : HPA
      */
 
     public function index() {
-        $this->data['posts'] = $this->Post_model->display_post($data = array(), $this->session->user['id']);
+//        $this->data['posts'] = $this->Post_model->display_post($data = array(), $this->session->user['id']);
         //   pr($this->data['posts'],1);
-        $this->template->load('front', 'user/home.php', $this->data);
+        $this->template->load('front', 'user/topichat/topichat', $this->data);
     }
 
     /*
-     * add_post method is used to add post in database
-     * develop by : ar
+     * add_group method is used to add new group in topichat
+     * develop by : HPA
      */
 
-    public function add_post() {
+    public function add_group() {
         if ($this->input->post()) {
             $this->form_validation->set_rules('description', 'description', 'required');
             if (!($this->form_validation->run() == FALSE)) {

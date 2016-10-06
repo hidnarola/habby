@@ -7,12 +7,6 @@ class Login extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model'));
-        $this->data['user_data'] = $this->session->userdata('user');
-        $this->data['all_countries'] = $this->Users_model->get_all_countries();
-        if (!empty($this->data['user_data'])) {
-            $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
-            redirect('home');
-        }
     }
 
     /**
@@ -36,6 +30,11 @@ class Login extends CI_Controller {
      * develop by : HPA
      */
     public function index() {
+        $this->data['user_data'] = $this->session->userdata('user');
+        if (!empty($this->data['user_data'])) {
+            $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
+            redirect('home');
+        }
         if ($this->session->userdata('language') == FALSE) {
             $this->session->set_userdata('language', 'english');
         }
@@ -107,6 +106,12 @@ class Login extends CI_Controller {
      * develop by : HPA
      */
     public function register() {
+        $this->data['user_data'] = $this->session->userdata('user');
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        if (!empty($this->data['user_data'])) {
+            $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
+            redirect('home');
+        }
         if ($this->input->post()) {
             $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail'), 'is_unique' => lang('Email is already exists')));

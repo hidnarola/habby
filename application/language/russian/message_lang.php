@@ -75,4 +75,51 @@ $lang['We have sent an email to you, please click on the link in your email to r
 $lang['Incorrect Email Id.Please try again.'] = 'Неправильный адрес электронной почты Id. Пожалуйста, попробуйте еще раз.';
 $lang['Invalid Token'] = 'Недопустимый маркер';
 $lang['Your password is successfully changed! Please login to access your account!'] = 'Ваш пароль успешно изменен! Пожалуйста, войдите, чтобы получить доступ к вашей учетной записи!';
+$lang['User Profile has been updated successfully.'] = 'Профиль пользователя был успешно обновлен.';
+$lang['Image has been uploaded successfully'] = 'Изображение было загружено успешно';
+
+//---Profile---
+$lang['Save'] = 'Сохранить';
+$lang['edit your profile'] = 'Редактировать профиль';
+$lang['UPLOAD PROFILE PICTURE'] = 'ЗАГРУЗИТЬ ПРОФИЛЬ ИЗОБРАЖЕНИЯ';
+$lang['Follower'] = 'толкатель';
+$lang['more'] = 'Больше';
+$lang['Follow'] = 'следить';
+$lang['IP'] = 'IP';
+$lang['Topichat'] = 'Topichat';
+$lang['Soulmate'] = 'Родственная душа';
+$lang['Group Plan'] = 'План группы';
+$lang['Challenge'] = 'Вызов';
+$lang['League and alliance'] = 'Лига и альянс';
+$lang['Information Posts'] = 'Информационные сообщения';
+$lang['Posted'] = 'Сообщение';
+$lang['Saved'] = 'Сохранено';
+
+//--Home--
+    //--Front Template---
+$lang['Home'] = 'Главная';
+$lang['Social Network'] = 'Социальная сеть';
+$lang['Profile'] = 'Профиль';
+$lang['Log Out'] = 'Выйти';
+$lang['Chat'] = 'чат';
+$lang['Post'] = 'После';
+$lang['Smile Share'] = 'Улыбка Поделиться';
+$lang['Challenge'] = 'Вызов';
+$lang['Live life'] = 'Живая жизнь';
+$lang['Follow us'] = 'Подписывайтесь на нас';
+$lang['Habby, LLC'] = 'Habby, LLC';
+$lang['All rights reserved.'] = 'Все права защищены.';
+    //---Post Model---
+$lang['title /short description'] = 'Название / краткое описание';
+$lang['Images'] = 'Изображений';
+$lang['Videos'] = 'Видео';
+$lang['POST'] = 'POST';
+    //--Chat Model---
+$lang['TYPE YOUR MESSAGE'] = 'Текст сообщения';
+$lang['What’s happening...'] = 'Что происходит...';
+$lang['Send Message'] = 'Отправить сообщение';
+$lang['Chats'] = 'Чаты';
+$lang['Write here...'] = 'Пишите здесь...';
+$lang['Send'] = 'послать';
+
 ?>

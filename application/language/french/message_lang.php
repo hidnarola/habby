@@ -75,5 +75,49 @@ $lang['We have sent an email to you, please click on the link in your email to r
 $lang['Incorrect Email Id.Please try again.'] = 'Mauvaise Email Id. Veuillez réessayer.';
 $lang['Invalid Token'] = 'jeton invalide';
 $lang['Your password is successfully changed! Please login to access your account!'] = "Votre mot de passe est changé avec succès! S'il vous plaît vous connecter pour accéder à votre compte!";
+$lang['User Profile has been updated successfully.'] = "L'image a été téléchargé avec succès";
+$lang['Image has been uploaded successfully'] = 'Изображение было загружено успешно';
 
+//---Profile---
+$lang['Save'] = 'Sauvegarder';
+$lang['edit your profile'] = 'Modifier votre profil';
+$lang['UPLOAD PROFILE PICTURE'] = 'TÉLÉCHARGEMENT PROFIL IMAGE';
+$lang['Follower'] = 'Disciple';
+$lang['more'] = 'plus';
+$lang['Follow'] = 'Suivre';
+$lang['IP'] = 'IP';
+$lang['Topichat'] = '';
+$lang['Soulmate'] = 'Âme sœur';
+$lang['Group Plan'] = 'Plan Groupe';
+$lang['Challenge'] = 'Défi';
+$lang['League and alliance'] = "League et de l'alliance";
+$lang['Information Posts'] = 'Informations messages';
+$lang['Posted'] = 'Publié';
+$lang['Saved'] = 'Enregistré';
+
+//--Home--
+    //--Front Template---
+$lang['Home'] = 'Accueil';
+$lang['Social Network'] = 'Réseau social';
+$lang['Profile'] = 'Profil';
+$lang['Log Out'] = 'Se déconnecter';
+$lang['Chat'] = 'bavarder';
+$lang['Post'] = 'Poster';
+$lang['Smile Share'] = 'Sourire Partager';
+$lang['Challenge'] = 'Défi';
+$lang['Live life'] = 'Vivre la vie';
+$lang['Follow us'] = 'Suivez-nous';
+$lang['Habby, LLC'] = 'Habby, LLC';
+$lang['All rights reserved.'] = 'Tous les droits sont réservés.';
+    //---Post Model---
+$lang['title /short description'] = 'titre / description courte';
+$lang['Images'] = 'Images';
+$lang['Videos'] = 'Vidéos';
+    //--Chat Model---
+$lang['TYPE YOUR MESSAGE'] = 'TYPE DE VOTRE MESSAGE';
+$lang['What’s happening...'] = 'Que ce passe-t-il...';
+$lang['Send Message'] = 'Envoyer le message';
+$lang['Chats'] = 'causeries';
+$lang['Write here...'] = 'Ecrire ici...';
+$lang['Send'] = 'Envoyer';
 ?>

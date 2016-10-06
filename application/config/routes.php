@@ -58,6 +58,9 @@ $route['register'] = "login/register";
 $route["home"] = "user/home";
 $route["home/(:any)"] = "user/home/$1";
 
+$route["topichat"] = "user/topichat";
+$route["topichat/(:any)"] = "user/topichat/$1";
+
 $route['user/forgot_password'] = "user/user/forgot_password";
 $route['user/(:any)'] = "user/user/$1";
 $route['user/reset_password/(:any)'] = "user/user/reset_password/$1";

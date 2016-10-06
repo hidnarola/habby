@@ -11,25 +11,27 @@
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                             <div class="row">
                                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
-                                    <div class="pfl_imgsec">
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH . $user_data['user_image']; ?>" class="img-responsive center-block">
+                                    <div class="pfl_imgsec" style="height: 140px;max-width: 216px;">
+                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image']; ?>" class="img-responsive center-block user_image" style="height: 100%;max-width: 100%;">
                                         <div class="pfl_imgsec_innr">
                                             <div class="upld_sec">
-                                                <div class="fileUpload up_img btn">
-                                                    <span><i class="fa fa-camera" aria-hidden="true"></i> UPLOAD PROFILE PICTURE</span>
-                                                    <input type="file" class="upload">
-                                                </div>
+                                                <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() . "home/profile_upload" ?>" id="upload_user_image">
+                                                    <div class="fileUpload up_img btn">
+                                                        <span><i class="fa fa-camera" aria-hidden="true"></i> <?php echo lang('UPLOAD PROFILE PICTURE');?></span>
+                                                        <input type="file" class="upload" name="user_image">
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </div>						
+                                        </div>	
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
                                     <div class="prfl_details">
-                                        <p>Name : <?php echo $user_data['name'] ?></p>	
-                                        <p>Gender : <?php echo $user_data['gender'] ?></p>	
-                                        <p>Country : <?php echo get_country_name($user_data['country']) ?></p>
-                                        <p>Self-introduction : <?php echo $user_data['bio'] ?></p>	
-                                        <p>Interest/Hobby : <?php echo $user_data['hobby'] ?></p>
+                                        <p><?php echo lang('');?>Name : <?php echo $user_data['name'] ?></p>	
+                                        <p><?php echo lang('');?>Gender : <?php echo $user_data['gender'] ?></p>	
+                                        <p><?php echo lang('');?>Country : <?php echo get_country_name($user_data['country']) ?></p>
+                                        <p><?php echo lang('');?>Self-introduction : <?php echo $user_data['bio'] ?></p>	
+                                        <p><?php echo lang('');?>Interest/Hobby : <?php echo $user_data['hobby'] ?></p>
                                         <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn">Edit Profile</a></p>
                                     </div>
                                 </div>
@@ -41,7 +43,7 @@
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 col-lg-offset-1 col-md-offset-1 pad_lft0">
                             <div class="follower_sec follow_sec">
-                                <h2>Follower</h2>
+                                <h2><?php echo lang('Follower');?></h2>
                                 <ul class="list-inline">
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
@@ -53,17 +55,17 @@
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
-                                    <li><a href="#">+more</a></li>
+                                    <li><a href="#">+<?php echo lang('more');?></a></li>
                                 </ul>
                             </div>
                             <div class="follow_sec2 follow_sec">
-                                <h2>Follow</h2>
+                                <h2><?php echo lang('Follow');?></h2>
                                 <ul class="list-inline">
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
                                     <li><a href="#"><img src="images/pst_prfl_icon.png"></a></li>
-                                    <li><a href="#">+more</a></li>
+                                    <li><a href="#">+<?php echo lang('more');?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -83,12 +85,12 @@
     <div class="container personal_cntner sub_menusec">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad_lft_rit0">
             <ul class="list-inline submenu_ul">
-                <li><a href="personal_account.html">IP</a></li>
-                <li><a href="personal_Topichat.html">Topichat</a></li>
-                <li><a href="personal_soulmate.html">Soulmate</a></li>
-                <li><a href="personal_group_plan.html">Group Plan</a></li>
-                <li><a href="personal_challenge.html">Challenge</a></li>
-                <li><a href="personal_league.html">League and alliance</a></li>
+                <li><a href="personal_account.html"><?php echo lang('IP');?></a></li>
+                <li><a href="personal_Topichat.html"><?php echo lang('Topichat');?></a></li>
+                <li><a href="personal_soulmate.html"><?php echo lang('Soulmate');?></a></li>
+                <li><a href="personal_group_plan.html"><?php echo lang('Group Plan');?></a></li>
+                <li><a href="personal_challenge.html"><?php echo lang('Challenge');?></a></li>
+                <li><a href="personal_league.html"><?php echo lang('League and alliance');?></a></li>
             </ul>
         </div>
     </div>
@@ -99,7 +101,7 @@
     <div class="container prsna_coner personal_cntner">
         <!-- Personal Account Title  start here -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prsnl_sm_sec">
-            <h2>Information Posts</h2>
+            <h2><?php echo lang('Information Posts');?></h2>
         </div>
         <!-- Personal Account Title  end here -->
 
@@ -109,7 +111,7 @@
 
                 <!-- Personal Account Posts start here -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                    <h2>Posted</h2>
+                    <h2><?php echo lang('Posted');?></h2>
                     <ul class="list-inline info_ul">
                         <li>
                             <a class="fancybox" href="images/recent_post_img1.jpg" data-fancybox-group="gallery1">
@@ -177,7 +179,7 @@
 
                 <!-- Personal Account Saved start here -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                    <h2>Saved</h2>
+                    <h2><?php echo lang('Saved');?></h2>
                     <ul class="list-inline info_ul">
                         <li>
                             <a href="#" data-target="#saved-posts" data-toggle="modal">
@@ -255,21 +257,23 @@
             <div class="modal-body">
                 <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button> 
-                    <b>Edit Your Profile</b>
+                    <b><?php echo lang('edit your profile') ?></b>
                 </div>
-                <form class="" role="form" method="post" action="<?php echo base_url() . "register" ?>">
+                <form class="" role="form" method="post" action="<?php echo base_url() . "home/profile" ?>">
                     <div class="form-group clearfix">
-                        <div class="col-lg-12">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo set_value('name'); ?>">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <?php $name = (set_value('name') == false) ? $user_data['name'] : set_value('name'); ?>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>">
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <div class="col-lg-12">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo set_value('email'); ?>">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <?php $email = (set_value('email') == false) ? $user_data['email'] : set_value('email'); ?>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>">
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <select name="country" class="form-control" id="country" >
                                 <?php
                                 if (!empty($all_countries)) {
@@ -286,37 +290,40 @@
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="gender" id="gender" value="Male" <?php echo set_radio('gender', 'Male', TRUE); ?>><?php echo lang('Male'); ?>
+                                    <input type="radio" name="gender" id="gender" value="Male" <?php
+                                    if ($user_data['gender'] == 'Male') {
+                                        echo 'checked';
+                                    }
+                                    ?>><?php echo lang('Male'); ?>
                                 </label>
                                 <label>
-                                    <input type="radio" name="gender" id="gender" value="Female" <?php echo set_radio('gender', 'Female'); ?>><?php echo lang('Female'); ?>
+                                    <input type="radio" name="gender" id="gender" value="Female" <?php
+                                    if ($user_data['gender'] == 'Female') {
+                                        echo 'checked';
+                                    }
+                                    ?>><?php echo lang('Female'); ?>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <div class="col-lg-12">
-                            <textarea class="form-control" id="bio" name="bio" placeholder="<?php echo lang('Enter your Bio'); ?>" rows="20" cols="20" ><?php echo set_value('bio'); ?></textarea>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <?php $bio = (set_value('bio') == false) ? $user_data['bio'] : set_value('bio'); ?>
+                            <textarea class="form-control" id="bio" name="bio" placeholder="<?php echo lang('Enter your Bio'); ?>" rows="20" cols="20" ><?php echo $bio; ?></textarea>
                         </div>
                     </div>
                     <div class="form-group clearfix">
-                        <div class="col-lg-12">
-                            <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma'); ?>" rows="20" cols="20"><?php echo set_value('hobby'); ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group clearfix">
-                        <div class="col-lg-12">
-                            <p class="policy_tag"><?php echo lang('By signing up, you agree to the'); ?> <a href="#"><?php echo lang('User Policy') ?></a></p>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <?php $hobby = (set_value('hobby') == false) ? $user_data['hobby'] : set_value('hobby'); ?>
+                            <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma'); ?>" rows="20" cols="20"><?php echo $hobby; ?></textarea>
                         </div>
                     </div>
                     <div class="form-group clearfix xs_mddle">
-                        <div class="col-lg-12">
-                            <div class="signbtnsec">
-                                <input type="submit" class="signupbtn" value="<?php echo lang('Sign Up for Habby'); ?>">
-                            </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="submit" class="pstbtn" value="<?php echo lang('Save'); ?>">
                         </div>
                     </div>
                 </form>
@@ -325,3 +332,11 @@
     </div>
 </div>
 <!--  Edit Profile Detail form modal end here -->
+<script>
+    $("#country").val('<?php echo $user_data['country']; ?>');
+    $(function () {
+        $('.upload').change(function () {
+            $('#upload_user_image').submit();
+        });
+    });
+</script>

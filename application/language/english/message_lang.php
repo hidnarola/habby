@@ -79,4 +79,53 @@ $lang['We have sent an email to you, please click on the link in your email to r
 $lang['Incorrect Email Id.Please try again.'] = 'Incorrect Email Id.Please try again.';
 $lang['Invalid Token'] = 'Invalid Token';
 $lang['Your password is successfully changed! Please login to access your account!'] = 'Your password is successfully changed! Please login to access your account!';
+$lang['User Profile has been updated successfully.'] = 'User Profile has been updated successfully.';
+$lang['Image has been uploaded successfully'] = 'Image has been uploaded successfully.';
+
+//---Profile---
+$lang['Save'] = 'Save';
+$lang['edit your profile'] = 'Edit your profile';
+$lang['UPLOAD PROFILE PICTURE'] = 'UPLOAD PROFILE PICTURE';
+$lang['Follower'] = 'Follower';
+$lang['more'] = 'more';
+$lang['Follow'] = 'Follow';
+$lang['IP'] = 'IP';
+$lang['Topichat'] = 'Topichat';
+$lang['Soulmate'] = 'Soulmate';
+$lang['Group Plan'] = 'Group Plan';
+$lang['Challenge'] = 'Challenge';
+$lang['League and alliance'] = 'League and alliance';
+$lang['Information Posts'] = 'Information Posts';
+$lang['Posted'] = 'Posted';
+$lang['Saved'] = 'Saved';
+
+//--Home--
+    //--Front Template---
+$lang['Home'] = 'Home';
+$lang['Social Network'] = 'Social Network';
+$lang['Profile'] = 'Profile';
+$lang['Log Out'] = 'Log Out';
+$lang['Chat'] = 'Chat';
+$lang['Post'] = 'Post';
+$lang['Smile Share'] = 'Smile Share';
+$lang['Challenge'] = 'Challenge';
+$lang['Live life'] = 'Live life';
+$lang['Follow us'] = 'Follow us';
+$lang['Habby, LLC'] = 'Habby, LLC';
+$lang['All rights reserved.'] = 'All rights reserved.';
+    //---Post Model---
+$lang['title /short description'] = 'title /short description';
+$lang['Images'] = 'Images';
+$lang['Videos'] = 'Videos';
+$lang['POST'] = 'POST';
+    //--Chat Model---
+$lang['TYPE YOUR MESSAGE'] = 'TYPE YOUR MESSAGE';
+$lang['What’s happening...'] = 'What’s happening...';
+$lang['Send Message'] = 'Send Message';
+$lang['Chats'] = 'Chats';
+$lang['Write here...'] = 'Write here...';
+$lang['Send'] = 'Send';
+$lang[''] = '';
+
+
 ?> 

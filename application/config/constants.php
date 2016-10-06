@@ -93,6 +93,8 @@ if ($servername == 'habby') {
     defined('Asset_path') OR define('Asset_path', 'http://clientapp.narola.online/HD/habby/');
 }
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code
+defined('DEFAULT_PROFILE_IMAGE_PATH') OR define('DEFAULT_PROFILE_IMAGE_PATH', Asset_path . 'uploads/user_profile/'); // highest automatically-assigned error code
+defined('DEFAULT_BANNER_IMAGE_PATH') OR define('DEFAULT_BANNER_IMAGE_PATH', Asset_path . 'uploads/banners/'); // highest automatically-assigned error code
 defined('DEFAULT_JS_PATH') OR define('DEFAULT_JS_PATH', Asset_path . 'public/front/js/'); // highest automatically-assigned error code
 defined('DEFAULT_CSS_PATH') OR define('DEFAULT_CSS_PATH', Asset_path . 'public/front/css/'); // highest automatically-assigned error code
 defined('USER_JS') or define('USER_JS', Asset_path . 'public/front/includes/');
