@@ -59,11 +59,18 @@
 	                                            ?>
 	                                        </p>
 	                                        <div class="pst_inrsec">
+	                                        	<?php
+	                                        		if(isset($post['media']))
+	                                        		{
+	                                        			?>
+			                                            <a class="fancybox"  href="uploads/user_post/<?php echo $post['media']; ?>" data-fancybox-group="gallery">
+			                                                <img src="uploads/user_post/<?php echo $post['media']; ?>" class="img-responsive center-block">
+			                                            </a>
+	                                        			<?php
+	                                        		}
+	                                        	?>
 	                                            <!-- image -->
 
-	                                            <a class="fancybox"  href="uploads/user_post/<?php echo $post['media']; ?>" data-fancybox-group="gallery">
-	                                                <img src="uploads/user_post/<?php echo $post['media']; ?>" class="img-responsive center-block">
-	                                            </a>
 
 	                                            <div class="cmnt_newsec">
 	                                                <ul class="post_opn_ul list-inline">
