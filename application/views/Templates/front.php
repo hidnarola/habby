@@ -116,8 +116,8 @@
                                             <li class="dropdown">
                                                 <a href="#" class="dropdown-toggle active  disabled" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('Home'); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                                 <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="smile-share.html"><?php echo lang('Smile Share'); ?></a></li>
-                                                    <li><a href="home-challenge.html"><?php echo lang('Challenge'); ?></a></li>
+                                                    <li><a href="home/smile_share"><?php echo lang('Smile Share'); ?></a></li>
+                                                    <li><a href="home/challenge"><?php echo lang('Challenge'); ?></a></li>
                                                 </ul>
                                             </li>
 
@@ -284,7 +284,7 @@
                         <div class="Profl_addsec home_post">
                             <div class="row pst_here_sec">
                                 <!-- post start here -->
-                                <form method="post" action="home/add_post">
+                                <form method="post" action="home/add_post" enctype="multipart/form-data">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="panel panel-default">
 
@@ -299,16 +299,20 @@
 
                                             <!-- Upload images or video section start here -->
                                             <div class="panel-body">
+                                                <div class="message alert alert-danger" style="display:none"></div>
                                                 <div class="upld_sec">
                                                     <div class="fileUpload up_img btn">
                                                         <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                                        <input type="file" class="upload" />
+                                                        <input type="file" name="uploadfile" class="upload" id="uploadFile"/>
                                                     </div>
                                                     <div class="fileUpload up_img btn">
                                                         <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                                         <input type="file" class="upload" />
                                                     </div>
 
+                                                </div>
+                                                <div class="image_wrapper">
+                                                    <div id="imagePreview"></div>
                                                 </div>
                                             </div>
                                             <!-- Upload images or video section end here -->

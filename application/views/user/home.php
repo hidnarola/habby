@@ -59,11 +59,17 @@
                                                 ?>
                                             </p>
                                             <div class="pst_inrsec">
+                                                <?php
+                                                if (isset($post['media'])) {
+                                                    ?>
+                                                    <a class="fancybox"  href="uploads/user_post/<?php echo $post['media']; ?>" data-fancybox-group="gallery">
+                                                        <img src="uploads/user_post/<?php echo $post['media']; ?>" class="img-responsive center-block">
+                                                    </a>
+                                                    <?php
+                                                }
+                                                ?>
                                                 <!-- image -->
 
-                                                <a class="fancybox"  href="<?php echo DEFAULT_IMAGE_PATH; ?>post_img.jpg" data-fancybox-group="gallery">
-                                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>post_img.jpg" class="img-responsive center-block">
-                                                </a>
 
                                                 <div class="cmnt_newsec">
                                                     <ul class="post_opn_ul list-inline">
@@ -85,9 +91,11 @@
                                                         </li>
                                                         <li>
                                                             <a href="javascript:;" class="user_coin">
-                                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>coin_icon.png"/><br>
+                                                                <img class="img-coin" src="<?php echo DEFAULT_IMAGE_PATH;
+                                                        echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
+                                                                ?>"/><br>
                                                                 <span class="coin_cnt">
-                                                                    <?php echo $post['post_coin'] ?>
+        <?php echo $post['post_coin'] ?>
                                                                 </span>
                                                             </a>
                                                         </li>
@@ -96,7 +104,7 @@
                                                             <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>like_img.png"><br>
                                                                     <span>
-                                                            <?php echo $post['post_like'] ?> Likes
+        <?php echo $post['post_like'] ?> Likes
                                                                     </span>
                                                             </a>
                                                             <ul class="dropdown-menu opn_drpdwn" role="menu">
@@ -106,7 +114,8 @@
                                                             -->
                                                             <a href="javascript:;" class="user_like">
                                                                 <img src="<?php echo DEFAULT_IMAGE_PATH;
-                                                    echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png' ?>" class="like_img"><br>
+        echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
+        ?>" class="like_img"><br>
                                                                 <span>
                                                                     <span class="like_cnt"><?php echo $post['post_like'] ?></span> Likes
                                                                 </span>
@@ -130,6 +139,7 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                                >>>>>>> b4589f0826d93652b44ef4ce2dc5cd7b3f731761
 
                                                 <div class="post_leftsec_hddn post_leftsec_hddn1 visible-xs">
                                                     <p class="cmn_txtnw"> Comment Here</p>

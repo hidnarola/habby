@@ -96,7 +96,7 @@ class Post extends CI_Controller {
 		if(!empty($coin = $this->Post_model->user_coin_exist_for_post($user_id,$post_id)))
 		{
 			// Update entry
-			if($this->Post_model->delete_post_coin($update_arr,$coin['id']))
+			if($this->Post_model->delete_post_coin($coin['id']))
 			{
 				echo '2';
 			}
