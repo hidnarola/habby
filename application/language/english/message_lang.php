@@ -82,6 +82,10 @@ $lang['Your password is successfully changed! Please login to access your accoun
 $lang['User Profile has been updated successfully.'] = 'User Profile has been updated successfully.';
 $lang['Image has been uploaded successfully'] = 'Image has been uploaded successfully.';
 
+
+$lang['Topic added successfully'] = 'Topic added successfully.';
+$lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
+
 //---Profile---
 $lang['Save'] = 'Save';
 $lang['edit your profile'] = 'Edit your profile';
@@ -94,7 +98,7 @@ $lang['Topichat'] = 'Topichat';
 $lang['Soulmate'] = 'Soulmate';
 $lang['Group Plan'] = 'Group Plan';
 $lang['Challenge'] = 'Challenge';
-$lang['League and alliance'] = 'League and alliance';
+$lang['League and alliance'] = 'League and Alliance';
 $lang['Information Posts'] = 'Information Posts';
 $lang['Posted'] = 'Posted';
 $lang['Saved'] = 'Saved';
@@ -125,6 +129,11 @@ $lang['Send Message'] = 'Send Message';
 $lang['Chats'] = 'Chats';
 $lang['Write here...'] = 'Write here...';
 $lang['Send'] = 'Send';
+
+    //---Topichat---
+$lang['Create'] = 'Create';
+$lang['Notes'] = 'Notes';
+$lang[''] = '';
 $lang[''] = '';
 
 
