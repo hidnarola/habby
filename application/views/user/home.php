@@ -24,30 +24,43 @@
                                     <div class="post_leftsec clearfix">
 
                                         <!-- Comment window -->
-
                                         <div class="post_leftsec_hddn post_leftsec_hddn1 hidden-xs">
                                             <p class="cmn_txtnw"> Comment Here</p>
                                             <textarea class="form-control comment" rows="3" id="comment"></textarea>
                                             <!-- Comment portion -->
                                             <?php
-                                                if(count($post['comments']) > 0)
+                                                if(isset($post['comments']) && count($post['comments']) > 0)
                                                 {
                                                     foreach($post['comments'] as $comment)
                                                     {
                                                         ?>
-                                                        <div class="commnt_visit_sec clearfix">
+                                                        <div class="commnt_visit_sec clearfix" data-post_comment_id="<?php echo $comment['id']; ?>">
                                                             <div class="cmn_img">
                                                                 <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
                                                             </div>
                                                             <div class="cmn_dtl">
                                                                 <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> Interesting</p>
                                                                 <ul class="cmnt_p clearfix">
-                                                                    <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
-                                                                    <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                                    <li class="comment_like_cnt">
+                                                                        <a href="javascript:;">
+                                                                            <span class="post_comment_like">
+                                                                                <?php echo $comment['cnt_like']; ?>
+                                                                            </span> 
+                                                                            <span class="post_comment_text"><?php echo ($comment['is_liked'])?'Unlike':'Like'; ?></span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="post_comment_reply">
+                                                                        <a href="javascript:;">
+                                                                            <span class="comment_reply_cnt">
+                                                                                <?php echo $comment['cnt_reply']; ?>
+                                                                            </span> Reply
+                                                                        </a>
+                                                                    </li>
                                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                                                     <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
                                                                 </ul>
                                                                 <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
+                                                                <div class="reply_dtl"></div>
                                                             </div>
                                                         </div>
                                                         <?php
@@ -56,7 +69,7 @@
                                                 else
                                                 {
                                                     ?>
-                                                    <div class="commnt_visit_sec clearfix">
+                                                    <div class="commnt_visit_sec clearfix no_comment">
                                                         No comments available
                                                     </div>
                                                     <?php
@@ -153,7 +166,7 @@
                                                             <a role="button" id="chat1" class="chat1">
                                                                 <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br>
                                                                 <span> 
-        <?php echo $post['post_comment'] ?> Comments
+                                                                    <span class="comment_cnt"><?php echo $post['post_comment'] ?></span> Comments
                                                                 </span>
                                                             </a>
                                                         </li>
@@ -170,24 +183,41 @@
 
                                                 <div class="post_leftsec_hddn post_leftsec_hddn1 visible-xs">
                                                     <p class="cmn_txtnw"> Comment Here</p>
-                                                    <textarea class="form-control" rows="3" id="textArea"></textarea>
-                                                    <div class="commnt_visit_sec clearfix">
-                                                        <div class="cmn_img">
-                                                            <img src="images/likeimg.jpg" class="img-responsive">
-                                                        </div>
-                                                        <div class="cmn_dtl">
-                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
-                                                            <ul class="cmnt_p clearfix">
-                                                                <li><a href="#">Like</a></li>
-                                                                <li><a href="#">Reply</a></li>
-                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                            </ul>
-                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
-                                                        </div>
-                                                    </div>
+                                                    <textarea class="form-control comment" rows="3" id="comment"></textarea>
+                                                     <?php
+                                                        if(isset($post['comments']) && count($post['comments']) > 0)
+                                                        {
+                                                            foreach($post['comments'] as $comment)
+                                                            {
+                                                                ?>
+                                                                <div class="commnt_visit_sec clearfix">
+                                                                    <div class="cmn_img">
+                                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
+                                                                    </div>
+                                                                    <div class="cmn_dtl">
+                                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> Interesting</p>
+                                                                        <ul class="cmnt_p clearfix">
+                                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
+                                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                                            <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                            <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
+                                                                        </ul>
+                                                                        <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
+                                                                    </div>
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            ?>
+                                                            <div class="commnt_visit_sec clearfix no_comment">
+                                                                No comments available
+                                                            </div>
+                                                            <?php
+                                                        }
+                                                    ?>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>

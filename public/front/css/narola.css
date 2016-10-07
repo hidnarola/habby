@@ -2,6 +2,11 @@
     height:38px;
     width:38px;
 }
+.post_leftsec_hddn
+{
+    max-height:100%;
+    overflow: scroll;
+}
 .image_wrapper{
     height:180px;
     width:425px;

@@ -115,7 +115,71 @@ class Post extends CI_Controller {
             $insert_arr['comment'] = $this->input->post('msg');
             if($this->Post_model->insert_post_comment($insert_arr))
             {
-                echo $this->db->insert_id();
+                // Create post comment content
+                $data['comment'] = $this->Post_model->get_post_comment_data_by_id($this->db->insert_id());
+                $this->load->view('user/partial/add_comment',$data);
+            }
+            else
+            {
+                echo '0';
+            }
+        }
+    }
+    
+    /*
+     * 
+     */
+    public function add_postcomment_like($post_comment_id)
+    {
+        $user_id = $this->session->user['id'];
+        if (!empty($like = $this->Post_model->user_like_exist_for_postcomment($user_id, $post_comment_id))) {
+            // Update entry
+            $update_arr['is_liked'] = !$like['is_liked'];
+            $update_arr['created_date'] = date('Y-m-d H:i:s');
+            if ($this->Post_model->update_postcomment_like($update_arr, $like['id'])) {
+                if ($like['is_liked']) {
+                    echo '-1';
+                } else {
+                    echo '1';
+                }
+            } else {
+                echo '0';
+            }
+        } else {
+            // Insert entry
+            $insert_arr['user_id'] = $user_id;
+            $insert_arr['post_comment_id'] = $post_comment_id;
+            $insert_arr['is_liked'] = "1";
+            if ($this->Post_model->add_postcomment_like($insert_arr)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+    }
+    /*
+     * 
+     */
+    public function display_comment_reply($post_comment_id) {
+        $data['reply'] = $this->Post_model->get_post_reply($post_comment_id);
+        $this->load->view('user/partial/display_comment_reply',$data);
+    }
+    
+    /*
+     * 
+     */
+    public function add_comment_reply($post_comment_id)
+    {
+        if($this->input->post())
+        {
+            $insert_arr['post_comment_id'] = $post_comment_id;
+            $insert_arr['user_id'] = $this->session->user['id'];
+            $insert_arr['comment'] = $this->input->post('msg');
+            if($this->Post_model->insert_post_comment_reply($insert_arr))
+            {
+                // Create post comment content
+                $data['reply'] = $this->Post_model->get_post_comment_reply_data_by_id($this->db->insert_id());
+                $this->load->view('user/partial/add_comment_reply',$data);
             }
             else
             {

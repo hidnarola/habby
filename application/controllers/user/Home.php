@@ -34,7 +34,8 @@ class Home extends CI_Controller {
      * develop by : ar
      */
 
-    public function smile_share() {
+    public function smile_share($page=1) {
+        
         $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id']);
       //  pr($this->data['posts'],1);
         $this->template->load('front', 'user/home.php', $this->data);
@@ -45,10 +46,25 @@ class Home extends CI_Controller {
      * develop by : ar
      */
 
-    public function challenge() {
-        $this->data['posts'] = $this->Post_model->challange_post($data = array(),$this->session->user['id']);
+    public function challenge($page=1) {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        $this->data['posts'] = $this->Post_model->challange_post($data = array(),$this->session->user['id'],$start,$limit);
       //  pr($this->data['posts'],1);
-        $this->template->load('front', 'user/home.php', $this->data);
+        if($page == 1)
+        {
+            $this->template->load('front', 'user/home.php', $this->data);
+        }
+        else
+        {
+            $data['view'] = $this->load->view('user/partial/load_post_data',$this->data,true);
+            $data['status'] = '1';
+            if(count($this->data['posts']) == 0)
+            {
+                $data['status'] = '0';
+            }
+            echo json_encode($data);
+        }
     }
 
     /*
