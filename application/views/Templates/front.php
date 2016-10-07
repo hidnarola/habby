@@ -126,10 +126,10 @@
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('Social Network'); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="<?php echo base_url() . "topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
-                                                    <li><a href="soulmate.html"><?php echo lang('Soulmate'); ?></a></li>
+                                                    <li><a href="<?php echo base_url() . "soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
                                                     <li><a href="group_plan.html"><?php echo lang('Group Plan'); ?></a></li>
                                                     <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
-                                                    <li><a href="league-and-alliance.html"><?php echo lang('League and Alliance'); ?></a></li>
+                                                    <li><a href="league-and-alliance.html"><?php echo lang('League and alliance'); ?></a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="treehole.html"><?php echo lang('Live life'); ?></a></li>
@@ -521,7 +521,44 @@
             });
 
         </script> 
+        <script>
 
+            $(function () {
+                $("div.soulmate_con2").slice(0, 3).show();
+                $("#loadMore").on('click', function (e) {
+                    e.preventDefault();
+                    $("div.soulmate_con2:hidden").slice(0, 2).slideDown();
+                    if ($("div.soulmate_con2:hidden").length == 0) {
+                        $("#load").fadeOut('slow');
+                    }
+                    $('html,body').animate({
+                        scrollTop: $(this).offset().top
+                    }, 1500);
+                });
+            });
+
+            $('a[href=#top]').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('.totop a').fadeIn();
+                } else {
+                    $('.totop a').fadeOut();
+                }
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#more_rate").click(function () {
+                    $(".topichat_left_sec").slideToggle("");
+                });
+            });
+        </script>
         <!-- My script code -->
         <script>
             $('document').ready(function () {

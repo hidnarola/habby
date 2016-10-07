@@ -46,4 +46,14 @@ function get_country_name($c_id = null) {
     return false;
 }
 
+function logged_in_user_id() {
+    $CI = & get_instance();
+    $session_data = $CI->session->userdata('user');
+    if (!empty($session_data)) {
+        return $session_data['id'];
+    } else {
+        return false;
+    }
+}
+
 ?>

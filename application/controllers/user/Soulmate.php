@@ -2,14 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Topichat extends CI_Controller {
+class Soulmate extends CI_Controller {
 
     var $data;
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Topichat_model', 'Common_functionality'));
-        $this->data['banner_image'] = $this->Common_functionality->get_banner_image('topichat');
+        $this->load->model(array('Users_model', 'Soulmate_model', 'Common_functionality'));
+        $this->data['banner_image'] = $this->Common_functionality->get_banner_image('soulmate');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
         if (empty($this->data['user_data'])) {
@@ -18,49 +18,36 @@ class Topichat extends CI_Controller {
     }
 
     /*
-     * index method loads topichat page view with all required details
+     * index method loads soulmate page view with all required details
      * develop by : HPA
      */
 
     public function index() {
-        if ($this->input->get()) {
-            $filterby = $this->input->get('filterby');
-            $this->data['filterby'] = $filterby;
-            if ($filterby == 'popular') {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_popular_topichat_group();
-            } else if ($filterby == 'recommended') {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group();
-            } else {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group();
-            }
-        } else {
-            $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group();
-        }
-//        pr($this->data['topichat_groups'], 1);
-        $this->template->load('front', 'user/topichat/topichat', $this->data);
+        $this->data['soulmate_groups'] = $this->Soulmate_model->get_soulmate_group();
+        $this->template->load('front', 'user/soulmate/soulmate', $this->data);
     }
 
     /*
-     * add_group method is used to add new group in topichat
+     * add_group method is used to add new group in soulmate
      * develop by : HPA
      */
 
     public function add_group() {
-        $topic_group_id = "";
+        $soulmate_group_id = "";
         $image_name = "";
         if ($this->input->post()) {
             $ins_data = array(
-                'topic_name' => $this->input->post('topic_name'),
-                'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
-                'notes' => $this->input->post('notes'),
+                'name' => $this->input->post('name'),
+                'slogan' => $this->input->post('slogan'),
+                'introduction' => $this->input->post('introduction'),
                 'user_id' => $this->data['user_data']['id'],
             );
-            $topic_group_id = $this->Topichat_model->insert_topic_group_data($ins_data);
+            $soulmate_group_id = $this->Soulmate_model->insert_soulmate_data($ins_data);
         }
         if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
 //            pr($_FILES, 1);
             /* v! If Image is uploaded then use upload library for the codeigniter to upload image */
-            $config['upload_path'] = './uploads/topichat_group';
+            $config['upload_path'] = './uploads/soulmate_group';
             $config['allowed_types'] = 'gif|jpg|png';
             $config['min_width'] = '300';
             $config['min_height'] = '300';
@@ -81,33 +68,31 @@ class Topichat extends CI_Controller {
                     $image_height = $image_info[1];
                     $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                 }
-                $image_name = "topichat_img1.jpg";
+                $image_name = "soulmate_img3.jpg";
                 $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
             } else {
                 $data_upload = array('upload_data' => $this->upload->data());
                 $image_name = $data_upload['upload_data']['file_name'];
             }
         } else {
-            $image_name = "topichat_img1.jpg";
+            $image_name = "soulmate_img3.jpg";
         }
-        $this->Topichat_model->update_topic_group_data($topic_group_id, ['group_cover' => $image_name]);
-        $this->session->set_flashdata('message', array('message' => lang('Topic added successfully'), 'class' => 'alert alert-success'));
-        redirect('topichat');
+        $this->Soulmate_model->update_soulmate_data($soulmate_group_id, ['group_cover' => $image_name]);
+        $this->session->set_flashdata('message', array('message' => lang('Soulmate group added successfully'), 'class' => 'alert alert-success'));
+        redirect('soulmate');
     }
 
     /*
-     * search method loads topichat page view with all required details
+     * search method loads soulmate search group results.
      * develop by : HPA
      */
 
     public function search() {
         if ($this->input->get()) {
-            $filterby = $this->input->get('topic_filter');
             $search_topic = $this->input->get('topic');
-            $this->data['filterby'] = $filterby;
-            $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($search_topic, $filterby);
+            $this->data['soulmate_groups'] = $this->Soulmate_model->get_search_soulmate_group($search_topic);
 //            pr($this->data['topichat_groups'], 1);
-            $this->template->load('front', 'user/topichat/topichat', $this->data);
+            $this->template->load('front', 'user/soulmate/soulmate', $this->data);
         }
     }
 

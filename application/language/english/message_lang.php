@@ -83,7 +83,8 @@ $lang['User Profile has been updated successfully.'] = 'User Profile has been up
 $lang['Image has been uploaded successfully'] = 'Image has been uploaded successfully.';
 
 
-$lang['Topic added successfully'] = 'Topic added successfully';
+$lang['Topic added successfully'] = 'Topic added successfully.';
+$lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
 
 //---Profile---
 $lang['Save'] = 'Save';
@@ -97,7 +98,7 @@ $lang['Topichat'] = 'Topichat';
 $lang['Soulmate'] = 'Soulmate';
 $lang['Group Plan'] = 'Group Plan';
 $lang['Challenge'] = 'Challenge';
-$lang['League and alliance'] = 'League and alliance';
+$lang['League and alliance'] = 'League and Alliance';
 $lang['Information Posts'] = 'Information Posts';
 $lang['Posted'] = 'Posted';
 $lang['Saved'] = 'Saved';

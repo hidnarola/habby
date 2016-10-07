@@ -14,29 +14,32 @@
 <!-- filter titile start here -->
 <div class="row filter_row">
     <div class="container grp_pnl_container">
-
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="lang_sec">
-                <select class="selectpicker filterby" data-style="btn-info">
-                    <option value="newest-post">Newest</option>
-                    <option value="popular-post">Popular</option>
-                    <option value="recommended">Recommended</option>
-                </select>
+        <form class="" role="form" method="get" action="<?php echo base_url() . "topichat" ?>" id="filterby_form">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="lang_sec">
+                    <select class="selectpicker filterby" data-style="btn-info" name="filterby">
+                        <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>>Newest</option>
+                        <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>>Popular</option>
+                        <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>>Recommended</option>
+                    </select>
+                </div>
             </div>
-        </div>
-
+        </form>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="topichat_search_sec">
-                <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                        <input type="text" class="  search-query form-control" placeholder="Find your group" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
+                <form class="" role="form" method="get" action="<?php echo base_url() . "topichat/search" ?>" id="search_form">
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            <input type="hidden" class="search-query form-control" placeholder="Find your group" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
+                            <input type="text" class="search-query form-control" placeholder="Find your group" name="topic" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger find_topic" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -71,7 +74,7 @@
                                 <div class="grp_pln_sec ">
 
                                     <div class="grp_pln_img_sec" style="height: 200px;width: 390px;">
-                                        <a href="#" data-toggle="modal" data-target="#topichat1post">
+                                        <a href="#" data-toggle="modal" data-target="#topichat1post" data-title="<?php echo $topichat_group['topic_name'] ?>" data-image="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat_group['group_cover'] ?>" data-user="<?php echo $topichat_group['display_name'] ?>" data-uimage="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $topichat_group['user_image'] ?>">
                                             <img src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat_group['group_cover'] ?> " class="img-responsive center-block" style="height: 100%;width: 100%;">
                                         </a>
                                     </div>
@@ -80,7 +83,7 @@
                                         <p class="topichat_txt1"><?php echo $topichat_group['topic_name'] ?> </p>
                                         <?php echo ($topichat_group['notes'] != NULL) ? '<p class="topichat_txt2">' . $topichat_group['notes'] . '</p>' : ""; ?>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><?php echo ($topichat_group['person_limit'] == -1) ? "No" : "<span>0/" . $topichat_group['person_limit'] . "</span>"; ?><span> users</span></li>
+                                            <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> users</span></li>
                                             <li><a href="<?php echo base_url() . "topichat/join/" . $topichat_group['id'] ?>" class="pstbtn">Join</a></li>
                                         </ul>
                                     </div>
@@ -98,176 +101,6 @@
         </div>
     </div>
     <!-- Topichat #1 section and Newest Post area end here  -->
-
-    <!-- Topichat #1 section and Popular Post area start here  -->
-    <div class="row grp_pnl_row popular-post flter_sec_row">
-        <div class="container grp_pnl_container">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-                <!-- Topichat #1 row section start here -->
-                <div class="row">
-                    <!-- Topichat #1 each section start here -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                        <div class="grp_pln_sec ">
-
-                            <div class="grp_pln_img_sec">
-                                <a href="#" data-toggle="modal" data-target="#topichat1post">
-                                    <img src="images/topichat_img4.jpg" class="img-responsive center-block">
-                                </a>
-                            </div>
-
-                            <div class="grp_pln_cont_sec">
-                                <p class="topichat_txt1">#Topic </p>
-                                <p class="topichat_txt2">Lorem Ipsum is simply dummy text </p>
-                                <ul class="list-inline soulmate_ul">
-                                    <li><span>120/200</span> <span>users</span></li>
-                                    <li><a href="topichat-2.html" class="pstbtn">Join</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Topichat #1 each section start here -->
-
-                    <!-- Topichat #1 each section start here -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                        <div class="grp_pln_sec ">
-
-                            <div class="grp_pln_img_sec">
-                                <a href="#" data-toggle="modal" data-target="#topichat1post">
-                                    <img src="images/topichat_img5.jpg" class="img-responsive center-block">
-                                </a>
-                            </div>
-
-                            <div class="grp_pln_cont_sec">
-                                <p class="topichat_txt1">#Topic </p>
-                                <p class="topichat_txt2">Lorem Ipsum is simply dummy text </p>
-                                <ul class="list-inline soulmate_ul">
-                                    <li><span>120/200</span> <span>users</span></li>
-                                    <li><a href="topichat-2.html" class="pstbtn">Join</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Topichat #1 each section start here -->
-
-                    <!-- Topichat #1 each section start here -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                        <div class="grp_pln_sec ">
-
-                            <div class="grp_pln_img_sec">
-                                <a href="#" data-toggle="modal" data-target="#topichat1post">
-                                    <img src="images/topichat_img6.jpg" class="img-responsive center-block">
-                                </a>
-                            </div>
-
-                            <div class="grp_pln_cont_sec">
-                                <p class="topichat_txt1">#Topic </p>
-                                <p class="topichat_txt2">Lorem Ipsum is simply dummy text </p>
-                                <ul class="list-inline soulmate_ul">
-                                    <li><span>120/200</span> <span>users</span></li>
-                                    <li><a href="topichat-2.html" class="pstbtn">Join</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Topichat #1 each section start here -->
-
-                </div>
-                <!-- Topichat #1 row section end here -->
-
-            </div>
-        </div>
-    </div>
-    <!-- Topichat #1 section and Popular Post area end here  -->
-
-    <!-- Topichat #1 section and Recommended Post area start here  -->
-    <div class="row grp_pnl_row recommended flter_sec_row">
-        <div class="container grp_pnl_container">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-                <!-- Topichat #1 row section start here -->
-                <div class="row">
-
-                    <!-- Topichat #1 each section start here -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                        <div class="grp_pln_sec ">
-
-                            <div class="grp_pln_img_sec">
-                                <a href="#" data-toggle="modal" data-target="#topichat1post">
-                                    <img src="images/topichat_img7.jpg" class="img-responsive center-block">
-                                </a>
-                            </div>
-
-                            <div class="grp_pln_cont_sec">
-                                <p class="topichat_txt1">#Topic </p>
-                                <p class="topichat_txt2">Lorem Ipsum is simply dummy text </p>
-                                <ul class="list-inline soulmate_ul">
-                                    <li><span>120/200</span> <span>users</span></li>
-                                    <li><a href="topichat-2.html" class="pstbtn">Join</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Topichat #1 each section start here -->
-
-                    <!-- Topichat #1 each section start here -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                        <div class="grp_pln_sec ">
-
-                            <div class="grp_pln_img_sec">
-                                <a href="#" data-toggle="modal" data-target="#topichat1post">
-                                    <img src="images/topichat_img8.jpg" class="img-responsive center-block">
-                                </a>
-                            </div>
-
-                            <div class="grp_pln_cont_sec">
-                                <p class="topichat_txt1">#Topic </p>
-                                <p class="topichat_txt2">Lorem Ipsum is simply dummy text </p>
-                                <ul class="list-inline soulmate_ul">
-                                    <li><span>120/200</span> <span>users</span></li>
-                                    <li><a href="topichat-2.html" class="pstbtn">Join</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Topichat #1 each section start here -->
-
-                    <!-- Topichat #1 each section start here -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                        <div class="grp_pln_sec ">
-
-                            <div class="grp_pln_img_sec">
-                                <a href="#" data-toggle="modal" data-target="#topichat1post">
-                                    <img src="images/topichat_img9.jpg" class="img-responsive center-block">
-                                </a>
-                            </div>
-
-                            <div class="grp_pln_cont_sec">
-                                <p class="topichat_txt1">#Topic </p>
-                                <p class="topichat_txt2">Lorem Ipsum is simply dummy text </p>
-                                <ul class="list-inline soulmate_ul">
-                                    <li><span>120/200</span> <span>users</span></li>
-                                    <li><a href="topichat-2.html" class="pstbtn">Join</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- Topichat #1 each section start here -->
-
-                </div>
-                <!-- Topichat #1 row section end here -->
-
-            </div>
-        </div>
-    </div>
-    <!-- Topichat #1 section and Recommended Post area end here  -->
-
 </div>
 <!-- Topichat Popular section start here -->
 <div class="modal" id="new_grp">
@@ -360,7 +193,43 @@
         </div>
     </div>
 </div>
+<!--  Topichat Post modal section start here -->
+<div class="modal" id="topichat1post">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <p id="modal_title"></p>
+                <h4 class="modal-title">
+                    <span id="modal_title"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p class="modl_ttl"><img src="" class="cht_pfl_img" id="m_image" style="height: 275px;width: 560px;"></p>
+                <div class="grp_pln_img_sec">
+                    <img src="" class="img-responsive center-block" id="m_user_image" style="height: 34px;width: 34px;display: inline-block;padding-right:5px"><span id="modal_user"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
+    //triggered when modal is about to be shown
+    $('#topichat1post').on('show.bs.modal', function (e) {
+
+        //get data-id attribute of the clicked element
+        var title = $(e.relatedTarget).data('title');
+        var image = $(e.relatedTarget).data('image');
+        var user = $(e.relatedTarget).data('user');
+        var uimage = $(e.relatedTarget).data('uimage');
+
+        $('#modal_title').text(title);
+        $('#modal_user').text(user);
+        $('#m_image').attr('src', image);
+        $('#m_user_image').attr('src', uimage);
+    });
+
     $('input:radio[name="person_limit"]').change(function () {
         if ($(this).is(":checked") && $(this).val() == 'Yes')
             $("#txt_No_of_person").removeAttr("disabled");
@@ -393,5 +262,12 @@
             $('.message').html("Please select proper image");
             $('.message').show();
         }
+    });
+
+    $(".filterby").change(function () {
+        $("#filterby_form").submit();
+    });
+    $(".find_topic").click(function () {
+        $("#search_form").submit();
     });
 </script>
