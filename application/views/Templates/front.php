@@ -127,7 +127,7 @@
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="<?php echo base_url() . "topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
                                                     <li><a href="<?php echo base_url() . "soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
-                                                    <li><a href="group_plan.html"><?php echo lang('Group Plan'); ?></a></li>
+                                                    <li><a href="<?php echo base_url() . "groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>
                                                     <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
                                                     <li><a href="league-and-alliance.html"><?php echo lang('League and alliance'); ?></a></li>
                                                 </ul>

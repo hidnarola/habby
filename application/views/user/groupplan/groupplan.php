@@ -14,23 +14,24 @@
 <!-- filter titile start here -->
 <div class="row filter_row">
     <div class="container grp_pnl_container">
-        <!--<form class="" role="form" method="get" action="<?php echo base_url() . "topichat" ?>" id="filterby_form">-->
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <!--                <div class="lang_sec">
-                                <select class="selectpicker filterby" data-style="btn-info" name="filterby">
-                                    <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>>Newest</option>
-                                    <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>>Popular</option>
-                                    <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>>Recommended</option>
-                                </select>
-                            </div>-->
-        </div>
+        <form class="" role="form" method="get" action="<?php echo base_url() . "groupplan" ?>" id="filterby_form">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="lang_sec">
+                    <select class="selectpicker filterby" data-style="btn-info" name="filterby">
+                        <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>>Newest</option>
+                        <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>>Popular</option>
+                        <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>>Recommended</option>
+                    </select>
+                </div>
+            </div>
         </form>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="topichat_search_sec">
-                <form class="" role="form" method="get" action="<?php echo base_url() . "soulmate/search" ?>" id="search_form">
+                <form class="" role="form" method="get" action="<?php echo base_url() . "groupplan/search" ?>" id="search_form">
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
-                            <input type="text" class="search-query form-control" placeholder="Find your soulmate" name="topic" />
+                            <input type="hidden" class="search-query form-control" placeholder="Find your group" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
+                            <input type="text" class="search-query form-control" placeholder="Find your Group plan" name="topic" />
                             <span class="input-group-btn">
                                 <button class="btn btn-danger find_topic" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -64,36 +65,32 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
                     <?php
-                    if (isset($soulmate_groups) && !empty($soulmate_groups)) {
-                        $i = 1;
-                        foreach ($soulmate_groups as $soulmate_group) {
-//                            pr($soulmate_group);
+                    if (isset($Group_plans) && !empty($Group_plans)) {
+                        foreach ($Group_plans as $Group_plan) {
+//                            pr($Group_plan);
                             ?>
-                            <!-- Group section start here -->
-                            <div class="row soulmate_con2">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 <?php echo (($i % 2 != 0) ? "" : "col-sm-push-6") ?> pad_lft_rit0">
-                                    <div class="soulmate_left_sec">
-                                        <p class="soulmate_txt1"><?php echo $soulmate_group['name'] ?> </p>
-                                        <p class="soulmate_txt2"><?php echo $soulmate_group['slogan'] ?></p>
-                                        <p class="soulmate_txt3"><?php echo $soulmate_group['introduction'] ?></p>
-                                        <p class="soulmate_txt4"><?php echo $soulmate_group['display_name'] ?> Created Group</p>
+                            <!-- Group plan each section start here -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 grp_cl6">
+                                <div class="grp_pln_sec ">
+                                    <div class="grp_pln_img_sec">
+                                        <a href="#" data-toggle="modal" data-target="#groupplan1post" data-title="<?php echo $Group_plan['name'] ?>" data-image="<?php echo DEFAULT_GROUPPLAN_IMAGE_PATH . $Group_plan['group_cover'] ?>" data-user="<?php echo $Group_plan['display_name'] ?>" data-uimage="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Group_plan['user_image'] ?>">
+                                            <img src="<?php echo DEFAULT_GROUPPLAN_IMAGE_PATH . $Group_plan['group_cover'] ?> " class="img-responsive center-block">	
+                                        </a>
+                                    </div>
+                                    <div class="grp_pln_cont_sec">
+                                        <p class="soulmate_txt1"><?php echo $Group_plan['name'] ?> </p>
+                                        <p class="soulmate_txt2"><?php echo $Group_plan['slogan'] ?></p>
+                                        <p class="soulmate_txt3"><?php echo $Group_plan['introduction'] ?></p>
+                                        <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> Created Group</p>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><?php echo date("d-m-Y", strtotime($soulmate_group['created_date'])); ?></li>
-                                            <li><a href="soulmate-2.html" class="pstbtn smlt_btn">Join</a></li>
+                                            <li><?php echo ($Group_plan['Total_User'] == 0) ? "No" : "<span>" . $Group_plan['Total_User'] . "</span>"; ?><span> users</span></li>
+                                            <li><a href="group_plan_2.html" class="pstbtn">Join</a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 <?php echo (($i % 2 != 0) ? "" : "col-sm-pull-6") ?> pad_lft_rit0">
-                                    <div class="soulmate_right_sec">
-                                        <a href="#" data-toggle="modal" data-target="#soulmate1post" data-title="<?php echo $soulmate_group['name'] ?>" data-image="<?php echo DEFAULT_SOULMATE_IMAGE_PATH . $soulmate_group['group_cover'] ?>" data-user="<?php echo $soulmate_group['display_name'] ?>" data-uimage="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $soulmate_group['user_image'] ?>">
-                                            <img src="<?php echo DEFAULT_SOULMATE_IMAGE_PATH . $soulmate_group['group_cover'] ?> " class="img-responsive center-block">	
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
-                            <!-- Group section end here -->
+                            <!-- Group plan each section end here -->
                             <?php
-                            $i++;
                         }
                     }
                     ?>
@@ -126,7 +123,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
                     <b>CREATE NEW GROUP</b>
                 </div>
-                <form class="" role="form" method="post" action="<?php echo base_url() . "soulmate/add_group"; ?>" enctype="multipart/form-data">
+                <form class="" role="form" method="post" action="<?php echo base_url() . "groupplan/add_group"; ?>" enctype="multipart/form-data">
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="inputEmail" placeholder="Group:" name="name" required="true">
@@ -166,7 +163,7 @@
         </div>
     </div>
 </div>
-<div class="modal" id="soulmate1post">
+<div class="modal" id="groupplan1post">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -188,7 +185,7 @@
 </div>
 <!-- Soulmate new group form popup end here -->
 <script type="text/javascript">
-    $('#soulmate1post').on('show.bs.modal', function (e) {
+    $('#groupplan1post').on('show.bs.modal', function (e) {
 
         //get data-id attribute of the clicked element
         var title = $(e.relatedTarget).data('title');
@@ -204,7 +201,7 @@
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
-//        console.log('on change fired');
+        //        console.log('on change fired');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
             $('.message').html("No file selected.");
