@@ -522,7 +522,7 @@
 
         </script> 
         <script>
-
+/*
             $(function () {
                 $("div.soulmate_con2").slice(0, 3).show();
                 $("#loadMore").on('click', function (e) {
@@ -536,7 +536,7 @@
                     }, 1500);
                 });
             });
-
+*/
             $('a[href=#top]').click(function () {
                 $('body,html').animate({
                     scrollTop: 0

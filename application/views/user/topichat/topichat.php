@@ -63,7 +63,7 @@
     <div class="row grp_pnl_row newest-post flter_sec_row">
         <div class="container grp_pnl_container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
+                <div class="row topichat_groups">
                     <?php
                     if (isset($topichat_groups) && !empty($topichat_groups)) {
                         foreach ($topichat_groups as $topichat_group) {
@@ -97,6 +97,16 @@
                     ?>
                 </div>
                 <!-- Topichat #1 row section end here -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                <a id="loadMore" href="javascript:;">Load More</a>
+                <p class="totop"> 
+                    <a href="#top" style="display: inline;"><img class="img-responsive" src="images/upload.png"></a>
+                </p>
             </div>
         </div>
     </div>
@@ -270,4 +280,65 @@
     $(".find_topic").click(function () {
         $("#search_form").submit();
     });
+    
+    // Lazy loading 
+        var page = 2;
+        var load = true;
+        $('#loadMore').click(function(){
+            if(load)
+            {
+                loaddata();
+            }
+        });
+
+        function loaddata()
+        {
+            var uri = window.location.href;
+            uri = uri.split('/');
+            var myurl = "";
+            if(typeof(uri[4]) != "undefined")
+            {
+                q = uri[4].split('?');
+                if(typeof(q[1]) != 'undefined' && (q[0] == 'search'))
+                {
+                    myurl = base_url+'topichat/search/'+page+'?'+q[1];
+                }
+                else
+                {
+                    myurl = base_url+'topichat/load_topichat_data/'+page;
+                }
+            }
+            else
+            {
+                q = window.location.href.split('?');
+                if(typeof(q[1]) != 'undefined')
+                {
+                    myurl = base_url+'topichat/load_topichat_data/'+page+'?'+q[1];
+                }
+                else
+                {
+                    myurl = base_url+'topichat/load_topichat_data/'+page;
+                }
+            }
+            $.ajax({
+                url : myurl,
+                method : 'get',
+                success : function(data){
+                    data = JSON.parse(data);
+                    if(data.status == 0)
+                    {
+                        load = false;
+                        $('.topichat_groups').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                        $('#loadMore').remove();
+                    }
+                    else
+                    {
+                        $('.topichat_groups').append(data.view);
+                    }
+                }
+            });
+            page++;
+        }
+        
+    
 </script>

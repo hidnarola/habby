@@ -23,8 +23,30 @@ class Soulmate extends CI_Controller {
      */
 
     public function index() {
-        $this->data['soulmate_groups'] = $this->Soulmate_model->get_soulmate_group();
+        $limit = 4;
+        $this->data['soulmate_groups'] = $this->Soulmate_model->get_soulmate_group(0, $limit);
         $this->template->load('front', 'user/soulmate/soulmate', $this->data);
+    }
+
+    /*
+     * load_soulmate_group according to pagination
+     * @param $page int specify page number
+     * 
+     * developed by : ar
+     */
+
+    public function load_soulmate_group($page) {
+        $data = array();
+        $limit = 4;
+        $start = ($page - 1) * $limit;
+        $this->data['soulmate_groups'] = $this->Soulmate_model->get_soulmate_group($start, $limit);
+        if (count($this->data['soulmate_groups']) > 0) {
+            $data['view'] = $this->load->view('user/partial/soulmate/display_soulmate_group', $this->data, true);
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
     }
 
     /*
@@ -87,12 +109,23 @@ class Soulmate extends CI_Controller {
      * develop by : HPA
      */
 
-    public function search() {
+    public function search($page = 1) {
         if ($this->input->get()) {
+            $limit = 4;
+            $start = ($page - 1) * $limit;
             $search_topic = $this->input->get('topic');
-            $this->data['soulmate_groups'] = $this->Soulmate_model->get_search_soulmate_group($search_topic);
-//            pr($this->data['topichat_groups'], 1);
-            $this->template->load('front', 'user/soulmate/soulmate', $this->data);
+            $this->data['soulmate_groups'] = $this->Soulmate_model->get_search_soulmate_group($search_topic, $start, $limit);
+            if ($page == 1) {
+                $this->template->load('front', 'user/soulmate/soulmate', $this->data);
+            } else {
+                if (count($this->data['soulmate_groups']) > 0) {
+                    $data['view'] = $this->load->view('user/partial/soulmate/display_soulmate_group', $this->data, true);
+                    $data['status'] = 1;
+                } else {
+                    $data['status'] = 0;
+                }
+                echo json_encode($data);
+            }
         }
     }
 
