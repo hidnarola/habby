@@ -206,23 +206,47 @@ $('document').ready(function () {
 
     function loaddata()
     {
-        console.log(window.location.href);
-        $.ajax({
-            url : base_url+'user/home/challenge/'+page,
-            method : 'get',
-            success : function(data){
-                data = JSON.parse(data);
-                if(data.status == 0)
-                {
-                    load = false;
-                    $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'>No more data found</div>");
+        var uri = window.location.href;
+        uri = uri.split('/');
+        if(typeof(uri[4]) != "undefined" && uri[4] == "challenge")
+        {
+            $.ajax({
+                url : base_url+'user/home/challenge/'+page,
+                method : 'get',
+                success : function(data){
+                    data = JSON.parse(data);
+                    if(data.status == 0)
+                    {
+                        load = false;
+                        $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'>No more data found</div>");
+                    }
+                    else
+                    {
+                        $('.post_section').append(data.view);
+                    }
                 }
-                else
-                {
-                    $('.post_section').append(data.view);
+            });
+            page++;
+        }
+        else
+        {
+            $.ajax({
+                url : base_url+'user/home/smile_share/'+page,
+                method : 'get',
+                success : function(data){
+                    data = JSON.parse(data);
+                    if(data.status == 0)
+                    {
+                        load = false;
+                        $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'>No more data found</div>");
+                    }
+                    else
+                    {
+                        $('.post_section').append(data.view);
+                    }
                 }
-            }
-        });
-        page++;
+            });
+            page++;
+        }
     }
 });

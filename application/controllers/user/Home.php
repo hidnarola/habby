@@ -23,8 +23,8 @@ class Home extends CI_Controller {
      */
 
     public function index() {
-        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id']);
-      //   pr($this->data['posts'],1);
+        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id'],0,3);
+//      //   pr($this->data['posts'],1);
         $this->template->load('front', 'user/home.php', $this->data);
     }
 
@@ -35,10 +35,23 @@ class Home extends CI_Controller {
      */
 
     public function smile_share($page=1) {
-        
-        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id']);
-      //  pr($this->data['posts'],1);
-        $this->template->load('front', 'user/home.php', $this->data);
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id'],$start,$limit);
+        if($page == 1)
+        {
+            $this->template->load('front', 'user/home.php', $this->data);
+        }
+        else
+        {
+            $data['view'] = $this->load->view('user/partial/load_post_data',$this->data,true);
+            $data['status'] = '1';
+            if(count($this->data['posts']) == 0)
+            {
+                $data['status'] = '0';
+            }
+            echo json_encode($data);
+        }
     }
 
     /*
@@ -50,7 +63,6 @@ class Home extends CI_Controller {
         $limit = 3;
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->challange_post($data = array(),$this->session->user['id'],$start,$limit);
-      //  pr($this->data['posts'],1);
         if($page == 1)
         {
             $this->template->load('front', 'user/home.php', $this->data);
