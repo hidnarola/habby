@@ -60,6 +60,7 @@ $route["home/(:any)"] = "user/home/$1";
 
 $route["topichat"] = "user/topichat";
 $route["topichat/(:any)"] = "user/topichat/$1";
+$route["topichat/(:any)/(:any)"] = "user/topichat/$1/$2";
 
 $route["soulmate"] = "user/soulmate";
 $route["soulmate/(:any)"] = "user/soulmate/$1";

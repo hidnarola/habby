@@ -22,22 +22,75 @@ class Topichat extends CI_Controller {
      * develop by : HPA
      */
 
-    public function index() {
+    public function index($page = 1) {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
         if ($this->input->get()) {
             $filterby = $this->input->get('filterby');
             $this->data['filterby'] = $filterby;
             if ($filterby == 'popular') {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_popular_topichat_group();
+                $this->data['topichat_groups'] = $this->Topichat_model->get_popular_topichat_group($start,$limit);
             } else if ($filterby == 'recommended') {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group();
+                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start,$limit);
             } else {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group();
+                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start,$limit);
             }
         } else {
-            $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group();
+            $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start,$limit);
         }
-//        pr($this->data['topichat_groups'], 1);
-        $this->template->load('front', 'user/topichat/topichat', $this->data);
+        if($page == 1)
+        {
+            $this->template->load('front', 'user/topichat/topichat', $this->data);
+        }
+        else
+        {
+            $data = array();
+            if(count($this->data['topichat_groups']) > 0)
+            {
+                $data['view'] = $this->load->view('user/partial/topichat/display_topichat_group',$this->data,true);
+                $data['status'] = 1;
+            }
+            else
+            {
+                $data['status'] = 0;
+            }
+        }
+    }
+    
+    public function load_topichat_data($page = 1) {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        if ($this->input->get()) {
+            $filterby = $this->input->get('filterby');
+            $this->data['filterby'] = $filterby;
+            if ($filterby == 'popular') {
+                $this->data['topichat_groups'] = $this->Topichat_model->get_popular_topichat_group($start,$limit);
+            } else if ($filterby == 'recommended') {
+                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start,$limit);
+            } else {
+                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start,$limit);
+            }
+        } else {
+            $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start,$limit);
+        }
+        if($page == 1)
+        {
+            $this->template->load('front', 'user/topichat/topichat', $this->data);
+        }
+        else
+        {
+            $data = array();
+            if(count($this->data['topichat_groups']) > 0)
+            {
+                $data['view'] = $this->load->view('user/partial/topichat/display_topichat_group',$this->data,true);
+                $data['status'] = 1;
+            }
+            else
+            {
+                $data['status'] = 0;
+            }
+            echo json_encode($data);
+        }
     }
 
     /*
@@ -100,14 +153,33 @@ class Topichat extends CI_Controller {
      * develop by : HPA
      */
 
-    public function search() {
+    public function search($page = 1) {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
         if ($this->input->get()) {
             $filterby = $this->input->get('topic_filter');
             $search_topic = $this->input->get('topic');
             $this->data['filterby'] = $filterby;
-            $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($search_topic, $filterby);
+            $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($search_topic, $filterby,$start,$limit);
 //            pr($this->data['topichat_groups'], 1);
-            $this->template->load('front', 'user/topichat/topichat', $this->data);
+            if($page == 1)
+            {
+                $this->template->load('front', 'user/topichat/topichat', $this->data);
+            }
+            else
+            {
+                $data = array();
+                if(count($this->data['topichat_groups']) > 0)
+                {
+                    $data['view'] = $this->load->view('user/partial/topichat/display_topichat_group',$this->data,true);
+                    $data['status'] = 1;
+                }
+                else
+                {
+                    $data['status'] = 0;
+                }
+                echo json_encode($data);
+            }
         }
     }
 

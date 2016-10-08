@@ -62,7 +62,7 @@
     <div class="row grp_pnl_row newest-post flter_sec_row">
         <div class="container grp_pnl_container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
+                <div class="row soulmate_groups">
                     <?php
                     if (isset($soulmate_groups) && !empty($soulmate_groups)) {
                         $i = 1;
@@ -70,7 +70,7 @@
 //                            pr($soulmate_group);
                             ?>
                             <!-- Group section start here -->
-                            <div class="row soulmate_con2">
+                            <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 <?php echo (($i % 2 != 0) ? "" : "col-sm-push-6") ?> pad_lft_rit0">
                                     <div class="soulmate_left_sec">
                                         <p class="soulmate_txt1"><?php echo $soulmate_group['name'] ?> </p>
@@ -108,7 +108,7 @@
     <div class="row">
         <div class="container">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                <a href="#" id="loadMore">Load More</a>
+                <a href="javascript:;" id="loadMore">Load More</a>
 
                 <p class="totop"> 
                     <a href="#top"><img src="images/upload.png" class="img-responsive"></a> 
@@ -237,6 +237,58 @@
 </script>
 <script>
     $(function () {
+        // Lazy loading 
+        var page = 2;
+        var load = true;
+        $('#loadMore').click(function(){
+            if(load)
+            {
+                loaddata();
+            }
+        });
+
+        function loaddata()
+        {
+            var uri = window.location.href;
+            uri = uri.split('/');
+            var myurl = "";
+            if(typeof(uri[4]) != "undefined")
+            {
+                q = uri[4].split('?');
+                if(typeof(q[1]) != 'undefined' && (q[0] == 'search'))
+                {
+                    myurl = base_url+'user/Soulmate/search/'+page+'?'+q[1];
+                }
+                else
+                {
+                    myurl = base_url+'user/Soulmate/load_soulmate_group/'+page;
+                }
+            }
+            else
+            {
+                myurl = base_url+'user/Soulmate/load_soulmate_group/'+page;
+            }
+            $.ajax({
+                url : myurl,
+                method : 'get',
+                success : function(data){
+                    data = JSON.parse(data);
+                    if(data.status == 0)
+                    {
+                        load = false;
+                        $('.soulmate_groups').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                        $('#loadMore').remove();
+                    }
+                    else
+                    {
+                        $('.soulmate_groups').append(data.view);
+                    }
+                }
+            });
+            page++;
+        }
+        
+        /*
         $("div.soulmate_con2").slice(0, 5).show();
         $("#loadMore").on('click', function (e) {
             e.preventDefault();
@@ -248,6 +300,7 @@
                 scrollTop: $(this).offset().top
             }, 1500);
         });
+        */
     });
 
     $('a[href=#top]').click(function () {
