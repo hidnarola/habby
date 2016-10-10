@@ -129,5 +129,15 @@ $lang['Recommended'] = "рекомендуемые";
 $lang['New'] = "Новая";
 $lang['League'] = "лига";
 $lang['Find leagues'] = "Найти лиги";
+$lang['Create New League'] = "Создать новую лигу";
+$lang['League Name'] = "Имя Лига";
+$lang['League introduction'] = "введение лига";
+$lang['League requirements'] = "требования Лиги";
+$lang['Cover Image'] = "изображение на обложке";
+$lang['Number of maximum members'] = "Количество максимальных членов";
+$lang['Badge Image'] = "Знак изображение";
+$lang['Requirement'] = "требование";
+$lang['Achieve'] = 'добиваться';
+$lang['Apply'] = 'Подать заявление';
 
 ?>

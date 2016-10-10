@@ -128,6 +128,14 @@ $lang['Recommended'] = "conseillé";
 $lang['New'] = "Nouveau";
 $lang['League'] = "Ligue";
 $lang['Find leagues'] = "Trouver des ligues";
-
-
+$lang['Create New League'] = "Créer une nouvelle Ligue";
+$lang['League Name'] = "Nom de la ligue";
+$lang['League introduction'] = "Ligue l'introduction";
+$lang['League requirements'] = "exigences de la Ligue";
+$lang['Cover Image'] = "Image de couverture";
+$lang['Number of maximum members'] = "Nombre de membres maximum";
+$lang['Badge Image'] = "Badge Image";
+$lang['Requirement'] = "Exigence";
+$lang['Achieve'] = 'Atteindre';
+$lang['Apply'] = 'Appliquer';
 ?>
