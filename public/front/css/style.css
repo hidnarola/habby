@@ -286,7 +286,7 @@ li.dropdown.dropdown2:hover #srchdrp
 .dropdown-menu li:first-child {
     background-color: #ffffff;
     padding: 0px 0px;
-	min-height: 0px;
+    min-height: 0px;
 }
 .my_nav .dropdown-menu
 {
@@ -295,8 +295,30 @@ li.dropdown.dropdown2:hover #srchdrp
 	border-radius: 0px;
 }
 
+.home-list-inline .dropdown .dropdown-menu li{
+    padding: 0;
+}
 
-
+.home-list-inline .dropdown .dropdown-menu li a {
+    position: relative;
+}
+.home-list-inline .dropdown .dropdown-menu li a i {
+    position: absolute;
+    left: 12px;
+    top: 13px;
+}
+span.user-thumb-sm img {
+    height: 100%;
+    width: 100%;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    padding-right: 0;
+}
+span.user-thumb-sm {
+    display: inline-block;
+    width: 22px;
+    height: 20px;
+}
 /* Navigation css end here*/
 .lang_sec
 {
@@ -4101,18 +4123,46 @@ margin:0px;
     background-color: transparent;
 }
 
-
-
+.login_frm .lang_sec {
+    margin: 6px 0px 0px 0px;
+    width: 135px;
+    background-image: url(../img/select_bg.png);
+    background-repeat: no-repeat;
+    background-position: 92% 11px;
+}
+.login_frm  .lang_sec select{
+    height: 22px;
+}
 /* mobile version css end here */
 
 
 
 /* Media queries start here */
 
-
+@media (max-width:1070px){
+    .login_frm .lang_sec{    width: 100px;    margin-left: 15px;}
+    .login_frm .lang_sec select {
+        height: 22px;
+        font-size: 12px;
+    }
+}
 
 @media (max-width:767px)
 {
+    .login_frm .lang_sec{   width: 100%;
+        padding: 0px 0px 0px;
+    }
+    .login_frm .lang_sec select {
+    height: 35px;
+    font-size: 12px;
+    text-align: left;
+    margin: 0 0 0 15px;
+    line-height: 29px;
+        width: 100%
+}
+.login_frm .lang_sec{
+        background-position: 99% 11px;
+}
 	.topichat_post_sec {
     position: static;
     right: 0;
@@ -4292,7 +4342,7 @@ margin:0px;
 	}
 	.mobile_chatsec li:last-child
 	{
-		padding-left:
+		/*padding-left:*/
 	}
 	.mov_sec.clicked2
 	{
@@ -5995,6 +6045,7 @@ a:hover {
     background-color: #fff;
     color: #76469e;
 }
+
 
 @media (max-width:767px)
 {

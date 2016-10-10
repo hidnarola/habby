@@ -19,6 +19,7 @@
         <link href="https://fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,300,400,500,600,700,800,900" rel="stylesheet">
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.min.js" ?>"></script>
+        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../../assets/js/html5shiv.js"></script>
@@ -50,10 +51,10 @@
                     <li class="pull-right "><button id="close_nav"> <img src="<?php echo DEFAULT_IMAGE_PATH . "nav-close-icon.png" ?>" class="cls_img"></button></li>
                 </ul>
             </div>
-            <a href="smile-share.html"><?php echo lang(''); ?>Smile Share</a>
-            <a href="home-challenge.html"><?php echo lang(''); ?>Challenge</a>
-            <a href="treehole.html"><?php echo lang(''); ?>Live life</a>
-            <a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang(''); ?>Log Out</a>
+            <a href="smile-share.html"><?php echo lang('Smile Share'); ?></a>
+            <a href="home-challenge.html"><?php echo lang('Challenge'); ?></a>
+            <a href="treehole.html"><?php echo lang('Live life'); ?></a>
+            <a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a>
         </nav>
         <!-- Mobile Toggle Menu end here -->
 
@@ -67,11 +68,12 @@
                             <?php
                             if (isset($user_data) && !empty($user_data)) {
                                 ?>
-                                <ul class="list-inline hdr_ul1">
+                                <ul class="list-inline hdr_ul1 home-list-inline">
                                     <li><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive"></li>
                                     <li class="dropdown">
                                         <a href="javascript:void(0)" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
-                                            <img src="<?php echo ($user_data['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
+                                            <span class="user-thumb-sm">
+                                                <img src="<?php echo ($user_data['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"></span>
                                             <?php echo $user_data['name'] ?>
                                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                                         </a>
@@ -128,7 +130,7 @@
                                                     <li><a href="<?php echo base_url() . "topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
                                                     <li><a href="<?php echo base_url() . "soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
                                                     <li><a href="<?php echo base_url() . "groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>
-                                                    <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
+                                                    <li><a href="<?php echo base_url() . "challenge" ?>"><?php echo lang('Challenge'); ?></a></li>
                                                     <li><a href="league-and-alliance.html"><?php echo lang('League and alliance'); ?></a></li>
                                                 </ul>
                                             </li>
@@ -415,6 +417,12 @@
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.fancybox.js" ?>"></script>
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "classie.js" ?>" ></script>
         <script>
+            $('.post_section').masonry({
+                itemSelector: '.pst_full_sec',
+                columnWidth: 100
+            });
+        </script>
+        <script>
             var menuLeft = document.getElementById('cbp-spmenu-s1'),
                     showLeftPush = document.getElementById('showLeftPush'),
                     body = document.body;
@@ -522,21 +530,21 @@
 
         </script> 
         <script>
-/*
-            $(function () {
-                $("div.soulmate_con2").slice(0, 3).show();
-                $("#loadMore").on('click', function (e) {
-                    e.preventDefault();
-                    $("div.soulmate_con2:hidden").slice(0, 2).slideDown();
-                    if ($("div.soulmate_con2:hidden").length == 0) {
-                        $("#load").fadeOut('slow');
-                    }
-                    $('html,body').animate({
-                        scrollTop: $(this).offset().top
-                    }, 1500);
-                });
-            });
-*/
+            /*
+             $(function () {
+             $("div.soulmate_con2").slice(0, 3).show();
+             $("#loadMore").on('click', function (e) {
+             e.preventDefault();
+             $("div.soulmate_con2:hidden").slice(0, 2).slideDown();
+             if ($("div.soulmate_con2:hidden").length == 0) {
+             $("#load").fadeOut('slow');
+             }
+             $('html,body').animate({
+             scrollTop: $(this).offset().top
+             }, 1500);
+             });
+             });
+             */
             $('a[href=#top]').click(function () {
                 $('body,html').animate({
                     scrollTop: 0
@@ -580,6 +588,7 @@
                 });
             });
         </script>
+
     </body>
 </html>
 

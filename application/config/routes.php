@@ -68,6 +68,10 @@ $route["soulmate/(:any)"] = "user/soulmate/$1";
 $route["groupplan"] = "user/groupplan";
 $route["groupplan/(:any)"] = "user/groupplan/$1";
 
+$route["challenge"] = "user/challenge";
+$route["challenge/(:any)"] = "user/challenge/$1";
+$route["challenge/(:any)/(:any)"] = "user/challenge/$1/$2";
+
 $route['user/forgot_password'] = "user/user/forgot_password";
 $route['user/(:any)'] = "user/user/$1";
 $route['user/reset_password/(:any)'] = "user/user/reset_password/$1";
