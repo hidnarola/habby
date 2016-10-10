@@ -120,4 +120,14 @@ $lang['Send Message'] = 'Envoyer le message';
 $lang['Chats'] = 'causeries';
 $lang['Write here...'] = 'Ecrire ici...';
 $lang['Send'] = 'Envoyer';
+
+// League and alliance
+$lang['Newest'] = "le plus récent";
+$lang['Popular'] = "populaire";
+$lang['Recommended'] = "conseillé";
+$lang['New'] = "Nouveau";
+$lang['League'] = "Ligue";
+$lang['Find leagues'] = "Trouver des ligues";
+
+
 ?>

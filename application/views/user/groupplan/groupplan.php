@@ -63,7 +63,7 @@
     <div class="row grp_pnl_row newest-post flter_sec_row">
         <div class="container grp_pnl_container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
+                <div class="row groupplans">
                     <?php
                     if (isset($Group_plans) && !empty($Group_plans)) {
                         foreach ($Group_plans as $Group_plan) {
@@ -83,7 +83,7 @@
                                         <p class="soulmate_txt3"><?php echo $Group_plan['introduction'] ?></p>
                                         <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> Created Group</p>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><?php echo ($Group_plan['Total_User'] == 0) ? "No" : "<span>" . $Group_plan['Total_User'] . "</span>"; ?><span> users</span></li>
+                                            <li><span><?php echo $Group_plan['Total_User']."/".$Group_plan['user_limit'] ?> users</span></li>
                                             <li><a href="group_plan_2.html" class="pstbtn">Join</a></li>
                                         </ul>
                                     </div>
@@ -105,7 +105,7 @@
     <div class="row">
         <div class="container">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                <a href="#" id="loadMore">Load More</a>
+                <a href="javascript:;" id="loadMore">Load More</a>
 
                 <p class="totop"> 
                     <a href="#top"><img src="images/upload.png" class="img-responsive"></a> 
@@ -132,6 +132,11 @@
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <input type="text" class="form-control" id="inputEmail" placeholder="Slogan : " name="slogan">
+                        </div>
+                    </div>
+                    <div class="form-group clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Number of maximum members : " pattern="^[0-9]$" name="user_limit">
                         </div>
                     </div>
                     <div class="form-group clearfix">
@@ -233,20 +238,6 @@
     });
 </script>
 <script>
-    $(function () {
-        $("div.soulmate_con2").slice(0, 5).show();
-        $("#loadMore").on('click', function (e) {
-            e.preventDefault();
-            $("div.soulmate_con2:hidden").slice(0, 5).slideDown();
-            if ($("div.soulmate_con2:hidden").length == 0) {
-                $("#load").fadeOut('slow');
-            }
-            $('html,body').animate({
-                scrollTop: $(this).offset().top
-            }, 1500);
-        });
-    });
-
     $('a[href=#top]').click(function () {
         $('body,html').animate({
             scrollTop: 0
@@ -261,4 +252,63 @@
             $('.totop a').fadeOut();
         }
     });
+    
+    // Lazy loading 
+        var page = 2;
+        var load = true;
+        $('#loadMore').click(function(){
+            if(load)
+            {
+                loaddata();
+            }
+        });
+
+        function loaddata()
+        {
+            var uri = window.location.href;
+            uri = uri.split('/');
+            var myurl = "";
+            if(typeof(uri[4]) != "undefined")
+            {
+                q = uri[4].split('?');
+                if(typeof(q[1]) != 'undefined' && (q[0] == 'search'))
+                {
+                    myurl = base_url+'groupplan/search/'+page+'?'+q[1];
+                }
+                else
+                {
+                    myurl = base_url+'groupplan/load_groupplan/'+page;
+                }
+            }
+            else
+            {
+                q = window.location.href.split('?');
+                if(typeof(q[1]) != 'undefined')
+                {
+                    myurl = base_url+'groupplan/load_groupplan/'+page+'?'+q[1];
+                }
+                else
+                {
+                    myurl = base_url+'groupplan/load_groupplan/'+page;
+                }
+            }
+            $.ajax({
+                url : myurl,
+                method : 'get',
+                success : function(data){
+                    data = JSON.parse(data);
+                    if(data.status == 0)
+                    {
+                        load = false;
+                        $('.groupplans').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                        $('#loadMore').remove();
+                    }
+                    else
+                    {
+                        $('.groupplans').append(data.view);
+                    }
+                }
+            });
+            page++;
+        }
 </script>

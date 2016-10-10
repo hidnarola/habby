@@ -7,7 +7,7 @@
         <base href="<?php echo base_url(); ?>"></base>
         <title>Habby</title>
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "bootstrap.css" ?>"/>
-        <link href="<?php echo DEFAULT_CSS_PATH . "flexnav.css" ?>" media="screen, projection" rel="stylesheet" type="text/css">
+        <!--<link href="<?php echo DEFAULT_CSS_PATH . "flexnav.css" ?>" media="screen, projection" rel="stylesheet" type="text/css"> -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "jquery.fancybox.css" ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "component.css" ?>"/>
@@ -129,7 +129,7 @@
                                                     <li><a href="<?php echo base_url() . "soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
                                                     <li><a href="<?php echo base_url() . "groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>
                                                     <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
-                                                    <li><a href="league-and-alliance.html"><?php echo lang('League and alliance'); ?></a></li>
+                                                    <li><a href="<?php echo base_url()."league" ?>"><?php echo lang('League and alliance'); ?></a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="treehole.html"><?php echo lang('Live life'); ?></a></li>
@@ -450,7 +450,7 @@
 
         </script>
         <script>
-            $(".flexnav").flexNav();
+            // $(".flexnav").flexNav();
         </script>
         <script type="text/javascript">
             $(document).ready(function () {

@@ -25,18 +25,19 @@ class Groupplan_model extends CI_Model {
         return $last_id;
     }
 
-    public function get_group_plan() {
+    public function get_group_plan($start,$limit) {
         $user_id = logged_in_user_id();
         $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image');
         $this->db->join('users', 'users.id = gp.user_id');
         $this->db->where('gp.user_id !=' . $user_id);
         $this->db->order_by('gp.created_date', 'DESC');
         $this->db->group_by('gp.id');
+        $this->db->limit($limit,$start);
         $res_data = $this->db->get('group gp')->result_array();
         return $res_data;
     }
 
-    public function get_search_groupplan($search_topic = NULL, $filterby = NUll) {
+    public function get_search_groupplan($search_topic = NULL, $filterby = NUll,$start,$limit) {
         $user_id = logged_in_user_id();
         $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image');
         $this->db->join('users', 'users.id = gp.user_id');
@@ -49,20 +50,21 @@ class Groupplan_model extends CI_Model {
         } else {
             $this->db->order_by('gp.created_date', 'DESC');
         }
+        $this->db->limit($limit,$start);
         $res_data = $this->db->get('group gp')->result_array();
         return $res_data;
     }
 
-    public function get_popular_group_plans() {
+    public function get_popular_group_plans($start,$limit) {
         $user_id = logged_in_user_id();
         $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image');
         $this->db->join('users', 'users.id = gp.user_id');
         $this->db->where('gp.user_id !=' . $user_id);
         $this->db->order_by('Total_User', 'DESC');
+        $this->db->limit($limit,$start);
         $res_data = $this->db->get('group gp')->result_array();
         return $res_data;
     }
-
 }
 
 ?>
