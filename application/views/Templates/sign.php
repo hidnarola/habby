@@ -41,10 +41,10 @@
             <div class="row">
                 <div class="hdr_sec1">
                     <div class="container">
-                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                        <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
                             <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive logo_img2"></a>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                        <div class="col-lg-7 col-md-8 col-sm-7 col-xs-12">
                             <div class="row">
 
                                 <div class="login_frm">
@@ -62,14 +62,23 @@
                                         }
                                         ?>
                                         <div class="form-group">
-                                            <div class="col-sm-5 col-xs-12">
+                                            <div class="col-sm-4 col-xs-12">
                                                 <input type="text" class="form-control" name="email" id="email" placeholder="<?php echo lang('E-mail');?>" value="<?php echo set_value('email'); ?>">
                                             </div>
-                                            <div class="col-sm-5 col-xs-12">
+                                            <div class="col-sm-4 col-xs-12">
                                                 <input type="password" class="form-control" name="password" id="pwd" placeholder="<?php echo lang('Password');?>">
                                             </div>
                                             <div class="col-sm-2 col-xs-12">
                                                 <input type="submit" class="login_btn" value="<?php echo lang('Login');?>">
+                                            </div>
+                                            <div class="col-sm-2 col-xs-12">
+                                                    <div class="lang_sec lang-change">
+                                        <select class="selectpicker" data-style="btn-info">
+                                            <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
+                                            <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
+                                            <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
+                                        </select>
+                                    </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -87,13 +96,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <div class="lang_sec lang-change">
-                                        <select class="selectpicker" data-style="btn-info">
-                                            <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
-                                            <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
-                                            <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
-                                        </select>
-                                    </div>
+                                
                                 </div>
                             </div>
                         </div>

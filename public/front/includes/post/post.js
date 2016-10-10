@@ -200,6 +200,10 @@ $('document').ready(function () {
         {
             if ($(window).scrollTop() == ( $(document).height() - $(window).height())) {
                 loaddata();
+                       $('.post_section').masonry({
+                            itemSelector: '.pst_full_sec',
+                             columnWidth: 100
+                        });
             }
         }
     });
