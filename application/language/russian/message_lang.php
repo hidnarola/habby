@@ -122,4 +122,12 @@ $lang['Chats'] = 'Чаты';
 $lang['Write here...'] = 'Пишите здесь...';
 $lang['Send'] = 'послать';
 
+// League and alliance
+$lang['Newest'] = "новейший";
+$lang['Popular'] = "Популярный";
+$lang['Recommended'] = "рекомендуемые";
+$lang['New'] = "Новая";
+$lang['League'] = "лига";
+$lang['Find leagues'] = "Найти лиги";
+
 ?>

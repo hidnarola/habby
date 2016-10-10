@@ -54,6 +54,7 @@ class Topichat extends CI_Controller {
             {
                 $data['status'] = 0;
             }
+            echo json_encode($data);
         }
     }
     
@@ -182,5 +183,4 @@ class Topichat extends CI_Controller {
             }
         }
     }
-
 }

@@ -136,5 +136,23 @@ $lang['Notes'] = 'Notes';
 $lang[''] = '';
 $lang[''] = '';
 
+// League and alliance
+
+$lang['Newest'] = "Newest";
+$lang['Popular'] = "Popular";
+$lang['Recommended'] = "Recommended";
+$lang['New'] = "New";
+$lang['League'] = "League";
+$lang['Find leagues'] = "Find leagues";
+$lang['Create New League'] = "Create New League";
+$lang['League Name'] = "League Name";
+$lang['League introduction'] = "League introduction";
+$lang['League requirements'] = "League requirements";
+$lang['Cover Image'] = "Cover Image";
+$lang['Number of maximum members'] = "Number of maximum members";
+$lang['Badge Image'] = "Badge Image";
+$lang['Requirement'] = "Requirement";
+$lang['Achieve'] = 'Achieve';
+$lang['Apply'] = 'Apply';
 
 ?> 

@@ -98,6 +98,7 @@ defined('DEFAULT_BANNER_IMAGE_PATH') OR define('DEFAULT_BANNER_IMAGE_PATH', Asse
 defined('DEFAULT_TOPICHAT_IMAGE_PATH') OR define('DEFAULT_TOPICHAT_IMAGE_PATH', Asset_path . 'uploads/topichat_group/'); // highest automatically-assigned error code
 defined('DEFAULT_SOULMATE_IMAGE_PATH') OR define('DEFAULT_SOULMATE_IMAGE_PATH', Asset_path . 'uploads/soulmate_group/'); // highest automatically-assigned error code
 defined('DEFAULT_GROUPPLAN_IMAGE_PATH') OR define('DEFAULT_GROUPPLAN_IMAGE_PATH', Asset_path . 'uploads/group_plan/'); // highest automatically-assigned error code
+defined('DEFAULT_LEAGUE_IMAGE_PATH') OR define('DEFAULT_LEAGUE_IMAGE_PATH', Asset_path . 'uploads/league/');
 defined('DEFAULT_JS_PATH') OR define('DEFAULT_JS_PATH', Asset_path . 'public/front/js/'); // highest automatically-assigned error code
 defined('DEFAULT_CSS_PATH') OR define('DEFAULT_CSS_PATH', Asset_path . 'public/front/css/'); // highest automatically-assigned error code
 defined('USER_JS') or define('USER_JS', Asset_path . 'public/front/includes/');
