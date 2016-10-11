@@ -8,17 +8,20 @@
     overflow: scroll;
 }
 .image_wrapper{
-    height:180px;
-    width:425px;
+    height:auto;
+    width:auto;
 }
 #imagePreview {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 180px;
     background-position: center center;
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;
+    float: left;
+    margin: 9px;
 }
+
 .logo_wrapper{
     height:180px;
     width:425px;
@@ -50,4 +53,8 @@
 .league_logo{
     max-height: 120px;
     max-width:100%;
+}
+
+.post_images{
+    padding:10px;
 }

@@ -2,7 +2,7 @@
 if (count($posts) > 0) {
     foreach ($posts as $post) {
         ?>
-        <div class="pst_full_sec" data-post_id="<?php echo $post['id']; ?>">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pst_full_sec" data-post_id="<?php echo $post['id']; ?>">
             <div class="cmnt_newsec_row">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -77,7 +77,7 @@ if (count($posts) > 0) {
                                     if (isset($post['media']) && is_array($post['media']) && count($post['media']) > 0) {
                                         foreach ($post['media'] as $value) {
                                             ?>
-                                            <a class="fancybox"  href="uploads/user_post/<?php echo $value['media']; ?>" data-fancybox-group="gallery">
+                                            <a class="fancybox post_images" href="uploads/user_post/<?php echo $value['media']; ?>" data-fancybox-group="gallery">
                                                 <img src="uploads/user_post/<?php echo $value['media']; ?>" class="img-responsive center-block">
                                             </a>
                                             <?php

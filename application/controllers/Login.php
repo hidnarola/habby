@@ -79,7 +79,15 @@ class Login extends CI_Controller {
 
                         $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
                         $this->session->set_flashdata('message', ['message' => lang('Login Successfully'), 'class' => 'alert alert-success']);
-                        $this->Users_model->update_user_data($user_data['id'], ['last_login' => date('Y-m-d H:i:s')]); // update last login time
+                        $update_arr = array();
+                        if($user_data['last_login'] < date("Y-m-d H:i:s\n",strtotime('today')))
+                        {
+                            $update_arr['total_coin'] = $user_data['total_coin'] + 5;
+                            
+                        }
+                        $update_arr['last_login'] = date('Y-m-d H:i:s');
+                        $this->Users_model->update_user_data($user_data['id'], $update_arr); // update last login time
+                        
                         $user_redirect = $this->session->userdata('user_redirect');
                         if (!empty($user_redirect)) {
                             $this->session->unset_userdata('user_redirect');

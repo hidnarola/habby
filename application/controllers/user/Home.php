@@ -23,31 +23,26 @@ class Home extends CI_Controller {
      */
 
     public function index() {
-        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id'],0,3);
+        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(), $this->session->user['id'], 0, 3);
 //      //   pr($this->data['posts'],1);
         $this->template->load('front', 'user/home.php', $this->data);
     }
-
 
     /*
      * smile_share method loads home page view with all required details
      * develop by : ar
      */
 
-    public function smile_share($page=1) {
+    public function smile_share($page = 1) {
         $limit = 3;
         $start = ($page - 1) * $limit;
-        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(),$this->session->user['id'],$start,$limit);
-        if($page == 1)
-        {
+        $this->data['posts'] = $this->Post_model->smileshare_post($data = array(), $this->session->user['id'], $start, $limit);
+        if ($page == 1) {
             $this->template->load('front', 'user/home.php', $this->data);
-        }
-        else
-        {
-            $data['view'] = $this->load->view('user/partial/load_post_data',$this->data,true);
+        } else {
+            $data['view'] = $this->load->view('user/partial/load_post_data', $this->data, true);
             $data['status'] = '1';
-            if(count($this->data['posts']) == 0)
-            {
+            if (count($this->data['posts']) == 0) {
                 $data['status'] = '0';
             }
             echo json_encode($data);
@@ -59,20 +54,16 @@ class Home extends CI_Controller {
      * develop by : ar
      */
 
-    public function challenge($page=1) {
+    public function challenge($page = 1) {
         $limit = 3;
         $start = ($page - 1) * $limit;
-        $this->data['posts'] = $this->Post_model->challange_post($data = array(),$this->session->user['id'],$start,$limit);
-        if($page == 1)
-        {
+        $this->data['posts'] = $this->Post_model->challange_post($data = array(), $this->session->user['id'], $start, $limit);
+        if ($page == 1) {
             $this->template->load('front', 'user/home.php', $this->data);
-        }
-        else
-        {
-            $data['view'] = $this->load->view('user/partial/load_post_data',$this->data,true);
+        } else {
+            $data['view'] = $this->load->view('user/partial/load_post_data', $this->data, true);
             $data['status'] = '1';
-            if(count($this->data['posts']) == 0)
-            {
+            if (count($this->data['posts']) == 0) {
                 $data['status'] = '0';
             }
             echo json_encode($data);
@@ -86,57 +77,81 @@ class Home extends CI_Controller {
 
     public function add_post() {
         if ($this->input->post()) {
-
-
             $this->form_validation->set_rules('description', 'description', 'required');
             if (!($this->form_validation->run() == FALSE)) {
-
                 $post_arr['description'] = $this->input->post('description');
                 $post_arr['user_id'] = $this->session->user['id'];
+                if ($post_id = $this->Post_model->add_post($post_arr)) {
+                    $media = array();
+                    if (!empty($_FILES['uploadfile']['name'])) {
+                        $filecount = count($_FILES['uploadfile']['name']);
+                        for($i = 0;$i<$filecount;++$i)
+                        {
+                            $_FILES['userFile']['name'] = $_FILES['uploadfile']['name'][$i];
+                            $_FILES['userFile']['type'] = $_FILES['uploadfile']['type'][$i];
+                            $_FILES['userFile']['tmp_name'] = $_FILES['uploadfile']['tmp_name'][$i];
+                            $_FILES['userFile']['error'] = $_FILES['uploadfile']['error'][$i];
+                            $_FILES['userFile']['size'] = $_FILES['uploadfile']['size'][$i];
 
-                if($_FILES['uploadfile']['name'])
-                {
-                    // Code of image uploading
-                    $config['upload_path']          = './uploads/user_post';
-                    $config['allowed_types']        = 'gif|jpg|png';
-                    $config['max_size']             = 1000000;
+                            // Code of image uploading
+                            $config['upload_path'] = './uploads/user_post';
+                            $config['allowed_types'] = 'gif|jpg|png';
+                            $config['max_size'] = 1000000;
 
-                    $this->upload->initialize($config);
+                            $this->upload->initialize($config);
 
-                    if ( ! $this->upload->do_upload('uploadfile'))
-                    {
-                            $error = array('error' => $this->upload->display_errors());
-                            $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
-                    }
-                    else
-                    {
-                            $data = array('upload_data' => $this->upload->data());
-
-                            if($post_id = $this->Post_model->add_post($post_arr))
-                            {
-                                $media = array();
-
-                                foreach($data as $row)
-                                {
-                                    $media_arr = array();
-                                    $media_arr['post_id'] = $post_id;
-                                    $media_arr['media_type'] = 'image';
-                                    $media_arr['media'] = $row['file_name'];
-                                    $media[] = $media_arr;
-                                }
-                                $this->Post_model->insert_post_media($media);
-                                $this->session->set_flashdata('msg', 'post added successfully');
+                            if (!$this->upload->do_upload('userFile')) {
+                                $error = array('error' => $this->upload->display_errors());
+                                $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                            } else {
+                                $data = $this->upload->data();
+                                $media_arr = array();
+                                $media_arr['post_id'] = $post_id;
+                                $media_arr['media_type'] = 'image';
+                                $media_arr['media'] = $data['file_name'];
+                                $media[] = $media_arr;
                             }
-                            else
-                            {
-                                $this->session->set_flashdata('msg', 'There was some problem in uploading post.');   
-                            }
+                        }
                     }
+                    if (!empty($_FILES['videofile']['name'])) {
+                        $filecount = count($_FILES['videofile']['name']);
+                        for($i = 0;$i<$filecount;++$i)
+                        {
+                            $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
+                            $_FILES['userFile']['type'] = $_FILES['videofile']['type'][$i];
+                            $_FILES['userFile']['tmp_name'] = $_FILES['videofile']['tmp_name'][$i];
+                            $_FILES['userFile']['error'] = $_FILES['videofile']['error'][$i];
+                            $_FILES['userFile']['size'] = $_FILES['videofile']['size'][$i];
+
+                            // Code of image uploading
+                            $config['upload_path'] = './uploads/user_post';
+                            $config['allowed_types'] = 'mp4|mov|3gp';
+                            $config['max_size'] = 4000000;
+
+                            $this->upload->initialize($config);
+
+                            if (!$this->upload->do_upload('userFile')) {
+                                $error = array('error' => $this->upload->display_errors());
+                                $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                            } else {
+                                $data = $this->upload->data();
+                                $media_arr = array();
+                                $media_arr['post_id'] = $post_id;
+                                $media_arr['media_type'] = 'video';
+                                $media_arr['media'] = $data['file_name'];
+                                $media[] = $media_arr;
+                            }
+                        }
+                    }
+                    if(count($media) > 0)
+                    {
+                        $this->Post_model->insert_post_media($media);
+                    }
+                    $this->session->set_flashdata('msg', 'post added successfully');
                 }
                 else
                 {
-                    $this->Post_model->add_post($post_arr);
-                    $this->session->set_flashdata('msg', 'post added successfully');
+                    $this->session->set_flashdata('msg', 'Post not added');
                 }
             } else {
                 $this->session->set_flashdata('msg', 'Invalid data entered for post');

@@ -81,20 +81,33 @@ class Post extends CI_Controller {
         $user_id = $this->session->user['id'];
         if (!empty($coin = $this->Post_model->user_coin_exist_for_post($user_id, $post_id))) {
             // Update entry
+            /*
             if ($this->Post_model->delete_post_coin($coin['id'])) {
                 echo '2';
             } else {
                 echo '0';
-            }
+            }*/
+            echo '2';
         } else {
-            // Insert entry
-            $insert_arr['user_id'] = $user_id;
-            $insert_arr['post_id'] = $post_id;
-            if ($this->Post_model->add_post_coin($insert_arr)) {
-                echo '1';
-            } else {
-                echo '0';
+            $userdata = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+            if($userdata['total_coin'] > 0)
+            {
+                $insert_arr['user_id'] = $user_id;
+                $insert_arr['post_id'] = $post_id;
+                if ($this->Post_model->add_post_coin($insert_arr)) {
+                    // Add or deduct coin from user's account
+                    $this->Users_model->deduct_coin_from_user($user_id);
+                    $this->Users_model->add_coin_to_user($this->get_post_user($post_id));
+                    echo '1';
+                } else {
+                    echo '0';
+                }
             }
+            else
+            {
+                echo '3';
+            }
+            // Insert entry
         }
     }
 
@@ -186,6 +199,17 @@ class Post extends CI_Controller {
                 echo '0';
             }
         }
+    }
+    
+    /*
+     * 
+     */
+    public function get_post_user($post_id)
+    {
+        $this->db->select('user_id');
+        $this->db->where('id',$post_id);
+        $row = $this->db->get('post')->row_array();
+        return $row['user_id'];
     }
 }
 ?>

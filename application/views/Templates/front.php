@@ -19,7 +19,8 @@
         <link href="https://fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,300,400,500,600,700,800,900" rel="stylesheet">
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.min.js" ?>"></script>
-        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+        <!--<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>-->
+        
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../../assets/js/html5shiv.js"></script>
@@ -304,16 +305,19 @@
                                                 <div class="upld_sec">
                                                     <div class="fileUpload up_img btn">
                                                         <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                                        <input type="file" name="uploadfile" class="upload" id="uploadFile"/>
+                                                        <input type="file" name="uploadfile[]" class="upload" id="uploadFile" multiple="multiple"/>
                                                     </div>
-                                                    <!--<div class="fileUpload up_img btn">
+                                                    <div class="fileUpload up_img btn">
                                                         <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
-                                                        <input type="file" class="upload" />
+                                                        <input type="file" name="videofile[]" id="uploadVideo" class="upload" multiple="multiple"/>
                                                     </div>
-                                                    -->
+                                                    
                                                 </div>
-                                                <div class="image_wrapper" >
-                                                    <div id="imagePreview"></div>
+                                                <div class="image_wrapper" style="display:none">
+                                                    
+                                                </div>
+                                                <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH."video_thumbnail.png" ?>">
+                                                    
                                                 </div>
                                             </div>
                                             <!-- Upload images or video section end here -->
@@ -416,12 +420,13 @@
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "bootstrap.js" ?>"></script>
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.fancybox.js" ?>"></script>
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "classie.js" ?>" ></script>
+        <!--
         <script>
             $('.post_section').masonry({
                 itemSelector: '.pst_full_sec',
                 columnWidth: 100
             });
-        </script>
+        </script> -->
         <script>
             var menuLeft = document.getElementById('cbp-spmenu-s1'),
                     showLeftPush = document.getElementById('showLeftPush'),
