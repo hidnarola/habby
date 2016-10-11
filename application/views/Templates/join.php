@@ -44,9 +44,11 @@
                 </div>
         </div>-->
 
-        <!--Header Start -->
         <?php $this->load->view('layouts/header'); ?>
-        <!--Header End-->
+
+        <!--Slider Start -->
+
+        <!--Slider End -->
 
         <!--Content Start-->
         <div class="container-fluid">
@@ -56,44 +58,6 @@
             }
             ?>
         </div>
-
-        <!-- Mobile version design start here -->
-
-        <!-- Mobile version design end here -->
-        <!--Content End-->
-        <!--Footer content section Start here-->
-        <div class="container-fluid">
-            <!-- Footer content section 1 Start here -->
-            <div class="row ftr_sec1">
-                <div class="container">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <p class="ftrtxt3"><?php echo lang('Follow us'); ?> </p>
-                        <ul class="list-inline ftr_ul">
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-tumblr" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer content section 1 end here -->
-
-            <!-- Footer content section 2 start here -->
-            <div class="row ftr_sec2">
-                <div class="container">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <p class="cpy_txt"><?php echo lang('Habby, LLC'); ?>  &copy; <?php echo lang('All rights reserved.'); ?></p>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer content section 2 end here -->
-        </div>
-        <!--Footer content section end here-->
-
-
         <!--  Post modal section start here -->
         <div class="modal" id="post_here">
             <div class="modal-dialog modal-lg">

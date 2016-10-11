@@ -10,6 +10,12 @@ class Soulmate_model extends CI_Model {
         $last_id = $this->db->insert_id();
         return $last_id;
     }
+    
+    public function insert_soulmate_request($data) {
+        $this->db->insert('soulmate_group_user_request', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+    }
 
     /* v! Insert data into users table */
 

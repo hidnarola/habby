@@ -15,7 +15,7 @@
 <div class="row filter_row">
     <div class="container grp_pnl_container">
         <form class="" role="form" method="get" action="<?php echo base_url() . "topichat" ?>" id="filterby_form">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-6 ">
                 <div class="lang_sec">
                     <select class="selectpicker filterby" data-style="btn-info" name="filterby">
                         <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>>Newest</option>
@@ -24,8 +24,9 @@
                     </select>
                 </div>
             </div>
+            <div class="clearfix-mobile"></div>
         </form>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="topichat_search_sec">
                 <form class="" role="form" method="get" action="<?php echo base_url() . "topichat/search" ?>" id="search_form">
                     <div id="custom-search-input">
@@ -70,12 +71,12 @@
 //                            pr($topichat_group);
                             ?>
                             <!-- Topichat #1 each section start here -->
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 grp_cl6">
                                 <div class="grp_pln_sec ">
 
-                                    <div class="grp_pln_img_sec" style="height: 200px;width: 390px;">
+                                    <div class="grp_pln_img_sec">
                                         <a href="#" data-toggle="modal" data-target="#topichat1post" data-title="<?php echo $topichat_group['topic_name'] ?>" data-image="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat_group['group_cover'] ?>" data-user="<?php echo $topichat_group['display_name'] ?>" data-uimage="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $topichat_group['user_image'] ?>">
-                                            <img src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat_group['group_cover'] ?> " class="img-responsive center-block" style="height: 100%;width: 100%;">
+                                            <img src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat_group['group_cover'] ?> " class="img-responsive center-block" style="">
                                         </a>
                                     </div>
 
@@ -84,7 +85,8 @@
                                         <?php echo ($topichat_group['notes'] != NULL) ? '<p class="topichat_txt2">' . $topichat_group['notes'] . '</p>' : ""; ?>
                                         <ul class="list-inline soulmate_ul">
                                             <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> users</span></li>
-                                            <li><a href="<?php echo base_url() . "topichat/join/" . $topichat_group['id'] ?>" class="pstbtn">Join</a></li>
+                                            <li><a href="<?php echo base_url() . "topichat/join/" . urlencode(base64_encode($topichat_group['id'])) ?>" class="pstbtn">Join</a></li>
+                                    <!--<li><button class="join pstbtn" id="<?php echo md5($topichat_group['id']); ?>">Join</button></li>-->
                                         </ul>
                                     </div>
 
@@ -215,10 +217,11 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <p class="modl_ttl"><img src="" class="cht_pfl_img" id="m_image" style="height: 275px;width: 560px;"></p>
-                <div class="grp_pln_img_sec">
-                    <img src="" class="img-responsive center-block" id="m_user_image" style="height: 34px;width: 34px;display: inline-block;padding-right:5px"><span id="modal_user"></span>
+                <div class="grp_pln_img_sec text-center">
+                    <img src="" class="img-responsive center-block" id="m_user_image" style="height: 34px;width: 34px;display: inline-block;padding-right:5px;border-radius: 50%;"><span id="modal_user"></span>
                 </div>
+                <p class="modl_ttl"><img src="" class="cht_pfl_img" id="m_image" style="height: 275px;width: 560px;"></p>
+
             </div>
 
         </div>

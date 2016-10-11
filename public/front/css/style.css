@@ -53,6 +53,7 @@ ul, li { margin:0; padding:0;}
     border-left: 1px solid #ccc !important;
 }
 
+
 @media (min-width: 1583px)
 {
 	.container {
@@ -3161,7 +3162,7 @@ margin:0px;
 
 /* 6 september 16 css start */
 .grp_pln_img_sec img {
-    max-height: 280px;
+   /* max-height: 280px;*/
 }
 .grp_pln_sec .soulmate_txt1
 {
@@ -3711,6 +3712,7 @@ margin:0px;
 .grp_pln_sec
 {
 	position: relative;
+         min-height: 345px;
 }
 .alliance_btn_ul
 {
@@ -4126,17 +4128,37 @@ margin:0px;
 .login_frm .lang_sec {
     margin: 6px 0px 0px 0px;
     width: 135px;
-    background-image: url(../img/select_bg.png);
+   /* background-image: url(../img/select_bg.png);
     background-repeat: no-repeat;
-    background-position: 92% 11px;
+    background-position: 92% 11px;*/
 }
 .login_frm  .lang_sec select{
     height: 22px;
 }
+
 /* mobile version css end here */
 
 
-
+.soulmate_ul {
+    bottom: 15px;
+    padding-right: 30px;
+    position: absolute;
+    width: 100%;
+}
+#topichat1post .grp_pln_img_sec {
+    padding: 15px 0;
+}
+#topichat1post #modal_title{
+    font-size: 18px;
+}
+#new_grp .radio.topchat_1_rdo > label {
+    display: inline-block;
+    vertical-align: top;
+}
+#new_grp .radio.topchat_1_rdo > label:first-child {
+    padding-top: 15px;
+}
+/* small */
 /* Media queries start here */
 
 @media (max-width:1070px){
@@ -5098,9 +5120,9 @@ margin:0px;
 		font-size: 13px;
 		padding: 0px 0px;
 	}
-	.hdr_ul1 li:nth-child(2) a {
+	/*.hdr_ul1 li:nth-child(2) a {
 		padding: 0px 0px;
-	}
+	}*/
 	.lang_sec {
 		padding: 4px 0px 4px;
 		width: 130px;
@@ -5385,6 +5407,7 @@ margin:0px;
 	}
 }
 
+
 @media (min-width:768px) and (max-width:991px)
 {
 	.soulmate_past_due_sec {
@@ -5667,6 +5690,9 @@ margin:0px;
 	.dropdown-menu li {
 		padding: 0px 0px;
 	}
+        .lang_sec select {
+            background-position: 94% center;
+        }
 }
 
 @media (min-width:768px) and (max-width:991px)
@@ -5726,16 +5752,23 @@ margin:0px;
 		font-size: 23px;
 	    padding-bottom: 15px;
 	}
-	.grp_pln_img_sec img {
+	/*.grp_pln_img_sec img {
 		max-height: 220px;
-	}
+	}*/
 	
 }
 /* Group plan page media query end here */
 
 
 /* Group plan 2 page media query start here */
-
+@media (min-width:767px) and (max-width:1199px){
+    .navbar-fixed-top .container.my_nav{
+        width: 100%;
+    }
+    .my_nav .nav > li > a {
+        padding: 11px 7px;
+    }
+}
 @media (max-width:767px)
 {
 	.whats_ul li {
@@ -6552,8 +6585,12 @@ a:hover {
 	.prfl_cvr_sec_dvdr:before
 	{
 		box-shadow: none;
-		width: 0px;
+	
+                width: 0px;
 	}
+         .grp_pln_img_sec{
+            
+        }
 }
 
 @media (min-width:768px) and (max-width:991px)
@@ -6597,4 +6634,50 @@ a:hover {
 @media (min-width:1583px) and (max-width:1700px)
 {
 }
+@media(min-width:768px){
+    .grp_pln_img_sec {
+       
+        max-height: 174px;
+        overflow: hidden;
+    }
+}
+@media(min-width:992px){
+    .topichat_groups div.grp_cl6:nth-child(3n+1){
+        clear: both;
+    }
+   
+
+}
+
+@media(max-width:991px){
+    .topichat_groups div.grp_cl6:nth-child(2n+1){
+        clear: both;
+    }
+}
+@media(max-width:500px){
+    .cmnt_newsec_row{
+        max-width: 90%;
+    }
+    .topichat_search_sec {
+        clear: both;
+        float: none;
+        max-width: 100%;
+        padding-top: 12px;
+    }
+    .filter_row .lang_sec{
+        width: 100%;
+    }
+    .clearfix-mobile{
+        clear:both;
+    }
+}
+
+@media(max-width:380px){
+    .lang_sec select {
+        background-position: 92% center;
+    }   
+}
+
+
+
 /* Personal page media query end here */	

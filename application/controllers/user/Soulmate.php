@@ -129,4 +129,14 @@ class Soulmate extends CI_Controller {
         }
     }
 
+    public function join($topic_id) {
+        $topic_id = base64_decode(urldecode($topic_id));
+        $ins_data = array(
+            'soulmate_group_id' => $topic_id,
+            'requested_user_id' => $this->data['user_data']['id'],
+        );
+        $this->Soulmate_model->insert_soulmate_request($ins_data);
+        $this->template->load('join', 'user/soulmate/join_soulmate', $this->data);
+    }
+
 }

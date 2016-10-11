@@ -79,7 +79,7 @@
                                         <p class="soulmate_txt4"><?php echo $soulmate_group['display_name'] ?> Created Group</p>
                                         <ul class="list-inline soulmate_ul">
                                             <li><?php echo date("d-m-Y", strtotime($soulmate_group['created_date'])); ?></li>
-                                            <li><a href="soulmate-2.html" class="pstbtn smlt_btn">Join</a></li>
+                                            <li><a href="<?php echo base_url() . "soulmate/join/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn smlt_btn">Join</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -240,8 +240,8 @@
         // Lazy loading 
         var page = 2;
         var load = true;
-        $('#loadMore').click(function(){
-            if(load)
+        $('#loadMore').click(function () {
+            if (load)
             {
                 loaddata();
             }
@@ -252,34 +252,31 @@
             var uri = window.location.href;
             uri = uri.split('/');
             var myurl = "";
-            if(typeof(uri[4]) != "undefined")
+            if (typeof (uri[4]) != "undefined")
             {
                 q = uri[4].split('?');
-                if(typeof(q[1]) != 'undefined' && (q[0] == 'search'))
+                if (typeof (q[1]) != 'undefined' && (q[0] == 'search'))
                 {
-                    myurl = base_url+'user/Soulmate/search/'+page+'?'+q[1];
-                }
-                else
+                    myurl = base_url + 'user/Soulmate/search/' + page + '?' + q[1];
+                } else
                 {
-                    myurl = base_url+'user/Soulmate/load_soulmate_group/'+page;
+                    myurl = base_url + 'user/Soulmate/load_soulmate_group/' + page;
                 }
-            }
-            else
+            } else
             {
-                myurl = base_url+'user/Soulmate/load_soulmate_group/'+page;
+                myurl = base_url + 'user/Soulmate/load_soulmate_group/' + page;
             }
             $.ajax({
-                url : myurl,
-                method : 'get',
-                success : function(data){
+                url: myurl,
+                method: 'get',
+                success: function (data) {
                     data = JSON.parse(data);
-                    if(data.status == 0)
+                    if (data.status == 0)
                     {
                         load = false;
                         $('.soulmate_groups').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
                         $('#loadMore').remove();
-                    }
-                    else
+                    } else
                     {
                         $('.soulmate_groups').append(data.view);
                     }
@@ -287,20 +284,20 @@
             });
             page++;
         }
-        
+
         /*
-        $("div.soulmate_con2").slice(0, 5).show();
-        $("#loadMore").on('click', function (e) {
-            e.preventDefault();
-            $("div.soulmate_con2:hidden").slice(0, 5).slideDown();
-            if ($("div.soulmate_con2:hidden").length == 0) {
-                $("#load").fadeOut('slow');
-            }
-            $('html,body').animate({
-                scrollTop: $(this).offset().top
-            }, 1500);
-        });
-        */
+         $("div.soulmate_con2").slice(0, 5).show();
+         $("#loadMore").on('click', function (e) {
+         e.preventDefault();
+         $("div.soulmate_con2:hidden").slice(0, 5).slideDown();
+         if ($("div.soulmate_con2:hidden").length == 0) {
+         $("#load").fadeOut('slow');
+         }
+         $('html,body').animate({
+         scrollTop: $(this).offset().top
+         }, 1500);
+         });
+         */
     });
 
     $('a[href=#top]').click(function () {
