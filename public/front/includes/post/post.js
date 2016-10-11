@@ -62,8 +62,13 @@ $('document').ready(function () {
                 }
                 else if (str == 2)
                 {
-                    t.find('.coin_cnt').html((coin - 1));
-                    t.find('.img-coin').attr('src', base_url + 'public/front/img/coin_icon.png');
+                    alert("You can't take back given coin");
+                   // t.find('.coin_cnt').html((coin - 1));
+                    t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
+                }
+                else if(str == 3)
+                {
+                    alert("You don't have enough coin to give");
                 }
                 else
                 {
@@ -76,7 +81,7 @@ $('document').ready(function () {
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
-        console.log('on change fired');
+        $('.image_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
             $('.message').html("No file selected.");
@@ -84,21 +89,62 @@ $('document').ready(function () {
             return; // no file selected, or no FileReader support
         }
 
+        var i = 0;
+        for(var key in files)
+        {
+            if (/^image/.test(files[key].type)) { // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[key]); // read the local file
 
-        if (/^image/.test(files[0].type)) { // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[0]); // read the local file
-
-            reader.onloadend = function () { // set image data as background of div
-                $('.message').hide();
-                $("#imagePreview").css("background-image", "url(" + this.result + ")");
-                // $('#imagePreview').addClass('imagePreview');
+                reader.onloadend = function () { // set image data as background of div
+                    // $('#imagePreview').addClass('imagePreview');
+                    $('.image_wrapper').show();
+                    $('.message').hide();
+                    $('.image_wrapper').append("<div class='imagePreview"+i+"' id='imagePreview'></div>");
+                    $('.imagePreview'+i).css("background-image", "url(" + this.result + ")");
+                    ++i;
+                }
+            }
+            else
+            {
+                this.files = '';
+                $('.message').html("Please select proper image");
+                $('.message').show();
             }
         }
-        else
-        {
-            $('.message').html("Please select proper image");
+    });
+
+    // Video uploading script
+    $('#uploadVideo').on("change",function(){
+        $('.video_wrapper').html('');
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            $('.message').html("No file selected.");
             $('.message').show();
+            return; // no file selected, or no FileReader support
+        }
+
+        var i = 0;
+        for(var key in files)
+        {
+            if (/^video/.test(files[key].type)) { // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[key]); // read the local file
+
+                reader.onloadend = function () { // set image data as background of div
+                    // $('#imagePreview').addClass('imagePreview');
+                    $('.video_wrapper').show();
+                    $('.message').hide();
+                    $('.video_wrapper').append("<img class='videoPreview"+i+"' id='imagePreview' src='"+$('.video_wrapper').data('default_image')+"'/>");
+//                    $('.videoPreview'+i).css("background-image", ;
+                    ++i;
+                }
+            }
+            else
+            {
+                $('.message').html("Please select proper image");
+                $('.message').show();
+            }
         }
     });
 

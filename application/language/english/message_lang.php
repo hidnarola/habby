@@ -119,7 +119,7 @@ $lang['Habby, LLC'] = 'Habby, LLC';
 $lang['All rights reserved.'] = 'All rights reserved.';
     //---Post Model---
 $lang['title /short description'] = 'title /short description';
-$lang['Images'] = 'Image';
+$lang['Images'] = 'Images';
 $lang['Videos'] = 'Videos';
 $lang['POST'] = 'POST';
     //--Chat Model---

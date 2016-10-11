@@ -139,5 +139,7 @@ $lang['Badge Image'] = "Знак изображение";
 $lang['Requirement'] = "требование";
 $lang['Achieve'] = 'добиваться';
 $lang['Apply'] = 'Подать заявление';
+/*
 
+*/
 ?>

@@ -53,6 +53,28 @@ class Users_model extends CI_Model {
         $res_data = $this->db->get('users')->row_array();
         return $res_data;
     }
+    
+    /*
+     * 
+     */
+    public function add_coin_to_user($user_id)
+    {
+        $this->db->where('id',$user_id);
+        $user = $this->db->get('users')->row_array();
+        $this->update_user_data($user_id, ['total_coin'=>($user['total_coin'] + 1)]);
+        return true;
+    }
+    
+    /*
+     * 
+     */
+    public function deduct_coin_from_user($user_id)
+    {
+        $this->db->where('id',$user_id);
+        $user = $this->db->get('users')->row_array();
+        $this->update_user_data($user_id, ['total_coin'=>($user['total_coin'] - 1)]);
+        return true;
+    }
 
     // --------------------------------------  Table - Country ----------------------------------------
 

@@ -50,6 +50,27 @@ class Post_model extends CI_Model {
 
         if(count($post_ids)>0)
         {
+            $this->db->where_in('post_id', $post_ids);
+            $post_media = $this->db->get('post_media')->result_array();
+            $post_media_ids = array_column($post_media, 'post_id');
+
+            if(count($post_media_ids) > 0)
+            {
+                for ($i = 0; $i < count($post);  ++$i) {
+                    $post[$i]['media'] = '';
+                    if (in_array($post[$i]['id'], $post_media_ids)) {
+                        $posts = array();
+                        foreach ($post_media as $value) {
+                            if ($post[$i]['id'] == $value['post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post[$i]['media'] = $posts;
+                    }
+                }
+            }
+            
+            // Post comments
             $this->db->where_in('p.post_id', $post_ids);
             $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply, count(pli.id) as is_liked');
             $this->db->from('post_comments p');
