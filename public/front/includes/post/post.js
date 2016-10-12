@@ -81,6 +81,7 @@ $('document').ready(function () {
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
+        $('.message').html();
         $('.image_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
@@ -116,6 +117,7 @@ $('document').ready(function () {
 
     // Video uploading script
     $('#uploadVideo').on("change",function(){
+        $('.message').html();
         $('.video_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
@@ -246,10 +248,10 @@ $('document').ready(function () {
         {
             if ($(window).scrollTop() == ( $(document).height() - $(window).height())) {
                 loaddata();
-                       $('.post_section').masonry({
-                            itemSelector: '.pst_full_sec',
-                             columnWidth: 100
-                        });
+//                       $('.post_section').masonry({
+//                            itemSelector: '.pst_full_sec',
+//                             columnWidth: 100
+//                        });
             }
         }
     });

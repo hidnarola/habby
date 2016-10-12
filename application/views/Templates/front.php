@@ -34,6 +34,13 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
         </script>
+        
+        <!-- Share this scripts -->
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">
+            stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
+        </script>
+        <!-- Share this scripts over -->
     </head>
     <body class="cbp-spmenu-push">
         <!--<div class="container-fluid">
