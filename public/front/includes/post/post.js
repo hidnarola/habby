@@ -63,10 +63,10 @@ $('document').ready(function () {
                 else if (str == 2)
                 {
                     alert("You can't take back given coin");
-                   // t.find('.coin_cnt').html((coin - 1));
+                    // t.find('.coin_cnt').html((coin - 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
                 }
-                else if(str == 3)
+                else if (str == 3)
                 {
                     alert("You don't have enough coin to give");
                 }
@@ -81,6 +81,7 @@ $('document').ready(function () {
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
+        $('.message').html();
         $('.image_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
@@ -90,7 +91,7 @@ $('document').ready(function () {
         }
 
         var i = 0;
-        for(var key in files)
+        for (var key in files)
         {
             if (/^image/.test(files[key].type)) { // only image file
                 var reader = new FileReader(); // instance of the FileReader
@@ -100,8 +101,8 @@ $('document').ready(function () {
                     // $('#imagePreview').addClass('imagePreview');
                     $('.image_wrapper').show();
                     $('.message').hide();
-                    $('.image_wrapper').append("<div class='imagePreview"+i+"' id='imagePreview'></div>");
-                    $('.imagePreview'+i).css("background-image", "url(" + this.result + ")");
+                    $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                     ++i;
                 }
             }
@@ -115,7 +116,8 @@ $('document').ready(function () {
     });
 
     // Video uploading script
-    $('#uploadVideo').on("change",function(){
+    $('#uploadVideo').on("change", function () {
+        $('.message').html();
         $('.video_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
@@ -125,7 +127,7 @@ $('document').ready(function () {
         }
 
         var i = 0;
-        for(var key in files)
+        for (var key in files)
         {
             if (/^video/.test(files[key].type)) { // only image file
                 var reader = new FileReader(); // instance of the FileReader
@@ -135,7 +137,7 @@ $('document').ready(function () {
                     // $('#imagePreview').addClass('imagePreview');
                     $('.video_wrapper').show();
                     $('.message').hide();
-                    $('.video_wrapper').append("<img class='videoPreview"+i+"' id='imagePreview' src='"+$('.video_wrapper').data('default_image')+"'/>");
+                    $('.video_wrapper').append("<img class='videoPreview" + i + "' id='imagePreview' src='" + $('.video_wrapper').data('default_image') + "'/>");
 //                    $('.videoPreview'+i).css("background-image", ;
                     ++i;
                 }
@@ -156,11 +158,11 @@ $('document').ready(function () {
             var msg = $.trim($(this).val());
             var post_id = $(this).parents('.pst_full_sec').data('post_id');
             $.ajax({
-                url:'user/post/add_comment/'+post_id,
-                method:'post',
-                data:'msg='+msg,
-                success:function(str){
-                    if(str != 0)
+                url: 'user/post/add_comment/' + post_id,
+                method: 'post',
+                data: 'msg=' + msg,
+                success: function (str) {
+                    if (str != 0)
                     {
                         t.after(str);
                         t.parent().children('.no_comment').remove();
@@ -174,13 +176,13 @@ $('document').ready(function () {
             return false;
         }
     });
-    
-    $('.post_section').on('click','.comment_like_cnt',function(){
+
+    $('.post_section').on('click', '.comment_like_cnt', function () {
         var t = $(this);
         var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
         $.ajax({
-            url:base_url+'user/post/add_postcomment_like/'+post_comment_id,
-            success:function(str){
+            url: base_url + 'user/post/add_postcomment_like/' + post_comment_id,
+            success: function (str) {
                 var like = parseInt(t.find('.post_comment_like').html());
                 if (str == 1)
                 {
@@ -202,19 +204,19 @@ $('document').ready(function () {
             }
         });
     });
-    
-    $(".post_section").on('click','.post_comment_reply',function(){
+
+    $(".post_section").on('click', '.post_comment_reply', function () {
         var t = $(this);
         var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
         $.ajax({
-            url:base_url+'user/post/display_comment_reply/'+post_comment_id,
-            success:function(str){
+            url: base_url + 'user/post/display_comment_reply/' + post_comment_id,
+            success: function (str) {
                 t.parents('.cmn_dtl').find('.reply_dtl').html(str);
             }
         });
     });
-    
-    $('.post_section').on('keypress','.comment_reply',function(e){
+
+    $('.post_section').on('keypress', '.comment_reply', function (e) {
         var key = e.keyCode;
         // If the user has pressed enter
         if (key == 13) {
@@ -222,11 +224,11 @@ $('document').ready(function () {
             var msg = $.trim($(this).val());
             var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
             $.ajax({
-                url:'user/post/add_comment_reply/'+post_comment_id,
-                method:'post',
-                data:'msg='+msg,
-                success:function(str){
-                    if(str != 0)
+                url: 'user/post/add_comment_reply/' + post_comment_id,
+                method: 'post',
+                data: 'msg=' + msg,
+                success: function (str) {
+                    if (str != 0)
                     {
                         t.before(str);
                         var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
@@ -238,18 +240,19 @@ $('document').ready(function () {
             return false;
         }
     });
-    
+
     var page = 2;
     var load = true;
     $(window).scroll(function () {
-        if(load)
+        if (load)
         {
-            if ($(window).scrollTop() == ( $(document).height() - $(window).height())) {
+            if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
                 loaddata();
-                       $('.post_section').masonry({
-                            itemSelector: '.pst_full_sec',
-                             columnWidth: 100
-                        });
+//                       $('.post_section').masonry({
+//                            itemSelector: '.pst_full_sec',
+//                             columnWidth: 100
+//                        });
+
             }
         }
     });
@@ -259,20 +262,20 @@ $('document').ready(function () {
         var uri = window.location.href;
         uri = uri.split('/');
         var myurl = '';
-        if(typeof(uri[4]) != "undefined" && uri[4] == "challenge")
+        if (typeof (uri[4]) != "undefined" && uri[4] == "challenge")
         {
-            myurl = base_url+'user/home/challenge/'+page;
+            myurl = base_url + 'user/home/challenge/' + page;
         }
         else
         {
-            myurl = base_url+'user/home/smile_share/'+page;
+            myurl = base_url + 'user/home/smile_share/' + page;
         }
         $.ajax({
-            url : myurl,
-            method : 'get',
-            success : function(data){
+            url: myurl,
+            method: 'get',
+            success: function (data) {
                 data = JSON.parse(data);
-                if(data.status == 0)
+                if (data.status == 0)
                 {
                     load = false;
                     $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'>No more data found</div>");
@@ -280,6 +283,13 @@ $('document').ready(function () {
                 else
                 {
                     $('.post_section').append(data.view);
+                    stButtons.locateElements();
+
+// or if you want to be a bit defensive about whether the lib has been
+// loaded or not:
+                    if (window.stButtons) {
+                        stButtons.locateElements();
+                    } // Parse ShareThis markup
                 }
             }
         });

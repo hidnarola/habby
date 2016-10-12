@@ -434,5 +434,70 @@ class Post_model extends CI_Model {
         $this->db->join('users u','p.user_id = u.id and p.id = '.$post_comment_reply_id);
         return $this->db->get()->row_array();
     }
+    
+    public function get_post_details($post_id)
+    {
+        $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment, count(DISTINCT ps.id) as post_share');
+        $this->db->from('post p');
+        $this->db->where('p.id',$post_id);
+        $this->db->join('users u', 'p.user_id = u.id');
+        $this->db->join('post_coin pc', 'p.id = pc.post_id', 'left');
+        $this->db->join('post_like pl', 'p.id = pl.post_id and pl.is_liked=1', 'left');
+        $this->db->join('post_comments pco', 'p.id = pco.post_id', 'left');
+        $this->db->join('post_share ps', 'p.id = ps.post_id', 'left');
+        $this->db->order_by('p.id', 'desc');
+        $this->db->group_by('p.id');
+        $post = $this->db->get()->row_array();
+
+        if(!empty($post))
+        {
+            $this->db->where('post_id', $post['id']);
+            $post_media = $this->db->get('post_media')->result_array();
+            $post_media_ids = array_column($post_media, 'post_id');
+
+            if(count($post_media_ids) > 0)
+            {
+                    $post['media'] = '';
+                    if (in_array($post['id'], $post_media_ids)) {
+                        $posts = array();
+                        foreach ($post_media as $value) {
+                            if ($post['id'] == $value['post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post['media'] = $posts;
+                    }
+            }
+
+            $this->db->where('p.post_id', $post['id']);
+            $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply');
+            $this->db->from('post_comments p');
+            $this->db->join('users u','p.user_id = u.id');
+            $this->db->join('post_comment_like pl','p.id = pl.post_comment_id and pl.is_liked=1','left');
+            $this->db->join('post_comment_reply pr','p.id = pr.post_comment_id','left');
+            $this->db->order_by('p.created_date', 'desc');
+            $this->db->group_by('p.id');
+            //$this->db->join();
+
+            $post_comments = $this->db->get()->result_array();
+    //        echo $this->db->last_query();
+            $post_comments_ids = array_column($post_comments, 'post_id');
+    //        pr($post_comments,1);
+            if(count($post_comments_ids) > 0)
+            {
+                    $post['comments'] = array();
+                    if (in_array($post['id'], $post_comments_ids)) {
+                        $posts = array();
+                        foreach ($post_comments as $value) {
+                            if ($post['id'] == $value['post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post['comments'] = $posts;
+                    }
+            }
+        }
+        return $post;
+    }
 }
 ?>
