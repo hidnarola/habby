@@ -133,7 +133,9 @@ $lang['Send'] = 'Send';
     //---Topichat---
 $lang['Create'] = 'Create';
 $lang['Notes'] = 'Notes';
-$lang[''] = '';
+
+$lang['Interest/Hobby'] = 'Interest/Hobby';
+$lang['Self-introduction'] = 'Self-introduction';
 $lang[''] = '';
 
 // League and alliance

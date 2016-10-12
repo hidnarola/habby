@@ -74,7 +74,7 @@
                                                 <li class="winner winner_btn" id="winner<?php echo $Challenge['id']; ?>" data-id="<?php echo $Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="challenge-2.html" class="pstbtn">Accept</a></li>
+                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
                                             </ul>
 
                                         </div>

@@ -111,4 +111,21 @@ class Challenge extends CI_Controller {
         }
     }
 
+    public function accept($topic_id) {
+        $id = base64_decode(urldecode($topic_id));
+        $ins_data = array(
+            'challange_id' => $id,
+            'user_id' => $this->data['user_data']['id'],
+            'is_quit' => false,
+        );
+        $this->Challenge_model->insert_challenge_user($ins_data);
+        redirect('challenge/details/' . $topic_id);
+    }
+
+    public function details($Id) {
+        $Id = base64_decode(urldecode($Id));
+        $this->data['challenge'] = $this->Challenge_model->get_challenge_by_id($Id);
+        $this->template->load('join', 'user/challenge/join_challenge', $this->data);
+    }
+
 }

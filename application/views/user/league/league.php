@@ -78,7 +78,7 @@
                                         <ul class="list-inline alliance_btn_ul">
                                             <li><a href="javascript:;" class="requirements" data-requirement="<?php echo $league_row['requirements'] ?>"><?php echo lang('Requirement') ?></a></li>
                                             <li><a id="winner13"><?php echo lang('Achieve'); ?></a></li>
-                                            <li><a href="league/apply/<?php echo $league_row['id'] ?>"><?php echo lang('Apply'); ?></a></li>
+                                            <li><a href="<?php echo base_url() . "league/apply/" . urlencode(base64_encode($league_row['id'])) ?>"><?php echo lang('Apply'); ?></a></li>
                                         </ul>
                                     </div>
                                     <div class="dropdownpln">
@@ -188,8 +188,8 @@
                             <!-- League and alliance each section end here -->
                             <?php
                         }
-                    ?>
-                    <?php
+                        ?>
+                        <?php
                     } else {
                         ?>
                         <div class="">
@@ -200,18 +200,18 @@
                     ?>
                 </div>
                 <!-- League and alliance row section end here -->
-                <?php 
-                    if (isset($league) && !empty($league) && count($league) > 0) {
-                        ?>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                            <a href="javascript:;" id="loadMore">Load More</a>
+                <?php
+                if (isset($league) && !empty($league) && count($league) > 0) {
+                    ?>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                        <a href="javascript:;" id="loadMore">Load More</a>
 
-                            <p class="totop"> 
-                                <a href="#top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/upload.png" class="img-responsive"></a> 
-                            </p>
-                        </div>
-                        <?php
-                    }
+                        <p class="totop"> 
+                            <a href="#top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/upload.png" class="img-responsive"></a> 
+                        </p>
+                    </div>
+                    <?php
+                }
                 ?>
 
             </div>
@@ -424,8 +424,8 @@
     // Lazy loading 
     var page = 2;
     var load = true;
-    $('#loadMore').click(function(){
-        if(load)
+    $('#loadMore').click(function () {
+        if (load)
         {
             loaddata();
         }
@@ -438,27 +438,25 @@
         var myurl = "";
 
         q = window.location.href.split('?');
-        if(typeof(q[1]) != 'undefined')
+        if (typeof (q[1]) != 'undefined')
         {
-            myurl = base_url+'league/load_league/'+page+'?'+q[1];
-        }
-        else
+            myurl = base_url + 'league/load_league/' + page + '?' + q[1];
+        } else
         {
-            myurl = base_url+'league/load_league/'+page;
+            myurl = base_url + 'league/load_league/' + page;
         }
 
         $.ajax({
-            url : myurl,
-            method : 'get',
-            success : function(data){
+            url: myurl,
+            method: 'get',
+            success: function (data) {
                 data = JSON.parse(data);
-                if(data.status == 0)
+                if (data.status == 0)
                 {
                     load = false;
                     $('.league_data').append("<div class='col-sm-12 alert alert-info text-center'>No more league found</div>");
                     $('#loadMore').remove();
-                }
-                else
+                } else
                 {
                     $('.league_data').append(data.view);
                 }

@@ -29,35 +29,29 @@ class Groupplan extends CI_Controller {
             $filterby = $this->input->get('filterby');
             $this->data['filterby'] = $filterby;
             if ($filterby == 'popular') {
-                $this->data['Group_plans'] = $this->Groupplan_model->get_popular_group_plans($start,$limit);
+                $this->data['Group_plans'] = $this->Groupplan_model->get_popular_group_plans($start, $limit);
             } else if ($filterby == 'recommended') {
-                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start,$limit);
+                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start, $limit);
             } else {
-                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start,$limit);
+                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start, $limit);
             }
         } else {
-            $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start,$limit);
+            $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start, $limit);
         }
-        if($page == 1)
-        {
+        if ($page == 1) {
             $this->template->load('front', 'user/groupplan/groupplan', $this->data);
-        }
-        else
-        {
+        } else {
             $data = array();
-            if(count($this->data['Group_plans']) > 0)
-            {
-                $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan',$this->data,true);
+            if (count($this->data['Group_plans']) > 0) {
+                $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan', $this->data, true);
                 $data['status'] = 1;
-            }
-            else
-            {
+            } else {
                 $data['status'] = 0;
             }
             echo json_encode($data);
         }
     }
-    
+
     public function load_groupplan($page = 1) {
         $limit = 2;
         $start = ($page - 1) * $limit;
@@ -65,29 +59,23 @@ class Groupplan extends CI_Controller {
             $filterby = $this->input->get('filterby');
             $this->data['filterby'] = $filterby;
             if ($filterby == 'popular') {
-                $this->data['Group_plans'] = $this->Groupplan_model->get_popular_group_plans($start,$limit);
+                $this->data['Group_plans'] = $this->Groupplan_model->get_popular_group_plans($start, $limit);
             } else if ($filterby == 'recommended') {
-                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start,$limit);
+                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start, $limit);
             } else {
-                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start,$limit);
+                $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start, $limit);
             }
         } else {
-            $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start,$limit);
+            $this->data['Group_plans'] = $this->Groupplan_model->get_group_plan($start, $limit);
         }
-        if($page == 1)
-        {
+        if ($page == 1) {
             $this->template->load('front', 'user/groupplan/groupplan', $this->data);
-        }
-        else
-        {
+        } else {
             $data = array();
-            if(count($this->data['Group_plans']) > 0)
-            {
-                $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan',$this->data,true);
+            if (count($this->data['Group_plans']) > 0) {
+                $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan', $this->data, true);
                 $data['status'] = 1;
-            }
-            else
-            {
+            } else {
                 $data['status'] = 0;
             }
             echo json_encode($data);
@@ -155,33 +143,43 @@ class Groupplan extends CI_Controller {
      * develop by : HPA
      */
 
-    public function search($page=1) {
+    public function search($page = 1) {
         $limit = 2;
         $start = ($page - 1) * $limit;
         if ($this->input->get()) {
             $filterby = $this->input->get('topic_filter');
             $search_topic = $this->input->get('topic');
-            $this->data['Group_plans'] = $this->Groupplan_model->get_search_groupplan($search_topic, $filterby,$start,$limit);
-            if($page == 1)
-            {
+            $this->data['Group_plans'] = $this->Groupplan_model->get_search_groupplan($search_topic, $filterby, $start, $limit);
+            if ($page == 1) {
                 $this->template->load('front', 'user/groupplan/groupplan', $this->data);
-            }
-            else
-            {
+            } else {
                 $data = array();
-                if(count($this->data['Group_plans']) > 0)
-                {
-                    $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan',$this->data,true);
+                if (count($this->data['Group_plans']) > 0) {
+                    $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan', $this->data, true);
                     $data['status'] = 1;
-                }
-                else
-                {
+                } else {
                     $data['status'] = 0;
                 }
                 echo json_encode($data);
             }
-            
         }
+    }
+
+    public function join($topic_id) {
+        $id = base64_decode(urldecode($topic_id));
+        $ins_data = array(
+            'group_id' => $id,
+            'user_id' => $this->data['user_data']['id'],
+            'is_approved' => false,
+        );
+        $this->Groupplan_model->insert_groupplan_user($ins_data);
+        redirect('groupplan/details/' . $topic_id);
+    }
+
+    public function details($Id) {
+        $Id = base64_decode(urldecode($Id));
+        $this->data['groupplan'] = $this->Groupplan_model->get_groupplan_by_id($Id);
+        $this->template->load('join', 'user/groupplan/join_groupplan', $this->data);
     }
 
 }

@@ -45,7 +45,7 @@ class League extends CI_Controller {
             echo json_encode($data);
         }
     }
-    
+
     public function load_league($page = 1) {
         $limit = 2;
         $start = ($page - 1) * $limit;
@@ -145,13 +145,28 @@ class League extends CI_Controller {
                 $image_name = "league_logo_default.jpg";
             }
             $insert_arr['league_logo'] = $image_name;
-            
-            if(!$this->League_model->add_league($insert_arr))
-            {
-                $this->session->set_flash('message','There was some problem while creating league');
+
+            if (!$this->League_model->add_league($insert_arr)) {
+                $this->session->set_flash('message', 'There was some problem while creating league');
             }
             redirect('league');
         }
+    }
+
+    public function apply($league_id) {
+        $Id = base64_decode(urldecode($league_id));
+        $ins_data = array(
+            'league_id' => $Id,
+            'user_id' => $this->data['user_data']['id'],
+        );
+        $this->League_model->insert_league_user($ins_data);
+        redirect('league/details/' . $league_id);
+    }
+
+    public function details($Id) {
+        $Id = base64_decode(urldecode($Id));
+        $this->data['league'] = $this->League_model->get_league_by_id($Id);
+        $this->template->load('join', 'user/league/join_league', $this->data);
     }
 
 }

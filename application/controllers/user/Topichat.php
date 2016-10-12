@@ -167,12 +167,18 @@ class Topichat extends CI_Controller {
     }
 
     public function join($topic_id) {
-        $topic_id = base64_decode(urldecode($topic_id));
+        $id = base64_decode(urldecode($topic_id));
         $ins_data = array(
-            'topic_id' => $topic_id,
+            'topic_id' => $id,
             'user_id' => $this->data['user_data']['id'],
         );
-        $topic_group_id = $this->Topichat_model->insert_topic_group_user($ins_data);
+        $this->Topichat_model->insert_topic_group_user($ins_data);
+        redirect('topichat/details/' . $topic_id);
+    }
+
+    public function details($Id) {
+        $Id = base64_decode(urldecode($Id));
+        $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }
 

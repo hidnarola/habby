@@ -101,4 +101,5 @@ defined('DEFAULT_GROUPPLAN_IMAGE_PATH') OR define('DEFAULT_GROUPPLAN_IMAGE_PATH'
 defined('DEFAULT_LEAGUE_IMAGE_PATH') OR define('DEFAULT_LEAGUE_IMAGE_PATH', Asset_path . 'uploads/league/');
 defined('DEFAULT_JS_PATH') OR define('DEFAULT_JS_PATH', Asset_path . 'public/front/js/'); // highest automatically-assigned error code
 defined('DEFAULT_CSS_PATH') OR define('DEFAULT_CSS_PATH', Asset_path . 'public/front/css/'); // highest automatically-assigned error code
+defined('DEFAULT_CHAT_DOC_PATH') OR define('DEFAULT_CHAT_DOC_PATH', Asset_path . 'public/chat/'); // highest automatically-assigned error code
 defined('USER_JS') or define('USER_JS', Asset_path . 'public/front/includes/');

@@ -246,51 +246,52 @@
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2">
-                            <p class="notifctn"><b>Mike</b> Changed topic.</p>
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span"><span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span >
-                            </p> 
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span"><span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span >
-                            </p> 
+                            <textarea id='log' name='log' readonly='readonly'></textarea><br/>
+    <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p>
+                                <p class="chat_1 clearfix">
+                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
+                                    <span class="wdth_span">
+                                        <span>Lorem Ipsum is simply dummy text</span>
+                                    </span>
+                                </p>
+    
+                                <p class="chat_2 clearfix">
+                                    <span class="wdth_span">
+                                        <span>Lorem Ipsum is simply dummy text</span>
+                                    </span>
+                                </p>
+                                <p class="chat_1 clearfix">
+                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> <span class="wdth_span">
+                                        <span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
+                                    </span>
+                                </p>
+    
+                                <p class="chat_2 clearfix">
+                                    <span class="wdth_span"><span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
+                                    </span >
+                                </p> 
+                                <p class="chat_1 clearfix">
+                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
+                                    <span class="wdth_span">
+                                        <span>Lorem Ipsum is simply dummy text</span>
+                                    </span>
+                                </p>
+    
+                                <p class="chat_2 clearfix">
+                                    <span class="wdth_span">
+                                        <span>Lorem Ipsum is simply dummy text</span>
+                                    </span>
+                                </p>
+                                <p class="chat_1 clearfix">
+                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> <span class="wdth_span">
+                                        <span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
+                                    </span>
+                                </p>
+    
+                                <p class="chat_2 clearfix">
+                                    <span class="wdth_span"><span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
+                                    </span >
+                                </p> -->
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -336,7 +337,7 @@
                                     <div class="topic_textarea">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Type Here...">
+                                                <input type="text" id='message' name='message' class="form-control" placeholder="Type Here...">
                                                 <span class="input-group-btn upld_icnpad">
                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
                                                 </span>

@@ -8,7 +8,7 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Post_model', 'Common_functionality'));
+        $this->load->model(array('Users_model', 'Post_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -85,8 +85,7 @@ class Home extends CI_Controller {
                     $media = array();
                     if (!empty($_FILES['uploadfile']['name'])) {
                         $filecount = count($_FILES['uploadfile']['name']);
-                        for($i = 0;$i<$filecount;++$i)
-                        {
+                        for ($i = 0; $i < $filecount; ++$i) {
                             $_FILES['userFile']['name'] = $_FILES['uploadfile']['name'][$i];
                             $_FILES['userFile']['type'] = $_FILES['uploadfile']['type'][$i];
                             $_FILES['userFile']['tmp_name'] = $_FILES['uploadfile']['tmp_name'][$i];
@@ -115,8 +114,7 @@ class Home extends CI_Controller {
                     }
                     if (!empty($_FILES['videofile']['name'])) {
                         $filecount = count($_FILES['videofile']['name']);
-                        for($i = 0;$i<$filecount;++$i)
-                        {
+                        for ($i = 0; $i < $filecount; ++$i) {
                             $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
                             $_FILES['userFile']['type'] = $_FILES['videofile']['type'][$i];
                             $_FILES['userFile']['tmp_name'] = $_FILES['videofile']['tmp_name'][$i];
@@ -143,14 +141,11 @@ class Home extends CI_Controller {
                             }
                         }
                     }
-                    if(count($media) > 0)
-                    {
+                    if (count($media) > 0) {
                         $this->Post_model->insert_post_media($media);
                     }
                     $this->session->set_flashdata('msg', 'post added successfully');
-                }
-                else
-                {
+                } else {
                     $this->session->set_flashdata('msg', 'Post not added');
                 }
             } else {
@@ -240,6 +235,12 @@ class Home extends CI_Controller {
                 redirect('home/profile');
             }
         }
+    }
+
+    public function topichat() {
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['topichats'] = $this->Topichat_model->get_topichat_group_by_user();
+        $this->template->load('front', 'user/topichat/home_topichat', $this->data);
     }
 
 }

@@ -81,11 +81,11 @@
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span>Rewards<?php // echo $Newest_Challenge['rewards']                           ?></span></li>
+                                                <li><span>Rewards<?php // echo $Newest_Challenge['rewards']                            ?></span></li>
                                                 <li class="winner winner_n_btn" id="winner<?php echo $Newest_Challenge['id']; ?>" data-id="<?php echo $Newest_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="challenge-2.html" class="pstbtn">Accept</a></li>
+                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
                                             </ul>
 
                                         </div>
@@ -264,7 +264,7 @@
                                                 <li class="winner winner_p_btn" id="winner<?php echo $Popular_Challenge['id'] ?>"  data-id="<?php echo $Popular_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="challenge-2.html" class="pstbtn">Accept</a></li>
+                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -444,7 +444,7 @@
                                                 <li class="winner winner_r_btn" id="winner<?php echo $Recom_Challenge['id'] ?>" data-id="<?php echo $Recom_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="challenge-2.html" class="pstbtn">Accept</a></li>
+                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
                                             </ul>
 
                                         </div>
@@ -569,17 +569,17 @@
     <!-- Soulmate #1 section and Newest Post area end here  -->
     <!-- Group section container end here -->
 
-<!--    <div class="row">
-        <div class="container">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                <a href="#" id="loadMore">Load More</a>
-
-                <p class="totop"> 
-                    <a href="#top"><img src="images/upload.png" class="img-responsive"></a> 
-                </p>
+    <!--    <div class="row">
+            <div class="container">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                    <a href="#" id="loadMore">Load More</a>
+    
+                    <p class="totop"> 
+                        <a href="#top"><img src="images/upload.png" class="img-responsive"></a> 
+                    </p>
+                </div>
             </div>
-        </div>
-    </div>-->
+        </div>-->
 </div>
 <!-- Soulmate new group form popup start here -->
 <div class="modal" id="new_grp">

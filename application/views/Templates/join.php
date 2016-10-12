@@ -20,15 +20,16 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,300,400,500,600,700,800,900" rel="stylesheet">
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.min.js" ?>"></script>
         <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
-        <script src="https://cdn.webrtc-experiment.com/firebase.js"></script>
+<!--        <script src="https://cdn.webrtc-experiment.com/firebase.js"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/RTCPeerConnection-v1.5.js" ?>"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout.js" ?>"></script>
-        <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>
+        <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>-->
+        <script src="<?php echo DEFAULT_CHAT_DOC_PATH . "fancywebsocket.js" ?>"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-          <script src="../../assets/js/html5shiv.js"></script>
-          <script src="../../assets/js/respond.min.js"></script>
-        <![endif]-->
+<script src="../../assets/js/html5shiv.js"></script>
+<script src="../../assets/js/respond.min.js"></script>
+<![endif]-->
         <script>
             var base_url = '<?php echo base_url(); ?>';
         </script>
@@ -248,7 +249,6 @@
                  */
 
                 $('.fancybox').fancybox();
-
                 /*
                  *  Different effects
                  */
@@ -287,7 +287,6 @@
                     $('#srchdrp2').toggle('');
                 });
             });
-
         </script>
         <script>
 
@@ -295,7 +294,6 @@
                 $(this).parents(".post_leftsec").children(".post_leftsec_hddn1").toggleClass('clicked');
                 $(this).closest(".mov_sec1").toggleClass('clicked2');
             });
-
             $('#chat2').on('click', function () {
                 $(".post_leftsec_hddn2").toggleClass('clicked');
                 $(".mov_sec2").toggleClass('clicked2');
@@ -308,7 +306,6 @@
                 $(".post_leftsec_hddn4").toggleClass('clicked');
                 $(".mov_sec4").toggleClass('clicked2');
             });
-
         </script> 
         <script>
             /*
@@ -332,7 +329,6 @@
                 }, 600);
                 return false;
             });
-
             $(window).scroll(function () {
                 if ($(this).scrollTop() > 50) {
                     $('.totop a').fadeIn();
@@ -369,7 +365,53 @@
                 });
             });
         </script>
+        <script>
+            var Server;
 
+            function log(text) {
+                $log = $('#log');
+                //Add text to log
+                $log.append(($log.val() ? "\n" : '') + text);
+                //Autoscroll
+                $log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
+            }
+
+            function send(text) {
+                Server.send('message', text);
+            }
+
+            $(document).ready(function () {
+                log('Connecting...');
+                Server = new FancyWebSocket('ws://127.0.0.1:9300');
+                console.log(Server);
+                $('#message').keypress(function (e) {
+                    if (e.keyCode == 13 && this.value) {
+                        log('You: ' + this.value);
+                        send(this.value);
+
+                        $(this).val('');
+                    }
+                });
+
+                //Let the user know we're connected
+                Server.bind('open', function () {
+                    send("HEms");
+                    log("Connected.");
+                });
+
+                //OH NOES! Disconnection occurred.
+                Server.bind('close', function (data) {
+                    log("Disconnected.");
+                });
+
+                //Log any messages sent from server
+                Server.bind('message', function (payload) {
+                    log(payload);
+                });
+
+                Server.connect();
+            });
+        </script>
     </body>
 </html>
 

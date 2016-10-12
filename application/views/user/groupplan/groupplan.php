@@ -84,7 +84,7 @@
                                         <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> Created Group</p>
                                         <ul class="list-inline soulmate_ul">
                                             <li><span><?php echo $Group_plan['Total_User']."/".$Group_plan['user_limit'] ?> users</span></li>
-                                            <li><a href="group_plan_2.html" class="pstbtn">Join</a></li>
+                                            <li><a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join">Join</a></li>
                                         </ul>
                                     </div>
                                 </div>

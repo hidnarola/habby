@@ -11,6 +11,12 @@ class Challenge_model extends CI_Model {
         return $last_id;
     }
 
+    public function insert_challenge_user($data) {
+        $this->db->insert('challange_user', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+    }
+
     /* v! Insert data into users table */
 
     public function update_challenge($id, $data) {
@@ -29,7 +35,8 @@ class Challenge_model extends CI_Model {
         $user_id = logged_in_user_id();
         $this->db->select('ch.*,users.name as display_name,users.user_image');
         $this->db->join('users', 'users.id = ch.user_id');
-        $this->db->where('ch.user_id !=' . $user_id);
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
+        $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->order_by('ch.created_date', 'DESC');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('challanges ch')->result_array();
@@ -40,11 +47,20 @@ class Challenge_model extends CI_Model {
         $user_id = logged_in_user_id();
         $this->db->select('ch.*,users.name as display_name,users.user_image');
         $this->db->join('users', 'users.id = ch.user_id');
-        $this->db->where('ch.user_id !=' . $user_id);
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
+        $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->order_by('ch.average_rank', 'DESC');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
+    }
+
+    public function get_challenge_by_id($id) {
+        if ($id != null) {
+            $this->db->where('id', $id);
+            $res_data = $this->db->get('challanges')->row_array();
+            return $res_data;
+        }
     }
 
 }
