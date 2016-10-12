@@ -367,7 +367,9 @@
         </script>
         <script>
             var Server;
-
+			var data = '<?php echo json_encode($this->session->user); ?>';
+			console.log(data);
+			
             function log(text) {
                 $log = $('#log');
                 //Add text to log
@@ -382,7 +384,7 @@
 
             $(document).ready(function () {
                 log('Connecting...');
-                Server = new FancyWebSocket('ws://127.0.0.1:9300');
+                Server = new FancyWebSocket('ws://192.168.1.202:9300');
                 console.log(Server);
                 $('#message').keypress(function (e) {
                     if (e.keyCode == 13 && this.value) {
@@ -395,7 +397,7 @@
 
                 //Let the user know we're connected
                 Server.bind('open', function () {
-                    send("HEms");
+					send(data);
                     log("Connected.");
                 });
 
