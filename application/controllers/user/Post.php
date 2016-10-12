@@ -211,5 +211,14 @@ class Post extends CI_Controller {
         $row = $this->db->get('post')->row_array();
         return $row['user_id'];
     }
+
+    /*
+     * 
+     */
+    public function display_post($post_id)
+    {
+        $this->data['post'] = $this->Post_model->get_post_details($post_id);
+        $this->load->view('user/post/display_single_post',$this->data);
+    }
 }
 ?>

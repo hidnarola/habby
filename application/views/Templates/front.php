@@ -24,8 +24,8 @@
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout.js" ?>"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>-->
 
-        <!--<script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>-->
-       
+        
+    
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../../assets/js/html5shiv.js"></script>
@@ -246,12 +246,15 @@
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.fancybox.js" ?>"></script>
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "classie.js" ?>" ></script>
         <!--
+        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
         <script>
             $('.post_section').masonry({
                 itemSelector: '.pst_full_sec',
-                columnWidth: 100
+//                columnWidth: '.col-lg-6',
+                
             });
-        </script> -->
+        </script>
+        -->
         <script>
             var menuLeft = document.getElementById('cbp-spmenu-s1'),
                     showLeftPush = document.getElementById('showLeftPush'),

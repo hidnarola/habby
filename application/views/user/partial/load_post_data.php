@@ -213,10 +213,6 @@ if (count($posts) > 0) {
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-         <script type="text/javascript">
-            stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
-        </script>
         <?php
     }
 } else {
