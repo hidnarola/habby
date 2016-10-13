@@ -239,8 +239,25 @@ class Home extends CI_Controller {
 
     public function topichat() {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
-        $this->data['topichats'] = $this->Topichat_model->get_topichat_group_by_user();
+        $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group();
+        $this->data['joined_topichats'] = $this->Topichat_model->get_joined_topichat_group();
         $this->template->load('front', 'user/topichat/home_topichat', $this->data);
+    }
+
+    public function soulmate() {
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['my_soulmates'] = $this->Soulmate_model->get_my_soulmate();
+        $this->data['joined_soulmates'] = $this->Soulmate_model->get_joined_soulmate();
+        $this->data['soulmate_reqs'] = $this->Soulmate_model->get_soulmate_request();
+        $this->template->load('front', 'user/soulmate/home_soulmate', $this->data);
+    }
+    
+    public function groupplan() {
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['my_groupplans'] = $this->Groupplan_model->get_my_groupplan();
+        $this->data['joined_groupplans'] = $this->Groupplan_model->get_joined_groupplan();
+        $this->data['groupplan_reqs'] = $this->Groupplan_model->get_groupplan_request();
+        $this->template->load('front', 'user/groupplan/home_groupplan', $this->data);
     }
 
 }

@@ -148,6 +148,7 @@ class Groupplan extends CI_Controller {
         $start = ($page - 1) * $limit;
         if ($this->input->get()) {
             $filterby = $this->input->get('topic_filter');
+            $this->data['filterby'] = $filterby;
             $search_topic = $this->input->get('topic');
             $this->data['Group_plans'] = $this->Groupplan_model->get_search_groupplan($search_topic, $filterby, $start, $limit);
             if ($page == 1) {
@@ -173,7 +174,8 @@ class Groupplan extends CI_Controller {
             'is_approved' => false,
         );
         $this->Groupplan_model->insert_groupplan_user($ins_data);
-        redirect('groupplan/details/' . $topic_id);
+        $this->session->set_flashdata('message', array('message' => lang('Group plan request has been sent successfully'), 'class' => 'alert alert-success'));
+        redirect('groupplan');
     }
 
     public function details($Id) {

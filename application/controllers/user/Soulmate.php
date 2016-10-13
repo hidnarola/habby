@@ -136,13 +136,37 @@ class Soulmate extends CI_Controller {
             'requested_user_id' => $this->data['user_data']['id'],
         );
         $this->Soulmate_model->insert_soulmate_request($ins_data);
-        redirect('soulmate/details/' . $topic_id);
+        $this->session->set_flashdata('message', ['message' => 'Request has been sent sucessfully.', 'class' => 'alert alert-success']);
+        redirect('soulmate');
     }
 
     public function details($Id) {
         $Id = base64_decode(urldecode($Id));
         $this->data['soulmate'] = $this->Soulmate_model->get_soulmate_group_by_id($Id);
         $this->template->load('join', 'user/soulmate/join_soulmate', $this->data);
+    }
+
+    public function request_action() {
+        if ($this->input->post()) {
+            $id = $this->input->post('id');
+            $Req = $this->Soulmate_model->get_soulmate_request_by_id($id);
+            $soulmate_group_id = $Req['soulmate_group_id'];
+            if ($this->input->post('action') == 'accept') {
+                $updated_array = array(
+                    'join_user_id' => $Req['requested_user_id'],
+                );
+                $updated_id = $this->Soulmate_model->update_soulmate_data($soulmate_group_id, $updated_array);
+                if ($updated_id != "") {
+                    $this->Soulmate_model->delete_soulmate_request($soulmate_group_id);
+                }
+                echo $soulmate_group_id;
+                exit;
+            } else {
+                $this->Soulmate_model->delete_soulmate_request_by_id($id);
+                exit;
+            }
+            die;
+        }
     }
 
 }

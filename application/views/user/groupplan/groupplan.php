@@ -83,8 +83,17 @@
                                         <p class="soulmate_txt3"><?php echo $Group_plan['introduction'] ?></p>
                                         <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> Created Group</p>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><span><?php echo $Group_plan['Total_User']."/".$Group_plan['user_limit'] ?> users</span></li>
-                                            <li><a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join">Join</a></li>
+                                            <li><span><?php echo $Group_plan['Total_User'] . "/" . $Group_plan['user_limit'] ?> users</span></li>
+                                            <li>
+                                                <?php if ($Group_plan['Is_Requested'] == 0) { ?>
+
+                                                    <a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join">Join</a>
+                                                <?php } else {
+                                                    ?>
+                                                    <a href="javascript:void(0);" class="pstbtn requested">Requested</a>
+                                                <?php }
+                                                ?>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -252,63 +261,59 @@
             $('.totop a').fadeOut();
         }
     });
-    
+
     // Lazy loading 
-        var page = 2;
-        var load = true;
-        $('#loadMore').click(function(){
-            if(load)
+    var page = 2;
+    var load = true;
+    $('#loadMore').click(function () {
+        if (load)
+        {
+            loaddata();
+        }
+    });
+
+    function loaddata()
+    {
+        var uri = window.location.href;
+        uri = uri.split('/');
+        var myurl = "";
+        if (typeof (uri[4]) != "undefined")
+        {
+            q = uri[4].split('?');
+            if (typeof (q[1]) != 'undefined' && (q[0] == 'search'))
             {
-                loaddata();
+                myurl = base_url + 'groupplan/search/' + page + '?' + q[1];
+            } else
+            {
+                myurl = base_url + 'groupplan/load_groupplan/' + page;
+            }
+        } else
+        {
+            q = window.location.href.split('?');
+            if (typeof (q[1]) != 'undefined')
+            {
+                myurl = base_url + 'groupplan/load_groupplan/' + page + '?' + q[1];
+            } else
+            {
+                myurl = base_url + 'groupplan/load_groupplan/' + page;
+            }
+        }
+        $.ajax({
+            url: myurl,
+            method: 'get',
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    load = false;
+                    $('.groupplans').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                    $('#loadMore').remove();
+                } else
+                {
+                    $('.groupplans').append(data.view);
+                }
             }
         });
-
-        function loaddata()
-        {
-            var uri = window.location.href;
-            uri = uri.split('/');
-            var myurl = "";
-            if(typeof(uri[4]) != "undefined")
-            {
-                q = uri[4].split('?');
-                if(typeof(q[1]) != 'undefined' && (q[0] == 'search'))
-                {
-                    myurl = base_url+'groupplan/search/'+page+'?'+q[1];
-                }
-                else
-                {
-                    myurl = base_url+'groupplan/load_groupplan/'+page;
-                }
-            }
-            else
-            {
-                q = window.location.href.split('?');
-                if(typeof(q[1]) != 'undefined')
-                {
-                    myurl = base_url+'groupplan/load_groupplan/'+page+'?'+q[1];
-                }
-                else
-                {
-                    myurl = base_url+'groupplan/load_groupplan/'+page;
-                }
-            }
-            $.ajax({
-                url : myurl,
-                method : 'get',
-                success : function(data){
-                    data = JSON.parse(data);
-                    if(data.status == 0)
-                    {
-                        load = false;
-                        $('.groupplans').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
-                        $('#loadMore').remove();
-                    }
-                    else
-                    {
-                        $('.groupplans').append(data.view);
-                    }
-                }
-            });
-            page++;
-        }
+        page++;
+    }
 </script>

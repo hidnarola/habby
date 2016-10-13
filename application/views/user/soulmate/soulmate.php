@@ -79,7 +79,15 @@
                                         <p class="soulmate_txt4"><?php echo $soulmate_group['display_name'] ?> Created Group</p>
                                         <ul class="list-inline soulmate_ul">
                                             <li><?php echo date("d-m-Y", strtotime($soulmate_group['created_date'])); ?></li>
-                                            <li><a href="<?php echo base_url() . "soulmate/join/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn smlt_btn">Join</a></li>
+                                            <li>
+                                                <?php if ($soulmate_group['Is_Requested'] == 0) { ?>
+                                                    <a href="<?php echo base_url() . "soulmate/join/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn smlt_btn">Join</a>
+                                                <?php } else {
+                                                    ?>
+                                                    <a href="javascript:void(0);" class="pstbtn requested">Requested</a>
+                                                <?php }
+                                                ?>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
