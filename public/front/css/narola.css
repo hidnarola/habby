@@ -58,3 +58,9 @@
 .post_images{
     padding:10px;
 }
+
+.user_chat_thumb
+{
+    height:25px;
+    width:25px;
+}
