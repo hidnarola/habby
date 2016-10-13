@@ -945,6 +945,7 @@ a.up_img i {
 	bottom: 0;
 	left: 5%;
 	width: 270px;
+        z-index:1;
 }
 .chat_lgsec
 {
@@ -1623,6 +1624,7 @@ ul.list-inline.pst_ul li img {
 .mov_sec
 {
 	float: left;
+        width: 100%;
 }
 .mov_sec.clicked2 {
     width: 54%;
@@ -2132,6 +2134,12 @@ margin:0px;
 	text-align: center;
 	color: #333333;
 	padding-bottom: 30px;
+        height: 80px;
+        width: 100%;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
 }
 .topicht_cont_sec
 {
@@ -4158,6 +4166,21 @@ margin:0px;
 #new_grp .radio.topchat_1_rdo > label:first-child {
     padding-top: 15px;
 }
+.soulmate_txt3{
+    width: 100%;
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.soulmate_right_sec {
+    height: 363px;
+    width: 100%;
+}
+.soulmate_right_sec img {
+    height: 100%;
+    width: 100%;
+}
 /* small */
 /* Media queries start here */
 
@@ -4405,12 +4428,18 @@ margin:0px;
 		padding: 0px 10px;
 		font-size: 10px;
 	}
+        .sav-n-orgnl{
+            float: right;
+        }
 	.sav_p {
 		right: 15px;
 		display: block;
 		position: static;
-		float: left;
+		float: right;
 	}
+        .sml_txt{
+            float: left;
+        }
 	.cmnt_newsec_row
 	{
 		min-height: 0px;
@@ -5006,10 +5035,6 @@ margin:0px;
 	.pst_txt2 {
 		font-size: 13px;
 	}
-	.sav_p {
-		right: 46%;
-	}
-
 	.liv_lif_hdg {
 		font-size: 17px;
 		padding-left: 45px;
@@ -5405,6 +5430,17 @@ margin:0px;
 	.wts_tdy1 {
 		padding: 10px 0px 0px 0px;
 	}
+        .personal_account_link{}
+        .lang_sec_mobile{}
+        .lang_sec_mobile .lang_sec.lang-change select{
+            padding-top: 5px;
+        }   
+        .lang_sec_mobile .lang_sec.lang-change{
+            height: 35px;
+            margin-left: 15px;
+            padding: 0;
+            margin-top: 15px;
+        }
 }
 
 
@@ -5504,6 +5540,20 @@ margin:0px;
 	.chat_1 span.wdth_span {
 		width: 84%;
 	}
+        .post_leftsec{
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            -webkit-flex-direction: column; /* Safari */
+            flex-direction:         column;
+        }
+        
+        /* Safari 6.1+ */
+        .post_leftsec_hddn.clicked{-webkit-order: 2;}
+         .mov_sec.clicked2 {-webkit-order: 1;}
+
+        /* Standard syntax */
+        .post_leftsec_hddn.clicked  {order: 2;}
+        .mov_sec.clicked2 {order: 1;}
 }
 @media (min-width:992px) and (max-width:1199px)
 {
@@ -5947,6 +5997,13 @@ margin:0px;
 		font-size: 13px;
 		padding: 12px 16px;
 	}
+        .clicked2 .post_leftsec_hddn.post_leftsec_hddn1.visible-xs{
+            height: auto;
+            width: auto;
+        }
+        .clicked2 .post_opn_ul{
+            text-align: center;
+        }
 }
 
 @media (min-width:768px) and (max-width:991px)
@@ -6192,7 +6249,11 @@ a:hover {
 
 
 /* League and alliance media query start here */
-
+@media(min-width:768px){
+    .cbp-spmenu-push-toright{
+        left: 0;
+    }
+}
 @media (max-width:767px)
 {
 	.alinc_txt {

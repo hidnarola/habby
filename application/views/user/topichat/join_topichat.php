@@ -246,20 +246,19 @@
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2">
-                            <textarea id='log' name='log' readonly='readonly'></textarea><br/>
-                                <p class="notifctn"><b>Mike</b> Changed topic.</p>
-                                <p class="chat_1 clearfix">
-                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
-                                    <span class="wdth_span">
-                                        <span>Lorem Ipsum is simply dummy text</span>
-                                    </span>
-                                </p>
-    
-                                <p class="chat_2 clearfix">
-                                    <span class="wdth_span">
-                                        <span>Lorem Ipsum is simply dummy text</span>
-                                    </span>
-                                </p>
+<!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p>
+                            <p class="chat_1 clearfix">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
+                                <span class="wdth_span">
+                                    <span>Lorem Ipsum is simply dummy text</span>
+                                </span>
+                            </p>
+
+                            <p class="chat_2 clearfix">
+                                <span class="wdth_span">
+                                    <span>Lorem Ipsum is simply dummy text</span>
+                                </span>
+                            </p> -->
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -316,7 +315,7 @@
                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
                                                 </span>
                                                 <span class="input-group-btn">
-                                                    <input class="chat_btn" type="submit" value="Send">
+                                                    <input class="submit_btn chat_btn" type="submit" value="Send">
                                                 </span>
                                             </div>
                                         </div>

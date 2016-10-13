@@ -2,7 +2,7 @@
 <?php
 $language = $this->session->userdata('language');
 ?>
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left visible-xs" id="cbp-spmenu-s1">
     <div class="clearfix nav_logo">
         <ul Class="list-inline mobile_chatsec">
             <li class="pull-left"><a href=""><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="mobil_logo"></a></li>
@@ -126,7 +126,17 @@ $language = $this->session->userdata('language');
                                 <section class="buttonset">
                                     <!-- Class "cbp-spmenu-open" gets applied to menu and "cbp-spmenu-push-toleft" or "cbp-spmenu-push-toright" to the body -->
                                     <ul Class="list-inline mobile_chatsec">
-                                        <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"> <br> Lorem Ipsum</a></li>
+                                        <li><a href="personal_account.html" class="pull-left personal_account_link"><img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"> <br> Lorem Ipsum</a>
+                                            <div class="inline-block lang_sec_mobile pull-right">
+                                                <div class="lang_sec lang-change">
+                                    <select data-style="btn-info" class="selectpicker">
+                                        <option selected="" value="eng">English</option>
+                                        <option value="fr">French</option>
+                                        <option value="ru">Russian</option>
+                                    </select>
+                                </div>
+                                            </div>
+                                        </li>
                                     </ul>
 
                                     <ul Class="list-inline mobile_chatsec">
