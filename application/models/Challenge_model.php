@@ -37,6 +37,7 @@ class Challenge_model extends CI_Model {
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
         $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
+        $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('challanges ch')->result_array();
@@ -49,6 +50,7 @@ class Challenge_model extends CI_Model {
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
         $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
+        $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.average_rank', 'DESC');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('challanges ch')->result_array();
@@ -61,6 +63,37 @@ class Challenge_model extends CI_Model {
             $res_data = $this->db->get('challanges')->row_array();
             return $res_data;
         }
+    }
+
+    public function get_my_challenge() {
+        $user_id = logged_in_user_id();
+        $this->db->select('ch.*');
+        $this->db->where('ch.user_id =' . $user_id);
+        $this->db->where('ch.is_finished', 0);
+        $this->db->order_by('ch.created_date', 'DESC');
+        $res_data = $this->db->get('challanges ch')->result_array();
+        return $res_data;
+    }
+
+    public function get_joined_challenge() {
+        $user_id = logged_in_user_id();
+        $this->db->select('ch.*');
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id);
+        $this->db->where('ch.is_finished', 0);
+        $this->db->order_by('ch.created_date', 'DESC');
+        $res_data = $this->db->get('challanges ch')->result_array();
+        return $res_data;
+    }
+
+    public function get_challenge_accepted() {
+        $user_id = logged_in_user_id();
+        $this->db->select('cu.*,users.name as display_name,ch.name');
+        $this->db->join('users', 'users.id = cu.user_id');
+        $this->db->join('challanges ch', 'cu.challange_id = ch.id AND ch.user_id =' . $user_id);
+        $this->db->where('ch.is_finished', 0);
+        $this->db->order_by('cu.challange_date', 'DESC');
+        $res_data = $this->db->get('challange_user cu')->result_array();
+        return $res_data;
     }
 
 }

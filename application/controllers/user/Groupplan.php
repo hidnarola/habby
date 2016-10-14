@@ -184,4 +184,24 @@ class Groupplan extends CI_Controller {
         $this->template->load('join', 'user/groupplan/join_groupplan', $this->data);
     }
 
+    public function request_action() {
+        if ($this->input->post()) {
+            $id = $this->input->post('id');
+            $Req = $this->Groupplan_model->get_groupplan_request_by_id($id);
+            if ($this->input->post('action') == 'accept') {
+                $insert_array = array(
+                    'group_id' => $Req['group_id'],
+                    'user_id' => $Req['user_id'],
+                );
+                $inserted_id = $this->Groupplan_model->insert_grouplan_users($insert_array);
+                if ($inserted_id != "") {
+                    $this->Groupplan_model->delete_grouplpan_request($id);
+                }
+            } else {
+                $this->Groupplan_model->delete_grouplpan_request($id);
+            }
+            die;
+        }
+    }
+
 }

@@ -59,4 +59,26 @@ class League_model extends CI_Model {
         }
     }
 
+    public function get_my_league() {
+        $user_id = logged_in_user_id();
+        $this->db->select('l.*,u.name as created_user,u.user_image');
+        $this->db->from('league l');
+        $this->db->join('users u', 'l.user_id = u.id');
+        $this->db->where('l.user_id', $user_id);
+        $this->db->order_by('l.created_date', 'DESC');
+        $res_data = $this->db->get()->result_array();
+        return $res_data;
+    }
+
+    public function get_joined_league() {
+        $user_id = logged_in_user_id();
+        $this->db->select('l.*,u.name as created_user,u.user_image, count(DISTINCT lm.id) as total_user');
+        $this->db->from('league l');
+        $this->db->join('users u', 'l.user_id = u.id');
+        $this->db->join('league_members lm', 'l.id = lm.league_id AND lm.user_id =' . $user_id);
+        $this->db->order_by('l.created_date', 'DESC');
+        $res_data = $this->db->get()->result_array();
+        return $res_data;
+    }
+
 }

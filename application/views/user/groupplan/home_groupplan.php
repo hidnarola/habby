@@ -14,14 +14,14 @@
                         <p><span class="by_spn">Group Plan 3</span> <span>New Message By Jing</span></p>
                         <p><span class="by_spn">Group Plan 4</span> <span>New Message By Jim</span></p>
                     </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 topi_prsnl soulmate_reqs">
-                        <h2 id="h2_soulmate">Group Plan Request :</h2>
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 topi_prsnl groupplan_reqs">
+                        <h2 id="h2_groupplan">Group Plan Request :</h2>
                         <?php
                         if ($groupplan_reqs != null && !empty($groupplan_reqs)) {
                             foreach ($groupplan_reqs as $groupplan_req) {
 //                                pr($soulmate_req);
                                 ?>
-                                <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 soulmate_<?php echo $groupplan_req['group_id'] ?>" id="soulmate_req">
+                                <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="groupplan_req">
                                     <p class="accept_req"><span class="by_spn"><?php echo $groupplan_req['name']; ?></span> <span>New Request By <?php echo $groupplan_req['display_name']; ?></span></p>
                                     <span class="accept_btn" id="accept_btn_<?php echo $groupplan_req['id']; ?>"><a href="javascript:void(0)" data-id="<?php echo $groupplan_req['id']; ?>" data-action="accept">Accept</a>
                                         <a class="" href="javascript:void(0)" data-id="<?php echo $groupplan_req['id']; ?>" data-action="cancel">Cancel</a></span>
@@ -83,7 +83,7 @@
                                         <div class="grp_prsnl_innr">
                                             <h2><?php echo $joined_groupplan['name'] ?></h2>
                                         </div>
-                                        <p class="enter_btn"><a href="<?php echo base_url() . "soulmate/details/" . urlencode(base64_encode($joined_groupplan['id'])) ?>">Enter</a></p>
+                                        <p class="enter_btn"><a href="<?php echo base_url() . "groupplan/details/" . urlencode(base64_encode($joined_groupplan['id'])) ?>">Enter</a></p>
                                     </div>
                                     <?php
                                 }
@@ -109,17 +109,17 @@
             var id = $(this).data('id');
             var action = $(this).data('action');
             $.ajax({
-                url: '<?php echo base_url() . "soulmate/request_action"; ?>',
+                url: '<?php echo base_url() . "groupplan/request_action"; ?>',
                 type: 'POST',
                 data: {id: id, action: action},
                 success: function (data) {
                     if (action === 'accept') {
-                        $(t).parents('.soulmate_reqs').find('.soulmate_' + data.trim()).fadeOut(1000);
-                        $('#h2_soulmate').after("<h2 class='req_msg'>Request Accepted. </h2>");
+                        $(t).parents('#groupplan_req').fadeOut(1000);
+                        $('#h2_groupplan').after("<h2 class='req_msg'>Request Accepted. </h2>");
                         $('.req_msg').fadeOut(5000);
                     } else {
-                        $(t).parents('#soulmate_req').fadeOut(1000);
-                        $('#h2_soulmate').after("<h2 class='req_msg'>Request Canceled. </h2>");
+                        $(t).parents('#groupplan_req').fadeOut(1000);
+                        $('#h2_groupplan').after("<h2 class='req_msg'>Request Canceled. </h2>");
                         $('.req_msg').fadeOut(5000);
                     }
                 }

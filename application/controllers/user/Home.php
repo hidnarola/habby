@@ -259,5 +259,20 @@ class Home extends CI_Controller {
         $this->data['groupplan_reqs'] = $this->Groupplan_model->get_groupplan_request();
         $this->template->load('front', 'user/groupplan/home_groupplan', $this->data);
     }
-
+    
+    public function challenges() {
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['my_challenges'] = $this->Challenge_model->get_my_challenge();
+        $this->data['joined_challenges'] = $this->Challenge_model->get_joined_challenge();
+        $this->data['challenge_accepted'] = $this->Challenge_model->get_challenge_accepted();
+        $this->template->load('front', 'user/challenge/home_challenge', $this->data);
+    }
+    
+    public function league() {
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['my_leagues'] = $this->League_model->get_my_league();
+        $this->data['joined_leagues'] = $this->League_model->get_joined_league();
+        $this->template->load('front', 'user/league/home_league', $this->data);
+    }
+    
 }
