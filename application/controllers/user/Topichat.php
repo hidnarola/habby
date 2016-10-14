@@ -177,9 +177,12 @@ class Topichat extends CI_Controller {
     }
 
     public function details($Id) {
+        $limit = 10;
         $Id = base64_decode(urldecode($Id));
-        $this->data['group_id'] = 'soulmate_'.$Id;
+        $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
+        $this->data['messages'] = $this->Topichat_model->get_messages($Id,$limit);
+        krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }
 

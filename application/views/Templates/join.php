@@ -308,21 +308,6 @@
             });
         </script> 
         <script>
-            /*
-             $(function () {
-             $("div.soulmate_con2").slice(0, 3).show();
-             $("#loadMore").on('click', function (e) {
-             e.preventDefault();
-             $("div.soulmate_con2:hidden").slice(0, 2).slideDown();
-             if ($("div.soulmate_con2:hidden").length == 0) {
-             $("#load").fadeOut('slow');
-             }
-             $('html,body').animate({
-             scrollTop: $(this).offset().top
-             }, 1500);
-             });
-             });
-             */
             $('a[href=#top]').click(function () {
                 $('body,html').animate({
                     scrollTop: 0
@@ -363,71 +348,6 @@
                         }
                     });
                 });
-            });
-        </script>
-        <script>
-            var Server;
-            data = '<?php echo json_encode($this->session->user); ?>';
-            data = JSON.parse(data);
-            
-
-            DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
-
-            function send(text) {
-                var msg = {
-                    message: text,
-                    type: 'send_message'
-                }
-                Server.send('message', JSON.stringify(msg));
-            }
-
-            $(document).ready(function () {
-//                Server = new FancyWebSocket('ws://192.168.1.202:9300');
-                Server = new FancyWebSocket('ws://127.0.0.1:9300');
-                // Send message to server
-                $('#message').keypress(function (e) {
-                    if (e.keyCode == 13 && this.value) {
-                        if (this.value.trim() != '')
-                        {
-                            $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + this.value + "</span></span></p>");
-                            send(this.value);
-                            $(this).val('');
-                        }
-                    }
-                });
-
-                $('.submit_btn').click(function (e) {
-                    msg = $('#message').val();
-                    if (msg.trim() != '')
-                    {
-                        $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + msg + "</span></span></p>");
-                        send(msg);
-                        $('#message').val('');
-                    }
-                });
-
-                //Let the user know we're connected
-                Server.bind('open', function () {
-                    // Fire when user connect first time
-                    var msg = {
-                        type: 'room_bind',
-                        
-                        message: data
-                    }
-                    Server.send('message', JSON.stringify(msg));
-                });
-
-                //OH NOES! Disconnection occurred.
-                Server.bind('close', function (data) {
-//                    log("Disconnected.");
-                });
-
-                //Log any messages sent from server
-                Server.bind('message', function (payload) {
-                    userdata = JSON.parse(payload);
-                    $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span>" + userdata.message + "</span></span></p>");
-                });
-                Server.connect();
             });
         </script>
     </body>

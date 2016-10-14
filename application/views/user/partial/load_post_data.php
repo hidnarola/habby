@@ -2,7 +2,7 @@
 if (count($posts) > 0) {
     foreach ($posts as $post) {
         ?>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pst_full_sec" data-post_id="<?php echo $post['id']; ?>">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pst_full_sec post_masonry_article" data-post_id="<?php echo $post['id']; ?>">
             <div class="cmnt_newsec_row">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

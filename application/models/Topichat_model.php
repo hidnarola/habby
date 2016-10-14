@@ -91,7 +91,7 @@ class Topichat_model extends CI_Model {
 
     public function get_my_topichat_group() {
         $user_id = logged_in_user_id();
-//        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.*,users.name as display_name,users.user_image');
+        $this->db->select('tg.*');
 //        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         $this->db->where('tg.user_id =' . $user_id);
@@ -103,7 +103,7 @@ class Topichat_model extends CI_Model {
 
     public function get_joined_topichat_group() {
         $user_id = logged_in_user_id();
-//        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.*,users.name as display_name,users.user_image');
+        $this->db->select('tg.*');
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         $this->db->where('tt.user_id IS NOT NULL');
@@ -113,6 +113,19 @@ class Topichat_model extends CI_Model {
         return $res_data;
     }
 
+    /*
+     * get_messages is used to fetch message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+    public function get_messages($group_id,$limit) {
+        $this->db->where('topic_group_id',$group_id);
+        $this->db->limit($limit,0);
+        $this->db->order_by('id','desc');
+        return $this->db->get('topic_group_chat')->result_array();
+    }
 }
-
 ?>

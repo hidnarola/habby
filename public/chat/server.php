@@ -5,6 +5,7 @@ set_time_limit(0);
 
 // include the web sockets server script (the server is started at the far bottom of this file)
 require 'class.PHPWebSocket.php';
+include 'db.php';
 
 // when a client sends data to the server
 function wsOnMessage($clientID, $message, $messageLength, $binary) {
@@ -20,24 +21,32 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
     $message = json_decode($message);
 
     if (!empty($message->type)) {
-        if ($message->type == 'bind' && empty($Server->wsClients[$clientID]['user_data'])) {
+        if ($message->type == 'room_bind' && empty($Server->wsClients[$clientID]['user_data'])) {
             $Server->wsClients[$clientID]['user_data'] = $message->message;
+            $Server->wsClients[$clientID]['room_id'] = $message->group_id;
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
-            // Send message to user
-            if (sizeof($Server->wsClients) == 1) {
-                $Server->wsSend($clientID, "No one available in the group");
-            } else {
-                // object that sent to recieving user
-                $send_object = array();
-                $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
-                $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
-                $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
-                $send_object['message'] = $message->message;
+            if ($message->type == 'topic_msg') {
+                $user_ids = get_topichat_users($message->group_id);
+                // database entry for topichat
+                send_topic_msg($message->group_id,$Server->wsClients[$clientID]['user_data']->id,$message->message);
+                
+                // Send message to user
+                if(count($user_ids) > 1)
+                {
+                    if (sizeof($Server->wsClients) != 1) {
+                        // object that sent to recieving user
+                        $send_object = array();
+                        $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
+                        $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
+                        $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
+                        $send_object['message'] = $message->message;
 
-                foreach ($Server->wsClients as $id => $client) {
-                    if ($id != $clientID) {
-                        $Server->wsSend($id, json_encode($send_object));
+                        foreach ($Server->wsClients as $id => $client) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id) {
+                                $Server->wsSend($id, json_encode($send_object));
+                            }
+                        }
                     }
                 }
             }
@@ -72,6 +81,12 @@ function wsOnClose($clientID, $status) {
     //Send a user left notice to everyone in the room
     foreach ($Server->wsClients as $id => $client)
         $Server->wsSend($id, "Visitor $clientID ($ip) has left the room.");
+}
+
+// Return online user ids from given array
+function return_online_users_from_given_ids($arr)
+{
+    
 }
 
 // start the server

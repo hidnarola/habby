@@ -64,3 +64,21 @@
     height:25px;
     width:25px;
 }
+
+.post_masonry_section{
+    display: block;
+    width: 100%;
+    margin: 5% auto;
+}
+
+.post_masonry_article {
+    display: block;
+    //width: 49%;
+    margin: 0 0 2%;
+ /*   float: left;
+    clear: left;*/
+}
+.post_masonry_article.right {
+    float: right !important;
+    clear: right !important;
+}

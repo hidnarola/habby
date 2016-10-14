@@ -248,6 +248,16 @@ $('document').ready(function () {
         {
             if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
                 loaddata();
+                setTimeout(function () {
+                    $('.post_masonry_article').each(function () {
+                        console.log($(this).data('post_id') + " having left " + $(this).offset().left);
+                        if ($(this).offset().left > 250)
+                        {
+                            $(this).addClass('right');
+                        }
+                    });
+                }, 1500);
+
 //                       $('.post_section').masonry({
 //                            itemSelector: '.pst_full_sec',
 //                             columnWidth: 100
