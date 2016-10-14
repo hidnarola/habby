@@ -90,6 +90,7 @@ class Groupplan_model extends CI_Model {
 
     public function get_my_groupplan() {
         $user_id = logged_in_user_id();
+        $this->db->select('gp.*');
         $this->db->where('gp.user_id', $user_id);
         $this->db->order_by('gp.created_date', 'DESC');
         $res_data = $this->db->get('group gp')->result_array();
@@ -98,6 +99,7 @@ class Groupplan_model extends CI_Model {
 
     public function get_joined_groupplan() {
         $user_id = logged_in_user_id();
+        $this->db->select('gp.*');
         $this->db->join('group_users gus', 'gus.group_id = gp.id AND gus.user_id =' . $user_id);
         $this->db->order_by('gp.created_date', 'DESC');
         $res_data = $this->db->get('group gp')->result_array();
@@ -112,8 +114,28 @@ class Groupplan_model extends CI_Model {
         $this->db->where('gp.user_id =' . $user_id);
         $this->db->order_by('gr.created_date', 'DESC');
         $res_data = $this->db->get('group_users_request gr')->result_array();
-        ;
         return $res_data;
+    }
+
+    public function get_groupplan_request_by_id($id) {
+        if ($id != null) {
+            $this->db->where('gr.id', $id);
+            $res_data = $this->db->get('group_users_request gr')->row_array();
+            return $res_data;
+        }
+    }
+
+    public function insert_grouplan_users($data) {
+        $this->db->insert('group_users', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+    }
+
+    public function delete_grouplpan_request($id) {
+        if ($id != null) {
+            $this->db->where('id', $id);
+            $this->db->delete('group_users_request');
+        }
     }
 
 }
