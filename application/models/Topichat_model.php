@@ -122,10 +122,31 @@ class Topichat_model extends CI_Model {
      * developed by : ar
      */
     public function get_messages($group_id,$limit) {
-        $this->db->where('topic_group_id',$group_id);
+        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->where('tg.topic_group_id',$group_id);
+        $this->db->join('users u','tg.user_id = u.id');
         $this->db->limit($limit,0);
-        $this->db->order_by('id','desc');
-        return $this->db->get('topic_group_chat')->result_array();
+        $this->db->order_by('tg.id','desc');
+        return $this->db->get('topic_group_chat tg')->result_array();
+    }
+    
+    /*
+     * load_messages is used to fetch more message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * @param $last_msg_id int specify last message that displayed
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+    public function load_messages($group_id,$limit,$last_msg_id) {
+        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->where('tg.topic_group_id',$group_id);
+        $this->db->where('tg.id < ',$last_msg_id);
+        $this->db->join('users u','tg.user_id = u.id');
+        $this->db->limit($limit,0);
+        $this->db->order_by('tg.id','desc');
+        return $this->db->get('topic_group_chat tg')->result_array();
     }
 }
 ?>
