@@ -11,7 +11,7 @@ function send(text) {
 }
 
 $(document).ready(function () {
-                Server = new FancyWebSocket('ws://192.168.1.186:9300');
+    Server = new FancyWebSocket('ws://192.168.1.186:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
     // Send message to server
     $('#message').keypress(function (e) {
@@ -21,6 +21,7 @@ $(document).ready(function () {
                 $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + this.value + "</span></span></p>");
                 send(this.value);
                 $(this).val('');
+                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         }
     });
@@ -32,6 +33,7 @@ $(document).ready(function () {
             $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + msg + "</span></span></p>");
             send(msg);
             $('#message').val('');
+            $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         }
     });
 
@@ -56,6 +58,8 @@ $(document).ready(function () {
         console.log(payload);
         userdata = JSON.parse(payload);
         $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span>" + userdata.message + "</span></span></p>");
+        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
     });
+
     Server.connect();
 });

@@ -225,8 +225,8 @@
                     <div class="tittl_sec_lg">
                         <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
                             <div class="tittl_sec">
-                                <p>#Topic <span></span></p>
-                                <p>Note : Lorem Ipsum is simply dummy text </p>
+                                <p><?php echo $topichat['topic_name']; ?> <span></span></p>
+                                <p>Note : <?php echo $topichat['notes']; ?> </p>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
@@ -247,34 +247,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2">
 <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-                            <?php
-                                foreach ($messages as $message) {
-                                        if($message['user_id'] == $this->session->user['id'])
-                                        {
-                                            ?>
-                                            <p class="chat_2 clearfix">
-                                                <span class="wdth_span">
-                                                    <span><?php echo $message['message']; ?></span>
-                                                </span>
-                                            </p>
-                                            <?php
-                                        }
-                                        else
-                                        {
-                                            ?>
-                                            <p class="chat_1 clearfix">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
-                                                <span class="wdth_span">
-                                                    <span><?php echo $message['message']; ?></span>
-                                                </span>
-                                            </p>
-                                            <?php
-                                        }
-                                }
-                            ?>
-                            
-
-                            
+                            <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -354,5 +327,49 @@
     data = '<?php echo json_encode($this->session->user); ?>';
     group_id = '<?php echo $group_id; ?>';
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
+    last_msg = '<?php echo (count($messages) > 0)?$messages[count($messages) - 1]['id']:0 ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>
+<!-- Lazy loading -->
+<script>
+    $('document').ready(function () {
+        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        var load = true;
+        var in_progress = false;
+        $('.chat_area2').scroll(function () {
+            if(load && !in_progress)
+            {
+                if ($('.chat_area2').scrollTop() == 0) {
+                    loaddata();
+                    in_process = true;
+                }
+            }
+        });
+
+        function loaddata()
+        {
+            $.ajax({
+                url : base_url+'/topichat/load_more_msg/'+group_id,
+                method: 'post',
+                data : 'last_msg='+last_msg,
+                success : function(more){
+                    more = JSON.parse(more);
+                    if(more.status)
+                    {
+                        $('.chat_area2').prepend(more.view);
+                        last_msg = more.last_msg_id;
+                        $(".chat_area2").animate({scrollTop: 200 }, 500);
+                    }
+                    else
+                    {
+                        load = false;
+                        $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                        $(".chat_area2").animate({scrollTop: 0 }, 500);
+                    }
+                    in_progress = false;
+                }
+            });
+            
+        }
+    });
+</script>
