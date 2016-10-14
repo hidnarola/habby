@@ -2291,6 +2291,8 @@ ul.list-inline.pst_ul li img {
     border-radius: 20px;
     background-color: #d2d2d2;
     display: inline-block;
+    max-width: 90%;
+    word-wrap: break-word;
 }
 .chat_1 img
 {
@@ -2325,6 +2327,8 @@ ul.list-inline.pst_ul li img {
     background-color: #76469e;
     display: inline-block;
     float: right;
+    max-width: 90%;
+    word-wrap: break-word;
 }
 .chat_2 img
 {

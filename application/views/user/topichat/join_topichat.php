@@ -349,8 +349,9 @@
         function loaddata()
         {
             $.ajax({
-                url : base_url+'/topichat/load_more_msg/'+group_id,
+                url : base_url+'topichat/load_more_msg/'+group_id,
                 method: 'post',
+                async: false,
                 data : 'last_msg='+last_msg,
                 success : function(more){
                     more = JSON.parse(more);
