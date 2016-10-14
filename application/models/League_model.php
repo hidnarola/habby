@@ -34,8 +34,8 @@ class League_model extends CI_Model {
         return $res_data;
     }
 
-    /*
-     * 
+    /* v! Insert league group into league table 
+     * develop by : AR
      */
 
     public function add_league($arr) {
@@ -45,11 +45,19 @@ class League_model extends CI_Model {
         return false;
     }
 
+    /* v! Insert league group users into league_members table 
+     * develop by : HPA
+     */
+
     public function insert_league_user($data) {
         $this->db->insert('league_members', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
     }
+
+    /* v! Selectleague group by id from league table 
+     * develop by : HPA
+     */
 
     public function get_league_by_id($id) {
         if ($id != "") {
@@ -58,6 +66,10 @@ class League_model extends CI_Model {
             return $res_data;
         }
     }
+
+    /* v! Select created league group from league table 
+     * develop by : HPA
+     */
 
     public function get_my_league() {
         $user_id = logged_in_user_id();
@@ -69,6 +81,10 @@ class League_model extends CI_Model {
         $res_data = $this->db->get()->result_array();
         return $res_data;
     }
+
+    /* v! Select joined league group from league table 
+     * develop by : HPA
+     */
 
     public function get_joined_league() {
         $user_id = logged_in_user_id();

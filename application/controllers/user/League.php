@@ -22,10 +22,10 @@ class League extends CI_Controller {
         }
     }
 
-    /*
-     * 
+    /**
+     * This function is used to .
+     * develop by : ar
      */
-
     public function index($page = 1) {
         $limit = 2;
         $start = ($page - 1) * $limit;
@@ -153,6 +153,10 @@ class League extends CI_Controller {
         }
     }
 
+    /**
+     * This function is used to join League group.
+     * develop by : HPA
+     */
     public function apply($league_id) {
         $Id = base64_decode(urldecode($league_id));
         $ins_data = array(
@@ -163,6 +167,10 @@ class League extends CI_Controller {
         redirect('league/details/' . $league_id);
     }
 
+    /**
+     * This function is used to display League group details.
+     * develop by : HPA
+     */
     public function details($Id) {
         $Id = base64_decode(urldecode($Id));
         $this->data['league'] = $this->League_model->get_league_by_id($Id);

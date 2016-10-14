@@ -166,6 +166,11 @@ class Topichat extends CI_Controller {
         }
     }
 
+    /*
+     * join method joins topichat and insert users request.
+     * develop by : HPA
+     */
+
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
         $ins_data = array(
@@ -176,12 +181,17 @@ class Topichat extends CI_Controller {
         redirect('topichat/details/' . $topic_id);
     }
 
+    /*
+     * details method display topichat with all required details.
+     * develop by : HPA
+     */
+
     public function details($Id) {
         $limit = 10;
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
-        $this->data['messages'] = $this->Topichat_model->get_messages($Id,$limit);
+        $this->data['messages'] = $this->Topichat_model->get_messages($Id, $limit);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }

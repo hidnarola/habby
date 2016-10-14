@@ -22,6 +22,7 @@
     if (isset($all_errors) && !empty($all_errors)) {
         echo '<div class="alert alert-danger">' . $all_errors . '</div>';
     }
+    $cnt = 0;
     ?>
     <!-- Soulmate #1 section and Newest Post area start here  -->
     <div class="row grp_pnl_row newest-post flter_sec_row">
@@ -31,6 +32,7 @@
                     <!-- Challenge each section start here -->
                     <?php
                     if ($Challenges != "" && !empty($Challenges)) {
+                        $cnt = count($Challenges);
                         foreach ($Challenges as $Challenge) {
 //                            pr($Challenge);
                             ?>
@@ -189,6 +191,12 @@
                             <!-- Challenge each section end here -->
                             <?php
                         }
+                    } else {
+                        ?>
+                        <div class="">
+                            No Challenge found.
+                        </div>
+                        <?php
                     }
                     ?>
                 </div>
@@ -199,17 +207,22 @@
     <!-- Soulmate #1 section and Newest Post area end here  -->
     <!-- Group section container end here -->
 
-    <div class="row">
-        <div class="container">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                <a href="javascript;" id="loadMore">Load More</a>
-
-                <p class="totop"> 
-                    <a href="#top"><img src="<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>" class="img-responsive"></a> 
-                </p>
+    <?php
+    if ($cnt >= 3) {
+        ?>
+        <div class = "row">
+            <div class = "container">
+                <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                    <a id = "loadMore" href = "javascript:;">Load More</a>
+                    <p class = "totop">
+                        <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
+        <?php
+    }
+    ?>
 </div>
 <!-- Soulmate new group form popup start here -->
 <div class="modal" id="new_grp">

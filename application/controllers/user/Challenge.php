@@ -66,6 +66,11 @@ class Challenge extends CI_Controller {
         }
     }
 
+    /*
+     * challenges method joins load all challenges filter wise.
+     * develop by : HPA
+     */
+
     public function challenges($page = 1) {
         if ($this->input->get()) {
             $limit = 3;
@@ -83,6 +88,11 @@ class Challenge extends CI_Controller {
             redirect('challenge');
         }
     }
+
+    /*
+     * load_challenge_data method load challenges with ajax.
+     * develop by : HPA
+     */
 
     public function load_challenge_data($page = 1) {
         $limit = 3;
@@ -111,6 +121,11 @@ class Challenge extends CI_Controller {
         }
     }
 
+    /*
+     * accept method accept challenges.
+     * develop by : HPA
+     */
+
     public function accept($topic_id) {
         $id = base64_decode(urldecode($topic_id));
         $ins_data = array(
@@ -121,6 +136,11 @@ class Challenge extends CI_Controller {
         $this->Challenge_model->insert_challenge_user($ins_data);
         redirect('challenge/details/' . $topic_id);
     }
+
+    /*
+     * details method display challenges with all required details.
+     * develop by : HPA
+     */
 
     public function details($Id) {
         $Id = base64_decode(urldecode($Id));

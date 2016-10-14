@@ -3,7 +3,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Topichat_model extends CI_Model {
-    /* v! Insert data into users table */
+    /* v! Insert topichat group data into topic_group table 
+     * develop by : HPA
+     */
 
     public function insert_topic_group_data($data) {
         $this->db->insert('topic_group', $data);
@@ -11,13 +13,19 @@ class Topichat_model extends CI_Model {
         return $last_id;
     }
 
+    /* v! Insert topichat group joined user data into topic_group_user table 
+     * develop by : HPA
+     */
+
     public function insert_topic_group_user($data) {
         $this->db->insert('topic_group_user', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
     }
 
-    /* v! Insert data into users table */
+    /* v! update topichat group into topic_group table 
+     * develop by : HPA
+     */
 
     public function update_topic_group_data($id, $data) {
         $data['modified_date'] = date('Y-m-d H:i:s');
@@ -30,6 +38,10 @@ class Topichat_model extends CI_Model {
         $last_id = $this->db->affected_rows();
         return $last_id;
     }
+
+    /* v! Select newest topichat group from topic_group table 
+     * develop by : HPA
+     */
 
     public function get_topichat_group($start, $limit) {
         $user_id = logged_in_user_id();
@@ -46,6 +58,10 @@ class Topichat_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select popular topichat group from topic_group table 
+     * develop by : HPA
+     */
+
     public function get_popular_topichat_group($start, $limit) {
         $user_id = logged_in_user_id();
         $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id)as Total_User ,tg.*,users.name as display_name,users.user_image');
@@ -59,6 +75,10 @@ class Topichat_model extends CI_Model {
 //        pr($res_data,1);
         return $res_data;
     }
+
+    /* v! Select topichat group by search group name from topic_group table 
+     * develop by : HPA
+     */
 
     public function get_search_topichat_group($search_topic = NULL, $filterby = NULL, $start, $limit) {
         $user_id = logged_in_user_id();
@@ -81,6 +101,10 @@ class Topichat_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select topichat group by id from topic_group table 
+     * develop by : HPA
+     */
+
     public function get_topichat_group_by_id($id) {
         if ($id != null) {
             $this->db->where('id', $id);
@@ -88,6 +112,10 @@ class Topichat_model extends CI_Model {
             return $res_data;
         }
     }
+
+    /* v! Select created topichat group from topic_group table 
+     * develop by : HPA
+     */
 
     public function get_my_topichat_group() {
         $user_id = logged_in_user_id();
@@ -100,6 +128,10 @@ class Topichat_model extends CI_Model {
         $res_data = $this->db->get('topic_group tg')->result_array();
         return $res_data;
     }
+
+    /* v! Select joined topichat group from topic_group table 
+     * develop by : HPA
+     */
 
     public function get_joined_topichat_group() {
         $user_id = logged_in_user_id();
@@ -121,11 +153,14 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function get_messages($group_id,$limit) {
-        $this->db->where('topic_group_id',$group_id);
-        $this->db->limit($limit,0);
-        $this->db->order_by('id','desc');
+
+    public function get_messages($group_id, $limit) {
+        $this->db->where('topic_group_id', $group_id);
+        $this->db->limit($limit, 0);
+        $this->db->order_by('id', 'desc');
         return $this->db->get('topic_group_chat')->result_array();
     }
+
 }
+
 ?>

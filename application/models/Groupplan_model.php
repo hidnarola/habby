@@ -3,7 +3,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Groupplan_model extends CI_Model {
-    /* v! Insert data into users table */
+    /* v! Insert data into grpups table 
+     * develop by : HPA
+     */
 
     public function insert_groupplan_data($data) {
         $this->db->insert('group', $data);
@@ -11,13 +13,19 @@ class Groupplan_model extends CI_Model {
         return $last_id;
     }
 
+    /* v! Insert data into group users table 
+     * develop by : HPA
+     */
+
     public function insert_groupplan_user($data) {
         $this->db->insert('group_users_request', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
     }
 
-    /* v! Insert data into users table */
+    /* v! Update data into group table 
+     * develop by : HPA
+     */
 
     public function update_groupplan_data($id, $data) {
         $data['modified_date'] = date('Y-m-d H:i:s');
@@ -30,6 +38,10 @@ class Groupplan_model extends CI_Model {
         $last_id = $this->db->affected_rows();
         return $last_id;
     }
+
+    /* v! Select data from group table 
+     * develop by : HPA
+     */
 
     public function get_group_plan($start, $limit) {
         $user_id = logged_in_user_id();
@@ -44,6 +56,10 @@ class Groupplan_model extends CI_Model {
         $res_data = $this->db->get('group gp')->result_array();
         return $res_data;
     }
+
+    /* v! Select data from group table by search data 
+     * develop by : HPA
+     */
 
     public function get_search_groupplan($search_topic = NULL, $filterby = NULL, $start, $limit) {
         $user_id = logged_in_user_id();
@@ -66,6 +82,10 @@ class Groupplan_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select popular data from group table 
+     * develop by : HPA
+     */
+
     public function get_popular_group_plans($start, $limit) {
         $user_id = logged_in_user_id();
         $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested');
@@ -80,6 +100,10 @@ class Groupplan_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select data from group table by id.
+     * develop by : HPA
+     */
+
     public function get_groupplan_by_id($id) {
         if ($id != null) {
             $this->db->where('id', $id);
@@ -87,6 +111,10 @@ class Groupplan_model extends CI_Model {
             return $res_data;
         }
     }
+
+    /* v! Select data of logged in user from group table 
+     * develop by : HPA
+     */
 
     public function get_my_groupplan() {
         $user_id = logged_in_user_id();
@@ -97,6 +125,10 @@ class Groupplan_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select data where logged in user join from group table 
+     * develop by : HPA
+     */
+
     public function get_joined_groupplan() {
         $user_id = logged_in_user_id();
         $this->db->select('gp.*');
@@ -105,6 +137,10 @@ class Groupplan_model extends CI_Model {
         $res_data = $this->db->get('group gp')->result_array();
         return $res_data;
     }
+
+    /* v! Select group plan request from group_users_request table 
+     * develop by : HPA
+     */
 
     public function get_groupplan_request() {
         $user_id = logged_in_user_id();
@@ -117,6 +153,10 @@ class Groupplan_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select group plan request by id from group_users_request table 
+     * develop by : HPA
+     */
+
     public function get_groupplan_request_by_id($id) {
         if ($id != null) {
             $this->db->where('gr.id', $id);
@@ -125,11 +165,19 @@ class Groupplan_model extends CI_Model {
         }
     }
 
+    /* v! Insert group plan join user details into group_users table 
+     * develop by : HPA
+     */
+
     public function insert_grouplan_users($data) {
         $this->db->insert('group_users', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
     }
+
+    /* v! Delete user request from group_users_request table 
+     * develop by : HPA
+     */
 
     public function delete_grouplpan_request($id) {
         if ($id != null) {

@@ -196,6 +196,10 @@ class Home extends CI_Controller {
         }
     }
 
+    /**
+     * This function is used to image upload.
+     * develop by : HPA
+     */
     public function profile_upload() {
         if ($_FILES) {
 
@@ -237,6 +241,10 @@ class Home extends CI_Controller {
         }
     }
 
+    /**
+     * This function is used to display topichat groups details.
+     * develop by : HPA
+     */
     public function topichat() {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group();
@@ -244,6 +252,10 @@ class Home extends CI_Controller {
         $this->template->load('front', 'user/topichat/home_topichat', $this->data);
     }
 
+    /**
+     * This function is used to display Soulmate groups details.
+     * develop by : HPA
+     */
     public function soulmate() {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_soulmates'] = $this->Soulmate_model->get_my_soulmate();
@@ -251,7 +263,11 @@ class Home extends CI_Controller {
         $this->data['soulmate_reqs'] = $this->Soulmate_model->get_soulmate_request();
         $this->template->load('front', 'user/soulmate/home_soulmate', $this->data);
     }
-    
+
+    /**
+     * This function is used to display group plans details.
+     * develop by : HPA
+     */
     public function groupplan() {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_groupplans'] = $this->Groupplan_model->get_my_groupplan();
@@ -259,7 +275,11 @@ class Home extends CI_Controller {
         $this->data['groupplan_reqs'] = $this->Groupplan_model->get_groupplan_request();
         $this->template->load('front', 'user/groupplan/home_groupplan', $this->data);
     }
-    
+
+    /**
+     * This function is used to display Challenges details.
+     * develop by : HPA
+     */
     public function challenges() {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_challenges'] = $this->Challenge_model->get_my_challenge();
@@ -267,12 +287,16 @@ class Home extends CI_Controller {
         $this->data['challenge_accepted'] = $this->Challenge_model->get_challenge_accepted();
         $this->template->load('front', 'user/challenge/home_challenge', $this->data);
     }
-    
+
+    /**
+     * This function is used to display League groups details.
+     * develop by : HPA
+     */
     public function league() {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_leagues'] = $this->League_model->get_my_league();
         $this->data['joined_leagues'] = $this->League_model->get_joined_league();
         $this->template->load('front', 'user/league/home_league', $this->data);
     }
-    
+
 }

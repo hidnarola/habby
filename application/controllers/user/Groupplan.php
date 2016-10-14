@@ -52,6 +52,11 @@ class Groupplan extends CI_Controller {
         }
     }
 
+    /*
+     * load_groupplan method loads soulmate page view with all required details
+     * develop by : AR
+     */
+
     public function load_groupplan($page = 1) {
         $limit = 2;
         $start = ($page - 1) * $limit;
@@ -166,6 +171,10 @@ class Groupplan extends CI_Controller {
         }
     }
 
+    /*
+     * join method joins group plan and insert users request.
+     * develop by : HPA
+     */
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
         $ins_data = array(
@@ -178,12 +187,20 @@ class Groupplan extends CI_Controller {
         redirect('groupplan');
     }
 
+    /*
+     * details method display group plan with all required details
+     * develop by : HPA
+     */
     public function details($Id) {
         $Id = base64_decode(urldecode($Id));
         $this->data['groupplan'] = $this->Groupplan_model->get_groupplan_by_id($Id);
         $this->template->load('join', 'user/groupplan/join_groupplan', $this->data);
     }
 
+    /*
+     * request_action method accept & denied group plan request.
+     * develop by : HPA
+     */
     public function request_action() {
         if ($this->input->post()) {
             $id = $this->input->post('id');

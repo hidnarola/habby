@@ -1,4 +1,4 @@
-<?php ?>
+<?php $cnt = 0; ?>
 <div class="row soulmate_con1">
     <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
     <div class="new_grp">
@@ -48,6 +48,7 @@
                 <div class="row league_data aliance_row">
                     <?php
                     if (isset($league) && !empty($league)) {
+                        $cnt = count($league);
                         foreach ($league as $league_row) {
                             ?>
 
@@ -188,12 +189,10 @@
                             <!-- League and alliance each section end here -->
                             <?php
                         }
-                        ?>
-                        <?php
                     } else {
                         ?>
                         <div class="">
-                            No league found
+                            No league found.
                         </div>
                         <?php
                     }

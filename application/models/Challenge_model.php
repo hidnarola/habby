@@ -3,7 +3,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Challenge_model extends CI_Model {
-    /* v! Insert data into users table */
+    /* v! insert challanges into challanges table 
+     * develop by : HPA
+     */
 
     public function insert_challenge($data) {
         $this->db->insert('challanges', $data);
@@ -11,13 +13,19 @@ class Challenge_model extends CI_Model {
         return $last_id;
     }
 
+    /* v! insert challange users into challange_user table 
+     * develop by : HPA
+     */
+
     public function insert_challenge_user($data) {
         $this->db->insert('challange_user', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
     }
 
-    /* v! Insert data into users table */
+    /* v! Update challange into challanges table 
+     * develop by : HPA
+     */
 
     public function update_challenge($id, $data) {
         $data['modified_date'] = date('Y-m-d H:i:s');
@@ -30,6 +38,10 @@ class Challenge_model extends CI_Model {
         $last_id = $this->db->affected_rows();
         return $last_id;
     }
+
+    /* v! Select newest challanges which is not created by logged in user from challanges table 
+     * develop by : HPA
+     */
 
     public function get_challenges($start, $limit) {
         $user_id = logged_in_user_id();
@@ -44,6 +56,10 @@ class Challenge_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select popular challanges which is not created by logged in user from challanges table 
+     * develop by : HPA
+     */
+
     public function get_popular_challenges($start, $limit) {
         $user_id = logged_in_user_id();
         $this->db->select('ch.*,users.name as display_name,users.user_image');
@@ -57,6 +73,10 @@ class Challenge_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select challanges by id from challanges table 
+     * develop by : HPA
+     */
+
     public function get_challenge_by_id($id) {
         if ($id != null) {
             $this->db->where('id', $id);
@@ -64,6 +84,10 @@ class Challenge_model extends CI_Model {
             return $res_data;
         }
     }
+
+    /* v! Select created challanges from challanges table 
+     * develop by : HPA
+     */
 
     public function get_my_challenge() {
         $user_id = logged_in_user_id();
@@ -75,6 +99,10 @@ class Challenge_model extends CI_Model {
         return $res_data;
     }
 
+    /* v! Select Joined challanges from challanges table 
+     * develop by : HPA
+     */
+
     public function get_joined_challenge() {
         $user_id = logged_in_user_id();
         $this->db->select('ch.*');
@@ -84,6 +112,10 @@ class Challenge_model extends CI_Model {
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
     }
+
+    /* v! Select accepted challanges from challange_user table 
+     * develop by : HPA
+     */
 
     public function get_challenge_accepted() {
         $user_id = logged_in_user_id();
