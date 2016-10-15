@@ -133,6 +133,7 @@ class Soulmate extends CI_Controller {
      * join method joins soulmate group and insert users request.
      * develop by : HPA
      */
+
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
         $ins_data = array(
@@ -154,6 +155,7 @@ class Soulmate extends CI_Controller {
      * request_action method accept & denied soulmate request.
      * develop by : HPA
      */
+
     public function request_action() {
         if ($this->input->post()) {
             $id = $this->input->post('id');

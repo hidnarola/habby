@@ -133,6 +133,11 @@ class Topichat extends CI_Controller {
             $image_name = "topichat_img1.jpg";
         }
         $this->Topichat_model->update_topic_group_data($topic_group_id, ['group_cover' => $image_name]);
+        $ins_user_data = array(
+            'topic_id' => $topic_group_id,
+            'user_id' => $this->data['user_data']['id'],
+        );
+        $this->Topichat_model->insert_topic_group_user($ins_user_data);
         $this->session->set_flashdata('message', array('message' => lang('Topic added successfully'), 'class' => 'alert alert-success'));
         redirect('topichat');
     }
@@ -196,23 +201,19 @@ class Topichat extends CI_Controller {
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }
 
-    public function load_more_msg($group_id)
-    {
+    public function load_more_msg($group_id) {
         $limit = 10;
         $last_msg_id = $this->input->post('last_msg');
-        $this->data['messages'] = $this->Topichat_model->load_messages($group_id,$limit,$last_msg_id);
-        if(count($this->data['messages']) > 0)
-        {
+        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $limit, $last_msg_id);
+        if (count($this->data['messages']) > 0) {
             $data['status'] = 1;
             krsort($this->data['messages']); // Reverse array
-            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg',$this->data,true);
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
             $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
-        }
-        else
-        {
+        } else {
             $data['status'] = 0;
         }
         echo json_encode($data);
-        
     }
+
 }

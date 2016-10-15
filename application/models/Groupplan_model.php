@@ -132,7 +132,7 @@ class Groupplan_model extends CI_Model {
     public function get_joined_groupplan() {
         $user_id = logged_in_user_id();
         $this->db->select('gp.*');
-        $this->db->join('group_users gus', 'gus.group_id = gp.id AND gus.user_id =' . $user_id);
+        $this->db->join('group_users gus', 'gus.group_id = gp.id AND gus.user_id =' . $user_id . ' AND gp.user_id != gus.user_id');
         $this->db->order_by('gp.created_date', 'DESC');
         $res_data = $this->db->get('group gp')->result_array();
         return $res_data;
