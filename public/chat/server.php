@@ -24,6 +24,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
         if ($message->type == 'room_bind' && empty($Server->wsClients[$clientID]['user_data'])) {
             $Server->wsClients[$clientID]['user_data'] = $message->message;
             $Server->wsClients[$clientID]['room_id'] = $message->group_id;
+            $server->wsClients[$clientID]['room_type'] = $message->type;
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
@@ -43,7 +44,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['message'] = $message->message;
 
                         foreach ($Server->wsClients as $id => $client) {
-                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_id'] == $message->type) {
                                 $Server->wsSend($id, json_encode($send_object));
                             }
                         }
@@ -83,11 +84,6 @@ function wsOnClose($clientID, $status) {
         $Server->wsSend($id, "Visitor $clientID ($ip) has left the room.");
 }
 
-// Return online user ids from given array
-function return_online_users_from_given_ids($arr)
-{
-    
-}
 
 // start the server
 $Server = new PHPWebSocket();

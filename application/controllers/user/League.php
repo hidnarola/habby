@@ -172,9 +172,29 @@ class League extends CI_Controller {
      * develop by : HPA
      */
     public function details($Id) {
+        $limit = 20;
+        $this->data['group_id'] = $Id;
+
         $Id = base64_decode(urldecode($Id));
         $this->data['league'] = $this->League_model->get_league_by_id($Id);
         $this->template->load('join', 'user/league/join_league', $this->data);
+        $this->data['messages'] = $this->League_model->get_messages($Id, $limit);
+        krsort($this->data['messages']); // Reverse array
+    }
+
+    public function load_more_msg($group_id) {
+        $limit = 10;
+        $last_msg_id = $this->input->post('last_msg');
+        $this->data['messages'] = $this->League_model->load_messages($group_id, $limit, $last_msg_id);
+        if (count($this->data['messages']) > 0) {
+            $data['status'] = 1;
+            krsort($this->data['messages']); // Reverse array
+            $data['view'] = $this->load->view('user/partial/league/load_more_msg', $this->data, true);
+            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
     }
 
 }
