@@ -43,16 +43,16 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['message'] = $message->message;
 
                         foreach ($Server->wsClients as $id => $client) {
-                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                                 $Server->wsSend($id, json_encode($send_object));
                             }
                         }
                     }
                 }
             } else if ($message->type == 'groupplan_msg') {
-                $user_ids = get_topichat_users($message->group_id);
+                $user_ids = get_groupplan_users($message->group_id);
                 // database entry for topichat
-                send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                send_groupplan_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
 
                 // Send message to user
                 if (count($user_ids) > 1) {
@@ -65,7 +65,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['message'] = $message->message;
 
                         foreach ($Server->wsClients as $id => $client) {
-                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_id'] == $message->type) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                                 $Server->wsSend($id, json_encode($send_object));
                             }
                         }
