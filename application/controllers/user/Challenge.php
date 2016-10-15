@@ -47,6 +47,11 @@ class Challenge extends CI_Controller {
             );
             $groupplan_id = $this->Challenge_model->insert_challenge($ins_data);
         }
+        $ins_user_data = array(
+            'challange_id' => $groupplan_id,
+            'user_id' => $this->data['user_data']['id'],
+        );
+        $this->Challenge_model->insert_challenge_user($ins_user_data);
         $this->session->set_flashdata('message', array('message' => lang('Challenge added successfully'), 'class' => 'alert alert-success'));
         redirect('challenge');
     }

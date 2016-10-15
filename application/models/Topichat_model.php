@@ -136,7 +136,7 @@ class Topichat_model extends CI_Model {
     public function get_joined_topichat_group() {
         $user_id = logged_in_user_id();
         $this->db->select('tg.*');
-        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
+        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id . ' AND tg.user_id != tt.user_id', 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         $this->db->where('tt.user_id IS NOT NULL');
         $this->db->order_by('tg.created_date', 'DESC');
@@ -153,15 +153,16 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function get_messages($group_id,$limit) {
+
+    public function get_messages($group_id, $limit) {
         $this->db->select('tg.*,u.name,u.user_image');
-        $this->db->where('tg.topic_group_id',$group_id);
-        $this->db->join('users u','tg.user_id = u.id');
-        $this->db->limit($limit,0);
-        $this->db->order_by('tg.id','desc');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('tg.id', 'desc');
         return $this->db->get('topic_group_chat tg')->result_array();
     }
-    
+
     /*
      * load_messages is used to fetch more message for given group
      * @param $group_id int specify group id to which message will fetch
@@ -171,13 +172,14 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function load_messages($group_id,$limit,$last_msg_id) {
+
+    public function load_messages($group_id, $limit, $last_msg_id) {
         $this->db->select('tg.*,u.name,u.user_image');
-        $this->db->where('tg.topic_group_id',$group_id);
-        $this->db->where('tg.id < ',$last_msg_id);
-        $this->db->join('users u','tg.user_id = u.id');
-        $this->db->limit($limit,0);
-        $this->db->order_by('tg.id','desc');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->where('tg.id < ', $last_msg_id);
+        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('tg.id', 'desc');
         return $this->db->get('topic_group_chat tg')->result_array();
     }
 

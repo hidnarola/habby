@@ -139,6 +139,11 @@ class Groupplan extends CI_Controller {
             $image_name = "grp_pln_img1.jpg";
         }
         $this->Groupplan_model->update_groupplan_data($groupplan_id, ['group_cover' => $image_name]);
+        $ins_user_data = array(
+            'group_id' => $groupplan_id,
+            'user_id' => $this->data['user_data']['id'],
+        );
+        $this->Groupplan_model->insert_grouplan_users($ins_user_data);
         $this->session->set_flashdata('message', array('message' => lang('Group plan added successfully'), 'class' => 'alert alert-success'));
         redirect('groupplan');
     }
