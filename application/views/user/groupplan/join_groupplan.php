@@ -198,52 +198,57 @@
         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 soulmate_2right_sec">
             <div class="soulmate_2right_secinr">
                 <div class="row usr_row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <?php
+                    if ($groupplan != null && !empty($groupplan)) {
+//                            pr($groupplan);
+                        ?>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="slmt_grp">
-                            <p class="usr_p usr_p2">Group name</p>
-                            <p class="usr_p usr_p2">Group Goal</p>
-                            <ul class="list-inline rcrd_ul">
-                                <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></a></li>
-                                <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>voice_record_img.png"></a></li>
-                            </ul>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="slmt_user_2">
-                            <p class="usr_p usr_p2">Slogan</p>
-
-                            <div class="tdy_pln_btn tdy_pln_btn">
-                                <p class="usr_p"><span>Member</span> <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"> </p>
-                                <div class="dropdownpln">
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <!-- <div class="form-group row">
-                                                    <label for="inputEmail" class="control-label">Finished:</label>
-                                                    <input type="number" class="form-control" id="inputEmail" placeholder="Num">
-                                            </div> -->
-                                            <ul class="list-unstyled revw_ul member_ul">
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 1</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 2</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 3</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 4</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 5</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 6</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 7</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 8</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 9</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 10</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 11</span></li>
-                                            </ul>	
-                                        </li>
-                                    </ul>
-                                </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="slmt_grp">
+                                <p class="usr_p usr_p2"><?php echo $groupplan['name']; ?></p>
+                                <p class="usr_p usr_p2"><?php echo $groupplan['slogan']; ?></p>
+                                <ul class="list-inline rcrd_ul">
+                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></a></li>
+                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>voice_record_img.png"></a></li>
+                                </ul>
                             </div>
-
                         </div>
-                    </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="slmt_user_2">
+                                <!--<p class="usr_p usr_p2">Slogan</p>-->
+
+                                <div class="tdy_pln_btn tdy_pln_btn">
+                                    <p class="usr_p"><span>Member</span> <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"> </p>
+                                    <div class="dropdownpln">
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <!-- <div class="form-group row">
+                                                        <label for="inputEmail" class="control-label">Finished:</label>
+                                                        <input type="number" class="form-control" id="inputEmail" placeholder="Num">
+                                                </div> -->
+                                                <ul class="list-unstyled revw_ul member_ul">
+                                                    <?php
+                                                    if ($groupplan_users != null && !empty($groupplan_users)) {
+                                                        foreach ($groupplan_users as $groupplan_user) {
+                                                            ?>
+                                                            <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $groupplan_user['user_image']; ?>" class="smlt_usrimg1 img-circle"></a> <span><?php echo $groupplan_user['display_name'] ?></span></li>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </ul>	
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
 
                 <!-- Chat area and tupe section start here -->

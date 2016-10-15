@@ -150,6 +150,7 @@ class Challenge extends CI_Controller {
     public function details($Id) {
         $Id = base64_decode(urldecode($Id));
         $this->data['challenge'] = $this->Challenge_model->get_challenge_by_id($Id);
+        $this->data['challenge_users'] = $this->Challenge_model->get_challenges_users($Id);
         $this->template->load('join', 'user/challenge/join_challenge', $this->data);
     }
 

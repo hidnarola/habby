@@ -47,22 +47,16 @@
                                 <div class="dropdownpln">
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <!-- <div class="form-group row">
-                                                    <label for="inputEmail" class="control-label">Finished:</label>
-                                                    <input type="number" class="form-control" id="inputEmail" placeholder="Num">
-                                            </div> -->
                                             <ul class="list-unstyled revw_ul member_ul">
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 1</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 2</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 3</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 4</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 5</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 6</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 7</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 8</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 9</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 10</span></li>
-                                                <li><a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"></a> <span>User Name 11</span></li>
+                                                <?php
+                                                if ($challenge_users != null && !empty($challenge_users)) {
+                                                    foreach ($challenge_users as $challenge_user) {
+                                                        ?>
+                                                        <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle"></a> <span><?php echo $challenge_user['display_name'] ?></span></li>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
                                             </ul>	
                                         </li>
                                     </ul>
@@ -196,29 +190,35 @@
             <div class="whit_wrapper">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="mak_chlng_sec">
-                            <h2 class="chlng_ttl">
-                                <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1"> “User name”</span>
-                                <span>  makes a challenge to public</span>
-                            </h2>
-                            <div class="mak_chlng_sec_innr">
-                                <div class="chlng2_cnt">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                                    <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
+                        <?php
+                        if ($challenge != null && !empty($challenge)) {
+//                            pr($challenge);
+                            ?>
+                            <div class="mak_chlng_sec">
+                                <h2 class="chlng_ttl">
+                                    <span ><img src="<?php echo DEFAULT_IMAGE_PATH . $challenge['user_image']; ?>" class="smlt_usrimg1 img-circle"> "<?php echo $challenge['display_name'] ?>"</span>
+                                    <span>  makes a challenge to public</span>
+                                </h2>
+                                <div class="mak_chlng_sec_innr">
+                                    <div class="chlng2_cnt">
+                                        <p><?php echo $challenge['description'] ?></p>
+                                    </div>
 
-                                <div class="row rwrds_chlng2">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <p>Rewards: <span>45</span>Coins</p>
+                                    <div class="row rwrds_chlng2">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <p>Rewards: <span><?php echo $challenge['rewards'] ?></span> Coins</p>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <p><?php echo date('d/m/Y', strtotime($challenge['created_date'])) ?></p>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <p>9/8/2016</p>
-                                    </div>
+
                                 </div>
 
                             </div>
-
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="row">

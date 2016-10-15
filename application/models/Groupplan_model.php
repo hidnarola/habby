@@ -225,6 +225,20 @@ class Groupplan_model extends CI_Model {
         return $this->db->get('group_chat gc')->result_array();
     }
 
+    /* v! Select joined groupplan users from group_users table 
+     * develop by : HPA
+     */
+
+    public function get_challenges_users($id) {
+        if ($id != null) {
+            $this->db->select('users.name as display_name,users.user_image');
+            $this->db->join('users', 'users.id = gu.user_id');
+            $this->db->where('gu.group_id', $id);
+            $res_data = $this->db->get('group_users gu')->result_array();
+            return $res_data;
+        }
+    }
+
 }
 
 ?>
