@@ -83,8 +83,6 @@ function get_groupplan_users($group_id) {
 function send_groupplan_msg($group_id, $sender_id, $msg) {
     global $conn;
     $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
-    echo $query;
-    exit;
     if (mysqli_query($conn, $query)) {
         return true;
     }

@@ -79,8 +79,10 @@ class Challenge_model extends CI_Model {
 
     public function get_challenge_by_id($id) {
         if ($id != null) {
-            $this->db->where('id', $id);
-            $res_data = $this->db->get('challanges')->row_array();
+            $this->db->select('ch.*,users.name as display_name,users.user_image');
+            $this->db->join('users', 'users.id = ch.user_id');
+            $this->db->where('ch.id', $id);
+            $res_data = $this->db->get('challanges ch')->row_array();
             return $res_data;
         }
     }
@@ -126,6 +128,19 @@ class Challenge_model extends CI_Model {
         $this->db->order_by('cu.challange_date', 'DESC');
         $res_data = $this->db->get('challange_user cu')->result_array();
         return $res_data;
+    }
+
+    /* v! Select accepted challange users from challange_user table 
+     * develop by : HPA
+     */
+    public function get_challenges_users($id) {
+        if ($id != null) {
+            $this->db->select('chu.*,users.name as display_name,users.user_image');
+            $this->db->join('users', 'users.id = chu.user_id');
+            $this->db->where('chu.challange_id', $id);
+            $res_data = $this->db->get('challange_user chu')->result_array();
+            return $res_data;
+        }
     }
 
 }
