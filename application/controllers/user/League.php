@@ -149,6 +149,11 @@ class League extends CI_Controller {
             if (!$this->League_model->add_league($insert_arr)) {
                 $this->session->set_flash('message', 'There was some problem while creating league');
             }
+            $ins_data = array(
+                'league_id' => $this->db->insert_id(),
+                'user_id' => $this->session->user['id']
+            );
+            $this->League_model->insert_league_user($ins_data);
             redirect('league');
         }
     }
@@ -173,9 +178,8 @@ class League extends CI_Controller {
      */
     public function details($Id) {
         $limit = 20;
-        $this->data['group_id'] = $Id;
-
         $Id = base64_decode(urldecode($Id));
+        $this->data['group_id'] = $Id;
         $this->data['league'] = $this->League_model->get_league_by_id($Id);
         $this->data['messages'] = $this->League_model->get_messages($Id, $limit);
         krsort($this->data['messages']); // Reverse array

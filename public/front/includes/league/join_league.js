@@ -43,7 +43,8 @@ $(document).ready(function () {
         var msg = {
             type: 'room_bind',
             message: data,
-            group_id: group_id
+            group_id: group_id,
+            room_type : 'league_msg'
         }
         Server.send('message', JSON.stringify(msg));
     });

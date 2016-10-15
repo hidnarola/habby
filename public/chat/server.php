@@ -24,7 +24,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
         if ($message->type == 'room_bind' && empty($Server->wsClients[$clientID]['user_data'])) {
             $Server->wsClients[$clientID]['user_data'] = $message->message;
             $Server->wsClients[$clientID]['room_id'] = $message->group_id;
-            $server->wsClients[$clientID]['room_type'] = $message->type;
+            $Server->wsClients[$clientID]['room_type'] = $message->room_type;
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
