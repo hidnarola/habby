@@ -32,11 +32,10 @@ function get_league_users($group_id) {
     //return select("select user_id from topic_group_user where topic_id = $group_id");
 }
 
-function send_league_msg($group_id,$sender_id,$msg){
-    global  $conn;
-    $query = "insert into league_messages value(NULL,$group_id,$sender_id,'".$msg."',NULL,NULL)";
-    if(mysqli_query($conn, $query))
-    {
+function send_league_msg($group_id, $sender_id, $msg) {
+    global $conn;
+    $query = "insert into league_messages value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    if (mysqli_query($conn, $query)) {
         return true;
     }
     return false;
@@ -84,6 +83,8 @@ function get_groupplan_users($group_id) {
 function send_groupplan_msg($group_id, $sender_id, $msg) {
     global $conn;
     $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    echo $query;
+    exit;
     if (mysqli_query($conn, $query)) {
         return true;
     }
