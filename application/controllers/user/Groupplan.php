@@ -194,6 +194,7 @@ class Groupplan extends CI_Controller {
      */
 
     public function details($Id) {
+        $limit = 20;
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['groupplan'] = $this->Groupplan_model->get_groupplan_by_id($Id);

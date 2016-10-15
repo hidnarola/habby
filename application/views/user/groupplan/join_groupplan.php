@@ -251,7 +251,7 @@
 
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                        <div class="chat_area2">
+                        <div class="chat_area2 chat_area_solmat chat_area_grppln">
 <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
                             <?php $this->load->view('user/partial/groupplan/load_more_msg') ?>
                         </div>
@@ -288,9 +288,9 @@
                                     <div class="topic_textarea">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Type Here...">
+                                                <input type="text" class="form-control" placeholder="Type Here..." id="message">
                                                 <span class="input-group-btn">
-                                                    <input class="chat_btn" type="submit" value="Send">
+                                                    <input class="chat_btn submit_btn" type="submit" value="Send">
                                                 </span>
                                             </div>
                                         </div>
