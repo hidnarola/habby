@@ -26,11 +26,11 @@ if ($league != "" && !empty($league)) {
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                                     <div class="leag_name leagu_section1">
-                                        <p><img src="<?php echo DEFAULT_IMAGE_PATH; ?>League-logo.png" class="leag_logo"> League name	</p>
+                                        <p><img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH.$league['league_logo']; ?>" class="leag_logo"><?php echo $league['name'] ?></p>
                                     </div>
 
                                     <div class="leag_intro leagu_section1">
-                                        <p>League Introduction	</p>	
+                                        <p><?php echo $league['introduction']; ?></p>	
                                     </div>
 
                                 </div>
@@ -39,7 +39,7 @@ if ($league != "" && !empty($league)) {
                                 <!--  League introduction footer section start here -->
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section2">
-                                    <p>Found Date: <span>12/04/2016</span></p>	
+                                    <p>Created Date: <span><?php echo date('d-m-Y',strtotime($league['created_date'])); ?></span></p>	
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section2">
                                     <p class="text-right">Rank: <span>100</span></p>
@@ -130,66 +130,30 @@ if ($league != "" && !empty($league)) {
                         <!--  League Meeting each content section start here -->
                         <div class="row leagu_section4row scrol_mmbr">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 leagu_section4 name">
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
-                                <p>
-                                    <a href="personal_account.html">
-                                        Name
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png">
-                                    </a>
-                                </p>
+                                <?php
+                                    if(count($league_members) > 0)
+                                    {
+                                        foreach($league_members as $member)
+                                        {
+                                            ?>
+                                            <p>
+                                                <a href="personal_account.html">
+                                                    <?php echo $member['name'] ?>
+                                                    <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$member['user_image']; ?>">
+                                                </a>
+                                            </p>
+                                            <?php
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <p>
+                                            No member available
+                                        </p>
+                                        <?php
+                                    }
+                                ?>
                             </div>
                         </div>
                         <!--  League Meeting each content section end here -->

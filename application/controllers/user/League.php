@@ -182,6 +182,7 @@ class League extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['league'] = $this->League_model->get_league_by_id($Id);
         $this->data['messages'] = $this->League_model->get_messages($Id, $limit);
+        $this->data['league_members'] = $this->League_model->get_league_members($Id);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/league/join_league', $this->data);
     }
@@ -200,5 +201,4 @@ class League extends CI_Controller {
         }
         echo json_encode($data);
     }
-
 }

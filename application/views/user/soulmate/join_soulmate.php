@@ -225,8 +225,8 @@
                     <div class="tittl_sec_lg">
                         <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
                             <div class="tittl_sec">
-                                <p>#Topic <span></span></p>
-                                <p>Note : Lorem Ipsum is simply dummy text </p>
+                                <p><?php echo $soulmate['name'] ?><span></span></p>
+                                <p>Slogan : <?php echo $soulmate['slogan']; ?></p>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">

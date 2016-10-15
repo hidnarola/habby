@@ -132,4 +132,12 @@ class League_model extends CI_Model {
         $this->db->order_by('l.id','desc');
         return $this->db->get('league_messages l')->result_array();
     }
+    
+    public function get_league_members($league_id)
+    {
+        $this->db->select('u.name,u.user_image');
+        $this->db->from('users u');
+        $this->db->join('league_members lm','u.id = lm.user_id and lm.league_id = '.$league_id);
+        return $this->db->get()->result_array();
+    }
 }

@@ -94,7 +94,7 @@ class Soulmate_model extends CI_Model {
     public function get_my_soulmate() {
         $user_id = logged_in_user_id();
         $this->db->select('sg.*,users.name as display_name,users.user_image');
-        $this->db->join('users', 'users.id = sg.user_id');
+        $this->db->join('users', 'users.id = sg.join_user_id');
         $this->db->where('sg.user_id =' . $user_id);
         $this->db->order_by('sg.created_date', 'DESC');
         $res_data = $this->db->get('soulmate_group sg')->result_array();
