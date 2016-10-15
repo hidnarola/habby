@@ -88,7 +88,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['message'] = $message->message;
 
                         foreach ($Server->wsClients as $id => $client) {
-                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_id'] == $message->type) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                                 $Server->wsSend($id, json_encode($send_object));
                             }
                         }
