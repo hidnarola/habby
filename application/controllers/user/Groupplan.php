@@ -175,6 +175,7 @@ class Groupplan extends CI_Controller {
      * join method joins group plan and insert users request.
      * develop by : HPA
      */
+
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
         $ins_data = array(
@@ -191,9 +192,13 @@ class Groupplan extends CI_Controller {
      * details method display group plan with all required details
      * develop by : HPA
      */
+
     public function details($Id) {
         $Id = base64_decode(urldecode($Id));
+        $this->data['group_id'] = $Id;
         $this->data['groupplan'] = $this->Groupplan_model->get_groupplan_by_id($Id);
+        $this->data['messages'] = $this->Groupplan_model->get_messages($Id, $limit);
+        krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/groupplan/join_groupplan', $this->data);
     }
 
@@ -201,6 +206,7 @@ class Groupplan extends CI_Controller {
      * request_action method accept & denied group plan request.
      * develop by : HPA
      */
+
     public function request_action() {
         if ($this->input->post()) {
             $id = $this->input->post('id');
