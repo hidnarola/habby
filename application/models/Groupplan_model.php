@@ -201,7 +201,8 @@ class Groupplan_model extends CI_Model {
         $this->db->join('users u', 'gc.user_id = u.id');
         $this->db->limit($limit, 0);
         $this->db->order_by('gc.id', 'desc');
-        return $this->db->get('group_chat gc')->result_array();
+        $res_data = $this->db->get('group_chat gc')->result_array();
+        return $res_data;
     }
 
     /*
