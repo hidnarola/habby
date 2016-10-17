@@ -30,7 +30,15 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             if ($message->type == 'topic_msg') {
                 $user_ids = get_topichat_users($message->group_id);
                 // database entry for topichat
-                send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                if(isset($message->media))
+                {
+                    $message->message = json_decode($message->message);
+                    send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
+                else
+                {
+                    send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
 
                 // Send message to user
                 if (count($user_ids) > 1) {
@@ -41,6 +49,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
+                        $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
 
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
@@ -83,7 +92,15 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             else if ($message->type == 'groupplan_msg') {
                 $user_ids = get_groupplan_users($message->group_id);
                 // database entry for topichat
-                send_groupplan_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                if(isset($message->media))
+                {
+                    $message->message = json_decode($message->message);
+                    send_groupplan_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
+                else
+                {
+                    send_groupplan_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
 
                 // Send message to user
                 if (count($user_ids) > 1) {
@@ -94,6 +111,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
+                        $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
 
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
@@ -105,7 +123,15 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             } else if ($message->type == 'league_msg') {
                 $user_ids = get_league_users($message->group_id);
                 // database entry for topichat
-                send_league_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                if(isset($message->media))
+                {
+                    $message->message = json_decode($message->message);
+                    send_league_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
+                else
+                {
+                    send_league_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
 
                 // Send message to user
                 if (count($user_ids) > 1) {
@@ -116,6 +142,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
+                        $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
 
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
@@ -128,7 +155,15 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 echo 'here';
                 $user_ids = get_challenge_users($message->group_id);
                 // database entry for topichat
-                send_challenge_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                if(isset($message->media))
+                {
+                    $message->message = json_decode($message->message);
+                    send_challenge_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
+                else
+                {
+                    send_challenge_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
 
                 // Send message to user
                 if (count($user_ids) > 1) {
@@ -139,6 +174,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
+                        $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
 
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {

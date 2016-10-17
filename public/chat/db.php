@@ -41,6 +41,16 @@ function send_league_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
+function send_league_media($group_id, $sender_id, $msg) {
+    global $conn;
+    foreach ($msg as $media) {
+        $query = "insert into league_messages value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        if (mysqli_query($conn, $query)) {
+            return true;
+        }
+    }
+}
+
 function get_topichat_users($group_id) {
     global $conn;
     $result = mysqli_query($conn, "select user_id from topic_group_user where topic_id = $group_id");
@@ -63,6 +73,16 @@ function send_topic_msg($group_id, $sender_id, $msg) {
         return true;
     }
     return false;
+}
+
+function send_topic_media($group_id, $sender_id, $msg) {
+    global $conn;
+    foreach ($msg as $media) {
+        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        if (mysqli_query($conn, $query)) {
+            return true;
+        }
+    }
 }
 
 function send_soulmate_msg($group_id, $sender_id, $msg) {
@@ -108,6 +128,16 @@ function send_groupplan_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
+function send_groupplan_media($group_id, $sender_id, $msg) {
+    global $conn;
+    foreach ($msg as $media) {
+        $query = "insert into group_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        if (mysqli_query($conn, $query)) {
+            return true;
+        }
+    }
+}
+
 function get_challenge_users($group_id) {
     global $conn;
     $result = mysqli_query($conn, "select user_id from challange_user where challange_id = $group_id");
@@ -132,4 +162,13 @@ function send_challenge_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
+function send_challenge_media($group_id, $sender_id, $msg) {
+    global $conn;
+    foreach ($msg as $media) {
+        $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        if (mysqli_query($conn, $query)) {
+            return true;
+        }
+    }
+}
 ?>

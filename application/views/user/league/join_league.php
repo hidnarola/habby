@@ -187,7 +187,12 @@ if ($league != "" && !empty($league)) {
                                             <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
                                                 <ul class="list-inline type_icon_ul">
                                                     <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li>
-                                                    <li><a href="javascript:;"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></a></li>
+                                                    <li>
+                                                        <div class="fileUpload up_img btn">
+                                                            <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
+                                                            <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                        </div>
+                                                    </li>
                                                     <li><a href="#"  data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
                                                 </ul>
                                             </div>
@@ -433,6 +438,7 @@ if ($league != "" && !empty($league)) {
     group_id = '<?php echo $group_id; ?>';
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
     last_msg = '<?php echo (count($messages) > 0)?$messages[count($messages) - 1]['id']:0 ?>';
+    upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/league/join_league.js"></script>
 <!-- Lazy loading -->

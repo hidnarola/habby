@@ -130,23 +130,16 @@ $(document).ready(function () {
 
     //Log any messages sent from server
     Server.bind('message', function (payload) {
-        console.log(payload);
         userdata = JSON.parse(payload);
-        console.log(userdata);
         if (userdata.media == null)
         {
-            console.log('message received');
             $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span>" + userdata.message + "</span></span></p>");
         }
         else
         {
-            console.log('image received');
             var i = Math.random().toString(36).substring(7);
-            console.log("i = ",i);
             $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
             $('.imagePreview' + i).css("background-image", "url(" + upload_path+userdata.media + ")");
-            
-            console.log('finished');
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
     });
