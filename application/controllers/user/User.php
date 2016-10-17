@@ -141,4 +141,37 @@ class User extends CI_Controller {
         }
     }
 
+    public function upload_chat_media() {
+        $media = array();
+        if (!empty($_FILES['image-0']['name'])) {
+            $filecount = count($_FILES['image-0']['name']);
+            for ($i = 0; $i < $filecount; ++$i) {
+                $_FILES['image']['name'] = $_FILES['image-0']['name'][$i];
+                $_FILES['image']['type'] = $_FILES['image-0']['type'][$i];
+                $_FILES['image']['tmp_name'] = $_FILES['image-0']['tmp_name'][$i];
+                $_FILES['image']['error'] = $_FILES['image-0']['error'][$i];
+                $_FILES['image']['size'] = $_FILES['image-0']['size'][$i];
+
+                // Code of image uploading
+                $config['upload_path'] = './uploads/chat_media';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = 1000000;
+
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('image-0')) {
+                    $error = array('error' => $this->upload->display_errors());
+                    echo "0";
+                    die;
+                } else {
+                    $data = $this->upload->data();
+                    $media_arr = array();
+                    $media_arr['media'] = $data['file_name'];
+                    $media[] = $media_arr;
+                }
+            }
+        }
+        echo json_encode($media);
+    }
+
 }

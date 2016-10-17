@@ -175,7 +175,7 @@ class Soulmate_model extends CI_Model {
     public function get_messages($group_id,$limit) {
         $this->db->select('s.*,u.name,u.user_image');
         $this->db->where('s.soulmate_group_id',$group_id);
-        $this->db->join('users u','u.user_id = u.id');
+        $this->db->join('users u','s.user_id = u.id');
         $this->db->limit($limit,0);
         $this->db->order_by('s.id','desc');
         return $this->db->get('soulmate_group_chat s')->result_array();

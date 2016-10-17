@@ -51,24 +51,31 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 }
             }
             if ($message->type == 'soulmate_msg') {
-                $user_ids = get_soulmate_users($message->group_id);
+                $to_user = $message->to_user;
+                if(isset($message->media))
+                {
+                    print_r($message->message);die;
+                    send_soulmate_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
+                else
+                {
+                    send_soulmate_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
                 // database entry for topichat
-                send_soulmate_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
 
                 // Send message to user
-                if (count($user_ids) > 1) {
-                    if (sizeof($Server->wsClients) != 1) {
-                        // object that sent to recieving user
-                        $send_object = array();
-                        $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
-                        $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
-                        $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
-                        $send_object['message'] = $message->message;
-
-                        foreach ($Server->wsClients as $id => $client) {
-                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
-                                $Server->wsSend($id, json_encode($send_object));
-                            }
+                if (sizeof($Server->wsClients) != 1) {
+                    // object that sent to recieving user
+                    $send_object = array();
+                    $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
+                    $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
+                    $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
+                    $send_object['message'] = $message->message;
+                    $send_object['media'] = (isset($message->media)?$message->media:NULL);
+                    foreach ($Server->wsClients as $id => $client) {
+                        if ($id != $clientID && $Server->wsClients[$id]['user_data']->id == $to_user && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
+                            $Server->wsSend($id, json_encode($send_object));
+                            break;
                         }
                     }
                 }
