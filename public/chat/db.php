@@ -65,8 +65,7 @@ function send_topic_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
-function send_soulmate_msg($group_id,$sender_id,$msg)
-{
+function send_soulmate_msg($group_id, $sender_id, $msg) {
     global $conn;
     $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
     if (mysqli_query($conn, $query)) {
@@ -75,9 +74,14 @@ function send_soulmate_msg($group_id,$sender_id,$msg)
     return false;
 }
 
-function send_soulmate_media($group_id,$sender_id,$msg) {
+function send_soulmate_media($group_id, $sender_id, $msg) {
     global $conn;
-    
+    foreach ($msg as $media) {
+        $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        if (mysqli_query($conn, $query)) {
+            return true;
+        }
+    }
 }
 
 function get_groupplan_users($group_id) {

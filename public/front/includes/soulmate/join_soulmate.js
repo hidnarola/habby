@@ -71,7 +71,7 @@ $(document).ready(function () {
             }
             else
             {
-                this.files = '';
+                //this.files = '';
                 $('.message').html("Please select proper image");
                 $('.message').show();
             }
@@ -96,14 +96,14 @@ $(document).ready(function () {
             success: function (str)
             {
                 console.log(str);
-                if(str != 0)
+                if (str != 0)
                 {
                     var msg = {
                         message: str,
                         type: 'soulmate_msg',
                         group_id: group_id,
                         to_user: join_user,
-                        media : 'image'
+                        media: 'image'
                     }
                     Server.send('message', JSON.stringify(msg));
                 }
@@ -132,7 +132,22 @@ $(document).ready(function () {
     Server.bind('message', function (payload) {
         console.log(payload);
         userdata = JSON.parse(payload);
-        $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span>" + userdata.message + "</span></span></p>");
+        console.log(userdata);
+        if (userdata.media == null)
+        {
+            console.log('message received');
+            $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span>" + userdata.message + "</span></span></p>");
+        }
+        else
+        {
+            console.log('image received');
+            var i = Math.random().toString(36).substring(7);
+            console.log("i = ",i);
+            $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
+            $('.imagePreview' + i).css("background-image", "url(" + upload_path+userdata.media + ")");
+            
+            console.log('finished');
+        }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
     });
 

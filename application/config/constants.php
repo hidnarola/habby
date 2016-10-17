@@ -94,6 +94,7 @@ if ($servername == 'habby') {
 }
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code
 defined('DEFAULT_PROFILE_IMAGE_PATH') OR define('DEFAULT_PROFILE_IMAGE_PATH', Asset_path . 'uploads/user_profile/'); // highest automatically-assigned error code
+defined('DEFAULT_CHAT_IMAGE_PATH') OR define('DEFAULT_CHAT_IMAGE_PATH', Asset_path . 'uploads/chat_media/'); 
 defined('DEFAULT_BANNER_IMAGE_PATH') OR define('DEFAULT_BANNER_IMAGE_PATH', Asset_path . 'uploads/banners/'); // highest automatically-assigned error code
 defined('DEFAULT_TOPICHAT_IMAGE_PATH') OR define('DEFAULT_TOPICHAT_IMAGE_PATH', Asset_path . 'uploads/topichat_group/'); // highest automatically-assigned error code
 defined('DEFAULT_SOULMATE_IMAGE_PATH') OR define('DEFAULT_SOULMATE_IMAGE_PATH', Asset_path . 'uploads/soulmate_group/'); // highest automatically-assigned error code

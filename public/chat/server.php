@@ -54,7 +54,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 $to_user = $message->to_user;
                 if(isset($message->media))
                 {
-                    print_r($message->message);die;
+                    $message->message = json_decode($message->message);
                     send_soulmate_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
                 else
@@ -70,8 +70,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
                     $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
                     $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
-                    $send_object['message'] = $message->message;
-                    $send_object['media'] = (isset($message->media)?$message->media:NULL);
+                    $send_object['message'] = (isset($message->media)?'':$message->message);
+                    $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
                     foreach ($Server->wsClients as $id => $client) {
                         if ($id != $clientID && $Server->wsClients[$id]['user_data']->id == $to_user && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                             $Server->wsSend($id, json_encode($send_object));

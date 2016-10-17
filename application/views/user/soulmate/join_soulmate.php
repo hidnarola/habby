@@ -330,6 +330,7 @@
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
     last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
     join_user = '<?php echo ($this->session->user['id'] == $soulmate['user_id']) ? $soulmate['join_user_id'] : $soulmate['user_id']; ?>';
+    upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/soulmate/join_soulmate.js"></script>
 <!-- Lazy loading -->
