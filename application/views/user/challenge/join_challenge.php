@@ -52,7 +52,7 @@
                                                 if ($challenge_users != null && !empty($challenge_users)) {
                                                     foreach ($challenge_users as $challenge_user) {
                                                         ?>
-                                                        <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle"></a> <span><?php echo $challenge_user['display_name'] ?></span></li>
+                                                        <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle"></a> <span><?php echo $challenge_user['display_name'] ?></span></li>
                                                         <?php
                                                     }
                                                 }
@@ -83,52 +83,8 @@
 
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                        <div class="chat_area_solmat chat_area_chalnge2">
-                            <p class="notifctn"><b>Mike</b> Changed topic.</p>
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text Lorem </span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span"><span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span >
-                            </p> 
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> 
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-                            <p class="chat_1 clearfix">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>nav_profile_img.png"> <span class="wdth_span">
-                                    <span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span>
-                            </p>
-
-                            <p class="chat_2 clearfix">
-                                <span class="wdth_span"><span>Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text</span>
-                                </span >
-                            </p> 
+                        <div class="chat_area_solmat chat_area_chalnge2 chat_area2">
+                            <?php $this->load->view('user/partial/challenge/load_more_msg') ?>
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -196,7 +152,7 @@
                             ?>
                             <div class="mak_chlng_sec">
                                 <h2 class="chlng_ttl">
-                                    <span ><img src="<?php echo DEFAULT_IMAGE_PATH . $challenge['user_image']; ?>" class="smlt_usrimg1 img-circle"> "<?php echo $challenge['display_name'] ?>"</span>
+                                    <span ><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge['user_image']; ?>" class="smlt_usrimg1 img-circle"> "<?php echo $challenge['display_name'] ?>"</span>
                                     <span>  makes a challenge to public</span>
                                 </h2>
                                 <div class="mak_chlng_sec_innr">
@@ -533,3 +489,53 @@
         </div>
     </div>
 </div>
+<script>
+    data = '<?php echo json_encode($this->session->user); ?>';
+    group_id = '<?php echo $group_id; ?>';
+    DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
+    last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
+</script>
+<script type="text/javascript" src="<?php echo USER_JS ?>/challenge/join_challenge.js"></script>
+<!-- Lazy loading -->
+<script>
+    $('document').ready(function () {
+        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        var load = true;
+        var in_progress = false;
+        $('.chat_area2').scroll(function () {
+            if (load && !in_progress)
+            {
+                if ($('.chat_area2').scrollTop() == 0) {
+                    loaddata();
+                    in_process = true;
+                }
+            }
+        });
+
+        function loaddata()
+        {
+            $.ajax({
+                url: base_url + 'challenge/load_more_msg/' + group_id,
+                method: 'post',
+                async: false,
+                data: 'last_msg=' + last_msg,
+                success: function (more) {
+                    more = JSON.parse(more);
+                    if (more.status)
+                    {
+                        $('.chat_area2').prepend(more.view);
+                        last_msg = more.last_msg_id;
+                        $(".chat_area2").animate({scrollTop: 200}, 500);
+                    } else
+                    {
+                        load = false;
+                        $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                        $(".chat_area2").animate({scrollTop: 0}, 500);
+                    }
+                    in_progress = false;
+                }
+            });
+
+        }
+    });
+</script>

@@ -148,9 +148,13 @@ class Challenge extends CI_Controller {
      */
 
     public function details($Id) {
+        $limit = 20;
         $Id = base64_decode(urldecode($Id));
+        $this->data['group_id'] = $Id;
         $this->data['challenge'] = $this->Challenge_model->get_challenge_by_id($Id);
         $this->data['challenge_users'] = $this->Challenge_model->get_challenges_users($Id);
+        $this->data['messages'] = $this->Challenge_model->get_messages($Id, $limit);
+        krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/challenge/join_challenge', $this->data);
     }
 
