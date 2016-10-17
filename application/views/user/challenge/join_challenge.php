@@ -104,7 +104,7 @@
                                             <ul class="list-inline type_icon_ul">
                                                 <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li>
                                                 <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></a></li>
-                                                <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
+                                                <li><a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
                                             </ul>
                                         </div>
 

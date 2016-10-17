@@ -344,7 +344,7 @@
                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></a>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
-                                                    <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                    <a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
                                                 </span>
                                                 <span class="input-group-btn">
                                                     <input class="chat_btn" type="submit" value="Send">

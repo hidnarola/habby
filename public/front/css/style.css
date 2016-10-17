@@ -2285,7 +2285,7 @@ ul.list-inline.pst_ul li img {
 }
 .chat_1 span.wdth_span span
 {
-    padding: 6px 15px;
+    padding: 8px 9px 5px 11px;
     border-radius: 20px;
     background-color: #d2d2d2;
     display: inline-block;
@@ -2320,7 +2320,7 @@ ul.list-inline.pst_ul li img {
 }
 .chat_2 span.wdth_span span
 {
-    padding: 6px 15px;
+    padding: 8px 10px;
     border-radius: 20px;
     background-color: #76469e;
     display: inline-block;
