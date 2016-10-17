@@ -119,7 +119,7 @@ $lang['Videos'] = 'Videos';
 $lang['POST'] = 'POST';
     //--Chat Model---
 $lang['TYPE YOUR MESSAGE'] = 'TYPE YOUR MESSAGE';
-$lang['What’s happening...'] = 'What’s happening...';
+$lang['Whatï¿½s happening...'] = 'Whatï¿½s happening...';
 $lang['Send Message'] = 'Send Message';
 $lang['Chats'] = 'Chats';
 $lang['Write here...'] = 'Write here...';
@@ -187,5 +187,7 @@ $lang['Badge Image'] = "Badge Image";
 $lang['Requirement'] = "Requirement";
 $lang['Achieve'] = 'Achieve';
 $lang['Apply'] = 'Apply';
+
+// League home
 
 ?> 
