@@ -178,4 +178,25 @@ $lang['Requirement'] = "требование";
 $lang['Achieve'] = 'добиваться';
 $lang['Apply'] = 'Подать заявление';
 
+// League home
+$lang['My league and alliance'] = "Моя лига и союз";
+$lang['Enter in League'] = "Введите в Лиге";
+$lang['Role in League'] = "Роль в Лиге";
+$lang['User'] = "пользователь";
+$lang['Owner'] = "владелец";
+$lang['Applied league and alliance'] = "Прикладная лига и союз";
+
+// League detail page
+$lang["Created Date"] = "Дата создания";
+$lang["Rank"] = "Ранг";
+$lang["Events"] = "Мероприятия";
+$lang["Meetings"] = "Встречи";
+$lang["No member available"] = "Ни один из членов доступен";
+$lang["Achieve"] = "добиваться";
+$lang["Member"] = "член";
+
+// soulmate listing page
+$lang["Find your soulmate"] = "Найти свою вторую половинку";
+$lang["Requested"] = "запрошенный";
+$lang["Group name"] = "Название группы";
 ?>

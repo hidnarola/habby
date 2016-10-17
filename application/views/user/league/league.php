@@ -203,7 +203,7 @@
                 if (isset($league) && !empty($league) && count($league) > 0) {
                     ?>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                        <a href="javascript:;" id="loadMore">Load More</a>
+                        <a href="javascript:;" id="loadMore"><?php echo lang("Load More"); ?></a>
 
                         <p class="totop"> 
                             <a href="#top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/upload.png" class="img-responsive"></a> 

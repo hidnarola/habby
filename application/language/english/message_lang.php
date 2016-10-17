@@ -220,5 +220,25 @@ $lang['Achieve'] = 'Achieve';
 $lang['Apply'] = 'Apply';
 
 // League home
+$lang['My league and alliance'] = "My league and alliance";
+$lang['Enter in League'] = "Enter in League";
+$lang['Role in League'] = "Role in League";
+$lang['User'] = "User";
+$lang['Owner'] = "Owner";
+$lang['Applied league and alliance'] = "Applied league and alliance";
 
-?> 
+// League detail page
+$lang["Created Date"] = "Created Date";
+$lang["Rank"] = "Rank";
+$lang["Events"] = "Events";
+$lang["Meetings"] = "Meetings";
+$lang["No member available"] = "No member available";
+$lang["Achieve"] = "Achieve";
+$lang["Member"] = "Member";
+
+// soulmate listing page
+$lang["Find your soulmate"] = "Find your soulmate";
+$lang["Requested"] = "Requested";
+$lang["Group name"] = "Group name";
+
+?>
