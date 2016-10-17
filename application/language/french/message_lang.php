@@ -200,4 +200,26 @@ $lang['Badge Image'] = "Badge Image";
 $lang['Requirement'] = "Exigence";
 $lang['Achieve'] = 'Atteindre';
 $lang['Apply'] = 'Appliquer';
+
+// League home
+$lang['My league and alliance'] = "Ma ligue et alliance";
+$lang['Enter in League'] = "Entrez dans la Ligue";
+$lang['Role in League'] = "Rôle dans la Ligue";
+$lang['User'] = "Utilisateur";
+$lang['Owner'] = "Propriétaire";
+$lang['Applied league and alliance'] = "ligue appliquée et alliance";
+
+// League detail page
+$lang["Created Date"] = "date de création";
+$lang["Rank"] = "Rang";
+$lang["Events"] = "Événements";
+$lang["Meetings"] = "Réunions";
+$lang["No member available"] = "Aucun membre disponible";
+$lang["Achieve"] = "Atteindre";
+$lang["Member"] = "Membre";
+
+// soulmate listing page
+$lang["Find your soulmate"] = "Trouvez votre âme soeur";
+$lang["Requested"] = "demandé";
+$lang["Group name"] = "Nom de groupe";
 ?>

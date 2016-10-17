@@ -197,12 +197,6 @@ function wsOnOpen($clientID) {
     $ip = long2ip($Server->wsClients[$clientID][6]);
     //$Server->wsSend('client id = '.$clientID);
     $Server->log("$ip ($clientID) has connected.");
-
-    //Send a join notice to everyone but the person who joined
-    foreach ($Server->wsClients as $id => $client) {
-        if ($id != $clientID)
-            $Server->wsSend($id, "Visitor $clientID ($ip) has joined the room.");
-    }
 }
 
 // when a client closes or lost connection

@@ -1,13 +1,7 @@
-<?php
-echo "jidskfjdoi";
-if ($league != "" && !empty($league)) {
-    pr($league);
-}
-?>
 <div class="row solmate_lg_row">
     <div class="container topic_2cntnr">
         <p class="mr_p visible-xs" >
-            <a href="#" class="pstbtn" id="more_rate" onclick = "displayFileBox()">Files</a> <a href="#" class="pstbtn" id="member_show" onclick = "displayLoginBox()">Member</a>
+            <a href="#" class="pstbtn" id="more_rate" onclick = "displayFileBox()">Files</a> <a href="#" class="pstbtn" id="member_show" onclick = "displayLoginBox()"><?php echo lang("Member"); ?></a>
         </p>
 
         <!-- Challenge left lg section start here -->
@@ -39,10 +33,10 @@ if ($league != "" && !empty($league)) {
                                 <!--  League introduction footer section start here -->
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section2">
-                                    <p>Created Date: <span><?php echo date('d-m-Y',strtotime($league['created_date'])); ?></span></p>	
+                                    <p><?php echo lang("Created Date"); ?>: <span><?php echo date('d-m-Y',strtotime($league['created_date'])); ?></span></p>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section2">
-                                    <p class="text-right">Rank: <span>100</span></p>
+                                    <p class="text-right"><?php echo lang("Rank"); ?>: <span>100</span></p>
                                 </div>
 
                                 <!--  League introduction footer section start here -->
@@ -65,10 +59,10 @@ if ($league != "" && !empty($league)) {
                             <!--  League Meeting section header start here -->
                             <div class="row meeting_sec">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section3">
-                                    <p>Meetings</p>
+                                    <p><?php echo lang("Meetings"); ?></p>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section3">
-                                    <p class="text-right"><a href="#" data-toggle="modal" data-target="#league_meeting">+ more</a></p>
+                                    <p class="text-right"><a href="#" data-toggle="modal" data-target="#league_meeting">+ <?php echo lang('more') ?></a></p>
                                 </div>
                             </div>
                             <!--  League Meeting section header end here -->
@@ -77,7 +71,7 @@ if ($league != "" && !empty($league)) {
                             <div class="row leagu_section4row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4">
                                     <p>
-                                        Date:
+                                        <?php echo lang('Date') ?>:
                                         <img src="<?php echo DEFAULT_IMAGE_PATH; ?>grn_check.png">
                                     </p>
                                 </div>
@@ -85,7 +79,7 @@ if ($league != "" && !empty($league)) {
                                     <p>Meeting details </p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4_3">
-                                    <p><a href="#" class="pstbtn">Join</a></p>
+                                    <p><a href="#" class="pstbtn"><?php echo lang('Join'); ?></a></p>
                                 </div>
                             </div>
                             <!--  League Meeting each content section end here -->
@@ -94,7 +88,7 @@ if ($league != "" && !empty($league)) {
                             <div class="row leagu_section4row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4">
                                     <p>
-                                        Date:
+                                        <?php echo lang('Date') ?>:
 
                                     </p>
                                 </div>
@@ -102,7 +96,7 @@ if ($league != "" && !empty($league)) {
                                     <p>Meeting details </p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4_3">
-                                    <p><a href="#" class="pstbtn">Join</a></p>
+                                    <p><a href="#" class="pstbtn"><?php echo lang('Join'); ?></a></p>
                                 </div>
                             </div>
                             <!--  League Meeting each content section end here -->
@@ -120,7 +114,7 @@ if ($league != "" && !empty($league)) {
                     <!--  League Meeting section header start here -->
                     <div class="row meeting_sec mmbr_hdg login_Box_Div">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 leagu_section3">
-                            <p>Member</p>
+                            <p><?php echo lang("Member"); ?></p>
                         </div>
 
                     </div>
@@ -149,7 +143,7 @@ if ($league != "" && !empty($league)) {
                                     {
                                         ?>
                                         <p>
-                                            No member available
+                                            <?php echo lang("No member available"); ?>
                                         </p>
                                         <?php
                                     }
@@ -207,9 +201,9 @@ if ($league != "" && !empty($league)) {
                                         <div class="topic_textarea">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <input type="text" id="message" class="form-control" placeholder="Type Here...">
+                                                    <input type="text" id="message" class="form-control" placeholder="<?php echo lang("Type Here..."); ?>">
                                                     <span class="input-group-btn">
-                                                        <input class="chat_btn submit_btn" type="submit" value="Send">
+                                                        <input class="chat_btn submit_btn" type="submit" value="<?php echo lang("Send"); ?>">
                                                     </span>
                                                 </div>
                                             </div>
@@ -241,10 +235,10 @@ if ($league != "" && !empty($league)) {
                             <!-- Event section header start here -->
                             <div class="row meeting_sec">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section3">
-                                    <p>Events</p>
+                                    <p><?php echo lang("Events"); ?></p>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section3">
-                                    <p class="text-right"><a href="#"  data-toggle="modal" data-target="#league_events">+ more</a></p>
+                                    <p class="text-right"><a href="#"  data-toggle="modal" data-target="#league_events">+ <?php echo lang("more"); ?></a></p>
                                 </div>
                             </div>
                             <!-- Event section header end here -->
@@ -329,12 +323,12 @@ if ($league != "" && !empty($league)) {
                 <div class="row chalng2_league_sec_1">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pad_lft_rit0">
                         <div class="leagu_section_acv leagu_section3">
-                            <p class="text-left">Achieve</p>
+                            <p class="text-left"><?php echo lang("Achieve"); ?></p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pad_lft_rit0">
                         <div class="leagu_section_acv leagu_section3">
-                            <p class="text-right"><a href="#" data-toggle="modal" data-target="#league_events2">+ more</a></p>
+                            <p class="text-right"><a href="#" data-toggle="modal" data-target="#league_events2">+ <?php echo lang("more"); ?></a></p>
                         </div>
                     </div>
                 </div>

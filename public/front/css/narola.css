@@ -89,3 +89,12 @@
     float: right !important;
     clear: right !important;
 }
+.league_sec
+{
+    width:610px;
+    height:275px;
+}
+
+.league_sec a{height:100%;width:100%;}
+
+.league_sec a img{height:100%;width:100%;}

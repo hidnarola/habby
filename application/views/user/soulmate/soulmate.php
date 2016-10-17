@@ -4,7 +4,7 @@
     <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
     <div class="new_grp">
         <!-- New Group button start-->
-        <a href="#" data-toggle="modal" data-target="#new_grp">New <br>Group</a>
+        <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang("New"); ?> <br><?php echo lang("Group"); ?></a>
         <!-- New Group button end-->
     </div>
 
@@ -30,7 +30,7 @@
                 <form class="" role="form" method="get" action="<?php echo base_url() . "soulmate/search" ?>" id="search_form">
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
-                            <input type="text" class="search-query form-control" placeholder="Find your soulmate" name="topic" />
+                            <input type="text" class="search-query form-control" placeholder="<?php echo lang("Find your soulmate"); ?>" name="topic" />
                             <span class="input-group-btn">
                                 <button class="btn btn-danger find_topic" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -83,7 +83,7 @@
                                             <li><?php echo date("d-m-Y", strtotime($soulmate_group['created_date'])); ?></li>
                                             <li>
                                                 <?php if ($soulmate_group['Is_Requested'] == 0) { ?>
-                                                    <a href="<?php echo base_url() . "soulmate/join/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn smlt_btn">Join</a>
+                                                    <a href="<?php echo base_url() . "soulmate/join/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn smlt_btn"><?php echo lang('Join'); ?></a>
                                                 <?php } else {
                                                     ?>
                                                     <a href="javascript:void(0);" class="pstbtn requested">Requested</a>
@@ -144,22 +144,22 @@
             <div class="modal-body">
                 <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-                    <b>CREATE NEW GROUP</b>
+                    <b><?php echo lang("CREATE NEW GROUP") ?></b>
                 </div>
                 <form class="" role="form" method="post" action="<?php echo base_url() . "soulmate/add_group"; ?>" enctype="multipart/form-data">
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Group:" name="name" required="true">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="<?php echo lang('Group name'); ?>" name="name" required="true">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Slogan : " name="slogan">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="<?php echo lang('Slogan'); ?>" name="slogan">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Group introduction : " name="introduction">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="<?php echo lang("Group introduction"); ?>" name="introduction">
                         </div>
                     </div>
                     <!-- Upload images or video section start here -->

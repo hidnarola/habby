@@ -55,7 +55,7 @@
                             <!-- League and alliance each section start here -->
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 aliance_cl_6">
                                 <div class="grp_pln_sec">
-                                    <div class="grp_pln_img_sec">
+                                    <div class="league_sec">
                                         <a href="#" data-toggle="modal" data-target="#league1post" data-title="<?php echo $league_row['name'] ?>" data-image="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $league_row['league_image'] ?>" data-user="<?php echo $league_row['created_user'] ?>" data-uimage="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $league_row['user_image'] ?>">
                                             <img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $league_row['league_image'] ?>" class="img-responsive center-block">
                                         </a>
@@ -203,7 +203,7 @@
                 if (isset($league) && !empty($league) && count($league) > 0) {
                     ?>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                        <a href="javascript:;" id="loadMore">Load More</a>
+                        <a href="javascript:;" id="loadMore"><?php echo lang("Load More"); ?></a>
 
                         <p class="totop"> 
                             <a href="#top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/upload.png" class="img-responsive"></a> 

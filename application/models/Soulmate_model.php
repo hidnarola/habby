@@ -81,8 +81,11 @@ class Soulmate_model extends CI_Model {
 
     public function get_soulmate_group_by_id($id) {
         if ($id != null) {
-            $this->db->where('id', $id);
-            $res_data = $this->db->get('soulmate_group')->row_array();
+            $this->db->select('sg.*,u.name as user_name,u.user_image,j.name as join_user,j.user_image as join_user_image');
+            $this->db->join('users u', 'u.id = sg.user_id');
+            $this->db->join('users j','j.id = sg.join_user_id','left');
+            $this->db->where('sg.id', $id);
+            $res_data = $this->db->get('soulmate_group sg')->row_array();
             return $res_data;
         }
     }
