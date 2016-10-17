@@ -161,6 +161,7 @@ class User extends CI_Controller {
 
                 if (!$this->upload->do_upload('image-0')) {
                     $error = array('error' => $this->upload->display_errors());
+                    //print_r($error);
                     echo "0";
                     die;
                 } else {
