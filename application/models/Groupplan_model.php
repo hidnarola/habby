@@ -229,7 +229,7 @@ class Groupplan_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_challenges_users($id) {
+    public function get_groupplan_users($id) {
         if ($id != null) {
             $this->db->select('users.name as display_name,users.user_image');
             $this->db->join('users', 'users.id = gu.user_id');

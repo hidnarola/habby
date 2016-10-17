@@ -133,6 +133,7 @@ class Challenge_model extends CI_Model {
     /* v! Select accepted challange users from challange_user table 
      * develop by : HPA
      */
+
     public function get_challenges_users($id) {
         if ($id != null) {
             $this->db->select('chu.*,users.name as display_name,users.user_image');
@@ -141,6 +142,45 @@ class Challenge_model extends CI_Model {
             $res_data = $this->db->get('challange_user chu')->result_array();
             return $res_data;
         }
+    }
+
+    /*
+     * get_messages is used to fetch message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+
+    public function get_messages($group_id, $limit) {
+        $this->db->select('chc.*,u.name,u.user_image');
+        $this->db->where('chc.challange_id', $group_id);
+        $this->db->join('users u', 'chc.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('chc.id', 'desc');
+        $res_data = $this->db->get('challange_chat chc')->result_array();
+        return $res_data;
+    }
+
+    /*
+     * load_messages is used to fetch more message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * @param $last_msg_id int specify last message that displayed
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+
+    public function load_messages($group_id, $limit, $last_msg_id) {
+        $this->db->select('chc.*,u.name,u.user_image');
+        $this->db->where('chc.challange_id', $group_id);
+        $this->db->where('chc.id < ', $last_msg_id);
+        $this->db->join('users u', 'chc.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('chc.id', 'desc');
+        return $this->db->get('challange_chat chc')->result_array();
     }
 
 }

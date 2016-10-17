@@ -203,7 +203,7 @@ class Groupplan extends CI_Controller {
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['groupplan'] = $this->Groupplan_model->get_groupplan_by_id($Id);
-        $this->data['groupplan_users'] = $this->Groupplan_model->get_challenges_users($Id);
+        $this->data['groupplan_users'] = $this->Groupplan_model->get_groupplan_users($Id);
         $this->data['messages'] = $this->Groupplan_model->get_messages($Id, $limit);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/groupplan/join_groupplan', $this->data);
