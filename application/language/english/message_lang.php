@@ -20,11 +20,6 @@ $lang['Password'] = 'Password';
 $lang["I've forgotten my password"] = "I've forgotten my password";
 $lang['Not a member yet?'] = 'Not a member yet?';
 $lang['Keep me logged in'] = 'Keep me logged in';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-
 
 //---Register---
 $lang['Name'] = 'Name';
@@ -136,6 +131,42 @@ $lang['Notes'] = 'Notes';
 
 $lang['Interest/Hobby'] = 'Interest/Hobby';
 $lang['Self-introduction'] = 'Self-introduction';
+
+ //---Topichat---
+    //--List--
+$lang['Group'] = 'Group';
+$lang['Find your group'] = 'Find your group';
+$lang['Join'] = 'Join';
+$lang['No Topichat found.'] = 'No Topichat found.';
+$lang['Load More'] = 'Load More';
+$lang['CRAETE NEW GROUP'] = 'CRAETE NEW GROUP';
+$lang['Topic'] = 'Topic';
+$lang['Number of People'] = 'Number of People';
+$lang['No limit'] = 'No limit';
+$lang['customise'] = 'customise';
+$lang['Note'] = 'Note';
+    //--Home--
+$lang['Topichat'] = 'Topichat';
+$lang['Enter'] = 'Enter';
+$lang['My Groups'] = 'My Groups';
+$lang['No Groups.'] = 'No Groups.';
+$lang['Joined Groups'] = 'Joined Groups';
+    //--Join--
+$lang['Files'] = 'Files';
+$lang['TOP RATE'] = 'TOP RATE';
+$lang['ALL FILES'] = 'ALL FILES';
+$lang['More'] = 'More';
+$lang['UPLOAD'] = 'UPLOAD';
+$lang['Shared'] = 'Shared';
+$lang['Edit'] = 'Edit';
+$lang['Share'] = 'Share';
+$lang['Type Here...'] = 'Type Here...';
+$lang['Send'] = 'Send';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
 $lang[''] = '';
 
 // League and alliance

@@ -1,7 +1,7 @@
 <div class="row cont_top_1">
     <div class="container topic_2cntnr mble_pd_0">
         <p class="mr_p visible-xs" >
-            <a href="#" class="pstbtn" id="more_rate">Files</a>
+            <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files');?></a>
         </p>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 topichat_left_sec">
             <div class="rate_lg_sec">
@@ -11,7 +11,7 @@
 
                     <!-- Top rate heading section start here -->
                     <div class="panel-heading">
-                        <b>TOP RATE</b>
+                        <b><?php echo lang('TOP RATE');?></b>
                         <span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
                     </div>
                     <!-- Top rate heading section end here -->
@@ -98,8 +98,8 @@
 
                 <!-- All files section start here -->
                 <div class="panel panel-default popular_img_sec">
-                    <div class="panel-heading"><b>ALL FILES</b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
-                    <div class="panel-heading shrd_topc_sec"><b>Shared</b> <span style="float: right"><a href="#"><b>More</b></a></span></div>
+                    <div class="panel-heading"><b><?php echo lang('ALL FILES');?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
+                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared');?></b> <span style="float: right"><a href="#"><b><?php echo lang('More');?></b></a></span></div>
                     <div class="panel-body">
                         <div class="topic_frame">
                             <a class="fancybox" data-type="iframe"  href="http://www.youtube.com/embed/WAZ5SmJd1To" data-fancybox-group="galleryshared1">
@@ -113,9 +113,9 @@
                 <!-- popular image and video section start here -->
                 <div class="panel panel-default popular_img_sec">
 
-                    <div class="panel-heading"><b>UPLOAD</b> <span style="float: right"><a href="#"><b>More</b></a></span></div>
+                    <div class="panel-heading"><b><?php echo lang('UPLOAD');?></b> <span style="float: right"><a href="#"><b><?php echo lang('More');?></b></a></span></div>
 
-                    <div class="panel-heading shrd_topc_sec"><b>Video</b></div>
+                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Videos');?></b></div>
 
                     <div class="panel-body">
                         <ul class="photo_vdo_ul">
@@ -164,7 +164,7 @@
 
                     </div>
 
-                    <div class="panel-heading shrd_topc_sec brdr_top"><b>Images</b> </div>
+                    <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images');?></b> </div>
 
                     <div class="panel-body">
                         <ul class="photo_vdo_ul">
@@ -232,7 +232,7 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
                             <div class="tittl_sec2">
                                 <p class="topchat_p">
-                                    <a href="#" class="pstbtn">Edit</a>
+                                    <a href="#" class="pstbtn"><?php echo lang('Edit');?></a>
                                 </p>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                                                         <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>twitter_img.jpg"></a>
                                                     </span>
                                                     <span class="input-group-btn">
-                                                        <input class="chat_btn" type="submit" value="Share">
+                                                        <input class="chat_btn" type="submit" value="<?php echo lang('Share');?>">
                                                     </span>
                                                 </div>
                                             </div>
@@ -293,7 +293,7 @@
                                     <div class="topic_textarea">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" id='message' name='message' class="form-control" placeholder="Type Here...">
+                                                <input type="text" id='message' name='message' class="form-control" placeholder="<?php echo lang('Type Here...');?>">
                                                 <span class="input-group-btn upld_icnpad">
                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
                                                 </span>
@@ -304,7 +304,7 @@
                                                     <a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
                                                 </span>
                                                 <span class="input-group-btn">
-                                                    <input class="submit_btn chat_btn" type="submit" value="Send">
+                                                    <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send');?>">
                                                 </span>
                                             </div>
                                         </div>
