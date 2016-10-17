@@ -19,6 +19,7 @@ $(document).ready(function () {
         if (e.keyCode == 13 && this.value) {
             if (this.value.trim() != '')
             {
+                this.value = $.emoticons.replace($('#message').val());
                 $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + this.value + "</span></span></p>");
                 send(this.value);
                 $(this).val('');
@@ -31,6 +32,7 @@ $(document).ready(function () {
         msg = $('#message').val();
         if (msg.trim() != '')
         {
+            msg = $.emoticons.replace($('#message').val());
             $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + msg + "</span></span></p>");
             send(msg);
             $('#message').val('');
