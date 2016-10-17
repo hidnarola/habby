@@ -124,6 +124,12 @@ $lang['Write here...'] = 'Ecrire ici...';
 $lang['Send'] = 'Envoyer';
 $lang['POST'] = 'POST';
 
+    //---Topichat---
+$lang['Create'] = 'Créer';
+$lang['Notes'] = 'Remarques';
+$lang['Interest/Hobby'] = 'Intérêt / Hobby';
+$lang['Self-introduction'] = 'Auto-présentation';
+
 //---Topichat---
     //--List--
 $lang['Group'] = 'Groupe';

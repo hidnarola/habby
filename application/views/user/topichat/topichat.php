@@ -135,7 +135,7 @@
                 <div class = "panel-heading">
                     <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">&times;
                     </button>
-                    <b><?php echo lang('CRAETE NEW GROUP');?></b>
+                    <b><?php echo lang('CREATE NEW GROUP');?></b>
                 </div>
                 <div class = "row pst_here_sec">
                     <!--post start here -->

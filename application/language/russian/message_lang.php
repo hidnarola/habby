@@ -124,6 +124,12 @@ $lang['Chats'] = 'Чаты';
 $lang['Write here...'] = 'Пишите здесь...';
 $lang['Send'] = 'послать';
 
+    //---Topichat---
+$lang['Create'] = 'Создайте';
+$lang['Notes'] = 'Заметки';
+$lang['Interest/Hobby'] = 'Интерес / Хобби';
+$lang['Self-introduction'] = 'Самостоятельного введения';
+
 //---Topichat---
     //--List--
 $lang['Group'] = 'группа';
