@@ -187,11 +187,10 @@ if ($league != "" && !empty($league)) {
                                             <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
                                                 <ul class="list-inline type_icon_ul">
                                                     <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li>
-                                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></a></li>
+                                                    <li><a href="javascript:;"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></a></li>
                                                     <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
                                                 </ul>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

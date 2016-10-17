@@ -49,7 +49,31 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         }
                     }
                 }
-            } else if ($message->type == 'groupplan_msg') {
+            }
+            if ($message->type == 'soulmate_msg') {
+                $user_ids = get_soulmate_users($message->group_id);
+                // database entry for topichat
+                send_soulmate_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+
+                // Send message to user
+                if (count($user_ids) > 1) {
+                    if (sizeof($Server->wsClients) != 1) {
+                        // object that sent to recieving user
+                        $send_object = array();
+                        $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
+                        $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
+                        $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
+                        $send_object['message'] = $message->message;
+
+                        foreach ($Server->wsClients as $id => $client) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
+                                $Server->wsSend($id, json_encode($send_object));
+                            }
+                        }
+                    }
+                }
+            }
+            else if ($message->type == 'groupplan_msg') {
                 $user_ids = get_groupplan_users($message->group_id);
                 // database entry for topichat
                 send_groupplan_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);

@@ -146,9 +146,28 @@ class Soulmate extends CI_Controller {
     }
 
     public function details($Id) {
+        $limit = 20;
         $Id = base64_decode(urldecode($Id));
+        $this->data['group_id'] = $Id;
         $this->data['soulmate'] = $this->Soulmate_model->get_soulmate_group_by_id($Id);
+        $this->data['messages'] = $this->Soulmate_model->get_messages($Id, $limit);
+        krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/soulmate/join_soulmate', $this->data);
+    }
+    
+    public function load_more_msg($group_id) {
+        $limit = 10;
+        $last_msg_id = $this->input->post('last_msg');
+        $this->data['messages'] = $this->Soulmate_model->load_messages($group_id, $limit, $last_msg_id);
+        if (count($this->data['messages']) > 0) {
+            $data['status'] = 1;
+            krsort($this->data['messages']); // Reverse array
+            $data['view'] = $this->load->view('user/partial/soulmate/load_more_msg', $this->data, true);
+            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
     }
 
     /*
