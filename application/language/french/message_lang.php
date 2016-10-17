@@ -124,41 +124,64 @@ $lang['Write here...'] = 'Ecrire ici...';
 $lang['Send'] = 'Envoyer';
 $lang['POST'] = 'POST';
 
- //---Topichat---
-$lang['Create'] = 'Create';
-$lang['Notes'] = 'Notes';
-$lang['Interest/Hobby'] = 'Interest/Hobby';
-$lang['Self-introduction'] = 'Self-introduction';
-
- //---Topichat---
+//---Topichat---
     //--List--
-$lang['Group'] = 'Group';
-$lang['Find your group'] = 'Find your group';
-$lang['Join'] = 'Join';
-$lang['No Topichat found.'] = 'No Topichat found.';
-$lang['Load More'] = 'Load More';
-$lang['CREATE NEW GROUP'] = 'CREATE NEW GROUP';
-$lang['Topic'] = 'Topic';
-$lang['Number of People'] = 'Number of People';
-$lang['No limit'] = 'No limit';
-$lang['customise'] = 'customise';
-$lang['Note'] = 'Note';
+$lang['Group'] = 'Groupe';
+$lang['Find your group'] = 'Trouvez votre groupe';
+$lang['Join'] = 'Joindre';
+$lang['No Topichat found.'] = 'Aucune Topichat trouvée.';
+$lang['Load More'] = 'Charger plus';
+$lang['CREATE NEW GROUP'] = 'Créer un nouveau groupe';
+$lang['Topic'] = 'Sujet';
+$lang['Number of People'] = 'Nombre de personnes';
+$lang['No limit'] = 'Sans limites';
+$lang['customise'] = 'personnaliser';
+$lang['Note'] = 'Remarque';
     //--Home--
 $lang['Topichat'] = 'Topichat';
-$lang['Enter'] = 'Enter';
-$lang['My Groups'] = 'My Groups';
-$lang['No Groups.'] = 'No Groups.';
-$lang['Joined Groups'] = 'Joined Groups';
+$lang['Enter'] = 'Entrer';
+$lang['My Groups'] = 'Mes Groupes';
+$lang['No Groups.'] = 'Aucun groupe.';
+$lang['Joined Groups'] = 'Groupes Inscrit';
     //--Join--
-$lang['Files'] = 'Files';
-$lang['TOP RATE'] = 'TOP RATE';
-$lang['ALL FILES'] = 'ALL FILES';
-$lang['More'] = 'More';
-$lang['UPLOAD'] = 'UPLOAD';
-$lang['Shared'] = 'Shared';
-$lang['Edit'] = 'Edit';
-$lang['Share'] = 'Share';
-$lang['Type Here...'] = 'Type Here...';
+$lang['Files'] = 'Fichiers';
+$lang['TOP RATE'] = 'TAUX TOP';
+$lang['ALL FILES'] = 'TOUS LES FICHIERS';
+$lang['More'] = 'Plus';
+$lang['UPLOAD'] = 'TÉLÉCHARGER';
+$lang['Shared'] = 'partagé';
+$lang['Edit'] = 'modifier';
+$lang['Share'] = 'Partager';
+$lang['Type Here...'] = 'Écrivez ici...';
+
+//---Group Plan---
+$lang['Group introduction'] = "l'introduction du groupe";
+$lang['Slogan'] = 'Slogan';
+$lang['Number of maximum members'] = 'Nombre de membres maximum';
+$lang['Find your Group plan'] = 'Trouvez votre plan de groupe';
+$lang['Created Group'] = 'Groupe créé';
+$lang['Requested'] = 'demandé';
+$lang['No Group plan found.'] = 'Aucun plan de groupe trouvé.';
+    //--Home--
+$lang['Group Plan'] = 'Plan Groupe';
+$lang['Group Plan Notification'] = 'Plan de groupe de notification';
+$lang['Group Plan Request'] = 'Plan de Demande Groupe';
+$lang['New Request By'] = 'Nouvelle demande par';
+$lang['Accept'] = 'Acceptez';
+$lang['Cancel'] = 'Annuler';
+$lang['No New Request'] = 'Aucune nouvelle demande';
+$lang['Group Plans'] = 'Régimes collectifs';
+    //--join---
+$lang['Past Due'] = 'Past Due';
+$lang['Date'] = 'Date';
+$lang['Plan'] = 'Plan';
+$lang['Review'] = 'La revue';
+$lang['Coming up'] = 'A venir';
+$lang['Upload files'] = 'Télécharger des fichiers';
+$lang['Rules'] = 'Règles';
+$lang['Member'] = 'Membre';
+$lang["What's Today"] = "Ce qui est aujourd'hui";
+
 
 // League and alliance
 $lang['Newest'] = "le plus récent";

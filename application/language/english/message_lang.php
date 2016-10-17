@@ -190,16 +190,6 @@ $lang['Rules'] = 'Rules';
 $lang['Member'] = 'Member';
 $lang["What's Today"] = "What's Today";
 
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-
 // League and alliance
 
 $lang['Newest'] = "Newest";

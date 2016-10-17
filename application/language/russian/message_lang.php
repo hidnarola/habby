@@ -124,41 +124,64 @@ $lang['Chats'] = 'Чаты';
 $lang['Write here...'] = 'Пишите здесь...';
 $lang['Send'] = 'послать';
 
- //---Topichat---
-$lang['Create'] = 'Create';
-$lang['Notes'] = 'Notes';
-$lang['Interest/Hobby'] = 'Interest/Hobby';
-$lang['Self-introduction'] = 'Self-introduction';
-
- //---Topichat---
+//---Topichat---
     //--List--
-$lang['Group'] = 'Group';
-$lang['Find your group'] = 'Find your group';
-$lang['Join'] = 'Join';
-$lang['No Topichat found.'] = 'No Topichat found.';
-$lang['Load More'] = 'Load More';
-$lang['CREATE NEW GROUP'] = 'CREATE NEW GROUP';
-$lang['Topic'] = 'Topic';
-$lang['Number of People'] = 'Number of People';
-$lang['No limit'] = 'No limit';
-$lang['customise'] = 'customise';
-$lang['Note'] = 'Note';
+$lang['Group'] = 'группа';
+$lang['Find your group'] = 'Найдите свою группу';
+$lang['Join'] = 'Присоединиться';
+$lang['No Topichat found.'] = 'Ни один Topichat не найдено.';
+$lang['Load More'] = 'Загрузи больше';
+$lang['CREATE NEW GROUP'] = 'Создать новую группу';
+$lang['Topic'] = 'тема';
+$lang['Number of People'] = 'Число людей';
+$lang['No limit'] = 'Безлимитный';
+$lang['customise'] = 'настроить';
+$lang['Note'] = 'Заметка';
     //--Home--
 $lang['Topichat'] = 'Topichat';
-$lang['Enter'] = 'Enter';
-$lang['My Groups'] = 'My Groups';
-$lang['No Groups.'] = 'No Groups.';
-$lang['Joined Groups'] = 'Joined Groups';
+$lang['Enter'] = 'Войти';
+$lang['My Groups'] = 'Мои группы';
+$lang['No Groups.'] = 'Нет групп.';
+$lang['Joined Groups'] = 'Группы Регистрация';
     //--Join--
-$lang['Files'] = 'Files';
-$lang['TOP RATE'] = 'TOP RATE';
-$lang['ALL FILES'] = 'ALL FILES';
-$lang['More'] = 'More';
-$lang['UPLOAD'] = 'UPLOAD';
-$lang['Shared'] = 'Shared';
-$lang['Edit'] = 'Edit';
-$lang['Share'] = 'Share';
-$lang['Type Here...'] = 'Type Here...';
+$lang['Files'] = 'файлы';
+$lang['TOP RATE'] = 'САМЫЕ ПОПУЛЯРНЫЕ';
+$lang['ALL FILES'] = 'ВСЕ ФАЙЛЫ';
+$lang['More'] = 'Больше';
+$lang['UPLOAD'] = 'ЗАГРУЗИТЬ';
+$lang['Shared'] = 'Общий';
+$lang['Edit'] = 'редактировать';
+$lang['Share'] = 'Поделиться';
+$lang['Type Here...'] = 'Введите здесь ...';
+
+//---Group Plan---
+$lang['Group introduction'] = 'введение Группа';
+$lang['Slogan'] = 'Лозунг';
+$lang['Number of maximum members'] = 'Количество максимальных членов';
+$lang['Find your Group plan'] = 'Найти свой план группы';
+$lang['Created Group'] = 'Создана группа';
+$lang['Requested'] = 'запрошенный';
+$lang['No Group plan found.'] = 'Ни один план группы не найдено.';
+$lang['Load More'] = 'Load More';
+    //--Home--
+$lang['Group Plan'] = 'План группы';
+$lang['Group Plan Notification'] = 'Группа План уведомления';
+$lang['Group Plan Request'] = 'План запроса группы';
+$lang['New Request By'] = 'Новый запрос По';
+$lang['Accept'] = 'принимать';
+$lang['Cancel'] = 'Отмена';
+$lang['No New Request'] = 'Нет Новый запрос';
+$lang['Group Plans'] = 'планы группы';
+    //--join---
+$lang['Past Due'] = 'Просроченный';
+$lang['Date'] = 'Дата';
+$lang['Plan'] = 'План';
+$lang['Review'] = 'Обзор';
+$lang['Coming up'] = 'Придумывая';
+$lang['Upload files'] = 'Загрузить файлы';
+$lang['Rules'] = 'правила';
+$lang['Member'] = 'член';
+$lang["What's Today"] = "Что сегодня";
 
 // League and alliance
 $lang['Newest'] = "новейший";
