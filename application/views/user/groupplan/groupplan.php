@@ -4,7 +4,7 @@
     <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
     <div class="new_grp">
         <!-- New Group button start-->
-        <a href="#" data-toggle="modal" data-target="#new_grp">New <br>Group</a>
+        <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang('New');?> <br><?php echo lang('Group');?></a>
         <!-- New Group button end-->
     </div>
 
@@ -18,9 +18,9 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="lang_sec">
                     <select class="selectpicker filterby" data-style="btn-info" name="filterby">
-                        <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>>Newest</option>
-                        <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>>Popular</option>
-                        <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>>Recommended</option>
+                        <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>><?php echo lang('Newest');?></option>
+                        <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>><?php echo lang('Popular');?></option>
+                        <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>><?php echo lang('Recommended');?></option>
                     </select>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 <form class="" role="form" method="get" action="<?php echo base_url() . "groupplan/search" ?>" id="search_form">
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
-                            <input type="hidden" class="search-query form-control" placeholder="Find your group" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
-                            <input type="text" class="search-query form-control" placeholder="Find your Group plan" name="topic" />
+                            <input type="hidden" class="search-query form-control" placeholder="<?php echo lang('Find your group');?>" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
+                            <input type="text" class="search-query form-control" placeholder="<?php echo lang('Find your Group plan');?>" name="topic" />
                             <span class="input-group-btn">
                                 <button class="btn btn-danger find_topic" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -83,16 +83,16 @@
                                         <p class="soulmate_txt1"><?php echo $Group_plan['name'] ?> </p>
                                         <p class="soulmate_txt2"><?php echo $Group_plan['slogan'] ?></p>
                                         <p class="soulmate_txt3"><?php echo $Group_plan['introduction'] ?></p>
-                                        <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> Created Group</p>
+                                        <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> <?php echo lang('Created Group');?></p>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><span><?php echo $Group_plan['Total_User'] . "/" . $Group_plan['user_limit'] ?> users</span></li>
+                                            <li><span><?php echo $Group_plan['Total_User'] . "/" . $Group_plan['user_limit'] ?> <?php echo lang('users');?></span></li>
                                             <li>
                                                 <?php if ($Group_plan['Is_Requested'] == 0) { ?>
 
-                                                    <a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join">Join</a>
+                                                    <a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join"><?php echo lang('Join');?></a>
                                                 <?php } else {
                                                     ?>
-                                                    <a href="javascript:void(0);" class="pstbtn requested">Requested</a>
+                                                    <a href="javascript:void(0);" class="pstbtn requested"><?php echo lang('Requested');?></a>
                                                 <?php }
                                                 ?>
                                             </li>
@@ -106,7 +106,7 @@
                     } else {
                         ?>
                         <div class="">
-                            No Group plan found.
+                            <?php echo lang('No Group plan found.');?>
                         </div>
                         <?php
                     }
@@ -124,7 +124,7 @@
         <div class = "row">
             <div class = "container">
                 <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                    <a id = "loadMore" href = "javascript:;">Load More</a>
+                    <a id = "loadMore" href = "javascript:;"><?php echo lang('Load More');?></a>
                     <p class = "totop">
                         <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
                     </p>
@@ -142,27 +142,27 @@
             <div class="modal-body">
                 <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-                    <b>CREATE NEW GROUP</b>
+                    <b><?php echo lang('CREATE NEW GROUP');?></b>
                 </div>
                 <form class="" role="form" method="post" action="<?php echo base_url() . "groupplan/add_group"; ?>" enctype="multipart/form-data">
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Group:" name="name" required="true">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="<?php echo lang('Group');?>:" name="name" required="true">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Slogan : " name="slogan">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="<?php echo lang('Slogan');?> : " name="slogan">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Number of maximum members : " pattern="^[0-9]$" name="user_limit">
+                            <input type="text" class="form-control" placeholder="<?php echo lang('Number of maximum members');?> : " pattern="^[0-9]{3}$" name="user_limit">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Group introduction : " name="introduction">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="<?php echo lang('Group introduction');?> : " name="introduction">
                         </div>
                     </div>
                     <!-- Upload images or video section start here -->

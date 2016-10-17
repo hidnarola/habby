@@ -76,8 +76,6 @@ $lang['Invalid Token'] = 'Invalid Token';
 $lang['Your password is successfully changed! Please login to access your account!'] = 'Your password is successfully changed! Please login to access your account!';
 $lang['User Profile has been updated successfully.'] = 'User Profile has been updated successfully.';
 $lang['Image has been uploaded successfully'] = 'Image has been uploaded successfully.';
-
-
 $lang['Topic added successfully'] = 'Topic added successfully.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
 
@@ -128,7 +126,6 @@ $lang['Send'] = 'Send';
     //---Topichat---
 $lang['Create'] = 'Create';
 $lang['Notes'] = 'Notes';
-
 $lang['Interest/Hobby'] = 'Interest/Hobby';
 $lang['Self-introduction'] = 'Self-introduction';
 
@@ -139,7 +136,7 @@ $lang['Find your group'] = 'Find your group';
 $lang['Join'] = 'Join';
 $lang['No Topichat found.'] = 'No Topichat found.';
 $lang['Load More'] = 'Load More';
-$lang['CRAETE NEW GROUP'] = 'CRAETE NEW GROUP';
+$lang['CREATE NEW GROUP'] = 'CREATE NEW GROUP';
 $lang['Topic'] = 'Topic';
 $lang['Number of People'] = 'Number of People';
 $lang['No limit'] = 'No limit';
@@ -161,7 +158,41 @@ $lang['Shared'] = 'Shared';
 $lang['Edit'] = 'Edit';
 $lang['Share'] = 'Share';
 $lang['Type Here...'] = 'Type Here...';
-$lang['Send'] = 'Send';
+
+//---Group Plan---
+$lang['Group introduction'] = 'Group introduction';
+$lang['Slogan'] = 'Slogan';
+$lang['Number of maximum members'] = 'Number of maximum members';
+$lang['Find your Group plan'] = 'Find your Group plan';
+$lang['Created Group'] = 'Created Group';
+$lang['Requested'] = 'Requested';
+$lang['No Group plan found.'] = 'No Group plan found.';
+$lang['Load More'] = 'Load More';
+    //--Home--
+$lang['Group Plan'] = 'Group Plan';
+$lang['Group Plan Notification'] = 'Group Plan Notification';
+$lang['Group Plan Request'] = 'Group Plan Request';
+$lang['New Request By'] = 'New Request By';
+$lang['Accept'] = 'Accept';
+$lang['Cancel'] = 'Cancel';
+$lang['No New Request'] = 'No New Request';
+$lang['Group Plans'] = 'Group Plans';
+    //--join---
+$lang['Files'] = 'Files';
+$lang['Past Due'] = 'Past Due';
+$lang['Date'] = 'Date';
+$lang['Plan'] = 'Plan';
+$lang['Review'] = 'Review';
+$lang['Coming up'] = 'Coming up';
+$lang['Edit'] = 'Edit';
+$lang['Upload files'] = 'Upload files';
+$lang['Rules'] = 'Rules';
+$lang['Member'] = 'Member';
+$lang["What's Today"] = "What's Today";
+
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

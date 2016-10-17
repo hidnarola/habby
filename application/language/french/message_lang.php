@@ -21,7 +21,6 @@ $lang["I've forgotten my password"] = "J'ai oublié mon mot de passe";
 $lang['Not a member yet?'] = 'Pas encore membre?';
 $lang['Keep me logged in'] = 'Rester connecté';
 
-
 //---Register---
 $lang['Name'] = 'prénom';
 $lang['Confirm Password'] = 'Confirmez le mot de passe';
@@ -78,6 +77,9 @@ $lang['Your password is successfully changed! Please login to access your accoun
 $lang['User Profile has been updated successfully.'] = "L'image a été téléchargé avec succès";
 $lang['Image has been uploaded successfully'] = 'Изображение было загружено успешно';
 
+$lang['Topic added successfully'] = 'Topic added successfully.';
+$lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
+
 //---Profile---
 $lang['Save'] = 'Sauvegarder';
 $lang['edit your profile'] = 'Modifier votre profil';
@@ -120,6 +122,43 @@ $lang['Send Message'] = 'Envoyer le message';
 $lang['Chats'] = 'causeries';
 $lang['Write here...'] = 'Ecrire ici...';
 $lang['Send'] = 'Envoyer';
+$lang['POST'] = 'POST';
+
+ //---Topichat---
+$lang['Create'] = 'Create';
+$lang['Notes'] = 'Notes';
+$lang['Interest/Hobby'] = 'Interest/Hobby';
+$lang['Self-introduction'] = 'Self-introduction';
+
+ //---Topichat---
+    //--List--
+$lang['Group'] = 'Group';
+$lang['Find your group'] = 'Find your group';
+$lang['Join'] = 'Join';
+$lang['No Topichat found.'] = 'No Topichat found.';
+$lang['Load More'] = 'Load More';
+$lang['CREATE NEW GROUP'] = 'CREATE NEW GROUP';
+$lang['Topic'] = 'Topic';
+$lang['Number of People'] = 'Number of People';
+$lang['No limit'] = 'No limit';
+$lang['customise'] = 'customise';
+$lang['Note'] = 'Note';
+    //--Home--
+$lang['Topichat'] = 'Topichat';
+$lang['Enter'] = 'Enter';
+$lang['My Groups'] = 'My Groups';
+$lang['No Groups.'] = 'No Groups.';
+$lang['Joined Groups'] = 'Joined Groups';
+    //--Join--
+$lang['Files'] = 'Files';
+$lang['TOP RATE'] = 'TOP RATE';
+$lang['ALL FILES'] = 'ALL FILES';
+$lang['More'] = 'More';
+$lang['UPLOAD'] = 'UPLOAD';
+$lang['Shared'] = 'Shared';
+$lang['Edit'] = 'Edit';
+$lang['Share'] = 'Share';
+$lang['Type Here...'] = 'Type Here...';
 
 // League and alliance
 $lang['Newest'] = "le plus récent";
