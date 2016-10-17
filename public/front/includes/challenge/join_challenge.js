@@ -4,7 +4,7 @@ data = JSON.parse(data);
 function send(text) {
     var msg = {
         message: text,
-        type: 'groupplan_msg',
+        type: 'challenge_msg',
         group_id: group_id
     }
     Server.send('message', JSON.stringify(msg));
@@ -44,7 +44,7 @@ $(document).ready(function () {
             type: 'room_bind',
             message: data,
             group_id: group_id,
-            room_type: 'groupplan_msg'
+            room_type: 'challenge_msg'
         }
         Server.send('message', JSON.stringify(msg));
     });

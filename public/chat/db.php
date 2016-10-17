@@ -65,6 +65,12 @@ function send_topic_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
+function get_soulmate_users($group_id)
+{
+    global $conn;
+    
+}
+
 function get_groupplan_users($group_id) {
     global $conn;
     $result = mysqli_query($conn, "select user_id from group_users where group_id = $group_id");

@@ -118,6 +118,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             } else if ($message->type == 'challenge_msg') {
+                echo 'here';
                 $user_ids = get_challenge_users($message->group_id);
                 // database entry for topichat
                 send_challenge_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
