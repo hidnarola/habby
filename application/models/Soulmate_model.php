@@ -164,6 +164,41 @@ class Soulmate_model extends CI_Model {
         }
     }
 
+    /*
+     * get_messages is used to fetch message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+    public function get_messages($group_id,$limit) {
+        $this->db->select('s.*,u.name,u.user_image');
+        $this->db->where('s.soulmate_group_id',$group_id);
+        $this->db->join('users u','u.user_id = u.id');
+        $this->db->limit($limit,0);
+        $this->db->order_by('s.id','desc');
+        return $this->db->get('soulmate_group_chat s')->result_array();
+    }
+    
+    /*
+     * load_messages is used to fetch more message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * @param $last_msg_id int specify last message that displayed
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+    public function load_messages($group_id,$limit,$last_msg_id) {
+        $this->db->select('l.*,u.name,u.user_image');
+        $this->db->where('l.league_id',$group_id);
+        $this->db->where('l.id < ',$last_msg_id);
+        $this->db->join('users u','l.user_id = u.id');
+        $this->db->limit($limit,0);
+        $this->db->order_by('l.id','desc');
+        return $this->db->get('league_messages l')->result_array();
+    }
 }
 
 ?>

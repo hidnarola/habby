@@ -365,3 +365,53 @@
         </div>
     </div>
 </div>
+<script>
+    data = '<?php echo json_encode($this->session->user); ?>';
+    group_id = '<?php echo $group_id; ?>';
+    DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
+    last_msg = '<?php echo (count($messages) > 0)?$messages[count($messages) - 1]['id']:0 ?>';
+</script>
+<script type="text/javascript" src="<?php echo USER_JS ?>/soulmate/join_soulmate.js"></script>
+<!-- Lazy loading -->
+<script>
+    $('document').ready(function () {
+        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        var load = true;
+        var in_progress = false;
+        $('.chat_area2').scroll(function () {
+            if(load && !in_progress)
+            {
+                if ($('.chat_area2').scrollTop() == 0) {
+                    loaddata();
+                    in_process = true;
+                }
+            }
+        });
+
+        function loaddata()
+        {
+            $.ajax({
+                url : base_url+'soulmate/load_more_msg/'+group_id,
+                method: 'post',
+                async: false,
+                data : 'last_msg='+last_msg,
+                success : function(more){
+                    more = JSON.parse(more);
+                    if(more.status)
+                    {
+                        $('.chat_area2').prepend(more.view);
+                        last_msg = more.last_msg_id;
+                        $(".chat_area2").animate({scrollTop: 200 }, 500);
+                    }
+                    else
+                    {
+                        load = false;
+                        $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                        $(".chat_area2").animate({scrollTop: 0 }, 500);
+                    }
+                    in_progress = false;
+                }
+            });
+        }
+    });
+</script>
