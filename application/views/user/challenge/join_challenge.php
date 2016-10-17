@@ -119,9 +119,9 @@
                                     <div class="topic_textarea">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Type Here...">
+                                                <input type="text" class="form-control" placeholder="Type Here..." id="message">
                                                 <span class="input-group-btn">
-                                                    <input class="chat_btn" type="submit" value="Send">
+                                                    <input class="chat_btn submit_btn" type="submit" value="Send">
                                                 </span>
                                             </div>
                                         </div>
