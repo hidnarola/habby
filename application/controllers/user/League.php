@@ -102,7 +102,7 @@ class League extends CI_Controller {
                         $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                     }
                     $image_name = "league_default.jpg";
-                    $this->session->set_flashdata('message', ['message' => 'League image was not uploaded.', 'class' => 'alert alert-danger']);
+                    $this->session->set_flashdata('message', ['message' => lang('League image was not uploaded.'), 'class' => 'alert alert-danger']);
                 } else {
                     $data_upload = array('upload_data' => $this->upload->data());
                     $image_name = $data_upload['upload_data']['file_name'];
@@ -136,7 +136,7 @@ class League extends CI_Controller {
                         $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                     }
                     $image_name = "league_logo_default.jpg";
-                    $this->session->set_flashdata('message', ['message' => 'League logo was not uploaded.', 'class' => 'alert alert-danger']);
+                    $this->session->set_flashdata('message', ['message' => lang('League logo was not uploaded.'), 'class' => 'alert alert-danger']);
                 } else {
                     $data_upload = array('upload_data' => $this->upload->data());
                     $image_name = $data_upload['upload_data']['file_name'];
@@ -147,7 +147,7 @@ class League extends CI_Controller {
             $insert_arr['league_logo'] = $image_name;
 
             if (!$this->League_model->add_league($insert_arr)) {
-                $this->session->set_flash('message', 'There was some problem while creating league');
+                $this->session->set_flash('message', lang('There was some problem while creating league'));
             }
             $ins_data = array(
                 'league_id' => $this->db->insert_id(),
@@ -184,6 +184,8 @@ class League extends CI_Controller {
         $this->data['messages'] = $this->League_model->get_messages($Id, $limit);
         $this->data['league_members'] = $this->League_model->get_league_members($Id);
         krsort($this->data['messages']); // Reverse array
+        $this->data['league_meetings'] = $this->League_model->get_league_meeting($Id);
+        $this->data['league_events'] = $this->League_model->get_league_events($Id);
         $this->template->load('join', 'user/league/join_league', $this->data);
     }
 
@@ -201,4 +203,38 @@ class League extends CI_Controller {
         }
         echo json_encode($data);
     }
+
+    public function add_meeting() {
+        if ($this->input->post()) {
+            $league_id = $this->input->post('id');
+            $Id = base64_decode(urldecode($league_id));
+            $ins_data = array(
+                'meeting_details' => $this->input->post('Meeting-details'),
+                'meeting_date' => date('Y-m-d', strtotime($this->input->post('Meeting-date'))),
+                'league_id' => $Id,
+                'user_id' => $this->data['user_data']['id'],
+            );
+            $this->League_model->insert_league_meeting($ins_data);
+            $this->session->set_flashdata('message', ['message' => lang('League meeting inserted sucessfully.'), 'class' => 'alert alert-success']);
+            redirect('league/details/' . $league_id);
+        }
+    }
+
+    public function add_event() {
+        if ($this->input->post()) {
+            $league_id = $this->input->post('id');
+            $Id = base64_decode(urldecode($league_id));
+            $ins_data = array(
+                'league_id' => $Id,
+                'user_id' => $this->data['user_data']['id'],
+                'event_title' => $this->input->post('event_title'),
+                'event_text' => $this->input->post('event_text'),
+                'event_date' => date('Y-m-d', strtotime($this->input->post('Event-date'))),
+            );
+            $this->League_model->insert_league_event($ins_data);
+            $this->session->set_flashdata('message', ['message' => lang('League event inserted sucessfully.'), 'class' => 'alert alert-success']);
+            redirect('league/details/' . $league_id);
+        }
+    }
+
 }

@@ -97,7 +97,7 @@ $lang['Posted'] = 'Posted';
 $lang['Saved'] = 'Saved';
 
 //--Home--
-    //--Front Template---
+//--Front Template---
 $lang['Home'] = 'Home';
 $lang['Social Network'] = 'Social Network';
 $lang['Profile'] = 'Profile';
@@ -110,12 +110,12 @@ $lang['Live life'] = 'Live life';
 $lang['Follow us'] = 'Follow us';
 $lang['Habby, LLC'] = 'Habby, LLC';
 $lang['All rights reserved.'] = 'All rights reserved.';
-    //---Post Model---
+//---Post Model---
 $lang['title /short description'] = 'title /short description';
 $lang['Images'] = 'Images';
 $lang['Videos'] = 'Videos';
 $lang['POST'] = 'POST';
-    //--Chat Model---
+//--Chat Model---
 $lang['TYPE YOUR MESSAGE'] = 'TYPE YOUR MESSAGE';
 $lang['What�s happening...'] = 'What�s happening...';
 $lang['Send Message'] = 'Send Message';
@@ -123,14 +123,14 @@ $lang['Chats'] = 'Chats';
 $lang['Write here...'] = 'Write here...';
 $lang['Send'] = 'Send';
 
-    //---Topichat---
+//---Topichat---
 $lang['Create'] = 'Create';
 $lang['Notes'] = 'Notes';
 $lang['Interest/Hobby'] = 'Interest/Hobby';
 $lang['Self-introduction'] = 'Self-introduction';
 
- //---Topichat---
-    //--List--
+//---Topichat---
+//--List--
 $lang['Group'] = 'Group';
 $lang['Find your group'] = 'Find your group';
 $lang['Join'] = 'Join';
@@ -142,13 +142,13 @@ $lang['Number of People'] = 'Number of People';
 $lang['No limit'] = 'No limit';
 $lang['customise'] = 'customise';
 $lang['Note'] = 'Note';
-    //--Home--
+//--Home--
 $lang['Topichat'] = 'Topichat';
 $lang['Enter'] = 'Enter';
 $lang['My Groups'] = 'My Groups';
 $lang['No Groups.'] = 'No Groups.';
 $lang['Joined Groups'] = 'Joined Groups';
-    //--Join--
+//--Join--
 $lang['Files'] = 'Files';
 $lang['TOP RATE'] = 'TOP RATE';
 $lang['ALL FILES'] = 'ALL FILES';
@@ -168,7 +168,7 @@ $lang['Created Group'] = 'Created Group';
 $lang['Requested'] = 'Requested';
 $lang['No Group plan found.'] = 'No Group plan found.';
 $lang['Load More'] = 'Load More';
-    //--Home--
+//--Home--
 $lang['Group Plan'] = 'Group Plan';
 $lang['Group Plan Notification'] = 'Group Plan Notification';
 $lang['Group Plan Request'] = 'Group Plan Request';
@@ -177,7 +177,7 @@ $lang['Accept'] = 'Accept';
 $lang['Cancel'] = 'Cancel';
 $lang['No New Request'] = 'No New Request';
 $lang['Group Plans'] = 'Group Plans';
-    //--join---
+//--join---
 $lang['Files'] = 'Files';
 $lang['Past Due'] = 'Past Due';
 $lang['Date'] = 'Date';
@@ -225,10 +225,25 @@ $lang["Meetings"] = "Meetings";
 $lang["No member available"] = "No member available";
 $lang["Achieve"] = "Achieve";
 $lang["Member"] = "Member";
+$lang["Meeting Date"] = "Meeting Date";
+$lang["No New Meetings."] = "No New Meetings.";
+$lang["No New Events."] = "No New Events.";
+$lang["Add New Event"] = "Add New Event";
+$lang["Enter Title"] = "Enter Title";
+$lang["Event Date"] = "Event Date";
+$lang["Event Details"] = "Event Details";
+$lang["Add New Meeting"] = "Add New Meeting";
+$lang["Meeting Details"] = "Meeting Details";
+
+    //---flash---
+$lang["League image was not uploaded."] = "League image was not uploaded.";
+$lang["League logo was not uploaded."] = "League logo was not uploaded.";
+$lang['There was some problem while creating league'] = 'There was some problem while creating league';
+$lang["League meeting inserted sucessfully."] = "League meeting inserted successfully.";
+$lang["League event inserted sucessfully."] = "League event inserted successfully.";
 
 // soulmate listing page
 $lang["Find your soulmate"] = "Find your soulmate";
 $lang["Requested"] = "Requested";
 $lang["Group name"] = "Group name";
-
 ?>
