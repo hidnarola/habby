@@ -1,10 +1,18 @@
+
 <div class="row solmate_lg_row">
     <div class="container topic_2cntnr">
         <p class="mr_p visible-xs" >
-            <a href="#" class="pstbtn" id="more_rate" onclick = "displayFileBox()">Files</a> <a href="#" class="pstbtn" id="member_show" onclick = "displayLoginBox()"><?php echo lang("Member"); ?></a>
+            <a href="#" class="pstbtn" id="more_rate" onclick = "displayFileBox()"><?php echo lang('Files'); ?></a> <a href="#" class="pstbtn" id="member_show" onclick = "displayLoginBox()"><?php echo lang("Member"); ?></a>
         </p>
 
         <!-- Challenge left lg section start here -->
+        <?php
+        $message = $this->session->flashdata('message');
+        if (!empty($message) && isset($message)) {
+            ($message['class'] != '') ? $message['class'] : '';
+            echo '<div class="' . $message['class'] . ' flashmsg">' . $message['message'] . '</div>';
+        }
+        ?>
         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 pd-right-chlng-0">
 
             <div class="chalng2_lg_lft_sec">
@@ -20,7 +28,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                                     <div class="leag_name leagu_section1">
-                                        <p><img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH.$league['league_logo']; ?>" class="leag_logo"><?php echo $league['name'] ?></p>
+                                        <p><img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $league['league_logo']; ?>" class="leag_logo"><?php echo $league['name'] ?></p>
                                     </div>
 
                                     <div class="leag_intro leagu_section1">
@@ -33,7 +41,7 @@
                                 <!--  League introduction footer section start here -->
 
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section2">
-                                    <p><?php echo lang("Created Date"); ?>: <span><?php echo date('d-m-Y',strtotime($league['created_date'])); ?></span></p>
+                                    <p><?php echo lang("Created Date"); ?>: <span><?php echo date('d/m/Y', strtotime($league['created_date'])); ?></span></p>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 leagu_section2">
                                     <p class="text-right"><?php echo lang("Rank"); ?>: <span>100</span></p>
@@ -68,39 +76,39 @@
                             <!--  League Meeting section header end here -->
 
                             <!--  League Meeting each content section start here -->
-                            <div class="row leagu_section4row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4">
-                                    <p>
-                                        <?php echo lang('Date') ?>:
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>grn_check.png">
-                                    </p>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 leagu_section4_2">
-                                    <p>Meeting details </p>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4_3">
-                                    <p><a href="#" class="pstbtn"><?php echo lang('Join'); ?></a></p>
-                                </div>
+                            <div class="meeting_section">
+                                <?php
+                                if ($league_meetings != null && !empty($league_meetings)) {
+                                    foreach ($league_meetings as $league_meeting) {
+                                        ?>
+                                        <div class="row leagu_section4row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4">
+                                                <p class="meeting_date">
+                                                    <?php echo lang('Date') . " : " . date('d/m/Y', strtotime($league_meeting['meeting_date'])) ?>
+                                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>grn_check.png">
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 leagu_section4_2">
+                                                <p><?php echo $league_meeting['meeting_details'] ?></p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4_3">
+                                                <p><a href="#" class="pstbtn"><?php echo lang('Join'); ?></a></p>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="row leagu_section4row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4">
+                                            <p class="meeting_date"><?php echo lang('No New Meetings.'); ?></p>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <!--  League Meeting each content section end here -->
-
-                            <!--  League Meeting each content section start here -->
-                            <div class="row leagu_section4row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4">
-                                    <p>
-                                        <?php echo lang('Date') ?>:
-
-                                    </p>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 leagu_section4_2">
-                                    <p>Meeting details </p>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 leagu_section4_3">
-                                    <p><a href="#" class="pstbtn"><?php echo lang('Join'); ?></a></p>
-                                </div>
-                            </div>
-                            <!--  League Meeting each content section end here -->
-
                         </div>
 
                     </div>
@@ -125,28 +133,24 @@
                         <div class="row leagu_section4row scrol_mmbr">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 leagu_section4 name">
                                 <?php
-                                    if(count($league_members) > 0)
-                                    {
-                                        foreach($league_members as $member)
-                                        {
-                                            ?>
-                                            <p>
-                                                <a href="personal_account.html">
-                                                    <?php echo $member['name'] ?>
-                                                    <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$member['user_image']; ?>">
-                                                </a>
-                                            </p>
-                                            <?php
-                                        }
-                                    }
-                                    else
-                                    {
+                                if (count($league_members) > 0) {
+                                    foreach ($league_members as $member) {
                                         ?>
                                         <p>
-                                            <?php echo lang("No member available"); ?>
+                                            <a href="personal_account.html">
+                                                <?php echo $member['name'] ?>
+                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $member['user_image']; ?>">
+                                            </a>
                                         </p>
                                         <?php
                                     }
+                                } else {
+                                    ?>
+                                    <p>
+                                        <?php echo lang("No member available"); ?>
+                                    </p>
+                                    <?php
+                                }
                                 ?>
                             </div>
                         </div>
@@ -244,72 +248,37 @@
                             <!-- Event section header end here -->
 
                             <!-- Event section content start here -->
-                            <div class="row event_sect">
-                                <!-- Event Each content start here -->
-                                <div class="row event_section_sm">
+                            <div class="events_section">
+                                <div class="row event_sect">
+                                    <?php
+                                    if ($league_events != null && !empty($league_events)) {
+                                        foreach ($league_events as $league_event) {
+                                            ?>
+                                            <!-- Event Each content start here -->
+                                            <div class="row event_section_sm">
 
-                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
-                                        <p class="text-left"><a href="#" data-toggle="modal" data-target="#league_events_2">Events Details</a> </p>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 leagu_section4_2">
-                                        <p class="text-right"> 12/04/2016</p>
-                                    </div>
+                                                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
+                                                    <p class="text-left"><a href="#" data-toggle="modal" data-target="#league_details" data-title="<?php echo $league_event['event_title'] ?>" data-details="<?php echo $league_event['event_text'] ?>"><?php echo $league_event['event_title'] ?></a></p>
+                                                </div>
+                                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 leagu_section4_2">
+                                                    <p class="text-right"> <?php echo date('d/m/Y', strtotime($league_event['event_date'])) ?></p>
+                                                </div>
 
+                                            </div>
+                                            <!-- Event Each content end here -->
+                                            <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <div class="row event_section_sm">
+                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
+                                                <p class="meeting_date"><?php echo lang('No New Events.'); ?></p>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
-                                <!-- Event Each content end here -->
-
-                                <!-- Event Each content start here -->
-                                <div class="row event_section_sm">
-
-                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
-                                        <p class="text-left"><a href="#" data-toggle="modal" data-target="#league_events_2">Events Details</a> </p>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 leagu_section4_2">
-                                        <p class="text-right"> 12/04/2016</p>
-                                    </div>
-
-                                </div>
-                                <!-- Event Each content end here -->
-
-                                <!-- Event Each content start here -->
-                                <div class="row event_section_sm">
-
-                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
-                                        <p class="text-left"><a href="#" data-toggle="modal" data-target="#league_events_2">Events Details</a> </p>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 leagu_section4_2">
-                                        <p class="text-right"> 12/04/2016</p>
-                                    </div>
-
-                                </div>
-                                <!-- Event Each content end here -->								
-
-                                <!-- Event Each content start here -->
-                                <div class="row event_section_sm">
-
-                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
-                                        <p class="text-left"><a href="#" data-toggle="modal" data-target="#league_events_2">Events Details</a> </p>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 leagu_section4_2">
-                                        <p class="text-right"> 12/04/2016</p>
-                                    </div>
-
-                                </div>
-                                <!-- Event Each content end here -->
-
-                                <!-- Event Each content start here -->
-                                <div class="row event_section_sm">
-
-                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 leagu_section4_2 event_name">
-                                        <p class="text-left"><a href="#" data-toggle="modal" data-target="#league_events_2">Events Details</a> </p>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 leagu_section4_2">
-                                        <p class="text-right"> 12/04/2016</p>
-                                    </div>
-
-                                </div>
-                                <!-- Event Each content end here -->
-
                             </div>
                             <!-- Event section content end here -->
                         </div>
@@ -328,7 +297,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pad_lft_rit0">
                         <div class="leagu_section_acv leagu_section3">
-                            <p class="text-right"><a href="#" data-toggle="modal" data-target="#league_events2">+ <?php echo lang("more"); ?></a></p>
+                            <p class="text-right"><a href="#" data-toggle="modal" data-target="#league_details_2">+ <?php echo lang("more"); ?></a></p>
                         </div>
                     </div>
                 </div>
@@ -426,12 +395,109 @@
         </div>
     </div>
 </div>
+<!-- New Events form popup start here -->
+<div class="modal mdl_frm" id="league_events">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                    <b><?php echo lang("Add New Event"); ?></b>
+                </div>
+                <div class="event">
+                    <form action="<?php echo base_url() . 'league/add_event' ?>" method="post">
+                        <div class="form-group clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" id="event_title" name="event_title" placeholder="<?php echo lang('Enter Title'); ?> :" required="true">
+                                <input  type="hidden" class="form-control" name="id" id="id" value="<?php echo $this->uri->segment(3) ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="Event-date" id="Event-date" placeholder="<?php echo lang('Event Date'); ?> :" required="true"/>
+                            </div>
+                        </div>
+                        <p><?php echo lang('Event Details'); ?> :</p>
+                        <div class="chalng_upld clearfix">
+                            <div class="upld_sec">
+                                <div class="fileUpload up_img btn">
+                                    <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
+                                    <input type="file" class="upload">
+                                </div>
+                                <div class="fileUpload up_img btn">
+                                    <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
+                                    <input type="file" class="upload">
+                                </div>
+                                <input type="text" class="form-control" id="event_text" name="event_text" placeholder="<?php echo lang('Enter Details'); ?>" required="true"/>
+                            </div>	
+                            <p class="text-right"><button type="submit" class="pstbtn"><?php echo lang('Add'); ?></button></p>
+                        </div>
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Events form popup end here -->
+<!-- New Meetings form popup start here -->
+<div class="modal mdl_frm" id="league_meeting">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                    <b><?php echo lang('Add New Meeting'); ?></b>
+                </div>
+                <div class="event clearfix">
+                    <form action="<?php echo base_url() . "league/add_meeting" ?>" method="post">
+                        <div class="form-group clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <input  type="text" class="form-control" name="Meeting-date" id="Meeting-date" placeholder="<?php echo lang('Meeting Date'); ?>" required="true"/>
+                                <input  type="hidden" class="form-control" name="id" id="id" value="<?php echo $this->uri->segment(3) ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" id="Meeting-details" name="Meeting-details" placeholder="<?php echo lang('Meeting Details'); ?>" required="true">
+                            </div>
+                        </div>
+                        <p class="text-right"><button type="submit" class="pstbtn"><?php echo lang('Add'); ?></button></p>
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Meetings form popup end here -->
+
+<!-- New Meetings form popup start here -->
+<div class="modal mdl_frm" id="league_details">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                    <b><span id="modal_title"></span></b>
+                </div>
+                <div class="evntpopup row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>rank-img2.jpg" class="img-responsive center-block">
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <p><span id="modal_details"></span></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Global variable for join_topichat.js -->
 <script>
     data = '<?php echo json_encode($this->session->user); ?>';
     group_id = '<?php echo $group_id; ?>';
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
-    last_msg = '<?php echo (count($messages) > 0)?$messages[count($messages) - 1]['id']:0 ?>';
+    last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
     upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/league/join_league.js"></script>
@@ -442,7 +508,7 @@
         var load = true;
         var in_progress = false;
         $('.chat_area2').scroll(function () {
-            if(load && !in_progress)
+            if (load && !in_progress)
             {
                 if ($('.chat_area2').scrollTop() == 0) {
                     loaddata();
@@ -454,28 +520,47 @@
         function loaddata()
         {
             $.ajax({
-                url : base_url+'league/load_more_msg/'+group_id,
+                url: base_url + 'league/load_more_msg/' + group_id,
                 method: 'post',
                 async: false,
-                data : 'last_msg='+last_msg,
-                success : function(more){
+                data: 'last_msg=' + last_msg,
+                success: function (more) {
                     more = JSON.parse(more);
-                    if(more.status)
+                    if (more.status)
                     {
                         $('.chat_area2').prepend(more.view);
                         last_msg = more.last_msg_id;
-                        $(".chat_area2").animate({scrollTop: 200 }, 500);
-                    }
-                    else
+                        $(".chat_area2").animate({scrollTop: 200}, 500);
+                    } else
                     {
                         load = false;
                         $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
-                        $(".chat_area2").animate({scrollTop: 0 }, 500);
+                        $(".chat_area2").animate({scrollTop: 0}, 500);
                     }
                     in_progress = false;
                 }
             });
-            
+
         }
+
+        var dateToday = new Date();
+        $('#Meeting-date').datepicker({
+            minDate: dateToday,
+        });
+        $("#Meeting-date").attr("placeholder", "<?php echo lang('Meeting Date') ?>");
+        $('#Event-date').datepicker({
+            minDate: dateToday,
+        });
+
+        //triggered when modal is about to be shown
+        $('#league_details').on('show.bs.modal', function (e) {
+
+            //get data-id attribute of the clicked element
+            var title = $(e.relatedTarget).data('title');
+            var details = $(e.relatedTarget).data('details');
+
+            $('#modal_title').text(title);
+            $('#modal_details').text(details);
+        });
     });
 </script>

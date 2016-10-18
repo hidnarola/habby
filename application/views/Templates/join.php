@@ -9,6 +9,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "bootstrap.css" ?>"/>
         <!--<link href="<?php echo DEFAULT_CSS_PATH . "flexnav.css" ?>" media="screen, projection" rel="stylesheet" type="text/css"> -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link href="<?php echo DEFAULT_CSS_PATH . "jquery-ui.css"; ?>" rel="stylesheet" />
+        <link href="<?php echo DEFAULT_CSS_PATH . "bootstrap-datepicker.css"; ?>" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "jquery.fancybox.css" ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "component.css" ?>"/>
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "style.css" ?>"/>
@@ -19,6 +21,7 @@
         <link href="https://fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,300,400,500,600,700,800,900" rel="stylesheet">
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.min.js" ?>"></script>
+        <script src="<?php echo DEFAULT_JS_PATH . "jquery-ui.min.js" ?>"></script>
         <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_EMOGI_PATH . "emoticons.css" ?>"/>
         <script src="<?php echo DEFAULT_EMOGI_PATH . "emoticons.js" ?>"></script>
@@ -388,7 +391,7 @@
                         }
                     });
                 });
-                $('.emoticon').click(function () {
+                $('#overview').on('click', '.emoticon', function () {
                     $('#message').val($('#message').val() + " " + $(this).html());
                 });
             });

@@ -91,7 +91,7 @@ class League_model extends CI_Model {
         $this->db->select('l.*,u.name as created_user,u.user_image');
         $this->db->from('league l');
         $this->db->join('users u', 'l.user_id = u.id');
-        $this->db->join('league_members lm', 'l.id = lm.league_id AND lm.user_id =' . $user_id.' and l.user_id != lm.user_id');
+        $this->db->join('league_members lm', 'l.id = lm.league_id AND lm.user_id =' . $user_id . ' and l.user_id != lm.user_id');
         $this->db->order_by('l.created_date', 'DESC');
         $res_data = $this->db->get()->result_array();
         return $res_data;
@@ -105,15 +105,16 @@ class League_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function get_messages($group_id,$limit) {
+
+    public function get_messages($group_id, $limit) {
         $this->db->select('l.*,u.name,u.user_image');
-        $this->db->where('l.league_id',$group_id);
-        $this->db->join('users u','l.user_id = u.id');
-        $this->db->limit($limit,0);
-        $this->db->order_by('l.id','desc');
+        $this->db->where('l.league_id', $group_id);
+        $this->db->join('users u', 'l.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('l.id', 'desc');
         return $this->db->get('league_messages l')->result_array();
     }
-    
+
     /*
      * load_messages is used to fetch more message for given group
      * @param $group_id int specify group id to which message will fetch
@@ -123,21 +124,67 @@ class League_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function load_messages($group_id,$limit,$last_msg_id) {
+
+    public function load_messages($group_id, $limit, $last_msg_id) {
         $this->db->select('l.*,u.name,u.user_image');
-        $this->db->where('l.league_id',$group_id);
-        $this->db->where('l.id < ',$last_msg_id);
-        $this->db->join('users u','l.user_id = u.id');
-        $this->db->limit($limit,0);
-        $this->db->order_by('l.id','desc');
+        $this->db->where('l.league_id', $group_id);
+        $this->db->where('l.id < ', $last_msg_id);
+        $this->db->join('users u', 'l.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('l.id', 'desc');
         return $this->db->get('league_messages l')->result_array();
     }
-    
-    public function get_league_members($league_id)
-    {
+
+    public function get_league_members($league_id) {
         $this->db->select('u.name,u.user_image');
         $this->db->from('users u');
-        $this->db->join('league_members lm','u.id = lm.user_id and lm.league_id = '.$league_id);
+        $this->db->join('league_members lm', 'u.id = lm.user_id and lm.league_id = ' . $league_id);
         return $this->db->get()->result_array();
     }
+
+    /* insert_league_meeting : Insert league group into league table 
+     * develop by : HPA
+     */
+
+    public function insert_league_meeting($data) {
+        $this->db->insert('league_meetings', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+    }
+    
+    /* insert_league_meeting : Insert league group into league table 
+     * develop by : HPA
+     */
+
+    public function insert_league_event($data) {
+        $this->db->insert('league_events', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+    }
+
+    /* v! Insert league group into league table 
+     * develop by : HPA
+     */
+
+    public function get_league_meeting($Id) {
+        if ($Id != null) {
+            $this->db->where('l.league_id', $Id);
+            $this->db->where('l.meeting_date >= CURDATE()');
+            $res_data = $this->db->get('league_meetings l')->result_array();
+            return $res_data;
+        }
+    }
+    /* v! Insert league group into league table 
+     * develop by : HPA
+     */
+
+    public function get_league_events($Id) {
+        if ($Id != null) {
+            $this->db->where('l.league_id', $Id);
+            $this->db->where('l.event_date >= CURDATE()');
+            $res_data = $this->db->get('league_events l')->result_array();
+            return $res_data;
+        }
+    }
+
 }

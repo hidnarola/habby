@@ -7,7 +7,6 @@
         <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang('New');?> <br><?php echo lang('Group');?></a>
         <!-- New Group button end-->
     </div>
-
 </div>
 <!-- Topicaht Post and bannner section end here -->
 

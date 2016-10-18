@@ -224,6 +224,23 @@ $lang["No member available"] = "Aucun membre disponible";
 $lang["Achieve"] = "Atteindre";
 $lang["Member"] = "Membre";
 
+$lang["Meeting Date"] = "Date de la réunion";
+$lang["No New Meetings."] = "Pas de nouveau Réunions.";
+$lang["No New Events."] = "Pas de nouveaux événements.";
+$lang["Add New Event"] = "Ajouter un nouvel événement";
+$lang["Enter Title"] = "Entrez le titre";
+$lang["Event Date"] = "Date de l'événement";
+$lang["Event Details"] = "Détails de l'évènement";
+$lang["Add New Meeting"] = "Ajouter une nouvelle réunion";
+$lang["Meeting Details"] = "Détails de la réunion";
+
+    //---flash---
+$lang["League image was not uploaded."] = "l'image de la Ligue n'a pas été téléchargé.";
+$lang["League logo was not uploaded."] = "League logo n'a pas été téléchargé.";
+$lang['There was some problem while creating league'] = 'Il y avait un problème lors de la création ligue';
+$lang["League meeting inserted sucessfully."] = "réunion de la Ligue inséré avec succès.";
+$lang["League event inserted sucessfully."] = "événement Ligue inséré avec succès.";
+
 // soulmate listing page
 $lang["Find your soulmate"] = "Trouvez votre âme soeur";
 $lang["Requested"] = "demandé";

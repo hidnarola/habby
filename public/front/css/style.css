@@ -3968,7 +3968,7 @@ ul.list-inline.pst_ul li img {
 .chat_area_league2
 {
     width: 565px;
-    top: 398px;
+    top: 435px;
     z-index:99;
     -webkit-box-shadow: inset 0px 11px 7px -10px #d0d0d2, inset 0px -4px 7px -5px #d0d0d2, inset 12px 0px 8px -11px #d0d0d2;
     -moz-box-shadow: inset 0px 11px 7px -10px #d0d0d2, inset 0px -4px 7px -5px #d0d0d2, inset 12px 0px 8px -11px #d0d0d2;
@@ -6724,5 +6724,15 @@ span.nexttab {
     margin-left: 182px;
 }
 
+.meeting_date{
+    width: 170px;
+    font-family: 'Raleway', sans-serif !important;
+    /*font-weight: 500 !important;*/
+}
+.meeting_section {
+    height: 90px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 /* Developer CSS End */
