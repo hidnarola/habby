@@ -2,6 +2,7 @@
 
 // Connection settings
 $conn = mysqli_connect("192.168.1.201", "habby", "6735C63zY35gOwF", "habby");
+mysqli_set_charset($conn,"utf8");
 
 function select($query) {
     global $conn;

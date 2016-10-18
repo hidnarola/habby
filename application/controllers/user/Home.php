@@ -6,6 +6,9 @@ class Home extends CI_Controller {
 
     var $data;
 
+    /*
+     * constructor loads required data including banner image
+     */
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model', 'Post_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model'));
@@ -29,7 +32,8 @@ class Home extends CI_Controller {
     }
 
     /*
-     * smile_share method loads home page view with all required details
+     * smile_share method loads smile-share post with all required details
+     * @param $page int specify page number that used for lazy loading
      * develop by : ar
      */
 
@@ -50,7 +54,8 @@ class Home extends CI_Controller {
     }
 
     /*
-     * challenge method loads home page view with all required details
+     * challenge method loads challenge post data with all required details
+     * @param $page int specify page number that used for lazy loading
      * develop by : ar
      */
 

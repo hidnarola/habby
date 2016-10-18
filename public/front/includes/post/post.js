@@ -1,4 +1,6 @@
 $('document').ready(function () {
+    
+    // Like functionality on post
     $('.post_section').on('click', '.user_like', function () {
         var t = $(this);
         post_id = t.parents('.pst_full_sec').data('post_id');
@@ -28,6 +30,7 @@ $('document').ready(function () {
         });
     });
 
+    // Save post to user's IP page
     $('.post_section').on('click', '.pstbtn', function () {
         var t = $(this);
         post_id = t.parents('.pst_full_sec').data('post_id');
@@ -47,6 +50,7 @@ $('document').ready(function () {
         });
     });
 
+    // Give coin to user post
     $('.post_section').on('click', '.user_coin', function () {
         var t = $(this);
         post_id = t.parents('.pst_full_sec').data('post_id');
@@ -150,6 +154,7 @@ $('document').ready(function () {
         }
     });
 
+    // Add comment to the post
     $(".comment").on("keypress", function (e) {
         var key = e.keyCode;
         var t = $(this);
@@ -177,6 +182,7 @@ $('document').ready(function () {
         }
     });
 
+    // Add like to the post comment
     $('.post_section').on('click', '.comment_like_cnt', function () {
         var t = $(this);
         var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
@@ -205,6 +211,7 @@ $('document').ready(function () {
         });
     });
 
+    // Display comment reply
     $(".post_section").on('click', '.post_comment_reply', function () {
         var t = $(this);
         var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
@@ -216,6 +223,7 @@ $('document').ready(function () {
         });
     });
 
+    // Add reply for the post comment
     $('.post_section').on('keypress', '.comment_reply', function (e) {
         var key = e.keyCode;
         // If the user has pressed enter
@@ -241,6 +249,7 @@ $('document').ready(function () {
         }
     });
 
+    // Lazy loading on scroll event for post
     var page = 2;
     var load = true;
     $(window).scroll(function () {
@@ -267,6 +276,7 @@ $('document').ready(function () {
         }
     });
 
+    // Fetch extra post for lazy loading
     function loaddata()
     {
         var uri = window.location.href;

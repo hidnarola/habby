@@ -98,3 +98,7 @@
 .league_sec a{height:100%;width:100%;}
 
 .league_sec a img{height:100%;width:100%;}
+
+.media_name {display:inline-block;}
+.post_btn {display: inline-block; float:right;}
+.make_disabled {cursor:not-allowed;}

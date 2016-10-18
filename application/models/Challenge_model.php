@@ -183,6 +183,82 @@ class Challenge_model extends CI_Model {
         return $this->db->get('challange_chat chc')->result_array();
     }
 
+    /*
+     * insert_challenge_media is used to insert multiple row in challange_post table
+     * @param $arr array[][] specify input data
+     *
+     * @return 	int 	number of rows inserted, if success
+     * 			boolean	false, if fail
+     * developed by : ar
+     */
+
+    public function insert_challenge_media($arr) {
+        return $this->db->insert_batch('challange_post', $arr);
+    }
+
+    /*
+     * 
+     */
+    public function get_challenge_posts($challange_id)
+    {
+        $this->db->select('cp.*,u.name,u.user_image,count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined,count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked,count(DISTINCT cpc.id) as tot_comment');
+        $this->db->from('challange_post cp');
+        $this->db->join('users u','cp.user_id = u.id');
+        $this->db->join('challange_post_coin cc','cp.id = cc.challange_post_id','left');
+        $this->db->join('challange_post_coin cc1','cp.id = cc1.challange_post_id and cc1.user_id = '.$this->session->user['id'],'left');
+        $this->db->join('challange_post_like cl','cp.id = cl.challange_post_id and cl.is_liked = 1','left');
+        $this->db->join('challange_post_like cl1','cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = '.$this->session->user['id'],'left');
+        $this->db->join('challange_post_comment cpc','cp.id = cpc.challange_post_id','left');
+        $this->db->where('cp.challange_id = '.$challange_id);
+        $this->db->order_by('id','desc');
+        $this->db->group_by('cp.id');
+        return $this->db->get()->result_array();
+    }
+    
+    /*
+     * user_coin_exist_for_post is used to check, if user has given like to particular post
+     * @param $user_id	int 	specify user_id
+     * @param $post_id 	int 	specify post_id
+     *
+     * @return boolean 	true, if user entry exist for post
+     * 					false, if not exist
+     * developed by : ar
+     */
+
+    public function user_coin_exist_for_post($user_id, $post_id) {
+        $where['user_id'] = $user_id;
+        $where['challange_post_id'] = $post_id;
+        $this->db->where($where);
+        return $this->db->get('challange_post_coin')->row_array();
+        //return $this->db->where('user_id',$user_id)->where('post_id',$post_id)->count_all_results('post_like');
+    }
+    
+    /*
+     * add_post_coin is used to add coin to given value
+     * @param $array array[] input fields
+     * 
+     * @return boolean	true, if success
+     *  		false, if fail
+     * developed by : ar
+     */
+
+    public function add_post_coin($array) {
+        if ($this->db->insert('challange_post_coin', $array)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /*
+     * 
+     */
+    public function get_post_user($post_id)
+    {
+        $this->db->select('user_id');
+        $this->db->where('id',$post_id);
+        $row = $this->db->get('challange_post')->row_array();
+        return $row['user_id'];
+    }
 }
 
 ?>

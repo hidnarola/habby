@@ -6,6 +6,9 @@ class Challenge extends CI_Controller {
 
     var $data;
 
+    /*
+     * 
+     */
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model', 'Challenge_model', 'Common_functionality'));
@@ -154,8 +157,146 @@ class Challenge extends CI_Controller {
         $this->data['challenge'] = $this->Challenge_model->get_challenge_by_id($Id);
         $this->data['challenge_users'] = $this->Challenge_model->get_challenges_users($Id);
         $this->data['messages'] = $this->Challenge_model->get_messages($Id, $limit);
+        
+        $this->data['challenge_post'] = $this->Challenge_model->get_challenge_posts($Id);
+        //pr($this->data['challenge_post'],1);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/challenge/join_challenge', $this->data);
     }
 
+    public function upload_media($challange_id) {
+        if ($this->input->post()) {
+            if (!empty($this->input->post('type'))) {
+                $media = array();
+                $c_id = base64_decode(urldecode($challange_id));
+                if ($this->input->post('type') == "image") {
+                    if (!empty($_FILES['image_upload']['name'])) {
+                        $filecount = count($_FILES['image_upload']['name']);
+                        for ($i = 0; $i < $filecount; ++$i) {
+//                            $_FILES['userFile']['name'] = $_FILES['image_upload']['name'][$i];
+//                            $_FILES['userFile']['type'] = $_FILES['image_upload']['type'][$i];
+//                            $_FILES['userFile']['tmp_name'] = $_FILES['image_upload']['tmp_name'][$i];
+//                            $_FILES['userFile']['error'] = $_FILES['image_upload']['error'][$i];
+//                            $_FILES['userFile']['size'] = $_FILES['image_upload']['size'][$i];
+                            $_FILES['userFile']['name'] = $_FILES['image_upload']['name'];
+                            $_FILES['userFile']['type'] = $_FILES['image_upload']['type'];
+                            $_FILES['userFile']['tmp_name'] = $_FILES['image_upload']['tmp_name'];
+                            $_FILES['userFile']['error'] = $_FILES['image_upload']['error'];
+                            $_FILES['userFile']['size'] = $_FILES['image_upload']['size'];
+
+                            // Code of image uploading
+                            $config['upload_path'] = './uploads/challenge_post';
+                            $config['allowed_types'] = 'gif|jpg|png';
+                            $config['max_size'] = 1000000;
+
+                            $this->upload->initialize($config);
+
+                            if (!$this->upload->do_upload('userFile')) {
+                                $error = array('error' => $this->upload->display_errors());
+                                $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                            } else {
+                                $data = $this->upload->data();
+                                $media_arr = array();
+                                $media_arr['challange_id'] = $c_id;
+                                $media_arr['user_id'] = $this->session->user['id'];
+                                $media_arr['media_type'] = 'image';
+                                $media_arr['media'] = $data['file_name'];
+                                $media[] = $media_arr;
+                            }
+                        }
+                        if(count($media) > 0)
+                        {
+                            $this->Challenge_model->insert_challenge_media($media);
+                            $this->session->set_flashdata('msg','Image has succesfully uploaded');
+                        }
+                    }
+                } else if ($this->input->post('type') == "video") {
+                    if (!empty($_FILES['video_upload']['name'])) {
+                        $filecount = count($_FILES['video_upload']['name']);
+                        for ($i = 0; $i < $filecount; ++$i) {
+//                            $_FILES['userFile']['name'] = $_FILES['video_upload']['name'][$i];
+//                            $_FILES['userFile']['type'] = $_FILES['video_upload']['type'][$i];
+//                            $_FILES['userFile']['tmp_name'] = $_FILES['video_upload']['tmp_name'][$i];
+//                            $_FILES['userFile']['error'] = $_FILES['video_upload']['error'][$i];
+//                            $_FILES['userFile']['size'] = $_FILES['video_upload']['size'][$i];
+                            $_FILES['userFile']['name'] = $_FILES['video_upload']['name'];
+                            $_FILES['userFile']['type'] = $_FILES['video_upload']['type'];
+                            $_FILES['userFile']['tmp_name'] = $_FILES['video_upload']['tmp_name'];
+                            $_FILES['userFile']['error'] = $_FILES['video_upload']['error'];
+                            $_FILES['userFile']['size'] = $_FILES['video_upload']['size'];
+
+                            // Code of image uploading
+                            $config['upload_path'] = './uploads/challenge_post';
+                            $config['allowed_types'] = 'mp4|mov|3gp';
+                            $config['max_size'] = 4000000;
+
+                            $this->upload->initialize($config);
+
+                            if (!$this->upload->do_upload('userFile')) {
+                                $error = array('error' => $this->upload->display_errors());
+                                $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                            } else {
+                                $data = $this->upload->data();
+                                $media_arr = array();
+                                $media_arr['challange_id'] = $c_id;
+                                $media_arr['user_id'] = $this->session->user['id'];
+                                $media_arr['media_type'] = 'video';
+                                $media_arr['media'] = $data['file_name'];
+                                $media[] = $media_arr;
+                            }
+                        }
+                        if(count($media) > 0)
+                        {
+                            $this->Challenge_model->insert_challenge_media($media);
+                            $this->session->set_flashdata('msg','Video has succesfully uploaded');
+                        }
+                    }
+                } else {
+                    $this->session->set_flashdata("msg", "Something went wrong.");
+                }
+            } else {
+                $this->session->set_flashdata("msg", "Please select image or video.");
+            }
+        } else {
+            $this->session->set_flashdata("msg", "Something went wrong.");
+        }
+        redirect('challenge/details/' . $challange_id);
+    }
+
+    /*
+     * add_coin is used to add coin to particular post
+     * @param $post_id int specify post_id
+     *
+     * echo '1', if coin added
+     * 		'2', Coin already given
+     * 		'0', operation fail 
+     */
+
+    public function add_coin($post_id) {
+        $user_id = $this->session->user['id'];
+        if (!empty($coin = $this->Challenge_model->user_coin_exist_for_post($user_id, $post_id))) {
+            echo '2';
+        } else {
+            $userdata = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+            if($userdata['total_coin'] > 0)
+            {
+                $insert_arr['user_id'] = $user_id;
+                $insert_arr['challange_post_id'] = $post_id;
+                if ($this->Challenge_model->add_post_coin($insert_arr)) {
+                    // Add or deduct coin from user's account
+                    $this->Users_model->deduct_coin_from_user($user_id);
+                    $this->Users_model->add_coin_to_user($this->Challenge_model->get_post_user($post_id));
+                    echo '1';
+                } else {
+                    echo '0';
+                }
+            }
+            else
+            {
+                echo '3';
+            }
+            // Insert entry
+        }
+    }
+    
 }
