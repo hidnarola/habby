@@ -196,7 +196,6 @@ $('document').ready(function () {
                 }
             });
         }
-
     });
 
     // Add reply for the post comment
