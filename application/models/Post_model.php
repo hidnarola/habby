@@ -339,7 +339,11 @@ class Post_model extends CI_Model {
     }
     
     /*
+     * get_post_comment_data_by_id is used to retrive comments data by post_comment_id
+     * @param $post_comment_id int specify post_comment_id
      * 
+     * @return $array return records found as per condition
+     * developed by : ar
      */
     public function get_post_comment_data_by_id($post_comment_id)
     {

@@ -197,24 +197,63 @@ class Challenge_model extends CI_Model {
     }
 
     /*
+     * challange_post is used to display all post according pagination
+     * @param $challange_id     int	specify challange id
+     * @param $logged_in_user   int     user_id of logged in user
+     * @param $start            int 	specify start position for pagination
+     * @param $limit            int 	specify page size
      * 
+     * @return array[][] return found record as per condition
+     * developed by : ar
      */
-    public function get_challenge_posts($challange_id)
-    {
+
+    public function get_challenge_posts($challange_id, $logged_in_user, $start = 0, $limit = 0) {
         $this->db->select('cp.*,u.name,u.user_image,count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined,count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked,count(DISTINCT cpc.id) as tot_comment');
         $this->db->from('challange_post cp');
-        $this->db->join('users u','cp.user_id = u.id');
-        $this->db->join('challange_post_coin cc','cp.id = cc.challange_post_id','left');
-        $this->db->join('challange_post_coin cc1','cp.id = cc1.challange_post_id and cc1.user_id = '.$this->session->user['id'],'left');
-        $this->db->join('challange_post_like cl','cp.id = cl.challange_post_id and cl.is_liked = 1','left');
-        $this->db->join('challange_post_like cl1','cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = '.$this->session->user['id'],'left');
-        $this->db->join('challange_post_comment cpc','cp.id = cpc.challange_post_id','left');
-        $this->db->where('cp.challange_id = '.$challange_id);
-        $this->db->order_by('id','desc');
+        $this->db->join('users u', 'cp.user_id = u.id');
+        $this->db->join('challange_post_coin cc', 'cp.id = cc.challange_post_id', 'left');
+        $this->db->join('challange_post_coin cc1', 'cp.id = cc1.challange_post_id and cc1.user_id = ' . $logged_in_user, 'left');
+        $this->db->join('challange_post_like cl', 'cp.id = cl.challange_post_id and cl.is_liked = 1', 'left');
+        $this->db->join('challange_post_like cl1', 'cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = ' . $logged_in_user, 'left');
+        $this->db->join('challange_post_comment cpc', 'cp.id = cpc.challange_post_id', 'left');
+        $this->db->where('cp.challange_id = ' . $challange_id);
+        $this->db->order_by('id', 'desc');
         $this->db->group_by('cp.id');
-        return $this->db->get()->result_array();
+        $post = $this->db->get()->result_array();
+
+        $post_ids = array_column($post, 'id');
+
+        if (count($post_ids) > 0) {
+            $this->db->where_in('p.challange_post_id', $post_ids);
+            $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply, count(pli.id) as is_liked');
+            $this->db->from('challange_post_comment p');
+            $this->db->join('users u', 'p.user_id = u.id');
+            $this->db->join('challange_post_comments_like pl', 'p.id = pl.challange_post_comment_id and pl.is_liked=1', 'left');
+            $this->db->join('challange_post_comments_like pli', 'p.id = pli.challange_post_comment_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
+            $this->db->join('challange_post_comments_reply pr', 'p.id = pr.challange_post_comment_id', 'left');
+            $this->db->order_by('p.created_date', 'desc');
+            $this->db->group_by('p.id');
+
+            $post_comments = $this->db->get()->result_array();
+            $post_comments_ids = array_column($post_comments, 'challange_post_id');
+            if (count($post_comments_ids) > 0) {
+                for ($i = 0; $i < count($post); ++$i) {
+                    $post[$i]['comments'] = array();
+                    if (in_array($post[$i]['id'], $post_comments_ids)) {
+                        $posts = array();
+                        foreach ($post_comments as $value) {
+                            if ($post[$i]['id'] == $value['challange_post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post[$i]['comments'] = $posts;
+                    }
+                }
+            }
+        }
+        return $post;
     }
-    
+
     /*
      * user_coin_exist_for_post is used to check, if user has given like to particular post
      * @param $user_id	int 	specify user_id
@@ -232,7 +271,7 @@ class Challenge_model extends CI_Model {
         return $this->db->get('challange_post_coin')->row_array();
         //return $this->db->where('user_id',$user_id)->where('post_id',$post_id)->count_all_results('post_like');
     }
-    
+
     /*
      * add_post_coin is used to add coin to given value
      * @param $array array[] input fields
@@ -248,16 +287,183 @@ class Challenge_model extends CI_Model {
         }
         return false;
     }
-    
+
     /*
      * 
      */
-    public function get_post_user($post_id)
-    {
+
+    public function get_post_user($post_id) {
         $this->db->select('user_id');
-        $this->db->where('id',$post_id);
+        $this->db->where('id', $post_id);
         $row = $this->db->get('challange_post')->row_array();
         return $row['user_id'];
+    }
+
+    /*
+     * user_like_exist_for_post is used to check, if user has given like to particular post
+     * @param $user_id	int 	specify user_id
+     * @param $post_id 	int 	specify post_id
+     *
+     * @return boolean 	true, if user entry exist for post
+     * 					false, if not exist
+     * developed by : ar
+     */
+
+    public function user_like_exist_for_post($user_id, $post_id) {
+        $where['user_id'] = $user_id;
+        $where['challange_post_id'] = $post_id;
+        $this->db->where($where);
+        return $this->db->get('challange_post_like')->row_array();
+    }
+
+    /*
+     * update_post_like is used to update like status to particular post
+     * @param $array array[] specify fields that going to insert
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * developed by : ar
+     */
+
+    public function update_post_like($array, $id) {
+        $this->db->where('id', $id);
+        if ($this->db->update('challange_post_like', $array)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * add_post_like is used to give like to particular post
+     * @param $array array[] specify fields that going to insert
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * developed by : ar
+     */
+
+    public function add_post_like($array) {
+        if ($this->db->insert('challange_post_like', $array)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * insert_post_comment is used to insert comments to the post
+     * @param $arr array[] input data
+     * 
+     * @return boolean true, if success
+     *                  false, if fail
+     * developed by : ar
+     */
+
+    public function insert_post_comment($arr) {
+        if ($this->db->insert('challange_post_comment', $arr)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * get_post_comment_data_by_id is used to retrive comments data by post_comment_id
+     * @param $post_comment_id int specify post_comment_id
+     * 
+     * @return $array return records found as per condition
+     * developed by : ar
+     */
+
+    public function get_post_comment_data_by_id($post_comment_id) {
+        $this->db->select('p.*, u.name, u.user_image, count(pl.challange_post_comment_id) as cnt_like, count(pr.challange_post_comment_id) as cnt_reply');
+        $this->db->from('challange_post_comment p');
+        $this->db->join('challange_post_comments_like pl', 'p.id = pl.challange_post_comment_id', 'left');
+        $this->db->join('challange_post_comments_reply pr', 'p.id = pr.challange_post_comment_id', 'left');
+        $this->db->join('users u', 'p.user_id = u.id and p.id = ' . $post_comment_id);
+        return $this->db->get()->row_array();
+    }
+
+    /*
+     * user_like_exist_for_postcomment is used to check, if user has given like to particular comment of post
+     * @param $user_id          int 	specify user_id
+     * @param $post_comment_id 	int 	specify post_comment_id
+     *
+     * @return boolean 	true, if user entry exist for post
+     * 					false, if not exist
+     * developed by : ar
+     */
+
+    public function user_like_exist_for_postcomment($user_id, $post_comment_id) {
+        $where['user_id'] = $user_id;
+        $where['challange_post_comment_id'] = $post_comment_id;
+        $this->db->where($where);
+        return $this->db->get('challange_post_comments_like')->row_array();
+    }
+
+    /*
+     * update_postcomment_like is used to update like status to particular comment on post
+     * @param $array array[] specify fields that going to insert
+     *
+     * return 	true, if success
+     * 			false, if fail
+     * developed by : ar
+     */
+
+    public function update_postcomment_like($array, $id) {
+        $this->db->where('id', $id);
+        if ($this->db->update('challange_post_comments_like', $array)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * add_postcomment_like is used to give like to particular comment of post
+     * @param $array array[] specify fields that going to insert
+     *
+     * return 	true, if success
+     * 			false, if fail
+     * developed by : ar
+     */
+
+    public function add_postcomment_like($array) {
+        if ($this->db->insert('challange_post_comments_like', $array)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * 
+     */
+
+    public function get_post_reply($post_comment_id) {
+        $this->db->select('u.name, u.user_image,r.reply_text, r.created_date');
+        $this->db->from('challange_post_comments_reply r');
+        $this->db->join('users u', 'r.user_id = u.id and r.challange_post_comment_id = ' . $post_comment_id);
+        $this->db->group_by('r.created_date', 'asc');
+        return $this->db->get()->result_array();
+    }
+
+    /*
+     * 
+     */
+
+    public function insert_post_comment_reply($arr) {
+        if ($this->db->insert('challange_post_comments_reply', $arr)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * 
+     */
+    public function get_post_comment_reply_data_by_id($post_comment_reply_id)
+    {
+        $this->db->select('p.*, u.name, u.user_image');
+        $this->db->from('challange_post_comments_reply p');
+        $this->db->join('users u','p.user_id = u.id and p.id = '.$post_comment_reply_id);
+        return $this->db->get()->row_array();
     }
 }
 

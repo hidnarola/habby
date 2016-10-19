@@ -9,6 +9,7 @@ class Challenge extends CI_Controller {
     /*
      * 
      */
+
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model', 'Challenge_model', 'Common_functionality'));
@@ -151,15 +152,16 @@ class Challenge extends CI_Controller {
      */
 
     public function details($Id) {
-        $limit = 20;
+        $msg_limit = 20;
+        $post_limit = 10;
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['challenge'] = $this->Challenge_model->get_challenge_by_id($Id);
         $this->data['challenge_users'] = $this->Challenge_model->get_challenges_users($Id);
-        $this->data['messages'] = $this->Challenge_model->get_messages($Id, $limit);
-        
-        $this->data['challenge_post'] = $this->Challenge_model->get_challenge_posts($Id);
-        //pr($this->data['challenge_post'],1);
+        $this->data['messages'] = $this->Challenge_model->get_messages($Id, $msg_limit);
+
+        $this->data['challenge_post'] = $this->Challenge_model->get_challenge_posts($Id, $this->session->user['id'], 0, $post_limit);
+//        pr($this->data['challenge_post'],1);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/challenge/join_challenge', $this->data);
     }
@@ -188,6 +190,7 @@ class Challenge extends CI_Controller {
                             $config['upload_path'] = './uploads/challenge_post';
                             $config['allowed_types'] = 'gif|jpg|png';
                             $config['max_size'] = 1000000;
+                            $config['file_name'] = md5(uniqid(mt_rand()));
 
                             $this->upload->initialize($config);
 
@@ -204,10 +207,9 @@ class Challenge extends CI_Controller {
                                 $media[] = $media_arr;
                             }
                         }
-                        if(count($media) > 0)
-                        {
+                        if (count($media) > 0) {
                             $this->Challenge_model->insert_challenge_media($media);
-                            $this->session->set_flashdata('msg','Image has succesfully uploaded');
+                            $this->session->set_flashdata('msg', 'Image has succesfully uploaded');
                         }
                     }
                 } else if ($this->input->post('type') == "video") {
@@ -224,6 +226,7 @@ class Challenge extends CI_Controller {
                             $_FILES['userFile']['tmp_name'] = $_FILES['video_upload']['tmp_name'];
                             $_FILES['userFile']['error'] = $_FILES['video_upload']['error'];
                             $_FILES['userFile']['size'] = $_FILES['video_upload']['size'];
+                            $config['file_name'] = md5(uniqid(mt_rand()));
 
                             // Code of image uploading
                             $config['upload_path'] = './uploads/challenge_post';
@@ -245,10 +248,9 @@ class Challenge extends CI_Controller {
                                 $media[] = $media_arr;
                             }
                         }
-                        if(count($media) > 0)
-                        {
+                        if (count($media) > 0) {
                             $this->Challenge_model->insert_challenge_media($media);
-                            $this->session->set_flashdata('msg','Video has succesfully uploaded');
+                            $this->session->set_flashdata('msg', 'Video has succesfully uploaded');
                         }
                     }
                 } else {
@@ -278,8 +280,7 @@ class Challenge extends CI_Controller {
             echo '2';
         } else {
             $userdata = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
-            if($userdata['total_coin'] > 0)
-            {
+            if ($userdata['total_coin'] > 0) {
                 $insert_arr['user_id'] = $user_id;
                 $insert_arr['challange_post_id'] = $post_id;
                 if ($this->Challenge_model->add_post_coin($insert_arr)) {
@@ -290,13 +291,136 @@ class Challenge extends CI_Controller {
                 } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo '3';
             }
             // Insert entry
         }
     }
-    
+
+    /*
+     * add_like is used to give like to particular post
+     * @param $post_id int specify post_id
+     *
+     * echo '-1', if user displike the post,
+     *   	'1', if user like the post,
+     * 		'0', if operation fail
+     * developed by : ar
+     */
+
+    public function add_like($post_id) {
+        $user_id = $this->session->user['id'];
+        if (!empty($like = $this->Challenge_model->user_like_exist_for_post($user_id, $post_id))) {
+            // Update entry
+            $update_arr['is_liked'] = !$like['is_liked'];
+            $update_arr['created_date'] = date('Y-m-d H:i:s');
+            if ($this->Challenge_model->update_post_like($update_arr, $like['id'])) {
+                if ($like['is_liked']) {
+                    echo '-1';
+                } else {
+                    echo '1';
+                }
+            } else {
+                echo '0';
+            }
+        } else {
+            // Insert entry
+            $insert_arr['user_id'] = $user_id;
+            $insert_arr['challange_post_id'] = $post_id;
+            $insert_arr['is_liked'] = "1";
+            if ($this->Challenge_model->add_post_like($insert_arr)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+    }
+
+    /*
+     * add_comment is used to add comment on the post
+     * @param $post_id int specify post_id
+     * 
+     * echo '1', if comment added
+     *      '0', if comment not added
+     * developed by : ar
+     */
+
+    public function add_comment($post_id) {
+        if ($this->input->post()) {
+            $insert_arr['challange_post_id'] = $post_id;
+            $insert_arr['user_id'] = $this->session->user['id'];
+            $insert_arr['comment_description'] = $this->input->post('msg');
+            if ($this->Challenge_model->insert_post_comment($insert_arr)) {
+                // Create post comment content
+                $data['comment'] = $this->Challenge_model->get_post_comment_data_by_id($this->db->insert_id());
+                $this->load->view('user/partial/challenge/add_challenge_post_comment', $data);
+            } else {
+                echo '0';
+            }
+        }
+    }
+
+    /*
+     * 
+     */
+
+    public function add_postcomment_like($post_comment_id) {
+        $user_id = $this->session->user['id'];
+        if (!empty($like = $this->Challenge_model->user_like_exist_for_postcomment($user_id, $post_comment_id))) {
+            // Update entry
+            $update_arr['is_liked'] = !$like['is_liked'];
+            $update_arr['created_date'] = date('Y-m-d H:i:s');
+            if ($this->Challenge_model->update_postcomment_like($update_arr, $like['id'])) {
+                if ($like['is_liked']) {
+                    echo '-1';
+                } else {
+                    echo '1';
+                }
+            } else {
+                echo '0';
+            }
+        } else {
+            // Insert entry
+            $insert_arr['user_id'] = $user_id;
+            $insert_arr['challange_post_comment_id'] = $post_comment_id;
+            $insert_arr['is_liked'] = "1";
+            if ($this->Challenge_model->add_postcomment_like($insert_arr)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+    }
+
+    /*
+     * 
+     */
+
+    public function display_comment_reply($post_comment_id) {
+        $data['reply'] = $this->Challenge_model->get_post_reply($post_comment_id);
+        $this->load->view('user/partial/challenge/display_comment_reply', $data);
+    }
+
+    /*
+     * 
+     */
+    public function add_comment_reply($post_comment_id)
+    {
+        if($this->input->post())
+        {
+            $insert_arr['challange_post_comment_id'] = $post_comment_id;
+            $insert_arr['user_id'] = $this->session->user['id'];
+            $insert_arr['reply_text'] = $this->input->post('msg');
+            if($this->Challenge_model->insert_post_comment_reply($insert_arr))
+            {
+                // Create post comment content
+                $data['reply'] = $this->Challenge_model->get_post_comment_reply_data_by_id($this->db->insert_id());
+                $this->load->view('user/partial/challenge/add_comment_reply',$data);
+            }
+            else
+            {
+                echo '0';
+            }
+        }
+    }
 }

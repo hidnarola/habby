@@ -1,5 +1,3 @@
-<?php
-?>
 <div class="commnt_visit_sec clearfix">
     <div class="cmn_img">
         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">

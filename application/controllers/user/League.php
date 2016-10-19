@@ -85,6 +85,7 @@ class League extends CI_Controller {
                 $config['min_width'] = '300';
                 $config['min_height'] = '300';
                 $config['encrypt_name'] = TRUE;
+                $config['file_name'] = md5(uniqid(mt_rand()));
 
                 //Initialize all params for the CI uplaod library
                 $this->upload->initialize($config);
@@ -119,6 +120,7 @@ class League extends CI_Controller {
                 $config['min_width'] = '300';
                 $config['min_height'] = '300';
                 $config['encrypt_name'] = TRUE;
+                $config['file_name'] = md5(uniqid(mt_rand()));
 
                 //Initialize all params for the CI uplaod library
                 $this->upload->initialize($config);

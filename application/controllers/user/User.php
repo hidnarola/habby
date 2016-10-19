@@ -156,6 +156,7 @@ class User extends CI_Controller {
                 $config['upload_path'] = './uploads/chat_media';
                 $config['allowed_types'] = 'gif|jpg|png';
                 $config['max_size'] = 1000000;
+                $config['file_name'] = md5(uniqid(mt_rand()));
 
                 $this->upload->initialize($config);
 

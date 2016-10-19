@@ -205,10 +205,6 @@ function wsOnClose($clientID, $status) {
     $ip = long2ip($Server->wsClients[$clientID][6]);
 
     $Server->log("$ip ($clientID) has disconnected.");
-
-    //Send a user left notice to everyone in the room
-    foreach ($Server->wsClients as $id => $client)
-        $Server->wsSend($id, "Visitor $clientID ($ip) has left the room.");
 }
 
 // start the server

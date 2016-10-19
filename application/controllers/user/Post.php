@@ -115,8 +115,8 @@ class Post extends CI_Controller {
      * add_comment is used to add comment on the post
      * @param $post_id int specify post_id
      * 
-     * echo '1', if post was saved
-     *      '0', if post was failed
+     * echo '1', if comment added
+     *      '0', if comment not added
      * developed by : ar
      */
     public function add_comment($post_id)

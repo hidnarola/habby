@@ -101,7 +101,8 @@ class Home extends CI_Controller {
                             $config['upload_path'] = './uploads/user_post';
                             $config['allowed_types'] = 'gif|jpg|png';
                             $config['max_size'] = 1000000;
-
+                            $config['file_name'] = md5(uniqid(mt_rand()));
+                            
                             $this->upload->initialize($config);
 
                             if (!$this->upload->do_upload('userFile')) {
@@ -130,7 +131,8 @@ class Home extends CI_Controller {
                             $config['upload_path'] = './uploads/user_post';
                             $config['allowed_types'] = 'mp4|mov|3gp';
                             $config['max_size'] = 4000000;
-
+                            $config['file_name'] = md5(uniqid(mt_rand()));
+                            
                             $this->upload->initialize($config);
 
                             if (!$this->upload->do_upload('userFile')) {
@@ -214,6 +216,7 @@ class Home extends CI_Controller {
             $config['min_width'] = '300';
             $config['min_height'] = '300';
             $config['encrypt_name'] = TRUE;
+            $config['file_name'] = md5(uniqid(mt_rand()));
 
             //Initialize all params for the CI uplaod library
             $this->upload->initialize($config);

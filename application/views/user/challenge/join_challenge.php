@@ -260,9 +260,7 @@
                                                     echo DEFAULT_IMAGE_PATH;
                                                     echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
                                                     ?>"/><br/>
-                                                    <span class="coin_cnt">
-                                                        <?php echo $post['tot_coin'] ?> 
-                                                    </span> Coins
+                                                    <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> Coins
                                                 </a>
                                             </li>
                                             <li class="dropdown">
@@ -274,7 +272,6 @@
                                                     <span>
                                                         <span class="like_cnt"><?php echo $post['tot_like'] ?></span> Likes
                                                     </span>
-
                                                 </a>
                                             </li>
                                             <li>
@@ -287,60 +284,47 @@
                                             </li>
                                         </ul>
                                         <div class="winner-comnt">
-
                                             <p class="cmn_txtnw"> Comment Here</p>
-                                            <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                            <textarea class="form-control comment" rows="3" id="comment"></textarea>
 
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="commnt_visit_sec clearfix">
-                                                        <div class="cmn_img">
-                                                            <img src="<?php echo DEFAULT_IMAGE_PATH; ?>likeimg.jpg" class="img-responsive">
-                                                        </div>
-                                                        <div class="cmn_dtl">
-
-                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
-
-                                                            <ul class="cmnt_p clearfix">
-                                                                <li><a href="#">Like</a></li>
-                                                                <li><a href="#">Reply</a></li>
-                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                            </ul>
-
-                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="commnt_visit_sec clearfix">
-                                                        <div class="cmn_img">
-                                                            <img src="<?php echo DEFAULT_IMAGE_PATH; ?>likeimg.jpg" class="img-responsive">
-                                                        </div>
-                                                        <div class="cmn_dtl">
-
-                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
-
-                                                            <ul class="cmnt_p clearfix">
-                                                                <li><a href="#">Like</a></li>
-                                                                <li><a href="#">Reply</a></li>
-                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                            </ul>
-
-                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
-
+                                            <?php
+                                            if (isset($post['comments']) && count($post['comments']) > 0) {
+                                                foreach ($post['comments'] as $comment) {
+                                                    ?>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="commnt_visit_sec clearfix" data-post_comment_id="<?php echo $comment['id']; ?>">
+                                                            <div class="cmn_img">
+                                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive user_chat_thumb img-circle">
+                                                                <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span></p>
+                                                            </div>
+                                                            <div class="cmn_dtl">
+                                                                <p class="cmmnt_para"><?php echo $comment['comment_description']; ?></p>
+                                                                <p class=""><?php echo $comment['created_date'] ?></p>
+                                                                <ul class="cmnt_p clearfix">
+                                                                    <li class="stlnon"><span></span></li>
+                                                                    <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
+                                                                    <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                                    <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                </ul>
+                                                                <div class="reply_dtl"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <div class="commnt_visit_sec clearfix no_comment">
+                                                    No comments available
                                                 </div>
-                                            </div>
+                                                <?php
+                                            }
+                                            ?>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <!-- Each Rank section end here-->
                         <?php
@@ -349,7 +333,7 @@
                 </div>
 
             </div>
-
+            // I also checked new layout for comment. 
             <!-- Soulmate past Due section end here -->
         </div>
     </div>
