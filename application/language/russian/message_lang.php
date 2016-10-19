@@ -233,6 +233,7 @@ $lang["Event Date"] = "Введите заголовок";
 $lang["Event Details"] = "Сведения о мероприятии";
 $lang["Add New Meeting"] = "Добавить встречу";
 $lang["Meeting Details"] = "Встреча Подробнее";
+$lang["Add"] = "Добавить";
 
     //---flash---
 $lang["League image was not uploaded."] = "Лига изображение не было загружено.";

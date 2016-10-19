@@ -90,3 +90,20 @@ $route['user/verify_email/(:any)'] = "user/user/verify_email/$1";
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/* Routes For the Admin Start */
+$route['admin'] = "admin/login";
+$route['admin/logout'] = "admin/dashboard/log_out";
+$route['admin/edit_profile'] = "admin/dashboard/edit";
+$route['admin/change_password'] = "admin/dashboard/change_password";
+$route['admin/(:any)'] = "admin/$1";
+
+$route['admin/users/add'] = 'admin/users/edit';
+$route['admin/pages/add'] = 'admin/pages/edit';
+$route['admin/(:any)/(:any)'] = "admin/$1/$2";
+
+$route['admin/users/delete/(:any)'] = 'admin/users/action/delete/$1';
+$route['admin/users/activate/(:any)'] = 'admin/users/action/activate/$1';
+$route['admin/users/block/(:any)'] = 'admin/users/action/block/$1';
+
+$route['admin/(:any)/(:any)/(:any)'] = "admin/$1/$2/$3";

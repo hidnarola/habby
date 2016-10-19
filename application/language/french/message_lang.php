@@ -233,6 +233,7 @@ $lang["Event Date"] = "Date de l'événement";
 $lang["Event Details"] = "Détails de l'évènement";
 $lang["Add New Meeting"] = "Ajouter une nouvelle réunion";
 $lang["Meeting Details"] = "Détails de la réunion";
+$lang["Add"] = "Ajouter";
 
     //---flash---
 $lang["League image was not uploaded."] = "l'image de la Ligue n'a pas été téléchargé.";

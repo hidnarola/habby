@@ -392,7 +392,7 @@
                     });
                 });
                 $('#overview').on('click', '.emoticon', function () {
-                    $('#message').val($('#message').val() + " " + $(this).html());
+                    $('#message_div').append($.emoticons.replace($(this).html()));                   
                 });
             });
         </script>

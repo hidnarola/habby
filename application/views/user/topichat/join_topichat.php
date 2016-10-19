@@ -1,7 +1,7 @@
 <div class="row cont_top_1">
     <div class="container topic_2cntnr mble_pd_0">
         <p class="mr_p visible-xs" >
-            <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files');?></a>
+            <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
         </p>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 topichat_left_sec">
             <div class="rate_lg_sec">
@@ -11,7 +11,7 @@
 
                     <!-- Top rate heading section start here -->
                     <div class="panel-heading">
-                        <b><?php echo lang('TOP RATE');?></b>
+                        <b><?php echo lang('TOP RATE'); ?></b>
                         <span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
                     </div>
                     <!-- Top rate heading section end here -->
@@ -98,8 +98,8 @@
 
                 <!-- All files section start here -->
                 <div class="panel panel-default popular_img_sec">
-                    <div class="panel-heading"><b><?php echo lang('ALL FILES');?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
-                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared');?></b> <span style="float: right"><a href="#"><b><?php echo lang('More');?></b></a></span></div>
+                    <div class="panel-heading"><b><?php echo lang('ALL FILES'); ?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
+                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared'); ?></b> <span style="float: right"><a href="#"><b><?php echo lang('More'); ?></b></a></span></div>
                     <div class="panel-body">
                         <div class="topic_frame">
                             <a class="fancybox" data-type="iframe"  href="http://www.youtube.com/embed/WAZ5SmJd1To" data-fancybox-group="galleryshared1">
@@ -113,9 +113,9 @@
                 <!-- popular image and video section start here -->
                 <div class="panel panel-default popular_img_sec">
 
-                    <div class="panel-heading"><b><?php echo lang('UPLOAD');?></b> <span style="float: right"><a href="#"><b><?php echo lang('More');?></b></a></span></div>
+                    <div class="panel-heading"><b><?php echo lang('UPLOAD'); ?></b> <span style="float: right"><a href="#"><b><?php echo lang('More'); ?></b></a></span></div>
 
-                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Videos');?></b></div>
+                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Videos'); ?></b></div>
 
                     <div class="panel-body">
                         <ul class="photo_vdo_ul">
@@ -164,7 +164,7 @@
 
                     </div>
 
-                    <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images');?></b> </div>
+                    <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images'); ?></b> </div>
 
                     <div class="panel-body">
                         <ul class="photo_vdo_ul">
@@ -232,7 +232,7 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
                             <div class="tittl_sec2">
                                 <p class="topchat_p">
-                                    <a href="#" class="pstbtn"><?php echo lang('Edit');?></a>
+                                    <a href="#" class="pstbtn"><?php echo lang('Edit'); ?></a>
                                 </p>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                                                         <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>twitter_img.jpg"></a>
                                                     </span>
                                                     <span class="input-group-btn">
-                                                        <input class="chat_btn" type="submit" value="<?php echo lang('Share');?>">
+                                                        <input class="chat_btn" type="submit" value="<?php echo lang('Share'); ?>">
                                                     </span>
                                                 </div>
                                             </div>
@@ -293,7 +293,8 @@
                                     <div class="topic_textarea">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" id='message' name='message' class="form-control" placeholder="<?php echo lang('Type Here...');?>">
+                                                <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
+                                                <input type="hidden" id='message' name='message' class="form-control"/>
                                                 <span class="input-group-btn upld_icnpad">
                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
                                                 </span>
@@ -307,7 +308,7 @@
                                                     <a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
                                                 </span>
                                                 <span class="input-group-btn">
-                                                    <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send');?>">
+                                                    <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
                                                 </span>
                                             </div>
                                         </div>
@@ -330,7 +331,7 @@
     data = '<?php echo json_encode($this->session->user); ?>';
     group_id = '<?php echo $group_id; ?>';
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
-    last_msg = '<?php echo (count($messages) > 0)?$messages[count($messages) - 1]['id']:0 ?>';
+    last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
     upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>
@@ -341,7 +342,7 @@
         var load = true;
         var in_progress = false;
         $('.chat_area2').scroll(function () {
-            if(load && !in_progress)
+            if (load && !in_progress)
             {
                 if ($('.chat_area2').scrollTop() == 0) {
                     loaddata();
@@ -353,28 +354,27 @@
         function loaddata()
         {
             $.ajax({
-                url : base_url+'topichat/load_more_msg/'+group_id,
+                url: base_url + 'topichat/load_more_msg/' + group_id,
                 method: 'post',
                 async: false,
-                data : 'last_msg='+last_msg,
-                success : function(more){
+                data: 'last_msg=' + last_msg,
+                success: function (more) {
                     more = JSON.parse(more);
-                    if(more.status)
+                    if (more.status)
                     {
                         $('.chat_area2').prepend(more.view);
                         last_msg = more.last_msg_id;
-                        $(".chat_area2").animate({scrollTop: 200 }, 500);
-                    }
-                    else
+                        $(".chat_area2").animate({scrollTop: 200}, 500);
+                    } else
                     {
                         load = false;
                         $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
-                        $(".chat_area2").animate({scrollTop: 0 }, 500);
+                        $(".chat_area2").animate({scrollTop: 0}, 500);
                     }
                     in_progress = false;
                 }
             });
-            
+
         }
     });
 </script>

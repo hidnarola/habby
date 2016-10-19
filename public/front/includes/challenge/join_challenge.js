@@ -14,25 +14,29 @@ $(document).ready(function () {
     Server = new FancyWebSocket('ws://192.168.1.186:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
     // Send message to server
-    $('#message').keypress(function (e) {
-        if (e.keyCode == 13 && this.value) {
-            if (this.value.trim() != '')
+    $('#message_div').keypress(function (e) {
+        if (e.keyCode == 13) {
+            if ($.trim($(this).html()) != '')
             {
-                this.value = $.emoticons.replace($('#message').val());
-                $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + this.value + "</span></span></p>");
-                send(this.value);
-                $(this).val('');
+//                this.value = $.emoticons.replace($('#message').val());
+                $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + $('#message_div').html() + "</span></span></p>");
+                send($('#message_div').html());
+                $(this).html('');
+                $('#message').val('');
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+            } else {
+                return false;
             }
         }
     });
     $('.submit_btn').click(function (e) {
-        msg = $('#message').val();
+        msg = $('#message_div').html();
         if (msg.trim() != '')
         {
-            msg = $.emoticons.replace($('#message').val());
+//            msg = $.emoticons.replace($('#message').val());
             $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + msg + "</span></span></p>");
             send(msg);
+            $('#message_div').html('');
             $('#message').val('');
             $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         }
