@@ -307,7 +307,7 @@
                                                                     <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
                                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                                                 </ul>
-                                                                <div class="reply_dtl"></div>
+                                                                <div class="reply_dtl" style="display:none"></div>
                                                             </div>
                                                         </div>
                                                     </div>

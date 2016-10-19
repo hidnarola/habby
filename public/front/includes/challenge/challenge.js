@@ -175,17 +175,28 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Display comment reply
     $(".chlng2_past_rank_sec").on('click', '.post_reply', function () {
-        var t = $(this);
-        var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
-        $.ajax({
-            url: base_url + 'user/challenge/display_comment_reply/' + post_comment_id,
-            success: function (str) {
-                t.parents('.cmn_dtl').find('.reply_dtl').html(str);
-            }
-        });
+
+        var $t = $(this).parents('.cmn_dtl').find('.reply_dtl');
+
+        if ($t.is(':visible')) {
+            $t.slideUp();
+            // Other stuff to do on slideUp
+        } else {
+            // Other stuff to down on slideDown
+            var t = $(this);
+            var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
+            $.ajax({
+                url: base_url + 'user/challenge/display_comment_reply/' + post_comment_id,
+                success: function (str) {
+                    t.parents('.cmn_dtl').find('.reply_dtl').html(str);
+                    $t.slideDown();
+                }
+            });
+        }
+
     });
 
     // Add reply for the post comment
@@ -214,5 +225,5 @@ $('document').ready(function () {
         }
     });
 
-    
+
 });
