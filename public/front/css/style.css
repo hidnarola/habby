@@ -6734,5 +6734,26 @@ span.nexttab {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+#overview .emoticon {
+    cursor: pointer !important;
+}
 
+
+
+[contenteditable] {
+    border: 1px solid #000;
+    line-height: 1.4em;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    -webkit-user-modify: read-write;
+    word-wrap: break-word;
+    -webkit-line-break: after-white-space;
+}
+img.emoticon {
+    vertical-align: top;
+    max-height: 1.4em;
+    max-width: 1.4em;
+    width: 19px !important;
+    float: none !important;
+}
 /* Developer CSS End */

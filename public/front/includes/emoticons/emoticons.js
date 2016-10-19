@@ -105,8 +105,9 @@ exports.toString = function(fn) {
  * @return {String}
  */
 exports.tpl = function(name, code, title) {
-    return '<span class="emoticon emoticon-' + name + '" title="' + title + '">' +
-        code + '</span>';
+    return '<img class="emoticon emoticon-' + name + '" title="' + title + '"/>';
+//    return '<span class="emoticon emoticon-' + name + '" title="' + title + '">' +
+//        code + '</span>';
 };
 
 }(typeof jQuery != 'undefined' ? jQuery : null,

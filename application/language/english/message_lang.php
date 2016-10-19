@@ -234,6 +234,7 @@ $lang["Event Date"] = "Event Date";
 $lang["Event Details"] = "Event Details";
 $lang["Add New Meeting"] = "Add New Meeting";
 $lang["Meeting Details"] = "Meeting Details";
+$lang["Add"] = "Add";
 
     //---flash---
 $lang["League image was not uploaded."] = "League image was not uploaded.";

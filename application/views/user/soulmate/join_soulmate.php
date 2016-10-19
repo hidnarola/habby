@@ -324,7 +324,8 @@
                                     <div class="topic_textarea">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" id="message" class="form-control" placeholder="Type Here...">
+                                                <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
+                                                <input type="hidden" id='message' name='message' class="form-control"/>
                                                 <span class="input-group-btn">
                                                     <input class="chat_btn submit_btn" type="submit" value="Send">
                                                 </span>

@@ -110,7 +110,7 @@ class Login extends CI_Controller {
     }
 
     /**
-     * This function is used to craete new user and send verification mail.
+     * This function is used to create new user and send verification mail.
      * develop by : HPA
      */
     public function register() {
