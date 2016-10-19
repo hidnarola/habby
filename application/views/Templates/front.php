@@ -212,21 +212,21 @@
 
 
         <!--  Fixed chat box section start here -->
-        <div class="chat_lgsec hidden-xs">
+<!--        <div class="chat_lgsec hidden-xs">
             <div class="panel panel-default">
-                <!--  chat box header start-->
+                  chat box header start
                 <div class="panel-heading">
                     <p class="text-center show_chat"><img src="<?php echo DEFAULT_IMAGE_PATH . "ftr_chat_icon.png" ?>"> <?php echo lang('Chats'); ?></p>
                 </div>
-                <!--  chat box header end-->
+                  chat box header end
 
-                <!--  chat box chat display section start-->
+                  chat box chat display section start
                 <div class="panel-body chat_smlr">
 
                 </div>
-                <!--  chat box chat display section end-->
+                  chat box chat display section end
 
-                <!--  chat box type and send section start-->
+                  chat box type and send section start
                 <div class="panel-footer chat_smlr">
                     <div class="form-group">
                         <div class="input-group">
@@ -237,9 +237,9 @@
                         </div>
                     </div>
                 </div>
-                <!--  chat box type and send section start-->
+                  chat box type and send section start
             </div>
-        </div>
+        </div>-->
         <!--  Fixed chat box section end here -->
 
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "bootstrap.js" ?>"></script>
