@@ -100,8 +100,29 @@ if (!empty($user_data['user_image'])) {
                                     <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Users</span></a>
                                     </li>
+                                    <li class="<?php echo ($controller == 'categories') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/categories'; ?>"><i class="icon-server"></i> <span>Post Categories</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'banners') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/banners'; ?>"><i class="icon-file-picture"></i> <span>Banner Images</span></a>
+                                    </li>
+<!--                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Topichat</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Soulmate</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Group Plan</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Challenges</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>League and Alliance</span></a>
+                                    </li>
                                     <li class="<?php echo ($controller == 'header_footer_control') ? 'active' : ''; ?>">
-                                        <a href="<?php echo base_url() . 'admin/header_footer_control'; ?>"><i class="icon-stack2"></i> <span>Header/Footer Setting</span></a>
+                                        <a href="<?php echo base_url() . 'admin/header_footer_control'; ?>"><i class="icon-stack2"></i> <span>Header/Footer Setting</span></a>-->
                                     </li>
                                     <li class="">
                                         <a href="<?php echo base_url() . "admin/logout"; ?>"><i class="icon-switch2"></i> <span>Logout</span></a>

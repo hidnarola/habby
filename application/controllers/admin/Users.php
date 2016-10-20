@@ -82,7 +82,7 @@ class Users extends CI_Controller {
             $check_user = $this->Admin_users_model->get_result('users', $where);
             if ($check_user) {
                 $this->data['user_datas'] = $check_user[0];
-                $this->data['title'] = 'Drope - Admin edit user';
+                $this->data['title'] = 'Habby - Admin edit user';
                 $this->data['heading'] = 'Edit user';
                 $this->data['all_countries'] = $this->Users_model->get_all_countries();
             } else {
@@ -90,14 +90,10 @@ class Users extends CI_Controller {
             }
         }
         if ($this->input->post()) {
-            $this->form_validation->set_rules('fname', 'first name', 'trim|required');
-            $this->form_validation->set_rules('lname', 'last name', 'trim|required');
-            $this->form_validation->set_rules('display_name', 'display name', 'trim|required');
-            $this->form_validation->set_rules('email_id', 'email', 'trim|required');
-
+            $this->form_validation->set_rules('name', 'Name', 'trim|required');
+            $this->form_validation->set_rules('email', 'E-Mail', 'trim|required', array('required' => 'Please fill the field' . ' %s .'));
             if ($this->form_validation->run() == FALSE) {
-                $this->data['subview'] = 'admin/users/manage';
-                $this->load->view('admin/layouts/layout_main', $this->data);
+                $this->template->load('admin_main', 'admin/users/manage', $this->data);
             } else {
                 $update_array = $this->input->post(null);
                 $this->Admin_users_model->update_record('users', $where, $update_array);

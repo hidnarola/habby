@@ -1,6 +1,6 @@
 <?php
 
-class Admin_pages_model extends CI_Model {
+class Admin_categories_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -11,35 +11,30 @@ class Admin_pages_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_pages_result($table, $select = null, $type) {
-        $columns = ['id', 'navigation_name', 'title', 'created_date'];
-        $this->db->select($select, FALSE);
+    public function get_all_categories() {
+        $start = $this->input->get('start');
+        $columns = ['id', 'category_name', 'is_deleted'];
+        $this->db->select('id,@a:=@a+1 AS test_id,category_name,is_deleted', false);
+        $this->db->where('is_deleted', 0);
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('navigation_name LIKE "%' . $keyword['value'] . '%" OR title LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('category_name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $this->db->limit($this->input->get('length'), $this->input->get('start'));
-        // $this->db->where('user_role != ','admin');
-        $query = $this->db->get($table);
-        if ($type == 'count') {
-            return $query->num_rows();
-        } else {
-            return $query->result_array();
-        }
+        $res_data = $this->db->get('post_categories,(SELECT @a:= ' . $start . ') AS a')->result_array();
+        return $res_data;
     }
 
     /**
-     * @uses : count rows of table
-     * @return : number of rows
+     * @uses : this function is used to count rows of users based on datatable in user list page
+     * @param : @table 
      * @author : HPA
      */
-    public function rows_of_table($table, $condition = null) {
-        $this->db->select('*');
-        if ($condition != null)
-            $this->db->where($condition);
-        $query = $this->db->get($table);
-        return $query->num_rows();
+    public function get_categories_count() {
+        $this->db->where('is_deleted', 0);
+        $res_data = $this->db->get('post_categories')->num_rows();
+        return $res_data;
     }
 
     /**
@@ -71,7 +66,7 @@ class Admin_pages_model extends CI_Model {
     }
 
     /**
-     * @uses : Insert user record into table
+     * @uses : Insert categories record into table
      * @param : @table = table name, @array = array of insert
      * @return : insert_id else 0
      * @author : HPA
@@ -85,3 +80,5 @@ class Admin_pages_model extends CI_Model {
     }
 
 }
+
+?>

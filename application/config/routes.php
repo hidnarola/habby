@@ -98,12 +98,10 @@ $route['admin/edit_profile'] = "admin/dashboard/edit";
 $route['admin/change_password'] = "admin/dashboard/change_password";
 $route['admin/(:any)'] = "admin/$1";
 
-$route['admin/users/add'] = 'admin/users/edit';
-$route['admin/pages/add'] = 'admin/pages/edit';
+$route['admin/(:any)/add'] = 'admin/$1/edit';
 $route['admin/(:any)/(:any)'] = "admin/$1/$2";
 
-$route['admin/users/delete/(:any)'] = 'admin/users/action/delete/$1';
-$route['admin/users/activate/(:any)'] = 'admin/users/action/activate/$1';
-$route['admin/users/block/(:any)'] = 'admin/users/action/block/$1';
-
+$route['admin/(:any)/delete/(:any)'] = 'admin/$1/action/delete/$2';
+$route['admin/(:any)/activate/(:any)'] = 'admin/$1/action/activate/$2';
+$route['admin/(:any)/block/(:any)'] = 'admin/$1/action/block/$2';
 $route['admin/(:any)/(:any)/(:any)'] = "admin/$1/$2/$3";
