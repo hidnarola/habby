@@ -224,5 +224,47 @@ $('document').ready(function () {
         }
     });
 
-
+    // Add rank to the post
+    $('.chlng2_past_rank_sec').on('click','.add',function(){
+        var t = $(this);
+        var post_id = t.parents('.rank_lg_sec').data('post_id');
+        $.ajax({
+            url: base_url + 'user/challenge/add_rank_to_challenge_post/'+post_id,
+            success : function(str){
+                if(str == 1)
+                {
+                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
+                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 1);
+                }
+                else if(str == 2)
+                {
+                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
+                    t.siblings('.sub').find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow.png');
+                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 2);
+                }
+            }
+        });
+    });
+    
+    // Subtract rank to the post
+    $('.chlng2_past_rank_sec').on('click','.sub',function(){
+        var t = $(this);
+        var post_id = t.parents('.rank_lg_sec').data('post_id');
+        $.ajax({
+            url: base_url + 'user/challenge/subtract_rank_from_challenge_post/'+post_id,
+            success : function(str){
+                if(str == -1)
+                {
+                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
+                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 1);
+                }
+                else if(str == -2)
+                {
+                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
+                    t.siblings('.add').find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow.png');
+                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 2);
+                }
+            }
+        });
+    });
 });

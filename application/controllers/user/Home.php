@@ -64,7 +64,7 @@ class Home extends CI_Controller {
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->challange_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
-            $this->template->load('front', 'user/home.php', $this->data);
+            $this->template->load('front', 'user/challenge.php', $this->data);
         } else {
             $data['view'] = $this->load->view('user/partial/load_post_data', $this->data, true);
             $data['status'] = '1';

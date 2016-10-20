@@ -208,7 +208,7 @@ class Challenge_model extends CI_Model {
      */
 
     public function get_challenge_posts($challange_id, $logged_in_user, $start = 0, $limit = 0) {
-        $this->db->select('cp.*,u.name,u.user_image,count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined,count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked,count(DISTINCT cpc.id) as tot_comment');
+        $this->db->select('cp.*,u.name,u.user_image,count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined,count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked,count(DISTINCT cpc.id) as tot_comment,count(DISTINCT crp.id) as positive_rank,count(DISTINCT crn.id) as negetive_rank,count(DISTINCT cru.id) is_ranked, cru.rank');
         $this->db->from('challange_post cp');
         $this->db->join('users u', 'cp.user_id = u.id');
         $this->db->join('challange_post_coin cc', 'cp.id = cc.challange_post_id', 'left');
@@ -216,11 +216,13 @@ class Challenge_model extends CI_Model {
         $this->db->join('challange_post_like cl', 'cp.id = cl.challange_post_id and cl.is_liked = 1', 'left');
         $this->db->join('challange_post_like cl1', 'cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = ' . $logged_in_user, 'left');
         $this->db->join('challange_post_comment cpc', 'cp.id = cpc.challange_post_id', 'left');
+        $this->db->join('challange_post_rank crp','cp.id = crp.challange_post_id and crp.rank = 1','left');
+        $this->db->join('challange_post_rank crn','cp.id = crn.challange_post_id and crn.rank = 0','left');
+        $this->db->join('challange_post_rank cru','cp.id = cru.challange_post_id and cru.user_id = '.$logged_in_user,'left');
         $this->db->where('cp.challange_id = ' . $challange_id);
-        $this->db->order_by('id', 'desc');
+        $this->db->order_by('(count(DISTINCT crp.id) - count(DISTINCT crn.id))', 'desc');
         $this->db->group_by('cp.id');
         $post = $this->db->get()->result_array();
-
         $post_ids = array_column($post, 'id');
 
         if (count($post_ids) > 0) {
@@ -465,6 +467,51 @@ class Challenge_model extends CI_Model {
         $this->db->join('users u','p.user_id = u.id and p.id = '.$post_comment_reply_id);
         return $this->db->get()->row_array();
     }
+    
+    /*
+     * 
+     */
+    public function user_rank_exist_for_post($uid,$post_id)
+    {
+        $where['user_id'] = $uid;
+        $where['challange_post_id'] = $post_id;
+        $this->db->where($where);
+        return $this->db->get('challange_post_rank')->row_array();
+    }
+    
+    /*
+     * update_post_rank is used to update rank status to particular post
+     * @param $array array[] specify fields that going to insert
+     * @param $id    int     specify id field of challange_post_rank table
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * developed by : ar
+     */
+
+    public function update_post_rank($array, $id) {
+        $this->db->where('id', $id);
+        if ($this->db->update('challange_post_rank', $array)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*
+     * add_post_rank is used to add rank to particular post
+     * @param $array array[] specify fields that going to insert
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * developed by : ar
+     */
+    public function add_post_rank($array) {
+        if ($this->db->insert('challange_post_rank', $array)) {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 ?>

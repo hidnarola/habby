@@ -221,6 +221,15 @@
                                             <li><img src="<?php echo DEFAULT_IMAGE_PATH; ?>rank_1.png"></li>
                                             <li><img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['user_image']; ?>" title="<?php echo $post['name'] ?>"></li>
                                         </ul>
+                                        <div id="field">
+                                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($post['is_ranked'] && $post['rank'])?'challeng_arrow_ranked.png':'challeng_arrow.png') ?>">
+                                            </button>
+                                            <span class="rank_rate"><?php echo $post['positive_rank'] - $post['negetive_rank']; ?></span>
+                                            <button type="button" id="sub" class="sub smlr_btn">
+                                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($post['is_ranked'] && !$post['rank'])?'challeng_arrow_ranked.png':'challeng_arrow.png') ?>">
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12 pad_lft0">
                                         <div class="rank-post">
@@ -332,9 +341,7 @@
                     }
                     ?>
                 </div>
-
             </div>
-            // I also checked new layout for comment. 
             <!-- Soulmate past Due section end here -->
         </div>
     </div>
@@ -343,6 +350,7 @@
     data = '<?php echo json_encode($this->session->user); ?>';
     group_id = '<?php echo $group_id; ?>';
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
+    DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
     last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
     upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
