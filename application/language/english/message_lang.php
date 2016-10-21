@@ -78,7 +78,7 @@ $lang['User Profile has been updated successfully.'] = 'User Profile has been up
 $lang['Image has been uploaded successfully'] = 'Image has been uploaded successfully.';
 $lang['Topic added successfully'] = 'Topic added successfully.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
-
+$lang['Group plan added successfully'] = 'Group plan added successfully';
 //---Profile---
 $lang['Save'] = 'Save';
 $lang['edit your profile'] = 'Edit your profile';
@@ -126,6 +126,7 @@ $lang['Send'] = 'Send';
 //---Topichat---
 $lang['Create'] = 'Create';
 $lang['Notes'] = 'Notes';
+$lang['Users'] = 'Users';
 $lang['Interest/Hobby'] = 'Interest/Hobby';
 $lang['Self-introduction'] = 'Self-introduction';
 
@@ -134,6 +135,7 @@ $lang['Self-introduction'] = 'Self-introduction';
 $lang['Group'] = 'Group';
 $lang['Find your group'] = 'Find your group';
 $lang['Join'] = 'Join';
+$lang['Joined'] = 'Joined';
 $lang['No Topichat found.'] = 'No Topichat found.';
 $lang['Load More'] = 'Load More';
 $lang['CREATE NEW GROUP'] = 'CREATE NEW GROUP';

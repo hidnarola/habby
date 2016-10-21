@@ -1,65 +1,7 @@
 $('document').ready(function () {
-    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-    var load = true;
-    var in_progress = false;
-    $('.chat_area2').scroll(function () {
-        if (load && !in_progress)
-        {
-            if ($('.chat_area2').scrollTop() == 0) {
-                loaddata();
-                in_process = true;
-            }
-        }
-    });
-    function loaddata()
-    {
-        $.ajax({
-            url: base_url + 'challenge/load_more_msg/' + group_id,
-            method: 'post',
-            async: false,
-            data: 'last_msg=' + last_msg,
-            success: function (more) {
-                more = JSON.parse(more);
-                if (more.status)
-                {
-                    $('.chat_area2').prepend(more.view);
-                    last_msg = more.last_msg_id;
-                    $(".chat_area2").animate({scrollTop: 200}, 500);
-                }
-                else
-                {
-                    load = false;
-                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
-                    $(".chat_area2").animate({scrollTop: 0}, 500);
-                }
-                in_progress = false;
-            }
-        });
-    }
 
-// upload challange post
-    var selected = false;
-    $('.upload_image').change(function () {
-        selected = true;
-        $(".type").val("image");
-        $('.media_name').html($(this).val());
-        $('.upload_btn').removeClass('make_disabled');
-    });
-    $('.upload_video').change(function () {
-        selected = true;
-        $(".type").val("video");
-        $('.media_name').html($(this).val());
-        $('.upload_btn').removeClass('make_disabled');
-    });
-    $("#media_form").submit(function () {
-        if (selected)
-        {
-            return true;
-        }
-        return false;
-    });
     // give coin to challenge post
-    $('.chlng2_past_rank_sec').on('click', '.user_coin', function () {
+    $('.post_masonry_section,#rank_modal').on('click', '.user_coin', function () {
         var t = $(this);
         post_id = t.parents('.rank_lg_sec').data('post_id');
         $.ajax({
@@ -88,8 +30,9 @@ $('document').ready(function () {
             }
         });
     });
+    
     // Like functionality on post
-    $('.chlng2_past_rank_sec').on('click', '.user_like', function () {
+    $('.post_masonry_section,#rank_modal').on('click', '.user_like', function () {
         var t = $(this);
         post_id = t.parents('.rank_lg_sec').data('post_id');
         $.ajax({
@@ -116,12 +59,14 @@ $('document').ready(function () {
             }
         });
     });
+    
     // Open comment part when user click on comment
-    $('.chlng2_past_rank_sec').on('click', '.cmnt_winner', function () {
+    $('.post_masonry_section,#rank_modal').on('click', '.cmnt_winner', function () {
         $(this).parents('.rank_lg_sec').find('.winner-comnt').slideToggle(1000);
     });
+
     // Add comment to the post
-    $(".comment").on("keypress", function (e) {
+    $(".post_masonry_section,#rank_modal").on("keypress", ".comment",function (e) {
         var key = e.keyCode;
         var t = $(this);
         // If the user has pressed enter
@@ -147,8 +92,9 @@ $('document').ready(function () {
             return false;
         }
     });
+
     // Add like to the post comment
-    $('.chlng2_past_rank_sec').on('click', '.comment_like_cnt', function () {
+    $('.post_masonry_section,#rank_modal').on('click', '.comment_like_cnt', function () {
         var t = $(this);
         var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
         $.ajax({
@@ -177,7 +123,7 @@ $('document').ready(function () {
     });
 
     // Display comment reply
-    $(".chlng2_past_rank_sec").on('click', '.post_reply', function () {
+    $(".post_masonry_section,#rank_modal").on('click', '.post_reply', function () {
 
         var $t = $(this).parents('.cmn_dtl').find('.reply_dtl');
 
@@ -199,7 +145,7 @@ $('document').ready(function () {
     });
 
     // Add reply for the post comment
-    $('.chlng2_past_rank_sec').on('keypress', '.comment_reply', function (e) {
+    $('.post_masonry_section,#rank_modal').on('keypress', '.comment_reply', function (e) {
         var key = e.keyCode;
         // If the user has pressed enter
         if (key == 13) {
@@ -223,47 +169,16 @@ $('document').ready(function () {
             return false;
         }
     });
-
-    // Add rank to the post
-    $('.chlng2_past_rank_sec').on('click','.add',function(){
-        var t = $(this);
-        var post_id = t.parents('.rank_lg_sec').data('post_id');
-        $.ajax({
-            url: base_url + 'user/challenge/add_rank_to_challenge_post/'+post_id,
-            success : function(str){
-                if(str == 1)
-                {
-                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 1);
-                }
-                else if(str == 2)
-                {
-                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
-                    t.siblings('.sub').find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 2);
-                }
-            }
-        });
-    });
     
-    // Subtract rank to the post
-    $('.chlng2_past_rank_sec').on('click','.sub',function(){
+    // Open rank modal and display rank post in it
+    $('.post_masonry_section').on('click','.others_rank',function(){
         var t = $(this);
-        var post_id = t.parents('.rank_lg_sec').data('post_id');
+        var challenge_id = t.parents('.rank_lg_sec').data('challenge_id');
+        
         $.ajax({
-            url: base_url + 'user/challenge/subtract_rank_from_challenge_post/'+post_id,
+            url : 'user/challenge/get_top_rank_post/'+challenge_id,
             success : function(str){
-                if(str == -1)
-                {
-                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 1);
-                }
-                else if(str == -2)
-                {
-                    t.find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png');
-                    t.siblings('.add').find('img').attr('src',DEFAULT_IMAGE_PATH+'challeng_arrow.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 2);
-                }
+                $('#rank_modal').find('.modal-body').html(str);
             }
         });
     });

@@ -85,14 +85,19 @@
                                         <p class="soulmate_txt3"><?php echo $Group_plan['introduction'] ?></p>
                                         <p class="soulmate_txt4"><?php echo $Group_plan['display_name'] ?> <?php echo lang('Created Group');?></p>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><span><?php echo $Group_plan['Total_User'] . "/" . $Group_plan['user_limit'] ?> <?php echo lang('users');?></span></li>
+                                            <li><span><?php echo $Group_plan['Total_User'] . "/" . $Group_plan['user_limit'] ?> <?php echo lang('Users');?></span></li>
                                             <li>
-                                                <?php if ($Group_plan['Is_Requested'] == 0) { ?>
-
-                                                    <a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join"><?php echo lang('Join');?></a>
-                                                <?php } else {
-                                                    ?>
+                                                <?php if ($Group_plan['Is_Requested'] != 0) { ?>
                                                     <a href="javascript:void(0);" class="pstbtn requested"><?php echo lang('Requested');?></a>
+                                                <?php }
+                                                else if($Group_plan['is_joined'] == 1){
+                                                    ?>
+                                                    <a href="javascript:void(0);" class="pstbtn requested"><?php echo lang('Joined');?></a>
+                                                    <?php
+                                                }
+                                                else {
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "groupplan/join/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn join"><?php echo lang('Join');?></a>
                                                 <?php }
                                                 ?>
                                             </li>

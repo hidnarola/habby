@@ -111,3 +111,4 @@
 .cmmnt_para {word-wrap:break-word;}
 
 .rank_rate{ display: block;}
+#rank_modal .modal-body{ max-height:500px; overflow-x: scroll;}

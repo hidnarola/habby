@@ -76,9 +76,9 @@ $lang['Invalid Token'] = 'jeton invalide';
 $lang['Your password is successfully changed! Please login to access your account!'] = "Votre mot de passe est changé avec succès! S'il vous plaît vous connecter pour accéder à votre compte!";
 $lang['User Profile has been updated successfully.'] = "L'image a été téléchargé avec succès";
 $lang['Image has been uploaded successfully'] = 'Изображение было загружено успешно';
-
 $lang['Topic added successfully'] = 'Topic added successfully.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
+$lang['Group plan added successfully'] = 'Plan de Groupe ajouté avec succès';
 
 //---Profile---
 $lang['Save'] = 'Sauvegarder';
@@ -127,6 +127,7 @@ $lang['POST'] = 'POST';
     //---Topichat---
 $lang['Create'] = 'Créer';
 $lang['Notes'] = 'Remarques';
+$lang['Users'] = 'Utilisateurs';
 $lang['Interest/Hobby'] = 'Intérêt / Hobby';
 $lang['Self-introduction'] = 'Auto-présentation';
 
@@ -135,6 +136,7 @@ $lang['Self-introduction'] = 'Auto-présentation';
 $lang['Group'] = 'Groupe';
 $lang['Find your group'] = 'Trouvez votre groupe';
 $lang['Join'] = 'Joindre';
+$lang['Joined'] = 'relié';
 $lang['No Topichat found.'] = 'Aucune Topichat trouvée.';
 $lang['Load More'] = 'Charger plus';
 $lang['CREATE NEW GROUP'] = 'Créer un nouveau groupe';

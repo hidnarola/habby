@@ -79,6 +79,7 @@ $lang['Image has been uploaded successfully'] = 'Изображение было
 
 $lang['Topic added successfully'] = 'Topic added successfully.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
+$lang['Group plan added successfully'] = 'План группы успешно добавлен';
 
 //---Profile---
 $lang['Save'] = 'Сохранить';
@@ -127,6 +128,7 @@ $lang['Send'] = 'послать';
     //---Topichat---
 $lang['Create'] = 'Создайте';
 $lang['Notes'] = 'Заметки';
+$lang['Users'] = 'пользователей';
 $lang['Interest/Hobby'] = 'Интерес / Хобби';
 $lang['Self-introduction'] = 'Самостоятельного введения';
 
@@ -135,6 +137,7 @@ $lang['Self-introduction'] = 'Самостоятельного введения'
 $lang['Group'] = 'группа';
 $lang['Find your group'] = 'Найдите свою группу';
 $lang['Join'] = 'Присоединиться';
+$lang['Joined'] = 'Регистрация';
 $lang['No Topichat found.'] = 'Ни один Topichat не найдено.';
 $lang['Load More'] = 'Загрузи больше';
 $lang['CREATE NEW GROUP'] = 'Создать новую группу';

@@ -45,10 +45,10 @@ class Challenge_model extends CI_Model {
 
     public function get_challenges($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('ch.*,users.name as display_name,users.user_image');
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied');
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
-        $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
+        // $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
         $this->db->limit($limit, $start);
@@ -62,7 +62,7 @@ class Challenge_model extends CI_Model {
 
     public function get_popular_challenges($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('ch.*,users.name as display_name,users.user_image');
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied');
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
         $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
@@ -512,6 +512,71 @@ class Challenge_model extends CI_Model {
         return false;
     }
 
+    /*
+     * 
+     */
+    public function get_challenge_data($challange_id)
+    {
+        $this->db->select('c.*,u.name as challange_user,u.user_image as challange_user_image');
+        $this->db->from('challanges c');
+        $this->db->join('users u', 'c.user_id = u.id');
+        $this->db->where('c.id = '.$challange_id);
+        return $this->db->get()->row_array();
+    }
+    
+    /*
+     * 
+     */
+    public function get_rank_post_by_challenge_id($challange_id,$logged_in_user,$limit)
+    {
+        $this->db->select('cp.*,u.name,u.user_image,count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined,count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked,count(DISTINCT cpc.id) as tot_comment,count(DISTINCT crp.id) as positive_rank,count(DISTINCT crn.id) as negetive_rank,count(DISTINCT cru.id) is_ranked, cru.rank');
+        $this->db->from('challange_post cp');
+        $this->db->join('users u', 'cp.user_id = u.id');
+        $this->db->join('challange_post_coin cc', 'cp.id = cc.challange_post_id', 'left');
+        $this->db->join('challange_post_coin cc1', 'cp.id = cc1.challange_post_id and cc1.user_id = ' . $logged_in_user, 'left');
+        $this->db->join('challange_post_like cl', 'cp.id = cl.challange_post_id and cl.is_liked = 1', 'left');
+        $this->db->join('challange_post_like cl1', 'cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = ' . $logged_in_user, 'left');
+        $this->db->join('challange_post_comment cpc', 'cp.id = cpc.challange_post_id', 'left');
+        $this->db->join('challange_post_rank crp','cp.id = crp.challange_post_id and crp.rank = 1','left');
+        $this->db->join('challange_post_rank crn','cp.id = crn.challange_post_id and crn.rank = 0','left');
+        $this->db->join('challange_post_rank cru','cp.id = cru.challange_post_id and cru.user_id = '.$logged_in_user,'left');
+        $this->db->where('cp.challange_id = ' . $challange_id);
+        $this->db->order_by('(count(DISTINCT crp.id) - count(DISTINCT crn.id))', 'desc');
+        $this->db->group_by('cp.id');
+        //$this->db->limit($limit);
+        $post = $this->db->get()->result_array();
+        $post_ids = array_column($post, 'id');
+
+        if (count($post_ids) > 0) {
+            $this->db->where_in('p.challange_post_id', $post_ids);
+            $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply, count(pli.id) as is_liked');
+            $this->db->from('challange_post_comment p');
+            $this->db->join('users u', 'p.user_id = u.id');
+            $this->db->join('challange_post_comments_like pl', 'p.id = pl.challange_post_comment_id and pl.is_liked=1', 'left');
+            $this->db->join('challange_post_comments_like pli', 'p.id = pli.challange_post_comment_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
+            $this->db->join('challange_post_comments_reply pr', 'p.id = pr.challange_post_comment_id', 'left');
+            $this->db->order_by('p.created_date', 'desc');
+            $this->db->group_by('p.id');
+
+            $post_comments = $this->db->get()->result_array();
+            $post_comments_ids = array_column($post_comments, 'challange_post_id');
+            if (count($post_comments_ids) > 0) {
+                for ($i = 0; $i < count($post); ++$i) {
+                    $post[$i]['comments'] = array();
+                    if (in_array($post[$i]['id'], $post_comments_ids)) {
+                        $posts = array();
+                        foreach ($post_comments as $value) {
+                            if ($post[$i]['id'] == $value['challange_post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post[$i]['comments'] = $posts;
+                    }
+                }
+            }
+        }
+        return $post;
+    }
 }
 
 ?>

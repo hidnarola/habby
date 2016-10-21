@@ -41,6 +41,8 @@ class Post_model extends CI_Model {
         $this->db->join('post_share ps', 'p.id = ps.post_id', 'left');
         $this->db->join('saved_post sp', 'p.id = sp.post_id and sp.user_id=' . $logged_in_user, 'left');
         $this->db->join('post_media pm', 'p.id = pm.post_id');
+        $this->db->where('p.is_block','0');
+        $this->db->where('p.is_deleted','0');
         $this->db->order_by('p.id', 'desc');
         $this->db->group_by('p.id');
         $this->db->limit($limit, $start);
@@ -114,7 +116,7 @@ class Post_model extends CI_Model {
      */
 
     public function challange_post($data, $logged_in_user, $start = 0, $limit = 0) {
-        $post = $this->db->query("select * from (select (sum(if(rank = 1, 1, 0)) - sum(if(rank = 0, 1, 0))) AS avg_rank, c.name,c.description, c.id, cu.name as challange_user,cu.user_image as challange_user_image, post_rank.challange_post_id, post.media,post.media_type, pu.name as post_user,pu.user_image as post_user_image,  count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined, count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked, count(DISTINCT cpc.id) as tot_comment  from challange_post_rank post_rank left join challange_post post on post.id = post_rank.challange_post_id left join challanges c on c.id = post.challange_id join users cu on cu.id = c.user_id join users pu on pu.id = post.user_id  left join challange_post_coin cc on post.id = cc.challange_post_id left join challange_post_coin cc1 on post.id = cc1.challange_post_id and cc1.user_id = 7 left join challange_post_like cl on post.id = cl.challange_post_id and cl.is_liked = 1 left join challange_post_like cl1 on post.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = 7 left join challange_post_comment cpc on post.id = cpc.challange_post_id  group by post_rank.challange_post_id order by avg_rank desc) a group by a.id")->result_array();
+        $post = $this->db->query("select * from (select (sum(if(rank = 1, 1, 0)) - sum(if(rank = 0, 1, 0))) AS avg_rank, c.name,c.description, c.id, cu.name as challange_user,cu.user_image as challange_user_image, post_rank.challange_post_id, post.media,post.media_type, pu.name as post_user,pu.user_image as post_user_image,  count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined, count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked, count(DISTINCT cpc.id) as tot_comment  from challange_post_rank post_rank left join challange_post post on post.id = post_rank.challange_post_id left join challanges c on c.id = post.challange_id join users cu on cu.id = c.user_id join users pu on pu.id = post.user_id  left join challange_post_coin cc on post.id = cc.challange_post_id left join challange_post_coin cc1 on post.id = cc1.challange_post_id and cc1.user_id = 7 left join challange_post_like cl on post.id = cl.challange_post_id and cl.is_liked = 1 left join challange_post_like cl1 on post.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = 7 left join challange_post_comment cpc on post.id = cpc.challange_post_id  group by post_rank.challange_post_id order by avg_rank desc) a group by a.id having avg_rank >= 0")->result_array();
 
         $post_ids = array_column($post, 'challange_post_id');
 

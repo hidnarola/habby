@@ -46,14 +46,17 @@ class Soulmate_model extends CI_Model {
 
     public function get_soulmate_group($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('sg.*,users.name as display_name,users.user_image,COUNT(DISTINCT sur.id) AS Is_Requested');
+        $this->db->select('sg.*,users.name as display_name,users.user_image,COUNT(DISTINCT sur.id) AS Is_Requested, if(sg.user_id = '.$user_id.' or sg.join_user_id = '.$user_id.',1,0) as is_joined');
         $this->db->join('users', 'users.id = sg.user_id');
         $this->db->join('soulmate_group_user_request sur', 'sur.soulmate_group_id = sg.id AND sur.requested_user_id = ' . $user_id, 'left');
-        $this->db->where('sg.user_id !=' . $user_id);
-        $this->db->where('sg.join_user_id IS NULL');
+        //$this->db->where('sg.user_id !=' . $user_id);
+        $this->db->where('(sg.join_user_id IS NULL or sg.user_id = '.$user_id.' or sg.join_user_id = '.$user_id.')');
         $this->db->order_by('sg.created_date', 'DESC');
         $this->db->limit($limit, $start);
+        $this->db->group_by('sg.id');
         $res_data = $this->db->get('soulmate_group sg')->result_array();
+//        pr($res_data);
+//        pr($this->db->last_query(),1);
         return $res_data;
     }
 
@@ -63,13 +66,15 @@ class Soulmate_model extends CI_Model {
 
     public function get_search_soulmate_group($search_topic = NULL, $start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('sg.*,users.name as display_name,users.user_image,COUNT(DISTINCT sur.id) AS Is_Requested');
+        $this->db->select('sg.*,users.name as display_name,users.user_image,COUNT(DISTINCT sur.id) AS Is_Requested, if(sg.user_id = '.$user_id.' or sg.join_user_id = '.$user_id.',1,0) as is_joined');
         $this->db->join('soulmate_group_user_request sur', 'sur.soulmate_group_id = sg.id AND sur.requested_user_id = ' . $user_id, 'left');
         $this->db->join('users', 'users.id = sg.user_id');
         $this->db->like('sg.name', $search_topic);
-        $this->db->where('sg.user_id !=' . $user_id);
-        $this->db->where('(sg.join_user_id !=' . $user_id . ' or sg.join_user_id IS NULL)');
+        // $this->db->where('sg.user_id !=' . $user_id);
+        // $this->db->where('(sg.join_user_id !=' . $user_id . ' or sg.join_user_id IS NULL)');
+        $this->db->where('(sg.join_user_id IS NULL or sg.user_id = '.$user_id.' or sg.join_user_id = '.$user_id.')');
         $this->db->order_by('sg.created_date', 'DESC');
+        $this->db->group_by('sg.id');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('soulmate_group sg')->result_array();
         return $res_data;

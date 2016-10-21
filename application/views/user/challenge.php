@@ -16,10 +16,10 @@
             <section class="post_masonry_section">
                 <?php
                 foreach ($posts as $post) {
-//                     pr($post);
+//                     pr($post,1);
                     ?>
                     <!-- Each Rank section start here-->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 rank_lg_sec bdr-right-clng" data-post_id="<?php echo $post['challange_post_id']; ?>">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 rank_lg_sec bdr-right-clng" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
                         <div class="cmnt_newsec_row">
                             <div class="challange_info">
                                 <div class="challenge_header">
@@ -73,11 +73,13 @@
 
                             <div class="rank_box2">
                                 <div class="row">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-
-                                    </div>
-                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 pad_lft0">
+                                    <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-11 col-md-11 col-sm-11 col-xs-12 pad_lft0">
                                         <ul class="list-inline winr_ul rank_ul2">
+                                            <li>
+                                                <button class="btn btn-primary others_rank" data-toggle="modal" data-target="#rank_modal">
+                                                    Others
+                                                </button>
+                                            </li>
                                             <li>
                                                 <a href="javascript:;" class="user_coin">
                                                     <img class="img-coin" src="<?php
@@ -115,7 +117,7 @@
                                             if (isset($post['comments']) && count($post['comments']) > 0) {
                                                 foreach ($post['comments'] as $comment) {
                                                     ?>
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="commnt_visit_sec clearfix" data-post_comment_id="<?php echo $comment['id']; ?>">
                                                             <div class="cmn_img">
                                                                 <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive user_chat_thumb img-circle">
@@ -159,7 +161,28 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge.js"></script>
+
+<!-- Rank modal -->
+<div id="rank_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Rank modal over -->
+
+<script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge_post.js"></script>
 <script>
 //    setTimeout(function () {
 //        $('.post_masonry_article').each(function () {

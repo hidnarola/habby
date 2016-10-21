@@ -501,4 +501,15 @@ class Challenge extends CI_Controller {
             }
         }
     }
+    
+    /*
+     * 
+     */
+    public function get_top_rank_post($challenge_id){
+        $limit = 3; // Fetch top 3 rank post, if 3 post available
+        $data['challenge'] = $this->Challenge_model->get_challenge_data($challenge_id);
+        $data['rank_post'] = $this->Challenge_model->get_rank_post_by_challenge_id($challenge_id,$this->session->user['id'],$limit);
+
+        echo $this->load->view('user/partial/challenge/display_rank_post_of_challenge',$data,true);
+    }
 }

@@ -85,7 +85,22 @@
                                                 <li class="winner winner_n_btn" id="winner<?php echo $Newest_Challenge['id']; ?>" data-id="<?php echo $Newest_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                                <li>
+                                                    <?php
+                                                        if($Newest_Challenge['is_applied'])
+                                                        {
+                                                            ?>
+                                                            <a href="javascript:;" class="pstbtn">Enter</a>
+                                                            <?php
+                                                        }
+                                                        else
+                                                        {
+                                                    ?>
+                                                            <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </li>
                                             </ul>
 
                                         </div>

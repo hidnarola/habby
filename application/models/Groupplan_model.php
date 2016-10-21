@@ -45,11 +45,11 @@ class Groupplan_model extends CI_Model {
 
     public function get_group_plan($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested');
+        $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested, count(DISTINCT gus.id) as is_joined');
         $this->db->join('group_users gus', 'gus.group_id = gp.id AND gus.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = gp.user_id');
         $this->db->join('group_users_request gur', 'gur.group_id = gp.id AND gur.user_id = ' . $user_id, 'left');
-        $this->db->where('gp.user_id !=' . $user_id . ' AND gus.user_id IS NULL');
+      //  $this->db->where('gp.user_id !=' . $user_id . ' AND gus.user_id IS NULL');
         $this->db->order_by('gp.created_date', 'DESC');
         $this->db->group_by('gp.id');
         $this->db->limit($limit, $start);
@@ -63,11 +63,11 @@ class Groupplan_model extends CI_Model {
 
     public function get_search_groupplan($search_topic = NULL, $filterby = NULL, $start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested');
+        $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested, count(DISTINCT gus.id) as is_joined');
         $this->db->join('group_users gus', 'gus.group_id = gp.id AND gus.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = gp.user_id');
         $this->db->join('group_users_request gur', 'gur.group_id = gp.id AND gur.user_id = ' . $user_id, 'left');
-        $this->db->where('gp.user_id !=' . $user_id . ' AND gus.user_id IS NULL');
+       // $this->db->where('gp.user_id !=' . $user_id . ' AND gus.user_id IS NULL');
         $this->db->like('gp.name', $search_topic);
         if ($filterby == 'popular') {
             $this->db->order_by('Total_User', 'DESC');
@@ -88,11 +88,11 @@ class Groupplan_model extends CI_Model {
 
     public function get_popular_group_plans($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested');
+        $this->db->select('(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE gp.id=gu.group_id) as Total_User,gp.*,users.name as display_name,users.user_image,COUNT(DISTINCT gur.id) AS Is_Requested, count(DISTINCT gus.id) as is_joined');
         $this->db->join('group_users gus', 'gus.group_id = gp.id AND gus.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = gp.user_id');
         $this->db->join('group_users_request gur', 'gur.group_id = gp.id AND gur.user_id = ' . $user_id, 'left');
-        $this->db->where('gp.user_id !=' . $user_id . ' AND gus.user_id IS NULL');
+        //$this->db->where('gp.user_id !=' . $user_id . ' AND gus.user_id IS NULL');
         $this->db->order_by('Total_User', 'DESC');
         $this->db->group_by('gp.id');
         $this->db->limit($limit, $start);

@@ -4,7 +4,7 @@
     <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
     <div class="new_grp">
         <!-- New Group button start-->
-        <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang('New');?> <br><?php echo lang('Group');?></a>
+        <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang('New'); ?> <br><?php echo lang('Group'); ?></a>
         <!-- New Group button end-->
     </div>
 </div>
@@ -17,9 +17,9 @@
             <div class="col-lg-6 col-md-6 col-sm-6 ">
                 <div class="lang_sec">
                     <select class="selectpicker filterby" data-style="btn-info" name="filterby">
-                        <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>><?php echo lang('Newest');?></option>
-                        <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>><?php echo lang('Popular');?></option>
-                        <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>><?php echo lang('Recommended');?></option>
+                        <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>><?php echo lang('Newest'); ?></option>
+                        <option value="popular" <?php echo (isset($filterby) && $filterby == 'popular') ? "selected" : "" ?>><?php echo lang('Popular'); ?></option>
+                        <option value="recommended" <?php echo (isset($filterby) && $filterby == 'recommended') ? "selected" : "" ?>><?php echo lang('Recommended'); ?></option>
                     </select>
                 </div>
             </div>
@@ -30,8 +30,8 @@
                 <form class="" role="form" method="get" action="<?php echo base_url() . "topichat/search" ?>" id="search_form">
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
-                            <input type="hidden" class="search-query form-control" placeholder="<?php echo lang('Find your group');?>" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
-                            <input type="text" class="search-query form-control" placeholder="<?php echo lang('Find your group');?>" name="topic" />
+                            <input type="hidden" class="search-query form-control" placeholder="<?php echo lang('Find your group'); ?>" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
+                            <input type="text" class="search-query form-control" placeholder="<?php echo lang('Find your group'); ?>" name="topic" />
                             <span class="input-group-btn">
                                 <button class="btn btn-danger find_topic" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -84,46 +84,58 @@
                                         <p class="topichat_txt1"><?php echo $topichat_group['topic_name'] ?> </p>
                                         <?php echo ($topichat_group['notes'] != NULL) ? '<p class="topichat_txt2">' . $topichat_group['notes'] . '</p>' : ""; ?>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> <?php echo lang('users');?></span></li>
-                                            <li><a href="<?php echo base_url() . "topichat/join/" . urlencode(base64_encode($topichat_group['id'])) ?>" class="pstbtn join"><?php echo lang('Join');?></a></li>
-                                    <!--<li><button class="join pstbtn" id="<?php echo md5($topichat_group['id']); ?>">Join</button></li>-->
+                                            <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> <?php echo lang('Users'); ?></span></li>
+                                            <li>
+                                                <?php
+                                                if ($topichat_group['is_joined']) {
+                                                    ?>
+                                                    <a href="javascript:;" class="pstbtn"><?php echo lang('Joined'); ?></a>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "topichat/join/" . urlencode(base64_encode($topichat_group['id'])) ?>" class="pstbtn"><?php echo lang('Join'); ?></a>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </li>
+                                                        <!--<li><button class="join pstbtn" id="<?php echo md5($topichat_group['id']); ?>">Join</button></li>-->
                                         </ul>
                                     </div>
 
                                 </div>
                             </div>
                             <!-- Topichat #1 each section start here -->
+        <?php
+    }
+} else {
+    ?>
+                        <div class="">
+                        <?php echo lang('No Topichat found.'); ?>
+                        </div>
                             <?php
                         }
-                    } else {
                         ?>
-                        <div class="">
-                            <?php echo lang('No Topichat found.');?>
-                        </div>
-                        <?php
-                    }
-                    ?>
                 </div>
                 <!-- Topichat #1 row section end here -->
             </div>
         </div>
     </div>
-    <?php
-    if ($cnt >= 3) {
-        ?>
+<?php
+if ($cnt >= 3) {
+    ?>
         <div class = "row">
             <div class = "container">
                 <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                    <a id = "loadMore" href = "javascript:;"><?php echo lang('Load More');?></a>
+                    <a id = "loadMore" href = "javascript:;"><?php echo lang('Load More'); ?></a>
                     <p class = "totop">
                         <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
                     </p>
                 </div>
             </div>
         </div>
-        <?php
-    }
-    ?>
+    <?php
+}
+?>
     <!--Topichat #1 section and Newest Post area end here  -->
 </div>
 <!--Topichat Popular section start here -->
@@ -134,7 +146,7 @@
                 <div class = "panel-heading">
                     <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">&times;
                     </button>
-                    <b><?php echo lang('CREATE NEW GROUP');?></b>
+                    <b><?php echo lang('CREATE NEW GROUP'); ?></b>
                 </div>
                 <div class = "row pst_here_sec">
                     <!--post start here -->
@@ -147,9 +159,9 @@
                                         <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class = "row">
                                                 <div class = "form-group clearfix">
-                                                    <label for = "select" class = "col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Topic');?> : </label>
+                                                    <label for = "select" class = "col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Topic'); ?> : </label>
                                                     <div class = "col-lg-11 col-md-11 col-sm-10 col-xs-9">
-                                                        <textarea class = "form-control topichat_txtarea" rows = "3" id = "textArea" placeholder = "#<?php echo lang('Topic');?>" name = "topic_name" required = "required"></textarea>
+                                                        <textarea class = "form-control topichat_txtarea" rows = "3" id = "textArea" placeholder = "#<?php echo lang('Topic'); ?>" name = "topic_name" required = "required"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,16 +169,16 @@
                                         <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class = "row">
                                                 <div class = "form-group clearfix">
-                                                    <label class = "col-lg-2 col-md-2 col-sm-2 col-xs-5 control-label"><?php echo lang('Number of People');?> :</label>
+                                                    <label class = "col-lg-2 col-md-2 col-sm-2 col-xs-5 control-label"><?php echo lang('Number of People'); ?> :</label>
                                                     <div class = "col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                                         <div class = "radio topchat_1_rdo">
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "optionsRadios1" value = "-1" checked = "">
-                                                                <?php echo lang('No limit');?>
+<?php echo lang('No limit'); ?>
                                                             </label>
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "No_of_person" value = "Yes" >
-                                                                <input type = "text" class = "form-control" id = "txt_No_of_person" name = "No_of_person" placeholder = "<?php echo lang('customise');?>" disabled>
+                                                                <input type = "text" class = "form-control" id = "txt_No_of_person" name = "No_of_person" placeholder = "<?php echo lang('customise'); ?>" disabled>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -180,7 +192,7 @@
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-    ?></span>
+?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>
@@ -197,7 +209,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="row">
                                                 <div class="form-group clearfix">
-                                                    <label for="select" class="col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Note');?> :</label>
+                                                    <label for="select" class="col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Note'); ?> :</label>
                                                     <div class="col-lg-11 col-md-11 col-sm-10 col-xs-9">
                                                         <textarea class="form-control topichat_txtarea" rows="3" id="textArea" name="notes"></textarea>
                                                     </div>

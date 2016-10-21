@@ -40,6 +40,7 @@ class Soulmate extends CI_Controller {
         $limit = 4;
         $start = ($page - 1) * $limit;
         $this->data['soulmate_groups'] = $this->Soulmate_model->get_soulmate_group($start, $limit);
+        
         if (count($this->data['soulmate_groups']) > 0) {
             $data['view'] = $this->load->view('user/partial/soulmate/display_soulmate_group', $this->data, true);
             $data['status'] = 1;
