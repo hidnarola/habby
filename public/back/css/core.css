@@ -6327,3 +6327,7 @@ h6.panel-title,
 i.icon-pencil3.pull-right {
     padding-left: 15px;
 }
+.banner-options {
+    float: right;
+    margin-top: -7px;
+}

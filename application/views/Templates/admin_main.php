@@ -106,6 +106,9 @@ if (!empty($user_data['user_image'])) {
                                     <li class="<?php echo ($controller == 'banners') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/banners'; ?>"><i class="icon-file-picture"></i> <span>Banner Images</span></a>
                                     </li>
+                                    <li class="<?php echo ($controller == 'posts') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/posts'; ?>"><i class="icon-magazine"></i> <span> Posts</span></a>
+                                    </li>
 <!--                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Topichat</span></a>
                                     </li>

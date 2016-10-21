@@ -1,4 +1,4 @@
-<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                             ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                              ?>"></script>-->
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/tables/datatables/datatables.min.js"; ?>"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/select2.min.js"; ?>"></script>
 <!-- Page header -->
@@ -75,18 +75,20 @@ if ($this->session->flashdata('success')) {
                                     <div class="caption">
                                         <h6 class="no-margin">
                                             <a href="#" class="text-default">Page : <?php echo $banner['page']; ?></a> 
-                                            <span class="banner-option" title="Edit"><a href="<?php echo base_url() . 'admin/banners/edit/' . $banner['id']; ?>" class="text-muted"><i class="icon-pencil3 pull-right"></i></a></span>
-                                            <?php
-                                            if ($banner['is_active'] == 1) {
-                                                ?>
-                                                <span class="banner-option" title="Deactive"><a href="<?php echo base_url() . 'admin/banners/block/' . $banner['id']; ?>" class="text-muted"><i class="icon-cross2 pull-right"></i></a></span>
+                                            <div class="banner-options">
+                                                <span class="banner-option" title="Edit"><a href="<?php echo base_url() . 'admin/banners/edit/' . $banner['id']; ?>" class="text-muted btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm"><i class="icon-pencil3 "></i></a></span>
                                                 <?php
-                                            } else {
-                                                ?>
-                                                <span class="banner-option" title="Active"><a href="<?php echo base_url() . 'admin/banners/activate/' . $banner['id']; ?>" class="text-muted"><i class="icon-check pull-right"></i></a></span>
-                                                        <?php
-                                                    }
+                                                if ($banner['is_active'] == 1) {
                                                     ?>
+                                                    <span class="banner-option" title="Deactive"><a href="<?php echo base_url() . 'admin/banners/block/' . $banner['id']; ?>" class="text-muted btn border-danger text-danger-600 btn-flat btn-icon btn-rounded"><i class="icon-cross2 pull-right"></i></a></span>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <span class="banner-option" title="Active"><a href="<?php echo base_url() . 'admin/banners/activate/' . $banner['id']; ?>" class="text-muted btn border-success text-success-600 btn-flat btn-icon btn-rounded"><i class="icon-check pull-right"></i></a></span>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                            </div>
                                         </h6>
                                     </div>
                                 </div>

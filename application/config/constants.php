@@ -96,6 +96,7 @@ defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'publ
 defined('DEFAULT_PROFILE_IMAGE_PATH') OR define('DEFAULT_PROFILE_IMAGE_PATH', Asset_path . 'uploads/user_profile/'); // highest automatically-assigned error code
 defined('DEFAULT_CHAT_IMAGE_PATH') OR define('DEFAULT_CHAT_IMAGE_PATH', Asset_path . 'uploads/chat_media/');
 defined('DEFAULT_BANNER_IMAGE_PATH') OR define('DEFAULT_BANNER_IMAGE_PATH', Asset_path . 'uploads/banners/'); // highest automatically-assigned error code
+defined('DEFAULT_POST_IMAGE_PATH') OR define('DEFAULT_POST_IMAGE_PATH', Asset_path . 'uploads/user_post/'); // highest automatically-assigned error code
 defined('DEFAULT_CHALLENGE_IMAGE_PATH') OR define('DEFAULT_CHALLENGE_IMAGE_PATH', Asset_path . 'uploads/challenge_post/'); // highest automatically-assigned error code
 defined('DEFAULT_TOPICHAT_IMAGE_PATH') OR define('DEFAULT_TOPICHAT_IMAGE_PATH', Asset_path . 'uploads/topichat_group/'); // highest automatically-assigned error code
 defined('DEFAULT_SOULMATE_IMAGE_PATH') OR define('DEFAULT_SOULMATE_IMAGE_PATH', Asset_path . 'uploads/soulmate_group/'); // highest automatically-assigned error code

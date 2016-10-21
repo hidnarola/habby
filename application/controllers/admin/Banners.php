@@ -77,9 +77,12 @@ class Banners extends CI_Controller {
             $this->template->load('admin_main', 'admin/banners/manage', $this->data);
         } else {
             $update_array = $this->input->post(null);
+
             if (!empty($_FILES['image']['name'])) {
                 $image_name = $this->upload_image('image', 'uploads/banners');
 //                pr($image_name, 1);
+            } else {
+                $image_name = 'home_banner.jpg';
             }
             if (isset($image_name)) {
                 if (is_array($image_name) && array_key_exists('errors', $image_name)) {
@@ -94,6 +97,16 @@ class Banners extends CI_Controller {
                 $this->session->set_flashdata('success', 'Banner successfully updated!');
                 redirect('admin/banners');
             } else {
+                if (isset($update_array['is_active'])) {
+                    $wheres = 'page = "' . $update_array['page'] . '"';
+                    $updates_array = array(
+                        'is_active' => 0,
+                    );
+                    $this->Admin_banners_model->update_record('banner_images', $wheres, $updates_array);
+                    $update_array['is_active'] = 1;
+                } else {;
+                    $update_array['is_active'] = 0;
+                }
                 $this->Admin_banners_model->insert('banner_images', $update_array);
                 $this->session->set_flashdata('success', 'Banner successfully added!');
                 redirect(site_url('admin/banners'));

@@ -25,14 +25,16 @@
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/validation/validate.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/styling/uniform.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/visualization/d3/d3.min.js"; ?>"></script>
-    <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/styling/switchery.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/styling/uniform.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/bootstrap_multiselect.js"; ?>"></script>
+    <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/styling/switch.min.js"; ?>"></script>
+    <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/styling/switchery.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/ui/moment/moment.min.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/pickers/daterangepicker.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "core/app.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_CKEDITOR_PATH . "ckeditor.js" ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "pages/login_validation.js"; ?>"></script>
     <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_validation.js"; ?>"></script>
+    <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "pages/form_floating_labels.js"; ?>"></script>
     <!-- /theme JS files -->
 </head>

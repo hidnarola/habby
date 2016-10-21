@@ -23,7 +23,9 @@ class Admin_banners_model extends CI_Model {
 //        $this->db->limit($this->input->get('length'), $this->input->get('start'));      
 //        $res_data = $this->db->get('banner_images,(SELECT @a:= '.$start.') AS a')->result_array();
 //        return $res_data;
-        return $this->db->get('banner_images')->result_array();
+        $this->db->order_by('page');
+        $res_data = $this->db->get('banner_images')->result_array();
+        return $res_data;
     }
 
     /**
