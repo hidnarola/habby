@@ -32,7 +32,14 @@ class Admin_categories_model extends CI_Model {
      * @author : HPA
      */
     public function get_categories_count() {
+        $columns = ['id', 'category_name', 'is_deleted'];
+        $this->db->select('id,@a:=@a+1 AS test_id,category_name,is_deleted', false);
         $this->db->where('is_deleted', 0);
+        $keyword = $this->input->get('search');
+        if (!empty($keyword['value'])) {
+            $this->db->having('category_name LIKE "%' . $keyword['value'] . '%"', NULL);
+        }
+        $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $res_data = $this->db->get('post_categories')->num_rows();
         return $res_data;
     }
