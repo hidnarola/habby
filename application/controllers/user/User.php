@@ -172,6 +172,35 @@ class User extends CI_Controller {
                     $media[] = $media_arr;
                 }
             }
+        } else if (!empty($_FILES['video-0']['name'])) {
+            $filecount = count($_FILES['video-0']['name']);
+            for ($i = 0; $i < $filecount; ++$i) {
+                $_FILES['video']['name'] = $_FILES['video-0']['name'][$i];
+                $_FILES['video']['type'] = $_FILES['video-0']['type'][$i];
+                $_FILES['video']['tmp_name'] = $_FILES['video-0']['tmp_name'][$i];
+                $_FILES['video']['error'] = $_FILES['video-0']['error'][$i];
+                $_FILES['video']['size'] = $_FILES['video-0']['size'][$i];
+
+                // Code of image uploading
+                $config['upload_path'] = './uploads/chat_media';
+                $config['allowed_types'] = 'mp4|mov|3gp';
+                $config['max_size'] = 4000000;
+                $config['file_name'] = md5(uniqid(mt_rand()));
+
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('video-0')) {
+                    $error = array('error' => $this->upload->display_errors());
+                    //print_r($error);
+                    echo "0";
+                    die;
+                } else {
+                    $data = $this->upload->data();
+                    $media_arr = array();
+                    $media_arr['media'] = $data['file_name'];
+                    $media[] = $media_arr;
+                }
+            }
         }
         echo json_encode($media);
     }

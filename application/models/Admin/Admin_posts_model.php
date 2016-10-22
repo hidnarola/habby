@@ -144,8 +144,6 @@ class Admin_posts_model extends CI_Model {
             }
             $post['media'] = $posts;
 
-
-
             $this->db->where('p.post_id', $post_id);
             $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply');
             $this->db->from('post_comments p');
@@ -165,27 +163,25 @@ class Admin_posts_model extends CI_Model {
             }
             $post['comments'] = $posts;
 
-            $post_comments_ids = array_column($post_comments, 'id');
-
+            // fetch reply of comments
+            $post_comments_ids = array_column($post['comments'], 'id');
             $this->db->select('p.*, u.name, u.user_image');
             $this->db->from('post_comment_reply p');
             $this->db->where_in('post_comment_id', $post_comments_ids);
             $this->db->join('users u', 'p.user_id = u.id');
             $post_replies = $this->db->get()->result_array();
 
-            $post_replies_ids = array_column($post_replies, 'post_comment_id');
-            if (count($post_replies_ids) > 0) {
-                for ($i = 0; $i < count($post_replies); ++$i) {
-                    $post[$i]['comment_replies'] = array();
-                    if (in_array($post[$i]['comment_replies']['post_comment_id'], $post_replies_ids)) {
-                        $posts = array();
-                        foreach ($post_replies as $value) {
-                            if ($post[$i]['comment_replies']['post_comment_id'] == $value['post_comment_id']) {
-                                $posts[] = $value;
-                            }
+
+            if (count($post_replies) > 0) {
+                for ($i = 0; $i < count($post['comments']); ++$i) {
+                    $post['comments'][$i]['comment_replies'] = array();
+                    $posts = array();
+                    foreach ($post_replies as $value) {
+                        if ($post['comments'][$i]['id'] == $value['post_comment_id']) {
+                            $posts[] = $value;
                         }
-                        $post[$i]['comment_replies']['comments']['replies'] = $posts;
                     }
+                    $post['comments'][$i]['comment_replies'] = $posts;
                 }
             }
             /*

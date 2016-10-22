@@ -28,18 +28,18 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
+                echo "message received";print_r($message);
                 $user_ids = get_topichat_users($message->group_id);
                 // database entry for topichat
                 if(isset($message->media))
                 {
                     $message->message = json_decode($message->message);
-                    send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                    send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
                 }
                 else
                 {
                     send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
-
                 // Send message to user
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {
@@ -50,7 +50,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
                         $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
-
+                        $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                                 $Server->wsSend($id, json_encode($send_object));
@@ -64,7 +64,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 if(isset($message->media))
                 {
                     $message->message = json_decode($message->message);
-                    send_soulmate_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                    send_soulmate_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message, $message->media);
                 }
                 else
                 {
@@ -81,6 +81,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                     $send_object['message'] = (isset($message->media)?'':$message->message);
                     $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
+                    $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
                     foreach ($Server->wsClients as $id => $client) {
                         if ($id != $clientID && $Server->wsClients[$id]['user_data']->id == $to_user && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                             $Server->wsSend($id, json_encode($send_object));

@@ -69,17 +69,17 @@ function get_topichat_users($group_id) {
 
 function send_topic_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
     return false;
 }
 
-function send_topic_media($group_id, $sender_id, $msg) {
+function send_topic_media($group_id, $sender_id, $msg,$media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','".$media->media."','".$media_type."',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -88,17 +88,17 @@ function send_topic_media($group_id, $sender_id, $msg) {
 
 function send_soulmate_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
     return false;
 }
 
-function send_soulmate_media($group_id, $sender_id, $msg) {
+function send_soulmate_media($group_id, $sender_id, $msg,$media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'','".$media->media."','".$media_type."',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }

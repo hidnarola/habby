@@ -267,6 +267,7 @@
                                                 <?php echo $Popular_Challenge['description'] ?>
                                             </p>
                                         </div>
+                                        
                                     </div>
 
                                     <!-- Challenge content section end here -->
@@ -279,7 +280,16 @@
                                                 <li class="winner winner_p_btn" id="winner<?php echo $Popular_Challenge['id'] ?>"  data-id="<?php echo $Popular_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                                <li>
+                                                    <?php
+                                                        if($Popular_Challenge['is_applied']){
+                                                            ?>
+                                                            <a href="javascript:;" class="pstbtn">Enter</a>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -301,6 +311,7 @@
                                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                                         <img src="<?php echo DEFAULT_IMAGE_PATH . "challenge-prfl.jpg"; ?>" class="img-responsive center-block ">
                                                     </div>
+                                                    
 
                                                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
                                                         <!-- <h2 class="chlng_hdg">Work description</h2> -->
@@ -459,7 +470,22 @@
                                                 <li class="winner winner_r_btn" id="winner<?php echo $Recom_Challenge['id'] ?>" data-id="<?php echo $Recom_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                                <li>
+                                                    <?php
+                                                        if($Recom_Challenge['is_applied'])
+                                                        {
+                                                            ?>
+                                                            <a href="javascript:;" class="pstbtn">Enter</a>
+                                                            <?php
+                                                        }
+                                                        else
+                                                        {
+                                                            ?>
+                                                            <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </li>
                                             </ul>
 
                                         </div>
