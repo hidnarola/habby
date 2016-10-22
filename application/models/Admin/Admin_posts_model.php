@@ -184,11 +184,7 @@ class Admin_posts_model extends CI_Model {
                     $post['comments'][$i]['comment_replies'] = $posts;
                 }
             }
-            /*
-
-             */
         }
-        pr($post, 1);
         return $post;
     }
 

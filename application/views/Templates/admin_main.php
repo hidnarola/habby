@@ -13,6 +13,53 @@ if (!empty($user_data['user_image'])) {
     <body>
         <?php $this->load->view('admin/layouts/layout_header'); ?>
         <!-- Main navbar -->
+        <style>
+            .thumb{
+                display: table;
+                width:100%;
+            }
+            .thumb-inner{
+                display: table-cell;
+                padding: 5px;
+            } 
+            .thumb-ul li a i {
+                font-size: 20px;
+            }
+            .thumb-ul li a i {
+                font-size: 20px;
+            }
+            .thumb-ul li {
+                display: inline-block;
+            }
+            .thumb-ul li a{
+                padding: 0 18px;
+                color: #26A69A;
+                text-align: center;
+            }
+            ul.thumb-ul {
+                padding-left: 10px;
+            }
+            .padding-15{
+                padding: 15px;
+            }
+            .media .thumb-ul li a {
+                padding: 0;
+                text-align: center;
+                display: inline-block;
+            }
+            .media .thumb-ul li a i, .media .thumb-ul li a {
+                font-size: 12px;
+            }
+            .media-list > li:nth-child(odd) {
+                background-color: #f9f7f7;
+            }
+            .media .thumb-ul li a {
+                padding: 0 8px 0 0;
+                text-align: center;
+                display: inline-block;
+                color:#2196F3;
+            }
+        </style>  
         <div class="navbar navbar-inverse">
             <div class="navbar-header">
 <!--                <a class="navbar-brand" href=""><img src="<?php echo DEFAULT_ADMIN_IMAGE_PATH . "logo_light.png"; ?>" alt=""></a>-->

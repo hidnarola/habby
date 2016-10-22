@@ -56,59 +56,11 @@ if ($this->session->flashdata('success')) {
     <div class="content">
         <div class="panel panel-flat">
             <div class="content">
-
-                <style>
-                    .thumb{
-                        display: table;
-                        width:100%;
-                    }
-                    .thumb-inner{
-                        display: table-cell;
-                        padding: 5px;
-                    } 
-                    .thumb-ul li a i {
-                        font-size: 20px;
-                    }
-                    .thumb-ul li a i {
-                        font-size: 20px;
-                    }
-                    .thumb-ul li {
-                        display: inline-block;
-                    }
-                    .thumb-ul li a{
-                        padding: 0 18px;
-                        color: #26A69A;
-                        text-align: center;
-                    }
-                    ul.thumb-ul {
-                        padding-left: 10px;
-                    }
-                    .padding-15{
-                        padding: 15px;
-                    }
-                    .media .thumb-ul li a {
-                        padding: 0;
-                        text-align: center;
-                        display: inline-block;
-                    }
-                    .media .thumb-ul li a i, .media .thumb-ul li a {
-                        font-size: 12px;
-                    }
-                    .media-list > li:nth-child(odd) {
-                        background-color: #f9f7f7;
-                    }
-                    .media .thumb-ul li a {
-                        padding: 0 8px 0 0;
-                        text-align: center;
-                        display: inline-block;
-                        color:#2196F3;
-                    }
-                </style>  
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <?php
                         if (isset($posts) && !empty($posts)) {
-                            pr($posts);
+//                            pr($posts);
                             ?>
                             <div class="thumbnail">
                                 <div class="thumb">
@@ -134,8 +86,7 @@ if ($this->session->flashdata('success')) {
                                 </div>
 
                                 <div class="caption">
-                                    <h6 class="no-margin-top text-semibold"><a href="#" class="text-default">For ostrich much</a> <a href="#" class="text-muted"><i class="icon-download pull-right"></i></a></h6>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    <h6 class="no-margin-top text-semibold"><a href="#" class="text-default"><?php echo $posts['description'] ?></a></h6>
                                 </div>
                                 <div>
                                     <ul class="thumb-ul">
@@ -169,7 +120,7 @@ if ($this->session->flashdata('success')) {
                                                 <div class="media-body">
                                                     <a href="#">
                                                         <?php echo $post_cmt['name']; ?>
-                                                        <span class="media-annotation pull-right"><?php echo date('h i',strtotime($post_cmt['created_date'])); ?></span>
+                                                        <span class="media-annotation pull-right"><?php echo date('h i', strtotime($post_cmt['created_date'])); ?></span>
                                                     </a>
 
                                                     <span class="display-block text-muted"> <?php echo $post_cmt['comment']; ?></span>      
@@ -188,23 +139,30 @@ if ($this->session->flashdata('success')) {
                                                             </a>
                                                         </li>
                                                     </ul>
-<!--                                                    <ul class="media-list padding-15">
-                                                        <li class="media">
-                                                            <div class="media-left">
-                                                                <img src="assets/images/placeholder.jpg" class="img-circle img-xs" alt="">
+                                                    <?php
+                                                    if (isset($post_cmt['comment_replies']) && !empty($post_cmt['comment_replies'])) {
+                                                        foreach ($post_cmt['comment_replies'] as $cmt_reply) {
+                                                            ?>
+                                                            <ul class="media-list padding-15">
+                                                                <li class="media">
+                                                                    <div class="media-left">
+                                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $cmt_reply['user_image']; ?>" class="img-circle img-xs" alt="">
+                                                                    </div>
 
-                                                            </div>
+                                                                    <div class="media-body">
+                                                                        <a href="#">
+                                                                            <?php echo $cmt_reply['name']; ?>
+                                                                            <span class="media-annotation pull-right"><?php echo date('h i', strtotime($cmt_reply['created_date'])); ?></span>
+                                                                        </a>
 
-                                                            <div class="media-body">
-                                                                <a href="#">
-                                                                    Margo Baker
-                                                                    <span class="media-annotation pull-right">12:16</span>
-                                                                </a>
-
-                                                                <span class="display-block text-muted">Pinched a well more moral chose goodness...</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>-->
+                                                                        <span class="display-block text-muted"><?php echo $cmt_reply['comment']; ?></span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </li>
                                             <?php
