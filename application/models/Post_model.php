@@ -444,7 +444,7 @@ class Post_model extends CI_Model {
             $post_comments = $this->db->get()->result_array();
             //        echo $this->db->last_query();
             $post_comments_ids = array_column($post_comments, 'post_id');
-            //        pr($post_comments,1);
+//                    pr($post_comments_ids,1);
             if (count($post_comments_ids) > 0) {
                 $post['comments'] = array();
                 if (in_array($post['id'], $post_comments_ids)) {
@@ -457,6 +457,7 @@ class Post_model extends CI_Model {
                     $post['comments'] = $posts;
                 }
             }
+            
         }
         return $post;
     }

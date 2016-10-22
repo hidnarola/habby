@@ -51,6 +51,7 @@ if ($this->session->flashdata('success')) {
         <div class="col-md-12">
             <form class="form-horizontal form-validate" action="" id="user_info" method="POST">
                 <div class="panel panel-flat">
+
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Post Description <span class="text-danger">*</span> </label>
@@ -78,7 +79,14 @@ if ($this->session->flashdata('success')) {
                                 </div>
                             </div>
                         </div>
-                        <?php // pr($post_datas); ?>
+                        <?php
+//                        pr($post_datas['media']);
+                        if (isset($post_datas['media']) && !empty($post_datas['media'])) {
+                            foreach ($post_datas['media'] as $post_media) {
+                                pr($post_media);
+                            }
+                        }
+                        ?>
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-3">
                                 <img src="<?php echo (isset($banner_datas['image'])) ? DEFAULT_BANNER_IMAGE_PATH . $banner_datas['image'] : ""; ?>" style="max-width: 100%"/>
