@@ -81,12 +81,11 @@ class Posts extends CI_Controller {
         if (empty($this->data['user_data'])) {
             redirect('admin/login');
         }
-        $user_id = $this->uri->segment(4);
-        if (is_numeric($user_id)) {
-            $where = 'id = ' . $this->db->escape($user_id);
-            $check_post = $this->Admin_posts_model->get_result('post', $where);
+        $post_id = $this->uri->segment(4);
+        if (is_numeric($post_id)) {
+            $check_post = $this->Admin_posts_model->get_post_result($post_id);
             if ($check_post) {
-                $this->data['post_datas'] = $check_post[0];
+                $this->data['post_datas'] = $check_post;
                 $this->data['title'] = 'Habby - Admin edit post';
                 $this->data['heading'] = 'Edit post';
             } else {
@@ -114,7 +113,7 @@ class Posts extends CI_Controller {
             redirect('admin/login');
         }
         $post_id = $this->uri->segment(4);
-        $this->data['posts'] = $this->Post_model->get_post_details($post_id);
+        $this->data['posts'] = $this->Admin_posts_model->get_post_details($post_id);
         $this->template->load('admin_main', 'admin/posts/view', $this->data);
     }
 

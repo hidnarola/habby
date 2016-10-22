@@ -35,6 +35,6 @@
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_CKEDITOR_PATH . "ckeditor.js" ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "pages/login_validation.js"; ?>"></script>
     <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_validation.js"; ?>"></script>
-    <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "pages/form_floating_labels.js"; ?>"></script>
+    <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_floating_labels.js"; ?>"></script>
     <!-- /theme JS files -->
 </head>
