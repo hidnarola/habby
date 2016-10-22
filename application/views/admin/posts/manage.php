@@ -79,14 +79,34 @@ if ($this->session->flashdata('success')) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="thumbnail">
+                                <div class="thumb">
+                                    <?php
 //                        pr($post_datas['media']);
-                        if (isset($post_datas['media']) && !empty($post_datas['media'])) {
-                            foreach ($post_datas['media'] as $post_media) {
-                                pr($post_media);
-                            }
-                        }
-                        ?>
+                                    if (isset($post_datas['media']) && !empty($post_datas['media'])) {
+                                        foreach ($post_datas['media'] as $post_media) {
+                                            if ($post_media['media_type'] == 'image') {
+                                                ?>
+                                                <div class="thumb-inner">
+                                                    <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>" alt="">
+                                                </div>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <div class="thumb-inner">
+                                                    <video controls class="img-responsive center-block">
+                                                        <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
+                                                    </video>
+                                                </div>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-8 col-lg-offset-3">
                                 <img src="<?php echo (isset($banner_datas['image'])) ? DEFAULT_BANNER_IMAGE_PATH . $banner_datas['image'] : ""; ?>" style="max-width: 100%"/>
