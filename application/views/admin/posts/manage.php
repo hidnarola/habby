@@ -94,7 +94,7 @@ if ($this->session->flashdata('success')) {
                                                 <?php
                                             } else {
                                                 ?>
-                                                <div class="thumb-inner">
+                                                <div class="thumb-inner">0
                                                     <video controls class="img-responsive center-block">
                                                         <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
                                                     </video>
