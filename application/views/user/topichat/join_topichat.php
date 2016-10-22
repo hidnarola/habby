@@ -295,13 +295,25 @@
                                             <div class="input-group">
                                                 <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
                                                 <input type="hidden" id='message' name='message' class="form-control"/>
-                                                <span class="input-group-btn upld_icnpad">
+                                                <!--<span class="input-group-btn upld_icnpad">
                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
+                                                </span>-->
+                                                <span class="input-group-btn upld_icnpad">
+                                                    <div class="fileUpload up_img btn">
+                                                        <span><img title="Upload image" src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
+                                                        <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                    </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
                                                     <div class="fileUpload up_img btn">
-                                                        <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
-                                                        <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                        <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
+                                                        <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
+                                                    </div>
+                                                </span>
+                                                <span class="input-group-btn upld_icnpad">
+                                                    <div class="fileUpload up_img btn">
+                                                        <span><img title="Upload file" src="<?php echo DEFAULT_IMAGE_PATH; ?>upload.png"></span>
+                                                        <input type="file" name="upload_file" class="upload" id="uploadFile"/>
                                                     </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
