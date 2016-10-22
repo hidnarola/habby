@@ -139,7 +139,8 @@ $(document).ready(function () {
                     $('.imagePreview'+i).html("<video controls='' src='"+this.result+"'>");
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 }
-            } else
+            } 
+            else
             {
                 //this.files = '';
                 $('.message').html("Please select proper Video");

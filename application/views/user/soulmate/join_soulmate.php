@@ -259,7 +259,7 @@
                 <div class="row usr_row hide_xs">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="slmt_user_1">
-                            <p class="usr_p"><a href="personal_account.html"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$soulmate['user_image']; ?>" class="smlt_usrimg1 user_chat_thumb"></a> <span><?php echo $soulmate['user_name'] ?></span></p>
+                            <p class="usr_p"><a href="personal_account.html"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $soulmate['user_image']; ?>" class="smlt_usrimg1 user_chat_thumb"></a> <span><?php echo $soulmate['user_name'] ?></span></p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -274,7 +274,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="slmt_user_2 slmt_user_1">
-                            <p class="usr_p"><span><?php echo (empty($soulmate['join_user']))?"No User":$soulmate['join_user']; ?></span> <a href="javascript:;"><img src="<?php echo (empty($soulmate['join_user']))?DEFAULT_IMAGE_PATH.'/pst_prfl_icon.png':DEFAULT_PROFILE_IMAGE_PATH.$soulmate['join_user_image']; ?>" class="smlt_usrimg1 user_chat_thumb"></a> </p>
+                            <p class="usr_p"><span><?php echo (empty($soulmate['join_user'])) ? "No User" : $soulmate['join_user']; ?></span> <a href="javascript:;"><img src="<?php echo (empty($soulmate['join_user'])) ? DEFAULT_IMAGE_PATH . '/pst_prfl_icon.png' : DEFAULT_PROFILE_IMAGE_PATH . $soulmate['join_user_image']; ?>" class="smlt_usrimg1 user_chat_thumb"></a> </p>
                         </div>
                     </div>
                 </div>
@@ -303,11 +303,17 @@
                                         </div>
                                         <div class="col-lg-3 col-md-5 col-sm-8 col-xs-9">
                                             <ul class="list-inline type_icon_ul">
-                                                <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol1.png"></a></li>
+                                                <!-- <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol1.png"></a></li> -->
                                                 <li>
                                                     <div class="fileUpload up_img btn">
                                                         <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
                                                         <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="fileUpload up_img btn">
+                                                        <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
+                                                        <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
                                                     </div>
                                                 </li>
                                                 <li><a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
