@@ -298,10 +298,10 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="topic_prfle_icon_sec">
 
-                                        <div class="col-lg-9 col-md-7 col-sm-4 col-xs-3">
+                                        <div class="col-lg-8 col-md-7 col-sm-4 col-xs-3">
                                             <a href="javascript:;"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/pst_prfl_icon.png" class="img-responsive cht_pfl_img"></a>
                                         </div>
-                                        <div class="col-lg-3 col-md-5 col-sm-8 col-xs-9">
+                                        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-9">
                                             <ul class="list-inline type_icon_ul">
                                                 <!-- <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol1.png"></a></li> -->
                                                 <li>

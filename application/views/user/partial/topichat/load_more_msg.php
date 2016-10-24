@@ -21,7 +21,7 @@ foreach ($messages as $message) {
                     ?>
                     <span style="float: right">
                         <span class='imagePreview' id='imagePreview_msg'>
-                            <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>"></video>
+                            <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:250px;"></video>
                         </span>
                     </span>
                     <?php
@@ -50,9 +50,9 @@ foreach ($messages as $message) {
                     <?php
                 } else if ($message['media_type'] == "video") {
                     ?>
-                    <span style="float: right">
+                    <span>
                         <span class='imagePreview' id='imagePreview_msg'>
-                            <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>"></video>
+                            <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:250px;"></video>
                         </span>
                     </span>
                     <?php

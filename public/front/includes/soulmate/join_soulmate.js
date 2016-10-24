@@ -138,10 +138,10 @@ $(document).ready(function () {
                     $('.message').hide();
                     $('.chat_area2').append("<p class='chat_2 clearfix'><span class='' style='float:right'><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
                     //$('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                    $('.imagePreview'+i).html("<video controls='' src='"+this.result+"'>");
+                    $('.imagePreview'+i).html("<video controls='' src='"+this.result+"' style='height:250px'>");
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 }
-            } 
+            }
             else
             {
                 //this.files = '';
@@ -222,7 +222,7 @@ $(document).ready(function () {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class=''><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
-                $('.imagePreview'+i).html("<video controls='' src='"+upload_path + userdata.media+"'>");
+                $('.imagePreview'+i).html("<video controls='' src='"+upload_path + userdata.media+"' style='height:250px'>");
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
