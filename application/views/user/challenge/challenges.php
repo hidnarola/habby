@@ -33,6 +33,7 @@
                     <?php
                     if ($Challenges != "" && !empty($Challenges)) {
                         $cnt = count($Challenges);
+                        
                         foreach ($Challenges as $Challenge) {
 //                            pr($Challenge);
                             ?>
@@ -76,7 +77,17 @@
                                                 <li class="winner winner_btn" id="winner<?php echo $Challenge['id']; ?>" data-id="<?php echo $Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
-                                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                                <?php
+                                                if ($Challenge['is_applied']) {
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                                    <?php
+                                                }
+                                                ?>
                                             </ul>
 
                                         </div>
@@ -189,16 +200,16 @@
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
-                            <?php
-                        }
-                    } else {
-                        ?>
+        <?php
+    }
+} else {
+    ?>
                         <div class="">
                             No Challenge found.
                         </div>
-                        <?php
-                    }
-                    ?>
+    <?php
+}
+?>
                 </div>
                 <!-- Challenge row section end here -->
             </div>
@@ -207,9 +218,9 @@
     <!-- Soulmate #1 section and Newest Post area end here  -->
     <!-- Group section container end here -->
 
-    <?php
-    if ($cnt >= 3) {
-        ?>
+<?php
+if ($cnt >= 3) {
+    ?>
         <div class = "row">
             <div class = "container">
                 <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
@@ -220,9 +231,9 @@
                 </div>
             </div>
         </div>
-        <?php
-    }
-    ?>
+    <?php
+}
+?>
 </div>
 <!-- Soulmate new group form popup start here -->
 <div class="modal" id="new_grp">

@@ -1,10 +1,9 @@
 $('document').ready(function () {
-    
-    // Like functionality on post
+
+// Like functionality on post
     $('.post_section').on('click', '.user_like', function () {
         var t = $(this);
         post_id = t.parents('.pst_full_sec').data('post_id');
-
         $.ajax({
             url: base_url + 'user/post/add_like/' + post_id,
             success: function (str) {
@@ -29,12 +28,10 @@ $('document').ready(function () {
             }
         });
     });
-
     // Save post to user's IP page
     $('.post_section').on('click', '.pstbtn', function () {
         var t = $(this);
         post_id = t.parents('.pst_full_sec').data('post_id');
-
         $.ajax({
             url: base_url + 'user/post/save_post/' + post_id,
             success: function (str) {
@@ -49,12 +46,10 @@ $('document').ready(function () {
             }
         });
     });
-
     // Give coin to user post
     $('.post_section').on('click', '.user_coin', function () {
         var t = $(this);
         post_id = t.parents('.pst_full_sec').data('post_id');
-
         $.ajax({
             url: base_url + 'user/post/add_coin/' + post_id,
             success: function (str) {
@@ -81,7 +76,6 @@ $('document').ready(function () {
             }
         });
     });
-
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
@@ -118,7 +112,6 @@ $('document').ready(function () {
             }
         }
     });
-
     // Video uploading script
     $('#uploadVideo').on("change", function () {
         $('.message').html();
@@ -153,7 +146,6 @@ $('document').ready(function () {
             }
         }
     });
-
     // Add comment to the post
     $(".comment").on("keypress", function (e) {
         var key = e.keyCode;
@@ -181,7 +173,6 @@ $('document').ready(function () {
             return false;
         }
     });
-
     // Add like to the post comment
     $('.post_section').on('click', '.comment_like_cnt', function () {
         var t = $(this);
@@ -210,7 +201,6 @@ $('document').ready(function () {
             }
         });
     });
-
     // Display comment reply
     $(".post_section").on('click', '.post_comment_reply', function () {
         var t = $(this);
@@ -222,7 +212,6 @@ $('document').ready(function () {
             }
         });
     });
-
     // Add reply for the post comment
     $('.post_section').on('keypress', '.comment_reply', function (e) {
         var key = e.keyCode;
@@ -248,7 +237,6 @@ $('document').ready(function () {
             return false;
         }
     });
-
     // Lazy loading on scroll event for post
     var page = 2;
     var load = true;
@@ -266,7 +254,6 @@ $('document').ready(function () {
                         }
                     });
                 }, 1500);
-
 //                       $('.post_section').masonry({
 //                            itemSelector: '.pst_full_sec',
 //                             columnWidth: 100
@@ -275,7 +262,6 @@ $('document').ready(function () {
             }
         }
     });
-
     // Fetch extra post for lazy loading
     function loaddata()
     {
@@ -302,17 +288,34 @@ $('document').ready(function () {
                 }
                 else
                 {
+
                     $('.post_section').append(data.view);
                     stButtons.locateElements();
-
 // or if you want to be a bit defensive about whether the lib has been
 // loaded or not:
                     if (window.stButtons) {
                         stButtons.locateElements();
                     } // Parse ShareThis markup
+
+
                 }
+                $('.share-link').popover({
+                    html: true,
+                    content: function () {
+                        return $(this).siblings("#popover-content").html();
+                    }
+                });
             }
         });
         page++;
     }
+
+    $('.post_section').on('click', '.share-link', function () {
+        $(this).popover({
+            html: true,
+            content: function () {
+                return $(this).siblings("#popover-content").html();
+            }
+        });
+    });
 });

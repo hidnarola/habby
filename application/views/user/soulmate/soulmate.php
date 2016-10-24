@@ -86,13 +86,15 @@
                                                     <a href="javascript:void(0);" class="pstbtn requested">Requested</a>
                                                 <?php } else if($soulmate_group['is_joined'] == 1) {
                                                     ?>
-                                                    <a href="javascript:void(0);" class="pstbtn requested"><?php echo lang('Joined'); ?></a>
+                                                    <a href="<?php echo base_url() . "soulmate/details/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn requested"><?php echo lang('Joined'); ?></a>
                                                     <?php
                                                 }
-                                                else{
+                                                else
+                                                {
                                                     ?>
                                                     <a href="<?php echo base_url() . "soulmate/join/" . urlencode(base64_encode($soulmate_group['id'])) ?>" class="pstbtn smlt_btn"><?php echo lang('Join'); ?></a>
-                                                <?php }
+                                                    <?php
+                                                }
                                                 ?>
                                             </li>
                                         </ul>

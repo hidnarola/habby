@@ -317,7 +317,10 @@
                                                     </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
-                                                    <a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                    <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+
+                                                    <!-- 
+                                                    <a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a> -->
                                                 </span>
                                                 <span class="input-group-btn">
                                                     <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
@@ -386,7 +389,13 @@
                     in_progress = false;
                 }
             });
-
         }
+
+        $('#emogis').popover({
+            html: true,
+            content: function () {
+                return $("#popover-content").html();
+            }
+        });
     });
 </script>

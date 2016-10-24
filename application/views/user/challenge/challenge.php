@@ -81,24 +81,21 @@
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span>Rewards<?php // echo $Newest_Challenge['rewards']                            ?></span></li>
+                                                <li><span>Rewards<?php // echo $Newest_Challenge['rewards']                             ?></span></li>
                                                 <li class="winner winner_n_btn" id="winner<?php echo $Newest_Challenge['id']; ?>" data-id="<?php echo $Newest_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
                                                 <li>
                                                     <?php
-                                                        if($Newest_Challenge['is_applied'])
-                                                        {
-                                                            ?>
-                                                            <a href="javascript:;" class="pstbtn">Enter</a>
-                                                            <?php
-                                                        }
-                                                        else
-                                                        {
-                                                    ?>
-                                                            <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a>
-                                                    <?php
-                                                        }
+                                                    if ($Newest_Challenge['is_applied']) {
+                                                        ?>
+                                                        <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                        <?php
+                                                    }
                                                     ?>
                                                 </li>
                                             </ul>
@@ -213,10 +210,10 @@
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
-                            <?php
-                        }
-                    }
-                    ?>
+        <?php
+    }
+}
+?>
                 </div>
                 <!-- Challenge row section end here -->
 
@@ -233,10 +230,10 @@
                     <!-- Challenge Title Section section end here -->
                 </div>
                 <div class="row">				
-                    <?php
-                    if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
-                        foreach ($Popular_Challenges as $Popular_Challenge) {
-                            ?>
+<?php
+if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
+    foreach ($Popular_Challenges as $Popular_Challenge) {
+        ?>
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
@@ -264,10 +261,10 @@
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                                             <p class="chlng_para">
-                                                <?php echo $Popular_Challenge['description'] ?>
+        <?php echo $Popular_Challenge['description'] ?>
                                             </p>
                                         </div>
-                                        
+
                                     </div>
 
                                     <!-- Challenge content section end here -->
@@ -281,14 +278,17 @@
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
                                                 <li>
-                                                    <?php
-                                                        if($Popular_Challenge['is_applied']){
-                                                            ?>
-                                                            <a href="javascript:;" class="pstbtn">Enter</a>
-                                                            <?php
-                                                        }
+        <?php
+        if ($Popular_Challenge['is_applied']) {
+            ?>
+                                                        <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                        <?php
+                                                    }
                                                     ?>
-                                                    <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -311,7 +311,7 @@
                                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                                         <img src="<?php echo DEFAULT_IMAGE_PATH . "challenge-prfl.jpg"; ?>" class="img-responsive center-block ">
                                                     </div>
-                                                    
+
 
                                                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
                                                         <!-- <h2 class="chlng_hdg">Work description</h2> -->
@@ -403,10 +403,10 @@
                             </div>
                             <!-- Challenge each section end here -->
 
-                            <?php
-                        }
-                    }
-                    ?>
+        <?php
+    }
+}
+?>
                 </div>
                 <!-- Challenge row section end here -->
 
@@ -424,10 +424,10 @@
                     <!-- Challenge Title Section section end here -->
                 </div>
                 <div class="row">					
-                    <?php
-                    if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
-                        foreach ($Recom_Challenges as $Recom_Challenge) {
-                            ?>
+<?php
+if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
+    foreach ($Recom_Challenges as $Recom_Challenge) {
+        ?>
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
@@ -455,7 +455,7 @@
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                                             <p class="chlng_para">
-                                                <?php echo $Recom_Challenge['description'] ?>
+        <?php echo $Recom_Challenge['description'] ?>
                                             </p>
                                         </div>
                                     </div>
@@ -471,19 +471,16 @@
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
                                                 <li>
-                                                    <?php
-                                                        if($Recom_Challenge['is_applied'])
-                                                        {
-                                                            ?>
-                                                            <a href="javascript:;" class="pstbtn">Enter</a>
-                                                            <?php
-                                                        }
-                                                        else
-                                                        {
-                                                            ?>
-                                                            <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
-                                                            <?php
-                                                        }
+        <?php
+        if ($Recom_Challenge['is_applied']) {
+            ?>
+                                                        <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                        <?php
+                                                    }
                                                     ?>
                                                 </li>
                                             </ul>
@@ -598,10 +595,10 @@
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
-                            <?php
-                        }
-                    }
-                    ?>
+        <?php
+    }
+}
+?>
                 </div>
                 <!-- Challenge row section end here -->
             </div>
