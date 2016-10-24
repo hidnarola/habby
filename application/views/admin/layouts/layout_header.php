@@ -12,6 +12,7 @@
     <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "components.css"; ?>" rel="stylesheet" type="text/css">
     <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "colors.css"; ?>" rel="stylesheet" type="text/css">
     <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "components.min.css"; ?>" rel="stylesheet" type="text/css">
+    <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "developer.css"; ?>" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->

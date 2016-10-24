@@ -12,54 +12,7 @@ if (!empty($user_data['user_image'])) {
     <?php ?>
     <body>
         <?php $this->load->view('admin/layouts/layout_header'); ?>
-        <!-- Main navbar -->
-        <style>
-            .thumb{
-                display: table;
-                width:100%;
-            }
-            .thumb-inner{
-                display: table-cell;
-                padding: 5px;
-            } 
-            .thumb-ul li a i {
-                font-size: 20px;
-            }
-            .thumb-ul li a i {
-                font-size: 20px;
-            }
-            .thumb-ul li {
-                display: inline-block;
-            }
-            .thumb-ul li a{
-                padding: 0 18px;
-                color: #26A69A;
-                text-align: center;
-            }
-            ul.thumb-ul {
-                padding-left: 10px;
-            }
-            .padding-15{
-                padding: 15px;
-            }
-            .media .thumb-ul li a {
-                padding: 0;
-                text-align: center;
-                display: inline-block;
-            }
-            .media .thumb-ul li a i, .media .thumb-ul li a {
-                font-size: 12px;
-            }
-            .media-list > li:nth-child(odd) {
-                background-color: #f9f7f7;
-            }
-            .media .thumb-ul li a {
-                padding: 0 8px 0 0;
-                text-align: center;
-                display: inline-block;
-                color:#2196F3;
-            }
-        </style>  
+        <!-- Main navbar --> 
         <div class="navbar navbar-inverse">
             <div class="navbar-header">
 <!--                <a class="navbar-brand" href=""><img src="<?php echo DEFAULT_ADMIN_IMAGE_PATH . "logo_light.png"; ?>" alt=""></a>-->
@@ -156,9 +109,9 @@ if (!empty($user_data['user_image'])) {
                                     <li class="<?php echo ($controller == 'posts') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/posts'; ?>"><i class="icon-magazine"></i> <span> Posts</span></a>
                                     </li>
-<!--                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
-                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Topichat</span></a>
-                                    </li>
+                                    <li class="<?php echo ($controller == 'topichat') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/topichat'; ?>"><i class="icon-users4"></i> <span>Topichat</span></a>
+                                    </li><!--
                                     <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Soulmate</span></a>
                                     </li>

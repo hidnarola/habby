@@ -107,7 +107,6 @@ class Posts extends CI_Controller {
                 redirect('admin/posts');
             } else {
                 if ($post_id = $this->Admin_posts_model->insert('post', $post_arr)) {
-                    pr($_FILES, 1);
                     $media = array();
                     if (!empty($_FILES['uploadfile']['name'])) {
                         $filecount = count($_FILES['uploadfile']['name']);

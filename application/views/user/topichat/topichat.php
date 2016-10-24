@@ -178,7 +178,7 @@ if ($cnt >= 3) {
                                                             </label>
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "No_of_person" value = "Yes" >
-                                                                <input type = "text" class = "form-control" id = "txt_No_of_person" name = "No_of_person" placeholder = "<?php echo lang('customise'); ?>" disabled>
+                                                                <input type = "number" class = "form-control" id = "txt_No_of_person" name = "No_of_person" placeholder = "<?php echo lang('customise'); ?>" disabled>
                                                             </label>
                                                         </div>
                                                     </div>

@@ -1,0 +1,74 @@
+.thumbnail h3{    margin: 0;
+                  padding: 5px;
+                  width: 100%;}
+
+.thumbnail h3 img {
+    max-width: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    height: 30px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.thumbnail{
+    display: inline-block;
+}
+.thumb:not(.thumb-rounded) img {
+    border-radius: 3px;
+    max-width: 330px;
+    margin: 0 auto;
+}
+.thumb{
+
+}
+.media-annotation{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+.media-body {
+    width: 100%;
+}
+.thumb-inner{
+    float: left;
+    padding: 5px;
+    vertical-align: top;
+    max-width: 330px;
+} 
+.thumb-ul li a i {
+    font-size: 20px;
+}
+.thumb-ul li a i {
+    font-size: 20px;
+}
+.thumb-ul li {
+    display: inline-block;
+}
+.thumb-ul li a{
+    padding: 0 18px;
+    color: #26A69A;
+    text-align: center;
+}
+ul.thumb-ul {
+    padding-left: 10px;
+}
+.padding-15{
+    padding: 15px;
+}
+.media .thumb-ul li a {
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+}
+.media .thumb-ul li a i, .media .thumb-ul li a {
+    font-size: 12px;
+}
+.media-list > li:nth-child(odd) {
+    background-color: #f9f7f7;
+}
+.media .thumb-ul li a {
+    padding: 0 8px 0 0;
+    text-align: center;
+    display: inline-block;
+    color:#2196F3;
+}

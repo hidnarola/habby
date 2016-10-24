@@ -64,7 +64,6 @@ if ($this->session->flashdata('success')) {
                             ?>
                             <div class="thumbnail">
                                 <h3><img src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg"> user name</h3>
-
                                 <div class="thumb">
                                     <?php
                                     foreach ($posts['media'] as $post_media) {
@@ -86,7 +85,7 @@ if ($this->session->flashdata('success')) {
                                     }
                                     ?>
                                 </div>
-                                <div class="clearfix"></div>
+
                                 <div class="caption">
                                     <h6 class="no-margin-top text-semibold"><a href="#" class="text-default"><?php echo $posts['description'] ?></a></h6>
                                 </div>

@@ -7,7 +7,7 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo site_url('admin/home'); ?>"><i class="icon-home2 position-left"></i> Home</a></li>
-            <li><a href="<?php echo site_url('admin/posts'); ?>"><i class="icon-magazine position-left"></i> Posts</a></li>
+            <li><a href="<?php echo site_url('admin/topichat'); ?>"><i class="icon-magazine position-left"></i> Topichat Groups</a></li>
             <li class="active"><?php echo $heading; ?></li>
         </ul>
     </div>
@@ -54,59 +54,47 @@ if ($this->session->flashdata('success')) {
                     <div class="panel-body">
                         <div class="message alert alert-danger" style="display:none"></div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Post Description <span class="text-danger">*</span> </label>
+                            <label class="col-lg-3 control-label">Topic Name <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <textarea id="description" name="description" placeholder="Enter Description" class="form-control"><?php echo (isset($post_datas['description'])) ? $post_datas['description'] : set_value('description'); ?></textarea>
+                                <textarea id="description" name="topic_name" placeholder="Enter Topic Name" class="form-control"><?php echo (isset($Topichats['topic_name'])) ? $Topichats['topic_name'] : set_value('topic_name'); ?></textarea>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">No. of People</label>
+                            <label class="radio-inline">
+                                <input type="radio" name="person_limit" id="optionsRadios1" value="-1" <?php echo ($Topichats['person_limit'] < 0) ? "checked" : "" ?>> No limit
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="person_limit" id="No_of_person" value="Yes" <?php echo ($Topichats['person_limit'] > 0 ) ? "checked" : "" ?>>
+                                <input type="number" class="form-control" id="txt_No_of_person" name="No_of_person" value="<?php echo ($Topichats['person_limit'] > 0) ? intval($Topichats['person_limit']) : "Customise" ?>" placeholder="<?php echo ($Topichats['person_limit'] > 0) ? intval($Topichats['person_limit']) : "Customise" ?>" disabled>
+                            </label>
+                        </div>
                         <div class="form-group form-group-material">
-                            <label class="display-block control-label has-margin animate is-visible col-lg-3">Post Images</label>
+                            <label class="display-block control-label has-margin animate is-visible col-lg-3">Topichat Image</label>
                             <div class="col-lg-7">
                                 <div class="uploader">
-                                    <input type="file" name="uploadfile[]" id="uploadFile" multiple="multiple" class="file-styled">
+                                    <input type="file" name="group_cover" id="uploadFile" class="file-styled">
                                     <span class="filename" style="-webkit-user-select: none;"></span>
                                     <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Images</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group form-group-material">
-                            <label class="display-block control-label has-margin animate is-visible col-lg-3">Post Videos</label>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Notes </label>
                             <div class="col-lg-7">
-                                <div class="uploader">
-                                    <input type="file" name="videofile[]" id="uploadVideo" multiple="multiple" class="file-styled">
-                                    <span class="filename" style="-webkit-user-select: none;"></span>
-                                    <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Videos</span>
-                                </div>
+                                <textarea id="description" name="notes" placeholder="Enter Notes" class="form-control"><?php echo (isset($Topichats['notes'])) ? $Topichats['notes'] : set_value('notes'); ?></textarea>
                             </div>
                         </div>
-
-
                         <?php
 //                        pr($post_datas['media']);
-                        if (isset($post_datas['media']) && !empty($post_datas['media'])) {
+                        if (isset($Topichats['group_cover']) && !empty($Topichats['group_cover'])) {
                             ?>
                             <div class="col-lg-12 col-sm-12">
                                 <div class="thumbnail">
                                     <div class="thumb">
-                                        <?php
-                                        foreach ($post_datas['media'] as $post_media) {
-                                            if ($post_media['media_type'] == 'image') {
-                                                ?>
-                                                <div class="thumb-inner">
-                                                    <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>" alt="">
-                                                </div>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <div class="thumb-inner">0
-                                                    <video controls class="img-responsive center-block">
-                                                        <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
-                                                    </video>
-                                                </div>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
+                                        <div class="thumb-inner">
+                                            <img src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $Topichats['group_cover']; ?>" alt="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -114,9 +102,6 @@ if ($this->session->flashdata('success')) {
                         }
                         ?>
                         <div class="image_wrapper" style="display:none">
-
-                        </div>
-                        <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
                         </div>
                         <div class="text-right">
                             <button class="btn btn-success" type="submit">Save <i class="icon-arrow-right14 position-right"></i></button>
@@ -222,5 +207,12 @@ if ($this->session->flashdata('success')) {
                 $('.message').show();
             }
         }
+    });
+
+    $('input:radio[name="person_limit"]').change(function () {
+        if ($(this).is(":checked") && $(this).val() == 'Yes')
+            $("#txt_No_of_person").removeAttr("disabled");
+        else
+            $("#txt_No_of_person").attr("disabled", "disabled");
     });
 </script>
