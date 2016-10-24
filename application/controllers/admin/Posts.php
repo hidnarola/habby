@@ -91,19 +91,94 @@ class Posts extends CI_Controller {
             } else {
                 show_404();
             }
+        } else {
+            $this->data['title'] = 'Habby - Admin add post';
+            $this->data['heading'] = 'Add post';
         }
-        if ($this->input->post()) {
-            $this->form_validation->set_rules('description', 'description', 'required');
-            if ($this->form_validation->run() == FALSE) {
-                $this->template->load('admin_main', 'admin/posts/manage', $this->data);
-            } else {
-                $update_array = $this->input->post(null);
-                $this->Admin_users_model->update_record('post', $where, $update_array);
+        $this->form_validation->set_rules('description', 'description', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->template->load('admin_main', 'admin/posts/manage', $this->data);
+        } else {
+            $post_arr['description'] = $this->input->post('description');
+            $post_arr['user_id'] = $this->session->user['id'];
+            if ($post_id != '') {
+                $this->Admin_posts_model->update_record('post', $where, $update_array);
                 $this->session->set_flashdata('success', 'post successfully updated!');
                 redirect('admin/posts');
+            } else {
+                if ($post_id = $this->Admin_posts_model->insert('post', $post_arr)) {
+                    pr($_FILES, 1);
+                    $media = array();
+                    if (!empty($_FILES['uploadfile']['name'])) {
+                        $filecount = count($_FILES['uploadfile']['name']);
+                        for ($i = 0; $i < $filecount; ++$i) {
+                            $_FILES['userFile']['name'] = $_FILES['uploadfile']['name'][$i];
+                            $_FILES['userFile']['type'] = $_FILES['uploadfile']['type'][$i];
+                            $_FILES['userFile']['tmp_name'] = $_FILES['uploadfile']['tmp_name'][$i];
+                            $_FILES['userFile']['error'] = $_FILES['uploadfile']['error'][$i];
+                            $_FILES['userFile']['size'] = $_FILES['uploadfile']['size'][$i];
+
+                            // Code of image uploading
+                            $config['upload_path'] = './uploads/user_post';
+                            $config['allowed_types'] = 'gif|jpg|png';
+                            $config['max_size'] = 1000000;
+                            $config['file_name'] = md5(uniqid(mt_rand()));
+
+                            $this->upload->initialize($config);
+
+                            if (!$this->upload->do_upload('userFile')) {
+                                $error = array('error' => $this->upload->display_errors());
+                                $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                            } else {
+                                $data = $this->upload->data();
+                                $media_arr = array();
+                                $media_arr['post_id'] = $post_id;
+                                $media_arr['media_type'] = 'image';
+                                $media_arr['media'] = $data['file_name'];
+                                $media[] = $media_arr;
+                            }
+                        }
+                    }
+                    if (!empty($_FILES['videofile']['name'])) {
+                        $filecount = count($_FILES['videofile']['name']);
+                        for ($i = 0; $i < $filecount; ++$i) {
+                            $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
+                            $_FILES['userFile']['type'] = $_FILES['videofile']['type'][$i];
+                            $_FILES['userFile']['tmp_name'] = $_FILES['videofile']['tmp_name'][$i];
+                            $_FILES['userFile']['error'] = $_FILES['videofile']['error'][$i];
+                            $_FILES['userFile']['size'] = $_FILES['videofile']['size'][$i];
+
+                            // Code of image uploading
+                            $config['upload_path'] = './uploads/user_post';
+                            $config['allowed_types'] = 'mp4|mov|3gp';
+                            $config['max_size'] = 4000000;
+                            $config['file_name'] = md5(uniqid(mt_rand()));
+
+                            $this->upload->initialize($config);
+
+                            if (!$this->upload->do_upload('userFile')) {
+                                $error = array('error' => $this->upload->display_errors());
+                                $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                            } else {
+                                $data = $this->upload->data();
+                                $media_arr = array();
+                                $media_arr['post_id'] = $post_id;
+                                $media_arr['media_type'] = 'video';
+                                $media_arr['media'] = $data['file_name'];
+                                $media[] = $media_arr;
+                            }
+                        }
+                    }
+                    if (count($media) > 0) {
+                        $this->Post_model->insert_post_media($media);
+                    }
+                    $this->session->set_flashdata('success', 'Post successfully added!');
+                } else {
+                    $this->session->set_flashdata('error', 'Post not added!');
+                }
+                redirect(site_url('admin/posts'));
             }
         }
-        $this->template->load('admin_main', 'admin/posts/manage', $this->data);
     }
 
     public function view() {
