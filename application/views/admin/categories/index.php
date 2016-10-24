@@ -12,7 +12,7 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo base_url() . "admin/dashboard" ?>"><i class="icon-home2 position-left"></i> Admin</a></li>
-            <li><i class="icon-users4 position-left"></i> Categories </li>
+            <li><i class="icon-server position-left"></i> Categories </li>
         </ul>
     </div>
 </div>

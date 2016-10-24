@@ -1,13 +1,13 @@
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
-            <h4><i class="icon-user"></i> <span class="text-semibold"><?php echo $heading; ?></span></h4>
+            <h4><i class="icon-server"></i> <span class="text-semibold"><?php echo $heading; ?></span></h4>
         </div>
     </div>
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo site_url('admin/home'); ?>"><i class="icon-home2 position-left"></i> Home</a></li>
-            <li><a href="<?php echo site_url('admin/users'); ?>"><i class="icon-users4 position-left"></i> Users</a></li>
+            <li><a href="<?php echo site_url('admin/categories'); ?>"><i class="icon-server position-left"></i> categories</a></li>
             <li class="active"><?php echo $heading; ?></li>
         </ul>
     </div>

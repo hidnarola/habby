@@ -1,4 +1,4 @@
-<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                          ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                           ?>"></script>-->
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/tables/datatables/datatables.min.js"; ?>"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/select2.min.js"; ?>"></script>
 <!-- Page header -->
@@ -12,7 +12,7 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo base_url() . "admin/dashboard" ?>"><i class="icon-home2 position-left"></i> Admin</a></li>
-            <li><i class="icon-users4 position-left"></i> Posts</li>
+            <li><i class="icon-magazine position-left"></i> Posts</li>
         </ul>
     </div>
 </div>
@@ -57,9 +57,9 @@ if ($this->session->flashdata('success')) {
     <!-- /content area -->
     <div class="content">
         <div class="panel panel-flat">
-            <!--            <div class="panel-heading text-right">
-                            <a href="<?php echo site_url('admin/posts/add'); ?>" class="btn btn-success btn-labeled"><b><i class="icon-user-plus"></i></b> Add new user</a>
-                        </div>-->
+            <div class="panel-heading text-right">
+                <a href="<?php echo site_url('admin/posts/add'); ?>" class="btn btn-success btn-labeled"><b><i class="icon-add"></i></b> Add new post</a>
+            </div>
             <table class="table datatable-basic">
                 <thead>
                     <tr>

@@ -165,27 +165,42 @@ class Admin_posts_model extends CI_Model {
 
             // fetch reply of comments
             $post_comments_ids = array_column($post['comments'], 'id');
-            $this->db->select('p.*, u.name, u.user_image');
-            $this->db->from('post_comment_reply p');
-            $this->db->where_in('post_comment_id', $post_comments_ids);
-            $this->db->join('users u', 'p.user_id = u.id');
-            $post_replies = $this->db->get()->result_array();
+            if (count($post_comments_ids) > 0) {
+                $this->db->select('p.*, u.name, u.user_image');
+                $this->db->from('post_comment_reply p');
+                $this->db->where_in('post_comment_id', $post_comments_ids);
+                $this->db->join('users u', 'p.user_id = u.id');
+                $post_replies = $this->db->get()->result_array();
 
-
-            if (count($post_replies) > 0) {
-                for ($i = 0; $i < count($post['comments']); ++$i) {
-                    $post['comments'][$i]['comment_replies'] = array();
-                    $posts = array();
-                    foreach ($post_replies as $value) {
-                        if ($post['comments'][$i]['id'] == $value['post_comment_id']) {
-                            $posts[] = $value;
+                if (count($post_replies) > 0) {
+                    for ($i = 0; $i < count($post['comments']); ++$i) {
+                        $post['comments'][$i]['comment_replies'] = array();
+                        $posts = array();
+                        foreach ($post_replies as $value) {
+                            if ($post['comments'][$i]['id'] == $value['post_comment_id']) {
+                                $posts[] = $value;
+                            }
                         }
+                        $post['comments'][$i]['comment_replies'] = $posts;
                     }
-                    $post['comments'][$i]['comment_replies'] = $posts;
                 }
             }
         }
         return $post;
+    }
+
+    /**
+     * @uses : Insert posts record into table
+     * @param : @table = table name, @array = array of insert
+     * @return : insert_id else 0
+     * @author : HPA
+     */
+    public function insert($table, $array) {
+        if ($this->db->insert($table, $array)) {
+            return $this->db->insert_id();
+        } else {
+            return 0;
+        }
     }
 
 }
