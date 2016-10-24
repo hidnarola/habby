@@ -343,7 +343,7 @@
         </script>
         <script>
 
-            $('.chat1').on('click', function () {
+            $('.post_section').on('click','.chat1', function () {
                 $(this).parents(".post_leftsec").children(".post_leftsec_hddn1").toggleClass('clicked');
                 $(this).closest(".mov_sec1").toggleClass('clicked2');
             });

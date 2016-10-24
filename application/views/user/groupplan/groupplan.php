@@ -92,7 +92,7 @@
                                                 <?php }
                                                 else if($Group_plan['is_joined'] == 1){
                                                     ?>
-                                                    <a href="javascript:void(0);" class="pstbtn requested"><?php echo lang('Joined');?></a>
+                                                    <a href="<?php echo base_url() . "groupplan/details/" . urlencode(base64_encode($Group_plan['id'])) ?>" class="pstbtn requested"><?php echo lang('Joined');?></a>
                                                     <?php
                                                 }
                                                 else {

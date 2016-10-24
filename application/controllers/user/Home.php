@@ -199,6 +199,8 @@ class Home extends CI_Controller {
             }
         } else {
             $this->data['all_countries'] = $this->Users_model->get_all_countries();
+            $this->data['posts'] = $this->Post_model->users_post($this->session->user['id'], 0, 3);
+            $this->data['saved_posts'] = $this->Post_model->saved_post($this->session->user['id'], 0, 3);
             $this->template->load('front', 'user/profile', $this->data);
         }
     }

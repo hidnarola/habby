@@ -183,24 +183,34 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="#">
+                                                                <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['id']?>">
+                                                                    
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                     <span>
                                                                         <?php echo $post['post_share'] ?> Shares
                                                                     </span>
                                                                 </a>
-                                                                <?php
-                                                                $media_url = (isset($post['media']) && is_array($post['media']) && count($post['media']) > 0) ? $post['media'][0]['media'] : '';
-                                                                $media = " st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
-                                                                $sharethis_content = "st_url='" . base_url() . "post/display_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
-                                                                ?>
-                                                                <span class='st_facebook' displayText='Facebook' <?php echo $sharethis_content ?>></span>
-                                                                <span class='st_twitter' displayText='Tweet' <?php echo $sharethis_content ?>></span>
-                                                                <span class='st_linkedin' displayText='LinkedIn' <?php echo $sharethis_content ?>></span>
-                                                                <span class='st_pinterest' displayText='Pinterest' <?php echo $sharethis_content ?>></span>
-                                                                <span class='st_googleplus' displayText='Google +' <?php echo $sharethis_content ?>></span>
-                                                                <span class='st_reddit' displayText='Reddit' <?php echo $sharethis_content ?>></span>
+
+                                                                <div id="popover-content" class="hide">
+                                                                    <ul class="share-icon-list">
+                                                                        <li>
+                                                                            <?php
+                                                                            $media_url = (isset($post['media']) && is_array($post['media']) && count($post['media']) > 0) ? $post['media'][0]['media'] : '';
+                                                                            $media = " st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
+                                                                            $sharethis_content = "st_url='" . base_url() . "post/display_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
+                                                                            ?>
+                                                                            <span class='st_facebook' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                            <span class='st_twitter' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                            <span class='st_linkedin' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                            <span class='st_pinterest' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                            <span class='st_googleplus' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                            <span class='st_reddit' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+
                                                             </li>
+
                                                         </ul>
                                                     </div>
 
@@ -269,5 +279,6 @@
             }
         });
     }, 1500);
+
 
 </script>

@@ -6,7 +6,7 @@
 .post_leftsec_hddn
 {
     max-height:100%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .image_wrapper{
     height:auto;
@@ -112,3 +112,5 @@
 
 .rank_rate{ display: block;}
 #rank_modal .modal-body{ max-height:500px; overflow-x: scroll;}
+.share-icon-list{  list-style-type: none;}
+.img-coin { height:22px;  /* max-width: 31px;*/}

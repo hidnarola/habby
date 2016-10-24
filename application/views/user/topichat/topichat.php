@@ -89,7 +89,7 @@
                                                 <?php
                                                 if ($topichat_group['is_joined']) {
                                                     ?>
-                                                    <a href="javascript:;" class="pstbtn"><?php echo lang('Joined'); ?></a>
+                                                    <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($topichat_group['id'])) ?>" class="pstbtn"><?php echo lang('Joined'); ?></a>
                                                     <?php
                                                 } else {
                                                     ?>

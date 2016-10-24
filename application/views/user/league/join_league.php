@@ -184,11 +184,17 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
                                                 <ul class="list-inline type_icon_ul">
-                                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li>
+                                                    <!-- <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li> -->
                                                     <li>
                                                         <div class="fileUpload up_img btn">
                                                             <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
                                                             <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="fileUpload up_img btn">
+                                                            <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
+                                                            <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
                                                         </div>
                                                     </li>
                                                     <li><a href="#"  data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>

@@ -35,17 +35,17 @@ function get_league_users($group_id) {
 
 function send_league_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into league_messages value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    $query = "insert into league_messages value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
     return false;
 }
 
-function send_league_media($group_id, $sender_id, $msg) {
+function send_league_media($group_id, $sender_id, $msg,$media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into league_messages value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        $query = "insert into league_messages value(NULL,$group_id,$sender_id,'','".$media->media."','".$media_type."',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -122,17 +122,17 @@ function get_groupplan_users($group_id) {
 
 function send_groupplan_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
     return false;
 }
 
-function send_groupplan_media($group_id, $sender_id, $msg) {
+function send_groupplan_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into group_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        $query = "insert into group_chat value(NULL,$group_id,$sender_id,'','".$media->media."','".$media_type."',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -156,17 +156,17 @@ function get_challenge_users($group_id) {
 
 function send_challenge_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL)";
+    $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
     return false;
 }
 
-function send_challenge_media($group_id, $sender_id, $msg) {
+function send_challenge_media($group_id, $sender_id, $msg,$media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'','".$media->media."',NULL)";
+        $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'','".$media->media."','".$media_type."',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }

@@ -19,10 +19,10 @@
 //                     pr($post,1);
                     ?>
                     <!-- Each Rank section start here-->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 rank_lg_sec bdr-right-clng" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
                         <div class="cmnt_newsec_row">
                             <div class="challange_info">
-                                <div class="challenge_header">
+                                <div class="challenge_header row">
                                     <div class="col-lg-2">
                                         <img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['challange_user_image']; ?>" title="<?php echo $post['challange_user'] ?>">
                                     </div>
@@ -30,6 +30,7 @@
                                         <?php echo $post['name']; ?>
                                     </div>
                                 </div>
+                                <div class="clearfix"></div>
                                 <div class="challenge_intro">
                                     <?php echo $post['description'] ?>
                                 </div>

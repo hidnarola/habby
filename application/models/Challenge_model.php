@@ -51,6 +51,7 @@ class Challenge_model extends CI_Model {
         // $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
+        $this->db->group_by('ch.id');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
@@ -65,9 +66,10 @@ class Challenge_model extends CI_Model {
         $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied');
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
-        $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
+        //$this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.average_rank', 'DESC');
+        $this->db->group_by('ch.id');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
