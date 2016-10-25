@@ -116,7 +116,7 @@ class Post_model extends CI_Model {
      */
 
     public function challange_post($data, $logged_in_user, $start = 0, $limit = 0) {
-        $post = $this->db->query("select * from (select (sum(if(rank = 1, 1, 0)) - sum(if(rank = 0, 1, 0))) AS avg_rank, c.name,c.description, c.id, cu.name as challange_user,cu.user_image as challange_user_image, post_rank.challange_post_id, post.media,post.media_type, pu.name as post_user,pu.user_image as post_user_image,  count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined, count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked, count(DISTINCT cpc.id) as tot_comment  from challange_post_rank post_rank left join challange_post post on post.id = post_rank.challange_post_id left join challanges c on c.id = post.challange_id join users cu on cu.id = c.user_id join users pu on pu.id = post.user_id  left join challange_post_coin cc on post.id = cc.challange_post_id left join challange_post_coin cc1 on post.id = cc1.challange_post_id and cc1.user_id = 7 left join challange_post_like cl on post.id = cl.challange_post_id and cl.is_liked = 1 left join challange_post_like cl1 on post.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = 7 left join challange_post_comment cpc on post.id = cpc.challange_post_id  group by post_rank.challange_post_id order by avg_rank desc) a group by a.id having avg_rank >= 0")->result_array();
+        $post = $this->db->query("select * from (select (sum(if(rank = 1, 1, 0)) - sum(if(rank = 0, 1, 0))) AS avg_rank, c.name,c.description, c.id, cu.name as challange_user,cu.user_image as challange_user_image, post_rank.challange_post_id, post.media,post.media_type, pu.name as post_user,pu.user_image as post_user_image,  count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined, count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked, count(DISTINCT cpc.id) as tot_comment  from challange_post_rank post_rank left join challange_post post on post.id = post_rank.challange_post_id left join challanges c on c.id = post.challange_id join users cu on cu.id = c.user_id join users pu on pu.id = post.user_id  left join challange_post_coin cc on post.id = cc.challange_post_id left join challange_post_coin cc1 on post.id = cc1.challange_post_id and cc1.user_id = 7 left join challange_post_like cl on post.id = cl.challange_post_id and cl.is_liked = 1 left join challange_post_like cl1 on post.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = 7 left join challange_post_comment cpc on post.id = cpc.challange_post_id  group by post_rank.challange_post_id order by avg_rank desc) a group by a.id having avg_rank >= 0 limit $start,$limit")->result_array();
 
         $post_ids = array_column($post, 'challange_post_id');
 
@@ -132,15 +132,14 @@ class Post_model extends CI_Model {
             $this->db->group_by('p.id');
 
             $post_comments = $this->db->get()->result_array();
-
             $post_comments_ids = array_column($post_comments, 'challange_post_id');
             if (count($post_comments_ids) > 0) {
                 for ($i = 0; $i < count($post); ++$i) {
                     $post[$i]['comments'] = array();
-                    if (in_array($post[$i]['id'], $post_comments_ids)) {
+                    if (in_array($post[$i]['challange_post_id'], $post_comments_ids)) {
                         $posts = array();
                         foreach ($post_comments as $value) {
-                            if ($post[$i]['id'] == $value['challange_post_id']) {
+                            if ($post[$i]['challange_post_id'] == $value['challange_post_id']) {
                                 $posts[] = $value;
                             }
                         }
@@ -461,10 +460,57 @@ class Post_model extends CI_Model {
         }
         return $post;
     }
+    
+    /*
+     * 
+     */
+    public function get_challenge_post_details($post_id) {
+        $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment');
+        $this->db->from('challange_post p');
+        $this->db->where('p.id', $post_id);
+        $this->db->join('users u', 'p.user_id = u.id');
+        $this->db->join('challange_post_coin pc', 'p.id = pc.challange_post_id', 'left');
+        $this->db->join('challange_post_like pl', 'p.id = pl.challange_post_id and pl.is_liked=1', 'left');
+        $this->db->join('challange_post_comment pco', 'p.id = pco.challange_post_id', 'left');
+        $this->db->order_by('p.id', 'desc');
+        $this->db->group_by('p.id');
+        $post = $this->db->get()->row_array();
+
+        if (!empty($post)) {
+            $this->db->where('p.post_id', $post['id']);
+            $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply');
+            $this->db->from('challange_post_comment p');
+            $this->db->join('users u', 'p.user_id = u.id');
+            $this->db->join('challange_post_comments_like pl', 'p.id = pl.challange_post_comment_id and pl.is_liked=1', 'left');
+            $this->db->join('challange_post_comments_reply pr', 'p.id = pr.challange_post_comment_id', 'left');
+            $this->db->order_by('p.created_date', 'desc');
+            $this->db->group_by('p.id');
+            //$this->db->join();
+
+            $post_comments = $this->db->get()->result_array();
+            //        echo $this->db->last_query();
+            $post_comments_ids = array_column($post_comments, 'challange_post_id');
+//                    pr($post_comments_ids,1);
+            if (count($post_comments_ids) > 0) {
+                $post['comments'] = array();
+                if (in_array($post['id'], $post_comments_ids)) {
+                    $posts = array();
+                    foreach ($post_comments as $value) {
+                        if ($post['id'] == $value['challange_post_id']) {
+                            $posts[] = $value;
+                        }
+                    }
+                    $post['comments'] = $posts;
+                }
+            }
+        }
+        return $post;
+    }
 
     /*
      * users_post is used to get all post posted by particular user
      * @param $user_id  int     user_id
+     * @param $logged_in_user   int logged in user_id
      * @param $start 	int 	specify start position for pagination
      * @param $limit 	int 	specify page size
      * 
@@ -472,14 +518,14 @@ class Post_model extends CI_Model {
      * developed by : ar
      */
 
-    public function users_post($user_id, $start = 0, $limit = 0) {
+    public function users_post($user_id, $logged_in_user,$start = 0, $limit = 0) {
         $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment, count(DISTINCT ps.id) as post_share, count(DISTINCT pcoin.id) as is_coined, count(DISTINCT pli.id) as is_liked, pm.media');
         $this->db->from('post p');
         $this->db->join('users u', 'p.user_id = u.id');
         $this->db->join('post_coin pc', 'p.id = pc.post_id', 'left');
-        $this->db->join('post_coin pcoin', 'p.id = pcoin.post_id and pcoin.user_id=' . $user_id, 'left');
+        $this->db->join('post_coin pcoin', 'p.id = pcoin.post_id and pcoin.user_id=' . $logged_in_user, 'left');
         $this->db->join('post_like pl', 'p.id = pl.post_id and pl.is_liked=1', 'left');
-        $this->db->join('post_like pli', 'p.id = pli.post_id and pli.is_liked=1 and pli.user_id=' . $user_id, 'left');
+        $this->db->join('post_like pli', 'p.id = pli.post_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
         $this->db->join('post_comments pco', 'p.id = pco.post_id', 'left');
         $this->db->join('post_share ps', 'p.id = ps.post_id', 'left');
         //$this->db->join('saved_post sp', 'p.id = sp.post_id and sp.user_id=' . $user_id, 'left');
@@ -520,7 +566,7 @@ class Post_model extends CI_Model {
             $this->db->from('post_comments p');
             $this->db->join('users u', 'p.user_id = u.id');
             $this->db->join('post_comment_like pl', 'p.id = pl.post_comment_id and pl.is_liked=1', 'left');
-            $this->db->join('post_comment_like pli', 'p.id = pli.post_comment_id and pli.is_liked=1 and pli.user_id=' . $user_id, 'left');
+            $this->db->join('post_comment_like pli', 'p.id = pli.post_comment_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
             $this->db->join('post_comment_reply pr', 'p.id = pr.post_comment_id', 'left');
             $this->db->order_by('p.created_date', 'desc');
             $this->db->group_by('p.id');
@@ -551,6 +597,7 @@ class Post_model extends CI_Model {
     /*
      * saved_post is used to get all post saved post of particular user
      * @param $user_id  int     user_id
+     * @param $logged_in_user   int logged in user_id
      * @param $start 	int 	specify start position for pagination
      * @param $limit 	int 	specify page size
      * 
@@ -558,14 +605,14 @@ class Post_model extends CI_Model {
      * developed by : ar
      */
 
-    public function saved_post($user_id, $start = 0, $limit = 0) {
+    public function saved_post($user_id,$logged_in_user, $start = 0, $limit = 0) {
         $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment, count(DISTINCT ps.id) as post_share, count(DISTINCT pcoin.id) as is_coined, count(DISTINCT pli.id) as is_liked, pm.media');
         $this->db->from('post p');
         $this->db->join('users u', 'p.user_id = u.id');
         $this->db->join('post_coin pc', 'p.id = pc.post_id', 'left');
-        $this->db->join('post_coin pcoin', 'p.id = pcoin.post_id and pcoin.user_id=' . $user_id, 'left');
+        $this->db->join('post_coin pcoin', 'p.id = pcoin.post_id and pcoin.user_id=' . $logged_in_user, 'left');
         $this->db->join('post_like pl', 'p.id = pl.post_id and pl.is_liked=1', 'left');
-        $this->db->join('post_like pli', 'p.id = pli.post_id and pli.is_liked=1 and pli.user_id=' . $user_id, 'left');
+        $this->db->join('post_like pli', 'p.id = pli.post_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
         $this->db->join('post_comments pco', 'p.id = pco.post_id', 'left');
         $this->db->join('post_share ps', 'p.id = ps.post_id', 'left');
         $this->db->join('saved_post sp', 'p.id = sp.post_id and sp.user_id=' . $user_id);
@@ -605,7 +652,7 @@ class Post_model extends CI_Model {
             $this->db->from('post_comments p');
             $this->db->join('users u', 'p.user_id = u.id');
             $this->db->join('post_comment_like pl', 'p.id = pl.post_comment_id and pl.is_liked=1', 'left');
-            $this->db->join('post_comment_like pli', 'p.id = pli.post_comment_id and pli.is_liked=1 and pli.user_id=' . $user_id, 'left');
+            $this->db->join('post_comment_like pli', 'p.id = pli.post_comment_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
             $this->db->join('post_comment_reply pr', 'p.id = pr.post_comment_id', 'left');
             $this->db->order_by('p.created_date', 'desc');
             $this->db->group_by('p.id');

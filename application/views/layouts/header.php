@@ -40,12 +40,12 @@ $language = $this->session->userdata('language');
                                     <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a></li>
                                 </ul>
                             </li>
-                            <li>
+<!--                            <li>
                                 <a href="#" data-toggle="modal" data-target="#msg_here">
                                     <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
                                     <?php echo lang('Chat'); ?>
                                 </a>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#post_here">
                                     <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_img.png" ?>">

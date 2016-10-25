@@ -316,7 +316,9 @@
                                                         <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
                                                     </div>
                                                 </li>
-                                                <li><a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
+                                                <li>
+                                                    <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -403,5 +405,13 @@
                 }
             });
         }
+
+        // Emojies popover
+        $('#emogis').popover({
+            html: true,
+            content: function () {
+                return $("#popover-content").html();
+            }
+        });
     });
 </script>

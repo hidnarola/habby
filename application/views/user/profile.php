@@ -14,7 +14,7 @@
                 <!-- Personal Account Posts start here -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 post_section">
                     <h2><?php echo lang('Posted'); ?></h2>
-                    <section class="post_masonry_section">
+                    <section class="post_masonry_section" id="users_post">
                         <?php
                         if (count($posts) > 0) {
                             foreach ($posts as $post) {
@@ -254,13 +254,29 @@
                         }
                         ?>
                     </section>
+                    <?php
+                    if (count($posts) == 3) {
+                        ?>
+                        <div class = "row">
+                            <div class = "">
+                                <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                                    <a id = "loadMore_post" class="loadmore" href = "javascript:;"><?php echo lang("Load More"); ?></a>
+                                    <p class = "totop">
+                                        <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <!-- Personal Account Posts end here -->
 
                 <!-- Personal Account Saved start here -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 post_section">
                     <h2><?php echo lang('Saved'); ?></h2>
-                    <section class="post_masonry_section">
+                    <section class="post_masonry_section" id="saved_post">
                         <?php
                         if (count($saved_posts) > 0) {
                             foreach ($saved_posts as $post) {
@@ -493,6 +509,22 @@
                         }
                         ?>
                     </section>
+                    <?php
+                    if (count($saved_posts) == 3) {
+                        ?>
+                        <div class = "row">
+                            <div class = "">
+                                <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                                    <a id = "loadMore_saved" class="loadmore" href = "javascript:;"><?php echo lang("Load More"); ?></a>
+                                    <p class = "totop">
+                                        <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <!-- Personal Account Saved end here -->
             </div>
@@ -581,4 +613,7 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    user_id = '<?php echo $this->session->user['id']; ?>'; // change this id with the user_id for which post is going to display
+</script>
 <script type="text/javascript" src="<?php echo USER_JS; ?>post/profile_post.js"></script>

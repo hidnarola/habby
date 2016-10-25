@@ -30,7 +30,7 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Like functionality on post
     $('.post_masonry_section,#rank_modal').on('click', '.user_like', function () {
         var t = $(this);
@@ -59,14 +59,14 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Open comment part when user click on comment
     $('.post_masonry_section,#rank_modal').on('click', '.cmnt_winner', function () {
         $(this).parents('.rank_lg_sec').find('.winner-comnt').slideToggle(1000);
     });
 
     // Add comment to the post
-    $(".post_masonry_section,#rank_modal").on("keypress", ".comment",function (e) {
+    $(".post_masonry_section,#rank_modal").on("keypress", ".comment", function (e) {
         var key = e.keyCode;
         var t = $(this);
         // If the user has pressed enter
@@ -169,17 +169,49 @@ $('document').ready(function () {
             return false;
         }
     });
-    
+
     // Open rank modal and display rank post in it
-    $('.post_masonry_section').on('click','.others_rank',function(){
+    $('.post_masonry_section').on('click', '.others_rank', function () {
         var t = $(this);
         var challenge_id = t.parents('.rank_lg_sec').data('challenge_id');
-        
+
         $.ajax({
-            url : 'user/challenge/get_top_rank_post/'+challenge_id,
-            success : function(str){
+            url: 'user/challenge/get_top_rank_post/' + challenge_id,
+            success: function (str) {
                 $('#rank_modal').find('.modal-body').html(str);
             }
         });
     });
+
+    var page = 2;
+    var load = true;
+    $(window).scroll(function () {
+        if (load)
+        {
+            if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
+                loaddata();
+            }
+        }
+    });
+
+    function loaddata()
+    {
+        $.ajax({
+            url: base_url + 'user/home/challenge/' + page,
+            method: 'get',
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    load = false;
+                    $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                }
+                else
+                {
+                    $('.post_masonry_section').append(data.view);
+                }
+            }
+        });
+        page++;
+    }
 });
