@@ -1,6 +1,6 @@
 <?php
 
-class Admin_topichat_model extends CI_Model {
+class Admin_groupplan_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -11,21 +11,21 @@ class Admin_topichat_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_all_topichats() {
+    public function get_all_groupplan() {
         $start = $this->input->get('start');
-        $columns = ['tg.id', 'tg.topic_name', '(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id)', 'tg.person_limit', 'u.name'];
-        $this->db->select('tg.id,@a:=@a+1 AS test_id,tg.topic_name,(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as total_joined,tg.person_limit,u.name as user_name,tg.is_deleted,tg.is_blocked', false);
-        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id', 'left');
-        $this->db->join('users u', 'u.id = tg.user_id');
-        $this->db->where('tg.is_deleted', 0);
-        $this->db->group_by('tg.id');
+        $columns = ['g.id', 'g.name','g.slogan', '(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id)', 'g.user_limit', 'u.name'];
+        $this->db->select('g.id,@a:=@a+1 AS test_id,g.name,g.slogan,g.user_limit,(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id ) as total_joined,u.name as user_name,g.is_deleted,g.is_blocked', false);
+        $this->db->join('group_users gus', 'gus.group_id = g.id', 'left');
+        $this->db->join('users u', 'u.id = g.user_id');
+        $this->db->where('g.is_deleted', 0);
+        $this->db->group_by('g.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('tg.topic_name LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('g.name LIKE "%' . $keyword['value'] . '%" OR g.slogan LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $this->db->limit($this->input->get('length'), $this->input->get('start'));
-        $res_data = $this->db->get('topic_group tg,(SELECT @a:= ' . $start . ') AS a')->result_array();
+        $res_data = $this->db->get('group g,(SELECT @a:= ' . $start . ') AS a')->result_array();
         return $res_data;
     }
 
@@ -34,18 +34,18 @@ class Admin_topichat_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_topichat_count() {
-        $columns = ['tg.id', 'tg.topic_name', '(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id)', 'tg.person_limit', 'u.name'];
-        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id', 'left');
-        $this->db->join('users u', 'u.id = tg.user_id');
-        $this->db->where('tg.is_deleted', 0);
-        $this->db->group_by('tg.id');
+    public function get_groupplan_count() {
+       $columns = ['g.id', 'g.name','g.slogan', '(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id)', 'g.user_limit', 'u.name'];
+        $this->db->join('group_users gus', 'gus.group_id = g.id', 'left');
+        $this->db->join('users u', 'u.id = g.user_id');
+        $this->db->where('g.is_deleted', 0);
+        $this->db->group_by('g.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('tg.topic_name LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('g.name LIKE "%' . $keyword['value'] . '%" OR g.slogan LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
-        $res_data = $this->db->get('topic_group tg')->num_rows();
+        $res_data = $this->db->get('group g')->num_rows();
         return $res_data;
     }
 
@@ -69,7 +69,7 @@ class Admin_topichat_model extends CI_Model {
      * @author : HPA
      */
     public function get_topichat_result($group_id) {
-        $this->db->select('tg.topic_name,tg.person_limit,tg.group_cover,tg.notes,u.name,u.user_image,(SELECT GROUP_CONCAT(tgu.user_id) from topic_group_user tgu where tgu.topic_id = ' . $group_id . ') AS joined_user,(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User');
+        $this->db->select('tg.topic_name,tg.person_limit,tg.group_cover,tg.notes,u.name,u.user_image,(SELECT GROUP_CONCAT(tgu.user_id) from topic_group_user tgu JOIN `topic_group` `tog` ON `tog`.`id`=`tgu`.`topic_id` where tgu.topic_id = ' . $group_id . ' AND  `tog`.`user_id`!=`tgu`.`user_id`) AS joined_user,(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User');
         $this->db->join('users u', 'u.id=tg.user_id');
         $this->db->where('tg.id', $group_id);
         $res_data = $this->db->get('topic_group tg')->row_array();

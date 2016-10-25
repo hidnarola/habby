@@ -111,13 +111,13 @@ if (!empty($user_data['user_image'])) {
                                     </li>
                                     <li class="<?php echo ($controller == 'topichat') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/topichat'; ?>"><i class="icon-users4"></i> <span>Topichat</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'soulmate') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/soulmate'; ?>"><i class="icon-users"></i> <span>Soulmate</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'groupplan') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/groupplan'; ?>"><i class="icon-users4"></i> <span>Group Plan</span></a>
                                     </li><!--
-                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
-                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Soulmate</span></a>
-                                    </li>
-                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
-                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Group Plan</span></a>
-                                    </li>
                                     <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>Challenges</span></a>
                                     </li>
