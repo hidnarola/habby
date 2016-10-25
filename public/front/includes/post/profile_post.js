@@ -1,4 +1,4 @@
-$('document').ready(function () {  
+$('document').ready(function () {
     // Like functionality on post
     $('.post_section').on('click', '.user_like', function () {
         var t = $(this);
@@ -28,7 +28,7 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Give coin to user post
     $('.post_section').on('click', '.user_coin', function () {
         var t = $(this);
@@ -172,4 +172,72 @@ $('document').ready(function () {
             }
         });
     });
+
+    // Lazy loading for post
+
+    var page = 2;
+    var load = true;
+    $('#loadMore_post').click(function () {
+        if (load)
+        {
+            loaddata();
+        }
+    });
+
+    function loaddata()
+    {
+        // user id declared on profile page
+        $.ajax({
+            url: base_url+'user/home/load_user_post/'+user_id+'/'+page,
+            method: 'get',
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    load = false;
+                    $('#users_post').append("<div class='col-sm-12 alert alert-info text-center'>No more post found</div>");
+                    $('#loadMore_post').remove();
+                }
+                else
+                {
+                    $('#users_post').append(data.view);
+                }
+            }
+        });
+        page++;
+    }
+
+    // Lazy loading for saved post loadMore_saved
+
+    var save_page = 2;
+    var save_load = true;
+    $('#loadMore_saved').click(function () {
+        if (save_load)
+        {
+            save_loaddata();
+        }
+    });
+
+    function save_loaddata()
+    {
+        // user id declared on profile page
+        $.ajax({
+            url: base_url+'user/home/load_user_savepost/'+user_id+'/'+save_page,
+            method: 'get',
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    save_load = false;
+                    $('#saved_post').append("<div class='col-sm-12 alert alert-info text-center'>No more saved post found</div>");
+                    $('#loadMore_saved').remove();
+                }
+                else
+                {
+                    $('#saved_post').append(data.view);
+                }
+            }
+        });
+        save_page++;
+    }
 });

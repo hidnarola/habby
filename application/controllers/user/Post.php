@@ -220,5 +220,14 @@ class Post extends CI_Controller {
         $this->data['post'] = $this->Post_model->get_post_details($post_id);
         $this->load->view('user/post/display_single_post',$this->data);
     }
+    
+    /*
+     * 
+     */
+    public function display_challenge_post($post_id)
+    {
+        $this->data['post'] = $this->Post_model->get_challenge_post_details($post_id);
+        $this->load->view('user/post/display_single_post',$this->data);
+    }
 }
 ?>

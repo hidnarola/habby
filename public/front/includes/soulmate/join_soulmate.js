@@ -16,19 +16,25 @@ $(document).ready(function () {
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
     // Send message to server
     $('#message_div').keypress(function (e) {
-       
         if (e.keyCode == 13) {
             if ($.trim($(this).html()) != '')
             {
-//                this.value = $.emoticons.replace($('#message').val());
                 $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + $('#message_div').html() + "</span></span></p>");
                 send($('#message_div').html());
                 $(this).html('');
                 $('#message').val('');
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-            } else {
-                return false;
             }
+            return false;
+        }
+        else if(e.charCode == 32 && $.trim($(this).html()) == '')
+        {
+            return false;
+        }
+        else if($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        {
+            $(this).html('');
+            return false;
         }
     });
 

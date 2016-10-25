@@ -32,7 +32,7 @@
                             <form method="post" enctype="multipart/form-data" id="media_form" action="challenge/upload_media/<?php echo urlencode(base64_encode($group_id)); ?>">
                                 <input type="hidden" name="type" class="type" value=""/>
                                 <div class="upld_sec">
-                                    <div class="fileUpload up_img btn">
+                                    <div class="fileUpload up_img btn upload_file_img">
                                         <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
                                         <input type="file" id="image_upload" class="upload upload_image" name="image_upload">
                                     </div>
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="upld_sec">
-                                    <p class="media_name">No media selected</p>
+                                    <p class="media_name select_file_name">No media selected</p>
                                     <p class="text-right post_btn "><button type="submit" class="pstbtn upload_btn make_disabled">Post</button></p>
                                 </div>
                             </form>
@@ -127,7 +127,9 @@
                                                         <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
                                                     </div>
                                                 </li>
-                                                <li><a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a></li>
+                                                <li>
+                                                    <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                </li>
                                             </ul>
                                         </div>
 

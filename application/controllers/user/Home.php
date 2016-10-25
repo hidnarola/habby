@@ -60,13 +60,13 @@ class Home extends CI_Controller {
      */
 
     public function challenge($page = 1) {
-        $limit = 3;
+        $limit = 2;
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->challange_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
             $this->template->load('front', 'user/challenge.php', $this->data);
         } else {
-            $data['view'] = $this->load->view('user/partial/load_post_data', $this->data, true);
+            $data['view'] = $this->load->view('user/partial/load_chellenge_post', $this->data, true);
             $data['status'] = '1';
             if (count($this->data['posts']) == 0) {
                 $data['status'] = '0';
@@ -198,13 +198,59 @@ class Home extends CI_Controller {
                 redirect('home/profile');
             }
         } else {
+            $user_id = $this->session->user['id']; // Change with the user_id for which you are displaying post
+            
             $this->data['all_countries'] = $this->Users_model->get_all_countries();
-            $this->data['posts'] = $this->Post_model->users_post($this->session->user['id'], 0, 3);
-            $this->data['saved_posts'] = $this->Post_model->saved_post($this->session->user['id'], 0, 3);
+            $this->data['posts'] = $this->Post_model->users_post($user_id,$this->session->user['id'], 0, 3);
+            $this->data['saved_posts'] = $this->Post_model->saved_post($user_id,$this->session->user['id'], 0, 3);
             $this->template->load('front', 'user/profile', $this->data);
         }
     }
+    
+    /*
+     * load_user_post is used to display user's post with pagination
+     * @param $user_id      int     specify user_id for which post will fetch
+     * @param $page         int     specify page number
+     * 
+     * echo     JSON    to display post on profile page
+     * developed by : ar
+     */
+    public function load_user_post($user_id,$page)
+    {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        $this->data['posts'] = $this->Post_model->users_post($user_id,$this->session->user['id'], $start, $limit);
+        if (count($this->data['posts']) > 0) {
+            $data['view'] = $this->load->view('user/partial/profile/load_user_post',$this->data,true);
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
 
+    /*
+     * load_user_savepost is used to display user's save post with pagination
+     * @param $user_id      int     specify user_id for which post will fetch
+     * @param $page         int     specify page number
+     * 
+     * echo     JSON    to display post on profile page
+     * developed by : ar
+     */
+    public function load_user_savepost($user_id,$page)
+    {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        $this->data['posts'] = $this->Post_model->saved_post($user_id,$this->session->user['id'], $start, $limit);
+        if (count($this->data['posts']) > 0) {
+            $data['view'] = $this->load->view('user/partial/profile/load_user_post',$this->data,true);
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
     /**
      * This function is used to image upload.
      * develop by : HPA

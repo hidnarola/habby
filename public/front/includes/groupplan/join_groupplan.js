@@ -18,15 +18,22 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             if ($.trim($(this).html()) != '')
             {
-//                this.value = $.emoticons.replace($('#message').val());
                 $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + $('#message_div').html() + "</span></span></p>");
                 send($('#message_div').html());
                 $(this).html('');
                 $('#message').val('');
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-            } else {
-                return false;
             }
+            return false;
+        }
+        else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        {
+            return false;
+        }
+        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        {
+            $(this).html('');
+            return false;
         }
     });
 
@@ -203,19 +210,19 @@ $(document).ready(function () {
             $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span>" + userdata.message + "</span></span></p>");
         } else
         {
-            if(userdata.media_type == "image")
+            if (userdata.media_type == "image")
             {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class='wdth_span'><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
             }
-            else if(userdata.media_type == "video")
+            else if (userdata.media_type == "video")
             {
                 console.log("video message");
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append("<p class='chat_1 clearfix'><img class='user_chat_thumb' title='" + userdata.user + "' src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "'><span class=''><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
-                $('.imagePreview'+i).html("<video controls='' src='"+upload_path + userdata.media+"' style='height:250px'>");
+                $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:250px'>");
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
