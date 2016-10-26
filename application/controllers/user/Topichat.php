@@ -197,7 +197,16 @@ class Topichat extends CI_Controller {
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
-        $this->data['messages'] = $this->Topichat_model->get_messages($Id, $limit);
+        $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id,$image_limit = 8);
+        $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id,$image_limit = 8);
+        $this->data['recent_videos_thumb'] = array();
+        foreach($this->data['recent_videos'] as $video)
+        {
+            $this->data['recent_videos_thumb'][] = explode(".",$video)[0]."_thumb.png";
+        }
+        $this->data['top_rank_post'] = $this->Topichat_model->get_top_rank_media($Id,$this->session->user['id'],$top_rank_limit = 3);
+//        pr($this->data['top_rank_post'],1);
+        $this->data['messages'] = $this->Topichat_model->get_messages($Id,$this->session->user['id'], $limit);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }
@@ -217,4 +226,81 @@ class Topichat extends CI_Controller {
         echo json_encode($data);
     }
 
+    /*
+     * 
+     */
+    public function add_rank_to_chat_post($chat_id){
+        $uid = $this->session->user['id'];
+        if(!empty($rank = $this->Topichat_model->user_rank_exist_for_chat($uid,$chat_id)))
+        {
+            // Update entry
+            if(!$rank['rank']) // rank is negetive?
+            {
+                $update_arr['rank'] = "1";
+                if($this->Topichat_model->update_chat_rank($update_arr,$rank['id']))
+                {
+                    echo "2";
+                }
+                else
+                {
+                    echo '0';
+                }
+            }
+            else
+            {
+                echo "3"; // no need to insert/update
+            }
+        }
+        else
+        {
+            // Insert entry
+            $insert_arr['user_id'] = $uid;
+            $insert_arr['topic_group_chat_id'] = $chat_id;
+            $insert_arr['rank'] = '1';
+            if ($this->Topichat_model->add_chat_rank($insert_arr)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+    }
+    
+    /*
+     * 
+     */
+     public function subtract_rank_from_chat_post($chat_id){
+        $uid = $this->session->user['id'];
+        if(!empty($rank = $this->Topichat_model->user_rank_exist_for_chat($uid,$chat_id)))
+        {
+            // Update entry
+            if($rank['rank']) // rank is positive?
+            {
+                $update_arr['rank'] = "0";
+                if($this->Topichat_model->update_chat_rank($update_arr,$rank['id']))
+                {
+                    echo "-2";
+                }
+                else
+                {
+                    echo '0';
+                }
+            }
+            else
+            {
+                echo "3"; // no need to insert/update
+            }
+        }
+        else
+        {
+            // Insert entry
+            $insert_arr['user_id'] = $uid;
+            $insert_arr['topic_group_chat_id'] = $chat_id;
+            $insert_arr['rank'] = '0';
+            if ($this->Topichat_model->add_chat_rank($insert_arr)) {
+                echo '-1';
+            } else {
+                echo '0';
+            }
+        }
+    }
 }
