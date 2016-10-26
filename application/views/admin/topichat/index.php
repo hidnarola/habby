@@ -1,4 +1,4 @@
-<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                  ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                   ?>"></script>-->
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/tables/datatables/datatables.min.js"; ?>"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/select2.min.js"; ?>"></script>
 <!-- Page header -->
@@ -68,6 +68,7 @@ if ($this->session->flashdata('success')) {
                         <th>No. of joined</th>
                         <th>Person Limit</th>
                         <th>Username</th>
+                        <th>Created Date</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>
@@ -119,6 +120,11 @@ if ($this->session->flashdata('success')) {
                 {
                     data: "user_name",
                     visible: true
+                },
+                {
+                    data: "created_date",
+                    visible: true,
+                    searchable: false,
                 },
                 {
                     data: "is_deleted",

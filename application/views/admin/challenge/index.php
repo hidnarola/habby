@@ -1,18 +1,18 @@
-<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                  ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                      ?>"></script>-->
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/tables/datatables/datatables.min.js"; ?>"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/select2.min.js"; ?>"></script>
 <!-- Page header -->
 <div class="page-header page-header-default">
     <div class="page-header-content">
         <div class="page-title">
-            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Admin</span> - Group Plan List</h4>
+            <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Admin</span> - Challenges List</h4>
         </div>
     </div>
 
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo base_url() . "admin/dashboard" ?>"><i class="icon-home2 position-left"></i> Admin</a></li>
-            <li><i class="icon-users4 position-left"></i> Group plans</li>
+            <li><i class="icon-users4 position-left"></i> Challenges</li>
         </ul>
     </div>
 </div>
@@ -58,16 +58,17 @@ if ($this->session->flashdata('success')) {
     <div class="content">
         <div class="panel panel-flat">
             <div class="panel-heading text-right">
-                <a href="<?php echo site_url('admin/groupplan/add'); ?>" class="btn btn-success btn-labeled"><b><i class="icon-add"></i></b> Add new Group</a>
+                <a href="<?php echo site_url('admin/challenge/add'); ?>" class="btn btn-success btn-labeled"><b><i class="icon-add"></i></b> Add new Group</a>
             </div>
             <table class="table datatable-basic">
                 <thead>
                     <tr>
                         <th>Sr No.</th>
-                        <th>Group Name</th>
-                        <th>Slogan</th>
+                        <th>Name</th>
+                        <th>Rewards</th>
                         <th>No. of joined</th>
-                        <th>Person Limit</th>
+                        <th>Average Rank</th>
+                        <th>Status</th>
                         <th>Username</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -76,7 +77,7 @@ if ($this->session->flashdata('success')) {
         </div>
     </div>
 </div>
-<script>
+<script>.
     $(function () {
         $('.datatable-basic').dataTable({
             processing: true,
@@ -88,7 +89,7 @@ if ($this->session->flashdata('success')) {
             },
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             order: [[0, "asc"]],
-            ajax: 'groupplan/list_groupplan',
+            ajax: 'challenge/list_challenge',
             columns: [
                 {
                     data: "test_id",
@@ -101,7 +102,7 @@ if ($this->session->flashdata('success')) {
                     visible: true
                 },
                 {
-                    data: "slogan",
+                    data: "rewards",
                     visible: true
                 },
                 {
@@ -110,9 +111,20 @@ if ($this->session->flashdata('success')) {
                     searchable: false
                 },
                 {
-                    data: "user_limit",
+                    data: "average_rank",
                     visible: true,
                     searchable: false,
+                },
+                {
+                    data: "is_finished",
+                    visible: true,
+                    render: function (data, type, full, meta) {
+                        if (full.is_finished == '0') {
+                            return '<span class="label label-success">Active</span>';
+                        } else {
+                            return '<span class="label label-info">Finished</span>';
+                        }
+                    }
                 },
                 {
                     data: "user_name",
@@ -127,14 +139,14 @@ if ($this->session->flashdata('success')) {
                     render: function (data, type, full, meta) {
                         var action = '';
                         if (full.is_blocked == '0') {
-                            action += '<a href="<?php echo base_url(); ?>admin/groupplan/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded btn-sm" title="View Details"><i class="icon-eye4"></i></a>';
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/groupplan/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/groupplan/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/groupplan/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '<a href="<?php echo base_url(); ?>admin/challenge/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded btn-sm" title="View Details"><i class="icon-eye4"></i></a>';
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/challenge/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/challenge/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/challenge/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
                         } else {
-                            action += '<a href="<?php echo base_url(); ?>admin/groupplan/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded"  title="View Details"><i class="icon-eye4"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/groupplan/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/groupplan/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '<a href="<?php echo base_url(); ?>admin/challenge/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded"  title="View Details"><i class="icon-eye4"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/challenge/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/challenge/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
                         }
                         return action;
                     }

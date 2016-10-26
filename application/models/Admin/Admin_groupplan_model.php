@@ -13,7 +13,7 @@ class Admin_groupplan_model extends CI_Model {
      */
     public function get_all_groupplan() {
         $start = $this->input->get('start');
-        $columns = ['g.id', 'g.name','g.slogan', '(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id)', 'g.user_limit', 'u.name'];
+        $columns = ['g.id', 'g.name', 'g.slogan', '(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id)', 'g.user_limit', 'u.name'];
         $this->db->select('g.id,@a:=@a+1 AS test_id,g.name,g.slogan,g.user_limit,(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id ) as total_joined,u.name as user_name,g.is_deleted,g.is_blocked', false);
         $this->db->join('group_users gus', 'gus.group_id = g.id', 'left');
         $this->db->join('users u', 'u.id = g.user_id');
@@ -35,7 +35,7 @@ class Admin_groupplan_model extends CI_Model {
      * @author : HPA
      */
     public function get_groupplan_count() {
-       $columns = ['g.id', 'g.name','g.slogan', '(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id)', 'g.user_limit', 'u.name'];
+        $columns = ['g.id', 'g.name', 'g.slogan', '(SELECT COUNT(gu.user_id) FROM `group_users` gu WHERE g.id=gu.group_id)', 'g.user_limit', 'u.name'];
         $this->db->join('group_users gus', 'gus.group_id = g.id', 'left');
         $this->db->join('users u', 'u.id = g.user_id');
         $this->db->where('g.is_deleted', 0);
@@ -68,11 +68,11 @@ class Admin_groupplan_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_topichat_result($group_id) {
-        $this->db->select('tg.topic_name,tg.person_limit,tg.group_cover,tg.notes,u.name,u.user_image,(SELECT GROUP_CONCAT(tgu.user_id) from topic_group_user tgu JOIN `topic_group` `tog` ON `tog`.`id`=`tgu`.`topic_id` where tgu.topic_id = ' . $group_id . ' AND  `tog`.`user_id`!=`tgu`.`user_id`) AS joined_user,(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User');
-        $this->db->join('users u', 'u.id=tg.user_id');
-        $this->db->where('tg.id', $group_id);
-        $res_data = $this->db->get('topic_group tg')->row_array();
+    public function get_groupplan_result($group_id) {
+        $this->db->select('g.name,g.user_limit,g.group_cover,g.slogan,g.introduction,u.name as user_name,u.user_image,(SELECT GROUP_CONCAT(gu.user_id) from group_users gu JOIN `group` `g1` ON `g1`.`id`=`gu`.`group_id` where gu.group_id = ' . $group_id . ') AS joined_user,(SELECT COUNT(gu1.user_id) FROM `group_users` gu1 WHERE g.id=gu1.group_id ) as Total_User,g.created_date');
+        $this->db->join('users u', 'u.id=g.user_id');
+        $this->db->where('g.id', $group_id);
+        $res_data = $this->db->get('group g')->row_array();
         $joied_users = explode(',', $res_data['joined_user']);
         foreach ($joied_users as $joied_user_id) {
             $this->db->select('name as joined_user_name,user_image as joined_user_image');
@@ -80,6 +80,8 @@ class Admin_groupplan_model extends CI_Model {
             $users[$joied_user_id] = $this->db->get('users')->row_array();
         }
         $res_data['joined_user'] = $users;
+//        echo $this->db->last_query();
+//        pr($res_data);
         return $res_data;
     }
 

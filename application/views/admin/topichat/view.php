@@ -70,8 +70,10 @@ if ($this->session->flashdata('success')) {
                                     </div>
                                 </div>
                                 <div class="caption">
-                                    <h6 class="no-margin-top text-semibold"><?php echo $topichats['notes'] ?></h6>
-                                    <h6 class="no-margin-top text-semibold">Group Limit : <?php echo ($topichats['person_limit'] != -1) ? $topichats['person_limit'] : "No Limit" ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Topic Name : </span><?php echo $topichats['topic_name'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Notes :  </span><?php echo $topichats['notes'] ?></h6>
+                                    <h6 class="no-margin-top "><span class="text-semibold">Group Limit : </span><?php echo ($topichats['person_limit'] != -1) ? $topichats['person_limit'] : "No Limit" ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Date : </span><?php echo date('d-m-Y h:i a', strtotime($topichats['created_date'])) ?></h6>
                                 </div>
                                 <div>
                                     <h4 class="text-semibold">Group Users (<?php echo $topichats['Total_User'] ?>)</h4>

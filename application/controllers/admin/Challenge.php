@@ -2,11 +2,11 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Soulmate extends CI_Controller {
+class Challenge extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(['admin/Admin_soulmate_model', 'Users_model', 'Soulmate_model']);
+        $this->load->model(['admin/Admin_challenge_model', 'Users_model', 'Challenge_model']);
     }
 
     /**
@@ -18,22 +18,22 @@ class Soulmate extends CI_Controller {
         if (empty($this->data['user_data'])) {
             redirect('admin/login');
         }
-        $this->template->load('admin_main', 'admin/soulmate/index', $this->data);
+        $this->template->load('admin_main', 'admin/challenge/index', $this->data);
     }
 
     /**
      * Function is used to get result based on datatable in user list page
      */
-    public function list_soulmate() {
+    public function list_challenge() {
         $session_data = $this->session->userdata('admin');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id'], 'role_id' => 1], false, true);
         if (empty($this->data['user_data'])) {
             redirect('admin/login');
         }
-        $final['recordsTotal'] = $this->Admin_soulmate_model->get_soulmate_count();
+        $final['recordsTotal'] = $this->Admin_challenge_model->get_challenge_count();
         $final['redraw'] = 1;
         $final['recordsFiltered'] = $final['recordsTotal'];
-        $final['data'] = $this->Admin_soulmate_model->get_all_soulmate();
+        $final['data'] = $this->Admin_challenge_model->get_all_challenge();
         $start = $this->input->get('start') + 1;
 
         foreach ($final['data'] as $key => $val) {
@@ -46,29 +46,29 @@ class Soulmate extends CI_Controller {
     public function action($action, $group_id) {
 
         $where = 'id = ' . $this->db->escape($group_id);
-        $check_topichat = $this->Admin_soulmate_model->get_result('soulmate_group', $where);
-        if ($check_topichat) {
+        $check_challenges = $this->Admin_challenge_model->get_result('challanges', $where);
+        if ($check_challenges) {
             if ($action == 'delete') {
                 $update_array = array(
                     'is_deleted' => 1
                 );
-                $this->session->set_flashdata('success', 'Soulmate Group successfully deleted!');
+                $this->session->set_flashdata('success', 'Challenge successfully deleted!');
             } elseif ($action == 'block') {
                 $update_array = array(
                     'is_blocked' => 1
                 );
-                $this->session->set_flashdata('success', 'Soulmate Group successfully blocked!');
+                $this->session->set_flashdata('success', 'Challenge successfully blocked!');
             } else {
                 $update_array = array(
                     'is_blocked' => 0
                 );
-                $this->session->set_flashdata('success', 'Soulmate Group successfully unblocked!');
+                $this->session->set_flashdata('success', 'Challenge successfully unblocked!');
             }
-            $this->Admin_soulmate_model->update_record('soulmate_group', $where, $update_array);
+            $this->Admin_challenge_model->update_record('challanges', $where, $update_array);
         } else {
             $this->session->set_flashdata('error', 'Invalid request. Please try again!');
         }
-        redirect(site_url('admin/soulmate'));
+        redirect(site_url('admin/challenge'));
     }
 
     /**
@@ -83,27 +83,33 @@ class Soulmate extends CI_Controller {
         }
         $group_id = $this->uri->segment(4);
         if (is_numeric($group_id)) {
-            $Soulmates = $this->Admin_soulmate_model->get_soulmate_result($group_id);
-            if ($Soulmates) {
-                $this->data['Soulmates'] = $Soulmates;
-                $this->data['title'] = 'Habby - Admin edit Soulmate Group';
-                $this->data['heading'] = 'Edit Soulmate Group';
+            $Groupplans = $this->Admin_groupplan_model->get_groupplan_result($group_id);
+            if ($Groupplans) {
+                $this->data['Groupplans'] = $Groupplans;
+                $this->data['title'] = 'Habby - Admin edit Groupplan';
+                $this->data['heading'] = 'Edit Groupplan';
             } else {
                 show_404();
             }
         } else {
-            $this->data['title'] = 'Habby - Admin add Soulmate Group';
-            $this->data['heading'] = 'Add Soulmate Group';
+            $this->data['title'] = 'Habby - Admin add Groupplan';
+            $this->data['heading'] = 'Add Groupplan';
         }
-        $this->form_validation->set_rules('name', 'Soulmate Name', 'required');
+        $this->form_validation->set_rules('name', 'Group Name', 'required');
+        $this->form_validation->set_rules('user_limit', 'Group User Limit', 'required|numeric');
         if ($this->form_validation->run() == FALSE) {
-            $this->template->load('admin_main', 'admin/soulmate/manage', $this->data);
+            $this->template->load('admin_main', 'admin/groupplan/manage', $this->data);
         } else {
             if ($group_id != '') {
-                $upd_data = $this->input->post(null);
+                $upd_data = array(
+                    'name' => $this->input->post('name'),
+                    'user_limit' => $this->input->post('user_limit'),
+                    'slogan' => $this->input->post('slogan'),
+                    'introduction' => $this->input->post('introduction')
+                );
                 $where = 'id = ' . $this->db->escape($group_id);
                 if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
-                    $config['upload_path'] = './uploads/soulmate_group';
+                    $config['upload_path'] = './uploads/group_plan';
                     $config['allowed_types'] = 'gif|jpg|png';
                     $config['min_width'] = '300';
                     $config['min_height'] = '300';
@@ -131,23 +137,22 @@ class Soulmate extends CI_Controller {
                         $upd_data['group_cover'] = $image_name;
                     }
                 }
-                if ($topic_id = $this->Admin_soulmate_model->update_record('soulmate_group', $where, $upd_data)) {
-                    $this->session->set_flashdata('success', 'Soulmate Group successfully updated!');
-                    redirect('admin/soulmate');
+                if ($topic_id = $this->Admin_groupplan_model->update_record('group', $where, $upd_data)) {
+                    $this->session->set_flashdata('success', 'Group successfully updated!');
+                    redirect('admin/groupplan');
                 }
             } else {
                 $ins_data = array(
                     'name' => $this->input->post('name'),
                     'slogan' => $this->input->post('slogan'),
+                    'user_limit' => $this->input->post('user_limit'),
                     'introduction' => $this->input->post('introduction'),
                     'user_id' => $this->data['user_data']['id'],
                 );
-
-                if ($soulmate_group_id = $this->Soulmate_model->insert_soulmate_data($ins_data)) {
+                if ($groupplan_id = $this->Admin_groupplan_model->insert('group', $ins_data)) {
                     if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
-//            pr($_FILES, 1);
                         /* v! If Image is uploaded then use upload library for the codeigniter to upload image */
-                        $config['upload_path'] = './uploads/soulmate_group';
+                        $config['upload_path'] = './uploads/group_plan';
                         $config['allowed_types'] = 'gif|jpg|png';
                         $config['min_width'] = '300';
                         $config['min_height'] = '300';
@@ -169,21 +174,26 @@ class Soulmate extends CI_Controller {
                                 $image_height = $image_info[1];
                                 $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                             }
-                            $image_name = "soulmate_img3.jpg";
+                            $image_name = "grp_pln_img1.jpg";
                             $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
                         } else {
                             $data_upload = array('upload_data' => $this->upload->data());
                             $image_name = $data_upload['upload_data']['file_name'];
                         }
                     } else {
-                        $image_name = "soulmate_img3.jpg";
+                        $image_name = "grp_pln_img1.jpg";
                     }
-                    $this->Soulmate_model->update_soulmate_data($soulmate_group_id, ['group_cover' => $image_name]);
-                    $this->session->set_flashdata('success', 'Soulmate group successfully blocked!');
+                    $this->Groupplan_model->update_groupplan_data($groupplan_id, ['group_cover' => $image_name]);
+                    $ins_user_data = array(
+                        'group_id' => $groupplan_id,
+                        'user_id' => $this->data['user_data']['id'],
+                    );
+                    $this->Groupplan_model->insert_grouplan_users($ins_user_data);
+                    $this->session->set_flashdata('success', 'Group successfully inserted!');
                 } else {
                     $this->session->set_flashdata('error', 'Invalid request. Please try again!');
                 }
-                redirect(site_url('admin/soulmate'));
+                redirect(site_url('admin/topichat'));
             }
         }
     }
@@ -195,8 +205,8 @@ class Soulmate extends CI_Controller {
             redirect('admin/login');
         }
         $group_id = $this->uri->segment(4);
-        $this->data['soulmates'] = $this->Admin_soulmate_model->get_soulmate_result($group_id);
-        $this->template->load('admin_main', 'admin/soulmate/view', $this->data);
+        $this->data['groupplans'] = $this->Admin_groupplan_model->get_groupplan_result($group_id);
+        $this->template->load('admin_main', 'admin/groupplan/view', $this->data);
     }
 
 }

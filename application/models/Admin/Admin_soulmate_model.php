@@ -13,8 +13,8 @@ class Admin_soulmate_model extends CI_Model {
      */
     public function get_all_soulmate() {
         $start = $this->input->get('start');
-        $columns = ['sg.id', 'sg.name', 'sg.slogan', 'u.name'];
-        $this->db->select('sg.id,@a:=@a+1 AS test_id,sg.name,sg.slogan,u.name as user_name,sg.is_deleted,sg.is_blocked', false);
+        $columns = ['sg.id', 'sg.name', 'u.name', 'sg.created_date'];
+        $this->db->select('sg.id,@a:=@a+1 AS test_id,sg.name,sg.slogan,u.name as user_name,DATE_FORMAT(sg.created_date,"%d %b %Y <br> %l:%i %p") AS created_date,sg.is_deleted,sg.is_blocked', false);
         $this->db->join('users u', 'u.id = sg.user_id');
         $this->db->where('sg.is_deleted', 0);
         $this->db->group_by('sg.id');
@@ -34,7 +34,7 @@ class Admin_soulmate_model extends CI_Model {
      * @author : HPA
      */
     public function get_soulmate_count() {
-        $columns = ['sg.id', 'sg.name', 'sg.slogan', 'u.name'];
+        $columns = ['sg.id', 'sg.name', 'u.name', 'sg.created_date'];
         $this->db->join('users u', 'u.id = sg.user_id');
         $this->db->where('sg.is_deleted', 0);
         $this->db->group_by('sg.id');
@@ -67,7 +67,7 @@ class Admin_soulmate_model extends CI_Model {
      * @author : HPA
      */
     public function get_soulmate_result($group_id) {
-        $this->db->select('sg.name,sg.slogan,sg.group_cover,sg.introduction,u.name as user_name,u.user_image,ju.name as join_user_name,ju.user_image as join_user_image');
+        $this->db->select('sg.name,sg.slogan,sg.group_cover,sg.introduction,u.name as user_name,u.user_image,ju.name as join_user_name,ju.user_image as join_user_image,sg.created_date');
         $this->db->join('users u', 'u.id=sg.user_id');
         $this->db->join('users ju', 'ju.id=sg.join_user_id AND sg.join_user_id IS NOT NULL', 'left');
         $this->db->where('sg.id', $group_id);

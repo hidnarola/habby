@@ -1,6 +1,6 @@
 <?php
 
-class Admin_topichat_model extends CI_Model {
+class Admin_challenge_model extends CI_Model {
 
     function __construct() {
         parent::__construct();
@@ -11,21 +11,21 @@ class Admin_topichat_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_all_topichats() {
+    public function get_all_challenge() {
         $start = $this->input->get('start');
-        $columns = ['tg.id', 'tg.topic_name', '(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id)', 'tg.person_limit', 'u.name', 'tg.created_date'];
-        $this->db->select('tg.id,@a:=@a+1 AS test_id,tg.topic_name,(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as total_joined,tg.person_limit,u.name as user_name,DATE_FORMAT(tg.created_date,"%d %b %Y <br> %l:%i %p") AS created_date,tg.is_deleted,tg.is_blocked', false);
-        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id', 'left');
-        $this->db->join('users u', 'u.id = tg.user_id');
-        $this->db->where('tg.is_deleted', 0);
-        $this->db->group_by('tg.id');
+        $columns = ['ch.id', 'ch.name', 'ch.rewards', 'COUNT(chu.user_id) as total_joined', 'ch.average_rank', 'ch.is_finished', 'u.name'];
+        $this->db->select('ch.id,@a:=@a+1 AS test_id,ch.name,ch.rewards,COUNT(chu.user_id) as total_joined,ch.average_rank,ch.is_finished,u.name as user_name,ch.is_deleted,ch.is_blocked', false);
+        $this->db->join('challange_user chu', 'chu.challange_id = ch.id', 'left');
+        $this->db->join('users u', 'u.id = ch.user_id');
+        $this->db->where('ch.is_deleted', 0);
+        $this->db->group_by('ch.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('tg.topic_name LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('ch.name LIKE "%' . $keyword['value'] . '%" OR ch.rewards LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $this->db->limit($this->input->get('length'), $this->input->get('start'));
-        $res_data = $this->db->get('topic_group tg,(SELECT @a:= ' . $start . ') AS a')->result_array();
+        $res_data = $this->db->get('challanges ch,(SELECT @a:= ' . $start . ') AS a')->result_array();
         return $res_data;
     }
 
@@ -34,18 +34,18 @@ class Admin_topichat_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_topichat_count() {
-        $columns = ['tg.id', 'tg.topic_name', '(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id)', 'tg.person_limit', 'u.name', 'tg.created_date'];
-        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id', 'left');
-        $this->db->join('users u', 'u.id = tg.user_id');
-        $this->db->where('tg.is_deleted', 0);
-        $this->db->group_by('tg.id');
+    public function get_challenge_count() {
+        $columns = ['ch.id', 'ch.name', 'ch.rewards', 'total_joined', 'ch.average_rank', 'ch.is_finished', 'u.name'];
+        $this->db->join('challange_user chu', 'chu.challange_id = ch.id', 'left');
+        $this->db->join('users u', 'u.id = ch.user_id');
+        $this->db->where('ch.is_deleted', 0);
+        $this->db->group_by('ch.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('tg.topic_name LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('ch.name LIKE "%' . $keyword['value'] . '%" OR ch.rewards LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
-        $res_data = $this->db->get('topic_group tg')->num_rows();
+        $res_data = $this->db->get('challanges ch')->num_rows();
         return $res_data;
     }
 
@@ -68,11 +68,11 @@ class Admin_topichat_model extends CI_Model {
      * @param : @table 
      * @author : HPA
      */
-    public function get_topichat_result($group_id) {
-        $this->db->select('tg.topic_name,tg.person_limit,tg.group_cover,tg.notes,u.name,u.user_image,(SELECT GROUP_CONCAT(tgu.user_id) from topic_group_user tgu where tgu.topic_id = ' . $group_id . ') AS joined_user,(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.created_date');
-        $this->db->join('users u', 'u.id=tg.user_id');
-        $this->db->where('tg.id', $group_id);
-        $res_data = $this->db->get('topic_group tg')->row_array();
+    public function get_groupplan_result($group_id) {
+        $this->db->select('g.name,g.user_limit,g.group_cover,g.slogan,g.introduction,u.name as user_name,u.user_image,(SELECT GROUP_CONCAT(gu.user_id) from group_users gu JOIN `group` `g1` ON `g1`.`id`=`gu`.`group_id` where gu.group_id = ' . $group_id . ') AS joined_user,(SELECT COUNT(gu1.user_id) FROM `group_users` gu1 WHERE g.id=gu1.group_id ) as Total_User,g.created_date');
+        $this->db->join('users u', 'u.id=g.user_id');
+        $this->db->where('g.id', $group_id);
+        $res_data = $this->db->get('group g')->row_array();
         $joied_users = explode(',', $res_data['joined_user']);
         foreach ($joied_users as $joied_user_id) {
             $this->db->select('name as joined_user_name,user_image as joined_user_image');

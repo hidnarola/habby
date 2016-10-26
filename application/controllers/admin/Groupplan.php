@@ -6,7 +6,7 @@ class Groupplan extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(['admin/Admin_groupplan_model', 'Users_model']);
+        $this->load->model(['admin/Admin_groupplan_model', 'Users_model', 'Groupplan_model']);
     }
 
     /**
@@ -83,31 +83,33 @@ class Groupplan extends CI_Controller {
         }
         $group_id = $this->uri->segment(4);
         if (is_numeric($group_id)) {
-            $Topichats = $this->Admin_topichat_model->get_topichat_result($group_id);
-            if ($Topichats) {
-                $this->data['Topichats'] = $Topichats;
-                $this->data['title'] = 'Habby - Admin edit Topichat Group';
-                $this->data['heading'] = 'Edit Topichat Group';
+            $Groupplans = $this->Admin_groupplan_model->get_groupplan_result($group_id);
+            if ($Groupplans) {
+                $this->data['Groupplans'] = $Groupplans;
+                $this->data['title'] = 'Habby - Admin edit Groupplan';
+                $this->data['heading'] = 'Edit Groupplan';
             } else {
                 show_404();
             }
         } else {
-            $this->data['title'] = 'Habby - Admin add Topichat Group';
-            $this->data['heading'] = 'Add Topichat Group';
+            $this->data['title'] = 'Habby - Admin add Groupplan';
+            $this->data['heading'] = 'Add Groupplan';
         }
-        $this->form_validation->set_rules('topic_name', 'Topic Name', 'required');
+        $this->form_validation->set_rules('name', 'Group Name', 'required');
+        $this->form_validation->set_rules('user_limit', 'Group User Limit', 'required|numeric');
         if ($this->form_validation->run() == FALSE) {
-            $this->template->load('admin_main', 'admin/topichat/manage', $this->data);
+            $this->template->load('admin_main', 'admin/groupplan/manage', $this->data);
         } else {
             if ($group_id != '') {
                 $upd_data = array(
-                    'topic_name' => $this->input->post('topic_name'),
-                    'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
-                    'notes' => $this->input->post('notes')
+                    'name' => $this->input->post('name'),
+                    'user_limit' => $this->input->post('user_limit'),
+                    'slogan' => $this->input->post('slogan'),
+                    'introduction' => $this->input->post('introduction')
                 );
                 $where = 'id = ' . $this->db->escape($group_id);
                 if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
-                    $config['upload_path'] = './uploads/topichat_group';
+                    $config['upload_path'] = './uploads/group_plan';
                     $config['allowed_types'] = 'gif|jpg|png';
                     $config['min_width'] = '300';
                     $config['min_height'] = '300';
@@ -135,22 +137,22 @@ class Groupplan extends CI_Controller {
                         $upd_data['group_cover'] = $image_name;
                     }
                 }
-                if ($topic_id = $this->Admin_topichat_model->update_record('topic_group', $where, $upd_data)) {
-                    $this->session->set_flashdata('success', 'Topichat Group successfully updated!');
-                    redirect('admin/topichat');
+                if ($topic_id = $this->Admin_groupplan_model->update_record('group', $where, $upd_data)) {
+                    $this->session->set_flashdata('success', 'Group successfully updated!');
+                    redirect('admin/groupplan');
                 }
             } else {
                 $ins_data = array(
-                    'topic_name' => $this->input->post('topic_name'),
-                    'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
-                    'notes' => $this->input->post('notes'),
+                    'name' => $this->input->post('name'),
+                    'slogan' => $this->input->post('slogan'),
+                    'user_limit' => $this->input->post('user_limit'),
+                    'introduction' => $this->input->post('introduction'),
                     'user_id' => $this->data['user_data']['id'],
                 );
-                if ($topic_group_id = $this->Admin_topichat_model->insert('topic_group', $ins_data)) {
+                if ($groupplan_id = $this->Admin_groupplan_model->insert('group', $ins_data)) {
                     if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
-//            pr($_FILES, 1);
                         /* v! If Image is uploaded then use upload library for the codeigniter to upload image */
-                        $config['upload_path'] = './uploads/topichat_group';
+                        $config['upload_path'] = './uploads/group_plan';
                         $config['allowed_types'] = 'gif|jpg|png';
                         $config['min_width'] = '300';
                         $config['min_height'] = '300';
@@ -172,22 +174,22 @@ class Groupplan extends CI_Controller {
                                 $image_height = $image_info[1];
                                 $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                             }
-                            $image_name = "topichat_img1.jpg";
+                            $image_name = "grp_pln_img1.jpg";
                             $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
                         } else {
                             $data_upload = array('upload_data' => $this->upload->data());
                             $image_name = $data_upload['upload_data']['file_name'];
                         }
                     } else {
-                        $image_name = "topichat_img1.jpg";
+                        $image_name = "grp_pln_img1.jpg";
                     }
-                    $this->Topichat_model->update_topic_group_data($topic_group_id, ['group_cover' => $image_name]);
+                    $this->Groupplan_model->update_groupplan_data($groupplan_id, ['group_cover' => $image_name]);
                     $ins_user_data = array(
-                        'topic_id' => $topic_group_id,
+                        'group_id' => $groupplan_id,
                         'user_id' => $this->data['user_data']['id'],
                     );
-                    $this->Topichat_model->insert_topic_group_user($ins_user_data);
-                    $this->session->set_flashdata('success', 'Topichat successfully blocked!');
+                    $this->Groupplan_model->insert_grouplan_users($ins_user_data);
+                    $this->session->set_flashdata('success', 'Group successfully inserted!');
                 } else {
                     $this->session->set_flashdata('error', 'Invalid request. Please try again!');
                 }
@@ -203,8 +205,8 @@ class Groupplan extends CI_Controller {
             redirect('admin/login');
         }
         $group_id = $this->uri->segment(4);
-        $this->data['topichats'] = $this->Admin_topichat_model->get_topichat_result($group_id);
-        $this->template->load('admin_main', 'admin/topichat/view', $this->data);
+        $this->data['groupplans'] = $this->Admin_groupplan_model->get_groupplan_result($group_id);
+        $this->template->load('admin_main', 'admin/groupplan/view', $this->data);
     }
 
 }

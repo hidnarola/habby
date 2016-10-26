@@ -59,34 +59,36 @@ if ($this->session->flashdata('success')) {
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <?php
-                        if (isset($topichats) && !empty($topichats)) {
-//                            pr($topichats);
+                        if (isset($soulmates) && !empty($soulmates)) {
+//                            pr($soulmates);
                             ?>
                             <div class="thumbnail">
-                                <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $topichats['user_image']; ?>"> <?php echo $topichats['name']; ?></h3>
+                                <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $soulmates['user_image']; ?>"> <?php echo $soulmates['user_name']; ?></h3>
                                 <div class="thumb">
                                     <div class="thumb-inner">
-                                        <img src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichats['group_cover']; ?>" alt="">
+                                        <img src="<?php echo DEFAULT_SOULMATE_IMAGE_PATH . $soulmates['group_cover']; ?>" alt="">
                                     </div>
                                 </div>
                                 <div class="caption">
-                                    <h6 class="no-margin-top text-semibold"><?php echo $topichats['notes'] ?></h6>
-                                    <h6 class="no-margin-top text-semibold">Group Limit : <?php echo ($topichats['person_limit'] != -1) ? $topichats['person_limit'] : "No Limit" ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Name : </span><?php echo $soulmates['name'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Slogan : </span><?php echo $soulmates['slogan'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Introduction : </span><?php echo $soulmates['introduction'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Date : </span><?php echo date('d-m-Y h:i a',  strtotime($soulmates['created_date'])) ?></h6>
                                 </div>
                                 <div>
-                                    <h4 class="text-semibold">Group Users (<?php echo $topichats['Total_User'] ?>)</h4>
+                                    <h4 class="text-semibold">Group Joined User</h4>
                                     <ul class="media-list padding-15">
                                         <?php
-                                        if (isset($topichats['joined_user']) && !empty($topichats['joined_user'])) {
-                                            foreach ($topichats['joined_user'] as $joined_user) {
-                                                ?>
-                                                <li class="media">
-                                                    <div class="media-left">
-                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $joined_user['joined_user_image']; ?>" class="img-circle img-xs" alt=""> <?php echo $joined_user['joined_user_name'] ?>
-                                                    </div>
-                                                </li>
-                                                <?php
-                                            }
+                                        if (isset($soulmates['join_user_name']) && $soulmates['join_user_name'] != "") {
+                                            ?>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $soulmates['join_user_image']; ?>" class="img-circle img-xs" alt=""> <?php echo $soulmates['join_user_name'] ?>
+                                                </div>
+                                            </li>
+                                            <?php
+                                        } else {
+                                            echo "No Joined User.";
                                         }
                                         ?>
                                     </ul>
