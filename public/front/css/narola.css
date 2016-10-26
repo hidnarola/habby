@@ -171,3 +171,17 @@
 .mov_sec {width:100%;}
 
 .chellange_options li{ padding-left:10px !important;}
+
+.topi_image {max-height:92px}
+
+.topi_image_li:nth-child(4n+1) {
+    clear: both;
+}
+
+.topichat_media_rank{display:inline-block;}
+
+.media_wrapper .topichat_media_rank button {display:block;}
+.media_wrapper .topichat_media_rank button img{background-color: white !important;}
+.media_wrapper .topichat_media_rank span {background-color: white; color:black;}
+
+.top_rank_profile {border-radius: 50%; height:60px;width:60px;}

@@ -58,7 +58,7 @@ foreach ($posts as $post) {
             <div class="rank_box2">
                 <div class="row">
                     <div class="col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-lg-11 col-md-11 col-sm-11 col-xs-12 pad_lft0">
-                        <ul class="list-inline winr_ul rank_ul2">
+                        <ul class="list-inline winr_ul rank_ul2 chellange_options">
                             <li>
                                 <button class="btn btn-primary others_rank" data-toggle="modal" data-target="#rank_modal">
                                     Others
@@ -92,6 +92,32 @@ foreach ($posts as $post) {
                                     </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['challange_post_id'] ?>">
+                                    <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
+                                    <span>
+                                        <?php //echo $post['post_share'] ?> Shares
+                                    </span>
+                                </a>
+                                <div id="popover-content" class="hide">
+                                    <ul class="share-icon-list">
+                                        <li>
+
+                                            <?php
+                                            $media_url = (isset($post['media'])) ? $post['media'] : '';
+                                            $media = "st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
+                                            $sharethis_content = "st_url='" . base_url() . "post/display_challenge_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
+                                            ?>
+                                            <span class='st_facebook' displayText='' <?php echo $sharethis_content ?>></span>
+                                            <span class='st_twitter' displayText='' <?php echo $sharethis_content ?>></span>
+                                            <span class='st_linkedin' displayText='' <?php echo $sharethis_content ?>></span>
+                                            <span class='st_pinterest' displayText='' <?php echo $sharethis_content ?>></span>
+                                            <span class='st_googleplus' displayText='' <?php echo $sharethis_content ?>></span>
+                                            <span class='st_reddit' displayText='' <?php echo $sharethis_content ?>></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                         <div class="winner-comnt">
                             <p class="cmn_txtnw"> Comment Here</p>
@@ -115,6 +141,7 @@ foreach ($posts as $post) {
                                                     <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
                                                     <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+
                                                 </ul>
                                                 <div class="reply_dtl" style="display:none"></div>
                                             </div>

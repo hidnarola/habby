@@ -2,7 +2,7 @@
 foreach ($messages as $message) {
     if ($message['user_id'] == $this->session->user['id']) {
         ?>
-        <p class="chat_2 clearfix">
+        <p class="chat_2 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>">
             <?php
             if (is_null($message['media'])) {
                 ?>
@@ -13,13 +13,32 @@ foreach ($messages as $message) {
             } else {
                 if ($message['media_type'] == "image") {
                     ?>
-                    <span class="wdth_span">
+                    <span class="wdth_span media_wrapper">
+                        <div id="field" class="topichat_media_rank">
+                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                            <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                            <button type="button" id="sub" class="sub smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                        </div>
+
                         <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg'></span>
                     </span>
                     <?php
                 } else if ($message['media_type'] == "video") {
                     ?>
-                    <span style="float: right">
+                    <span style="float: right" class="media_wrapper">
+                        <div id="field" class="topichat_media_rank">
+                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                            <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                            <button type="button" id="sub" class="sub smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                        </div>
                         <span class='imagePreview' id='imagePreview_msg'>
                             <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:250px;"></video>
                         </span>
@@ -32,7 +51,7 @@ foreach ($messages as $message) {
         <?php
     } else {
         ?>
-        <p class="chat_1 clearfix">
+        <p class="chat_1 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>">
             <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'> 
             <?php
             if (is_null($message['media'])) {
@@ -44,13 +63,31 @@ foreach ($messages as $message) {
             } else {
                 if ($message['media_type'] == "image") {
                     ?>
-                    <span class="wdth_span">
+                    <span class="wdth_span media_wrapper">
+                        <div id="field" class="topichat_media_rank">
+                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                            <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                            <button type="button" id="sub" class="sub smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                        </div>
                         <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg'></span>
                     </span>
                     <?php
                 } else if ($message['media_type'] == "video") {
                     ?>
-                    <span>
+                    <span class="media_wrapper">
+                        <div id="field" class="topichat_media_rank">
+                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                            <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                            <button type="button" id="sub" class="sub smlr_btn">
+                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png'); ?>"/>
+                            </button>
+                        </div>
                         <span class='imagePreview' id='imagePreview_msg'>
                             <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:250px;"></video>
                         </span>
