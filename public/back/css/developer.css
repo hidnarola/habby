@@ -13,6 +13,13 @@
 .thumbnail{
     display: inline-block;
 }
+.c_post_thumbnail{
+    display: block !important;
+}
+
+.challenge_post:nth-child(3n+1){
+    clear:both;
+}
 .thumb:not(.thumb-rounded) img {
     border-radius: 3px;
     max-width: 330px;
@@ -72,3 +79,9 @@ ul.thumb-ul {
     display: inline-block;
     color:#2196F3;
 }
+
+/*span.media-annotation.pull-right.reply_time {
+    position: relative;
+    right: -30px;
+    top: 0px;
+}*/

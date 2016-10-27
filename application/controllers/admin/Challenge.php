@@ -83,117 +83,52 @@ class Challenge extends CI_Controller {
         }
         $group_id = $this->uri->segment(4);
         if (is_numeric($group_id)) {
-            $Groupplans = $this->Admin_groupplan_model->get_groupplan_result($group_id);
-            if ($Groupplans) {
-                $this->data['Groupplans'] = $Groupplans;
-                $this->data['title'] = 'Habby - Admin edit Groupplan';
-                $this->data['heading'] = 'Edit Groupplan';
+            $Challenges = $this->Admin_challenge_model->get_challenge_result($group_id);
+            if ($Challenges) {
+                $this->data['Challenges'] = $Challenges;
+                $this->data['title'] = 'Habby - Admin edit Challenge';
+                $this->data['heading'] = 'Edit Challenge';
             } else {
                 show_404();
             }
         } else {
-            $this->data['title'] = 'Habby - Admin add Groupplan';
-            $this->data['heading'] = 'Add Groupplan';
+            $this->data['title'] = 'Habby - Admin add Challenge';
+            $this->data['heading'] = 'Add Challenge';
         }
-        $this->form_validation->set_rules('name', 'Group Name', 'required');
-        $this->form_validation->set_rules('user_limit', 'Group User Limit', 'required|numeric');
+        $this->form_validation->set_rules('name', 'Challenge Name', 'required');
+        $this->form_validation->set_rules('rewards', 'Rewards', 'required|numeric');
         if ($this->form_validation->run() == FALSE) {
-            $this->template->load('admin_main', 'admin/groupplan/manage', $this->data);
+            $this->template->load('admin_main', 'admin/challenge/manage', $this->data);
         } else {
             if ($group_id != '') {
                 $upd_data = array(
                     'name' => $this->input->post('name'),
-                    'user_limit' => $this->input->post('user_limit'),
-                    'slogan' => $this->input->post('slogan'),
-                    'introduction' => $this->input->post('introduction')
+                    'description' => $this->input->post('description'),
+                    'rewards' => $this->input->post('rewards')
                 );
                 $where = 'id = ' . $this->db->escape($group_id);
-                if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
-                    $config['upload_path'] = './uploads/group_plan';
-                    $config['allowed_types'] = 'gif|jpg|png';
-                    $config['min_width'] = '300';
-                    $config['min_height'] = '300';
-                    $config['encrypt_name'] = TRUE;
-                    $config['file_name'] = md5(uniqid(mt_rand()));
-                    //Initialize all params for the CI uplaod library
-                    $this->upload->initialize($config);
-
-                    // If picture is uploaded then IF otherwise ELSE "car_picture" paseed as input file name
-                    // IF not fit into given parameter then set proper error message and redirect to car/pictire function
-                    if (!$this->upload->do_upload('group_cover')) {
-
-                        $error = $this->upload->display_errors();
-
-                        if ($_FILES["group_cover"]["tmp_name"] != '') {
-                            $image_info = getimagesize($_FILES["group_cover"]["tmp_name"]);
-                            $image_width = $image_info[0];
-                            $image_height = $image_info[1];
-                            $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
-                        }
-                        $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
-                    } else {
-                        $data_upload = array('upload_data' => $this->upload->data());
-                        $image_name = $data_upload['upload_data']['file_name'];
-                        $upd_data['group_cover'] = $image_name;
-                    }
-                }
-                if ($topic_id = $this->Admin_groupplan_model->update_record('group', $where, $upd_data)) {
-                    $this->session->set_flashdata('success', 'Group successfully updated!');
-                    redirect('admin/groupplan');
+                if ($this->Admin_challenge_model->update_record('challanges', $where, $upd_data)) {
+                    $this->session->set_flashdata('success', 'Challenge successfully updated!');
+                    redirect('admin/challenge');
                 }
             } else {
-                $ins_data = array(
-                    'name' => $this->input->post('name'),
-                    'slogan' => $this->input->post('slogan'),
-                    'user_limit' => $this->input->post('user_limit'),
-                    'introduction' => $this->input->post('introduction'),
-                    'user_id' => $this->data['user_data']['id'],
-                );
-                if ($groupplan_id = $this->Admin_groupplan_model->insert('group', $ins_data)) {
-                    if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
-                        /* v! If Image is uploaded then use upload library for the codeigniter to upload image */
-                        $config['upload_path'] = './uploads/group_plan';
-                        $config['allowed_types'] = 'gif|jpg|png';
-                        $config['min_width'] = '300';
-                        $config['min_height'] = '300';
-                        $config['encrypt_name'] = TRUE;
-                        $config['file_name'] = md5(uniqid(mt_rand()));
-
-                        //Initialize all params for the CI uplaod library
-                        $this->upload->initialize($config);
-
-                        // If picture is uploaded then IF otherwise ELSE "car_picture" paseed as input file name
-                        // IF not fit into given parameter then set proper error message and redirect to car/pictire function
-                        if (!$this->upload->do_upload('group_cover')) {
-
-                            $error = $this->upload->display_errors();
-
-                            if ($_FILES["group_cover"]["tmp_name"] != '') {
-                                $image_info = getimagesize($_FILES["group_cover"]["tmp_name"]);
-                                $image_width = $image_info[0];
-                                $image_height = $image_info[1];
-                                $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
-                            }
-                            $image_name = "grp_pln_img1.jpg";
-                            $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
-                        } else {
-                            $data_upload = array('upload_data' => $this->upload->data());
-                            $image_name = $data_upload['upload_data']['file_name'];
-                        }
-                    } else {
-                        $image_name = "grp_pln_img1.jpg";
-                    }
-                    $this->Groupplan_model->update_groupplan_data($groupplan_id, ['group_cover' => $image_name]);
-                    $ins_user_data = array(
-                        'group_id' => $groupplan_id,
+                $groupplan_id = "";
+                if ($this->input->post()) {
+                    $ins_data = array(
+                        'name' => $this->input->post('name'),
+                        'description' => $this->input->post('description'),
+                        'rewards' => $this->input->post('rewards'),
                         'user_id' => $this->data['user_data']['id'],
                     );
-                    $this->Groupplan_model->insert_grouplan_users($ins_user_data);
-                    $this->session->set_flashdata('success', 'Group successfully inserted!');
-                } else {
-                    $this->session->set_flashdata('error', 'Invalid request. Please try again!');
+                    $groupplan_id = $this->Admin_challenge_model->insert('challanges', $ins_data);
                 }
-                redirect(site_url('admin/topichat'));
+                $ins_user_data = array(
+                    'challange_id' => $groupplan_id,
+                    'user_id' => $this->data['user_data']['id'],
+                );
+                $this->Challenge_model->insert_challenge_user($ins_user_data);
+                $this->session->set_flashdata('success', 'Challenge successfully Added!');
+                redirect(site_url('admin/challenge'));
             }
         }
     }
@@ -205,8 +140,8 @@ class Challenge extends CI_Controller {
             redirect('admin/login');
         }
         $group_id = $this->uri->segment(4);
-        $this->data['groupplans'] = $this->Admin_groupplan_model->get_groupplan_result($group_id);
-        $this->template->load('admin_main', 'admin/groupplan/view', $this->data);
+        $this->data['challenges'] = $this->Admin_challenge_model->get_challenge_results($group_id);
+        $this->template->load('admin_main', 'admin/challenge/view', $this->data);
     }
 
 }
