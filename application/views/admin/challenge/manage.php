@@ -7,7 +7,7 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo site_url('admin/home'); ?>"><i class="icon-home2 position-left"></i> Home</a></li>
-            <li><a href="<?php echo site_url('admin/groupplan'); ?>"><i class="icon-magazine position-left"></i> Group plans</a></li>
+            <li><a href="<?php echo site_url('admin/challenge'); ?>"><i class="icon-magazine position-left"></i> Challenges</a></li>
             <li class="active"><?php echo $heading; ?></li>
         </ul>
     </div>
@@ -49,63 +49,28 @@ if ($this->session->flashdata('success')) {
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <form class="form-horizontal form-validate" action="" id="post_info" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal form-validate" action="" id="post_info" method="POST">
                 <div class="panel panel-flat">
                     <div class="panel-body">
                         <div class="message alert alert-danger" style="display:none"></div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Group Name <span class="text-danger">*</span> </label>
+                            <label class="col-lg-3 control-label">Challenge Name <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" placeholder="Enter Group Name" name="name" value="<?php echo (isset($Groupplans['name'])) ? $Groupplans['name'] : set_value('name'); ?>"> 
+                                <input type="text" class="form-control" placeholder="Enter Challenge Name" name="name" value="<?php echo (isset($Challenges['name'])) ? $Challenges['name'] : set_value('name'); ?>"> 
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Group Slogan</label>
+                            <label class="col-lg-3 control-label">Challenge Description</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" placeholder="Enter Group Slogan" name="slogan" value="<?php echo (isset($Groupplans['slogan'])) ? $Groupplans['slogan'] : set_value('slogan'); ?>">
+                                <textarea id="introduction" name="description" placeholder="Enter Challenge Description" class="form-control"><?php echo (isset($Challenges['description'])) ? $Challenges['description'] : set_value('description'); ?></textarea>
                             </div>
                         </div> 
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Group Introduction</label>
+                            <label class="col-lg-3 control-label">Rewards</label>
                             <div class="col-lg-7">
-                                <textarea id="introduction" name="introduction" placeholder="Enter Group Introduction" class="form-control"><?php echo (isset($Groupplans['introduction'])) ? $Groupplans['introduction'] : set_value('introduction'); ?></textarea>
+                                <input type="text" class="form-control" placeholder="Enter Challenge Rewards" name="rewards" value="<?php echo (isset($Challenges['rewards'])) ? $Challenges['rewards'] : set_value('rewards'); ?>"> 
                             </div>
                         </div> 
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Group user limit</label>
-                            <div class="col-lg-7">
-                                <input type="text" id="user_limit" name="user_limit" placeholder="Enter Group user Limit" class="form-control" value="<?php echo (isset($Groupplans['user_limit'])) ? $Groupplans['user_limit'] : set_value('user_limit'); ?>">
-                            </div>
-                        </div> 
-
-                        <div class="form-group form-group-material">
-                            <label class="display-block control-label has-margin animate is-visible col-lg-3">Group Image</label>
-                            <div class="col-lg-7">
-                                <div class="uploader">
-                                    <input type="file" name="group_cover" id="uploadFile" class="file-styled">
-                                    <span class="filename" style="-webkit-user-select: none;"></span>
-                                    <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Images</span>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-//                        pr($post_datas['media']);
-                        if (isset($Groupplans['group_cover']) && !empty($Groupplans['group_cover'])) {
-                            ?>
-                            <div class="col-lg-12 col-sm-12">
-                                <div class="thumbnail">
-                                    <div class="thumb">
-                                        <div class="thumb-inner">
-                                            <img src="<?php echo DEFAULT_GROUPPLAN_IMAGE_PATH . $Groupplans['group_cover']; ?>" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                        <div class="image_wrapper" style="display:none">
-                        </div>
                         <div class="text-right">
                             <button class="btn btn-success" type="submit">Save <i class="icon-arrow-right14 position-right"></i></button>
                         </div>

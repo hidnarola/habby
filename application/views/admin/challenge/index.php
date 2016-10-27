@@ -58,7 +58,7 @@ if ($this->session->flashdata('success')) {
     <div class="content">
         <div class="panel panel-flat">
             <div class="panel-heading text-right">
-                <a href="<?php echo site_url('admin/challenge/add'); ?>" class="btn btn-success btn-labeled"><b><i class="icon-add"></i></b> Add new Group</a>
+                <a href="<?php echo site_url('admin/challenge/add'); ?>" class="btn btn-success btn-labeled"><b><i class="icon-add"></i></b> Add new Challenge</a>
             </div>
             <table class="table datatable-basic">
                 <thead>
@@ -77,7 +77,7 @@ if ($this->session->flashdata('success')) {
         </div>
     </div>
 </div>
-<script>.
+<script>
     $(function () {
         $('.datatable-basic').dataTable({
             processing: true,

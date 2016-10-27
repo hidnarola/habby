@@ -80,7 +80,6 @@ if ($this->session->flashdata('success')) {
                             </div>
                         </div>
 
-
                         <?php
 //                        pr($post_datas['media']);
                         if (isset($post_datas['media']) && !empty($post_datas['media'])) {
@@ -98,7 +97,7 @@ if ($this->session->flashdata('success')) {
                                                 <?php
                                             } else {
                                                 ?>
-                                                <div class="thumb-inner">0
+                                                <div class="thumb-inner">
                                                     <video controls class="img-responsive center-block">
                                                         <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
                                                     </video>

@@ -9,7 +9,7 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo base_url() . "admin/dashboard" ?>"><i class="icon-home2 position-left"></i> Admin</a></li>
-            <li><a href="<?php echo base_url() . "admin/topichat" ?>"><i class="icon-users4 position-left"></i> Topichat</a></li>
+            <li><a href="<?php echo base_url() . "admin/challenge" ?>"><i class="icon-users4 position-left"></i> Challenges</a></li>
             <li><i class="icon-users4 position-left"></i> Details</li>
         </ul>
     </div>
@@ -58,29 +58,24 @@ if ($this->session->flashdata('success')) {
             <div class="content">
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
+                        <h2 class="text-semibold no-margin-top">Challenge Details</h2>
                         <?php
-                        if (isset($groupplans) && !empty($groupplans)) {
-//                            pr($groupplans);
+                        if (isset($challenges) && !empty($challenges)) {
+//                            pr($challenges);
                             ?>
                             <div class="thumbnail">
-                                <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $groupplans['user_image']; ?>"> <?php echo $groupplans['user_name']; ?></h3>
-                                <div class="thumb">
-                                    <div class="thumb-inner">
-                                        <img src="<?php echo DEFAULT_GROUPPLAN_IMAGE_PATH . $groupplans['group_cover']; ?>" alt="">
-                                    </div>
-                                </div>
+                                <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenges['user_image']; ?>"> <?php echo $challenges['user_name']; ?></h3>
                                 <div class="caption">
-                                    <h6 class="no-margin-top"><span class="text-semibold">Name : </span><?php echo $groupplans['name'] ?></h6>
-                                    <h6 class="no-margin-top"><span class="text-semibold">Slogan : </span><?php echo $groupplans['slogan'] ?></h6>
-                                    <h6 class="no-margin-top"><span class="text-semibold">Introduction : </span><?php echo $groupplans['introduction'] ?></h6>
-                                    <h6 class="no-margin-top"><span class="text-semibold">Date : </span><?php echo date('d-m-Y h:i a', strtotime($groupplans['created_date'])) ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Name : </span><?php echo $challenges['name'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Description : </span><?php echo $challenges['description'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Date : </span><?php echo date('d-m-Y h:i a', strtotime($challenges['created_date'])) ?></h6>
                                 </div>
                                 <div>
-                                    <h4 class="text-semibold">Group Joined User</h4>
+                                    <h4 class="text-semibold">Challenge Accepted User</h4>
                                     <ul class="media-list padding-15">
                                         <?php
-                                        if (isset($groupplans['joined_user']) && !empty($groupplans['joined_user'])) {
-                                            foreach ($groupplans['joined_user'] as $join_user) {
+                                        if (isset($challenges['joined_user']) && !empty($challenges['joined_user'])) {
+                                            foreach ($challenges['joined_user'] as $join_user) {
                                                 ?>
                                                 <li class="media">
                                                     <div class="media-left">
@@ -100,6 +95,130 @@ if ($this->session->flashdata('success')) {
                         }
                         ?>
                     </div>
+                </div>
+                <div class="row ">
+                    <h2 class="text-semibold no-margin-top">Challenge Post</h2>
+                    <?php
+                    if (isset($challenges['challenge_post']) && !empty($challenges['challenge_post'])) {
+                        foreach ($challenges['challenge_post'] as $challenge_post) {
+//                            pr($challenge_post);
+                            ?>
+                            <div class="challenge_post col-sm-4">
+                                <div class="thumbnail c_post_thumbnail">
+                                    <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge_post['post_user_image']; ?>"> <?php echo $challenge_post['post_user_name']; ?></h3>
+
+                                    <div class="thumb">
+                                        <?php
+                                        if ($challenge_post['media_type'] == 'image') {
+                                            ?>
+                                            <div class="thumb-inner">
+                                                <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $challenge_post['media']; ?>" alt="">
+                                            </div>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <div class="thumb-inner">
+                                                <video controls class="img-responsive center-block">
+                                                    <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $challenge_post['media']; ?>"></source>
+                                                </video>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="caption">
+                                        <h6 class="no-margin-top"><span class="text-semibold">Average Rank : </span><?php echo $challenge_post['positive_rank'] - $challenge_post['negetive_rank']; ?></h6>
+                                    </div>
+                                    <div>
+                                        <ul class="thumb-ul">
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="icon-coins"></i>
+                                                    <br><span class="coins-count"><?php echo $challenge_post['tot_coin'] ?> coins</span> </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="icon-thumbs-up3"></i>
+                                                    <br><span class="likes-count"><?php echo $challenge_post['tot_like'] ?> Likes</span> 
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)">
+                                                    <i class="icon-comments"></i>
+                                                    <br><span class="comments-count"><?php echo $challenge_post['tot_comment'] ?> comments</span> 
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <ul class="media-list padding-15">
+                                            <?php
+                                            foreach ($challenge_post['comments'] as $post_cmt) {
+                                                ?>
+                                                <li class="media">
+                                                    <div class="media-left">
+                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $post_cmt['user_image']; ?>" class="img-circle img-xs" alt="">
+                                                    </div>
+
+                                                    <div class="media-body">
+                                                        <a href="#">
+                                                            <?php echo $post_cmt['name']; ?>
+                                                            <span class="media-annotation pull-right"><?php echo date('h i', strtotime($post_cmt['created_date'])); ?></span>
+                                                        </a>
+
+                                                        <span class="display-block text-muted"> <?php echo $post_cmt['comment_description']; ?></span>      
+                                                        <ul class="thumb-ul">
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="icon-thumbs-up3"></i>
+                                                                    <br><span class="likes-count"> <?php echo $post_cmt['cnt_like']; ?> Likes</span> 
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="icon-comments"></i>
+                                                                    <br><span class="comments-count"> <?php echo $post_cmt['cnt_reply']; ?> comments</span> 
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <?php
+                                                        if (isset($post_cmt['comment_replies']) && !empty($post_cmt['comment_replies'])) {
+                                                            foreach ($post_cmt['comment_replies'] as $cmt_reply) {
+//                                                                pr($cmt_reply);
+                                                                ?>
+                                                                <ul class="media-list padding-15">
+                                                                    <li class="media">
+                                                                        <div class="media-left">
+                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $cmt_reply['user_image']; ?>" class="img-circle img-xs" alt="">
+                                                                        </div>
+
+                                                                        <div class="media-body">
+                                                                            <a href="#">
+                                                                                <?php echo $cmt_reply['name']; ?>
+                                                                                <span class="media-annotation pull-right reply_time"><?php echo date('h i', strtotime($cmt_reply['created_date'])); ?></span>
+                                                                            </a>
+
+                                                                            <span class="display-block text-muted"><?php echo $cmt_reply['reply_text']; ?></span>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </li>
+                                                <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
