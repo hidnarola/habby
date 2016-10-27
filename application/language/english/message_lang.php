@@ -151,6 +151,8 @@ $lang['My Groups'] = 'My Groups';
 $lang['No Groups.'] = 'No Groups.';
 $lang['Joined Groups'] = 'Joined Groups';
 //--Join--
+$lang['Edit Group'] = 'Edit Group';
+$lang['Update'] = 'Update';
 $lang['Files'] = 'Files';
 $lang['TOP RATE'] = 'TOP RATE';
 $lang['ALL FILES'] = 'ALL FILES';

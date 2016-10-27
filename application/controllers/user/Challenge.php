@@ -512,4 +512,86 @@ class Challenge extends CI_Controller {
 
         echo $this->load->view('user/partial/challenge/display_rank_post_of_challenge',$data,true);
     }
+    
+    /*
+     * 
+     */
+    public function add_rank_to_challenge($challenge_id){
+        $uid = $this->session->user['id'];
+        if(!empty($rank = $this->Challenge_model->user_rank_exist_for_challenge($uid,$challenge_id)))
+        {
+            // Update entry
+            if(!$rank['rank']) // rank is negetive?
+            {
+                $update_arr['rank'] = "1";
+                if($this->Challenge_model->update_challenge_rank($update_arr,$rank['id']))
+                {
+                    $this->Challenge_model->change_challenge_average_rank($challenge_id,2);
+                    echo "2";
+                }
+                else
+                {
+                    echo '0';
+                }
+            }
+            else
+            {
+                echo "3"; // no need to insert/update
+            }
+        }
+        else
+        {
+            // Insert entry
+            $insert_arr['user_id'] = $uid;
+            $insert_arr['challange_id'] = $challenge_id;
+            $insert_arr['rank'] = '1';
+            if ($this->Challenge_model->add_challenge_rank($insert_arr)) {
+                $this->Challenge_model->change_challenge_average_rank($challenge_id,1);
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+    }
+    
+    /*
+     * 
+     */
+     public function subtract_rank_from_challenge($challenge_id){
+        $uid = $this->session->user['id'];
+        if(!empty($rank = $this->Challenge_model->user_rank_exist_for_challenge($uid,$challenge_id)))
+        {
+            // Update entry
+            if($rank['rank']) // rank is positive?
+            {
+                $update_arr['rank'] = "0";
+                if($this->Challenge_model->update_challenge_rank($update_arr,$rank['id']))
+                {
+                    $this->Challenge_model->change_challenge_average_rank($challenge_id,-2);
+                    echo "-2";
+                }
+                else
+                {
+                    echo '0';
+                }
+            }
+            else
+            {
+                echo "3"; // no need to insert/update
+            }
+        }
+        else
+        {
+            // Insert entry
+            $insert_arr['user_id'] = $uid;
+            $insert_arr['challange_id'] = $challenge_id;
+            $insert_arr['rank'] = '0';
+            if ($this->Challenge_model->add_challenge_rank($insert_arr)) {
+                $this->Challenge_model->change_challenge_average_rank($challenge_id,-1);
+                echo '-1';
+            } else {
+                echo '0';
+            }
+        }
+    }
 }

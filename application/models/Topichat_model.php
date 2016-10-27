@@ -287,6 +287,17 @@ class Topichat_model extends CI_Model {
         return $this->db->get('topic_group_chat tg')->result_array();
     }
 
+    /*
+     * developed by : ar
+     */
+    public function insert_topichat_group_modification($arr)
+    {
+        if($this->db->insert('topic_group_modify',$arr))
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 ?>

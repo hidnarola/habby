@@ -9,10 +9,9 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 topi_prsnl">
                         <h2><?php echo lang('');?>Topic Notification :</h2>
+                        
                         <p><span class="by_spn">Topichat 1</span> <span>New Message By Jim</span></p>
-                        <p><span class="by_spn">Topichat 2</span> <span>New Message By Meera</span></p>
-                        <p><span class="by_spn">Topichat 3</span> <span>New Message By Jing</span></p>
-                        <p><span class="by_spn">Topichat 4</span> <span>New Message By Jim</span></p>
+                        
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 ">
                         <h2><?php echo lang('Group');?></h2>

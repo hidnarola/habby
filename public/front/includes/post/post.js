@@ -147,7 +147,7 @@ $('document').ready(function () {
         }
     });
     // Add comment to the post
-    $(".comment").on("keypress", function (e) {
+    $(".post_section").on("keypress", ".comment", function (e) {
         var key = e.keyCode;
         var t = $(this);
         // If the user has pressed enter
@@ -203,14 +203,21 @@ $('document').ready(function () {
     });
     // Display comment reply
     $(".post_section").on('click', '.post_comment_reply', function () {
-        var t = $(this);
-        var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
-        $.ajax({
-            url: base_url + 'user/post/display_comment_reply/' + post_comment_id,
-            success: function (str) {
-                t.parents('.cmn_dtl').find('.reply_dtl').html(str);
-            }
-        });
+        var $t = $(this).parents('.cmn_dtl').find('.reply_dtl');
+        if ($t.is(':visible')) {
+            $t.slideUp();
+            // Other stuff to do on slideUp
+        } else {
+            var t = $(this);
+            var post_comment_id = t.parents('.commnt_visit_sec').data('post_comment_id');
+            $.ajax({
+                url: base_url + 'user/post/display_comment_reply/' + post_comment_id,
+                success: function (str) {
+                    t.parents('.cmn_dtl').find('.reply_dtl').html(str);
+                    $t.slideDown();
+                }
+            });
+        }
     });
     // Add reply for the post comment
     $('.post_section').on('keypress', '.comment_reply', function (e) {
@@ -265,19 +272,8 @@ $('document').ready(function () {
     // Fetch extra post for lazy loading
     function loaddata()
     {
-        var uri = window.location.href;
-        uri = uri.split('/');
-        var myurl = '';
-        if (typeof (uri[4]) != "undefined" && uri[4] == "challenge")
-        {
-            myurl = base_url + 'user/home/challenge/' + page;
-        }
-        else
-        {
-            myurl = base_url + 'user/home/smile_share/' + page;
-        }
         $.ajax({
-            url: myurl,
+            url: base_url + 'user/home/smile_share/' + page,
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
@@ -290,14 +286,6 @@ $('document').ready(function () {
                 {
 
                     $('.post_section').append(data.view);
-                    stButtons.locateElements();
-// or if you want to be a bit defensive about whether the lib has been
-// loaded or not:
-                    if (window.stButtons) {
-                        stButtons.locateElements();
-                    } // Parse ShareThis markup
-
-
                 }
                 $('.share-link').popover({
                     html: true,
@@ -305,6 +293,12 @@ $('document').ready(function () {
                         return $(this).siblings("#popover-content").html();
                     }
                 });
+                stButtons.locateElements();
+// or if you want to be a bit defensive about whether the lib has been
+// loaded or not:
+                if (window.stButtons) {
+                    stButtons.locateElements();
+                } // Parse ShareThis markup
             }
         });
         page++;
@@ -318,4 +312,22 @@ $('document').ready(function () {
             }
         });
     });
+
+    // Set post in two column format
+    setTimeout(function () {
+        $('.post_masonry_article').each(function () {
+            console.log($(this).data('post_id') + " having left " + $(this).offset().left);
+            if ($(this).offset().left > 250)
+            {
+                $(this).addClass('right');
+            }
+        });
+    }, 1500);
+
+    stButtons.locateElements();
+// or if you want to be a bit defensive about whether the lib has been
+// loaded or not:
+    if (window.stButtons) {
+        stButtons.locateElements();
+    } // Parse ShareThis markup
 });

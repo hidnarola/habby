@@ -28,17 +28,17 @@
     <div class="row grp_pnl_row newest-post flter_sec_row">
         <div class="container grp_pnl_container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row challenges">
+                <div class="row challenges challenge_container">
                     <!-- Challenge each section start here -->
                     <?php
                     if ($Challenges != "" && !empty($Challenges)) {
                         $cnt = count($Challenges);
-                        
+
                         foreach ($Challenges as $Challenge) {
 //                            pr($Challenge);
                             ?>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec ">
+                                <div class="challenge_sec" data-challenge_id="<?php echo $Challenge['id']; ?>">
                                     <!-- Challenge header section start here -->
                                     <div class="challenge_cont_sec row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
@@ -56,7 +56,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
                                                 <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field" />
+                                                <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field rank_rate" />
                                                 <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
                                             </div>
                                         </div>
@@ -200,16 +200,16 @@
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
-        <?php
-    }
-} else {
-    ?>
+                            <?php
+                        }
+                    } else {
+                        ?>
                         <div class="">
                             No Challenge found.
                         </div>
-    <?php
-}
-?>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <!-- Challenge row section end here -->
             </div>
@@ -218,9 +218,9 @@
     <!-- Soulmate #1 section and Newest Post area end here  -->
     <!-- Group section container end here -->
 
-<?php
-if ($cnt >= 3) {
-    ?>
+    <?php
+    if ($cnt >= 3) {
+        ?>
         <div class = "row">
             <div class = "container">
                 <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
@@ -231,9 +231,9 @@ if ($cnt >= 3) {
                 </div>
             </div>
         </div>
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
 </div>
 <!-- Soulmate new group form popup start here -->
 <div class="modal" id="new_grp">
@@ -432,5 +432,71 @@ if ($cnt >= 3) {
         page++;
     }
 
+    // Add rank for challenge
+    $(".challenge_container").on("click", ".add", function () {
+        var t = $(this);
+        var challenge_id = t.parents('.challenge_sec').data('challenge_id');
+        c = $('body').find("[data-challenge_id='" + challenge_id + "']");
+        $.ajax({
+            url: base_url + 'user/challenge/add_rank_to_challenge/' + challenge_id,
+            success: function (str)
+            {
+                if (str == 1)
+                {
+                    c.find('.add').find('img').each(function () {
+                        $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                    });
+                    c.find('.rank_rate').each(function () {
+                        $(this).val(parseInt($(this).val()) + 1);
+                    });
+                }
+                else if (str == 2)
+                {
+                    c.find('.add').find('img').each(function () {
+                        $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                    });
+                    c.find('.sub').find('img').each(function () {
+                        $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
+                    });
+                    c.find('.rank_rate').each(function () {
+                        $(this).val(parseInt($(this).val()) + 2);
+                    });
+                }
+            }
+        });
+    });
+
+    // Subtract rank for challenge
+    $(".challenge_container").on("click", ".sub", function () {
+        var t = $(this);
+        var challenge_id = t.parents('.challenge_sec').data('challenge_id');
+        c = $('body').find("[data-challenge_id='" + challenge_id + "']");
+        $.ajax({
+            url: base_url + 'user/challenge/subtract_rank_from_challenge/' + challenge_id,
+            success: function (str) {
+                if (str == -1)
+                {
+                    c.find('.sub').find('img').each(function () {
+                        $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                    });
+                    c.find('.rank_rate').each(function () {
+                        $(this).val(parseInt(t.siblings('.rank_rate').val()) - 1);
+                    });
+                }
+                else if (str == -2)
+                {
+                    c.find('.sub').find('img').each(function () {
+                        $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                    });
+                    c.find('.add').find('img').each(function () {
+                        $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
+                    });
+                    c.find('.rank_rate').each(function () {
+                        $(this).val(parseInt($(this).val()) - 2);
+                    });
+                }
+            }
+        });
+    });
 
 </script>

@@ -37,7 +37,7 @@
                     </div>
                     <!-- Challenge Title Section section end here -->
                 </div>
-                <div class="row">
+                <div class="row challenge_container">
                     <?php
                     if ($Newest_Challenges != "" && !empty($Newest_Challenges)) {
                         foreach ($Newest_Challenges as $Newest_Challenge) {
@@ -46,7 +46,7 @@
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec ">
+                                <div class="challenge_sec" data-challenge_id="<?php echo $Newest_Challenge['id']; ?>">
                                     <!-- Challenge header section start here -->
                                     <div class="challenge_cont_sec row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
@@ -64,7 +64,7 @@
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
                                                 <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Newest_Challenge['average_rank']; ?>" class="field" />
+                                                <input type="text" id="1" value="<?php echo $Newest_Challenge['average_rank']; ?>" class="field rank_rate" />
                                                 <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
                                             </div>
                                         </div>
@@ -229,7 +229,7 @@
                     </div>
                     <!-- Challenge Title Section section end here -->
                 </div>
-                <div class="row">				
+                <div class="row challenge_container">				
 <?php
 if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
     foreach ($Popular_Challenges as $Popular_Challenge) {
@@ -237,7 +237,7 @@ if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec ">
+                                <div class="challenge_sec" data-challenge_id="<?php echo $Popular_Challenge['id']; ?>">
                                     <!-- Challenge header section start here -->
                                     <div class="challenge_cont_sec row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
@@ -255,7 +255,7 @@ if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
                                                 <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Popular_Challenge['average_rank'] ?>" class="field" />
+                                                <input type="text" id="1" value="<?php echo $Popular_Challenge['average_rank'] ?>" class="field rank_rate" />
                                                 <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
                                             </div>
                                         </div>
@@ -431,7 +431,7 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec ">
+                                <div class="challenge_sec" data-challenge_id="<?php echo $Recom_Challenge['id']; ?>">
                                     <!-- Challenge header section start here -->
                                     <div class="challenge_cont_sec row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
@@ -449,7 +449,7 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
                                                 <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Recom_Challenge['average_rank'] ?>" class="field" />
+                                                <input type="text" id="1" value="<?php echo $Recom_Challenge['average_rank'] ?>" class="field rank_rate" />
                                                 <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
                                             </div>
                                         </div>
@@ -674,120 +674,7 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
         </div>
     </div>
 </div>
-<!-- Soulmate new group form popup end here -->
-<script type="text/javascript">
-    $('#groupplan1post').on('show.bs.modal', function (e) {
-
-        //get data-id attribute of the clicked element
-        var title = $(e.relatedTarget).data('title');
-        var image = $(e.relatedTarget).data('image');
-        var user = $(e.relatedTarget).data('user');
-        var uimage = $(e.relatedTarget).data('uimage');
-
-        $('#modal_title').text(title);
-        $('#modal_user').text(user);
-        $('#m_image').attr('src', image);
-        $('#m_user_image').attr('src', uimage);
-    });
-    // Image uploading script
-    $("#uploadFile").on("change", function ()
-    {
-        //        console.log('on change fired');
-        var files = !!this.files ? this.files : [];
-        if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
-            $('.message').show();
-            return; // no file selected, or no FileReader support
-        }
-
-
-        if (/^image/.test(files[0].type)) { // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[0]); // read the local file
-
-            reader.onloadend = function () { // set image data as background of div
-                $('.message').hide();
-                $('.image_wrapper').show();
-                $("#imagePreview").css("background-image", "url(" + this.result + ")");
-            }
-        } else {
-            $('.message').html("Please select proper image");
-            $('.message').show();
-        }
-    });
-
-    $(".filterby").change(function () {
-        $("#filterby_form").submit();
-    });
-    $(".find_topic").click(function () {
-        $("#search_form").submit();
-    });
-
-    $(".more_challenge").click(function () {
-        $("#more_ch_form").submit();
-    })
-</script>
 <script>
-    $(function () {
-        $("div.soulmate_con2").slice(0, 5).show();
-        $("#loadMore").on('click', function (e) {
-            e.preventDefault();
-            $("div.soulmate_con2:hidden").slice(0, 5).slideDown();
-            if ($("div.soulmate_con2:hidden").length == 0) {
-                $("#load").fadeOut('slow');
-            }
-            $('html,body').animate({
-                scrollTop: $(this).offset().top
-            }, 1500);
-        });
-    });
-
-    $('a[href=#top]').click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 600);
-        return false;
-    });
-
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 50) {
-            $('.totop a').fadeIn();
-        } else {
-            $('.totop a').fadeOut();
-        }
-    });
+    DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
 </script>
-<script>
-    $(document).ready(function () {
-        $(".winner_n_btn").click(function () {
-            var id = $(this).data('id');
-            $(".winner_popup_n_" + id).slideToggle(1000);
-        });
-        $(".winner_p_btn").click(function () {
-            var id = $(this).data('id');
-            $(".winner_popup_p_" + id).slideToggle(1000);
-        });
-        $(".winner_r_btn").click(function () {
-            var id = $(this).data('id');
-            $(".winner_popup_r_" + id).slideToggle(1000);
-        });
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $(".cmnt_winner").click(function () {
-            $(".winner-comnt").slideToggle(1000);
-        });
-    });
-</script>
-
-<!-- vote section jquery start here -->
-<script>
-    $('.add').click(function () {
-        $(this).next().val(+$(this).next().val() + 1);
-    });
-    $('.sub').click(function () {
-        if ($(this).prev().val() > 0)
-            $(this).prev().val(+$(this).prev().val() - 1);
-    });
-</script>
+<script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge_list.js"></script>

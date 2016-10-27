@@ -47,7 +47,7 @@ $('document').ready(function () {
     // Add rank to the post
     $('.topichat_msg_sec').on('click', '.add', function () {
         var t = $(this);
-        var chat_id = t.parents('.topichat_msg_sec').find('.topichat_media_post').data('chat_id');
+        var chat_id = t.parents('.topichat_media_post').data('chat_id');
         $.ajax({
             url: base_url + 'user/topichat/add_rank_to_chat_post/' + chat_id,
             success: function (str) {
@@ -69,7 +69,7 @@ $('document').ready(function () {
     // Subtract rank to the post
     $('.topichat_msg_sec').on('click', '.sub', function () {
         var t = $(this);
-        var chat_id = t.parents('.topichat_msg_sec').find('.topichat_media_post').data('chat_id');
+        var chat_id = t.parents('.topichat_media_post').data('chat_id');
         $.ajax({
             url: base_url + 'user/topichat/subtract_rank_from_chat_post/' + chat_id,
             success: function (str) {
@@ -86,5 +86,39 @@ $('document').ready(function () {
                 }
             }
         });
+    });
+
+    $('input:radio[name="person_limit"]').change(function () {
+        if ($(this).is(":checked") && $(this).val() == 'Yes')
+            $("#txt_No_of_person").removeAttr("disabled");
+        else
+            $("#txt_No_of_person").attr("disabled", "disabled");
+    });
+    
+    // Image uploading script
+    $("body").on("change","#uploadFile", function ()
+    {
+                console.log('on change fired');
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            $('.message').html("No file selected.");
+            $('.message').show();
+            return; // no file selected, or no FileReader support
+        }
+
+
+        if (/^image/.test(files[0].type)) { // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function () { // set image data as background of div
+                $('.message').hide();
+                $('.new_image_wrapper').show();
+                $("#imagePreview").css("background-image", "url(" + this.result + ")");
+            }
+        } else {
+            $('.message').html("Please select proper image");
+            $('.message').show();
+        }
     });
 });

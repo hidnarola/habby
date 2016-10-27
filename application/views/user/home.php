@@ -35,10 +35,14 @@
                                                         ?>
                                                         <div class="commnt_visit_sec clearfix" data-post_comment_id="<?php echo $comment['id']; ?>">
                                                             <div class="cmn_img">
-                                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
+                                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive user_chat_thumb img-circle">
+                                                                <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span></p>
                                                             </div>
                                                             <div class="cmn_dtl">
-                                                                <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> Interesting</p>
+
+                                                                <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
+                                                                <p class=""><?php echo $comment['created_date'] ?></p>
+
                                                                 <ul class="cmnt_p clearfix">
                                                                     <li class="comment_like_cnt">
                                                                         <a href="javascript:;">
@@ -56,10 +60,8 @@
                                                                         </a>
                                                                     </li>
                                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                    <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
                                                                 </ul>
-                                                                <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
-                                                                <div class="reply_dtl"></div>
+                                                                <div class="reply_dtl" style="display: none"></div>
                                                             </div>
                                                         </div>
                                                         <?php
@@ -183,8 +185,8 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['id']?>">
-                                                                    
+                                                                <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['id'] ?>">
+
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                     <span>
                                                                         <?php echo $post['post_share'] ?> Shares
@@ -269,16 +271,3 @@
     </div>
 </div>
 <script type="text/javascript" src="<?php echo USER_JS; ?>post/post.js"></script>
-<script>
-    setTimeout(function () {
-        $('.post_masonry_article').each(function () {
-            console.log($(this).data('post_id') + " having left " + $(this).offset().left);
-            if ($(this).offset().left > 250)
-            {
-                $(this).addClass('right');
-            }
-        });
-    }, 1500);
-
-
-</script>

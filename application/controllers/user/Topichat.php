@@ -144,6 +144,65 @@ class Topichat extends CI_Controller {
     }
 
     /*
+     * update_group is used to update topichat group information
+     * @param $group_id     int     specify group id of the group for which we are updating info
+     * 
+     * @return boolean  true    if, succesfully updated
+     *                  false   if, fail in updation
+     * develop by : ar
+     */
+
+    public function update_group($group_id) {
+        $group_id = base64_decode(urldecode($group_id));
+        $image_name = "";
+        if ($this->input->post()) {
+            $update_data = array(
+                'topic_name' => $this->input->post('topic_name'),
+                'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
+                'notes' => $this->input->post('notes'),
+                //'user_id' => $this->data['user_data']['id'],
+            );
+        }
+        if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
+            /* v! If Image is uploaded then use upload library for the codeigniter to upload image */
+            $config['upload_path'] = './uploads/topichat_group';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['min_width'] = '300';
+            $config['min_height'] = '300';
+            $config['encrypt_name'] = TRUE;
+            $config['file_name'] = md5(uniqid(mt_rand()));
+
+            //Initialize all params for the CI uplaod library
+            $this->upload->initialize($config);
+
+            // If picture is uploaded then IF otherwise ELSE "car_picture" paseed as input file name
+            // IF not fit into given parameter then set proper error message and redirect to car/pictire function
+            if (!$this->upload->do_upload('group_cover')) {
+
+                $error = $this->upload->display_errors();
+
+                if ($_FILES["group_cover"]["tmp_name"] != '') {
+                    $image_info = getimagesize($_FILES["group_cover"]["tmp_name"]);
+                    $image_width = $image_info[0];
+                    $image_height = $image_info[1];
+                    $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
+                }
+                $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
+            } else {
+                $data_upload = array('upload_data' => $this->upload->data());
+                $update_data['group_cover'] = $data_upload['upload_data']['file_name'];
+            }
+        }
+        $this->Topichat_model->update_topic_group_data($group_id, $update_data);
+        $this->session->set_flashdata('message', array('message' => lang('Topic updated successfully'), 'class' => 'alert alert-success'));
+        // Add entry in modification table
+        $arr['user_id'] = $this->session->user['id'];
+        $arr['description'] = "has changed group info";
+        $this->Topichat_model->insert_topichat_group_modification($arr);
+        redirect('topichat/details/'.  urlencode(base64_encode($group_id)));
+    }
+
+    /*
      * search method loads topichat page view with all required details
      * develop by : HPA
      */
@@ -197,16 +256,15 @@ class Topichat extends CI_Controller {
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
-        $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id,$image_limit = 8);
-        $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id,$image_limit = 8);
+        $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
+        $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id, $image_limit = 8);
         $this->data['recent_videos_thumb'] = array();
-        foreach($this->data['recent_videos'] as $video)
-        {
-            $this->data['recent_videos_thumb'][] = explode(".",$video)[0]."_thumb.png";
+        foreach ($this->data['recent_videos'] as $video) {
+            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
         }
-        $this->data['top_rank_post'] = $this->Topichat_model->get_top_rank_media($Id,$this->session->user['id'],$top_rank_limit = 3);
+        $this->data['top_rank_post'] = $this->Topichat_model->get_top_rank_media($Id, $this->session->user['id'], $top_rank_limit = 3);
 //        pr($this->data['top_rank_post'],1);
-        $this->data['messages'] = $this->Topichat_model->get_messages($Id,$this->session->user['id'], $limit);
+        $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }
@@ -229,30 +287,22 @@ class Topichat extends CI_Controller {
     /*
      * 
      */
-    public function add_rank_to_chat_post($chat_id){
+
+    public function add_rank_to_chat_post($chat_id) {
         $uid = $this->session->user['id'];
-        if(!empty($rank = $this->Topichat_model->user_rank_exist_for_chat($uid,$chat_id)))
-        {
+        if (!empty($rank = $this->Topichat_model->user_rank_exist_for_chat($uid, $chat_id))) {
             // Update entry
-            if(!$rank['rank']) // rank is negetive?
-            {
+            if (!$rank['rank']) { // rank is negetive?
                 $update_arr['rank'] = "1";
-                if($this->Topichat_model->update_chat_rank($update_arr,$rank['id']))
-                {
+                if ($this->Topichat_model->update_chat_rank($update_arr, $rank['id'])) {
                     echo "2";
-                }
-                else
-                {
+                } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo "3"; // no need to insert/update
             }
-        }
-        else
-        {
+        } else {
             // Insert entry
             $insert_arr['user_id'] = $uid;
             $insert_arr['topic_group_chat_id'] = $chat_id;
@@ -264,34 +314,26 @@ class Topichat extends CI_Controller {
             }
         }
     }
-    
+
     /*
      * 
      */
-     public function subtract_rank_from_chat_post($chat_id){
+
+    public function subtract_rank_from_chat_post($chat_id) {
         $uid = $this->session->user['id'];
-        if(!empty($rank = $this->Topichat_model->user_rank_exist_for_chat($uid,$chat_id)))
-        {
+        if (!empty($rank = $this->Topichat_model->user_rank_exist_for_chat($uid, $chat_id))) {
             // Update entry
-            if($rank['rank']) // rank is positive?
-            {
+            if ($rank['rank']) { // rank is positive?
                 $update_arr['rank'] = "0";
-                if($this->Topichat_model->update_chat_rank($update_arr,$rank['id']))
-                {
+                if ($this->Topichat_model->update_chat_rank($update_arr, $rank['id'])) {
                     echo "-2";
-                }
-                else
-                {
+                } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo "3"; // no need to insert/update
             }
-        }
-        else
-        {
+        } else {
             // Insert entry
             $insert_arr['user_id'] = $uid;
             $insert_arr['topic_group_chat_id'] = $chat_id;
@@ -303,4 +345,5 @@ class Topichat extends CI_Controller {
             }
         }
     }
+
 }

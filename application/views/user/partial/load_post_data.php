@@ -19,10 +19,14 @@ if (count($posts) > 0) {
                                         ?>
                                         <div class="commnt_visit_sec clearfix" data-post_comment_id="<?php echo $comment['id']; ?>">
                                             <div class="cmn_img">
-                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
+                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive user_chat_thumb img-circle">
+                                                <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span></p>
                                             </div>
                                             <div class="cmn_dtl">
-                                                <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> Interesting</p>
+
+                                                <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
+                                                <p class=""><?php echo $comment['created_date'] ?></p>
+
                                                 <ul class="cmnt_p clearfix">
                                                     <li class="comment_like_cnt">
                                                         <a href="javascript:;">
@@ -40,10 +44,8 @@ if (count($posts) > 0) {
                                                         </a>
                                                     </li>
                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                    <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
                                                 </ul>
-                                                <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
-                                                <div class="reply_dtl"></div>
+                                                <div class="reply_dtl" style="display: none"></div>
                                             </div>
                                         </div>
                                         <?php

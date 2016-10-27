@@ -579,6 +579,59 @@ class Challenge_model extends CI_Model {
         }
         return $post;
     }
-}
+    
+    /*
+     * 
+     */
+    public function user_rank_exist_for_challenge($uid,$challenge_id)
+    {
+        $where['user_id'] = $uid;
+        $where['challange_id'] = $challenge_id;
+        $this->db->where($where);
+        return $this->db->get('challange_rank')->row_array();
+    }
+    
+    public function update_challenge_rank($array, $id) {
+        $this->db->where('id', $id);
+        if ($this->db->update('challange_rank', $array)) {
+            return true;
+        }
+        return false;
+    }
 
+    /*
+     * add_post_rank is used to add rank to particular challenge
+     * @param $array array[] specify fields that going to insert
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * developed by : ar
+     */
+    public function add_challenge_rank($array) {
+        if ($this->db->insert('challange_rank', $array)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /*
+     * change_challenge_average_rank is used to change average rank of the challenge
+     * @param   $challenge_id   int     specify challeranknge id
+     * @param   $rank_number    int     specify the rank number to increase or decrese e.g. if rank_number is 2, then average rank is increased by 2, if rank_number is -1, then average rank is decresed by 1.
+     * 
+     * @return  true, if success
+     *          false, if fail
+     * developed by : ar
+     */
+    public function change_challenge_average_rank($challenge_id,$rank_number)
+    {
+        $this->db->where('id',$challenge_id);
+        $this->db->set('average_rank',"average_rank + ".$rank_number,false);
+        if($this->db->update('challanges'))
+        {
+            return true;
+        }
+        return false;
+    }
+}
 ?>
