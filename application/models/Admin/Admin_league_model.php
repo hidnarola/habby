@@ -71,6 +71,18 @@ class Admin_league_model extends CI_Model {
         $this->db->join('users u', 'u.id=lg.user_id');
         $this->db->where('lg.id', $group_id);
         $res_data = $this->db->get('league lg')->row_array();
+        return $res_data;
+    }
+    /**
+     * @uses : This function is used get result from the table
+     * @param : @table 
+     * @author : HPA
+     */
+    public function get_league_results($group_id) {
+        $this->db->select('lg.name,lg.user_limit,lg.introduction,lg.league_image,lg.requirements,lg.league_logo,u.name as user_name,u.user_image,(SELECT GROUP_CONCAT(lu.user_id) from league_members lu where lu.league_id = ' . $group_id . ') AS joined_user,(SELECT COUNT(lu.user_id) FROM `league_members` lu WHERE lg.id=lu.league_id ) as Total_User,lg.created_date');
+        $this->db->join('users u', 'u.id=lg.user_id');
+        $this->db->where('lg.id', $group_id);
+        $res_data = $this->db->get('league lg')->row_array();
         $joied_users = explode(',', $res_data['joined_user']);
         foreach ($joied_users as $joied_user_id) {
             $this->db->select('name as joined_user_name,user_image as joined_user_image');
@@ -89,6 +101,7 @@ class Admin_league_model extends CI_Model {
     public function update_record($table, $condition, $user_array) {
         $this->db->where($condition);
         if ($this->db->update($table, $user_array)) {
+            echo $this->db->last_query();
             return 1;
         } else {
             return 0;
