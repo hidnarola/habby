@@ -134,7 +134,8 @@ class League extends CI_Controller {
                             $image_height = $image_info[1];
                             $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                         }
-                        $this->session->set_flashdata('error', 'League image was not uploaded.');
+                        $this->session->set_flashdata('error', 'League image was not uploaded.' . $error);
+                        redirect('admin/league/edit/' . $group_id);
                     } else {
                         $data_upload = array('upload_data' => $this->upload->data());
                         $image_name = $data_upload['upload_data']['file_name'];
@@ -166,7 +167,8 @@ class League extends CI_Controller {
                             $image_height = $image_info[1];
                             $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                         }
-                        $this->session->set_flashdata('error', 'League logo was not uploaded.');
+                        $this->session->set_flashdata('error', 'League logo was not uploaded.' . $error);
+                        redirect('admin/league/edit/' . $group_id);
                     } else {
                         $data_upload = array('upload_data' => $this->upload->data());
                         $image_name = $data_upload['upload_data']['file_name'];
@@ -174,9 +176,10 @@ class League extends CI_Controller {
                     }
                 }
                 $where = 'id = ' . $this->db->escape($group_id);
-                $this->Admin_league_model->update_record('league', $where, $upd_data);
-                $this->session->set_flashdata('success', 'League Group successfully updated!');
-                redirect('admin/league');
+                if ($this->Admin_league_model->update_record('league', $where, $upd_data)) {
+                    $this->session->set_flashdata('success', 'League Group successfully updated!');
+                    redirect('admin/league');
+                }
             } else {
                 $ins_data = array(
                     'name' => $this->input->post('name'),
@@ -279,7 +282,7 @@ class League extends CI_Controller {
             redirect('admin/login');
         }
         $group_id = $this->uri->segment(4);
-        $this->data['topichats'] = $this->Admin_topichat_model->get_topichat_result($group_id);
+        $this->data['leagues'] = $this->Admin_league_model->get_league_results($group_id);
         $this->template->load('admin_main', 'admin/league/view', $this->data);
     }
 
