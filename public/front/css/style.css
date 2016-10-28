@@ -2304,9 +2304,9 @@ ul.list-inline.pst_ul li img {
 
 .chat_2
 {
-    font-size: 13px;
+font-size: 13px;
     color: #ffffff;
-    width: 85%;
+    width: 320px;
     margin: 0px 0px 8px auto;
     text-align: left;
 }
@@ -6755,5 +6755,31 @@ img.emoticon {
     max-width: 1.4em;
     width: 19px !important;
     float: none !important;
+}
+.chat_2 img.rank_img_sec{
+    width: auto;
+    margin-right: 0;
+}
+.chat_2 .topichat_media_rank{
+     position: absolute;
+     left: -30px;
+     top: 50%;
+     margin-top: -26px;
+}
+.chat_2 .media_wrapper {
+    position: relative;
+}
+.imagePreview{
+        display: block;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    box-shadow: none !important;
+    background-position:center  !important;
+    width: 100% !important ;
+    height: 100% !important;
+}
+.chat_2 .media_wrapper {
+    position: relative;
+    height: 180px;
 }
 /* Developer CSS End */

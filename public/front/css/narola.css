@@ -195,3 +195,26 @@
 {
     background-color: #f6f7f8 !important;
 }
+.edit_topichat_rdo > label{
+    display: inline-block;
+    vertical-align: middle;
+}
+.video-w-icon{
+    position: relative;
+    display: block;
+}
+
+.video-w-icon:after{
+    background: rgba(0, 0, 0, 0.3) url("../img/play-button-w.png") no-repeat scroll center center / 24px auto;
+    content: "";
+    height: 100%;
+    left: 0;
+    
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    
+    
+}
+

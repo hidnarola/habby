@@ -302,9 +302,17 @@ class Home extends CI_Controller {
      * This function is used to display topichat groups details.
      * develop by : HPA
      */
-    public function topichat() {
+    public function topichat($user_id=0) {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->user['id'];
+        }
+        else
+        {
+            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
-        $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group();
+        $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group($user_id);
         $this->data['joined_topichats'] = $this->Topichat_model->get_joined_topichat_group();
         $this->template->load('front', 'user/topichat/home_topichat', $this->data);
     }
@@ -363,5 +371,4 @@ class Home extends CI_Controller {
         $this->data['saved_posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], 0, 3);
         $this->template->load('front', 'user/profile', $this->data);
     }
-
 }

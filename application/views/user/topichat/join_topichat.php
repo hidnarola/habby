@@ -55,7 +55,7 @@
                                         <?php
                                     } else if ($post['media_type'] == "video") {
                                         ?>
-                                        <a class="fancybox" target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1">
+                                        <a class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1">
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
                                         </a>
                                         <?php
@@ -311,7 +311,7 @@
                                                 <div class = "form-group clearfix">
                                                     <label class = "col-lg-2 col-md-2 col-sm-2 col-xs-5 control-label"><?php echo lang('Number of People'); ?> :</label>
                                                     <div class = "col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                                        <div class = "radio topchat_1_rdo">
+                                                            <div class = "radio topchat_1_rdo edit_topichat_rdo">
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "optionsRadios1" value = "-1" <?php echo ($topichat['person_limit'] == -1) ? 'checked' : '' ?>><?php echo lang('No limit'); ?></label>
                                                             <label>

@@ -86,8 +86,8 @@ $language = $this->session->userdata('language');
                                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo lang('Social Network'); ?> <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="<?php echo base_url() . "topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
-                                            <li><a href="<?php echo base_url() . "soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
-                                            <li><a href="<?php echo base_url() . "groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>
+<!--                                            <li><a href="<?php echo base_url() . "soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
+                                            <li><a href="<?php echo base_url() . "groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>-->
                                             <li><a href="<?php echo base_url() . "challenge" ?>"><?php echo lang('Challenge'); ?></a></li>
                                             <li><a href="<?php echo base_url() . "league" ?>"><?php echo lang('League and alliance'); ?></a></li>
                                         </ul>

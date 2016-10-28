@@ -7,13 +7,32 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prsnl_sm_innrsec">
             <div class="prfl_cvr_sec prfl_cvr_sec_dvdr prfl_cvr_sec_dvdr2">
                 <div class="row">
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 topi_prsnl">
-                        <h2><?php echo lang('');?>Topic Notification :</h2>
-                        
-                        <p><span class="by_spn">Topichat 1</span> <span>New Message By Jim</span></p>
-                        
-                    </div>
-                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 ">
+                    <?php
+                        if($user_data['id'] == $this->session->user['id'])
+                        {
+                            ?>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 topi_prsnl">
+                                <h2><?php echo lang('');?>Topic Notification :</h2>                        
+                                <p><span class="by_spn">Topichat 1</span> <span>New Message By Jim</span></p>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                    <?php
+                        if($user_data['id'] == $this->session->user['id'])
+                        {
+                            ?>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 ">
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                            <?php
+                        }
+                    ?>
+                    
                         <h2><?php echo lang('Group');?></h2>
                         <div class="row grp_3sec">
                             <h2 class="subgroup"><?php echo lang('My Groups');?></h2>
