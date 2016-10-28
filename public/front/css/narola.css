@@ -185,3 +185,13 @@
 .media_wrapper .topichat_media_rank span {background-color: white; color:black;}
 
 .top_rank_profile {border-radius: 50%; height:60px;width:60px;}
+
+.reward_img {
+    width: 26px;
+    margin-right: 5px;
+}
+
+.no-media
+{
+    background-color: #f6f7f8 !important;
+}

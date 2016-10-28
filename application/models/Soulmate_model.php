@@ -207,6 +207,44 @@ class Soulmate_model extends CI_Model {
         $this->db->order_by('l.id','desc');
         return $this->db->get('league_messages l')->result_array();
     }
+    
+    /*
+     * get_recent_images used to fetch recent images from database related to particular group
+     * @param   $group_id   int     specify group_id
+     * @param   $limit      int     specify limit
+     * 
+     * @return  array   one dimensional array having image names
+     * developed by : ar
+     */
+    public function get_recent_images($group_id,$limit)
+    {
+        $this->db->select('media');
+        $this->db->where('media_type','image');
+        $this->db->where('soulmate_group_id',$group_id);
+        $this->db->limit($limit);
+        $this->db->order_by('created_date','desc');
+        $arr = $this->db->get('soulmate_group_chat')->result_array();
+        return array_column($arr,'media');
+    }
+    
+    /*
+     * get_recent_videos used to fetch recent videos from database related to particular group
+     * @param   $group_id   int     specify group_id
+     * @param   $limit      int     specify limit
+     * 
+     * @return  array   one dimensional array having video names
+     * developed by : ar
+     */
+    public function get_recent_videos($group_id,$limit)
+    {
+        $this->db->select('media');
+        $this->db->where('media_type','video');
+        $this->db->where('soulmate_group_id',$group_id);
+        $this->db->limit($limit);
+        $this->db->order_by('created_date','desc');
+        $arr = $this->db->get('soulmate_group_chat')->result_array();
+        return array_column($arr,'media');
+    }
 }
 
 ?>

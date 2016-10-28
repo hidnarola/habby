@@ -153,6 +153,14 @@ class Soulmate extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['soulmate'] = $this->Soulmate_model->get_soulmate_group_by_id($Id);
         $this->data['messages'] = $this->Soulmate_model->get_messages($Id, $limit);
+        $this->data['recent_images'] = $this->Soulmate_model->get_recent_images($Id,$image_limit = 6);
+        $this->data['recent_videos'] = $this->Soulmate_model->get_recent_videos($Id,$image_limit = 6);
+        $this->data['recent_videos_thumb'] = array();
+        foreach ($this->data['recent_videos'] as $video) {
+            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+        }
+//        pr($this->data['recent_images']);
+//        pr($this->data['recent_videos'],1);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/soulmate/join_soulmate', $this->data);
     }

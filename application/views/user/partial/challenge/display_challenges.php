@@ -4,7 +4,7 @@ if ($Challenges != "" && !empty($Challenges)) {
 //                            pr($Challenge);
         ?>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-            <div class="challenge_sec ">
+            <div class="challenge_sec" data-challenge_id="<?php echo $Challenge['id']; ?>">
                 <!-- Challenge header section start here -->
                 <div class="challenge_cont_sec row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
@@ -21,9 +21,9 @@ if ($Challenges != "" && !empty($Challenges)) {
                 <div class="challenge_cont_sec2 row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                         <div id="field">
-                            <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
-                            <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field" />
-                            <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
+                            <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 1)?'challeng_arrow_ranked.png': "challeng_arrow.png";?>"></button>
+                            <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>"  class="field rank_rate" />
+                            <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Challenge['is_ranked']  && $Challenge['given_rank'] == 0)?'challeng_arrow_ranked.png': "challeng_arrow.png";?>"></button>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
@@ -39,7 +39,7 @@ if ($Challenges != "" && !empty($Challenges)) {
                 <div class="challenge_cont_sec3 row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="list-inline chlng_ul2">
-                            <li><span>Rewards</span></li>
+                            <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH."coin_icon.png" ?>"/><?php echo $Challenge['rewards'] ?></span></li>
                             <li class="winner winner_btn" id="winner<?php echo $Challenge['id']; ?>" data-id="<?php echo $Challenge['id']; ?>">
                                 <a class="pstbtn">Winners</a>
                             </li>

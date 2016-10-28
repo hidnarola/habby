@@ -55,9 +55,9 @@
                                     <div class="challenge_cont_sec2 row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Challenge['is_ranked']  && $Challenge['given_rank'] == 1)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0)?'challeng_arrow_ranked.png': "challeng_arrow.png";?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
@@ -73,7 +73,7 @@
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span>Rewards</span></li>
+                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH."coin_icon.png" ?>"/><?php echo $Challenge['rewards'] ?></span></li>
                                                 <li class="winner winner_btn" id="winner<?php echo $Challenge['id']; ?>" data-id="<?php echo $Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
@@ -292,6 +292,8 @@
 </div>
 <!-- Soulmate new group form popup end here -->
 <script type="text/javascript">
+    DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
+    
     $('#groupplan1post').on('show.bs.modal', function (e) {
 
         //get data-id attribute of the clicked element
@@ -417,7 +419,6 @@
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
-                console.log(data);
                 if (data.status == 0)
                 {
                     load = false;

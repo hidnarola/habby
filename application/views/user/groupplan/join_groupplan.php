@@ -6,126 +6,129 @@
         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 soulmate_2left_sec">
             <!-- Soulmate past Due section start here -->
             <div class="soulmate_past_due_sec ">
-
-                <div class="row soulmate_past_due_sec2">
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 soulmate2_hdgsec">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <p class="due_para"><?php echo lang('Past Due'); ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="slmat2date_sec grp2date_sec">
-
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <p class="slmt_dat_p grp_dat_p"><?php echo lang('Date'); ?>:</p>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-
-                                    <div class="row grp_pln2_rvw">
-                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                            <p class="grpl_plntxt"><?php echo lang('Plan'); ?></p>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                            <p class="rvw_pbtn"><a href="#" data-toggle="modal" data-target="#review_popup_grppg"><?php echo lang('Review'); ?></a></p>
+                <!--                
+                                <div class="row soulmate_past_due_sec2">
+                
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 soulmate2_hdgsec">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                                                <p class="due_para">Past Due</p>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="row grp_pln2_rvw">
-                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                            <p class="grpl_plntxt"><?php echo lang('Plan'); ?></p>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                            <p class="rvw_pbtn"><a href="#" data-toggle="modal" data-target="#review_popup_grppg"><?php echo lang('Review'); ?></a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="row soulmate_past_due_sec2">
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 soulmate2_hdgsec">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <p class="due_para"><?php echo lang('Coming up'); ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="slmat2date_sec grp2date_sec">
-
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <p class="slmt_dat_p grp_dat_p"><?php echo lang('Date'); ?>:</p>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-
-                                    <div class="row grp_pln2_rvw">
-                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                                            <p class="grpl_plntxt"><?php echo lang('Plan'); ?></p>
-                                            <p class="descriptn grp_dercp">
-                                                Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text 
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <p class="rvw_pbtn grp_edtbtn"><a href="#" data-toggle="modal" data-target="#edit_popup_grppg"><?php echo lang('Edit'); ?></a></p>
+                
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="slmat2date_sec grp2date_sec">
+                
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                    <p class="slmt_dat_p grp_dat_p">Date:</p>
+                                                </div>
+                                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                
+                                                    <div class="row grp_pln2_rvw">
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                            <p class="grpl_plntxt">Plan</p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                            <p class="rvw_pbtn"><a href="#" data-toggle="modal" data-target="#review_popup_grppg">Review</a></p>
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="row grp_pln2_rvw">
+                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                            <p class="grpl_plntxt">Plan</p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                            <p class="rvw_pbtn"><a href="#" data-toggle="modal" data-target="#review_popup_grppg">Review</a></p>
+                                                        </div>
+                                                    </div>
+                
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
+                
                                 </div>
-                            </div>
-                        </div>
-                        <div class="slmat2date_sec grp2date_sec">
-
-                            <div class="row">
-                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                    <p class="slmt_dat_p grp_dat_p"><?php echo lang('Date'); ?>:</p>
-                                </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-
-                                    <div class="row grp_pln2_rvw">
-                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                                            <p class="grpl_plntxt"><?php echo lang('Plan'); ?></p>
-                                            <p class="descriptn grp_dercp">
-                                                Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text 
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                            <p class="rvw_pbtn grp_edtbtn"><a href="#" data-toggle="modal" data-target="#edit_popup_grppg"><?php echo lang('Edit'); ?></a></p>
+                
+                
+                                <div class="row soulmate_past_due_sec2">
+                
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 soulmate2_hdgsec">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <p class="due_para">Coming up</p>
+                                            </div>
                                         </div>
                                     </div>
-
+                
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="slmat2date_sec grp2date_sec">
+                
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                    <p class="slmt_dat_p grp_dat_p">Date:</p>
+                                                </div>
+                                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                
+                                                    <div class="row grp_pln2_rvw">
+                                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                            <p class="grpl_plntxt">Plan</p>
+                                                            <p class="descriptn grp_dercp">
+                                                                Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text 
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <p class="rvw_pbtn grp_edtbtn"><a href="#" data-toggle="modal" data-target="#edit_popup_grppg">Edit</a></p>
+                                                        </div>
+                                                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slmat2date_sec grp2date_sec">
+                
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                    <p class="slmt_dat_p grp_dat_p">Date:</p>
+                                                </div>
+                                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                
+                                                    <div class="row grp_pln2_rvw">
+                                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                            <p class="grpl_plntxt">Plan</p>
+                                                            <p class="descriptn grp_dercp">
+                                                                Lorem Ipsum is simply dummy text Lorem Ipsum is simply dummy text 
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                            <p class="rvw_pbtn grp_edtbtn"><a href="#" data-toggle="modal" data-target="#edit_popup_grppg">Edit</a></p>
+                                                        </div>
+                                                    </div>
+                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                -->
                 <div class="row soulmate_past_due_sec2">
 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 soulmate2_hdgsec">
                         <div class="row">
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                <p class="due_para"><?php echo lang('Upload files'); ?></p>
+                                <p class="due_para">Upload</p>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                 <p class="due_para text-right">
-                                <div class="upld_sec upld_sec2">
-                                    <div class="fileUpload up_img btn">
-                                        <span>+</span>
-                                        <input type="file" class="upload">
-                                    </div>
-                                </div>
+                                    <a href="javascript:;">More</a>
+                                    <!--                                <div class="upld_sec upld_sec2">
+                                                                        <div class="fileUpload up_img btn">
+                                                                            <span>+</span>
+                                                                            <input type="file" class="upload">
+                                                                        </div>
+                                                                    </div>-->
                                 </p>
 
                             </div>
@@ -135,54 +138,66 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                         <div class="upld_img_sec">
-                            <div class="row riles_sec">
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                    <p class="slmt_dat_p"><?php echo lang('Rules'); ?></p>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <p class="fls_btn"><a href="#"><?php echo lang('Files'); ?></a></p>
-                                </div>
-                            </div>
+                            <!--                            <div class="row riles_sec">
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                                <p class="slmt_dat_p">Rules</p>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                                <p class="fls_btn"><a href="#">Files</a></p>
+                                                            </div>
+                                                        </div>-->
                             <div class="row cmg_uprw">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <p class="slmt_dat_p"><?php echo lang('Videos'); ?></p>
+                                    <p class="slmt_dat_p">Videos</p>
 
-                                    <ul class="photo_vdo_ul photo_vdo_ulslmt clearfix">
-                                        <li>
-                                            <a class="fancybox" href="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img1.jpg" data-fancybox-group="gallery1">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img1.jpg" class="img-responsive">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="fancybox" href="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img2.jpg" data-fancybox-group="gallery1">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img2.jpg" class="img-responsive">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="fancybox" href="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img3.jpg" data-fancybox-group="gallery1">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img3.jpg" class="img-responsive">
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <p class="slmt_dat_p"><?php echo lang('Images'); ?></p>
+                                    <?php
+                                    if (count($recent_videos_thumb) > 0) {
+                                        ?>
+                                        <ul class="photo_vdo_ul photo_vdo_ulslmt clearfix">
+                                            <?php
+                                            foreach ($recent_videos_thumb as $key => $image) {
+                                                ?>
+                                                <li>
+                                                    <a class="fancybox" target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key]; ?>" data-fancybox-group="gallery1">
+                                                        <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
+                                                    </a>
+                                                </li>
+                                                <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <div class="alert no-media">No videos uploaded</div>
+                                        <?php
+                                    }
+                                    ?>
+                                    <p class="slmt_dat_p">Images</p>
 
-                                    <ul class="photo_vdo_ul photo_vdo_ulslmt clearfix">
-                                        <li>
-                                            <a class="fancybox" href="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img1.jpg" data-fancybox-group="gallery1">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img1.jpg" class="img-responsive">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="fancybox" href="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img2.jpg" data-fancybox-group="gallery1">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img2.jpg" class="img-responsive">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="fancybox" href="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img3.jpg" data-fancybox-group="gallery1">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>topi_chat_img3.jpg" class="img-responsive">
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <?php
+                                    if (count($recent_images) > 0) {
+                                        ?>
+                                        <ul class="photo_vdo_ul photo_vdo_ulslmt clearfix">
+                                            <?php
+                                            foreach ($recent_images as $image) {
+                                                ?>
+                                                <li class="">
+                                                    <a class="fancybox"  href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
+                                                        <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
+                                                    </a>
+                                                </li>
+                                                <?php
+                                            }
+                                            ?>
+                                        </ul>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <div class="alert no-media">No Images uploaded</div>
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -190,9 +205,7 @@
 
                 </div>
             </div>
-
             <!-- Soulmate past Due section end here -->
-
         </div>
         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 soulmate_2right_sec">
             <div class="soulmate_2right_secinr">

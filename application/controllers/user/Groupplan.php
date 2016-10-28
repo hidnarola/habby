@@ -205,6 +205,12 @@ class Groupplan extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['groupplan'] = $this->Groupplan_model->get_groupplan_by_id($Id);
         $this->data['groupplan_users'] = $this->Groupplan_model->get_groupplan_users($Id);
+        $this->data['recent_images'] = $this->Groupplan_model->get_recent_images($Id, $image_limit = 6);
+        $this->data['recent_videos'] = $this->Groupplan_model->get_recent_videos($Id, $image_limit = 6);
+        $this->data['recent_videos_thumb'] = array();
+        foreach ($this->data['recent_videos'] as $video) {
+            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+        }
         $this->data['messages'] = $this->Groupplan_model->get_messages($Id, $limit);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/groupplan/join_groupplan', $this->data);

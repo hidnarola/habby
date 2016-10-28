@@ -93,7 +93,6 @@ $(function () {
     // Add rank for challenge
     $(".challenge_container").on("click",".add",function(){
         var t = $(this);
-        console.log(t);
         var challenge_id = t.parents('.challenge_sec').data('challenge_id');
         c = $('body').find("[data-challenge_id='"+challenge_id+"']");
         $.ajax({

@@ -13,16 +13,23 @@
                                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                                     <div class="pfl_imgsec" style="height: 140px;max-width: 216px;">
                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image']; ?>" class="img-responsive center-block user_image" style="height: 100%;max-width: 100%;">
-                                        <div class="pfl_imgsec_innr">
-                                            <div class="upld_sec">
-                                                <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() . "home/profile_upload" ?>" id="upload_user_image">
-                                                    <div class="fileUpload up_img btn">
-                                                        <span><i class="fa fa-camera" aria-hidden="true"></i> <?php echo lang('UPLOAD PROFILE PICTURE'); ?></span>
-                                                        <input type="file" class="upload" name="user_image">
+                                        <?php 
+                                            if($user_data['id'] == $this->session->user['id'])
+                                            {
+                                                ?>
+                                                <div class="pfl_imgsec_innr">
+                                                    <div class="upld_sec">
+                                                        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() . "home/profile_upload" ?>" id="upload_user_image">
+                                                            <div class="fileUpload up_img btn">
+                                                                <span><i class="fa fa-camera" aria-hidden="true"></i> <?php echo lang('UPLOAD PROFILE PICTURE'); ?></span>
+                                                                <input type="file" class="upload" name="user_image">
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                </form>
-                                            </div>
-                                        </div>	
+                                                </div>
+                                                <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
@@ -32,7 +39,14 @@
                                         <p><?php echo lang('Country'); ?> : <?php echo get_country_name($user_data['country']) ?></p>
                                         <p><?php echo lang('Self-introduction'); ?> : <?php echo $user_data['bio'] ?></p>	
                                         <p><?php echo lang('Interest/Hobby'); ?> : <?php echo $user_data['hobby'] ?></p>
-                                        <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn">Edit Profile</a></p>
+                                        <?php 
+                                            if($user_data['id'] == $this->session->user['id'])
+                                            {
+                                                ?>
+                                                <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn">Edit Profile</a></p>
+                                                <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -84,12 +98,30 @@
     <div class="container personal_cntner sub_menusec">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad_lft_rit0">
             <ul class="list-inline submenu_ul">
-                <li><a href="<?php echo base_url() . "home/profile" ?>"><?php echo lang('IP'); ?></a></li>
-                <li><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
-                <li><a href="<?php echo base_url() . "home/soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
-                <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>
-                <li><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
-                <li><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>
+                <?php 
+                    if($user_data['id'] == $this->session->user['id'])
+                    {
+                        ?>
+                            <li><a href="<?php echo base_url() . "home/profile" ?>"><?php echo lang('IP'); ?></a></li>
+                            <li><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
+                            <li><a href="<?php echo base_url() . "home/soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
+                            <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>
+                            <li><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
+                            <li><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <li><a href="<?php echo base_url() . "user_profile/".$user_data['id']; ?>"><?php echo lang('IP'); ?></a></li>
+                        <li><a href="<?php echo base_url() . "user_profile/topichat".$user_data['id']; ?>"><?php echo lang('Topichat'); ?></a></li>
+                        <li><a href="<?php echo base_url() . "user_profile/soulmate".$user_data['id']; ?>"><?php echo lang('Soulmate'); ?></a></li>
+                        <li><a href="<?php echo base_url() . "user_profile/groupplan".$user_data['id']; ?>"><?php echo lang('Group Plan'); ?></a></li>
+                        <li><a href="<?php echo base_url() . "user_profile/challenges".$user_data['id']; ?>"><?php echo lang('Challenge'); ?></a></li>
+                        <li><a href="<?php echo base_url() . "user_profile/league".$user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>
+                        <?php
+                    }
+                ?>
             </ul>
         </div>
     </div>
