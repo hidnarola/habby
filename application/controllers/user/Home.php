@@ -9,6 +9,7 @@ class Home extends CI_Controller {
     /*
      * constructor loads required data including banner image
      */
+
     public function __construct() {
         parent::__construct();
         $this->load->model(array('Users_model', 'Post_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model'));
@@ -102,7 +103,7 @@ class Home extends CI_Controller {
                             $config['allowed_types'] = 'gif|jpg|png';
                             $config['max_size'] = 1000000;
                             $config['file_name'] = md5(uniqid(mt_rand()));
-                            
+
                             $this->upload->initialize($config);
 
                             if (!$this->upload->do_upload('userFile')) {
@@ -132,7 +133,7 @@ class Home extends CI_Controller {
                             $config['allowed_types'] = 'mp4|mov|3gp';
                             $config['max_size'] = 4000000;
                             $config['file_name'] = md5(uniqid(mt_rand()));
-                            
+
                             $this->upload->initialize($config);
 
                             if (!$this->upload->do_upload('userFile')) {
@@ -199,14 +200,14 @@ class Home extends CI_Controller {
             }
         } else {
             $user_id = $this->session->user['id']; // Change with the user_id for which you are displaying post
-            
+            $this->data['user_id'] = $user_id;
             $this->data['all_countries'] = $this->Users_model->get_all_countries();
-            $this->data['posts'] = $this->Post_model->users_post($user_id,$this->session->user['id'], 0, 3);
-            $this->data['saved_posts'] = $this->Post_model->saved_post($user_id,$this->session->user['id'], 0, 3);
+            $this->data['posts'] = $this->Post_model->users_post($user_id, $this->session->user['id'], 0, 3);
+            $this->data['saved_posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], 0, 3);
             $this->template->load('front', 'user/profile', $this->data);
         }
     }
-    
+
     /*
      * load_user_post is used to display user's post with pagination
      * @param $user_id      int     specify user_id for which post will fetch
@@ -215,13 +216,13 @@ class Home extends CI_Controller {
      * echo     JSON    to display post on profile page
      * developed by : ar
      */
-    public function load_user_post($user_id,$page)
-    {
+
+    public function load_user_post($user_id, $page) {
         $limit = 3;
         $start = ($page - 1) * $limit;
-        $this->data['posts'] = $this->Post_model->users_post($user_id,$this->session->user['id'], $start, $limit);
+        $this->data['posts'] = $this->Post_model->users_post($user_id, $this->session->user['id'], $start, $limit);
         if (count($this->data['posts']) > 0) {
-            $data['view'] = $this->load->view('user/partial/profile/load_user_post',$this->data,true);
+            $data['view'] = $this->load->view('user/partial/profile/load_user_post', $this->data, true);
             $data['status'] = 1;
         } else {
             $data['status'] = 0;
@@ -237,20 +238,20 @@ class Home extends CI_Controller {
      * echo     JSON    to display post on profile page
      * developed by : ar
      */
-    public function load_user_savepost($user_id,$page)
-    {
+
+    public function load_user_savepost($user_id, $page) {
         $limit = 3;
         $start = ($page - 1) * $limit;
-        $this->data['posts'] = $this->Post_model->saved_post($user_id,$this->session->user['id'], $start, $limit);
+        $this->data['posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], $start, $limit);
         if (count($this->data['posts']) > 0) {
-            $data['view'] = $this->load->view('user/partial/profile/load_user_post',$this->data,true);
+            $data['view'] = $this->load->view('user/partial/profile/load_user_post', $this->data, true);
             $data['status'] = 1;
         } else {
             $data['status'] = 0;
         }
         echo json_encode($data);
     }
-    
+
     /**
      * This function is used to image upload.
      * develop by : HPA
@@ -353,6 +354,14 @@ class Home extends CI_Controller {
         $this->data['my_leagues'] = $this->League_model->get_my_league();
         $this->data['joined_leagues'] = $this->League_model->get_joined_league();
         $this->template->load('front', 'user/league/home_league', $this->data);
+    }
+
+    public function user_profile($user_id) {
+        $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['posts'] = $this->Post_model->users_post($user_id, $this->session->user['id'], 0, 3);
+        $this->data['saved_posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], 0, 3);
+        $this->template->load('front', 'user/profile', $this->data);
     }
 
 }

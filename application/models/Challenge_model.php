@@ -45,9 +45,10 @@ class Challenge_model extends CI_Model {
 
     public function get_challenges($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied');
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank');
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
+        $this->db->join('challange_rank cr','cr.challange_id = ch.id and cr.user_id = '.$user_id,'left');
         // $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
@@ -63,9 +64,10 @@ class Challenge_model extends CI_Model {
 
     public function get_popular_challenges($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied');
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank');
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
+        $this->db->join('challange_rank cr','cr.challange_id = ch.id and cr.user_id = '.$user_id,'left');
         //$this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.average_rank', 'DESC');
