@@ -7,7 +7,7 @@
     <div class="breadcrumb-line">
         <ul class="breadcrumb">
             <li><a href="<?php echo site_url('admin/home'); ?>"><i class="icon-home2 position-left"></i> Home</a></li>
-            <li><a href="<?php echo site_url('admin/posts'); ?>"><i class="icon-magazine position-left"></i> Posts</a></li>
+            <li><a href="<?php echo site_url('admin/league'); ?>"><i class="icon-magazine position-left"></i> Leagues Groups</a></li>
             <li class="active"><?php echo $heading; ?></li>
         </ul>
     </div>
@@ -54,82 +54,96 @@ if ($this->session->flashdata('success')) {
                     <div class="panel-body">
                         <div class="message alert alert-danger" style="display:none"></div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Post Description <span class="text-danger">*</span> </label>
+                            <label class="col-lg-3 control-label">League Name <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <textarea id="description" name="description" placeholder="Enter Description" class="form-control"><?php echo (isset($post_datas['description'])) ? $post_datas['description'] : set_value('description'); ?></textarea>
+                                <textarea id="description" name="name" placeholder="Enter Name" class="form-control"><?php echo (isset($Leagues['name'])) ? $Leagues['name'] : set_value('name'); ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">League Introduction <span class="text-danger">*</span> </label>
+                            <div class="col-lg-7">
+                                <textarea id="description" name="introduction" placeholder="Enter Introduction" class="form-control"><?php echo (isset($Leagues['introduction'])) ? $Leagues['introduction'] : set_value('introduction'); ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Group user limit <span class="text-danger">*</span></label>
+                            <div class="col-lg-7">
+                                <input type="text" id="user_limit" name="user_limit" placeholder="Enter Group user Limit" class="form-control" value="<?php echo (isset($Leagues['user_limit'])) ? $Leagues['user_limit'] : set_value('user_limit'); ?>">
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Requirements <span class="text-danger">*</span> </label>
+                            <div class="col-lg-7">
+                                <textarea id="description" name="requirements" placeholder="Enter Requirements" class="form-control"><?php echo (isset($Leagues['requirements'])) ? $Leagues['requirements'] : set_value('requirements'); ?></textarea>
                             </div>
                         </div>
                         <div class="form-group form-group-material">
-                            <label class="display-block control-label has-margin animate is-visible col-lg-3">Post Images</label>
+                            <label class="display-block control-label has-margin animate is-visible col-lg-3">League Logo</label>
                             <div class="col-lg-7">
                                 <div class="uploader">
-                                    <input type="file" name="uploadfile[]" id="uploadFile" multiple="multiple" class="file-styled">
+                                    <input type="file" name="league_logo" id="uploadLogo" class="file-styled">
+                                    <span class="filename" style="-webkit-user-select: none;"></span>
+                                    <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Logo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-material">
+                            <label class="display-block control-label has-margin animate is-visible col-lg-3">League Image</label>
+                            <div class="col-lg-7">
+                                <div class="uploader">
+                                    <input type="file" name="league_image" id="uploadFile" class="file-styled">
                                     <span class="filename" style="-webkit-user-select: none;"></span>
                                     <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Images</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group form-group-material">
-                            <label class="display-block control-label has-margin animate is-visible col-lg-3">Post Videos</label>
-                            <div class="col-lg-7">
-                                <div class="uploader">
-                                    <input type="file" name="videofile[]" id="uploadVideo" multiple="multiple" class="file-styled">
-                                    <span class="filename" style="-webkit-user-select: none;"></span>
-                                    <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Videos</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <?php
+                        <div class="col-lg-12 col-sm-12 league_images">
+                            <?php
 //                        pr($post_datas['media']);
-                        if (isset($post_datas['media']) && !empty($post_datas['media'])) {
-                            ?>
-                            <div class="col-lg-12 col-sm-12">
-                                <div class="thumbnail">
-                                    <div class="thumb">
-                                        <img src="http://habby/uploads/user_post/151230075154.jpg" alt="">
-                                        <div class="caption-overflow">
-                                            <span>
-                                                <a href="assets/images/placeholder.jpg" data-popup="lightbox" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
-                                                <a href="#" class="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i class="icon-link2"></i></a>
-                                            </span>
+                            if (isset($Leagues['league_logo']) && !empty($Leagues['league_logo'])) {
+                                ?>
+                                <div class="league_inner">
+                                    <h6> League Logo</h6>
+                                    <div class="thumbnail">
+                                        <div class="thumb">
+                                            <div class="thumb-inner">
+                                                <img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $Leagues['league_logo']; ?>" alt="">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="thumb">
-                                        <?php
-                                        foreach ($post_datas['media'] as $post_media) {
-                                            if ($post_media['media_type'] == 'image') {
-                                                ?>
-                                                <div class="thumb-inner">
-                                                    <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>" alt="">
-
-                                                </div>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <div class="thumb-inner">
-                                                    <video controls class="img-responsive center-block">
-                                                        <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
-                                                    </video>
-                                                </div>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                            <?php
+//                        pr($post_datas['media']);
+                            if (isset($Leagues['league_image']) && !empty($Leagues['league_image'])) {
+                                ?>
+                                <div league_inner>
+                                    <h6> League Image</h6>
+                                    <div class="thumbnail">
+                                        <div class="thumb">
+                                            <div class="thumb-inner">
+                                                <img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $Leagues['league_image']; ?>" alt="">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 league_images">
+                            <div class="logo_wrapper" style="display:none">
+                                <h6> League New Logo</h6>
                             </div>
-                            <?php
-                        }
-                        ?>
-                        <div class="image_wrapper" style="display:none">
+                            <div class="image_wrapper" style="display:none">
 
+                            </div>
                         </div>
-                        <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
-                        </div>
-                        <div class="text-right">
-                            <button class="btn btn-success" type="submit">Save <i class="icon-arrow-right14 position-right"></i></button>
-                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-success" type="submit">Save <i class="icon-arrow-right14 position-right"></i></button>
                     </div>
                 </div>
             </form>
@@ -178,16 +192,13 @@ if ($this->session->flashdata('success')) {
         var i = 0;
         for (var key in files) {
             if (/^image/.test(files[key].type)) { // only image file
-                console.log(files);
-                console.log(key);
-                console.log(files[key].type);
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
                 reader.onloadend = function () { // set image data as background of div
                     // $('#imagePreview').addClass('imagePreview');
                     $('.image_wrapper').show();
                     $('.message').hide();
-                    $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                    $('.image_wrapper').append("<h6> League New Image</h6><div class='imagePreview" + i + "' id='imagePreview'></div>");
                     $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                     ++i;
                 }
@@ -200,9 +211,9 @@ if ($this->session->flashdata('success')) {
     });
 
     // Video uploading script
-    $('#uploadVideo').on("change", function () {
+    $('#uploadLogo').on("change", function () {
         $('.message').html();
-        $('.video_wrapper').html('');
+        $('.logo_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
             $('.message').html("No file selected.");
@@ -213,23 +224,30 @@ if ($this->session->flashdata('success')) {
         var i = 0;
         for (var key in files)
         {
-            if (/^video/.test(files[key].type)) { // only image file
+            if (/^image/.test(files[key].type)) { // only image file
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
 
                 reader.onloadend = function () { // set image data as background of div
                     // $('#imagePreview').addClass('imagePreview');
-                    $('.video_wrapper').show();
+                    $('.logo_wrapper').show();
                     $('.message').hide();
-                    $('.video_wrapper').append("<img class='videoPreview" + i + "' id='imagePreview' src='" + $('.video_wrapper').data('default_image') + "'/>");
-                    //                    $('.videoPreview'+i).css("background-image", ;
+                    $('.logo_wrapper').append("<h6> League New Logo</h6><div class='logPreview" + i + "' id='logPreview'></div>");
+                    $('.logPreview' + i).css("background-image", "url(" + this.result + ")");
                     ++i;
                 }
             } else
             {
-                $('.message').html("Please select proper image");
+                $('.message').html("Please select proper image Logo");
                 $('.message').show();
             }
         }
+    });
+
+    $('input:radio[name="person_limit"]').change(function () {
+        if ($(this).is(":checked") && $(this).val() == 'Yes')
+            $("#txt_No_of_person").removeAttr("disabled");
+        else
+            $("#txt_No_of_person").attr("disabled", "disabled");
     });
 </script>

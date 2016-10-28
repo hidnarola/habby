@@ -120,10 +120,10 @@ if (!empty($user_data['user_image'])) {
                                     </li>
                                     <li class="<?php echo ($controller == 'challenge') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/challenge'; ?>"><i class="icon-users4"></i> <span>Challenges</span></a>
-                                    </li><!--
-                                    <li class="<?php echo ($controller == 'users') ? 'active' : ''; ?>">
-                                        <a href="<?php echo base_url() . 'admin/users'; ?>"><i class="icon-users4"></i> <span>League and Alliance</span></a>
                                     </li>
+                                    <li class="<?php echo ($controller == 'league') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/league'; ?>"><i class="icon-users4"></i> <span>League and Alliance</span></a>
+                                    </li><!--
                                     <li class="<?php echo ($controller == 'header_footer_control') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/header_footer_control'; ?>"><i class="icon-stack2"></i> <span>Header/Footer Setting</span></a>-->
                                     </li>
