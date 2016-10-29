@@ -18,7 +18,7 @@
                             ?>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topi_prsnl">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 topi_prsnl">
-                                    <img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $my_league['league_logo']; ?>" class="img-responsive center-block">	
+                                    <img src="<?php echo DEFAULT_LEAGUE_IMAGE_PATH . $my_league['league_logo']; ?>" class="img-responsive center-block">
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 league_prsnl">
                                     <p><?php echo $my_league['name']; ?></p>
