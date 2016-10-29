@@ -107,6 +107,7 @@ defined('DEFAULT_JS_PATH') OR define('DEFAULT_JS_PATH', Asset_path . 'public/fro
 defined('DEFAULT_CSS_PATH') OR define('DEFAULT_CSS_PATH', Asset_path . 'public/front/css/'); // highest automatically-assigned error code
 defined('DEFAULT_EMOGI_PATH') OR define('DEFAULT_EMOGI_PATH', Asset_path . 'public/front/includes/emoticons/'); // highest automatically-assigned error code
 defined('DEFAULT_CHAT_DOC_PATH') OR define('DEFAULT_CHAT_DOC_PATH', Asset_path . 'public/chat/'); // highest automatically-assigned error code
+defined('DEFAULT_CHAT_MEDIA_PATH') OR define('DEFAULT_CHAT_MEDIA_PATH', Asset_path . 'uploads/chat_media/'); // highest automatically-assigned error code
 defined('USER_JS') or define('USER_JS', Asset_path . 'public/front/includes/');
 
 

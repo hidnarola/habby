@@ -111,6 +111,26 @@ class Admin_topichat_model extends CI_Model {
         }
     }
 
+    public function get_messages($group_id, $limit = null) {
+        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->group_by('tg.id');
+        $res_data = $this->db->get('topic_group_chat tg')->result_array();
+        return $res_data;
+    }
+
+    public function load_messages($group_id, $limit, $last_msg_id) {
+        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->where('tg.id < ', $last_msg_id);
+        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('tg.id', 'desc');
+        return $this->db->get('topic_group_chat tg')->result_array();
+    }
+
 }
 
 ?>
