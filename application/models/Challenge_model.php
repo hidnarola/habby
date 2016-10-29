@@ -95,8 +95,7 @@ class Challenge_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_my_challenge() {
-        $user_id = logged_in_user_id();
+    public function get_my_challenge($user_id) {
         $this->db->select('ch.*');
         $this->db->where('ch.user_id =' . $user_id);
         $this->db->where('ch.is_finished', 0);
@@ -109,8 +108,7 @@ class Challenge_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_joined_challenge() {
-        $user_id = logged_in_user_id();
+    public function get_joined_challenge($user_id) {
         $this->db->select('ch.*');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND ch.user_id != cu.user_id');
         $this->db->where('ch.is_finished', 0);
@@ -123,8 +121,7 @@ class Challenge_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_challenge_accepted() {
-        $user_id = logged_in_user_id();
+    public function get_challenge_accepted($user_id) {
         $this->db->select('cu.*,users.name as display_name,ch.name');
         $this->db->join('users', 'users.id = cu.user_id');
         $this->db->join('challanges ch', 'cu.challange_id = ch.id AND ch.user_id =' . $user_id);

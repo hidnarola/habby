@@ -27,8 +27,16 @@
                                     <p><?php echo $my_league['introduction']; ?></p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 league_prsnl">
-
-                                    <p class="enter_btn"><a href="<?php echo base_url() . "league/details/" . urlencode(base64_encode($my_league['id'])) ?>"><?php echo lang("Enter in League"); ?></a></p>
+                                    <p class="enter_btn">
+                                        <?php
+                                            if ($user_data['id'] == $this->session->user['id'])
+                                            {
+                                                ?>
+                                                <a href="<?php echo base_url() . "league/details/" . urlencode(base64_encode($my_league['id'])) ?>"><?php echo lang("Enter in League"); ?></a>
+                                                <?php
+                                            }
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                             <hr/>
@@ -58,8 +66,16 @@
                                     <p><?php echo $joined_league['introduction']; ?></p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 league_prsnl">
-
-                                    <p class="enter_btn"><a href="<?php echo base_url() . "league/details/" . urlencode(base64_encode($joined_league['id'])) ?>"><?php echo lang("Enter in League"); ?></a></p>
+                                    <p class="enter_btn">
+                                        <?php
+                                            if ($user_data['id'] == $this->session->user['id'])
+                                            {
+                                                ?>
+                                                <a href="<?php echo base_url() . "league/details/" . urlencode(base64_encode($joined_league['id'])) ?>"><?php echo lang("Enter in League"); ?></a>
+                                                <?php
+                                            }
+                                        ?>
+                                    </p>
                                 </div>
                             </div>
                             <hr/>

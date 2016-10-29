@@ -313,7 +313,7 @@ class Home extends CI_Controller {
         }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group($user_id);
-        $this->data['joined_topichats'] = $this->Topichat_model->get_joined_topichat_group();
+        $this->data['joined_topichats'] = $this->Topichat_model->get_joined_topichat_group($user_id);
         $this->template->load('front', 'user/topichat/home_topichat', $this->data);
     }
 
@@ -345,11 +345,19 @@ class Home extends CI_Controller {
      * This function is used to display Challenges details.
      * develop by : HPA
      */
-    public function challenges() {
+    public function challenges($user_id=0) {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->user['id'];
+        }
+        else
+        {
+            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
-        $this->data['my_challenges'] = $this->Challenge_model->get_my_challenge();
-        $this->data['joined_challenges'] = $this->Challenge_model->get_joined_challenge();
-        $this->data['challenge_accepted'] = $this->Challenge_model->get_challenge_accepted();
+        $this->data['my_challenges'] = $this->Challenge_model->get_my_challenge($user_id);
+        $this->data['joined_challenges'] = $this->Challenge_model->get_joined_challenge($user_id);
+        $this->data['challenge_accepted'] = $this->Challenge_model->get_challenge_accepted($user_id);
         $this->template->load('front', 'user/challenge/home_challenge', $this->data);
     }
 
@@ -357,10 +365,18 @@ class Home extends CI_Controller {
      * This function is used to display League groups details.
      * develop by : HPA
      */
-    public function league() {
+    public function league($user_id=0) {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->user['id'];
+        }
+        else
+        {
+            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
-        $this->data['my_leagues'] = $this->League_model->get_my_league();
-        $this->data['joined_leagues'] = $this->League_model->get_joined_league();
+        $this->data['my_leagues'] = $this->League_model->get_my_league($user_id);
+        $this->data['joined_leagues'] = $this->League_model->get_joined_league($user_id);
         $this->template->load('front', 'user/league/home_league', $this->data);
     }
 

@@ -5,7 +5,7 @@
             <h2><?php echo lang('Topichat');?></h2>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prsnl_sm_innrsec">
-            <div class="prfl_cvr_sec prfl_cvr_sec_dvdr prfl_cvr_sec_dvdr2">
+            <div class="prfl_cvr_sec <?php echo ($user_data['id'] == $this->session->user['id'])?' prfl_cvr_sec_dvdr prfl_cvr_sec_dvdr2':'' ?>">
                 <div class="row">
                     <?php
                         if($user_data['id'] == $this->session->user['id'])
@@ -32,7 +32,6 @@
                             <?php
                         }
                     ?>
-                    
                         <h2><?php echo lang('Group');?></h2>
                         <div class="row grp_3sec">
                             <h2 class="subgroup"><?php echo lang('My Groups');?></h2>
@@ -44,7 +43,16 @@
                                         <div class="grp_prsnl_innr">
                                             <h2><?php echo $my_topichat['topic_name'] ?></h2>
                                         </div>
-                                        <p class="enter_btn"><a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($my_topichat['id'])) ?>"><?php echo lang('Enter');?></a></p>
+                                        <p class="enter_btn">
+                                            <?php
+                                                if($user_data['id'] == $this->session->user['id'])
+                                                {
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($my_topichat['id'])) ?>"><?php echo lang('Enter');?></a>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </p>
                                     </div>
                                     <?php
                                 }
@@ -68,7 +76,16 @@
                                         <div class="grp_prsnl_innr">
                                             <h2><?php echo $joined_topichat['topic_name'] ?></h2>
                                         </div>
-                                        <p class="enter_btn"><a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($joined_topichat['id'])) ?>"><?php echo lang('Enter');?></a></p>
+                                        <p class="enter_btn">
+                                            <?php
+                                                if($user_data['id'] == $this->session->user['id'])
+                                                {
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($joined_topichat['id'])) ?>"><?php echo lang('Enter');?></a>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </p>
                                     </div>
                                     <?php
                                 }

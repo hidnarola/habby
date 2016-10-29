@@ -131,8 +131,7 @@ class Topichat_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_joined_topichat_group() {
-        $user_id = logged_in_user_id();
+    public function get_joined_topichat_group($user_id) {
         $this->db->select('tg.*');
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id . ' AND tg.user_id != tt.user_id', 'left');
         $this->db->join('users', 'users.id = tg.user_id');
