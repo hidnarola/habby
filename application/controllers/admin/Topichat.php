@@ -204,6 +204,7 @@ class Topichat extends CI_Controller {
         }
         $group_id = $this->uri->segment(4);
         $this->data['topichats'] = $this->Admin_topichat_model->get_topichat_result($group_id);
+        $this->data['messages'] = $this->Admin_topichat_model->get_messages($group_id, $limit = 20);
         $this->template->load('admin_main', 'admin/topichat/view', $this->data);
     }
 

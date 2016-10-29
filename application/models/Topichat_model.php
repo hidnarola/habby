@@ -73,7 +73,7 @@ class Topichat_model extends CI_Model {
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('topic_group tg')->result_array();
 //        echo $this->db->last_query();
-    //    pr($res_data,1);
+        //    pr($res_data,1);
         return $res_data;
     }
 
@@ -152,13 +152,13 @@ class Topichat_model extends CI_Model {
      * developed by : ar
      */
 
-    public function get_messages($group_id,$logged_in_user, $limit) {
+    public function get_messages($group_id, $logged_in_user, $limit = null) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->join('users u', 'tg.user_id = u.id');
-        $this->db->join('topic_group_chat_rank trp','tg.id = trp.topic_group_chat_id and trp.rank = 1','left');
-        $this->db->join('topic_group_chat_rank trn','tg.id = trn.topic_group_chat_id and trn.rank = 0','left');
-        $this->db->join('topic_group_chat_rank tru','tg.id = tru.topic_group_chat_id and tru.user_id = '.$logged_in_user,'left');
+        $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
+        $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
+        $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->limit($limit, 0);
         $this->db->order_by('tg.id', 'desc');
         $this->db->group_by('tg.id');
@@ -193,17 +193,17 @@ class Topichat_model extends CI_Model {
      * @return  array   one dimensional array having image names
      * developed by : ar
      */
-    public function get_recent_images($group_id,$limit)
-    {
+
+    public function get_recent_images($group_id, $limit) {
         $this->db->select('media');
-        $this->db->where('media_type','image');
-        $this->db->where('topic_group_id',$group_id);
+        $this->db->where('media_type', 'image');
+        $this->db->where('topic_group_id', $group_id);
         $this->db->limit($limit);
-        $this->db->order_by('created_date','desc');
+        $this->db->order_by('created_date', 'desc');
         $arr = $this->db->get('topic_group_chat')->result_array();
-        return array_column($arr,'media');
+        return array_column($arr, 'media');
     }
-    
+
     /*
      * get_recent_videos used to fetch recent videos from database related to particular group
      * @param   $group_id   int     specify group_id
@@ -212,28 +212,28 @@ class Topichat_model extends CI_Model {
      * @return  array   one dimensional array having video names
      * developed by : ar
      */
-    public function get_recent_videos($group_id,$limit)
-    {
+
+    public function get_recent_videos($group_id, $limit) {
         $this->db->select('media');
-        $this->db->where('media_type','video');
-        $this->db->where('topic_group_id',$group_id);
+        $this->db->where('media_type', 'video');
+        $this->db->where('topic_group_id', $group_id);
         $this->db->limit($limit);
-        $this->db->order_by('created_date','desc');
+        $this->db->order_by('created_date', 'desc');
         $arr = $this->db->get('topic_group_chat')->result_array();
-        return array_column($arr,'media');
+        return array_column($arr, 'media');
     }
-    
+
     /*
      * 
      */
-    public function user_rank_exist_for_chat($uid,$chat_id)
-    {
+
+    public function user_rank_exist_for_chat($uid, $chat_id) {
         $where['user_id'] = $uid;
         $where['topic_group_chat_id'] = $chat_id;
         $this->db->where($where);
         return $this->db->get('topic_group_chat_rank')->row_array();
     }
-    
+
     /*
      * update_chat_rank is used to update rank status to particular chat
      * @param $array array[] specify fields that going to insert
@@ -251,7 +251,7 @@ class Topichat_model extends CI_Model {
         }
         return false;
     }
-    
+
     /*
      * add_chat_rank is used to add rank to particular post
      * @param $array array[] specify fields that going to insert
@@ -260,26 +260,27 @@ class Topichat_model extends CI_Model {
      * 		false, if fail
      * developed by : ar
      */
+
     public function add_chat_rank($array) {
         if ($this->db->insert('topic_group_chat_rank', $array)) {
             return true;
         }
         return false;
     }
-    
+
     /*
      * 
      */
-    public function get_top_rank_media($group_id,$logged_in_user,$limit)
-    {
+
+    public function get_top_rank_media($group_id, $logged_in_user, $limit) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.media_type IS NOT NULL');
         $this->db->join('users u', 'tg.user_id = u.id');
 //        $this->db->join('topic_group_chat_rank tr','tg.id = tr.topic_group_chat_id');
-        $this->db->join('topic_group_chat_rank trp','tg.id = trp.topic_group_chat_id and trp.rank = 1','left');
-        $this->db->join('topic_group_chat_rank trn','tg.id = trn.topic_group_chat_id and trn.rank = 0','left');
-        $this->db->join('topic_group_chat_rank tru','tg.id = tru.topic_group_chat_id and tru.user_id = '.$logged_in_user,'left');
+        $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
+        $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
+        $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->limit($limit, 0);
         $this->db->order_by('(count(DISTINCT trp.id) - count(DISTINCT trn.id))', 'desc');
         $this->db->group_by('tg.id');
@@ -289,14 +290,14 @@ class Topichat_model extends CI_Model {
     /*
      * developed by : ar
      */
-    public function insert_topichat_group_modification($arr)
-    {
-        if($this->db->insert('topic_group_modify',$arr))
-        {
+
+    public function insert_topichat_group_modification($arr) {
+        if ($this->db->insert('topic_group_modify', $arr)) {
             return true;
         }
         return false;
     }
+
 }
 
 ?>

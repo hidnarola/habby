@@ -98,8 +98,114 @@ if ($this->session->flashdata('success')) {
                         }
                         ?>
                     </div>
+                    <?php if (isset($messages) && !empty($messages)) { ?>
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="tabbable">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="activity">
+                                            <!-- Timeline -->
+                                            <div class="col-lg-12 col-sm-12">
+                                                <div class="panel panel-flat timeline-content">
+                                                    <div class="panel-heading">
+                                                        <h6 class="panel-title">Group Conversation</h6>
+                                                    </div>
+
+                                                    <div class="panel-body chat_area2">
+                                                        <ul class="media-list chat-list ">
+                                                            <?php
+                                                            foreach ($messages as $message) {
+//                                                                pr($message);
+                                                                ?>
+
+                                                                <li class="media">
+                                                                    <div class="media-left">
+                                                                        <a title="<?php echo $message['name'] ?>">
+                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image'] ?>" class="img-circle" alt="">
+                                                                        </a>
+                                                                    </div>
+                                                                    <?php if ($message['message'] != null) { ?>
+                                                                        <div class="media-body">
+                                                                            <div class="media-content"><?php echo $message['message'] ?></div>
+                                                                        </div>
+                                                                        <?php
+                                                                    } else {
+                                                                        if ($message['media'] != null && $message['media_type'] == 'image') {
+                                                                            ?>
+                                                                            <div class="media-body" style='position: relative;height: 180px;'>
+                                                                                <img src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" alt="" style="display: block;max-width:100% !important;max-height: 100% !important;">
+                                                                            </div>
+                                                                            <?php
+                                                                        } else {
+                                                                            ?>
+                                                                            <div class="media-body">
+                                                                                <video controls="" src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" style="height:180px;"></video>
+                                                                            </div>
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+
+                                                                    <?php } ?>
+                                                                </li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /messages -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('document').ready(function () {
+//        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        $(".chat_area2").animate({scrollTop: $('.chat_area2').offset().bottom}, 1000);
+        var load = true;
+        var in_progress = false;
+        $('.chat_area2').scroll(function () {
+            if (load && !in_progress)
+            {
+                if ($('.chat_area2').scrollTop() == 0) {
+                    console.log("here");
+                    return false;
+                    loaddata();
+                    in_process = true;
+                }
+            }
+        });
+
+        function loaddata()
+        {
+            $.ajax({
+                url: base_url + 'topichat/load_more_msg/' + group_id,
+                method: 'post',
+                async: false,
+                data: 'last_msg=' + last_msg,
+                success: function (more) {
+                    more = JSON.parse(more);
+                    console.log(more);
+                    if (more.status)
+                    {
+                        $('.chat_area2').prepend(more.view);
+                        last_msg = more.last_msg_id;
+                        $(".chat_area2").animate({scrollTop: 200}, 500);
+                    } else
+                    {
+                        load = false;
+                        $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                        $(".chat_area2").animate({scrollTop: 0}, 500);
+                    }
+                    in_progress = false;
+                }
+            });
+        }
+    });
+</script>
