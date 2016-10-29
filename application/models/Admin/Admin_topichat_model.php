@@ -115,7 +115,7 @@ class Admin_topichat_model extends CI_Model {
         $this->db->select('tg.*,u.name,u.user_image');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->join('users u', 'tg.user_id = u.id');
-        $this->db->limit($limit, 0);
+//        $this->db->limit($limit, 0);
         $this->db->group_by('tg.id');
         $res_data = $this->db->get('topic_group_chat tg')->result_array();
         return $res_data;

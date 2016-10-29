@@ -167,15 +167,14 @@ if ($this->session->flashdata('success')) {
 <script type="text/javascript">
     $('document').ready(function () {
 //        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-        $(".chat_area2").animate({scrollTop: $('.chat_area2').offset().bottom}, 1000);
+//        $(".chat_area2").animate({scrollTop: $('.chat_area2').height()}, 1000);
+        $(".chat-list").animate({scrollTop: $('.chat-list').height()+10000}, 1000);
         var load = true;
         var in_progress = false;
         $('.chat_area2').scroll(function () {
             if (load && !in_progress)
             {
                 if ($('.chat_area2').scrollTop() == 0) {
-                    console.log("here");
-                    return false;
                     loaddata();
                     in_process = true;
                 }
