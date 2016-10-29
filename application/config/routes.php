@@ -87,6 +87,8 @@ $route['user/(:any)'] = "user/user/$1";
 $route['user/reset_password/(:any)'] = "user/user/reset_password/$1";
 $route['user/verify_email/(:any)'] = "user/user/verify_email/$1";
 $route['user_profile/topichat/(:any)'] = 'user/Home/topichat/$1';
+$route['user_profile/challenges/(:any)'] = 'user/Home/challenges/$1';
+$route['user_profile/league/(:any)'] = 'user/Home/league/$1';
 $route['user_profile/(:any)'] = "user/Home/user_profile/$1";
 
 $route['default_controller'] = 'login';

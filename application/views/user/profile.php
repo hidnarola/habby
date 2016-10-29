@@ -614,6 +614,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    user_id = '<?php echo $this->session->user['id']; ?>'; // change this id with the user_id for which post is going to display
+    user_id = '<?php echo $user_data['id']; ?>'; // change this id with the user_id for which post is going to display
 </script>
 <script type="text/javascript" src="<?php echo USER_JS; ?>post/profile_post.js"></script>

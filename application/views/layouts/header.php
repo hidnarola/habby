@@ -24,15 +24,15 @@ $language = $this->session->userdata('language');
             <div class="container my_nav">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 hidden-xs">
                     <?php
-                    if (isset($user_data) && !empty($user_data)) {
+                    if (isset($user_data) && !empty($this->session->user)) {
                         ?>
                         <ul class="list-inline hdr_ul1 home-list-inline">
                             <li><img src="<?php echo DEFAULT_IMAGE_PATH . "logo.png" ?>" class="img-responsive"></li>
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <span class="user-thumb-sm">
-                                        <img src="<?php echo ($user_data['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"></span>
-                                    <?php echo $user_data['name'] ?>
+                                        <img src="<?php echo ($this->session->user['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"></span>
+                                    <?php echo $this->session->user['name'] ?>
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">

@@ -71,8 +71,7 @@ class League_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_my_league() {
-        $user_id = logged_in_user_id();
+    public function get_my_league($user_id) {
         $this->db->select('l.*,u.name as created_user,u.user_image');
         $this->db->from('league l');
         $this->db->join('users u', 'l.user_id   = u.id');
@@ -86,8 +85,7 @@ class League_model extends CI_Model {
      * develop by : HPA
      */
 
-    public function get_joined_league() {
-        $user_id = logged_in_user_id();
+    public function get_joined_league($user_id) {
         $this->db->select('l.*,u.name as created_user,u.user_image');
         $this->db->from('league l');
         $this->db->join('users u', 'l.user_id = u.id');
