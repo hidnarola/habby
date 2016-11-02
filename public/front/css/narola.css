@@ -214,7 +214,14 @@
     top: 0;
     width: 100%;
     z-index: 2;
-    
+}
+
+.txt_white{ color:white;font-size:20px;}
+
+.event_user{
+    display:inline-block;
     
 }
 
+.event_profile_sec .usr_post_img {display:inline-block; background-color: whitesmoke;}
+.event_profile_sec .post_title {display:inline-block;}

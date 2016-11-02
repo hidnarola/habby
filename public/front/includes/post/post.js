@@ -91,24 +91,27 @@ $('document').ready(function () {
         var i = 0;
         for (var key in files)
         {
-            if (/^image/.test(files[key].type)) { // only image file
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[key]); // read the local file
-
-                reader.onloadend = function () { // set image data as background of div
-                    // $('#imagePreview').addClass('imagePreview');
-                    $('.image_wrapper').show();
-                    $('.message').hide();
-                    $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
-                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                    ++i;
-                }
-            }
-            else
+            if (key != "length" && key != "item")
             {
-                this.files = '';
-                $('.message').html("Please select proper image");
-                $('.message').show();
+                if (/^image/.test(files[key].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
+
+                    reader.onloadend = function () { // set image data as background of div
+                        // $('#imagePreview').addClass('imagePreview');
+                        $('.image_wrapper').show();
+                        $('.message').hide();
+                        $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                        $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                        ++i;
+                    }
+                }
+                else
+                {
+                    this.files = '';
+                    $('.message').html("Please select proper image");
+                    $('.message').show();
+                }
             }
         }
     });
@@ -141,7 +144,7 @@ $('document').ready(function () {
             }
             else
             {
-                $('.message').html("Please select proper image");
+                $('.message').html("Please select proper video");
                 $('.message').show();
             }
         }

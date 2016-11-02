@@ -82,6 +82,9 @@ $route["challenge"] = "user/challenge";
 $route["challenge/(:any)"] = "user/challenge/$1";
 $route["challenge/(:any)/(:any)"] = "user/challenge/$1/$2";
 
+$route["events"] = "user/events";
+$route["events/(:any)"] = "user/events/$1";
+
 $route['user/forgot_password'] = "user/user/forgot_password";
 $route['user/(:any)'] = "user/user/$1";
 $route['user/reset_password/(:any)'] = "user/user/reset_password/$1";

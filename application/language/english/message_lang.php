@@ -251,4 +251,30 @@ $lang["League event inserted sucessfully."] = "League event inserted successfull
 $lang["Find your soulmate"] = "Find your soulmate";
 $lang["Requested"] = "Requested";
 $lang["Group name"] = "Group name";
+
+// Events
+$lang["Events"] = "Events";
+$lang["Event"] = "Event";
+$lang["Filters"] = "Filters";
+$lang["No Events found."] = "No Events found.";
+$lang["Create New Event"] = "Create New Event";
+$lang["Event title"] = "Event title";
+$lang["Events details and who you are looking for"] = "Events details and who you are looking for";
+$lang["Event start time"] = "Event start time";
+$lang["Event end time"] = "Event end time";
+$lang["Number of people to join"] = "Number of people to join";
+$lang["Approval needed"] = "Approval needed";
+$lang["Post release distance range"] = "Post release distance range";
+$lang["From current location"] = "From current location";
+$lang["Yes"] = "Yes";
+$lang["No"] = "No";
+$lang["Number of seat"] = "Number of seat";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+
+
 ?>

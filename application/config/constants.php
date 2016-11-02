@@ -96,6 +96,7 @@ defined("ROOT_PATH") OR define("ROOT_PATH","c:/wamp/www/habby/");
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code
 defined('DEFAULT_PROFILE_IMAGE_PATH') OR define('DEFAULT_PROFILE_IMAGE_PATH', Asset_path . 'uploads/user_profile/'); // highest automatically-assigned error code
 defined('DEFAULT_CHAT_IMAGE_PATH') OR define('DEFAULT_CHAT_IMAGE_PATH', Asset_path . 'uploads/chat_media/');
+defined('DEFAULT_EVENT_MEDIA_PATH') OR define('DEFAULT_EVENT_MEDIA_PATH', Asset_path . 'uploads/event_post/');
 defined('DEFAULT_BANNER_IMAGE_PATH') OR define('DEFAULT_BANNER_IMAGE_PATH', Asset_path . 'uploads/banners/'); // highest automatically-assigned error code
 defined('DEFAULT_POST_IMAGE_PATH') OR define('DEFAULT_POST_IMAGE_PATH', Asset_path . 'uploads/user_post/'); // highest automatically-assigned error code
 defined('DEFAULT_CHALLENGE_IMAGE_PATH') OR define('DEFAULT_CHALLENGE_IMAGE_PATH', Asset_path . 'uploads/challenge_post/'); // highest automatically-assigned error code
