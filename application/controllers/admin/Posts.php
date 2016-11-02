@@ -258,4 +258,12 @@ class Posts extends CI_Controller {
         $this->template->load('admin_main', 'admin/posts/view', $this->data);
     }
 
+    public function del_post() {
+        if ($this->input->post()) {
+            $post_media_id = $this->input->post('post_media_id');
+            $status = $this->Admin_posts_model->delete_post_media($post_media_id);
+            echo $status;exit;
+        }
+    }
+
 }

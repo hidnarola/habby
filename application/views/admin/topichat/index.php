@@ -1,4 +1,4 @@
-<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                   ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                                               ?>"></script>-->
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/tables/datatables/datatables.min.js"; ?>"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/select2.min.js"; ?>"></script>
 <!-- Page header -->
@@ -138,11 +138,11 @@ if ($this->session->flashdata('success')) {
                             action += '<a href="<?php echo base_url(); ?>admin/topichat/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded btn-sm" title="View Details"><i class="icon-eye4"></i></a>';
                             action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
                             action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
                         } else {
                             action += '<a href="<?php echo base_url(); ?>admin/topichat/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded"  title="View Details"><i class="icon-eye4"></i></a>'
                             action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
                         }
                         return action;
                     }
@@ -153,5 +153,27 @@ if ($this->session->flashdata('success')) {
             minimumResultsForSearch: Infinity,
             width: 'auto'
         });
+
     });
+    function delete_topichat(id) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Topichat Group!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plz!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = "<?php echo base_url(); ?>admin/topichat/delete/" + id;
+//                        swal("Deleted!", "Your Topichat Group has been deleted.", "success");
+                    } else {
+                        swal("Cancelled", "Your Topichat Group is safe :)", "error");
+                    }
+                });
+    }
 </script>

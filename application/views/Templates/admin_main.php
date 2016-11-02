@@ -112,12 +112,12 @@ if (!empty($user_data['user_image'])) {
                                     <li class="<?php echo ($controller == 'topichat') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/topichat'; ?>"><i class="icon-users4"></i> <span>Topichat</span></a>
                                     </li>
-                                    <li class="<?php echo ($controller == 'soulmate') ? 'active' : ''; ?>">
+<!--                                    <li class="<?php echo ($controller == 'soulmate') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/soulmate'; ?>"><i class="icon-users"></i> <span>Soulmate</span></a>
                                     </li>
                                     <li class="<?php echo ($controller == 'groupplan') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/groupplan'; ?>"><i class="icon-users4"></i> <span>Group Plan</span></a>
-                                    </li>
+                                    </li>-->
                                     <li class="<?php echo ($controller == 'challenge') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/challenge'; ?>"><i class="icon-users4"></i> <span>Challenges</span></a>
                                     </li>
@@ -158,6 +158,13 @@ if (!empty($user_data['user_image'])) {
         <script>
             $('document').ready(function () {
                 $('.flashmsg').fadeOut(6000);
+            });
+            $('.grid').masonry({
+                // set itemSelector so .grid-sizer is not used in layout
+                itemSelector: '.grid-item',
+                // use element for option
+                columnWidth: '.grid-sizer',
+                percentPosition: true
             });
         </script>
     </body>

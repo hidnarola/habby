@@ -203,6 +203,15 @@ class Admin_posts_model extends CI_Model {
         }
     }
 
+    public function delete_post_media($post_media_id) {
+        if ($post_media_id != null) {
+            $this->db->where('id', $post_media_id);
+            $this->db->delete('post_media');
+            return true;
+        }
+        return false;
+    }
+
 }
 
 ?>
