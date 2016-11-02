@@ -1,4 +1,4 @@
-<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                      ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/datatables_data_sources.js";                       ?>"></script>-->
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/tables/datatables/datatables.min.js"; ?>"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "plugins/forms/selects/select2.min.js"; ?>"></script>
 <!-- Page header -->
@@ -107,7 +107,7 @@ if ($this->session->flashdata('success')) {
                         var action = '';
                         if (full.is_deleted == '0') {
                             action += '<a href="<?php echo base_url(); ?>admin/categories/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/categories/delete/' + full.id + '" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded" onclick="delete_category(' + full.id + ')"  title="Delete"><i class="icon-cross2"></i></a>'
                         }
                         return action;
                     }
@@ -120,4 +120,26 @@ if ($this->session->flashdata('success')) {
             width: 'auto'
         });
     });
+
+    function delete_category(id) {
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this category!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plz!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = "<?php echo base_url(); ?>admin/categories/delete/" + id;
+//                        swal("Deleted!", "Your Topichat Group has been deleted.", "success");
+                    } else {
+                        swal("Cancelled", "Your category is safe :)", "error");
+                    }
+                });
+    }
 </script>

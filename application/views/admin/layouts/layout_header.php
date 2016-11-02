@@ -13,6 +13,8 @@
     <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "colors.css"; ?>" rel="stylesheet" type="text/css">
     <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "components.min.css"; ?>" rel="stylesheet" type="text/css">
     <link href="<?php echo DEFAULT_ADMIN_CSS_PATH . "developer.css"; ?>" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_EMOGI_PATH . "emoticons.css" ?>"/>
+
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
@@ -35,7 +37,12 @@
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "core/app.js"; ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_CKEDITOR_PATH . "ckeditor.js" ?>"></script>
     <script type="text/javascript" src="<?php echo DEFAULT_ADMIN_JS_PATH . "pages/login_validation.js"; ?>"></script>
-    <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_validation.js"; ?>"></script>
-    <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_floating_labels.js"; ?>"></script>
+    <script src="<?php echo DEFAULT_EMOGI_PATH . "emoticons.js" ?>"></script>
+    <script src="<?php echo DEFAULT_EMOGI_PATH . "emoticons_details.js" ?>"></script>
+    <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_validation.js";      ?>"></script>
+    <script type="text/javascript" src="<?php // echo DEFAULT_ADMIN_JS_PATH . "pages/form_floating_labels.js";      ?>"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <script src="<?php echo DEFAULT_ADMIN_JS_PATH . "sweetalert.min.js"; ?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_ADMIN_CSS_PATH . "sweetalert.css"; ?>">
     <!-- /theme JS files -->
 </head>

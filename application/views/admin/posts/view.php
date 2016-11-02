@@ -64,18 +64,19 @@ if ($this->session->flashdata('success')) {
                             ?>
                             <div class="thumbnail">
                                 <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $posts['post_user_profile'];?>"> <?php echo  $posts['post_user'];?></h3>
-                                <div class="thumb">
+                                <div class="thumb grid">
+                                    <div class="grid-sizer"></div>
                                     <?php
                                     foreach ($posts['media'] as $post_media) {
                                         if ($post_media['media_type'] == 'image') {
                                             ?>
-                                            <div class="thumb-inner">
+                                            <div class="thumb-inner grid-item">
                                                 <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>" alt="">
                                             </div>
                                             <?php
                                         } else {
                                             ?>
-                                            <div class="thumb-inner">
+                                            <div class="thumb-inner grid-item">
                                                 <video controls class="img-responsive center-block">
                                                     <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
                                                 </video>

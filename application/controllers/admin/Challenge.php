@@ -141,6 +141,7 @@ class Challenge extends CI_Controller {
         }
         $group_id = $this->uri->segment(4);
         $this->data['challenges'] = $this->Admin_challenge_model->get_challenge_results($group_id);
+        $this->data['messages'] = $this->Admin_challenge_model->get_messages($group_id);
         $this->template->load('admin_main', 'admin/challenge/view', $this->data);
     }
 

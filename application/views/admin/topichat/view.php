@@ -57,12 +57,13 @@ if ($this->session->flashdata('success')) {
         <div class="panel panel-flat">
             <div class="content">
                 <div class="row">
-                    <div class="col-lg-12 col-sm-12">
+                    <div class="col-lg-3 col-sm-12">
+                        <h2 class="text-semibold no-margin-top">Topichat Details</h2>
                         <?php
                         if (isset($topichats) && !empty($topichats)) {
 //                            pr($topichats);
                             ?>
-                            <div class="thumbnail">
+                            <div class="thumbnail topi-chart-thumbnail">
                                 <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $topichats['user_image']; ?>"> <?php echo $topichats['name']; ?></h3>
                                 <div class="thumb">
                                     <div class="thumb-inner">
@@ -76,8 +77,8 @@ if ($this->session->flashdata('success')) {
                                     <h6 class="no-margin-top"><span class="text-semibold">Date : </span><?php echo date('d-m-Y h:i a', strtotime($topichats['created_date'])) ?></h6>
                                 </div>
                                 <div>
-                                    <h4 class="text-semibold">Group Users (<?php echo $topichats['Total_User'] ?>)</h4>
-                                    <ul class="media-list padding-15">
+                                    <h4 class="text-semibold">Group Users <span class="badge badge-success heading-text"><?php echo $topichats['Total_User'] ?></span></h4>
+                                    <ul class="media-list padding-15 challenge-accepted-user-list">
                                         <?php
                                         if (isset($topichats['joined_user']) && !empty($topichats['joined_user'])) {
                                             foreach ($topichats['joined_user'] as $joined_user) {
@@ -98,67 +99,67 @@ if ($this->session->flashdata('success')) {
                         }
                         ?>
                     </div>
-                    <?php if (isset($messages) && !empty($messages)) { ?>
-                        <div class="row">
-                            <div class="col-lg-9">
-                                <div class="tabbable">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade in active" id="activity">
-                                            <!-- Timeline -->
-                                            <div class="col-lg-12 col-sm-12">
-                                                <div class="panel panel-flat timeline-content">
-                                                    <div class="panel-heading">
-                                                        <h6 class="panel-title">Group Conversation</h6>
-                                                    </div>
-
-                                                    <div class="panel-body chat_area2">
-                                                        <ul class="media-list chat-list ">
-                                                            <?php
-                                                            foreach ($messages as $message) {
+                    <div class="col-lg-9">
+                        <div class="tabbable">
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" id="activity">
+                                    <!-- Timeline -->
+                                    <div class="col-lg-12 col-sm-12">
+                                        <h2 class="text-semibold no-margin-top">Group Conversation</h2>
+                                        <div class="panel panel-flat timeline-content group-conversation-wrapper topichat-group-conversation">
+                                            <div class="panel-body chat_area2">
+                                                <ul class="media-list chat-list ">
+                                                    <?php
+                                                    if (isset($messages) && !empty($messages)) {
+                                                        foreach ($messages as $message) {
 //                                                                pr($message);
-                                                                ?>
+                                                            ?>
 
-                                                                <li class="media">
-                                                                    <div class="media-left">
-                                                                        <a title="<?php echo $message['name'] ?>">
-                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image'] ?>" class="img-circle" alt="">
-                                                                        </a>
+                                                            <li class="media">
+                                                                <div class="media-left">
+                                                                    <a title="<?php echo $message['name'] ?>">
+                                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image'] ?>" class="img-circle" alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <?php if ($message['message'] != null) { ?>
+                                                                    <div class="media-body">
+                                                                        <div class="media-content"><?php echo $message['message'] ?></div>
                                                                     </div>
-                                                                    <?php if ($message['message'] != null) { ?>
-                                                                        <div class="media-body">
-                                                                            <div class="media-content"><?php echo $message['message'] ?></div>
+                                                                    <?php
+                                                                } else {
+                                                                    if ($message['media'] != null && $message['media_type'] == 'image') {
+                                                                        ?>
+                                                                        <div class="media-body" style='position: relative;height: 180px;'>
+                                                                            <div class="media-content"><img src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" alt="" style="display: block;max-width:100% !important;max-height: 180px !important;"> </div>
                                                                         </div>
                                                                         <?php
                                                                     } else {
-                                                                        if ($message['media'] != null && $message['media_type'] == 'image') {
-                                                                            ?>
-                                                                            <div class="media-body" style='position: relative;height: 180px;'>
-                                                                                <img src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" alt="" style="display: block;max-width:100% !important;max-height: 100% !important;">
-                                                                            </div>
-                                                                            <?php
-                                                                        } else {
-                                                                            ?>
-                                                                            <div class="media-body">
-                                                                                <video controls="" src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" style="height:180px;"></video>
-                                                                            </div>
-                                                                            <?php
-                                                                        }
                                                                         ?>
+                                                                        <div class="media-body">
+                                                                            <div class="media-content">
+                                                                                <video controls="" src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" style="height:180px;"></video></div>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                    ?>
 
-                                                                    <?php } ?>
-                                                                </li>
-                                                            <?php } ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                                <?php } ?>
+                                                            </li>
+                                                            <?php
+                                                        }
+                                                    }else{
+                                                        echo "No Message";
+                                                    }
+                                                    ?>
+                                                </ul>
                                             </div>
-                                            <!-- /messages -->
                                         </div>
                                     </div>
+                                    <!-- /messages -->
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -166,15 +167,15 @@ if ($this->session->flashdata('success')) {
 </div>
 <script type="text/javascript">
     $('document').ready(function () {
-//        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-//        $(".chat_area2").animate({scrollTop: $('.chat_area2').height()}, 1000);
-        $(".chat-list").animate({scrollTop: $('.chat-list').height()+10000}, 1000);
+        last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
+        $(".chat-list").animate({scrollTop: $('.chat-list').height() + 10000}, 1000);
         var load = true;
         var in_progress = false;
         $('.chat_area2').scroll(function () {
             if (load && !in_progress)
             {
                 if ($('.chat_area2').scrollTop() == 0) {
+                    ;
                     loaddata();
                     in_process = true;
                 }

@@ -12,6 +12,7 @@
 }
 .thumbnail{
     display: inline-block;
+    width: 100%;
 }
 .c_post_thumbnail{
     display: block !important;
@@ -102,3 +103,91 @@ div#logPreview {
     right: -30px;
     top: 0px;
 }*/
+
+/* fluid 5 columns */
+.grid-sizer,
+.grid-item { width: 33.33%; }
+/* 2 columns */
+.topi-chart-thumbnail{
+    display: inline-block;
+    width:auto;
+    min-height: 751px;
+}
+.topi-chart-thumbnail h4.text-semibold{
+    background-color: #ddd;
+    margin-left: -4px;
+    padding-left: 15px;
+    margin-right: -4px;
+    border-bottom: 2px solid #868181;
+    padding-bottom: 5px;
+}
+.group-conversation-wrapper .media-list > li:nth-child(odd){
+    background-color: transparent;
+}
+.group-conversation-wrapper .media-list > li:nth-child(odd) .media-body{
+
+    background-color: #f5f5f5;
+    border-color: #f5f5f5;
+
+}
+.group-conversation-wrapper .media-list > li:nth-child(even) .media-body .media-content{
+
+    background-color: #26A69A;
+    border-color: #26A69A;
+    position: relative;
+    padding: 10px 12px;
+    border-radius: 3px;
+    color: #fff;
+}
+/*.topi-chart-thumbnail .thumb-inner{
+    height: 330px;
+    overflow: hidden;
+}*/
+.challenge-accepted-user-list{
+    max-height: 320px;
+    overflow: auto;
+}
+.challenge-details-thumbnail{
+    min-height: 560px;
+}
+.banners-thumbnail-wrapper .thumb:not(.thumb-rounded) img{
+    border-radius: 3px;
+    max-width: inherit;
+    margin: 0 auto;
+}
+.manage-thumbnail-wrapper .thumb-inner:hover > .caption-overflow {
+    background-color: rgba(0, 0, 0, 0.7);
+    visibility: visible;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+.manage-thumbnail-wrapper .thumb-inner{
+    position: relative;
+}
+.manage-thumbnail-wrapper .caption-overflow span{
+    position: absolute;
+    top: 0;
+    margin-top: 7px;
+    width: 100%;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 5px;
+}
+.panel-body.chat_area2 {
+    height: 560px;
+}
+.topichat-group-conversation .panel-body.chat_area2 {
+    height: 750px;
+}
+.topichat-group-conversation .panel-body.chat_area2 .chat-list {
+    max-height: 715px;
+    overflow: auto;
+}
+.panel-body.chat_area2 .chat-list .media-content {
+    width: 100%;
+    background-color: #f5f5f5;
+    border-color: #ccc;
+    position: relative;
+    padding: 10px 12px;
+    border-radius: 3px;
+}

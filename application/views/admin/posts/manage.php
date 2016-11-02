@@ -81,36 +81,40 @@ if ($this->session->flashdata('success')) {
                         </div>
 
                         <?php
-//                        pr($post_datas['media']);
+//                        pr($post_datas);
                         if (isset($post_datas['media']) && !empty($post_datas['media'])) {
                             ?>
                             <div class="col-lg-12 col-sm-12">
-                                <div class="thumbnail">
-                                    <div class="thumb">
-                                        <img src="http://habby/uploads/user_post/151230075154.jpg" alt="">
-                                        <div class="caption-overflow">
-                                            <span>
-                                                <a href="assets/images/placeholder.jpg" data-popup="lightbox" class="btn border-white text-white btn-flat btn-icon btn-rounded"><i class="icon-plus3"></i></a>
-                                                <a href="#" class="btn border-white text-white btn-flat btn-icon btn-rounded ml-5"><i class="icon-link2"></i></a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="thumb">
+                                <div class="thumbnail manage-thumbnail-wrapper">
+                                    <div class="thumb grid">
+                                        <div class="grid-sizer"></div>
                                         <?php
                                         foreach ($post_datas['media'] as $post_media) {
+//                                            pr($post_media);
                                             if ($post_media['media_type'] == 'image') {
                                                 ?>
-                                                <div class="thumb-inner">
+                                                <div class="thumb-inner grid-item" id="post_media_<?php echo $post_media['id']; ?>">
                                                     <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>" alt="">
+                                                    <div class="caption-overflow">
+                                                        <span>
+                                                            <a href="javascript:void(0)" data-id="<?php echo $post_media['id']; ?>" data-type="image" data-popup="lightbox" class="btn text-white btn-flat btn-icon delete-post"><i class="icon-close2"></i></a>
 
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <?php
                                             } else {
                                                 ?>
-                                                <div class="thumb-inner">
+                                                <div class="thumb-inner grid-item" id="post_media_<?php echo $post_media['id']; ?>">
                                                     <video controls class="img-responsive center-block">
                                                         <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $post_media['media']; ?>"></source>
                                                     </video>
+                                                    <div class="caption-overflow">
+                                                        <span>
+                                                            <a href="javascript:void(0)" data-id="<?php echo $post_media['id']; ?>" data-type="video" data-popup="lightbox" class="btn text-white btn-flat btn-icon delete-post"><i class="icon-close2"></i></a>
+
+                                                        </span>
+                                                    </div>
                                                 </div>
                                                 <?php
                                             }
@@ -178,9 +182,6 @@ if ($this->session->flashdata('success')) {
         var i = 0;
         for (var key in files) {
             if (/^image/.test(files[key].type)) { // only image file
-                console.log(files);
-                console.log(key);
-                console.log(files[key].type);
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
                 reader.onloadend = function () { // set image data as background of div
@@ -231,5 +232,50 @@ if ($this->session->flashdata('success')) {
                 $('.message').show();
             }
         }
+
+
     });
+    $(function () {
+        $('.delete-post').click(function () {
+            var id = $(this).data('id');
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this Post Media!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plz!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                    function (isConfirm) {
+                        if (isConfirm) {
+
+                            $.ajax({
+                                url: '<?php echo base_url() . "admin/posts/del_post"; ?>',
+                                type: 'POST',
+                                data: {post_media_id: id},
+                                success: function (data) {
+                                    $('#post_media_' + id).fadeOut(1000, function () {
+                                        swal("Deleted!", "Your Post Media has been deleted.", "success");
+                                    });
+                                    setTimeout(function () {
+                                        $('.grid').masonry({
+                                            // set itemSelector so .grid-sizer is not used in layout
+                                            itemSelector: '.grid-item',
+                                            // use element for option
+                                            columnWidth: '.grid-sizer',
+                                            percentPosition: true
+                                        });
+                                    }, 3000);
+                                }
+                            });
+                        } else {
+                            swal("Cancelled", "Your Post Media is safe :)", "error");
+                        }
+                    });
+        });
+    });
+
 </script>

@@ -67,7 +67,7 @@ if ($this->session->flashdata('success')) {
                         ?>
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
-                                <div class="thumbnail">
+                                <div class="thumbnail banners-thumbnail-wrapper">
                                     <div class="thumb">
                                         <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner['image']; ?>" alt="<?php echo $banner['image_name']; ?>">
                                     </div>

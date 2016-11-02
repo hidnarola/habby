@@ -115,3 +115,4 @@ defined('DEFAULT_ADMIN_IMAGE_PATH') OR define('DEFAULT_ADMIN_IMAGE_PATH', Asset_
 defined('DEFAULT_ADMIN_JS_PATH') OR define('DEFAULT_ADMIN_JS_PATH', Asset_path . 'public/back/js/'); // highest automatically-assigned error code
 defined('DEFAULT_ADMIN_CSS_PATH') OR define('DEFAULT_ADMIN_CSS_PATH', Asset_path . 'public/back/css/'); // highest automatically-assigned error code
 defined('DEFAULT_ADMIN_CKEDITOR_PATH') OR define('DEFAULT_ADMIN_CKEDITOR_PATH', Asset_path . 'public/back/ckeditor/'); // highest automatically-assigned error code
+
