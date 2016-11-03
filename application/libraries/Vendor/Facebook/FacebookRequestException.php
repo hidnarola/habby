@@ -113,7 +113,7 @@ class FacebookRequestException extends FacebookSDKException
       // API Throttling
       case 4:
       case 17:
-      case 341:
+      case 341:        
         return new FacebookThrottleException($raw, $data, $statusCode);
         break;
 

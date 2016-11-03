@@ -23,6 +23,7 @@ class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->library(['facebook']);
         $this->load->model(array('Users_model', 'Common_functionality'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
     }
@@ -200,17 +201,96 @@ class User extends CI_Controller {
                     $media_arr['media'] = $data['file_name'];
                     $media[] = $media_arr;
                     // Create video thumb
-                    $cmd = ROOT_PATH."ffmpeg/bin/ffmpeg -i ".ROOT_PATH."uploads/chat_media/".$data['file_name']." -ss 00:00:01.435 -f image2 -vframes 1 ".ROOT_PATH."uploads/chat_media/".$data['raw_name']."_thumb.png"; 
+                    $cmd = ROOT_PATH . "ffmpeg/bin/ffmpeg -i " . ROOT_PATH . "uploads/chat_media/" . $data['file_name'] . " -ss 00:00:01.435 -f image2 -vframes 1 " . ROOT_PATH . "uploads/chat_media/" . $data['raw_name'] . "_thumb.png";
                     exec($cmd);
                 }
             }
-        }
-        else
-        {
+        } else {
             echo "601";
             die;
         }
         echo json_encode($media);
+    }
+
+    /* v! Redirect Url for the login with facebook define in the application/config/config.php */
+
+    public function facebook_callback() {
+        $user_detail = $this->facebook->get_user();
+        $sess_user_data = $this->session->userdata('user');
+        if (!empty($user_detail)) {
+            if (!empty($sess_user_data)) {
+                $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
+                if ($res_fb_account == 0) {
+                    //update users table with new facebook ID
+                    $this->Users_model->update_user_data($sess_user_data['id'], ['external_id' => $user_detail['id'], 'signup_type' => 'Facebook']);
+                    $this->session->set_flashdata('message', ['message' => lang('Your account is successfully linked to facebook.'), 'class' => 'alert alert-success']);
+                    redirect('home');
+                } else {
+                    //Error Facebook is already connect with some other account
+                    $this->session->set_flashdata('message', ['message' => lang('fb_connect_fail'), 'class' => 'alert alert-danger']);
+                    redirect('home');
+                }
+            }
+            $fname = $user_detail['first_name'];
+            $lname = $user_detail['last_name'];
+            $display_name = $user_detail['name'];
+            $gender = 'male';
+            if (!empty($user_detail['gender'])) {
+                $gender = ( strtolower($user_detail['gender']) == 'male') ? 'Male' : 'Female';
+            }
+
+            $email = $user_detail['email'];
+            $facebook_id = $user_detail['id'];
+
+            $res_data = $this->Users_model->check_if_user_exist(array('email' => $email), true);
+            $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
+
+            //IF New User then it will enter all data into database otherwise it will create login-session for him/her
+            if ($res_data == 0 && $res_fb_account == 0) {
+
+                $ins_data = array(
+                    'name' => $display_name,
+                    'email' => $email,
+                    'country' => '206',
+                    'gender' => $gender,
+                    'external_id' => $facebook_id,
+                    'signup_type' => 'Facebook',
+                    'user_image' => 'profile_img.jpg',
+                    'is_active' => 1
+                );
+
+                $last_user_id = $this->Users_model->insert_user_data($ins_data); // Register User - add data into database
+                //Create Related Sub Directories for last created User - using cms_helper.php 
+
+                $all_user_data = $this->Users_model->check_if_user_exist(['email' => $email], false, true);
+                $this->session->set_userdata(['user' => $all_user_data, 'loggedin' => TRUE]);
+                $this->Users_model->update_user_data($all_user_data['id'], ['last_login' => date('Y-m-d H:i:s')]);
+                redirect('home');
+            } else {
+                if ($res_fb_account == 0) {
+                    $user_data = $this->Users_model->check_if_user_exist(array('email' => $email), false, true);
+                } else {
+                    $user_data = $this->Users_model->check_if_user_exist(array('external_id' => $facebook_id, 'signup_type' => 'Facebook'), false, true);
+                }
+
+                // v! Redirect to password change page if users who are logged in with facebook didn't set password for their account
+                if ($user_data['external_id'] != '') {
+                    $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]);
+                    $this->Users_model->update_user_data($user_data['id'], ['last_login' => date('Y-m-d H:i:s')]); // Update last Login Details
+//                    if ($user_data['password'] == '') {
+////                        redirect('user/dashboard/password_change');
+//                    } else {
+////                        redirect('user/dashboard');
+//                    }
+                } else {
+                    $this->session->set_flashdata('message', array('message' => lang('Email address already in use. Please try with another one.'), 'class' => 'alert alert-danger'));
+                    redirect('login');
+                }
+            }/*  // END of ELSE of if($res_data == 0) condition */
+        } else {
+            $this->session->set_flashdata('message', array('message' => lang('Insufficient detail to Login. Please try again.'), 'class' => 'alert alert-danger'));
+            redirect('login');
+        }
     }
 
 }

@@ -88,6 +88,7 @@ $route["events/(:any)"] = "user/events/$1";
 $route["events/(:any)/(:any)"] = "user/events/$1/$2";
 
 $route['user/forgot_password'] = "user/user/forgot_password";
+$route['user/facebook_callback'] = "user/user/facebook_callback";
 $route['user/(:any)'] = "user/user/$1";
 $route['user/reset_password/(:any)'] = "user/user/reset_password/$1";
 $route['user/verify_email/(:any)'] = "user/user/verify_email/$1";

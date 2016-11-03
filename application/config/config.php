@@ -522,8 +522,8 @@ $config['proxy_ips'] = '';
 /**
  * Facebook Login Configuration
  */
-$config['facebook']['api_id'] = '1090796097706335';
-$config['facebook']['app_secret'] = '9b748595ad9527333cc763dca8d2bc89';
+$config['facebook']['api_id'] = '326180321092686';
+$config['facebook']['app_secret'] = 'fd7a0f521a85d9e0113180e4a4f6778f';
 $config['facebook']['redirect_url'] = $config['base_url'] . '/user/facebook_callback';
 $config['facebook']['permissions'] = array(
     'email',
