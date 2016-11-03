@@ -53,26 +53,26 @@ class Users_model extends CI_Model {
         $res_data = $this->db->get('users')->row_array();
         return $res_data;
     }
-    
+
     /*
      * 
      */
-    public function add_coin_to_user($user_id)
-    {
-        $this->db->where('id',$user_id);
+
+    public function add_coin_to_user($user_id) {
+        $this->db->where('id', $user_id);
         $user = $this->db->get('users')->row_array();
-        $this->update_user_data($user_id, ['total_coin'=>($user['total_coin'] + 1)]);
+        $this->update_user_data($user_id, ['total_coin' => ($user['total_coin'] + 1)]);
         return true;
     }
-    
+
     /*
      * 
      */
-    public function deduct_coin_from_user($user_id)
-    {
-        $this->db->where('id',$user_id);
+
+    public function deduct_coin_from_user($user_id) {
+        $this->db->where('id', $user_id);
         $user = $this->db->get('users')->row_array();
-        $this->update_user_data($user_id, ['total_coin'=>($user['total_coin'] - 1)]);
+        $this->update_user_data($user_id, ['total_coin' => ($user['total_coin'] - 1)]);
         return true;
     }
 
@@ -81,6 +81,11 @@ class Users_model extends CI_Model {
     public function get_all_countries() {
         $res_data = $this->db->get('country')->result_array();
         return $res_data;
+    }
+
+    public function check_fb_id_used($fb_id) {
+        $res = $this->db->get_where('users', ['external_id' => $fb_id, 'signup_type' => 'Facebook'])->num_rows();
+        return $res;
     }
 
 }

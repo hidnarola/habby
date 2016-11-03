@@ -33,6 +33,7 @@ class Login extends CI_Controller {
     public function index() {
         $this->data['user_data'] = $this->session->userdata('user');
         if (!empty($this->data['user_data'])) {
+            pr($this->data['user_data'], 1);
             $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
             redirect('home');
         }

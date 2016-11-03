@@ -77,7 +77,7 @@ class Facebook {
         return $this->helper->getLoginUrl($this->ci->config->item('permissions', 'facebook'));
     }
 
-    public function get_logout_url() {        
+    public function get_logout_url() {
         if ($this->session) {
             $this->ci->session->set_userdata('fb_token', "");
             return $this->helper->getLogoutUrl($this->session, base_url() . 'login');
@@ -86,10 +86,9 @@ class Facebook {
     }
 
     public function get_user() {
-        
         if ($this->session) {
             try {
-                $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,birthday,education,gender,location,friends'))->execute();
+                $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
                 $user = $request->getGraphObject()->asArray();
                 return $user;
             } catch (FacebookRequestException $e) {
@@ -98,6 +97,4 @@ class Facebook {
         }
     }
 
-
 }
-
