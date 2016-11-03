@@ -222,7 +222,7 @@ class User extends CI_Controller {
                 $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
                 if ($res_fb_account == 0) {
                     //update users table with new facebook ID
-                    $this->Users_model->update_user_data($sess_user_data['id'], ['external_id' => $user_detail['id'], 'signup_type' => 'Facebook']);
+                    $this->Users_model->update_user_data($sess_user_data['id'], ['external_id' => $user_detail['id'], 'signup_type' => 2]);
                     $this->session->set_flashdata('message', ['message' => lang('Your account is successfully linked to facebook.'), 'class' => 'alert alert-success']);
                     redirect('home');
                 } else {
@@ -254,7 +254,7 @@ class User extends CI_Controller {
                     'country' => '206',
                     'gender' => $gender,
                     'external_id' => $facebook_id,
-                    'signup_type' => 'Facebook',
+                    'signup_type' => 2,
                     'user_image' => 'profile_img.jpg',
                     'is_active' => 1
                 );
@@ -270,7 +270,7 @@ class User extends CI_Controller {
                 if ($res_fb_account == 0) {
                     $user_data = $this->Users_model->check_if_user_exist(array('email' => $email), false, true);
                 } else {
-                    $user_data = $this->Users_model->check_if_user_exist(array('external_id' => $facebook_id, 'signup_type' => 'Facebook'), false, true);
+                    $user_data = $this->Users_model->check_if_user_exist(array('external_id' => $facebook_id, 'signup_type' => 2), false, true);
                 }
 
                 // v! Redirect to password change page if users who are logged in with facebook didn't set password for their account
