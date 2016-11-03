@@ -519,3 +519,16 @@ $config['rewrite_short_tags'] = FALSE;
   | Array:		array('10.0.1.200', '192.168.5.0/24')
  */
 $config['proxy_ips'] = '';
+/**
+ * Facebook Login Configuration
+ */
+$config['facebook']['api_id'] = '1090796097706335';
+$config['facebook']['app_secret'] = '9b748595ad9527333cc763dca8d2bc89';
+$config['facebook']['redirect_url'] = $config['base_url'] . '/user/facebook_callback';
+$config['facebook']['permissions'] = array(
+    'email',
+    'user_location',
+    'user_birthday',
+    'user_friends',
+    'public_profile'
+);
