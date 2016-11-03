@@ -104,6 +104,26 @@ $(function () {
                 {
                     swal("You can't join this event as event reached at its maximum limit");
                 }
+                else if(str == 3 || str == 5)
+                {
+                    swal("Something went wrong");
+                }
+                else if(str == 4)
+                {
+                    swal("You have joined this event");
+                    $this.removeClass('event_join');
+                    $this.html('Enter');
+                }
+                else if(str == 6)
+                {
+                    swal("You have made request for join this event");
+                    $this.removeClass('event_join');
+                    $this.html('Requested');
+                }
+                else
+                {
+                    swal("Something went wrong");
+                }
             }
         });
     });
