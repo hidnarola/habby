@@ -26,11 +26,11 @@ $(document).ready(function () {
             }
             return false;
         }
-        else if(e.charCode == 32 && $.trim($(this).html()) == '')
+        else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
         }
-        else if($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
         {
             $(this).html('');
             return false;
@@ -70,9 +70,9 @@ $(document).ready(function () {
                     var i = Math.random().toString(36).substring(7);
                     // $('#imagePreview').addClass('imagePreview');
                     $('.message').hide();
-                    
-                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview'+i+'"  id="imagePreview_msg"></span></div></div>');
-                    
+
+                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
+
                     $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
 
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
@@ -133,31 +133,37 @@ $(document).ready(function () {
         console.log(files);
         for (var key in files)
         {
-            if (/^video/.test(files[key].type)) { // only video file
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[key]); // read the local file
+            console.log("key = ", key);
+            if (key != "length" && key != "item")
+            {
+                if (/^video/.test(files[key].type)) { // only video file
+                    console.log("video rendering");
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
 
-                reader.onloadend = function () { // set image data as background of div
-                    var i = Math.random().toString(36).substring(7);
-                    display_file_class = 'imagePreview'+i;
-                    
-                    $('.message').hide();
-                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="float:right"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="'+display_file_class+'"  id="imagePreview_msg"></span></div></div>');
-                    $('.' + display_file_class).html("<video controls='' src='" + this.result + "' style='height:180px;'>");
+                    reader.onloadend = function () { // set image data as background of div
+                        var i = Math.random().toString(36).substring(7);
+                        display_file_class = 'imagePreview' + i;
+
+                        $('.message').hide();
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="float:right"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + '"  id="imagePreview_msg"></span></div></div>');
+                        $('.' + display_file_class).html("<video controls='' src='" + this.result + "' style='height:180px;'>");
+                        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                    }
+                }
+                else
+                {
+                    console.log('In else of video uploading');
+                    $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
+
+                    //this.files = '';
+                    $('.message').html("Please select proper Video");
+                    $('.message').show();
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                    return;
                 }
             }
-            else
-            {
-                console.log('In else of video uploading');
-                $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
-                
-                //this.files = '';
-                $('.message').html("Please select proper Video");
-                $('.message').show();
-                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-                return;
-            }
+
         }
         var form_data = new FormData();
         $.each(files, function (i, file) {
@@ -178,10 +184,10 @@ $(document).ready(function () {
             },
             success: function (str)
             {
-                console.log('in video uploading response : '+str);
-                if(str == "601")
+                console.log('in video uploading response : ' + str);
+                if (str == "601")
                 {
-                    var p = $('.'+display_file_class).parent().addClass('wdth_span');
+                    var p = $('.' + display_file_class).parent().addClass('wdth_span');
                     p.html('<span>Fail to send message</span>');
                 }
                 else if (str != 0)
@@ -222,23 +228,23 @@ $(document).ready(function () {
         if (userdata.media_type == null)
         {
             console.log("text message");
-            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="'+ DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image +'" title="'+userdata.user+'"><span class="wdth_span"><span>'+userdata.message+'</span></div>');
-            
+            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
+
         }
         else
         {
             if (userdata.media_type == "image")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="'+ DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image +'" title="'+userdata.user+'"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
-                
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
             }
             else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="'+ DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image +'" title="'+userdata.user+'"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
-                
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
             }
