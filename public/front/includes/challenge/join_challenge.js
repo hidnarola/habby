@@ -18,7 +18,7 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             if ($.trim($(this).html()) != '')
             {
-                $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + $('#message_div').html() + "</span></span></p>");
+                $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + $('#message_div').html() + "</span></span></div>");
                 send($('#message_div').html());
                 $(this).html('');
                 $('#message').val('');
@@ -41,7 +41,7 @@ $(document).ready(function () {
         if (msg.trim() != '')
         {
 //            msg = $.emoticons.replace($('#message').val());
-            $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span>" + msg + "</span></span></p>");
+            $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg + "</span></span></div>");
             send(msg);
             $('#message_div').html('');
             $('#message').val('');
@@ -70,7 +70,7 @@ $(document).ready(function () {
                     var i = Math.random().toString(36).substring(7);
                     // $('#imagePreview').addClass('imagePreview');
                     $('.message').hide();
-                    $('.chat_area2').append("<p class='chat_2 clearfix'><span class='wdth_span'><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
+                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
                     $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 }
@@ -129,25 +129,31 @@ $(document).ready(function () {
 
         for (var key in files)
         {
-            if (/^video/.test(files[key].type)) { // only image file
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[key]); // read the local file
-
-                reader.onloadend = function () { // set image data as background of div
-                    var i = Math.random().toString(36).substring(7);
-                    // $('#imagePreview').addClass('imagePreview');
-                    $('.message').hide();
-                    $('.chat_area2').append("<p class='chat_2 clearfix'><span class='' style='float:right'><span class='imagePreview" + i + "' id='imagePreview_msg'></span></span></p>");
-                    //$('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                    $('.imagePreview' + i).html("<video controls='' src='" + this.result + "' style='height:250px'>");
-                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-                }
-            }
-            else
+            if (key != "length" && key != "item")
             {
-                //this.files = '';
-                $('.message').html("Please select proper Video");
-                $('.message').show();
+                if (/^video/.test(files[key].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
+
+                    reader.onloadend = function () { // set image data as background of div
+                        var i = Math.random().toString(36).substring(7);
+                        // $('#imagePreview').addClass('imagePreview');
+                        $('.message').hide();
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="float:right"><span class="' + display_file_class + '"  id="imagePreview_msg"></span></div></div>');
+                        //$('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                        $('.imagePreview' + i).html("<video controls='' src='" + this.result + "' style='height:180px'>");
+                        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                    }
+                }
+                else
+                {
+                    $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
+                    //this.files = '';
+                    $('.message').html("Please select proper Video");
+                    $('.message').show();
+                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                    return;
+                }
             }
         }
         var form_data = new FormData();

@@ -130,14 +130,12 @@ $(document).ready(function () {
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
-        console.log(files);
         for (var key in files)
         {
             console.log("key = ", key);
             if (key != "length" && key != "item")
             {
                 if (/^video/.test(files[key].type)) { // only video file
-                    console.log("video rendering");
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[key]); // read the local file
 
@@ -153,7 +151,6 @@ $(document).ready(function () {
                 }
                 else
                 {
-                    console.log('In else of video uploading');
                     $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
 
                     //this.files = '';
