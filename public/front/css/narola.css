@@ -225,8 +225,8 @@
     
 }
 
-.event_profile_sec .usr_post_img {display:inline-block; background-color: whitesmoke;}
-.event_profile_sec .post_title {display:inline-block;}
+.event_profile_sec .usr_post_img {display:inline-block;}
+.event_profile_sec .post_title {display:inline-block;font-size:17px;}
 .event_post_details,.event_seat > span {
   font-size: 15px;
   padding-top: 10px;
@@ -327,6 +327,7 @@
     float: right;
 }
 
+.event_post .grp_pln_sec {padding:15px;}
 @media(min-width:1583px){.row.event_container {
   margin: 0 auto;
   width: 1289px;

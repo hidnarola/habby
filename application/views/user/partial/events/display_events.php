@@ -7,10 +7,10 @@ foreach ($event_posts as $event) {
             <div class="event_profile_sec">
                 <div class="usr_post_img">
                     <img class="img-circle img-responsive event_user" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $event['user_image'] ?>">
-                    <span><label class="control-label"><?php echo $event['name']; ?></label></span>
                 </div>
                 <div class="post_title">
-                    <?php echo $event['title']; ?>
+                    <span><label class="control-label"><?php echo $event['name']; ?></label></span>
+                     creates an event "<?php echo $event['title']; ?>"
                 </div>
             </div>
             <div class='event_post_details'>

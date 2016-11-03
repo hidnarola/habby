@@ -152,7 +152,6 @@ $(document).ready(function () {
                 else
                 {
                     $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
-
                     //this.files = '';
                     $('.message').html("Please select proper Video");
                     $('.message').show();
