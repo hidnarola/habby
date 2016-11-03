@@ -2,7 +2,7 @@
 foreach ($messages as $message) {
     if ($message['user_id'] == $this->session->user['id']) {
         ?>
-        <p class="chat_2 clearfix">
+        <div class="chat_2 clearfix">
             <?php
             if (is_null($message['media'])) {
                 ?>
@@ -28,11 +28,11 @@ foreach ($messages as $message) {
                 }
             }
             ?>
-        </p>
+        </div>
         <?php
     } else {
         ?>
-        <p class="chat_1 clearfix">
+        <div class="chat_1 clearfix">
             <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'> 
             <?php
             if (is_null($message['media'])) {
@@ -59,7 +59,7 @@ foreach ($messages as $message) {
                 }
             }
             ?>
-        </p>
+        </div>
         <?php
     }
 }
