@@ -20,19 +20,18 @@ class Events extends CI_Controller {
     public function index($page = 1) {
         $limit = 4;
         $start = ($page - 1) * $limit;
+        $this->data['event_posts'] = $this->Event_model->get_event_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
-            $this->data['event_posts'] = $this->Event_model->get_event_post($data = array(), $this->session->user['id'], $start, $limit);
-//            pr($this->data['posts'],1);
             $this->template->load('front', 'user/events/events', $this->data);
         } else {
-//            $data = array();
-//            if (count($this->data['Group_plans']) > 0) {
-//                $data['view'] = $this->load->view('user/partial/groupplan/display_groupplan', $this->data, true);
-//                $data['status'] = 1;
-//            } else {
-//                $data['status'] = 0;
-//            }
-//            echo json_encode($data);
+            $data = array();
+            if (count($this->data['event_posts']) > 0) {
+                $data['view'] = $this->load->view('user/partial/events/display_events', $this->data, true);
+                $data['status'] = 1;
+            } else {
+                $data['status'] = 0;
+            }
+            echo json_encode($data);
         }
     }
 
@@ -130,4 +129,63 @@ class Events extends CI_Controller {
         redirect('events');
     }
 
+    /*
+     * 
+     */
+    public function join_event($event_id){
+        $logged_in_user = $this->session->user['id'];
+        if(!($this->Event_model->user_exist_for_event($logged_in_user,$event_id)))
+        {
+            if(!($this->Event_model->user_requested_for_event($logged_in_user,$event_id)))
+            {
+                // Is limit exceed for particular event?
+                $limit = $this->Event_model->get_limit_for_event($event_id);
+                $joined_user = $this->Event_model->get_total_joined_user_for_event($event_id);
+                if($joined_user < $limit)
+                {
+                    // User can join group
+                    // Check for approval is needed or not
+                    if($this->Event_model->Is_approval_needed_for_event($event))
+                    {
+                        // Request for join group
+                        if($this->Event_model->add_event_join_request($logged_in_user,$event_id))
+                        {
+                            echo "6";
+                        }
+                        else
+                        {
+                            echo "5";
+                        }
+                    }
+                    else
+                    {
+                        // Join group directly (without request)
+                        if($this->Event_model->add_event_user($logged_in_user,$event_id))
+                        {
+                            echo "4";
+                        }
+                        else
+                        {
+                            echo "3";
+                        }
+                    }
+                }
+                else
+                {
+                    // Limit exceed
+                    echo "2";
+                }
+            }
+            else
+            {
+                // Already requested for particular event
+                echo "1";
+            }
+        }
+        else
+        {
+            // User already available in that event
+            echo "0";
+        }
+    }
 }
