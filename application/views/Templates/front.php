@@ -18,14 +18,17 @@
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_ADMIN_CSS_PATH . "sweetalert.css"; ?>">
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "jquery.min.js" ?>"></script>
 <!--        <script src="https://cdn.webrtc-experiment.com/firebase.js"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/RTCPeerConnection-v1.5.js" ?>"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout.js" ?>"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>-->
+        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+        <script src="<?php echo DEFAULT_ADMIN_JS_PATH . "sweetalert.min.js"; ?>"></script>
 
-        
-    
+
+
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../../assets/js/html5shiv.js"></script>
@@ -34,7 +37,7 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
         </script>
-        
+
         <!-- Share this scripts -->
         <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
         <script type="text/javascript">
@@ -136,13 +139,13 @@
                                                         <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                                         <input type="file" name="videofile[]" id="uploadVideo" class="upload" multiple="multiple"/>
                                                     </div>
-                                                    
+
                                                 </div>
                                                 <div class="image_wrapper" style="display:none">
-                                                    
+
                                                 </div>
-                                                <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH."video_thumbnail.png" ?>">
-                                                    
+                                                <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
+
                                                 </div>
                                             </div>
                                             <!-- Upload images or video section end here -->
@@ -212,34 +215,34 @@
 
 
         <!--  Fixed chat box section start here -->
-<!--        <div class="chat_lgsec hidden-xs">
-            <div class="panel panel-default">
-                  chat box header start
-                <div class="panel-heading">
-                    <p class="text-center show_chat"><img src="<?php echo DEFAULT_IMAGE_PATH . "ftr_chat_icon.png" ?>"> <?php echo lang('Chats'); ?></p>
-                </div>
-                  chat box header end
-
-                  chat box chat display section start
-                <div class="panel-body chat_smlr">
-
-                </div>
-                  chat box chat display section end
-
-                  chat box type and send section start
-                <div class="panel-footer chat_smlr">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="<?php echo lang('Write here...'); ?>">
-                            <span class="input-group-btn">
-                                <input class="chat_btn" type="submit" value="<?php echo lang('Send') ?>">
-                            </span>
+        <!--        <div class="chat_lgsec hidden-xs">
+                    <div class="panel panel-default">
+                          chat box header start
+                        <div class="panel-heading">
+                            <p class="text-center show_chat"><img src="<?php echo DEFAULT_IMAGE_PATH . "ftr_chat_icon.png" ?>"> <?php echo lang('Chats'); ?></p>
                         </div>
+                          chat box header end
+        
+                          chat box chat display section start
+                        <div class="panel-body chat_smlr">
+        
+                        </div>
+                          chat box chat display section end
+        
+                          chat box type and send section start
+                        <div class="panel-footer chat_smlr">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="<?php echo lang('Write here...'); ?>">
+                                    <span class="input-group-btn">
+                                        <input class="chat_btn" type="submit" value="<?php echo lang('Send') ?>">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                          chat box type and send section start
                     </div>
-                </div>
-                  chat box type and send section start
-            </div>
-        </div>-->
+                </div>-->
         <!--  Fixed chat box section end here -->
 
         <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH . "bootstrap.js" ?>"></script>
@@ -343,7 +346,7 @@
         </script>
         <script>
 
-            $('.post_section').on('click','.chat1', function () {
+            $('.post_section').on('click', '.chat1', function () {
                 $(this).parents(".post_leftsec").children(".post_leftsec_hddn1").toggleClass('clicked');
                 $(this).closest(".mov_sec1").toggleClass('clicked2');
             });

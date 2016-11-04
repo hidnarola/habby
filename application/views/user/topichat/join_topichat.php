@@ -33,9 +33,9 @@
                                         <span class="rank_rate"><?php echo $post['positive_rank'] - $post['negetive_rank']; ?></span>
                                         <button type="button" id="sub" class="sub smlr_btn">
                                             <img src="<?php
-                                                 echo DEFAULT_IMAGE_PATH;
-                                                 echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
-                                                 ?>"/>
+                                            echo DEFAULT_IMAGE_PATH;
+                                            echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                            ?>"/>
                                         </button>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                     <!-- popular image and video section start here -->
                     <div class="panel panel-default popular_img_sec">
 
-                        <div class="panel-heading"><b><?php echo lang('UPLOAD'); ?></b> <span style="float: right"><a href="#"><b><?php echo lang('More'); ?></b></a></span></div>
+                        <div class="panel-heading"><b><?php echo lang('UPLOAD'); ?></b> <span style="float: right"><a href="<?php echo base_url() . "topichat/media/" . $this->uri->segment(3) ?>"><b><?php echo lang('More'); ?></b></a></span></div>
 
                         <?php
                         if (count($recent_videos) > 0) {
@@ -108,7 +108,7 @@
                                     foreach ($recent_videos_thumb as $key => $image) {
                                         ?>
                                         <li class="topi_image_li">
-                                            <a class="fancybox" target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key]; ?>" data-fancybox-group="gallery1">
+                                            <a class="fancybox video-w-icon" target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key]; ?>" data-fancybox-group="gallery1">
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
                                         </li>
@@ -184,7 +184,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2 topichat_msg_sec">
 <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-                                <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
+                            <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -311,7 +311,7 @@
                                                 <div class = "form-group clearfix">
                                                     <label class = "col-lg-2 col-md-2 col-sm-2 col-xs-5 control-label"><?php echo lang('Number of People'); ?> :</label>
                                                     <div class = "col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                                            <div class = "radio topchat_1_rdo edit_topichat_rdo">
+                                                        <div class = "radio topchat_1_rdo edit_topichat_rdo">
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "optionsRadios1" value = "-1" <?php echo ($topichat['person_limit'] == -1) ? 'checked' : '' ?>><?php echo lang('No limit'); ?></label>
                                                             <label>
@@ -330,7 +330,7 @@
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-?></span>
+                            ?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>

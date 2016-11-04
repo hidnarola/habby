@@ -18,6 +18,7 @@
                         <?php
                         if (count($posts) > 0) {
                             foreach ($posts as $post) {
+//                                pr($post);
                                 ?>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pst_full_sec post_masonry_article" data-post_id="<?php echo $post['id']; ?>">
                                     <div class="cmnt_newsec_row">
@@ -115,7 +116,7 @@
                                                             <div class="cmnt_newsec">
                                                                 <ul class="post_opn_ul list-inline">
                                                                     <li class="pull-left">
-                                                                        <a href="#" class="usr_post_img">
+                                                                        <a href="<?php echo base_url() . "user_profile/" . $post['user_id'] ?>" class="usr_post_img">
                                                                             <?php
                                                                             if (empty($post['post_user_profile'])) {
                                                                                 ?>
@@ -377,7 +378,7 @@
                                                             <div class="cmnt_newsec">
                                                                 <ul class="post_opn_ul list-inline">
                                                                     <li class="pull-left">
-                                                                        <a href="#" class="usr_post_img">
+                                                                        <a href="<?php echo base_url() . "user_profile/" . $post['user_id'] ?>" class="usr_post_img">
                                                                             <?php
                                                                             if (empty($post['post_user_profile'])) {
                                                                                 ?>

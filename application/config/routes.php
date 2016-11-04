@@ -64,6 +64,7 @@ $route["post/(:any)/(:any)"] = "user/post/$1/$2";
 
 $route["topichat"] = "user/topichat";
 $route["topichat/(:any)"] = "user/topichat/$1";
+$route["topichat/media/(:any)"] = "user/topichat/topichat_media/$1";
 $route["topichat/(:any)/(:any)"] = "user/topichat/$1/$2";
 
 $route["soulmate"] = "user/soulmate";

@@ -61,7 +61,7 @@ class Home extends CI_Controller {
      */
 
     public function challenge($page = 1) {
-        $limit = 2;
+        $limit = 1;
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->challange_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
@@ -204,6 +204,8 @@ class Home extends CI_Controller {
             $this->data['all_countries'] = $this->Users_model->get_all_countries();
             $this->data['posts'] = $this->Post_model->users_post($user_id, $this->session->user['id'], 0, 3);
             $this->data['saved_posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], 0, 3);
+            $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
+            $this->data['followings'] = $this->Users_model->get_user_following($user_id);
             $this->template->load('front', 'user/profile', $this->data);
         }
     }
@@ -302,18 +304,17 @@ class Home extends CI_Controller {
      * This function is used to display topichat groups details.
      * develop by : HPA
      */
-    public function topichat($user_id=0) {
-        if($user_id == 0)
-        {
+    public function topichat($user_id = 0) {
+        if ($user_id == 0) {
             $user_id = $this->session->user['id'];
-        }
-        else
-        {
-            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        } else {
+            $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
         }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group($user_id);
         $this->data['joined_topichats'] = $this->Topichat_model->get_joined_topichat_group($user_id);
+        $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
+        $this->data['followings'] = $this->Users_model->get_user_following($user_id);
         $this->template->load('front', 'user/topichat/home_topichat', $this->data);
     }
 
@@ -345,19 +346,18 @@ class Home extends CI_Controller {
      * This function is used to display Challenges details.
      * develop by : HPA
      */
-    public function challenges($user_id=0) {
-        if($user_id == 0)
-        {
+    public function challenges($user_id = 0) {
+        if ($user_id == 0) {
             $user_id = $this->session->user['id'];
-        }
-        else
-        {
-            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        } else {
+            $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
         }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_challenges'] = $this->Challenge_model->get_my_challenge($user_id);
         $this->data['joined_challenges'] = $this->Challenge_model->get_joined_challenge($user_id);
         $this->data['challenge_accepted'] = $this->Challenge_model->get_challenge_accepted($user_id);
+        $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
+        $this->data['followings'] = $this->Users_model->get_user_following($user_id);
         $this->template->load('front', 'user/challenge/home_challenge', $this->data);
     }
 
@@ -365,29 +365,30 @@ class Home extends CI_Controller {
      * This function is used to display League groups details.
      * develop by : HPA
      */
-    public function league($user_id=0) {
-        if($user_id == 0)
-        {
+    public function league($user_id = 0) {
+        if ($user_id == 0) {
             $user_id = $this->session->user['id'];
-        }
-        else
-        {
-            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        } else {
+            $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
         }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_leagues'] = $this->League_model->get_my_league($user_id);
         $this->data['joined_leagues'] = $this->League_model->get_joined_league($user_id);
+        $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
+        $this->data['followings'] = $this->Users_model->get_user_following($user_id);
         $this->template->load('front', 'user/league/home_league', $this->data);
     }
 
     public function user_profile($user_id) {
-        $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
+        $this->data['followings'] = $this->Users_model->get_user_following($user_id);
         $this->data['posts'] = $this->Post_model->users_post($user_id, $this->session->user['id'], 0, 3);
         $this->data['saved_posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], 0, 3);
         $this->template->load('front', 'user/profile', $this->data);
     }
-    
+
     public function events($user_id=0)
     {
         if($user_id == 0)
@@ -464,6 +465,26 @@ class Home extends CI_Controller {
         else
         {
             echo "0";
+        }
+    }
+    public function follow_user() {
+        if ($this->input->post()) {
+            $Ins_arr = array(
+                'user_id' => $this->input->post('user_id'),
+                'follower_id' => $this->session->user['id']
+            );
+            $id = $this->Users_model->insert_follower_data($Ins_arr);
+            echo $id;
+            exit;
+        }
+    }
+
+    public function unfollow_user() {
+        if ($this->input->post()) {
+            $where = 'user_id = ' . $this->db->escape($this->input->post('user_id')) . 'AND follower_id=' . $this->db->escape($this->session->user['id']);
+            $id = $this->Users_model->delete_follower_data($where);
+            echo $id;
+            exit;
         }
     }
 }
