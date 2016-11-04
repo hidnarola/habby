@@ -55,8 +55,7 @@ $('document').ready(function () {
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 1);
-                }
-                else if (str == 2)
+                } else if (str == 2)
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.sub').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
@@ -77,8 +76,7 @@ $('document').ready(function () {
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 1);
-                }
-                else if (str == -2)
+                } else if (str == -2)
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.add').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
@@ -94,11 +92,11 @@ $('document').ready(function () {
         else
             $("#txt_No_of_person").attr("disabled", "disabled");
     });
-    
+
     // Image uploading script
-    $("body").on("change","#uploadFile", function ()
+    $("body").on("change", "#uploadFile", function ()
     {
-                console.log('on change fired');
+        console.log('on change fired');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
             $('.message').html("No file selected.");
@@ -121,4 +119,42 @@ $('document').ready(function () {
             $('.message').show();
         }
     });
+
+    $(".video_wrapper").animate({scrollTop: $('.video_wrapper').prop("scrollHeight")}, 1000);
+    var load = true;
+    var in_progress = false;
+    $('.video_wrapper').scroll(function () {
+        if (load && !in_progress)
+        {
+            if ($('.video_wrapper').scrollTop() == 0) {
+                loadvideo();
+                in_process = true;
+            }
+        }
+    });
+
+    function loadvideo()
+    {
+        $.ajax({
+            url: base_url + 'topichat/load_more_video/' + group_id,
+            method: 'post',
+            async: false,
+            data: 'last_video=' + last_video,
+            success: function (more) {
+                more = JSON.parse(more);
+                if (more.status)
+                {
+                    $('.chat_area2').prepend(more.view);
+                    last_msg = more.last_msg_id;
+                    $(".chat_area2").animate({scrollTop: 200}, 500);
+                } else
+                {
+                    load = false;
+                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                    $(".chat_area2").animate({scrollTop: 0}, 500);
+                }
+                in_progress = false;
+            }
+        });
+    }
 });

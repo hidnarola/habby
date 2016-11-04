@@ -1,3 +1,7 @@
+<?php
+$controller = $this->router->fetch_class(); //outputs index
+$method_name = $this->router->fetch_method(); //outputs index
+?>
 <div class="row personal_act_sec">
     <?php
     if (isset($user_data) && !empty($user_data)) {
@@ -13,22 +17,21 @@
                                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                                     <div class="pfl_imgsec" style="height: 140px;max-width: 216px;">
                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image']; ?>" class="img-responsive center-block user_image" style="height: 100%;max-width: 100%;">
-                                        <?php 
-                                            if($user_data['id'] == $this->session->user['id'])
-                                            {
-                                                ?>
-                                                <div class="pfl_imgsec_innr">
-                                                    <div class="upld_sec">
-                                                        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() . "home/profile_upload" ?>" id="upload_user_image">
-                                                            <div class="fileUpload up_img btn">
-                                                                <span><i class="fa fa-camera" aria-hidden="true"></i> <?php echo lang('UPLOAD PROFILE PICTURE'); ?></span>
-                                                                <input type="file" class="upload" name="user_image">
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                        <?php
+                                        if ($user_data['id'] == $this->session->user['id']) {
+                                            ?>
+                                            <div class="pfl_imgsec_innr">
+                                                <div class="upld_sec">
+                                                    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() . "home/profile_upload" ?>" id="upload_user_image">
+                                                        <div class="fileUpload up_img btn">
+                                                            <span><i class="fa fa-camera" aria-hidden="true"></i> <?php echo lang('UPLOAD PROFILE PICTURE'); ?></span>
+                                                            <input type="file" class="upload" name="user_image">
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <?php
-                                            }
+                                            </div>
+                                            <?php
+                                        }
                                         ?>
                                     </div>
                                 </div>
@@ -39,13 +42,26 @@
                                         <p><?php echo lang('Country'); ?> : <?php echo get_country_name($user_data['country']) ?></p>
                                         <p><?php echo lang('Self-introduction'); ?> : <?php echo $user_data['bio'] ?></p>	
                                         <p><?php echo lang('Interest/Hobby'); ?> : <?php echo $user_data['hobby'] ?></p>
-                                        <?php 
-                                            if($user_data['id'] == $this->session->user['id'])
-                                            {
+                                        <?php
+                                        if ($user_data['id'] == $this->session->user['id']) {
+                                            ?>
+                                            <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn">Edit Profile</a></p>
+                                            <?php
+                                        } else {
+                                            if (isset($followers) && !empty($followers)) {
+                                                foreach ($followers as $follower) {
+                                                    if ($follower['follower_id'] == $this->session->user['id']) {
+                                                        ?>
+                                                        <p class="follow_p"><a href="javascript:void(0)" class="unfollowbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>">Followed</a></p>
+                                                        <?php
+                                                    }
+                                                }
+                                            } else {
                                                 ?>
-                                                <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn">Edit Profile</a></p>
+                                                <p class="follow_p"><a href="javascript:void(0)" class="followbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>">Follow</a></p>
                                                 <?php
                                             }
+                                        }
                                         ?>
                                     </div>
                                 </div>
@@ -58,28 +74,48 @@
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 col-lg-offset-1 col-md-offset-1 pad_lft0">
                             <div class="follower_sec follow_sec">
                                 <h2><?php echo lang('Follower'); ?></h2>
+
                                 <ul class="list-inline">
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                </ul>
-                                <ul class="list-inline">
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#">+<?php echo lang('more'); ?></a></li>
+                                    <?php
+                                    $i = 0;
+                                    if (isset($followers) && !empty($followers)) {
+                                        foreach ($followers as $follower) {
+                                            ?>
+                                            <li><a href="<?php echo base_url() . "user_profile/" . $follower['follower_id'] ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $follower['user_image']; ?>" title="<?php echo $follower['name']; ?>" class="img-circle" style="height: 25px;width: 25px;"></a></li>
+                                            <?php
+                                            $i++;
+                                        }
+                                        if ($i > 4) {
+                                            ?>
+                                            <li><a href="#">+<?php echo lang('more'); ?></a></li>
+                                            <?php
+                                        }
+                                    } else {
+                                        echo "<li>No Follower.</li>";
+                                    }
+                                    ?>
                                 </ul>
                             </div>
                             <div class="follow_sec2 follow_sec">
                                 <h2><?php echo lang('Follow'); ?></h2>
                                 <ul class="list-inline">
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png"></a></li>
-                                    <li><a href="#">+<?php echo lang('more'); ?></a></li>
+                                    <?php
+                                    $j = 0;
+                                    if (isset($followings) && !empty($followings)) {
+                                        foreach ($followings as $following) {
+                                            ?>
+                                            <li><a href="<?php echo base_url() . "user_profile/" . $following['user_id'] ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $following['user_image']; ?>" title="<?php echo $following['name']; ?>" class="img-circle" style="height: 25px;width: 25px;"></a></li>
+                                            <?php
+                                        }
+                                        if ($j > 4) {
+                                            ?>
+                                            <li><a href="#">+<?php echo lang('more'); ?></a></li>
+                                            <?php
+                                        }
+                                    } else {
+                                        echo "<li>No Followee.</li>";
+                                    }
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -98,29 +134,27 @@
     <div class="container personal_cntner sub_menusec">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad_lft_rit0">
             <ul class="list-inline submenu_ul">
-                <?php 
-                    if($user_data['id'] == $this->session->user['id'])
-                    {
-                        ?>
-                            <li><a href="<?php echo base_url() . "home/profile" ?>"><?php echo lang('IP'); ?></a></li>
-                            <li><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
-<!--                            <li><a href="<?php echo base_url() . "home/soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
-                            <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>-->
-                            <li><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
-                            <li><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>
-                        <?php
-                    }
-                    else
-                    {
-                        ?>
-                        <li><a href="<?php echo base_url() . "user_profile/".$user_data['id']; ?>"><?php echo lang('IP'); ?></a></li>
-                        <li><a href="<?php echo base_url() . "user_profile/topichat/".$user_data['id']; ?>"><?php echo lang('Topichat'); ?></a></li>
-<!--                        <li><a href="<?php echo base_url() . "user_profile/soulmate/".$user_data['id']; ?>"><?php echo lang('Soulmate'); ?></a></li>
-                        <li><a href="<?php echo base_url() . "user_profile/groupplan/".$user_data['id']; ?>"><?php echo lang('Group Plan'); ?></a></li>-->
-                        <li><a href="<?php echo base_url() . "user_profile/challenges/".$user_data['id']; ?>"><?php echo lang('Challenge'); ?></a></li>
-                        <li><a href="<?php echo base_url() . "user_profile/league/".$user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>
-                        <?php
-                    }
+                <?php
+                if ($user_data['id'] == $this->session->user['id']) {
+                    ?>
+                    <li class="<?php echo ($controller == 'home' && $method_name == 'profile') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/profile" ?>"><?php echo lang('IP'); ?></a></li>
+                    <li class="<?php echo ($controller == 'home' && $method_name == 'topichat') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
+    <!--                            <li><a href="<?php echo base_url() . "home/soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
+                    <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>-->
+                    <li class="<?php echo ($controller == 'home' && $method_name == 'challenges') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
+                    <li class="<?php echo ($controller == 'home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>
+                    <?php
+                } else {
+//                    echo $controller . " " . $method_name;
+                    ?>
+                    <li class="<?php echo ($controller == 'Home' && $method_name == 'user_profile') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/" . $user_data['id']; ?>"><?php echo lang('IP'); ?></a></li>
+                    <li class="<?php echo ($controller == 'Home' && $method_name == 'topichat') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/topichat/" . $user_data['id']; ?>"><?php echo lang('Topichat'); ?></a></li>
+    <!--                        <li><a href="<?php echo base_url() . "user_profile/soulmate/" . $user_data['id']; ?>"><?php echo lang('Soulmate'); ?></a></li>
+                    <li><a href="<?php echo base_url() . "user_profile/groupplan/" . $user_data['id']; ?>"><?php echo lang('Group Plan'); ?></a></li>-->
+                    <li class="<?php echo ($controller == 'Home' && $method_name == 'challenges') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/challenges/" . $user_data['id']; ?>"><?php echo lang('Challenge'); ?></a></li>
+                    <li class="<?php echo ($controller == 'Home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/league/" . $user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>
+                    <?php
+                }
                 ?>
             </ul>
         </div>
@@ -214,6 +248,65 @@
     $(function () {
         $('.upload').change(function () {
             $('#upload_user_image').submit();
+        });
+        $('.followbtn').click(function () {
+            var user_id = $(this).data('userid');
+            swal({
+                title: "Are you sure?",
+                text: "You would like to follow this user!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Follow!",
+                cancelButtonText: "No, cancel plz!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: '<?php echo base_url() . "home/follow_user"; ?>',
+                                type: 'POST',
+                                data: {user_id: user_id},
+                                success: function (data) {
+                                    $('.followbtn').text("Followed");
+                                    swal("Followed!", "User have been followed.", "success");
+                                }
+                            });
+                        } else {
+                            swal("Cancelled", "You are not follow this user :)", "error");
+                        }
+                    });
+        });
+
+        $('.unfollowbtn').click(function () {
+            var user_id = $(this).data('userid');
+            swal({
+                title: "Are you sure?",
+                text: "You would like to unfollow this user!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Unfollow!",
+                cancelButtonText: "No, cancel plz!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: '<?php echo base_url() . "home/unfollow_user"; ?>',
+                                type: 'POST',
+                                data: {user_id: user_id},
+                                success: function (data) {
+                                    $('.unfollowbtn').text("Follow");
+                                    swal("Followed!", "User have been Unfollowed.", "success");
+                                }
+                            });
+                        } else {
+                            swal("Cancelled", "You are not unfollow this user :)", "error");
+                        }
+                    });
         });
     });
 </script>

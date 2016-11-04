@@ -93,7 +93,7 @@ $language = $this->session->userdata('language');
                                             <li><a href="<?php echo base_url() . "league" ?>"><?php echo lang('League and alliance'); ?></a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="treehole.html"><?php echo lang('Live life'); ?></a></li>
+                                    <!--<li><a href="treehole.html"><?php echo lang('Live life'); ?></a></li>-->
 
                                 </ul>
                                 <ul class="list-unstyled srch_sec hidden-xs">

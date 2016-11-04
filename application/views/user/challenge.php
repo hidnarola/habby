@@ -3,7 +3,7 @@
 </div>
 <div class="row cont_sec1">
     <div class="home_lg_sec">
-        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 post_section">
+        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 post_section ">
             <?php
             if ($this->session->msg) {
                 ?>
@@ -13,12 +13,12 @@
                 <?php
             }
             ?>
-            <section class="post_masonry_section">
+            <section class="post_masonry_section grid">
                 <?php
                 foreach ($posts as $post) {
                     ?>
                     <!-- Each Rank section start here-->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 rank_lg_sec" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 rank_lg_sec grid-item" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
                         <div class="cmnt_newsec_row">
                             <div class="challange_info">
                                 <div class="challenge_header row">
@@ -118,9 +118,9 @@
                                                 <div id="popover-content" class="hide">
                                                     <ul class="share-icon-list">
                                                         <li>
-                                                            
+
                                                             <?php
-                                                            $media_url = (isset($post['media'])) ? $post['media']: '';
+                                                            $media_url = (isset($post['media'])) ? $post['media'] : '';
                                                             $media = "st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
                                                             $sharethis_content = "st_url='" . base_url() . "post/display_challenge_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
                                                             ?>
@@ -220,4 +220,11 @@
 //            }
 //        });
 //    }, 1500);
+//    $('.grid').masonry({
+//        // set itemSelector so .grid-sizer is not used in layout
+//        itemSelector: '.grid-item',
+//        // use element for option
+////        columnWidth: '33.33333333%',
+//        percentPosition: true
+//    });
 </script>

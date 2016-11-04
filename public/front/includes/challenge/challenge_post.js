@@ -12,18 +12,15 @@ $('document').ready(function () {
                 {
                     t.find('.coin_cnt').html((coin + 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
-                }
-                else if (str == 2)
+                } else if (str == 2)
                 {
                     alert("You can't take back given coin");
                     // t.find('.coin_cnt').html((coin - 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
-                }
-                else if (str == 3)
+                } else if (str == 3)
                 {
                     alert("You don't have enough coin to give");
-                }
-                else
+                } else
                 {
                     console.log('fail');
                 }
@@ -44,14 +41,12 @@ $('document').ready(function () {
                     // User liked images
                     t.find('.like_cnt').html((like + 1));
                     t.find('.like_img').attr('src', base_url + 'public/front/img/liked_img.png');
-                }
-                else if (str == -1)
+                } else if (str == -1)
                 {
                     // User disliked the post
                     t.find('.like_cnt').html((like - 1));
                     t.find('.like_img').attr('src', base_url + 'public/front/img/like_img.png');
-                }
-                else
+                } else
                 {
                     // like failed
                     console.log('fail');
@@ -106,14 +101,12 @@ $('document').ready(function () {
                     // User liked images
                     t.find('.post_comment_like').html((like + 1));
                     t.find('.post_comment_text').html('Unlike');
-                }
-                else if (str == -1)
+                } else if (str == -1)
                 {
                     // User disliked the post
                     t.find('.post_comment_like').html((like - 1));
                     t.find('.post_comment_text').html('Like');
-                }
-                else
+                } else
                 {
                     // like failed
                     console.log('fail');
@@ -205,9 +198,17 @@ $('document').ready(function () {
                 {
                     load = false;
                     $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
-                }
-                else
+                } else
                 {
+                    setTimeout(function () {
+                        $('.grid').masonry({
+                            // set itemSelector so .grid-sizer is not used in layout
+                            itemSelector: '.grid-item',
+                            // use element for option
+//                            columnWidth: '33.33333333%',
+                            percentPosition: true
+                        });
+                    }, 1000);
                     $('.post_masonry_section').append(data.view);
                 }
             }

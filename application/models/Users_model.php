@@ -88,6 +88,40 @@ class Users_model extends CI_Model {
         return $res;
     }
 
+    /* v! Insert data into users table */
+
+    public function insert_follower_data($data) {
+        $this->db->insert('follower', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+    }
+
+    public function delete_follower_data($where) {
+        $this->db->where($where);
+        $this->db->delete('follower');
+        return true;
+    }
+
+    public function get_user_follower($user_id) {
+        if ($user_id != "") {
+            $this->db->select('u.name,u.user_image,f.*');
+            $this->db->join('users u', 'u.id=f.follower_id');
+            $this->db->where('f.user_id', $user_id);
+            $res_data = $this->db->get('follower f')->result_array();
+            return $res_data;
+        }
+    }
+
+    public function get_user_following($user_id) {
+        if ($user_id != "") {
+            $this->db->select('u.name,u.user_image,f.*');
+            $this->db->join('users u', 'u.id=f.user_id');
+            $this->db->where('f.follower_id', $user_id);
+            $res_data = $this->db->get('follower f')->result_array();
+            return $res_data;
+        }
+    }
+
 }
 
 ?>

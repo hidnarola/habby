@@ -160,7 +160,7 @@ class Topichat extends CI_Controller {
                 'topic_name' => $this->input->post('topic_name'),
                 'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
                 'notes' => $this->input->post('notes'),
-                //'user_id' => $this->data['user_data']['id'],
+                    //'user_id' => $this->data['user_data']['id'],
             );
         }
         if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
@@ -199,7 +199,7 @@ class Topichat extends CI_Controller {
         $arr['user_id'] = $this->session->user['id'];
         $arr['description'] = "has changed group info";
         $this->Topichat_model->insert_topichat_group_modification($arr);
-        redirect('topichat/details/'.  urlencode(base64_encode($group_id)));
+        redirect('topichat/details/' . urlencode(base64_encode($group_id)));
     }
 
     /*
@@ -344,6 +344,33 @@ class Topichat extends CI_Controller {
                 echo '0';
             }
         }
+    }
+
+    public function topichat_media($Id) {
+        $Id = base64_decode(urldecode($Id));
+        $this->data['group_id'] = $Id;
+        $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
+        $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id, $image_limit = 8);
+        $this->data['recent_videos_thumb'] = array();
+        foreach ($this->data['recent_videos'] as $video) {
+            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+        }
+        $this->template->load('join', 'user/topichat/topichat_media', $this->data);
+    }
+
+    public function load_more_video($group_id) {
+        $limit = 10;
+        $last_video_id = $this->input->post('last_video');
+//        $this->data['videos'] = $this->Topichat_model->load_recent_videos($group_id, $limit, $last_msg_id);
+//        if (count($this->data['messages']) > 0) {
+//            $data['status'] = 1;
+//            krsort($this->data['messages']); // Reverse array
+//            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
+//            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+//        } else {
+//            $data['status'] = 0;
+//        }
+        echo json_encode($data);
     }
 
 }
