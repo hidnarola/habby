@@ -106,6 +106,7 @@
                             <li><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
 <!--                            <li><a href="<?php echo base_url() . "home/soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
                             <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>-->
+                            <li><a href="<?php echo base_url() . "home/events" ?>"><?php echo lang('Events'); ?></a></li>
                             <li><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
                             <li><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>
                         <?php
@@ -117,6 +118,7 @@
                         <li><a href="<?php echo base_url() . "user_profile/topichat/".$user_data['id']; ?>"><?php echo lang('Topichat'); ?></a></li>
 <!--                        <li><a href="<?php echo base_url() . "user_profile/soulmate/".$user_data['id']; ?>"><?php echo lang('Soulmate'); ?></a></li>
                         <li><a href="<?php echo base_url() . "user_profile/groupplan/".$user_data['id']; ?>"><?php echo lang('Group Plan'); ?></a></li>-->
+                        <li><a href="<?php echo base_url() . "user_profile/events/".$user_data['id']; ?>"><?php echo lang('Events'); ?></a></li>
                         <li><a href="<?php echo base_url() . "user_profile/challenges/".$user_data['id']; ?>"><?php echo lang('Challenge'); ?></a></li>
                         <li><a href="<?php echo base_url() . "user_profile/league/".$user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>
                         <?php

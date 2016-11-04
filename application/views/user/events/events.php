@@ -61,7 +61,7 @@
     </div>
     <!-- Group section container end here -->
     <?php
-    if ($cnt >= 4) {
+    if ($cnt >= 2) {
         ?>
         <div class = "row">
             <div class = "container">

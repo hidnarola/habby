@@ -1,8 +1,8 @@
 <?php
-foreach ($event_posts as $event) {
+foreach ($event_post as $event) {
     ?>
     <!-- Group plan each section start here -->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 event_post " data-id="<?php echo $event['id'] ?>">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 event_post " data-id="<?php echo $event['id'] ?>">
         <div class='grp_pln_sec'>
             <div class="event_profile_sec">
                 <div class="usr_post_img">
@@ -46,25 +46,6 @@ foreach ($event_posts as $event) {
             </div>
             <div class='event_seat'>
                 <span><?php echo lang("Number of seat") . " : " . $event['limit']; ?></span>
-                <?php
-                if ($event['is_joined']) {
-                    ?>
-                    <a href='<?php echo base_url().'/events/details/'. urlencode(base64_encode($event['id'])) ?>' class='pstbtn'>Enter</a>
-                    <?php
-                }
-                else if($event['is_requested'])
-                {
-                    ?>
-                    <a href='javascript:;' class='pstbtn'>Requested</a>
-                    <?php
-                }
-                else
-                {
-                    ?>
-                    <a href='javascript:;' class='pstbtn event_join'>Join</a>
-                    <?php
-                }
-                ?>
             </div>
         </div>
     </div>

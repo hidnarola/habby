@@ -269,12 +269,18 @@ $lang["From current location"] = "From current location";
 $lang["Yes"] = "Yes";
 $lang["No"] = "No";
 $lang["Number of seat"] = "Number of seat";
+$lang["Created Events"] = "Created Events";
+$lang["Joined Events"] = "Joined Events";
+$lang["No more event found"] = "No more event found";
+$lang["No Joined Event available"] = "No Joined Event available";
+$lang["No Joined Event available."] = "No Joined Event available.";
+$lang["No Event available"] = "No Event available";
+$lang["Event join request"] = "Event join request";
+$lang["wants to join"] = "wants to join";
 $lang[""] = "";
 $lang[""] = "";
 $lang[""] = "";
 $lang[""] = "";
 $lang[""] = "";
-$lang[""] = "";
-
 
 ?>

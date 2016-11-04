@@ -18,7 +18,7 @@ class Events extends CI_Controller {
     }
 
     public function index($page = 1) {
-        $limit = 4;
+        $limit = 2;
         $start = ($page - 1) * $limit;
         $this->data['event_posts'] = $this->Event_model->get_event_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
@@ -145,7 +145,7 @@ class Events extends CI_Controller {
                 {
                     // User can join group
                     // Check for approval is needed or not
-                    if($this->Event_model->Is_approval_needed_for_event($event))
+                    if($this->Event_model->Is_approval_needed_for_event($event_id))
                     {
                         // Request for join group
                         if($this->Event_model->add_event_join_request($logged_in_user,$event_id))
@@ -187,5 +187,25 @@ class Events extends CI_Controller {
             // User already available in that event
             echo "0";
         }
+    }
+    
+    /*
+     * 
+     */
+    public function details($id){
+        $limit = 20;
+        $id = base64_decode(urldecode($id));
+        $this->data['group_id'] = $id;
+        $this->data['event'] = $this->Event_model->get_event_by_id($id);
+        $this->data['recent_images'] = array();
+        $this->data['recent_videos'] = array();
+        $this->data['recent_videos_thumb'] = array();
+        foreach ($this->data['recent_videos'] as $video) {
+            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+        }
+        
+        $this->data['messages'] = array();
+        krsort($this->data['messages']); // Reverse array
+        $this->template->load('join', 'user/events/join_event', $this->data);
     }
 }

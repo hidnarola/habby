@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Post_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model'));
+        $this->load->model(array('Users_model', 'Post_model','Event_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -386,5 +386,84 @@ class Home extends CI_Controller {
         $this->data['posts'] = $this->Post_model->users_post($user_id, $this->session->user['id'], 0, 3);
         $this->data['saved_posts'] = $this->Post_model->saved_post($user_id, $this->session->user['id'], 0, 3);
         $this->template->load('front', 'user/profile', $this->data);
+    }
+    
+    public function events($user_id=0)
+    {
+        if($user_id == 0)
+        {
+            $user_id = $this->session->user['id'];
+        }
+        else
+        {
+            $this->data['user_data'] =  $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
+        }
+        $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['user_events'] = $this->Event_model->get_users_event($user_id,0,3);
+        $this->data['joined_events'] = $this->Event_model->get_users_joined_event($user_id,0,3);
+        if($user_id == $this->session->user['id'])
+        {
+            $this->data['event_request'] = $this->Event_model->get_join_request($user_id);
+        }
+        $this->template->load('front', 'user/events/home_events', $this->data);
+    }
+    
+    public function load_users_events($user_id,$page)
+    {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        $this->data['event_post'] = $this->Event_model->get_users_event($user_id,$start,$limit);
+        if (count($this->data['event_post']) > 0) {
+            $data['view'] = $this->load->view('user/partial/events/load_user_events',$this->data,true);
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+            $data['message'] = lang("No more event found");
+        }
+        echo json_encode($data);
+    }
+    
+    public function load_users_joined_events($user_id,$page)
+    {
+        $limit = 3;
+        $start = ($page - 1) * $limit;
+        $this->data['event_post'] = $this->Event_model->get_users_joined_event($user_id,$start,$limit);
+        if (count($this->data['event_post']) > 0) {
+            $data['view'] = $this->load->view('user/partial/events/load_user_events',$this->data,true);
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+            $data['message'] = lang("No more saved post found");
+        }
+        echo json_encode($data);
+    }
+    
+    public function accept_event_request($request_id){
+        $event_request = $this->Event_model->get_event_request($request_id);
+        
+        //Delete request
+        $this->Event_model->delete_request($request_id);
+        
+        // Insert into event_user
+        if($this->Event_model->add_event_user($event_request['user_id'],$event_request['event_id']))
+        {
+            echo "1";
+        }
+        else
+        {
+            echo "0";
+        }
+    }
+    
+    public function deny_event_request($request_id){
+        //Delete request
+        if($this->Event_model->delete_request($request_id))
+        {
+            echo "1";
+        }
+        else
+        {
+            echo "0";
+        }
     }
 }

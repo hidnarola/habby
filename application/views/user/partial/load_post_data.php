@@ -157,7 +157,7 @@ if (count($posts) > 0) {
                                                 <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top">
                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                     <span>
-                                                        <?php echo $post['post_share'] ?> Shares
+                                                        <?php // echo $post['post_share'] ?> Shares
                                                     </span>
                                                 </a>
 

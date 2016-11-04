@@ -35,7 +35,7 @@ $language = $this->session->userdata('language');
                                     <?php echo $this->session->user['name'] ?>
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-menu profile_dropdown" role="menu">
                                     <li><a href="<?php echo base_url() . "home/profile" ?>"><i class="fa fa-user" aria-hidden="true"></i> <?php echo lang('Profile'); ?></a></li>
                                     <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a></li>
                                 </ul>

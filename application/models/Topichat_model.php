@@ -96,6 +96,7 @@ class Topichat_model extends CI_Model {
         $this->db->like('tg.topic_name', $search_topic);
 //        $this->db->where('tg.user_id !=' . $user_id . ' AND tt.user_id IS NULL');
         $this->db->limit($limit, $start);
+        $this->db->group_by('tg.id');
         $res_data = $this->db->get('topic_group tg')->result_array();
         return $res_data;
     }

@@ -189,7 +189,7 @@
 
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                     <span>
-                                                                        <?php echo $post['post_share'] ?> Shares
+                                                                        <?php // echo $post['post_share'] ?> Shares
                                                                     </span>
                                                                 </a>
 

@@ -31,10 +31,11 @@ class Event_model extends CI_Model {
         {
             $this->db->where('where',$where);
         }
-        $this->db->select('e.*,u.name,u.user_image,count(distinct eu.id) as is_joined');
+        $this->db->select('e.*,u.name,u.user_image,count(distinct eu.id) as is_joined,count(distinct er.id) as is_requested');
         $this->db->from('events e');
         $this->db->join('users u','e.user_id = u.id');
         $this->db->join('event_users eu','eu.event_id = e.id and eu.user_id = '.$logged_in_user,'left');
+        $this->db->join('event_request er','er.event_id = e.id and er.user_id = '.$logged_in_user,'left');
         $this->db->group_by('e.id');
         $this->db->order_by('e.id','desc');
         $this->db->limit($limit,$start);
@@ -131,6 +132,93 @@ class Event_model extends CI_Model {
             return true;
         }
         return false;
+    }
+    
+    /*
+     * 
+     */
+    public function get_users_event($user_id,$start,$limit) {
+        $this->db->select('e.*,u.name,u.user_image');
+        $this->db->from('events e');
+        $this->db->join('users u','e.user_id = u.id');
+        $this->db->where('e.user_id = '.$user_id);
+        $this->db->group_by('e.id');
+        $this->db->order_by('e.id','desc');
+        $this->db->limit($limit,$start);
+        $post = $this->db->get()->result_array();
+        
+        $event_ids = array_column($post, 'id');
+        if(count($event_ids) > 0)
+        {
+            $this->db->where_in('event_id',$event_ids);
+            $media = $this->db->get('event_media')->result_array();
+            foreach ($media as $event_media) {
+                $post[array_search($event_media['event_id'],$event_ids)]['media'][] = $event_media;
+            }
+        }
+        return $post;
+    }
+    
+    /*
+     * 
+     */
+    public function get_users_joined_event($user_id,$start,$limit) {
+        $this->db->select('e.*,u.name,u.user_image');
+        $this->db->from('events e');
+        $this->db->join('users u','e.user_id = u.id');
+        $this->db->join('event_users eu','eu.event_id = e.id and eu.user_id ='.$user_id.' and e.user_id != '.$user_id);
+        $this->db->group_by('e.id');
+        $this->db->order_by('e.id','desc');
+        $this->db->limit($limit,$start);
+        $post = $this->db->get()->result_array();
+        
+        $event_ids = array_column($post, 'id');
+        if(count($event_ids) > 0)
+        {
+            $this->db->where_in('event_id',$event_ids);
+            $media = $this->db->get('event_media')->result_array();
+            foreach ($media as $event_media) {
+                $post[array_search($event_media['event_id'],$event_ids)]['media'][] = $event_media;
+            }
+        }
+        return $post;
+    }
+    
+    /*
+     * 
+     */
+    public function get_join_request($user_id)
+    {
+        $this->db->select("er.id,e.title,u.name,u.user_image");
+        $this->db->from("event_request er");
+        $this->db->join("events e","er.event_id = e.id and e.user_id = ".$user_id);
+        $this->db->join("users u","er.user_id = u.id");
+        return $this->db->get()->result_array();
+    }
+    
+    /*
+     * 
+     */
+    public function get_event_request($request_id){
+        return $this->db->where('id',$request_id)->get('event_request')->row_array();
+    }
+    
+    /*
+     * 
+     */
+    public function delete_request($request_id){
+        if($this->db->where('id',$request_id)->delete('event_request'))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    /*
+     * 
+     */
+    public function get_event_by_id($id){
+        return $this->db->where('id',$id)->get('events')->row_array();
     }
 }
 

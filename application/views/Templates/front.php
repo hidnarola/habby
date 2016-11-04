@@ -117,8 +117,8 @@
 
                                             <!-- tittle or short description section satrt here -->
                                             <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-                                                <div class="jst_txt">
-                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_prfl_icon.png" ?>"> <?php echo lang('title /short description'); ?> 
+                                                <div class="jst_txt usr_post_img">
+                                                    <img class='img-circle' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$this->session->user['user_image'] ?>"> <?php echo lang('title /short description'); ?> 
                                                 </div>
                                                 <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                                             </div>
