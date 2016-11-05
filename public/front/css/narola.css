@@ -133,9 +133,10 @@
     vertical-align: middle;
 }
 .chlng2_cnt > p {
-    height: 93px;
-    overflow: hidden;
-    width: 500px;
+    height: 64px;
+    overflow-y: scroll;
+    width: 100%;
+    margin-bottom: 17px;
 }
 .col-lg-4.col-md-4.col-sm-4.col-xs-12.grp_cl6:nth-child(3n+1) {
     clear: both;
@@ -383,7 +384,23 @@
     margin-bottom: 30px;
 }
 
+.chalng_descpn {
+    padding: 13px 15px !important;
+}
 
+.chlng2_cnt {
+    width: 100%!important;
+}
+.mak_chlng_sec_innr {
+    width: 100%;
+    max-width: 100%;
+    margin: 0px 0px !important;
+}
+.row.rwrds_chlng2 {
+    border-top: 1px solid;
+    margin-top: auto;
+    border-color: #d8d8d8;
+}
 @media(min-width:1583px){.row.event_container {
                              margin: 0 auto;
                              width: 1289px;

@@ -214,6 +214,7 @@ class Topichat extends CI_Controller {
             $filterby = $this->input->get('topic_filter');
             $search_topic = $this->input->get('topic');
             $this->data['filterby'] = $filterby;
+            $this->data['topic'] = $search_topic;
             $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($search_topic, $filterby, $start, $limit);
 //            pr($this->data['topichat_groups'], 1);
             if ($page == 1) {
@@ -361,15 +362,16 @@ class Topichat extends CI_Controller {
     public function load_more_video($group_id) {
         $limit = 10;
         $last_video_id = $this->input->post('last_video');
-//        $this->data['videos'] = $this->Topichat_model->load_recent_videos($group_id, $limit, $last_msg_id);
-//        if (count($this->data['messages']) > 0) {
-//            $data['status'] = 1;
-//            krsort($this->data['messages']); // Reverse array
-//            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
-//            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
-//        } else {
-//            $data['status'] = 0;
-//        }
+        $this->data['videos'] = $this->Topichat_model->load_recent_videos($group_id, $limit, $last_video_id);
+        pr($this->data['videos'], 1);
+        if (count($this->data['videos']) > 0) {
+            $data['status'] = 1;
+            krsort($this->data['videos']); // Reverse array
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_video', $this->data, true);
+            $data['last_video_id'] = $this->data['videos'][count($this->data['videos']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
         echo json_encode($data);
     }
 
