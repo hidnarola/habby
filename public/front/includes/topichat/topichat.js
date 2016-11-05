@@ -119,43 +119,45 @@ $('document').ready(function () {
         }
     });
 
-//    $(".video_wrapper").animate({scrollTop: $('.video_wrapper').prop("scrollHeight")}, 1000);
-//    var load = true;
-//    var in_progress = false;
-//    $('.video_wrapper').scroll(function () {
-//        if (load && !in_progress)
-//        {
-//            if ($('.video_wrapper').scrollTop() == 0) {
-//                loadvideo();
-//                in_process = true;
-//            }
-//        }
-//    });
-//
-//    function loadvideo()
-//    {
-//        $.ajax({
-//            url: base_url + 'topichat/load_more_video/' + group_id,
-//            method: 'post',
-//            async: false,
-//            data: 'last_video=' + last_video,
-//            success: function (more) {
-//                console.log(more);
-//                return false;
-//                more = JSON.parse(more);
-//                if (more.status)
-//                {
-//                    $('.chat_area2').prepend(more.view);
-//                    last_msg = more.last_msg_id;
-//                    $(".chat_area2").animate({scrollTop: 200}, 500);
-//                } else
-//                {
-//                    load = false;
-//                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
-//                    $(".chat_area2").animate({scrollTop: 0}, 500);
-//                }
-//                in_progress = false;
-//            }
-//        });
-//    }
+    var load = true;
+    var in_progress = false;
+    $('.video_wrapper').scroll(function () {
+        if (load && !in_progress)
+        {
+//            if ($('.video_wrapper').scrollTop() == $('.video_wrapper').height) {
+//            if ($('.video_wrapper').scrollTop() == ($(document).height() - $('.video_wrapper').height())) {
+            if($('.video_wrapper').scrollTop() + $('.video_wrapper').innerHeight() >= $('.video_wrapper')[0].scrollHeight){
+                loadvideo();
+                in_process = true;
+            }
+        }
+    });
+
+    function loadvideo()
+    {
+        $.ajax({
+            url: base_url + 'topichat/load_more_video/' + group_id,
+            method: 'post',
+            async: false,
+            data: 'last_video=' + last_video,
+            success: function (more) {
+                console.log(more);
+                return false;
+                more = JSON.parse(more);
+                if (more.status)
+                {
+                    $('.chat_area2').prepend(more.view);
+                    last_msg = more.last_msg_id;
+                    $(".chat_area2").animate({scrollTop: 200}, 500);
+                }
+                else
+                {
+                    load = false;
+                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                    $(".chat_area2").animate({scrollTop: 0}, 500);
+                }
+                in_progress = false;
+            }
+        });
+    }
 });
