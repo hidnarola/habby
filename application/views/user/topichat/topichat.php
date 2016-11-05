@@ -31,7 +31,7 @@
                     <div id="custom-search-input">
                         <div class="input-group col-md-12">
                             <input type="hidden" class="search-query form-control" placeholder="<?php echo lang('Find your group'); ?>" name="topic_filter" value="<?php echo (isset($filterby)) ? $filterby : "" ?>"/>
-                            <input type="text" class="search-query form-control" placeholder="<?php echo lang('Find your group'); ?>" name="topic" />
+                            <input type="text" class="search-query form-control" placeholder="<?php echo lang('Find your group'); ?>" name="topic" value="<?php echo (isset($topic)) ? $topic : "" ?>" />
                             <span class="input-group-btn">
                                 <button class="btn btn-danger find_topic" type="submit">
                                     <span class="glyphicon glyphicon-search"></span>

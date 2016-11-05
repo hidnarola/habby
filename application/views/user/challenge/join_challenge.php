@@ -22,9 +22,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="chalng_descpn">
-                            <p><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="smlt_usrimg1">
-                                Introduction / Description
-                            </p>
+                            <p>Upload Challenge Post</p>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chalng_upld_col">
@@ -64,7 +62,7 @@
                                                 if ($challenge_users != null && !empty($challenge_users)) {
                                                     foreach ($challenge_users as $challenge_user) {
                                                         ?>
-                                                        <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle"></a> <span><?php echo $challenge_user['display_name'] ?></span></li>
+                                                        <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle user_chat_thumb"></a> <span><?php echo $challenge_user['display_name'] ?></span></li>
                                                         <?php
                                                     }
                                                 }
@@ -178,7 +176,7 @@
                             ?>
                             <div class="mak_chlng_sec">
                                 <h2 class="chlng_ttl">
-                                    <span ><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge['user_image']; ?>" class="smlt_usrimg1 img-circle"> "<?php echo $challenge['display_name'] ?>"</span>
+                                    <span ><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge['user_image']; ?>" class="smlt_usrimg1 img-circle user_chat_thumb"> "<?php echo $challenge['display_name'] ?>"</span>
                                     <span>  makes a challenge to public</span>
                                 </h2>
                                 <div class="mak_chlng_sec_innr">

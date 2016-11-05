@@ -26,6 +26,7 @@
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>-->
         <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
         <script src="<?php echo DEFAULT_ADMIN_JS_PATH . "sweetalert.min.js"; ?>"></script>
+        <script type="text/javascript" src="<?php echo USER_JS; ?>post/post.js"></script>
 
 
 
@@ -121,7 +122,7 @@
                                             <!-- tittle or short description section satrt here -->
                                             <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
                                                 <div class="jst_txt usr_post_img">
-                                                    <img class='img-circle' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$this->session->user['user_image'] ?>"> <?php echo lang('title /short description'); ?> 
+                                                    <img class='img-circle' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] ?>"> <?php echo lang('title /short description'); ?> 
                                                 </div>
                                                 <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
                                             </div>

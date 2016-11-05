@@ -270,4 +270,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo USER_JS; ?>post/post.js"></script>
