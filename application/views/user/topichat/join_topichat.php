@@ -250,7 +250,7 @@
                                                 <span class="input-group-btn upld_icnpad">
                                                     <div class="fileUpload up_img btn">
                                                         <span><img title="Upload file" src="<?php echo DEFAULT_IMAGE_PATH; ?>upload.png"></span>
-                                                        <input type="file" name="upload_file" class="upload" id="uploadFile"/>
+                                                        <input type="file" name="upload_files" class="upload" id="upload_files"/>
                                                     </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
