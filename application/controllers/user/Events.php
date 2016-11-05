@@ -204,7 +204,7 @@ class Events extends CI_Controller {
             $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
         }
         
-        $this->data['messages'] = array();
+        $this->data['messages'] = $this->Event_model->get_messages($id, $limit);;
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/events/join_event', $this->data);
     }

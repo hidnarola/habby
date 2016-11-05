@@ -172,4 +172,37 @@ function send_challenge_media($group_id, $sender_id, $msg,$media_type) {
         }
     }
 }
+
+function get_event_users($group_id) {
+    global $conn;
+    $result = mysqli_query($conn, "select user_id from event_users where event_id = $group_id");
+    if (mysqli_num_rows($result) > 0) {
+        $arr = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $arr[] = $row['user_id'];
+        }
+        return $arr;
+    } else {
+        return 0;
+    }
+}
+
+function send_event_msg($group_id, $sender_id, $msg) {
+    global $conn;
+    $query = "insert into event_chat value(NULL,$group_id,$sender_id,'" . mysqli_real_escape_string($conn,$msg) . "',NULL,NULL,NULL)";
+    if (mysqli_query($conn, $query)) {
+        return true;
+    }
+    return false;
+}
+
+function send_event_media($group_id, $sender_id, $msg,$media_type) {
+    global $conn;
+    foreach ($msg as $media) {
+        $query = "insert into event_chat value(NULL,$group_id,$sender_id,'','".$media->media."','".$media_type."',NULL)";
+        if (mysqli_query($conn, $query)) {
+            return true;
+        }
+    }
+}
 ?>

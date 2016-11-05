@@ -4,7 +4,7 @@ data = JSON.parse(data);
 function send(text) {
     var msg = {
         message: text,
-        type: 'topic_msg',
+        type: 'event_msg',
         group_id: group_id
     }
     Server.send('message', JSON.stringify(msg));
@@ -41,7 +41,7 @@ $(document).ready(function () {
         msg = $('#message_div').html();
         if (msg.trim() != '')
         {
-            $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg + "</span></span></div>");
+            $('.chat_area2').append("<div class='chat_2 clearfix event_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg + "</span></span></div>");
             send(msg);
             $('#message_div').html('');
             $('#message').val('');
@@ -71,7 +71,7 @@ $(document).ready(function () {
                     // $('#imagePreview').addClass('imagePreview');
                     $('.message').hide();
 
-                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
+                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
 
                     $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
 
@@ -109,7 +109,7 @@ $(document).ready(function () {
                 {
                     var msg = {
                         message: str,
-                        type: 'topic_msg',
+                        type: 'event_msg',
                         group_id: group_id,
                         media: 'image'
                     }
@@ -144,7 +144,7 @@ $(document).ready(function () {
                         display_file_class = 'imagePreview' + i;
 
                         $('.message').hide();
-                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="float:right"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + '"  id="imagePreview_msg"></span></div></div>');
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="float:right"><span class="' +display_file_class+ '"  id="imagePreview_msg"></span></div></div>');
                         $('.' + display_file_class).html("<video controls='' src='" + this.result + "' style='height:180px;'>");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                     }
@@ -190,7 +190,7 @@ $(document).ready(function () {
                 {
                     var msg = {
                         message: str,
-                        type: 'topic_msg',
+                        type: 'event_msg',
                         group_id: group_id,
                         media: 'video'
                     }
@@ -207,7 +207,7 @@ $(document).ready(function () {
             type: 'room_bind',
             message: data,
             group_id: group_id,
-            room_type: 'topic_msg'
+            room_type: 'event_msg'
         }
         Server.send('message', JSON.stringify(msg));
     });
@@ -224,7 +224,7 @@ $(document).ready(function () {
         if (userdata.media_type == null)
         {
             console.log("text message");
-            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
+            $('.chat_area2').append('<div class="chat_1 clearfix event_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
 
         }
         else
@@ -232,16 +232,14 @@ $(document).ready(function () {
             if (userdata.media_type == "image")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                $('.chat_area2').append('<div class="chat_1 clearfix event_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
 
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
             }
             else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
-
-                //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
             }
         }

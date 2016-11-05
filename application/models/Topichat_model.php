@@ -151,7 +151,6 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-
     public function get_messages($group_id, $logged_in_user, $limit = null) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
@@ -174,7 +173,6 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-
     public function load_messages($group_id, $limit, $last_msg_id) {
         $this->db->select('tg.*,u.name,u.user_image');
         $this->db->where('tg.topic_group_id', $group_id);

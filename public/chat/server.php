@@ -28,7 +28,6 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
-                echo "message received";print_r($message);
                 $user_ids = get_topichat_users($message->group_id);
                 // database entry for topichat
                 if(isset($message->media))
@@ -59,7 +58,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             }
-            if ($message->type == 'soulmate_msg') {
+            else if ($message->type == 'soulmate_msg') {
                 $to_user = $message->to_user;
                 if(isset($message->media))
                 {
@@ -121,7 +120,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         }
                     }
                 }
-            } else if ($message->type == 'league_msg') {
+            } 
+            else if ($message->type == 'league_msg') {
                 $user_ids = get_league_users($message->group_id);
                 // database entry for topichat
                 if(isset($message->media))
@@ -152,7 +152,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         }
                     }
                 }
-            } else if ($message->type == 'challenge_msg') {
+            } 
+            else if ($message->type == 'challenge_msg') {
                 $user_ids = get_challenge_users($message->group_id);
                 // database entry for topichat
                 if(isset($message->media))
@@ -165,6 +166,37 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     send_challenge_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
 
+                // Send message to user
+                if (count($user_ids) > 1) {
+                    if (sizeof($Server->wsClients) != 1) {
+                        // object that sent to recieving user
+                        $send_object = array();
+                        $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
+                        $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
+                        $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
+                        $send_object['message'] = $message->message;
+                        $send_object['media'] = (isset($message->media)?$message->message[0]->media:NULL);
+                        $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
+                        foreach ($Server->wsClients as $id => $client) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
+                                $Server->wsSend($id, json_encode($send_object));
+                            }
+                        }
+                    }
+                }
+            }
+            else if ($message->type == 'event_msg') {
+                $user_ids = get_event_users($message->group_id);
+                // database entry for event
+                if(isset($message->media))
+                {
+                    $message->message = json_decode($message->message);
+                    send_event_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
+                }
+                else
+                {
+                    send_event_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                }
                 // Send message to user
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {

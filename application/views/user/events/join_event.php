@@ -106,7 +106,7 @@ if (count($recent_images) > 0) {
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2 event_msg_sec">
 <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-<?php $this->load->view('user/partial/topichat/load_more_msg') ?>
+<?php $this->load->view('user/partial/events/load_more_msg') ?>
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -276,5 +276,5 @@ if (count($recent_images) > 0) {
     last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
     upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
-<script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>
+<script type="text/javascript" src="<?php echo USER_JS ?>/event/join_event.js"></script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>

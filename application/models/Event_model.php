@@ -220,6 +220,24 @@ class Event_model extends CI_Model {
     public function get_event_by_id($id){
         return $this->db->where('id',$id)->get('events')->row_array();
     }
+    
+    /*
+     * get_messages is used to fetch message for given group
+     * @param $event_id int specify event id to which message will fetch
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+    public function get_messages($event_id, $limit = null) {
+        $this->db->select('ec.*,u.name,u.user_image');
+        $this->db->where('ec.event_id', $event_id);
+        $this->db->join('users u', 'ec.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('ec.id', 'desc');
+        $this->db->group_by('ec.id');
+        return $this->db->get('event_chat ec')->result_array();
+    }
 }
 
 ?>
