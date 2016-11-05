@@ -352,10 +352,12 @@ class Topichat extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
         $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($Id, $limit = 8);
+//        pr($this->data['recent_videos'],1);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
-            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+            $this->data['recent_videos_thumb'][] = explode(".", $video['media'])[0] . "_thumb.png";
         }
+//        pr($this->data['recent_videos_thumb'],1);        
         $this->template->load('join', 'user/topichat/topichat_media', $this->data);
     }
 
