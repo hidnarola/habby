@@ -205,6 +205,35 @@ class User extends CI_Controller {
                     exec($cmd);
                 }
             }
+        } else if (!empty($_FILES['files-0']['name'])) {
+            $filecount = count($_FILES['files-0']['name']);
+            for ($i = 0; $i < $filecount; ++$i) {
+                $_FILES['files']['name'] = $_FILES['files-0']['name'][$i];
+                $_FILES['files']['type'] = $_FILES['files-0']['type'][$i];
+                $_FILES['files']['tmp_name'] = $_FILES['files-0']['tmp_name'][$i];
+                $_FILES['files']['error'] = $_FILES['files-0']['error'][$i];
+                $_FILES['files']['size'] = $_FILES['files-0']['size'][$i];
+
+                // Code of image uploading
+                $config['upload_path'] = './uploads/chat_media';
+                $config['allowed_types'] = 'pdf|doc|text|txt';
+                $config['max_size'] = 5000000;
+                $config['file_name'] = md5(uniqid(mt_rand()));
+
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('files-0')) {
+                    $error = array('error' => $this->upload->display_errors());
+                    //print_r($error);
+                    echo "0";
+                    die;
+                } else {
+                    $data = $this->upload->data();
+                    $media_arr = array();
+                    $media_arr['media'] = $data['file_name'];
+                    $media[] = $media_arr;
+                }
+            }
         } else {
             echo "601";
             die;

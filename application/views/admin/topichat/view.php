@@ -175,7 +175,6 @@ if ($this->session->flashdata('success')) {
             if (load && !in_progress)
             {
                 if ($('.chat_area2').scrollTop() == 0) {
-                    ;
                     loaddata();
                     in_process = true;
                 }
