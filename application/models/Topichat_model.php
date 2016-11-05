@@ -235,6 +235,7 @@ class Topichat_model extends CI_Model {
         $this->db->select('tg.*,u.name,u.user_image');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.media IS NOT NULL');
+        $this->db->where('tg.media_type', 'video');
         if(!is_null($last_video_id))
         {
             $this->db->where('tg.id < ', $last_video_id);
