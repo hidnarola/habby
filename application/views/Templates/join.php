@@ -31,7 +31,6 @@
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout.js" ?>"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>-->
         <script src="<?php echo DEFAULT_CHAT_DOC_PATH . "fancywebsocket.js" ?>"></script>
-        <script type="text/javascript" src="<?php echo USER_JS; ?>post/post.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
 <script src="../../assets/js/html5shiv.js"></script>
@@ -404,6 +403,85 @@
                     console.log("hello");
                     $('#message_div').append($.emoticons.replace($(this).html()));
                     $('#emogis').popover('hide');
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                // Image uploading script for post creation
+                $("#uploadFile").on("change", function ()
+                {
+                    $('.message').html();
+                    $('.image_wrapper').html('');
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) {
+                        $('.message').html("No file selected.");
+                        $('.message').show();
+                        return; // no file selected, or no FileReader support
+                    }
+
+                    var i = 0;
+                    for (var key in files)
+                    {
+                        if (key != "length" && key != "item")
+                        {
+                            if (/^image/.test(files[key].type)) { // only image file
+                                var reader = new FileReader(); // instance of the FileReader
+                                reader.readAsDataURL(files[key]); // read the local file
+
+                                reader.onloadend = function () { // set image data as background of div
+                                    // $('#imagePreview').addClass('imagePreview');
+                                    $('.image_wrapper').show();
+                                    $('.message').hide();
+                                    $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                                    ++i;
+                                }
+                            }
+                            else
+                            {
+                                this.files = '';
+                                $('.message').html("Please select proper image");
+                                $('.message').show();
+                            }
+                        }
+                    }
+                });
+
+                // Video uploading script for post creation
+                $('#uploadVideo').on("change", function () {
+                    $('.message').html();
+                    $('.video_wrapper').html('');
+                    var files = !!this.files ? this.files : [];
+                    if (!files.length || !window.FileReader) {
+                        $('.message').html("No file selected.");
+                        $('.message').show();
+                        return; // no file selected, or no FileReader support
+                    }
+
+                    var i = 0;
+                    for (var key in files)
+                    {
+                        if (/^video/.test(files[key].type)) { // only image file
+                            var reader = new FileReader(); // instance of the FileReader
+                            reader.readAsDataURL(files[key]); // read the local file
+
+                            reader.onloadend = function () { // set image data as background of div
+                                // $('#imagePreview').addClass('imagePreview');
+                                $('.video_wrapper').show();
+                                $('.message').hide();
+                                $('.video_wrapper').append("<img class='videoPreview" + i + "' id='imagePreview' src='" + $('.video_wrapper').data('default_image') + "'/>");
+//                    $('.videoPreview'+i).css("background-image", ;
+                                ++i;
+                            }
+                        }
+                        else
+                        {
+                            $('.message').html("Please select proper video");
+                            $('.message').show();
+                        }
+                    }
                 });
             });
         </script>

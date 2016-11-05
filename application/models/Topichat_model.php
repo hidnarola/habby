@@ -231,11 +231,14 @@ class Topichat_model extends CI_Model {
      * developed by : ar
      */
 
-    public function load_recent_videos($group_id, $limit, $last_video_id) {
+    public function load_recent_videos($group_id, $limit, $last_video_id = null) {
         $this->db->select('tg.*,u.name,u.user_image');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.media IS NOT NULL');
-        $this->db->where('tg.id < ', $last_video_id);
+        if(!is_null($last_video_id))
+        {
+            $this->db->where('tg.id < ', $last_video_id);
+        }
         $this->db->join('users u', 'tg.user_id = u.id');
         $this->db->limit($limit, 0);
         $this->db->order_by('tg.id', 'desc');

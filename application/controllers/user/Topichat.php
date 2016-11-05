@@ -351,7 +351,7 @@ class Topichat extends CI_Controller {
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
-        $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id, $image_limit = 8);
+        $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($Id, $limit = 8);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
@@ -360,7 +360,7 @@ class Topichat extends CI_Controller {
     }
 
     public function load_more_video($group_id) {
-        $limit = 10;
+        $limit = 8;
         $last_video_id = $this->input->post('last_video');
         $this->data['videos'] = $this->Topichat_model->load_recent_videos($group_id, $limit, $last_video_id);
         pr($this->data['videos'], 1);
