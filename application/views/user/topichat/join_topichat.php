@@ -387,3 +387,14 @@
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>
+<script type="text/javascript">
+    $('document').ready(function () {
+        setTimeout(function () {
+            $(".fancybox").fancybox({
+                'width': 300, // set the width
+                'height': 300, // set the height
+                'type': 'iframe'       // tell the script to create an iframe
+            });
+        }, 100);
+    });
+</script>

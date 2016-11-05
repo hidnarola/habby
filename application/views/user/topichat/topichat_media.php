@@ -4,20 +4,6 @@
             <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
         </p>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <!-- All files section start here -->
-            <!--                <div class="panel panel-default popular_img_sec">
-                                <div class="panel-heading"><b><?php echo lang('ALL FILES'); ?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
-                                <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared'); ?></b> <span style="float: right"><a href="#"><b><?php echo lang('More'); ?></b></a></span></div>
-                                <div class="panel-body">
-                                    <div class="topic_frame">
-                                        <a class="fancybox" data-type="iframe"  href="http://www.youtube.com/embed/WAZ5SmJd1To" data-fancybox-group="galleryshared1">
-                                            <img src="<?php echo DEFAULT_IMAGE_PATH; ?>rank-img2.jpg" class="img-responsive">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>-->
-            <!-- All files section end here -->
-
             <?php
             if (count($recent_images) > 0 || count($recent_videos) > 0) {
                 ?>
@@ -33,15 +19,7 @@
 
                         <div class="panel-body video_wrapper">
                             <?php
-                            foreach ($recent_videos_thumb as $key => $image) {
-                                ?>
-                                <div class="col-lg-3 topichat_media">
-                                    <a class="fancybox video-w-icon" target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key]['media']; ?>" data-fancybox-group="gallery1">
-                                        <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive ">
-                                    </a>
-                                </div>
-                                <?php
-                            }
+                            $this->load->view('user/partial/topichat/load_more_video');
                             ?>
                         </div>
                         <?php
@@ -55,13 +33,14 @@
 
                         <div class="panel-body image_wrapper">
                             <?php
-                            
                             foreach ($recent_images as $image) {
                                 ?>
                                 <div class="col-lg-3 topichat_media">
-                                    <a class="fancybox"  href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
-                                        <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image topi_images">
-                                    </a>
+                                    <div class="topichat_media_wrapper">
+                                        <a class="fancybox"  href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
+                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image topi_images">
+                                        </a>
+                                    </div>
                                 </div>
                                 <?php
                             }
