@@ -24,13 +24,13 @@ foreach ($event_posts as $event) {
                         <?php
                         if ($value['media_type'] == "image") {
                             ?>
-                            <a class="post_images" data-toggle="modal" data-target="#myModal1"  >
+                            <a class="post_images" data-toggle="modal" data-target="#myModal" >
                                 <img src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>" class="img-responsive center-block">
                             </a>
                             <?php
                         } else {
                             ?>
-                            <a class="post_images" data-toggle="modal" data-target="#myModal1"  href="javascript:;">
+                            <a class="post_images" data-toggle="modal" data-target="#myModal"  href="javascript:;">
                                 <video controls class="img-responsive center-block">
                                     <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>"></source>
                                     Seems like your browser doesn't support video tag.
@@ -69,7 +69,7 @@ foreach ($event_posts as $event) {
     <?php
 }
 ?>
-<div class="modal fade" id="myModal1" role="dialog">
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -108,3 +108,10 @@ foreach ($event_posts as $event) {
 
     </div>
 </div>
+<script type="text/javascript">
+    $('document').ready(function(){
+        $('.event_post').on('click','post_images',function(str){
+//            alert("hello");
+        });
+    });
+</script>
