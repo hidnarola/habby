@@ -273,12 +273,12 @@ class Topichat extends CI_Controller {
     public function load_more_msg($group_id) {
         $limit = 10;
         $last_msg_id = $this->input->post('last_msg');
-        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $limit, $last_msg_id);
+        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $this->session->user['id'], $limit, $last_msg_id);
         if (count($this->data['messages']) > 0) {
+            $data['query'] = $this->db->last_query();
             $data['status'] = 1;
             krsort($this->data['messages']); // Reverse array
             $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
-            pr($data['view'],1);
             $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
         } else {
             $data['status'] = 0;
@@ -349,16 +349,15 @@ class Topichat extends CI_Controller {
     }
 
     public function topichat_media($Id) {
+
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
-        $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
-        $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($Id, $limit = 8);
-//        pr($this->data['recent_videos'],1);
+        $this->data['recent_images'] = $this->Topichat_model->load_recent_images($Id, $image_limit = 8);
+        $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($Id, $video_limit = 8);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video['media'])[0] . "_thumb.png";
         }
-//        pr($this->data['recent_videos_thumb'],1);        
         $this->template->load('join', 'user/topichat/topichat_media', $this->data);
     }
 
@@ -366,10 +365,28 @@ class Topichat extends CI_Controller {
         $limit = 8;
         $last_video_id = $this->input->post('last_video');
         $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($group_id, $limit, $last_video_id);
+        $this->data['recent_videos_thumb'] = array();
+        foreach ($this->data['recent_videos'] as $video) {
+            $this->data['recent_videos_thumb'][] = explode(".", $video['media'])[0] . "_thumb.png";
+        }
         if (count($this->data['recent_videos']) > 0) {
             $data['status'] = 1;
             $data['view'] = $this->load->view('user/partial/topichat/load_more_video', $this->data, true);
             $data['last_video_id'] = $this->data['recent_videos'][count($this->data['recent_videos']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
+
+    public function load_more_image($group_id) {
+        $limit = 4;
+        $last_image_id = $this->input->post('last_image');
+        $this->data['recent_images'] = $this->Topichat_model->load_recent_images($group_id, $limit, $last_image_id);
+        if (count($this->data['recent_images']) > 0) {
+            $data['status'] = 1;
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_image', $this->data, true);
+            $data['last_image_id'] = $this->data['recent_images'][count($this->data['recent_images']) - 1]['id'];
         } else {
             $data['status'] = 0;
         }

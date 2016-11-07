@@ -173,14 +173,19 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function load_messages($group_id, $limit, $last_msg_id) {
-        $this->db->select('tg.*,u.name,u.user_image');
+    public function load_messages($group_id, $logged_in_user,$limit, $last_msg_id) {
+        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.id < ', $last_msg_id);
+        $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
+        $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
+        $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->join('users u', 'tg.user_id = u.id');
         $this->db->limit($limit, 0);
         $this->db->order_by('tg.id', 'desc');
-        return $this->db->get('topic_group_chat tg')->result_array();
+        $this->db->group_by('tg.id');
+        $messages = $this->db->get('topic_group_chat tg')->result_array();
+        return $messages;
     }
 
     /*
@@ -222,7 +227,7 @@ class Topichat_model extends CI_Model {
     }
 
     /*
-     * load_messages is used to fetch more message for given group
+     * load_recent_videos is used to fetch more message for given group
      * @param $group_id int specify group id to which message will fetch
      * @param $last_msg_id int specify last message that displayed
      * 
@@ -247,6 +252,32 @@ class Topichat_model extends CI_Model {
         return $res_data;
     }
 
+    /*
+     * load_recent_images is used to fetch more message for given group
+     * @param $group_id int specify group id to which message will fetch
+     * @param $last_msg_id int specify last message that displayed
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+
+    public function load_recent_images($group_id, $limit, $last_image_id = null) {
+        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->where('tg.media IS NOT NULL');
+        $this->db->where('tg.media_type', 'image');
+        if(!is_null($last_image_id))
+        {
+            $this->db->where('tg.id < ', $last_image_id);
+        }
+        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('tg.id', 'desc');
+        $res_data = $this->db->get('topic_group_chat tg')->result_array();
+        return $res_data;
+    }
+    
     /*
      * 
      */

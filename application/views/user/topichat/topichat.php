@@ -107,24 +107,25 @@
                                 </div>
                             </div>
                             <!-- Topichat #1 each section start here -->
-        <?php
-    }
-} else {
-    ?>
-                        <div class="">
-                        <?php echo lang('No Topichat found.'); ?>
-                        </div>
                             <?php
                         }
+                    }
+                    else {
                         ?>
+                        <div class="">
+                            <?php echo lang('No Topichat found.'); ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <!-- Topichat #1 row section end here -->
             </div>
         </div>
     </div>
-<?php
-if ($cnt >= 3) {
-    ?>
+    <?php
+    if ($cnt >= 3) {
+        ?>
         <div class = "row">
             <div class = "container">
                 <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
@@ -135,9 +136,9 @@ if ($cnt >= 3) {
                 </div>
             </div>
         </div>
-    <?php
-}
-?>
+        <?php
+    }
+    ?>
     <!--Topichat #1 section and Newest Post area end here  -->
 </div>
 <!--Topichat Popular section start here -->
@@ -176,7 +177,7 @@ if ($cnt >= 3) {
                                                         <div class = "radio topchat_1_rdo">
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "optionsRadios1" value = "-1" checked = "">
-<?php echo lang('No limit'); ?>
+                                                                <?php echo lang('No limit'); ?>
                                                             </label>
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "No_of_person" value = "Yes" >
@@ -194,7 +195,7 @@ if ($cnt >= 3) {
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-?></span>
+                                                                ?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>

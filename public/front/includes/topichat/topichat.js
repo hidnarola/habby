@@ -23,6 +23,7 @@ $('document').ready(function () {
                 more = JSON.parse(more);
                 if (more.status)
                 {
+//                    console.log(more.view);
                     $('.chat_area2').prepend(more.view);
                     last_msg = more.last_msg_id;
                     $(".chat_area2").animate({scrollTop: 200}, 500);
@@ -119,16 +120,19 @@ $('document').ready(function () {
         }
     });
 
-    var load = true;
-    var in_progress = false;
+    var load_video = true;
+    var in_progress_video = false;
     $('.video_wrapper').scroll(function () {
-        if (load && !in_progress)
+        if (load_video && !in_progress_video)
         {
 //            if ($('.video_wrapper').scrollTop() == $('.video_wrapper').height) {
 //            if ($('.video_wrapper').scrollTop() == ($(document).height() - $('.video_wrapper').height())) {
-            if($('.video_wrapper').scrollTop() + $('.video_wrapper').innerHeight() >= $('.video_wrapper')[0].scrollHeight){
-                loadvideo();
-                in_process = true;
+            if ($('.video_wrapper').scrollTop() + $('.video_wrapper').innerHeight() >= $('.video_wrapper')[0].scrollHeight) {
+                if (!in_progress_video)
+                {
+                    loadvideo();
+                    in_process_video = false;
+                }
             }
         }
     });
@@ -142,21 +146,55 @@ $('document').ready(function () {
             data: 'last_video=' + last_video,
             success: function (more) {
                 console.log(more);
-                return false;
                 more = JSON.parse(more);
                 if (more.status)
                 {
-                    $('.chat_area2').prepend(more.view);
-                    last_msg = more.last_msg_id;
-                    $(".chat_area2").animate({scrollTop: 200}, 500);
+                    $('.video_wrapper').append(more.view);
+                    last_video = more.last_video_id;
                 }
                 else
                 {
-                    load = false;
-                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
-                    $(".chat_area2").animate({scrollTop: 0}, 500);
+                    load_video = false;
                 }
-                in_progress = false;
+                in_progress_video = false;
+            }
+        });
+    }
+    
+    var load_image = true;
+    var in_progress_image = false;
+    $('.image_wrapper').scroll(function () {
+        if (load_image && !in_progress_image)
+        {
+            if ($('.image_wrapper').scrollTop() + $('.image_wrapper').innerHeight() >= $('.image_wrapper')[0].scrollHeight) {
+                if (!in_progress_video)
+                {
+                    loadimage();
+                    in_process_image = false;
+                }
+            }
+        }
+    });
+
+    function loadimage()
+    {
+        $.ajax({
+            url: base_url + 'topichat/load_more_image/' + group_id,
+            method: 'post',
+            async: false,
+            data: 'last_image=' + last_image,
+            success: function (more) {
+                more = JSON.parse(more);
+                if (more.status)
+                {
+                    $('.image_wrapper').append(more.view);
+                    last_image = more.last_image_id;
+                }
+                else
+                {
+                    load_image = false;
+                }
+                in_progress_image = false;
             }
         });
     }
