@@ -203,25 +203,25 @@ $(document).ready(function () {
         }
         for (var key in files)
         {
-
             if (key != "length" && key != "item")
             {
-                if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type))) { // only pdf and text files
+                if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type))) { // only pdf and text files 
+                    var file_name = files[key].name;
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[key]); // read the local file
                     reader.onloadend = function () { // set image data as background of div
                         var i = Math.random().toString(36).substring(7);
                         display_file_class = 'imagePreview' + i;
                         $('.message').hide();
-                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><span class="' + display_file_class + '"  id="imagePreview_msg"></span></div></div>');
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
                         $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeigh t")}, 1000);
                     }
                 } else
                 {
-                    $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper files (pdf/text)</span></span></div>");
+                    $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper files (pdf/txt/xls/doc)</span></span></div>");
                     //this.files = '';
-                    $('.message').html("Please select proper files (pdf/text)");
+                    $('.message').html("Please select proper files (pdf/txt/xls/doc)");
                     $('.message').show();
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                     return;
@@ -248,7 +248,7 @@ $(document).ready(function () {
             },
             success: function (str)
             {
-                console.log('in file uploading response : ' + str);
+//                console.log('in file uploading response : ' + str[0]);
                 if (str == "601")
                 {
                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
@@ -261,7 +261,9 @@ $(document).ready(function () {
                         group_id: group_id,
                         media: 'files'
                     }
-                    console.log(msg);
+                    str = JSON.parse(str);
+                    $('.' + display_file_class).siblings('a').attr('href', base_url + 'topichat/download_file/' + str[0].media);
+                    $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
                     Server.send('message', JSON.stringify(msg));
                 }
             }
@@ -306,8 +308,8 @@ $(document).ready(function () {
             } else if (userdata.media_type == "files")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
-                //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'topichat/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a></div></div>');
+                $('.imagePreview' + i).data('file', userdata.media);
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             }
         }

@@ -125,9 +125,9 @@ $('document').ready(function () {
     $('.video_wrapper').scroll(function () {
         if (load_video && !in_progress_video)
         {
-//            if ($('.video_wrapper').scrollTop() == $('.video_wrapper').height) {
-//            if ($('.video_wrapper').scrollTop() == ($(document).height() - $('.video_wrapper').height())) {
             if ($('.video_wrapper').scrollTop() + $('.video_wrapper').innerHeight() >= $('.video_wrapper')[0].scrollHeight) {
+                in_process = true;
+
                 if (!in_progress_video)
                 {
                     loadvideo();
@@ -151,8 +151,7 @@ $('document').ready(function () {
                 {
                     $('.video_wrapper').append(more.view);
                     last_video = more.last_video_id;
-                }
-                else
+                } else
                 {
                     load_video = false;
                 }
@@ -160,7 +159,7 @@ $('document').ready(function () {
             }
         });
     }
-    
+
     var load_image = true;
     var in_progress_image = false;
     $('.image_wrapper').scroll(function () {
@@ -189,8 +188,7 @@ $('document').ready(function () {
                 {
                     $('.image_wrapper').append(more.view);
                     last_image = more.last_image_id;
-                }
-                else
+                } else
                 {
                     load_image = false;
                 }
@@ -198,4 +196,17 @@ $('document').ready(function () {
             }
         });
     }
+
+    $('.file_download').click(function () {
+        var media = $(this).data('file');
+//        $.ajax({
+//            url: base_url + 'topichat/download_file',
+//            method: 'post',
+//            async: false,
+//            data: 'media=' + media,
+//            success: function (media) {
+////                window.location.reload();
+//            }
+//        });
+    });
 });

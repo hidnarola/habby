@@ -59,7 +59,7 @@ foreach ($messages as $message) {
                 } else if ($message['media_type'] == "files") {
                     ?>
                     <div class="wdth_span media_wrapper">
-                        <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='imagePreview_msg'></span>
+                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "topichat/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
                     </div>
                     <?php
                 }
@@ -128,7 +128,7 @@ foreach ($messages as $message) {
                 } else if ($message['media_type'] == "files") {
                     ?>
                     <div class="wdth_span media_wrapper img_media_wrapper">
-                        <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='imagePreview_msg'></span>
+                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "topichat/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
                     </div>
                     <?php
                 }
