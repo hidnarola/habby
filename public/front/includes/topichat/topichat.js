@@ -126,7 +126,7 @@ $('document').ready(function () {
         {
 //            if ($('.video_wrapper').scrollTop() == $('.video_wrapper').height) {
 //            if ($('.video_wrapper').scrollTop() == ($(document).height() - $('.video_wrapper').height())) {
-            if($('.video_wrapper').scrollTop() + $('.video_wrapper').innerHeight() >= $('.video_wrapper')[0].scrollHeight){
+            if ($('.video_wrapper').scrollTop() + $('.video_wrapper').innerHeight() >= $('.video_wrapper')[0].scrollHeight) {
                 loadvideo();
                 in_process = true;
             }
@@ -149,8 +149,7 @@ $('document').ready(function () {
                     $('.chat_area2').prepend(more.view);
                     last_msg = more.last_msg_id;
                     $(".chat_area2").animate({scrollTop: 200}, 500);
-                }
-                else
+                } else
                 {
                     load = false;
                     $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
@@ -160,4 +159,17 @@ $('document').ready(function () {
             }
         });
     }
+
+    $('.file_download').click(function () {
+        var media = $(this).data('file');
+//        $.ajax({
+//            url: base_url + 'topichat/download_file',
+//            method: 'post',
+//            async: false,
+//            data: 'media=' + media,
+//            success: function (media) {
+////                window.location.reload();
+//            }
+//        });
+    });
 });

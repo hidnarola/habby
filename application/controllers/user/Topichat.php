@@ -8,6 +8,7 @@ class Topichat extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->helper('download');
         $this->load->model(array('Users_model', 'Topichat_model', 'Common_functionality'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('topichat');
         $session_data = $this->session->userdata('user');
@@ -278,7 +279,7 @@ class Topichat extends CI_Controller {
             $data['status'] = 1;
             krsort($this->data['messages']); // Reverse array
             $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
-            pr($data['view'],1);
+            pr($data['view'], 1);
             $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
         } else {
             $data['status'] = 0;
@@ -375,4 +376,27 @@ class Topichat extends CI_Controller {
         }
         echo json_encode($data);
     }
+
+    public function download_file($fileName) {
+        $this->load->helper('download');
+        ob_clean();
+        $file = 'uploads/chat_media/' . $fileName;
+        if (!file_exists($file))
+            die("I'm sorry, the file doesn't seem to exist.");
+
+        $type = filetype($file);
+        // Get a date and timestamp
+        $today = date("F j, Y, g:i a");
+        $time = time();
+        // Send file headers
+        header("Content-type: $type");
+        header("Content-Disposition: attachment;filename=$fileName");
+        header("Content-Transfer-Encoding: binary");
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        // Send the file contents.
+        set_time_limit(0);
+        readfile($file);
+    }
+
 }

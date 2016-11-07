@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ALL);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
@@ -248,6 +249,7 @@ class User extends CI_Controller {
         $sess_user_data = $this->session->userdata('user');
         if (!empty($user_detail)) {
             if (!empty($sess_user_data)) {
+                pr($sess_user_data, 1);
                 $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
                 if ($res_fb_account == 0) {
                     //update users table with new facebook ID
@@ -276,15 +278,15 @@ class User extends CI_Controller {
 
             //IF New User then it will enter all data into database otherwise it will create login-session for him/her
             if ($res_data == 0 && $res_fb_account == 0) {
-
+                $profile_image = $this->use_facebook_photo($user_detail['id']);
                 $ins_data = array(
                     'name' => $display_name,
                     'email' => $email,
-                    'country' => '206',
+                    'country' => '99',
                     'gender' => $gender,
                     'external_id' => $facebook_id,
                     'signup_type' => 2,
-                    'user_image' => 'profile_img.jpg',
+                    'user_image' => $profile_image,
                     'is_active' => 1
                 );
 
@@ -306,6 +308,7 @@ class User extends CI_Controller {
                 if ($user_data['external_id'] != '') {
                     $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]);
                     $this->Users_model->update_user_data($user_data['id'], ['last_login' => date('Y-m-d H:i:s')]); // Update last Login Details
+                    redirect('home');
 //                    if ($user_data['password'] == '') {
 ////                        redirect('user/dashboard/password_change');
 //                    } else {
@@ -319,6 +322,19 @@ class User extends CI_Controller {
         } else {
             $this->session->set_flashdata('message', array('message' => lang('Insufficient detail to Login. Please try again.'), 'class' => 'alert alert-danger'));
             redirect('login');
+        }
+    }
+
+    public function use_facebook_photo($facebook_id) {
+        if (!empty($facebook_id)) {
+            $url = 'https://graph.facebook.com/' . $facebook_id . '/picture?type=large';
+            $data = file_get_contents($url);
+            $img_name = random_string('alnum', 20) . '.jpg';
+            $img_path = 'uploads/user_profile/' . $img_name;
+            $file_handler = fopen($img_path, 'w+');
+            fputs($file_handler, $data);
+            fclose($file_handler);
+            return $img_name;
         }
     }
 
