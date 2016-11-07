@@ -10,7 +10,10 @@ function send(text) {
 }
 
 $(document).ready(function () {
-    Server = new FancyWebSocket('ws://192.168.1.186:9300');
+//    Server = new FancyWebSocket('ws://192.168.1.202:9300');
+    // Server = new FancyWebSocket('ws://192.168.1.186:9300');
+//    Server = new FancyWebSocket('ws://123.201.110.194:9300');
+    Server = new FancyWebSocket('ws://203.109.68.198:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
     // Send message to server
     $('#message_div').keypress(function (e) {
@@ -24,7 +27,8 @@ $(document).ready(function () {
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
             return false;
-        } else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        }
+        else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
         } else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')

@@ -256,65 +256,6 @@ $('document').ready(function () {
         }
     });
     
-    // Lazy loading on scroll event for post
-    var page = 2;
-    var load = true;
-    $(window).scroll(function () {
-        if (load)
-        {
-            if ($(window).scrollTop() == ($(document).height() - $(window).height())) {
-                loaddata();
-                setTimeout(function () {
-                    $('.post_masonry_article').each(function () {
-                        if ($(this).offset().left > 250)
-                        {
-                            $(this).addClass('right');
-                        }
-                    });
-                }, 1500);
-//                       $('.post_section').masonry({
-//                            itemSelector: '.pst_full_sec',
-//                             columnWidth: 100
-//                        });
-
-            }
-        }
-    });
-    
-    // Fetch extra post for lazy loading
-    function loaddata()
-    {
-        $.ajax({
-            url: base_url + 'user/home/smile_share/' + page,
-            method: 'get',
-            success: function (data) {
-                data = JSON.parse(data);
-                if (data.status == 0)
-                {
-                    load = false;
-                    $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'>No more data found</div>");
-                }
-                else
-                {
-                    $('.post_section').append(data.view);
-                }
-                $('.share-link').popover({
-                    html: true,
-                    content: function () {
-                        return $(this).siblings("#popover-content").html();
-                    }
-                });
-                stButtons.locateElements();
-// or if you want to be a bit defensive about whether the lib has been
-// loaded or not:
-                if (window.stButtons) {
-                    stButtons.locateElements();
-                } // Parse ShareThis markup
-            }
-        });
-        page++;
-    }
-
     $('.post_section').on('click', '.share-link', function () {
         $(this).popover({
             html: true,
@@ -333,11 +274,4 @@ $('document').ready(function () {
             }
         });
     }, 1500);
-
-    stButtons.locateElements();
-// or if you want to be a bit defensive about whether the lib has been
-// loaded or not:
-    if (window.stButtons) {
-        stButtons.locateElements();
-    } // Parse ShareThis markup
 });
