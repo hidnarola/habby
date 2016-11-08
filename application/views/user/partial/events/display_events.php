@@ -24,14 +24,14 @@ foreach ($event_posts as $event) {
                         <?php
                         if ($value['media_type'] == "image") {
                             ?>
-                            <a class="post_images" data-toggle="modal" data-target="#myModal" >
+                            <a class="post_images" href="javascript:;">
                                 <img src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>" class="img-responsive center-block">
                             </a>
                             <?php
                         } else {
                             ?>
-                            <a class="post_images" data-toggle="modal" data-target="#myModal"  href="javascript:;">
-                                <video controls class="img-responsive center-block">
+                            <a class="post_images" href="javascript:;">
+                                <video controls class="img-responsive center-block myvideo" >
                                     <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>"></source>
                                     Seems like your browser doesn't support video tag.
                                 </video>
@@ -45,22 +45,23 @@ foreach ($event_posts as $event) {
                 ?>
 
             </div>
-            <div class='event_seat'>
-                <span><?php echo lang("Number of seat") . " : " . $event['limit']; ?></span>
+            <div class='event_seat' data-start="<?php echo $event['start_time'] ?>" data-end="<?php echo $event['end_time'] ?>">
+                <span class="seat_details"><?php echo lang("Number of seat") . " : " . $event['limit']; ?></span>
+                <a href="javascript:;" class="view_details pstbtn">View Details</a>
                 <?php
-                if ($event['is_joined']) {
-                    ?>
-                    <a href='<?php echo base_url() . '/events/details/' . urlencode(base64_encode($event['id'])) ?>' class='pstbtn'>Enter</a>
-                    <?php
-                } else if ($event['is_requested']) {
-                    ?>
-                    <a href='javascript:;' class='pstbtn'>Requested</a>
-                    <?php
-                } else {
-                    ?>
-                    <a href='javascript:;' class='pstbtn event_join'>Join</a>
-                    <?php
-                }
+                    if ($event['is_joined']) {
+                        ?>
+                        <a href='<?php echo base_url() . '/events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'>Enter</a>
+                        <?php
+                    } else if ($event['is_requested']) {
+                        ?>
+                        <a href='javascript:;' class='join_btn pstbtn'>Requested</a>
+                        <?php
+                    } else {
+                        ?>
+                        <a href='javascript:;' class='join_btn pstbtn event_join'>Join</a>
+                        <?php
+                    }
                 ?>
             </div>
         </div>
@@ -77,31 +78,18 @@ foreach ($event_posts as $event) {
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="event_profile_sec">
-                    <div class="usr_post_img">
-                        <img src="http://habby/uploads/user_profile/6e981ab23e7a6d6b3e6f17ad6b2d75d6.jpg" class="img-circle img-responsive event_user">
-                    </div>
-                    <div class="post_title">
-                        <span><label class="control-label">Ashish Rana</label></span>
-                        creates an event "last post"
-                    </div>
+
                 </div>
             </div>
             <div class="modal-body">
 
-                <div class="event_post_details">
-                    testing post having image of car            </div>
-                <div class="event_media">
-                    <a data-target="#myModal1" data-toggle="modal" class="post_images">
-                        <img class="img-responsive center-block" src="http://habby/uploads/event_post/e26e60f247862da3970b832169c643b1.jpg">
-                    </a>
-
-                </div>
+                <div class="event_post_details"></div>
+                <div class="event_media"></div>
                 <div class="event_seat">
-                    <span>Number of seat : 150</span>
-                    <a class="pstbtn event_join" href="javascript:;">Join</a><br/>
-                     <span>monday</span><br/>
-                     <span>07-11-2016</span><br>
-                    <span>15:07</span>
+                    <span class="seat_details"></span>
+                    <a class="join_btn pstbtn" href=""></a><br/>
+                    <span class="start_time"></span><br/>
+                    <span class="end_time"></span>
                 </div>
             </div>
         </div>
@@ -109,9 +97,20 @@ foreach ($event_posts as $event) {
     </div>
 </div>
 <script type="text/javascript">
-    $('document').ready(function(){
-        $('.event_post').on('click','post_images',function(str){
-//            alert("hello");
+    $('document').ready(function () {
+        $('.event_post').on('click', '.view_details', function (str) {
+            var modal = $("#myModal");
+            var event_post = $(this).parents('.event_post');
+
+            modal.find('.event_profile_sec').html(event_post.find('.event_profile_sec').html());
+            modal.find('.event_post_details').html(event_post.find('.event_post_details').html());
+            modal.find('.event_media').html(event_post.find('.event_media').html());
+            modal.find('.seat_details').html(event_post.find('.seat_details').html());
+            modal.find('.join_btn').html(event_post.find('.join_btn').html());
+            modal.find('.join_btn').attr('href',event_post.find('.join_btn').attr('href'));
+            modal.find('.start_time').html('Event Start Time : '+event_post.find('.event_seat').data('start'));
+            modal.find('.end_time').html('Event End Time : '+event_post.find('.event_seat').data('end'));
+            modal.modal('show');
         });
     });
 </script>

@@ -353,6 +353,19 @@ class Topichat_model extends CI_Model {
         return false;
     }
 
+    /*
+     * 
+     */
+    public function get_topic_notification_by_user_id($user_id,$start,$limit){
+        $this->db->select('n.*, u.name,tg.topic_name, f.name as user_name');
+        $this->db->where('n.user_id = '.$user_id);
+        $this->db->join('users u','u.id = n.user_id');
+        $this->db->join('users f','f.id = n.from_user_id');
+        $this->db->join('topic_group tg','tg.id = n.topic_group_id');
+        $this->db->limit($limit,$start);
+        $this->db->order_by('n.id','desc');
+        return $this->db->get('topic_notification n')->result_array();
+    }
 }
 
 ?>

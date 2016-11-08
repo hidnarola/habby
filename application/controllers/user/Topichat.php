@@ -198,8 +198,11 @@ class Topichat extends CI_Controller {
         $this->session->set_flashdata('message', array('message' => lang('Topic updated successfully'), 'class' => 'alert alert-success'));
         // Add entry in modification table
         $arr['user_id'] = $this->session->user['id'];
-        $arr['description'] = "has changed group info";
-        $this->Topichat_model->insert_topichat_group_modification($arr);
+        $arr['description'] = "Information has been changed by";
+        if($this->Topichat_model->insert_topichat_group_modification($arr))
+        {
+            
+        }
         redirect('topichat/details/' . urlencode(base64_encode($group_id)));
     }
 

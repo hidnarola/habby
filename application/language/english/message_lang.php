@@ -144,6 +144,7 @@ $lang['Number of People'] = 'Number of People';
 $lang['No limit'] = 'No limit';
 $lang['customise'] = 'customise';
 $lang['Note'] = 'Note';
+$lang['Topic Notification'] = 'Topic Notification';
 //--Home--
 $lang['Topichat'] = 'Topichat';
 $lang['Enter'] = 'Enter';

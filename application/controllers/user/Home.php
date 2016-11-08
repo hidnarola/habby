@@ -307,6 +307,7 @@ class Home extends CI_Controller {
     public function topichat($user_id = 0) {
         if ($user_id == 0) {
             $user_id = $this->session->user['id'];
+            $this->data['notification'] = $this->Topichat_model->get_topic_notification_by_user_id($user_id,$start = 0,$limit = 10);
         } else {
             $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $user_id], false, true);
         }

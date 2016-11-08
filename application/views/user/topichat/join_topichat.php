@@ -255,9 +255,6 @@
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
                                                     <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
-
-                                                    <!-- 
-                                                    <a href="#" data-toggle="modal" data-target="#emogis"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a> -->
                                                 </span>
                                                 <span class="input-group-btn">
                                                     <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
@@ -290,7 +287,7 @@
                 </div>
                 <div class = "row pst_here_sec">
                     <!--post start here -->
-                    <form class = "" role = "form" method = "post" action = "<?php echo base_url() . "topichat/update_group/" . urlencode(base64_encode($topichat['id'])); ?>" enctype = "multipart/form-data">
+                    <form class = "update_form" role = "form" method = "post" action = "<?php echo base_url() . "topichat/update_group/" . urlencode(base64_encode($topichat['id'])); ?>" enctype = "multipart/form-data">
                         <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class = "panel panel-default">
                                 <!--Upload images or video section start here -->
