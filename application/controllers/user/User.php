@@ -217,7 +217,7 @@ class User extends CI_Controller {
 
                 // Code of image uploading
                 $config['upload_path'] = './uploads/chat_media';
-                $config['allowed_types'] = 'pdf|doc|text|txt';
+                $config['allowed_types'] = 'pdf|doc|docx|txt|xls|xlsx|text';
                 $config['max_size'] = 5000000;
                 $config['file_name'] = md5(uniqid(mt_rand()));
 

@@ -1,0 +1,16 @@
+Estimation - https://docs.google.com/spreadsheets/d/185j_yPd53hzAJGxQASB6l7H0AvpKgr8zWpiYsvgCPIs/edit
+
+Client Name - Martin
+
+Client App DB Credentials
+==========================
+DB Name :- drope
+U	:- drope
+P	:- p67j58H5M591DGM
+
+
+SVN Details 
+================
+URL : svn://svn-ext.developersglobal.com/drope
+User : naroladev1
+Pass : %31theb05516%

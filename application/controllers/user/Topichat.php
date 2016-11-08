@@ -419,4 +419,20 @@ class Topichat extends CI_Controller {
         echo json_encode($data);
     }
 
+
+    public function get_content() {
+        $url = "https://img.youtube.com/vi/AbzdfUNsSsM/0.jpg";
+        $data = file_get_contents($url);
+        $img_name = random_string('alnum', 20) . '.jpg';
+        $img_path = 'uploads/shared_media/' . $img_name;
+        $file_handler = fopen($img_path, 'w+');
+        fputs($file_handler, $data);
+        fclose($file_handler);
+//        file_put_contents($img_path, $data);
+        $image = "<img src='" . base_url() . "uploads/shared_media/" . $img_name . "'/>";
+        echo $image;
+        exit;
+        return $image;
+    }
+
 }

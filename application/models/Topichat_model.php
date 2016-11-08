@@ -330,7 +330,7 @@ class Topichat_model extends CI_Model {
     public function get_top_rank_media($group_id, $logged_in_user, $limit) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
-        $this->db->where('tg.media_type IS NOT NULL');
+        $this->db->where('tg.media_type IS NOT NULL AND tg.media_type !="files"');
         $this->db->join('users u', 'tg.user_id = u.id');
 //        $this->db->join('topic_group_chat_rank tr','tg.id = tr.topic_group_chat_id');
         $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
