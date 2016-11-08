@@ -11,9 +11,9 @@ function send(text) {
 
 $(document).ready(function () {
 //    Server = new FancyWebSocket('ws://192.168.1.202:9300');
-    // Server = new FancyWebSocket('ws://192.168.1.186:9300');
+    Server = new FancyWebSocket('ws://192.168.1.186:9300');
 //    Server = new FancyWebSocket('ws://123.201.110.194:9300');
-    Server = new FancyWebSocket('ws://203.109.68.198:9300');
+//    Server = new FancyWebSocket('ws://203.109.68.198:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
     // Send message to server
     $('#message_div').keypress(function (e) {
@@ -27,8 +27,7 @@ $(document).ready(function () {
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
             return false;
-        }
-        else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        } else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
         } else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
@@ -205,7 +204,7 @@ $(document).ready(function () {
         {
             if (key != "length" && key != "item")
             {
-                if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type))) { // only pdf and text files 
+                if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type)) || /vnd.openxmlformats-officedocument.wordprocessingml.document$/.test(files[key].type) || /.docx$/.test(files[key].name) || /.doc$/.test(files[key].name) || /.xls$/.test(files[key].name) || /.xlsx$/.test(files[key].name)) { // only pdf and text files 
                     var file_name = files[key].name;
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[key]); // read the local file
@@ -233,6 +232,7 @@ $(document).ready(function () {
         $.each(files, function (i, file) {
             form_data.append('files-' + i, file);
         });
+
         form_data.append("msg_files", files);
         // Send file using ajax
         $.ajax({
@@ -269,6 +269,39 @@ $(document).ready(function () {
             }
         });
     });
+
+    // Set up preview.
+    $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
+    // On submit add hidden inputs to the form.
+    $('.share_btn').on('click', function () {
+        var preview = $('#url').data('preview');
+        if (JSON.stringify(preview) != '{}') {
+//            console.log(preview);
+            html = '<div class="row">' +
+                    '<div class="large-3 columns">' +
+                    '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                    '</div>' +
+                    '<div class="large-9 column">' +
+                    '<a href="' + preview.original_url + '">' + preview.title + '</a>' +
+                    '<p>' + preview.description + '</p>' +
+                    '</div>' +
+                    '</div>';
+            $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare'></div></div>");
+            $('.fileshare').append(html);
+
+            // Send file using ajax
+            preview = JSON.stringify(preview);
+            var msg = {
+                message: preview,
+                type: 'topic_msg',
+                group_id: group_id,
+                media: 'links'
+            }
+            Server.send('message', JSON.stringify(msg));
+            $('#url').val('');
+        }
+    });
+
     //Let the user know we're connected
     Server.bind('open', function () {
         // Fire when user connect first time

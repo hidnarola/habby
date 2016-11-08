@@ -200,21 +200,21 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"> <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="cht_pfl_img"></a></span>	
-                                                    <input type="text" class="form-control" placeholder="Copy Link Here">
+                                                    <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
                                                     <span class="input-group-btn scl_mda_img">
-                                                        <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_img.jpg"></a>
+                                                        <a href="https://www.google.co.in/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_img.jpg"></a>
                                                     </span>
                                                     <span class="input-group-btn scl_mda_img">
-                                                        <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>youtube_img.jpg"></a>
+                                                        <a href="https://www.youtube.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>youtube_img.jpg"></a>
                                                     </span>
                                                     <span class="input-group-btn scl_mda_img">
-                                                        <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_plus_img.jpg"></a>
+                                                        <a href="https://plus.google.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_plus_img.jpg"></a>
                                                     </span>
                                                     <span class="input-group-btn scl_mda_img">
-                                                        <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>twitter_img.jpg"></a>
+                                                        <a href="https://twitter.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>twitter_img.jpg"></a>
                                                     </span>
                                                     <span class="input-group-btn">
-                                                        <input class="chat_btn" type="submit" value="<?php echo lang('Share'); ?>">
+                                                        <input class="chat_btn share_btn" type="submit" value="<?php echo lang('Share'); ?>">
                                                     </span>
                                                 </div>
                                             </div>

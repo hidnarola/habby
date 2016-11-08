@@ -451,6 +451,12 @@
     width:555px;
     white-space: nowrap;
 }
+.share_2.clearfix {
+    float: right;
+    clear: right;
+    max-width: 500px;
+    margin-top: 30PX;
+}
 @media(min-width:1583px){.row.event_container {
                              margin: 0 auto;
                              width: 1289px;
