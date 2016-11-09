@@ -18,6 +18,12 @@ function select($query) {
     }
 }
 
+function insert_id()
+{
+    global  $conn;
+    return mysqli_insert_id($conn);
+}
+
 function get_league_users($group_id) {
     global $conn;
     $result = mysqli_query($conn, "select user_id from league_members where league_id = $group_id");

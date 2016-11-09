@@ -11,6 +11,8 @@ include 'db.php';
 function wsOnMessage($clientID, $message, $messageLength, $binary) {
     global $Server;
 
+//    echo "WSClient = ";
+//        print_r($Server->wsClients);echo "<br/><br/>";
 //    $ip = long2ip($Server->wsClients[$clientID][6]);
     // check if message length is 0
     if ($messageLength == 0) {
@@ -33,9 +35,12 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 $user_ids = get_topichat_users($message->group_id);
                 foreach($Server->wsClients as $id=>$client)
                 {
-                    $online_users[] = $client['user_data']->id;
+                    if($client['room_type'] != "topic_notification" && $message->group_id == $client['room_id'])
+                    {
+                        $online_users[] = $client['user_data']->id;
+                    }
                 }
-                print_r($online_users);
+//                print_r($online_users);
                 
                 send_topic_notification($message->group_id, $Server->wsClients[$clientID]['user_data']->id,array_diff($user_ids, $online_users), 'new message');
                 // database entry for topichat
@@ -51,6 +56,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 {
                     send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
+                $chat_id = insert_id();
                 // Send message to user
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {
@@ -61,14 +67,19 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
                         $send_object['media'] = (isset($message->media)?($message->media=='links')?$message->message :$message->message[0]->media:NULL);
+                        $send_object['chat_id'] = $chat_id;
                         $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
                         $send_object['group'] = get_topic_name($message->group_id);
                         foreach ($Server->wsClients as $id => $client) {
-                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
+//                                echo "Topichat message = ";
+//                                print_r($message);echo "<br/>";
                                 $Server->wsSend($id, json_encode($send_object));
                             }
-                            else if($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && $Server->wsClients[$id]['room_type'] == "topic_notification")
+                            else if($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && (! in_array($Server->wsClients[$id]['user_data']->id, $online_users)) && $Server->wsClients[$id]['room_type'] == "topic_notification")
                             {
+//                                echo "In else message = ";
+//                                print_r($Server->wsClients[$id]);
                                 $send_object['message'] = 'New message by';
                                 $Server->wsSend($id, json_encode($send_object));
                             }
