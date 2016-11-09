@@ -457,7 +457,24 @@
     max-width: 500px;
     margin-top: 30PX;
 }
-@media(min-width:1583px){.row.event_container {
-                             margin: 0 auto;
-                             width: 1289px;
-                         }}
+.share_1.clearfix {
+    float: left;
+    clear: left;
+    max-width: 500px;
+    margin-top: 30PX;
+}
+
+.share_1 img.user_chat_thumb {
+    width: 4%;
+    border-radius: 100%;
+    margin-right: 8px;
+    float: left;
+    background-color: #d2d2d2;
+}
+@media(min-width:1583px){
+    .row.event_container
+    {
+        margin: 0 auto;
+        width: 1289px;
+    }
+}

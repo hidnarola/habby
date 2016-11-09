@@ -9,6 +9,38 @@ function send(text) {
     Server.send('message', JSON.stringify(msg));
 }
 
+function share_links() {
+    var preview = $('#url').data('preview');
+    var i = Math.random().toString(36).substring(7);
+    if (JSON.stringify(preview) != '{}') {
+//            console.log(preview);
+        html = '<div class="row">' +
+                '<div class="large-3 columns">' +
+                '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                '</div>' +
+                '<div class="large-9 column">' +
+                '<a href="' + preview.original_url + '">' + preview.title + '</a>' +
+                '<p>' + preview.description + '</p>' +
+                '</div>' +
+                '</div>';
+        $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare" + i + "'></div></div>");
+        $('.fileshare' + i).append(html);
+
+        // Send file using ajax
+        preview = JSON.stringify(preview);
+        var msg = {
+            message: preview,
+            type: 'topic_msg',
+            group_id: group_id,
+            media: 'links'
+        }
+        Server.send('message', JSON.stringify(msg));
+        $('#url').val('');
+        $('#url').preview({bind: false});
+    }
+    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+}
+
 $(document).ready(function () {
 //    Server = new FancyWebSocket('ws://192.168.1.202:9300');
     Server = new FancyWebSocket('ws://192.168.1.186:9300');
@@ -214,7 +246,7 @@ $(document).ready(function () {
                         $('.message').hide();
                         $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
                         $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
-                        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeigh t")}, 1000);
+                        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                     }
                 } else
                 {
@@ -269,9 +301,9 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     // Send update notification to other users
-    $(".update_form").submit(function(){
+    $(".update_form").submit(function () {
         var msg = {
             message: 'changed',
             type: 'topic_notification',
@@ -284,34 +316,20 @@ $(document).ready(function () {
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
     $('.share_btn').on('click', function () {
-        var preview = $('#url').data('preview');
-        if (JSON.stringify(preview) != '{}') {
-//            console.log(preview);
-            html = '<div class="row">' +
-                    '<div class="large-3 columns">' +
-                    '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
-                    '</div>' +
-                    '<div class="large-9 column">' +
-                    '<a href="' + preview.original_url + '">' + preview.title + '</a>' +
-                    '<p>' + preview.description + '</p>' +
-                    '</div>' +
-                    '</div>';
-            $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare'></div></div>");
-            $('.fileshare').append(html);
-
-            // Send file using ajax
-            preview = JSON.stringify(preview);
-            var msg = {
-                message: preview,
-                type: 'topic_msg',
-                group_id: group_id,
-                media: 'links'
+        share_links();
+    });
+    $('#url').keypress(function (e) {
+        if (e.keyCode == 13) {
+            if ($.trim($(this) == ""))
+            {
+                share_links();
             }
-            Server.send('message', JSON.stringify(msg));
-            $('#url').val('');
+            return false;
+        } else if (e.charCode == 32 && $.trim($(this)) == '')
+        {
+            return false;
         }
     });
-
 
     //Let the user know we're connected
     Server.bind('open', function () {
@@ -355,6 +373,17 @@ $(document).ready(function () {
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'topichat/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a></div></div>');
                 $('.imagePreview' + i).data('file', userdata.media);
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
+            } else if (userdata.media_type == "links") {
+                userlink = JSON.parse(userdata.message);
+                $('.chat_area2').append('<div class="share_1 clearfix" data-chat_id=""><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare"><div class="row">' +
+                        '<div class="large-3 columns">' +
+                        '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
+                        '</div>' +
+                        '<div class="large-9 column">' +
+                        '<a href="' + userlink.original_url + '">' + userlink.title + '</a>' +
+                        '<p>' + userlink.description + '</p>' +
+                        '</div>' +
+                        '</div></div></div>');
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
