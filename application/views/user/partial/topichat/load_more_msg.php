@@ -76,7 +76,7 @@ foreach ($messages as $message) {
                 ?>
                 <div class = "share_2 clearfix" data-chat_id="<?php echo $message['id'] ?>">
                     <div class = "fileshare">
-                        <div class = "row">
+                        <div class = "">
                             <?php
                             if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
                                 ?>
@@ -179,7 +179,7 @@ foreach ($messages as $message) {
                 <div class = "share_1 clearfix" data-chat_id="<?php echo $message['id'] ?>">
                     <img class = "user_chat_thumb" src = "<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title="<?php echo $message['name'] ?>">
                     <div class = "fileshare">
-                        <div class = "row">
+                        <div class = "">
                             <?php
                             if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
                                 ?>
