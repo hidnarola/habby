@@ -10,40 +10,44 @@ function send(text) {
 }
 
 function share_links() {
-    var preview = $('#url').data('preview');
-    var i = Math.random().toString(36).substring(7);
-    if (JSON.stringify(preview) != '{}') {
-//            console.log(preview);
-        html = '<div class="row">' +
-                '<div class="large-3 columns">' +
-                '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
-                '</div>' +
-                '<div class="large-9 column">' +
-                '<a href="' + preview.original_url + '">' + preview.title + '</a>' +
-                '<p>' + preview.description + '</p>' +
-                '</div>' +
-                '</div>';
-        $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare" + i + "'></div></div>");
-        $('.fileshare' + i).append(html);
+    setTimeout(function () {
+        var i = Math.random().toString(36).substring(7);
+        var preview = $('#url').data('preview');
+        console.log(preview);
+        if (JSON.stringify(preview) != '{}') {
+            html = '<div class="">' +
+                    '<div class="large-3 columns">' +
+                    '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                    '</div>' +
+                    '<div class="large-9 column">' +
+                    '<a href="' + preview.original_url + '" target="_blank">' + preview.title + '</a>' +
+                    '<p>' + preview.description + '</p>' +
+                    '</div>' +
+                    '</div>';
+            $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare" + i + " fileshare'></div></div>");
+            $('.fileshare' + i).append(html);
 
-        // Send file using ajax
-        preview = JSON.stringify(preview);
-        var msg = {
-            message: preview,
-            type: 'topic_msg',
-            group_id: group_id,
-            media: 'links'
+            // Send file using ajax
+            preview = JSON.stringify(preview);
+            var msg = {
+                message: preview,
+                type: 'topic_msg',
+                group_id: group_id,
+                media: 'links'
+            }
+            Server.send('message', JSON.stringify(msg));
+            $('#url').val('');
+            $('#url').preview({bind: false});
+            $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        } else {
+            swal("Please check your Link.");
         }
-        Server.send('message', JSON.stringify(msg));
-        $('#url').val('');
-        $('#url').preview({bind: false});
-    }
-    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+    }, 1000);
 }
 
 $(document).ready(function () {
 //    Server = new FancyWebSocket('ws://192.168.1.202:9300');
-    Server = new FancyWebSocket('ws://192.168.1.186:9300');
+    Server = new FancyWebSocket('ws://192.168.1.143:9300');
 //    Server = new FancyWebSocket('ws://123.201.110.194:9300');
 //    Server = new FancyWebSocket('ws://203.109.68.198:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
@@ -194,8 +198,7 @@ $(document).ready(function () {
                         $('.' + display_file_class).html("<video controls='' src='" + this.result + "' style='height:180px;'>");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                     }
-                }
-                else
+                } else
                 {
                     $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
                     //this.files = '';
@@ -231,8 +234,7 @@ $(document).ready(function () {
                 {
                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
                     p.html('<span>Fail to send message</span>');
-                }
-                else if (str != 0)
+                } else if (str != 0)
                 {
                     var msg = {
                         message: str,
@@ -339,14 +341,18 @@ $(document).ready(function () {
     // Set up preview.
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
-    $('.share_btn').on('click', function () {
+    $('.share_btn').click(function () {
+        $('#url').attr('disabled', true);
         share_links();
+        $('#url').attr('disabled', false);
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
             if ($.trim($(this) == ""))
             {
+                $('#url').attr('disabled', true);
                 share_links();
+                $('#url').attr('disabled', false);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this)) == '')
@@ -399,7 +405,7 @@ $(document).ready(function () {
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             } else if (userdata.media_type == "links") {
                 userlink = JSON.parse(userdata.message);
-                $('.chat_area2').append('<div class="share_1 clearfix" data-chat_id=""><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare"><div class="row">' +
+                $('.chat_area2').append('<div class="share_1 clearfix" data-chat_id=""><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare"><div class="">' +
                         '<div class="large-3 columns">' +
                         '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
                         '</div>' +

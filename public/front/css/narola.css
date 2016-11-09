@@ -456,6 +456,8 @@
     clear: right;
     max-width: 500px;
     margin-top: 30PX;
+    display: block;
+    clear: both;
 }
 .share_1.clearfix {
     float: left;
@@ -470,7 +472,19 @@
     margin-right: 8px;
     float: left;
     background-color: #d2d2d2;
+    display: block;
 }
+.share_1 .fileshare {    display: block;
+                         width: auto;
+                         overflow: hidden;}
+.fileshare{
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.fileshare p{color:#000;}
+
 @media(min-width:1583px){
     .row.event_container
     {
