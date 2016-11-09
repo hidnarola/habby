@@ -9,17 +9,16 @@ function send(text) {
     Server.send('message', JSON.stringify(msg));
 }
 
-function share_links() {
-    var preview = $('#url').data('preview');
+function share_links(preview) {
     var i = Math.random().toString(36).substring(7);
     if (JSON.stringify(preview) != '{}') {
-//            console.log(preview);
+        console.log(preview);
         html = '<div class="row">' +
                 '<div class="large-3 columns">' +
                 '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
                 '</div>' +
                 '<div class="large-9 column">' +
-                '<a href="' + preview.original_url + '">' + preview.title + '</a>' +
+                '<a href="' + preview.original_url + '" target="_blank">' + preview.title + '</a>' +
                 '<p>' + preview.description + '</p>' +
                 '</div>' +
                 '</div>';
@@ -208,8 +207,7 @@ $(document).ready(function () {
                 {
                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
                     p.html('<span>Fail to send message</span>');
-                }
-                else if (str != 0)
+                } else if (str != 0)
                 {
                     var msg = {
                         message: str,
@@ -315,15 +313,16 @@ $(document).ready(function () {
 
     // Set up preview.
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
+    var preview = $('#url').data('preview');
     // On submit add hidden inputs to the form.
-    $('.share_btn').on('click', function () {
-        share_links();
+    $('.share_btn').click(function () {
+        share_links(preview);
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
             if ($.trim($(this) == ""))
             {
-                share_links();
+                share_links(preview);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this)) == '')
@@ -353,19 +352,18 @@ $(document).ready(function () {
         userdata = JSON.parse(payload);
         if (userdata.media_type == null)
         {
-            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="'+userdata.chat_id+'" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
+            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
         } else
         {
             if (userdata.media_type == "image")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="'+userdata.chat_id+'" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
-            } 
-            else if (userdata.media_type == "video")
+            } else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="'+userdata.chat_id+'" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
             } else if (userdata.media_type == "files")
