@@ -60,10 +60,12 @@ $(document).ready(function () {
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
             return false;
-        } else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        }
+        else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
-        } else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        }
+        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
         {
             $(this).html('');
             return false;
@@ -83,6 +85,7 @@ $(document).ready(function () {
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
+        var i;
         $('.message').html();
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
@@ -98,7 +101,7 @@ $(document).ready(function () {
                 reader.readAsDataURL(files[key]); // read the local file
 
                 reader.onloadend = function () { // set image data as background of div
-                    var i = Math.random().toString(36).substring(7);
+                    i = Math.random().toString(36).substring(7);
                     // $('#imagePreview').addClass('imagePreview');
                     $('.message').hide();
                     $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
@@ -118,6 +121,7 @@ $(document).ready(function () {
         });
         form_data.append("msg_image", files);
         // Send file using ajax
+        var media_data;
         $.ajax({
             url: base_url + '/user/User/upload_chat_media',
             dataType: 'script',
@@ -126,6 +130,7 @@ $(document).ready(function () {
             processData: false,
             data: form_data,
             type: 'post',
+            async: false,
             error: function (textStatus, errorThrown) {
 
             },
@@ -141,7 +146,23 @@ $(document).ready(function () {
                         media: 'image'
                     }
                     Server.send('message', JSON.stringify(msg));
+                    media_data = JSON.parse(str);
                 }
+            },
+            complete: function (xhr,status) {
+                console.log("xhr = ",xhr);
+                console.log("status = ",status);
+                $.ajax({
+                    url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                    method: 'post',
+                    async: false,
+                    data: 'media=' + media_data[0].media,
+                    success: function (resp) {
+                        console.log("i = " + i);
+                        $('.imagePreview' + i).parents('.topichat_media_post').data('chat_id', resp);
+                        $('.imagePreview' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                    }
+                });
             }
         });
     });
@@ -355,19 +376,19 @@ $(document).ready(function () {
         userdata = JSON.parse(payload);
         if (userdata.media_type == null)
         {
-            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="'+userdata.chat_id+'" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
+            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
         } else
         {
             if (userdata.media_type == "image")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="'+userdata.chat_id+'" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
-            } 
+            }
             else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="'+userdata.chat_id+'" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
             } else if (userdata.media_type == "files")

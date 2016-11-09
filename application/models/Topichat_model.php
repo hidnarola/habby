@@ -366,6 +366,16 @@ class Topichat_model extends CI_Model {
         $this->db->order_by('n.id','desc');
         return $this->db->get('topic_notification n')->result_array();
     }
+    
+    /*
+     * 
+     */
+    public function get_chat_id_from_media_name($media){
+        $this->db->select('id');
+        $id = $this->db->where('media',$media)->get('topic_group_chat')->row_array()['id'];
+        echo $id;die;
+        return $id;
+    }
 }
 
 ?>

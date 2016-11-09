@@ -435,4 +435,12 @@ class Topichat extends CI_Controller {
         return $image;
     }
 
+    
+    /*
+     * 
+     */
+    public function get_chat_id_from_media_name(){
+        $media = $this->input->post('media');
+        echo $this->Topichat_model->get_chat_id_from_media_name($media);
+    }
 }

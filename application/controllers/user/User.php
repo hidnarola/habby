@@ -337,5 +337,4 @@ class User extends CI_Controller {
             return $img_name;
         }
     }
-
 }
