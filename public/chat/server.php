@@ -11,8 +11,6 @@ include 'db.php';
 function wsOnMessage($clientID, $message, $messageLength, $binary) {
     global $Server;
 
-//    echo "WSClient = ";
-//        print_r($Server->wsClients);echo "<br/><br/>";
 //    $ip = long2ip($Server->wsClients[$clientID][6]);
     // check if message length is 0
     if ($messageLength == 0) {
@@ -72,14 +70,10 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['group'] = get_topic_name($message->group_id);
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
-//                                echo "Topichat message = ";
-//                                print_r($message);echo "<br/>";
                                 $Server->wsSend($id, json_encode($send_object));
                             }
                             else if($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && (! in_array($Server->wsClients[$id]['user_data']->id, $online_users)) && $Server->wsClients[$id]['room_type'] == "topic_notification")
                             {
-//                                echo "In else message = ";
-//                                print_r($Server->wsClients[$id]);
                                 $send_object['message'] = 'New message by';
                                 $Server->wsSend($id, json_encode($send_object));
                             }

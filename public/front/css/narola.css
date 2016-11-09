@@ -448,7 +448,7 @@
 }
 #message_div {
     overflow: hidden;
-    width:555px;
+    width:100%;
     white-space: nowrap;
 }
 .share_2.clearfix {
