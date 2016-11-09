@@ -484,6 +484,7 @@
 .fileshare{
     border: 1px solid #ccc;
     padding: 5px;
+    background : whitesmoke;
     border-radius: 5px;
     overflow: hidden;
 }

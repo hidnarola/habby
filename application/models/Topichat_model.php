@@ -58,6 +58,32 @@ class Topichat_model extends CI_Model {
         return $res_data;
     }
 
+    /* Select Recommnded topichat group for logged in user from topic_group table
+     * @param $start    int     specify start position
+     * @param $limit    int     specify limit
+     * 
+     * @return array[][]    return two dimensional array having record of topic groups
+     * develop by : ar
+     */
+
+    public function get_recommended_group($start, $limit) {
+        $user_id = logged_in_user_id();
+        $this->db->select('topic_id');
+        $joined_group = array_column($this->db->where('user_id',$user_id)->get('topic_group_user')->result_array(),'topic_id');
+        
+        // Fetch group in which user's friends are joined and user has not joined
+        $this->db->select('distinct(tgu.topic_id)');
+        $this->db->from('topic_group_user tgu');
+        $this->db->join('users u','u.id = tgu.user_id');
+        $this->db->join('follower f','(f.follower_id = '.$user_id.' and f.user_id = u.id) or (f.user_id = '.$user_id.' and f.follower_id = u.id)'); // follower or following user
+        $friends_group = array_column($this->db->get()->result_array(),'topic_id');
+        
+        // removed those group whoes user's already joined
+        $recommanded_group = array_diff($friends_group,$joined_group);
+        
+    }
+    
+    
     /* v! Select popular topichat group from topic_group table 
      * develop by : HPA
      */
