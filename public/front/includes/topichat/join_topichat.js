@@ -20,10 +20,11 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             if ($.trim($(this).html()) != '')
             {
+                msg = $(this).html();
                 $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + $('#message_div').html() + "</span></span></div>");
                 $(this).html('');
                 $('#message').val('');
-                send($('#message_div').html());
+                send(msg);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
             return false;
@@ -140,7 +141,8 @@ $(document).ready(function () {
                         $('.' + display_file_class).html("<video controls='' src='" + this.result + "' style='height:180px;'>");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                     }
-                } else
+                }
+                else
                 {
                     $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
                     //this.files = '';
