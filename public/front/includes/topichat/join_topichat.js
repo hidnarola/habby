@@ -56,6 +56,7 @@ function share_links() {
 $(document).ready(function () {
 //    Server = new FancyWebSocket('ws://192.168.1.202:9300');
     Server = new FancyWebSocket('ws://192.168.1.143:9300');
+//    Server = new FancyWebSocket('ws://192.168.1.186:9300');
 //    Server = new FancyWebSocket('ws://123.201.110.194:9300');
 //    Server = new FancyWebSocket('ws://203.109.68.198:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
