@@ -13,7 +13,7 @@ function share_links() {
     setTimeout(function () {
         var i = Math.random().toString(36).substring(7);
         var preview = $('#url').data('preview');
-        console.log(preview);
+//        console.log(preview);
         if (JSON.stringify(preview) != '{}') {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
@@ -50,7 +50,7 @@ function share_links() {
         } else {
             swal("Please correct your Link.");
         }
-    }, 1000);
+    }, 2000);
 }
 
 $(document).ready(function () {
@@ -348,17 +348,17 @@ $(document).ready(function () {
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
     $('.share_btn').click(function () {
-        $('#url').attr('disabled', true);
+        $('#url').prop('disabled', true);
         share_links();
-        $('#url').attr('disabled', false);
+        $('#url').prop('disabled', false);
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
             if ($.trim($(this) == ""))
             {
-                $('#url').attr('disabled', true);
+                $('#url').prop('disabled', true);
                 share_links();
-                $('#url').attr('disabled', false);
+                $('#url').prop('disabled', false);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this)) == '')
