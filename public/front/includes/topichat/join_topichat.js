@@ -18,9 +18,10 @@ function share_links() {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
                 $('#url').val('');
-                $('#url').preview({bind: false});
+                $('#url').trigger('close');
+//                $('#url').preview({bind: false});
+                $('#url').prop('disabled', false);
                 return false;
-
             } else {
                 html = '<div class="">' +
                         '<div class="large-3 columns">' +
@@ -44,13 +45,17 @@ function share_links() {
                 }
                 Server.send('message', JSON.stringify(msg));
                 $('#url').val('');
-                $('#url').preview({bind: false});
+//                $('#url').trigger('close');
+                $('#url').prop('disabled', false);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
             swal("Please correct your Link.");
+            $('#url').trigger('close');
+            $('#url').prop('disabled', false);
+            return false;
         }
-    }, 2000);
+    }, 5000);
 }
 
 $(document).ready(function () {
@@ -351,7 +356,6 @@ $(document).ready(function () {
     $('.share_btn').click(function () {
         $('#url').prop('disabled', true);
         share_links();
-        $('#url').prop('disabled', false);
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
@@ -359,7 +363,6 @@ $(document).ready(function () {
             {
                 $('#url').prop('disabled', true);
                 share_links();
-                $('#url').prop('disabled', false);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this)) == '')
