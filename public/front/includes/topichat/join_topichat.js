@@ -15,32 +15,40 @@ function share_links() {
         var preview = $('#url').data('preview');
         console.log(preview);
         if (JSON.stringify(preview) != '{}') {
-            html = '<div class="">' +
-                    '<div class="large-3 columns">' +
-                    '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
-                    '</div>' +
-                    '<div class="large-9 column">' +
-                    '<a href="' + preview.original_url + '" target="_blank">' + preview.title + '</a>' +
-                    '<p>' + preview.description + '</p>' +
-                    '</div>' +
-                    '</div>';
-            $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare" + i + " fileshare'></div></div>");
-            $('.fileshare' + i).append(html);
+            if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
+                swal("No content found");
+                $('#url').val('');
+                $('#url').preview({bind: false});
+                return false;
 
-            // Send file using ajax
-            preview = JSON.stringify(preview);
-            var msg = {
-                message: preview,
-                type: 'topic_msg',
-                group_id: group_id,
-                media: 'links'
+            } else {
+                html = '<div class="">' +
+                        '<div class="large-3 columns">' +
+                        '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                        '</div>' +
+                        '<div class="large-9 column">' +
+                        '<a href="' + preview.original_url + '" target="_blank">' + preview.title + '</a>' +
+                        '<p>' + preview.description + '</p>' +
+                        '</div>' +
+                        '</div>';
+                $('.chat_area2').append("<div class='share_2 clearfix'><div class='fileshare" + i + " fileshare'></div></div>");
+                $('.fileshare' + i).append(html);
+
+                // Send file using ajax
+                preview = JSON.stringify(preview);
+                var msg = {
+                    message: preview,
+                    type: 'topic_msg',
+                    group_id: group_id,
+                    media: 'links'
+                }
+                Server.send('message', JSON.stringify(msg));
+                $('#url').val('');
+                $('#url').preview({bind: false});
+                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
-            Server.send('message', JSON.stringify(msg));
-            $('#url').val('');
-            $('#url').preview({bind: false});
-            $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         } else {
-            swal("Please check your Link.");
+            swal("Please correct your Link.");
         }
     }, 1000);
 }
@@ -64,12 +72,10 @@ $(document).ready(function () {
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
             return false;
-        }
-        else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        } else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
-        }
-        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        } else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
         {
             $(this).html('');
             return false;
@@ -153,9 +159,9 @@ $(document).ready(function () {
                     media_data = JSON.parse(str);
                 }
             },
-            complete: function (xhr,status) {
-                console.log("xhr = ",xhr);
-                console.log("status = ",status);
+            complete: function (xhr, status) {
+                console.log("xhr = ", xhr);
+                console.log("status = ", status);
                 $.ajax({
                     url: base_url + '/user/Topichat/get_chat_id_from_media_name',
                     method: 'post',
@@ -390,8 +396,7 @@ $(document).ready(function () {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
-            }
-            else if (userdata.media_type == "video")
+            } else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
@@ -410,7 +415,7 @@ $(document).ready(function () {
                         '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
                         '</div>' +
                         '<div class="large-9 column">' +
-                        '<a href="' + userlink.original_url + '">' + userlink.title + '</a>' +
+                        '<a href="' + userlink.original_url + '" target="_blank">' + userlink.title + '</a>' +
                         '<p>' + userlink.description + '</p>' +
                         '</div>' +
                         '</div></div></div>');

@@ -455,15 +455,21 @@
     float: right;
     clear: right;
     max-width: 500px;
-    margin-top: 30PX;
+    /*margin-top: 30PX;*/
     display: block;
     clear: both;
+    margin-bottom: 30px;
+
 }
 .share_1.clearfix {
     float: left;
     clear: left;
     max-width: 500px;
-    margin-top: 30PX;
+    /*margin-top: 30PX;*/
+    margin-bottom: 30px;
+    display: block;
+    width: auto;
+    overflow: hidden;
 }
 
 .share_1 img.user_chat_thumb {
@@ -474,9 +480,7 @@
     background-color: #d2d2d2;
     display: block;
 }
-.share_1 .fileshare {    display: block;
-                         width: auto;
-                         overflow: hidden;}
+
 .fileshare{
     border: 1px solid #ccc;
     padding: 5px;
