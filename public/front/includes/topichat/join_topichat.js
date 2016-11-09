@@ -13,14 +13,15 @@ function share_links() {
     setTimeout(function () {
         var i = Math.random().toString(36).substring(7);
         var preview = $('#url').data('preview');
-        console.log(preview);
+//        console.log(preview);
         if (JSON.stringify(preview) != '{}') {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
                 $('#url').val('');
-                $('#url').preview({bind: false});
+                $('#url').trigger('close');
+//                $('#url').preview({bind: false});
+                $('#url').prop('disabled', false);
                 return false;
-
             } else {
                 html = '<div class="">' +
                         '<div class="large-3 columns">' +
@@ -44,13 +45,17 @@ function share_links() {
                 }
                 Server.send('message', JSON.stringify(msg));
                 $('#url').val('');
-                $('#url').preview({bind: false});
+//                $('#url').trigger('close');
+                $('#url').prop('disabled', false);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
             swal("Please correct your Link.");
+            $('#url').trigger('close');
+            $('#url').prop('disabled', false);
+            return false;
         }
-    }, 1000);
+    }, 5000);
 }
 
 $(document).ready(function () {
@@ -349,17 +354,15 @@ $(document).ready(function () {
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
     $('.share_btn').click(function () {
-        $('#url').attr('disabled', true);
+        $('#url').prop('disabled', true);
         share_links();
-        $('#url').attr('disabled', false);
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
             if ($.trim($(this) == ""))
             {
-                $('#url').attr('disabled', true);
+                $('#url').prop('disabled', true);
                 share_links();
-                $('#url').attr('disabled', false);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this)) == '')
