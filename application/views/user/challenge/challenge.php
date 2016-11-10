@@ -63,9 +63,15 @@
                                     <div class="challenge_cont_sec2 row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 1)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Newest_Challenge['average_rank']; ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 0)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
@@ -81,7 +87,7 @@
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH."coin_icon.png" ?>"/><?php echo $Newest_Challenge['rewards'] ?></span></li>
+                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Newest_Challenge['rewards'] ?></span></li>
                                                 <li class="winner winner_n_btn" id="winner<?php echo $Newest_Challenge['id']; ?>" data-id="<?php echo $Newest_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
@@ -210,10 +216,10 @@
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
-        <?php
-    }
-}
-?>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <!-- Challenge row section end here -->
 
@@ -230,10 +236,10 @@
                     <!-- Challenge Title Section section end here -->
                 </div>
                 <div class="row challenge_container">				
-<?php
-if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
-    foreach ($Popular_Challenges as $Popular_Challenge) {
-        ?>
+                    <?php
+                    if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
+                        foreach ($Popular_Challenges as $Popular_Challenge) {
+                            ?>
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
@@ -254,14 +260,20 @@ if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
                                     <div class="challenge_cont_sec2 row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH ; echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 1)?'challeng_arrow_ranked.png': "challeng_arrow.png";?>"></button>
+                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Popular_Challenge['average_rank'] ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 0)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                                             <p class="chlng_para">
-        <?php echo $Popular_Challenge['description'] ?>
+                                                <?php echo $Popular_Challenge['description'] ?>
                                             </p>
                                         </div>
 
@@ -273,14 +285,14 @@ if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH."coin_icon.png" ?>"/><?php echo $Popular_Challenge['rewards'] ?></span></li>
+                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Popular_Challenge['rewards'] ?></span></li>
                                                 <li class="winner winner_p_btn" id="winner<?php echo $Popular_Challenge['id'] ?>"  data-id="<?php echo $Popular_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
                                                 <li>
-        <?php
-        if ($Popular_Challenge['is_applied']) {
-            ?>
+                                                    <?php
+                                                    if ($Popular_Challenge['is_applied']) {
+                                                        ?>
                                                         <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Enter</a>
                                                         <?php
                                                     } else {
@@ -403,10 +415,10 @@ if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
                             </div>
                             <!-- Challenge each section end here -->
 
-        <?php
-    }
-}
-?>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <!-- Challenge row section end here -->
 
@@ -424,10 +436,10 @@ if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
                     <!-- Challenge Title Section section end here -->
                 </div>
                 <div class="row">					
-<?php
-if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
-    foreach ($Recom_Challenges as $Recom_Challenge) {
-        ?>
+                    <?php
+                    if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
+                        foreach ($Recom_Challenges as $Recom_Challenge) {
+                            ?>
 
                             <!-- Challenge each section start here -->
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
@@ -438,7 +450,7 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
                                             <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Recom_Challenge['user_image'] ?>" class="img-responsive center-block ">
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
-                                            <h2 class="chlng_hdg">Makes a challenge <img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
+                                            <h2 class="chlng_hdg"><?php echo $Recom_Challenge['name'] ?><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
                                         </div>
                                     </div>
                                     <!-- Challenge header section end here -->
@@ -448,14 +460,20 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
                                     <div class="challenge_cont_sec2 row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Recom_Challenge['is_ranked']  && $Recom_Challenge['given_rank'] == 1)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Recom_Challenge['average_rank'] ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 0)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                                             <p class="chlng_para">
-        <?php echo $Recom_Challenge['description'] ?>
+                                                <?php echo $Recom_Challenge['description'] ?>
                                             </p>
                                         </div>
                                     </div>
@@ -466,22 +484,12 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH."coin_icon.png" ?>"/><?php echo $Recom_Challenge['rewards'] ?></span></li>
+                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Recom_Challenge['rewards'] ?></span></li>
                                                 <li class="winner winner_r_btn" id="winner<?php echo $Recom_Challenge['id'] ?>" data-id="<?php echo $Recom_Challenge['id']; ?>">
                                                     <a class="pstbtn">Winners</a>
                                                 </li>
                                                 <li>
-        <?php
-        if ($Recom_Challenge['is_applied']) {
-            ?>
-                                                        <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Enter</a>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                    <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
                                                 </li>
                                             </ul>
 
@@ -595,10 +603,10 @@ if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
-        <?php
-    }
-}
-?>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <!-- Challenge row section end here -->
             </div>

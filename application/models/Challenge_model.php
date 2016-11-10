@@ -23,6 +23,17 @@ class Challenge_model extends CI_Model {
         return $last_id;
     }
 
+    public function update_challenge_user($id, $data) {
+        if (is_array($id)) {
+            $this->db->where($id);
+        } else {
+            $this->db->where(['id' => $id]);
+        }
+        $this->db->update('challange_user', $data);
+        $last_id = $this->db->affected_rows();
+        return $last_id;
+    }
+
     /* v! Update challange into challanges table 
      * develop by : HPA
      */
@@ -47,8 +58,8 @@ class Challenge_model extends CI_Model {
         $user_id = logged_in_user_id();
         $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank');
         $this->db->join('users', 'users.id = ch.user_id');
-        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
-        $this->db->join('challange_rank cr','cr.challange_id = ch.id and cr.user_id = '.$user_id,'left');
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
+        $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
         // $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
@@ -64,10 +75,10 @@ class Challenge_model extends CI_Model {
 
     public function get_popular_challenges($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank');
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank,cu.is_quit');
         $this->db->join('users', 'users.id = ch.user_id');
-        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id, 'left');
-        $this->db->join('challange_rank cr','cr.challange_id = ch.id and cr.user_id = '.$user_id,'left');
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
+        $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
         //$this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.average_rank', 'DESC');
@@ -76,7 +87,7 @@ class Challenge_model extends CI_Model {
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
     }
-    
+
     /* Select Recommnded challenge for logged in user
      * @param $start    int     specify start position
      * @param $limit    int     specify limit
@@ -84,82 +95,74 @@ class Challenge_model extends CI_Model {
      * @return array[][]    return two dimensional array having record of challenge
      * develop by : ar
      */
-    public function get_recommended_challenges($start,$limit)
-    {
+
+    public function get_recommended_challenges($start, $limit) {
         $user_id = logged_in_user_id();
-        $joined_challenge = array_column($this->db->where('user_id',$user_id)->get('challange_user')->result_array(),'challange_id');
-        
+        $joined_challenge = array_column($this->db->where('user_id', $user_id)->get('challange_user')->result_array(), 'challange_id');
+
         // Fetch challenge that user's friends have accepted and user has not.
         $this->db->select('distinct(cu.challange_id)');
         $this->db->from('challange_user cu');
-        $this->db->join('users u','u.id = cu.user_id');
-        $this->db->join('challanges c','c.id = cu.id and c.is_finished != 1 and c.is_blocked != 1 and c.is_deleted != 1');
-        $this->db->join('follower f','(f.follower_id = '.$user_id.' and f.user_id = u.id) or (f.user_id = '.$user_id.' and f.follower_id = u.id)'); // follower or following user
-        $friends_challange = array_column($this->db->get()->result_array(),'challange_id');
-        
+        $this->db->join('users u', 'u.id = cu.user_id');
+        $this->db->join('challanges c', 'c.id = cu.id and c.is_finished != 1 and c.is_blocked != 1 and c.is_deleted != 1');
+        $this->db->join('follower f', '(f.follower_id = ' . $user_id . ' and f.user_id = u.id) or (f.user_id = ' . $user_id . ' and f.follower_id = u.id)'); // follower or following user
+        $friends_challange = array_column($this->db->get()->result_array(), 'challange_id');
+
         // removed those challanges whoes user's already joined
-        $recommanded_challange = array_diff($friends_challange,$joined_challenge);
-        if(count($recommanded_challange) >= ($start + $limit)) // Checking limit is sufficient
-        {
-            $ids_to_fetch = array_slice($recommanded_challange,$start,$limit);
+        $recommanded_challange = array_diff($friends_challange, $joined_challenge);
+        if (count($recommanded_challange) >= ($start + $limit)) { // Checking limit is sufficient
+            $ids_to_fetch = array_slice($recommanded_challange, $start, $limit);
             return $this->fetch_challenges_by_ids($ids_to_fetch);
-        }
-        else // Need to fetch more challenges
-        {
-            $ids_not_to_search = (array_merge($joined_challenge,$recommanded_challange));
+        } else { // Need to fetch more challenges
+            $ids_not_to_search = (array_merge($joined_challenge, $recommanded_challange));
             // Fetch hobby of user
-            $user_hobbies = array_map("trim",explode(",",$this->db->select('hobby')->where('id',$user_id)->get('users')->row_array()['hobby']));
-            if(count($user_hobbies) > 0) // If hobby exist
-            {
+            $user_hobbies = array_map("trim", explode(",", $this->db->select('hobby')->where('id', $user_id)->get('users')->row_array()['hobby']));
+            if (count($user_hobbies) > 0) { // If hobby exist
                 $fetch_limit = (($start + $limit) - count($recommanded_challange));
                 // Fetch group according to user's hobby
                 $this->db->select('distinct(c.id)');
                 $this->db->from('challanges c');
-                $this->db->where_not_in('c.id',$ids_not_to_search);
+                $this->db->where_not_in('c.id', $ids_not_to_search);
                 $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
                 $this->db->limit($fetch_limit);
-                foreach($user_hobbies as $hobby)
-                {
-                    $this->db->or_like('name',$hobby);
-                    $this->db->or_like('description',$hobby);
+                foreach ($user_hobbies as $hobby) {
+                    $this->db->or_like('name', $hobby);
+                    $this->db->or_like('description', $hobby);
                 }
-                $interested_challenge_id = array_column($this->db->get()->result_array(),'id');
-                $ids_not_to_search = array_merge($ids_not_to_search,$interested_challenge_id);
-                
-                $recommanded_challange = array_merge($recommanded_challange,$interested_challenge_id);
-                
-                if($fetch_limit > count($interested_challenge_id))
-                {
+                $interested_challenge_id = array_column($this->db->get()->result_array(), 'id');
+                $ids_not_to_search = array_merge($ids_not_to_search, $interested_challenge_id);
+
+                $recommanded_challange = array_merge($recommanded_challange, $interested_challenge_id);
+
+                if ($fetch_limit > count($interested_challenge_id)) {
                     $fetch_limit = (($start + $limit) - count($recommanded_challange));
                     // Fetch old challenges, that user has not accepted
                     $fetch_limit = (($start + $limit) - count($recommanded_challange));
                     // Fetch Old challenges
                     $this->db->select('distinct(c.id)');
                     $this->db->from('challanges c');
-                    $this->db->where_not_in('c.id',$ids_not_to_search);
+                    $this->db->where_not_in('c.id', $ids_not_to_search);
                     $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
                     $this->db->limit($fetch_limit);
                     $this->db->order_by('id');
-                    $old_challenge_id = array_column($this->db->get()->result_array(),'id');
-                    $recommanded_group = array_merge($recommanded_challange,$old_challenge_id);
+                    $old_challenge_id = array_column($this->db->get()->result_array(), 'id');
+                    $recommanded_group = array_merge($recommanded_challange, $old_challenge_id);
                 }
-                $ids_to_fetch = array_slice($recommanded_challange,$start,$limit);
+                $ids_to_fetch = array_slice($recommanded_challange, $start, $limit);
                 return $this->fetch_challenges_by_ids($ids_to_fetch);
-            }
-            else // If hobby not available
-            {
+            } else { // If hobby not available
                 // Fetch old challenges, that user has not accepted
                 $fetch_limit = (($start + $limit) - count($recommanded_challange));
                 // Fetch Old challenges
                 $this->db->select('distinct(c.id)');
                 $this->db->from('challanges c');
-                $this->db->where_not_in('c.id',$ids_not_to_search);
+                $this->db->where_not_in('c.id', $ids_not_to_search);
                 $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
                 $this->db->limit($fetch_limit);
                 $this->db->order_by('id');
-                $old_challenge_id = array_column($this->db->get()->result_array(),'id');
-                $recommanded_group = array_merge($recommanded_challange,$old_challenge_id);
-                $ids_to_fetch = array_slice($recommanded_challange,$start,$limit);
+                $old_challenge_id = array_column($this->db->get()->result_array(), 'id');
+                $recommanded_group = array_merge($recommanded_challange, $old_challenge_id);
+                $ids_to_fetch = array_slice($recommanded_challange, $start, $limit);
                 return $this->fetch_challenges_by_ids($ids_to_fetch);
             }
         }
@@ -169,24 +172,23 @@ class Challenge_model extends CI_Model {
      * 
      * 
      */
-    public function fetch_challenges_by_ids($ids){
-        if(count($ids) > 0)
-        {
+
+    public function fetch_challenges_by_ids($ids) {
+        if (count($ids) > 0) {
             $user_id = logged_in_user_id();
             $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cr.id) as is_ranked,cr.rank as given_rank');
             $this->db->join('users', 'users.id = ch.user_id');
-            $this->db->join('challange_rank cr','cr.challange_id = ch.id and cr.user_id = '.$user_id,'left');
-            $this->db->where_in('ch.id',$ids);
+//            $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
+            $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
+            $this->db->where_in('ch.id', $ids);
             $this->db->group_by('ch.id');
             return $this->db->get('challanges ch')->result_array();
-        }
-        else
-        {
+        } else {
             $arr = array();
             return $arr;
         }
     }
-    
+
     /* v! Select challanges by id from challanges table 
      * develop by : HPA
      */
@@ -198,6 +200,24 @@ class Challenge_model extends CI_Model {
             $this->db->where('ch.id', $id);
             $res_data = $this->db->get('challanges ch')->row_array();
             return $res_data;
+        }
+    }
+
+    /* v! Select challanges by id from challanges table 
+     * develop by : HPA
+     */
+
+    public function get_challenge_quit($id, $user_id) {
+        if ($id != null) {
+            $this->db->where('cu.challange_id', $id);
+            $this->db->where('cu.user_id', $user_id);
+            $this->db->where('cu.is_quit', 1);
+            $res_data = $this->db->get('challange_user cu')->row_array();
+            if (!empty($res_data)) {
+                return $res_data['id'];
+            } else {
+                return false;
+            }
         }
     }
 
@@ -327,9 +347,9 @@ class Challenge_model extends CI_Model {
         $this->db->join('challange_post_like cl', 'cp.id = cl.challange_post_id and cl.is_liked = 1', 'left');
         $this->db->join('challange_post_like cl1', 'cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = ' . $logged_in_user, 'left');
         $this->db->join('challange_post_comment cpc', 'cp.id = cpc.challange_post_id', 'left');
-        $this->db->join('challange_post_rank crp','cp.id = crp.challange_post_id and crp.rank = 1','left');
-        $this->db->join('challange_post_rank crn','cp.id = crn.challange_post_id and crn.rank = 0','left');
-        $this->db->join('challange_post_rank cru','cp.id = cru.challange_post_id and cru.user_id = '.$logged_in_user,'left');
+        $this->db->join('challange_post_rank crp', 'cp.id = crp.challange_post_id and crp.rank = 1', 'left');
+        $this->db->join('challange_post_rank crn', 'cp.id = crn.challange_post_id and crn.rank = 0', 'left');
+        $this->db->join('challange_post_rank cru', 'cp.id = cru.challange_post_id and cru.user_id = ' . $logged_in_user, 'left');
         $this->db->where('cp.challange_id = ' . $challange_id);
         $this->db->order_by('(count(DISTINCT crp.id) - count(DISTINCT crn.id))', 'desc');
         $this->db->group_by('cp.id');
@@ -571,25 +591,25 @@ class Challenge_model extends CI_Model {
     /*
      * 
      */
-    public function get_post_comment_reply_data_by_id($post_comment_reply_id)
-    {
+
+    public function get_post_comment_reply_data_by_id($post_comment_reply_id) {
         $this->db->select('p.*, u.name, u.user_image');
         $this->db->from('challange_post_comments_reply p');
-        $this->db->join('users u','p.user_id = u.id and p.id = '.$post_comment_reply_id);
+        $this->db->join('users u', 'p.user_id = u.id and p.id = ' . $post_comment_reply_id);
         return $this->db->get()->row_array();
     }
-    
+
     /*
      * 
      */
-    public function user_rank_exist_for_post($uid,$post_id)
-    {
+
+    public function user_rank_exist_for_post($uid, $post_id) {
         $where['user_id'] = $uid;
         $where['challange_post_id'] = $post_id;
         $this->db->where($where);
         return $this->db->get('challange_post_rank')->row_array();
     }
-    
+
     /*
      * update_post_rank is used to update rank status to particular post
      * @param $array array[] specify fields that going to insert
@@ -616,6 +636,7 @@ class Challenge_model extends CI_Model {
      * 		false, if fail
      * developed by : ar
      */
+
     public function add_post_rank($array) {
         if ($this->db->insert('challange_post_rank', $array)) {
             return true;
@@ -626,20 +647,20 @@ class Challenge_model extends CI_Model {
     /*
      * 
      */
-    public function get_challenge_data($challange_id)
-    {
+
+    public function get_challenge_data($challange_id) {
         $this->db->select('c.*,u.name as challange_user,u.user_image as challange_user_image');
         $this->db->from('challanges c');
         $this->db->join('users u', 'c.user_id = u.id');
-        $this->db->where('c.id = '.$challange_id);
+        $this->db->where('c.id = ' . $challange_id);
         return $this->db->get()->row_array();
     }
-    
+
     /*
      * 
      */
-    public function get_rank_post_by_challenge_id($challange_id,$logged_in_user,$limit)
-    {
+
+    public function get_rank_post_by_challenge_id($challange_id, $logged_in_user, $limit) {
         $this->db->select('cp.*,u.name,u.user_image,count(DISTINCT cc.id) as tot_coin, count(DISTINCT cc1.id) as is_coined,count(DISTINCT cl.id) as tot_like, count(DISTINCT cl1.id) as is_liked,count(DISTINCT cpc.id) as tot_comment,count(DISTINCT crp.id) as positive_rank,count(DISTINCT crn.id) as negetive_rank,count(DISTINCT cru.id) is_ranked, cru.rank');
         $this->db->from('challange_post cp');
         $this->db->join('users u', 'cp.user_id = u.id');
@@ -648,9 +669,9 @@ class Challenge_model extends CI_Model {
         $this->db->join('challange_post_like cl', 'cp.id = cl.challange_post_id and cl.is_liked = 1', 'left');
         $this->db->join('challange_post_like cl1', 'cp.id = cl1.challange_post_id and cl1.is_liked = 1 and cl1.user_id = ' . $logged_in_user, 'left');
         $this->db->join('challange_post_comment cpc', 'cp.id = cpc.challange_post_id', 'left');
-        $this->db->join('challange_post_rank crp','cp.id = crp.challange_post_id and crp.rank = 1','left');
-        $this->db->join('challange_post_rank crn','cp.id = crn.challange_post_id and crn.rank = 0','left');
-        $this->db->join('challange_post_rank cru','cp.id = cru.challange_post_id and cru.user_id = '.$logged_in_user,'left');
+        $this->db->join('challange_post_rank crp', 'cp.id = crp.challange_post_id and crp.rank = 1', 'left');
+        $this->db->join('challange_post_rank crn', 'cp.id = crn.challange_post_id and crn.rank = 0', 'left');
+        $this->db->join('challange_post_rank cru', 'cp.id = cru.challange_post_id and cru.user_id = ' . $logged_in_user, 'left');
         $this->db->where('cp.challange_id = ' . $challange_id);
         $this->db->order_by('(count(DISTINCT crp.id) - count(DISTINCT crn.id))', 'desc');
         $this->db->group_by('cp.id');
@@ -688,18 +709,18 @@ class Challenge_model extends CI_Model {
         }
         return $post;
     }
-    
+
     /*
      * 
      */
-    public function user_rank_exist_for_challenge($uid,$challenge_id)
-    {
+
+    public function user_rank_exist_for_challenge($uid, $challenge_id) {
         $where['user_id'] = $uid;
         $where['challange_id'] = $challenge_id;
         $this->db->where($where);
         return $this->db->get('challange_rank')->row_array();
     }
-    
+
     public function update_challenge_rank($array, $id) {
         $this->db->where('id', $id);
         if ($this->db->update('challange_rank', $array)) {
@@ -716,13 +737,14 @@ class Challenge_model extends CI_Model {
      * 		false, if fail
      * developed by : ar
      */
+
     public function add_challenge_rank($array) {
         if ($this->db->insert('challange_rank', $array)) {
             return true;
         }
         return false;
     }
-    
+
     /*
      * change_challenge_average_rank is used to change average rank of the challenge
      * @param   $challenge_id   int     specify challeranknge id
@@ -732,15 +754,16 @@ class Challenge_model extends CI_Model {
      *          false, if fail
      * developed by : ar
      */
-    public function change_challenge_average_rank($challenge_id,$rank_number)
-    {
-        $this->db->where('id',$challenge_id);
-        $this->db->set('average_rank',"average_rank + ".$rank_number,false);
-        if($this->db->update('challanges'))
-        {
+
+    public function change_challenge_average_rank($challenge_id, $rank_number) {
+        $this->db->where('id', $challenge_id);
+        $this->db->set('average_rank', "average_rank + " . $rank_number, false);
+        if ($this->db->update('challanges')) {
             return true;
         }
         return false;
     }
+
 }
+
 ?>
