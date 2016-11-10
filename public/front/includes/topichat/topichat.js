@@ -49,6 +49,7 @@ $('document').ready(function () {
     $('.topichat_msg_sec').on('click', '.add', function () {
         var t = $(this);
         var chat_id = t.parents('.topichat_media_post').data('chat_id');
+        console.log(chat_id);
         $.ajax({
             url: base_url + 'user/topichat/add_rank_to_chat_post/' + chat_id,
             success: function (str) {
