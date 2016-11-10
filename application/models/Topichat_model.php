@@ -68,6 +68,7 @@ class Topichat_model extends CI_Model {
 
     public function get_recommended_group($start, $limit) {
         $user_id = logged_in_user_id();
+
         $joined_group = array_column($this->db->select('topic_id')->where('user_id',$user_id)->get('topic_group_user')->result_array(),'topic_id');
         
         // Fetch group in which user's friends are joined and user has not joined
@@ -260,6 +261,7 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
+
     public function get_messages($group_id, $logged_in_user, $limit = null) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
@@ -282,7 +284,8 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function load_messages($group_id, $logged_in_user,$limit, $last_msg_id) {
+
+    public function load_messages($group_id, $logged_in_user, $limit, $last_msg_id) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.id < ', $last_msg_id);
@@ -350,8 +353,7 @@ class Topichat_model extends CI_Model {
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.media IS NOT NULL');
         $this->db->where('tg.media_type', 'video');
-        if(!is_null($last_video_id))
-        {
+        if (!is_null($last_video_id)) {
             $this->db->where('tg.id < ', $last_video_id);
         }
         $this->db->join('users u', 'tg.user_id = u.id');
@@ -376,8 +378,7 @@ class Topichat_model extends CI_Model {
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.media IS NOT NULL');
         $this->db->where('tg.media_type', 'image');
-        if(!is_null($last_image_id))
-        {
+        if (!is_null($last_image_id)) {
             $this->db->where('tg.id < ', $last_image_id);
         }
         $this->db->join('users u', 'tg.user_id = u.id');
@@ -386,7 +387,7 @@ class Topichat_model extends CI_Model {
         $res_data = $this->db->get('topic_group_chat tg')->result_array();
         return $res_data;
     }
-    
+
     /*
      * 
      */
@@ -439,7 +440,7 @@ class Topichat_model extends CI_Model {
     public function get_top_rank_media($group_id, $logged_in_user, $limit) {
         $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
-        $this->db->where('tg.media_type IS NOT NULL AND tg.media_type !="files"');
+//        $this->db->where('tg.media_type IS NOT NULL AND tg.media_type !="files"');
         $this->db->join('users u', 'tg.user_id = u.id');
 //        $this->db->join('topic_group_chat_rank tr','tg.id = tr.topic_group_chat_id');
         $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
@@ -449,6 +450,22 @@ class Topichat_model extends CI_Model {
         $this->db->order_by('(count(DISTINCT trp.id) - count(DISTINCT trn.id))', 'desc');
         $this->db->group_by('tg.id');
         return $this->db->get('topic_group_chat tg')->result_array();
+    }
+
+    public function get_shared_media($group_id, $logged_in_user, $limit) {
+        $this->db->select('tg.*');
+//        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+        $this->db->like('tg.media', 'media');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->where('tg.media_type IS NOT NULL AND tg.media_type ="links"');
+//        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+//        $this->db->order_by('(count(DISTINCT trp.id) - count(DISTINCT trn.id))', 'desc');
+        $this->db->group_by('tg.id');
+        $res_data = $this->db->get('topic_group_chat tg')->result_array();
+//        echo $this->db->last_query();
+//        exit;
+        return $res_data;
     }
 
     /*
@@ -465,26 +482,30 @@ class Topichat_model extends CI_Model {
     /*
      * 
      */
-    public function get_topic_notification_by_user_id($user_id,$start,$limit){
+
+    public function get_topic_notification_by_user_id($user_id, $start, $limit) {
         $this->db->select('n.*, u.name,tg.topic_name, f.name as user_name');
-        $this->db->where('n.user_id = '.$user_id);
-        $this->db->join('users u','u.id = n.user_id');
-        $this->db->join('users f','f.id = n.from_user_id');
-        $this->db->join('topic_group tg','tg.id = n.topic_group_id');
-        $this->db->limit($limit,$start);
-        $this->db->order_by('n.id','desc');
+        $this->db->where('n.user_id = ' . $user_id);
+        $this->db->join('users u', 'u.id = n.user_id');
+        $this->db->join('users f', 'f.id = n.from_user_id');
+        $this->db->join('topic_group tg', 'tg.id = n.topic_group_id');
+        $this->db->limit($limit, $start);
+        $this->db->order_by('n.id', 'desc');
         return $this->db->get('topic_notification n')->result_array();
     }
-    
+
     /*
      * 
      */
-    public function get_chat_id_from_media_name($media){
+
+    public function get_chat_id_from_media_name($media) {
         $this->db->select('id');
-        $id = $this->db->where('media',$media)->get('topic_group_chat')->row_array()['id'];
-        echo $id;die;
+        $id = $this->db->where('media', $media)->get('topic_group_chat')->row_array()['id'];
+        echo $id;
+        die;
         return $id;
     }
+
 }
 
 ?>

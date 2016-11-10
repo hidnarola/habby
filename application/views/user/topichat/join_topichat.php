@@ -59,6 +59,34 @@
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
                                         </a>
                                         <?php
+                                    } else if ($post['media_type'] == "files") {
+                                        ?>
+                                        <a class="files" href="<?php echo base_url() . "topichat/download_file/" . $post['media'] ?>" data-fancybox-group="gallerytopichat1">
+                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">
+                                            <span class="filename"><?php echo $post['media'] ?></span>
+                                        </a>
+                                        <?php
+                                    } else if ($post['media_type'] == "links") {
+                                        $media = json_decode($post['media']);
+                                        ?>
+                                        <div class = "fileshare">
+                                            <div class = "">
+                                                <?php
+                                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                                    ?>
+                                                    <div class = "large-3 columns">
+                                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                                    </div>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <div class = "large-9 column">
+                                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                                    <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
                                     }
                                     ?>
                                 </div>
@@ -76,17 +104,20 @@
                 <!-- Top rate section start here -->
 
                 <!-- All files section start here -->
-                <div class="panel panel-default popular_img_sec">
+<!--                <div class="panel panel-default popular_img_sec">
                     <div class="panel-heading"><b><?php echo lang('ALL FILES'); ?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
                     <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared'); ?></b> <span style="float: right"><a href="#"><b><?php echo lang('More'); ?></b></a></span></div>
                     <div class="panel-body">
                         <div class="topic_frame">
-                            <a class="fancybox" data-type="iframe"  href="http://www.youtube.com/embed/WAZ5SmJd1To" data-fancybox-group="galleryshared1">
-                                <img src="<?php echo DEFAULT_IMAGE_PATH; ?>rank-img2.jpg" class="img-responsive">
-                            </a>
+                            <?php
+                            if (isset($shared_links) && !empty($shared_links)) {
+//                                pr($shared_links);
+                            }
+                            ?>
+                            <?php // echo "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fvideoseries%3Fwmode%3Dopaque%26list%3DPL442FA2C127377F07&wmode=opaque&url=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DiCUV3iv9xOs&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FiCUV3iv9xOs%2Fhqdefault.jpg&key=3cd32b4596b54c5fa93b5d197a72299c&type=text%2Fhtml&schema=youtube\" width=\"560\" height=\"315\" scrolling=\"no\" frameborder=\"0\" allowfullscreen></iframe>"; ?>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- All files section end here -->
 
                 <?php

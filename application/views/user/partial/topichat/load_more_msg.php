@@ -66,6 +66,21 @@ foreach ($messages as $message) {
                 ?>
                 <div class="chat_2 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>" style="float:right;clear:right">
                     <div class="wdth_span media_wrapper">
+                        <div id="field" class="topichat_media_rank">
+                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                <img src="<?php
+                                echo DEFAULT_IMAGE_PATH;
+                                echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                ?>" class="rank_img_sec"/>
+                            </button>
+                            <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                            <button type="button" id="sub" class="sub smlr_btn">
+                                <img src="<?php
+                                echo DEFAULT_IMAGE_PATH;
+                                echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                ?>" class="rank_img_sec"/>
+                            </button>
+                        </div>
                         <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "topichat/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
                     </div>
                 </div>
@@ -74,7 +89,22 @@ foreach ($messages as $message) {
                 $media = json_decode($message['media']);
 //                pr($media);
                 ?>
-                <div class = "share_2 clearfix" data-chat_id="<?php echo $message['id'] ?>">
+                <div class = "share_2 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>">
+                    <div id="field" class="topichat_media_rank">
+                        <button type="button" id="add" class="add add_btn smlr_btn">
+                            <img src="<?php
+                            echo DEFAULT_IMAGE_PATH;
+                            echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                            ?>" class="rank_img_sec"/>
+                        </button>
+                        <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                        <button type="button" id="sub" class="sub smlr_btn">
+                            <img src="<?php
+                            echo DEFAULT_IMAGE_PATH;
+                            echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                            ?>" class="rank_img_sec"/>
+                        </button>
+                    </div>
                     <div class = "fileshare">
                         <div class = "">
                             <?php
@@ -87,8 +117,8 @@ foreach ($messages as $message) {
                             }
                             ?>
                             <div class = "large-9 column">
-                                <a href = "<?php echo $media->original_url ?>" target="_blank"><?php echo $media->title ?></a>
-                                <p><?php echo $media->description ?></p>
+                                <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
                             </div>
                         </div>
                     </div>
@@ -170,13 +200,28 @@ foreach ($messages as $message) {
                     <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'> 
                     <div class="wdth_span media_wrapper img_media_wrapper">
                         <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "topichat/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
+                        <div id="field" class="topichat_media_rank">
+                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                <img src="<?php
+                                echo DEFAULT_IMAGE_PATH;
+                                echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                ?>" class="rank_img_sec"/>
+                            </button>
+                            <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                            <button type="button" id="sub" class="sub smlr_btn">
+                                <img src="<?php
+                                echo DEFAULT_IMAGE_PATH;
+                                echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                ?>" class="rank_img_sec"/>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <?php
             } else if ($message['media_type'] == "links") {
                 $media = json_decode($message['media']);
                 ?>
-                <div class = "share_1 clearfix" data-chat_id="<?php echo $message['id'] ?>">
+                <div class = "share_1 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>">
                     <img class = "user_chat_thumb" src = "<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title="<?php echo $message['name'] ?>">
                     <div class = "fileshare">
                         <div class = "">
@@ -190,10 +235,25 @@ foreach ($messages as $message) {
                             }
                             ?>
                             <div class = "large-9 column">
-                                <a href = "<?php echo $media->original_url ?>" target="_blank"><?php echo $media->title ?></a>
-                                <p><?php echo $media->description ?></p>
+                                <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
                             </div>
                         </div>
+                    </div>
+                    <div id="field" class="topichat_media_rank">
+                        <button type="button" id="add" class="add add_btn smlr_btn">
+                            <img src="<?php
+                            echo DEFAULT_IMAGE_PATH;
+                            echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                            ?>" class="rank_img_sec"/>
+                        </button>
+                        <span class="rank_rate"><?php echo $message['positive_rank'] - $message['negetive_rank']; ?></span>
+                        <button type="button" id="sub" class="sub smlr_btn">
+                            <img src="<?php
+                            echo DEFAULT_IMAGE_PATH;
+                            echo (($message['is_ranked'] && $message['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                            ?>" class="rank_img_sec"/>
+                        </button>
                     </div>
                 </div>
                 <?php

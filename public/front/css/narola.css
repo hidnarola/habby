@@ -488,8 +488,19 @@
     border-radius: 5px;
     overflow: hidden;
 }
+.share_1 .fileshare{
+    max-width: 88%;
+    display: inline-block;
+}
+.share_2 .fileshare{
+    display: inline-block;
+    max-width: 93%;
+}
 .fileshare p{color:#000;}
 
+img.file_icon {
+    height: 70px;
+}
 @media(min-width:1583px){
     .row.event_container
     {
