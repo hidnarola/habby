@@ -89,10 +89,12 @@ $servername = $_SERVER['SERVER_NAME'];
 
 if ($servername == 'habby') {
     defined('Asset_path') OR define('Asset_path', 'http://habby/');
+    defined("ROOT_PATH") OR define("ROOT_PATH","c:/wamp/www/habby/");
 } else {
     defined('Asset_path') OR define('Asset_path', 'http://clientapp.narola.online/HD/habby/');
+    defined("ROOT_PATH") OR define("ROOT_PATH","/habby");
 }
-defined("ROOT_PATH") OR define("ROOT_PATH","c:/wamp/www/habby/");
+
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code
 defined('DEFAULT_PROFILE_IMAGE_PATH') OR define('DEFAULT_PROFILE_IMAGE_PATH', Asset_path . 'uploads/user_profile/'); // highest automatically-assigned error code
 defined('DEFAULT_CHAT_IMAGE_PATH') OR define('DEFAULT_CHAT_IMAGE_PATH', Asset_path . 'uploads/chat_media/');
