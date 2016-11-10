@@ -174,7 +174,8 @@ class User extends CI_Controller {
                     $media[] = $media_arr;
                 }
             }
-        } else if (!empty($_FILES['video-0']['name'])) {
+        } 
+        else if (!empty($_FILES['video-0']['name'])) {
             $filecount = count($_FILES['video-0']['name']);
             for ($i = 0; $i < $filecount; ++$i) {
                 $_FILES['video']['name'] = $_FILES['video-0']['name'][$i];
@@ -206,7 +207,8 @@ class User extends CI_Controller {
                     exec($cmd);
                 }
             }
-        } else if (!empty($_FILES['files-0']['name'])) {
+        } 
+        else if (!empty($_FILES['files-0']['name'])) {
             $filecount = count($_FILES['files-0']['name']);
             for ($i = 0; $i < $filecount; ++$i) {
                 $_FILES['files']['name'] = $_FILES['files-0']['name'][$i];
@@ -235,7 +237,8 @@ class User extends CI_Controller {
                     $media[] = $media_arr;
                 }
             }
-        } else {
+        } 
+        else {
             echo "601";
             die;
         }
