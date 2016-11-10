@@ -31,7 +31,7 @@ class Challenge extends CI_Controller {
         $start = ($page - 1) * $limit;
         $this->data['Newest_Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
         $this->data['Popular_Challenges'] = $this->Challenge_model->get_popular_challenges($start, $limit);
-        $this->data['Recom_Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
+        $this->data['Recom_Challenges'] = $this->Challenge_model->get_recommended_challenges($start, $limit);
         $this->template->load('front', 'user/challenge/challenge', $this->data);
     }
 
@@ -137,12 +137,21 @@ class Challenge extends CI_Controller {
 
     public function accept($topic_id) {
         $id = base64_decode(urldecode($topic_id));
-        $ins_data = array(
-            'challange_id' => $id,
-            'user_id' => $this->data['user_data']['id'],
-            'is_quit' => false,
-        );
-        $this->Challenge_model->insert_challenge_user($ins_data);
+        $is_applied_id = $this->Challenge_model->get_challenge_quit($id, $this->data['user_data']['id']);
+        if ($is_applied_id != null) {
+            $upd_data = array(
+                'is_quit' => false,
+                'challange_date' => date('Y-m-d H:i:s')
+            );
+            $this->Challenge_model->update_challenge_user($is_applied_id, $upd_data);
+        } else {
+            $ins_data = array(
+                'challange_id' => $id,
+                'user_id' => $this->data['user_data']['id'],
+                'is_quit' => false,
+            );
+            $this->Challenge_model->insert_challenge_user($ins_data);
+        }
         redirect('challenge/details/' . $topic_id);
     }
 
@@ -161,7 +170,7 @@ class Challenge extends CI_Controller {
         $this->data['messages'] = $this->Challenge_model->get_messages($Id, $msg_limit);
 
         $this->data['challenge_post'] = $this->Challenge_model->get_challenge_posts($Id, $this->session->user['id'], 0, $post_limit);
-    //    pr($this->data['challenge_post'],1);
+        //    pr($this->data['challenge_post'],1);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/challenge/join_challenge', $this->data);
     }
@@ -404,53 +413,41 @@ class Challenge extends CI_Controller {
     /*
      * 
      */
-    public function add_comment_reply($post_comment_id)
-    {
-        if($this->input->post())
-        {
+
+    public function add_comment_reply($post_comment_id) {
+        if ($this->input->post()) {
             $insert_arr['challange_post_comment_id'] = $post_comment_id;
             $insert_arr['user_id'] = $this->session->user['id'];
             $insert_arr['reply_text'] = $this->input->post('msg');
-            if($this->Challenge_model->insert_post_comment_reply($insert_arr))
-            {
+            if ($this->Challenge_model->insert_post_comment_reply($insert_arr)) {
                 // Create post comment content
                 $data['reply'] = $this->Challenge_model->get_post_comment_reply_data_by_id($this->db->insert_id());
-                $this->load->view('user/partial/challenge/add_comment_reply',$data);
-            }
-            else
-            {
+                $this->load->view('user/partial/challenge/add_comment_reply', $data);
+            } else {
                 echo '0';
             }
         }
     }
-    
+
     /*
      * 
      */
-    public function add_rank_to_challenge_post($post_id){
+
+    public function add_rank_to_challenge_post($post_id) {
         $uid = $this->session->user['id'];
-        if(!empty($rank = $this->Challenge_model->user_rank_exist_for_post($uid,$post_id)))
-        {
+        if (!empty($rank = $this->Challenge_model->user_rank_exist_for_post($uid, $post_id))) {
             // Update entry
-            if(!$rank['rank']) // rank is negetive?
-            {
+            if (!$rank['rank']) { // rank is negetive?
                 $update_arr['rank'] = "1";
-                if($this->Challenge_model->update_post_rank($update_arr,$rank['id']))
-                {
+                if ($this->Challenge_model->update_post_rank($update_arr, $rank['id'])) {
                     echo "2";
-                }
-                else
-                {
+                } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo "3"; // no need to insert/update
             }
-        }
-        else
-        {
+        } else {
             // Insert entry
             $insert_arr['user_id'] = $uid;
             $insert_arr['challange_post_id'] = $post_id;
@@ -462,34 +459,26 @@ class Challenge extends CI_Controller {
             }
         }
     }
-    
+
     /*
      * 
      */
-     public function subtract_rank_from_challenge_post($post_id){
+
+    public function subtract_rank_from_challenge_post($post_id) {
         $uid = $this->session->user['id'];
-        if(!empty($rank = $this->Challenge_model->user_rank_exist_for_post($uid,$post_id)))
-        {
+        if (!empty($rank = $this->Challenge_model->user_rank_exist_for_post($uid, $post_id))) {
             // Update entry
-            if($rank['rank']) // rank is positive?
-            {
+            if ($rank['rank']) { // rank is positive?
                 $update_arr['rank'] = "0";
-                if($this->Challenge_model->update_post_rank($update_arr,$rank['id']))
-                {
+                if ($this->Challenge_model->update_post_rank($update_arr, $rank['id'])) {
                     echo "-2";
-                }
-                else
-                {
+                } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo "3"; // no need to insert/update
             }
-        }
-        else
-        {
+        } else {
             // Insert entry
             $insert_arr['user_id'] = $uid;
             $insert_arr['challange_post_id'] = $post_id;
@@ -501,97 +490,83 @@ class Challenge extends CI_Controller {
             }
         }
     }
-    
+
     /*
      * 
      */
-    public function get_top_rank_post($challenge_id){
+
+    public function get_top_rank_post($challenge_id) {
         $limit = 3; // Fetch top 3 rank post, if 3 post available
         $data['challenge'] = $this->Challenge_model->get_challenge_data($challenge_id);
-        $data['rank_post'] = $this->Challenge_model->get_rank_post_by_challenge_id($challenge_id,$this->session->user['id'],$limit);
+        $data['rank_post'] = $this->Challenge_model->get_rank_post_by_challenge_id($challenge_id, $this->session->user['id'], $limit);
 
-        echo $this->load->view('user/partial/challenge/display_rank_post_of_challenge',$data,true);
+        echo $this->load->view('user/partial/challenge/display_rank_post_of_challenge', $data, true);
     }
-    
+
     /*
      * 
      */
-    public function add_rank_to_challenge($challenge_id){
+
+    public function add_rank_to_challenge($challenge_id) {
         $uid = $this->session->user['id'];
-        if(!empty($rank = $this->Challenge_model->user_rank_exist_for_challenge($uid,$challenge_id)))
-        {
+        if (!empty($rank = $this->Challenge_model->user_rank_exist_for_challenge($uid, $challenge_id))) {
             // Update entry
-            if(!$rank['rank']) // rank is negetive?
-            {
+            if (!$rank['rank']) { // rank is negetive?
                 $update_arr['rank'] = "1";
-                if($this->Challenge_model->update_challenge_rank($update_arr,$rank['id']))
-                {
-                    $this->Challenge_model->change_challenge_average_rank($challenge_id,2);
+                if ($this->Challenge_model->update_challenge_rank($update_arr, $rank['id'])) {
+                    $this->Challenge_model->change_challenge_average_rank($challenge_id, 2);
                     echo "2";
-                }
-                else
-                {
+                } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo "3"; // no need to insert/update
             }
-        }
-        else
-        {
+        } else {
             // Insert entry
             $insert_arr['user_id'] = $uid;
             $insert_arr['challange_id'] = $challenge_id;
             $insert_arr['rank'] = '1';
             if ($this->Challenge_model->add_challenge_rank($insert_arr)) {
-                $this->Challenge_model->change_challenge_average_rank($challenge_id,1);
+                $this->Challenge_model->change_challenge_average_rank($challenge_id, 1);
                 echo '1';
             } else {
                 echo '0';
             }
         }
     }
-    
+
     /*
      * 
      */
-     public function subtract_rank_from_challenge($challenge_id){
+
+    public function subtract_rank_from_challenge($challenge_id) {
         $uid = $this->session->user['id'];
-        if(!empty($rank = $this->Challenge_model->user_rank_exist_for_challenge($uid,$challenge_id)))
-        {
+        if (!empty($rank = $this->Challenge_model->user_rank_exist_for_challenge($uid, $challenge_id))) {
             // Update entry
-            if($rank['rank']) // rank is positive?
-            {
+            if ($rank['rank']) { // rank is positive?
                 $update_arr['rank'] = "0";
-                if($this->Challenge_model->update_challenge_rank($update_arr,$rank['id']))
-                {
-                    $this->Challenge_model->change_challenge_average_rank($challenge_id,-2);
+                if ($this->Challenge_model->update_challenge_rank($update_arr, $rank['id'])) {
+                    $this->Challenge_model->change_challenge_average_rank($challenge_id, -2);
                     echo "-2";
-                }
-                else
-                {
+                } else {
                     echo '0';
                 }
-            }
-            else
-            {
+            } else {
                 echo "3"; // no need to insert/update
             }
-        }
-        else
-        {
+        } else {
             // Insert entry
             $insert_arr['user_id'] = $uid;
             $insert_arr['challange_id'] = $challenge_id;
             $insert_arr['rank'] = '0';
             if ($this->Challenge_model->add_challenge_rank($insert_arr)) {
-                $this->Challenge_model->change_challenge_average_rank($challenge_id,-1);
+                $this->Challenge_model->change_challenge_average_rank($challenge_id, -1);
                 echo '-1';
             } else {
                 echo '0';
             }
         }
     }
+
 }
