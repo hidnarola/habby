@@ -22,7 +22,7 @@ if (isset($topichat_groups) && !empty($topichat_groups)) {
                         <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> <?php echo lang('Users'); ?></span></li>
                         <li>
                             <?php
-                            if ($topichat_group['is_joined']) {
+                            if (isset($topichat_group['is_joined']) && $topichat_group['is_joined']) {
                                 ?>
                                 <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($topichat_group['id'])) ?>" class="pstbtn"><?php echo lang('Joined'); ?></a>
                                 <?php
@@ -33,7 +33,7 @@ if (isset($topichat_groups) && !empty($topichat_groups)) {
                             }
                             ?>
                         </li>
-                                    <!--<li><button class="join pstbtn" id="<?php echo md5($topichat_group['id']); ?>">Join</button></li>-->
+                        <!--<li><button class="join pstbtn" id="<?php echo md5($topichat_group['id']); ?>">Join</button></li>-->
                     </ul>
                 </div>
 

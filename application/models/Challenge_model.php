@@ -76,7 +76,117 @@ class Challenge_model extends CI_Model {
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
     }
+    
+    /* Select Recommnded challenge for logged in user
+     * @param $start    int     specify start position
+     * @param $limit    int     specify limit
+     * 
+     * @return array[][]    return two dimensional array having record of challenge
+     * develop by : ar
+     */
+    public function get_recommended_challenges($start,$limit)
+    {
+        $user_id = logged_in_user_id();
+        $joined_challenge = array_column($this->db->where('user_id',$user_id)->get('challange_user')->result_array(),'challange_id');
+        
+        // Fetch challenge that user's friends have accepted and user has not.
+        $this->db->select('distinct(cu.challange_id)');
+        $this->db->from('challange_user cu');
+        $this->db->join('users u','u.id = cu.user_id');
+        $this->db->join('challanges c','c.id = cu.id and c.is_finished != 1 and c.is_blocked != 1 and c.is_deleted != 1');
+        $this->db->join('follower f','(f.follower_id = '.$user_id.' and f.user_id = u.id) or (f.user_id = '.$user_id.' and f.follower_id = u.id)'); // follower or following user
+        $friends_challange = array_column($this->db->get()->result_array(),'challange_id');
+        
+        // removed those challanges whoes user's already joined
+        $recommanded_challange = array_diff($friends_challange,$joined_challenge);
+        if(count($recommanded_challange) >= ($start + $limit)) // Checking limit is sufficient
+        {
+            $ids_to_fetch = array_slice($recommanded_challange,$start,$limit);
+            return $this->fetch_challenges_by_ids($ids_to_fetch);
+        }
+        else // Need to fetch more challenges
+        {
+            $ids_not_to_search = (array_merge($joined_challenge,$recommanded_challange));
+            // Fetch hobby of user
+            $user_hobbies = array_map("trim",explode(",",$this->db->select('hobby')->where('id',$user_id)->get('users')->row_array()['hobby']));
+            if(count($user_hobbies) > 0) // If hobby exist
+            {
+                $fetch_limit = (($start + $limit) - count($recommanded_challange));
+                // Fetch group according to user's hobby
+                $this->db->select('distinct(c.id)');
+                $this->db->from('challanges c');
+                $this->db->where_not_in('c.id',$ids_not_to_search);
+                $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
+                $this->db->limit($fetch_limit);
+                foreach($user_hobbies as $hobby)
+                {
+                    $this->db->or_like('name',$hobby);
+                    $this->db->or_like('description',$hobby);
+                }
+                $interested_challenge_id = array_column($this->db->get()->result_array(),'id');
+                $ids_not_to_search = array_merge($ids_not_to_search,$interested_challenge_id);
+                
+                $recommanded_challange = array_merge($recommanded_challange,$interested_challenge_id);
+                
+                if($fetch_limit > count($interested_challenge_id))
+                {
+                    $fetch_limit = (($start + $limit) - count($recommanded_challange));
+                    // Fetch old challenges, that user has not accepted
+                    $fetch_limit = (($start + $limit) - count($recommanded_challange));
+                    // Fetch Old challenges
+                    $this->db->select('distinct(c.id)');
+                    $this->db->from('challanges c');
+                    $this->db->where_not_in('c.id',$ids_not_to_search);
+                    $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
+                    $this->db->limit($fetch_limit);
+                    $this->db->order_by('id');
+                    $old_challenge_id = array_column($this->db->get()->result_array(),'id');
+                    $recommanded_group = array_merge($recommanded_challange,$old_challenge_id);
+                }
+                $ids_to_fetch = array_slice($recommanded_challange,$start,$limit);
+                return $this->fetch_challenges_by_ids($ids_to_fetch);
+            }
+            else // If hobby not available
+            {
+                // Fetch old challenges, that user has not accepted
+                $fetch_limit = (($start + $limit) - count($recommanded_challange));
+                // Fetch Old challenges
+                $this->db->select('distinct(c.id)');
+                $this->db->from('challanges c');
+                $this->db->where_not_in('c.id',$ids_not_to_search);
+                $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
+                $this->db->limit($fetch_limit);
+                $this->db->order_by('id');
+                $old_challenge_id = array_column($this->db->get()->result_array(),'id');
+                $recommanded_group = array_merge($recommanded_challange,$old_challenge_id);
+                $ids_to_fetch = array_slice($recommanded_challange,$start,$limit);
+                return $this->fetch_challenges_by_ids($ids_to_fetch);
+            }
+        }
+    }
 
+    /*
+     * 
+     * 
+     */
+    public function fetch_challenges_by_ids($ids){
+        if(count($ids) > 0)
+        {
+            $user_id = logged_in_user_id();
+            $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cr.id) as is_ranked,cr.rank as given_rank');
+            $this->db->join('users', 'users.id = ch.user_id');
+            $this->db->join('challange_rank cr','cr.challange_id = ch.id and cr.user_id = '.$user_id,'left');
+            $this->db->where_in('ch.id',$ids);
+            $this->db->group_by('ch.id');
+            return $this->db->get('challanges ch')->result_array();
+        }
+        else
+        {
+            $arr = array();
+            return $arr;
+        }
+    }
+    
     /* v! Select challanges by id from challanges table 
      * develop by : HPA
      */

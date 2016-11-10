@@ -44,7 +44,7 @@ if ($Challenges != "" && !empty($Challenges)) {
                                 <a class="pstbtn">Winners</a>
                             </li>
                             <?php
-                                if($Challenge['is_applied'])
+                                if(isset($Challenge['is_applied']) && $Challenge['is_applied'])
                                 {
                                     ?>
                                     <li><a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Enter</a></li>

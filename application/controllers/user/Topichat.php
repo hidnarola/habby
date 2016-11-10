@@ -62,7 +62,7 @@ class Topichat extends CI_Controller {
             if ($filterby == 'popular') {
                 $this->data['topichat_groups'] = $this->Topichat_model->get_popular_topichat_group($start, $limit);
             } else if ($filterby == 'recommended') {
-                $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start, $limit);
+                $this->data['topichat_groups'] = $this->Topichat_model->get_recommended_group($start, $limit);
             } else {
                 $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start, $limit);
             }
@@ -434,7 +434,6 @@ class Topichat extends CI_Controller {
         exit;
         return $image;
     }
-
     
     /*
      * 

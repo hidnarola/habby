@@ -88,7 +88,7 @@ class Challenge extends CI_Controller {
             if ($filterby == 'popular') {
                 $this->data['Challenges'] = $this->Challenge_model->get_popular_challenges($start, $limit);
             } else if ($filterby == 'recommended') {
-                $this->data['Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
+                $this->data['Challenges'] = $this->Challenge_model->get_recommended_challenges($start, $limit);
             } else {
                 $this->data['Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
             }
@@ -111,7 +111,7 @@ class Challenge extends CI_Controller {
             if ($filterby == 'popular') {
                 $this->data['Challenges'] = $this->Challenge_model->get_popular_challenges($start, $limit);
             } else if ($filterby == 'recommended') {
-                $this->data['Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
+                $this->data['Challenges'] = $this->Challenge_model->get_recommended_challenges($start, $limit);
             } else {
                 $this->data['Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
             }
