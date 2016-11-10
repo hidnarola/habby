@@ -45,6 +45,10 @@ function share_links() {
                     media: 'links'
                 }
                 Server.send('message', JSON.stringify(msg));
+//                {
+//                    console.log('in if');
+//                }
+//                console.log('after written');
                 $('#url').val('');
 //                $('#url').trigger('close');
                 $('#url').prop('disabled', false);
@@ -235,6 +239,7 @@ $(document).ready(function () {
             processData: false,
             data: form_data,
             type: 'post',
+            async : false,
             error: function (textStatus, errorThrown) {
 
             },
@@ -308,7 +313,6 @@ $(document).ready(function () {
                     return;
                 }
             }
-
         }
         var form_data = new FormData();
         $.each(files, function (i, file) {
@@ -326,6 +330,7 @@ $(document).ready(function () {
             processData: false,
             data: form_data,
             type: 'post',
+            async: false,
             error: function (textStatus, errorThrown) {
 
             },
@@ -335,7 +340,8 @@ $(document).ready(function () {
                 {
                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
                     p.html('<span>Fail to send message</span>');
-                } else if (str != 0)
+                }
+                else if (str != 0)
                 {
                     var msg = {
                         message: str,
