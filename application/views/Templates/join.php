@@ -46,6 +46,7 @@
         </script>
     </head>
     <body class="cbp-spmenu-push">
+        <div class="loader"></div>
         <!--<div class="container-fluid">
                 <div class="row">
                         <div class="container">

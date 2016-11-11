@@ -467,6 +467,12 @@
     top: 25%;
     left: -30px;
 }
+
+.share_1 .topichat_media_rank {
+    position: absolute;
+    margin-top: 2%;
+}
+
 .share_1.clearfix {
     float: left;
     /*clear: left;*/
@@ -524,7 +530,7 @@ img.file_icon {
     z-index: 100;
     background-image : url('http://loadinggif.com/images/image-selection/3.gif');
     background-color:#666;
-    opacity : 0.4;
+    opacity : 0.8;
     background-repeat : no-repeat;
     background-position : center;
     left : 0;

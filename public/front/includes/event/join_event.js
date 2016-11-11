@@ -11,7 +11,7 @@ function send(text) {
 }
 
 $(document).ready(function () {
-    Server = new FancyWebSocket('ws://192.168.1.186:9300');
+    Server = new FancyWebSocket('ws://192.168.1.143:9300');
 //    Server = new FancyWebSocket('ws://127.0.0.1:9300');
     // Send message to server
     $('#message_div').keypress(function (e) {
@@ -90,6 +90,7 @@ $(document).ready(function () {
             form_data.append('image-' + i, file);
         });
         form_data.append("msg_image", files);
+        $(".loader").addClass('show');
         // Send file using ajax
         $.ajax({
             url: base_url + '/user/User/upload_chat_media',
@@ -114,6 +115,7 @@ $(document).ready(function () {
                         media: 'image'
                     }
                     Server.send('message', JSON.stringify(msg));
+                    $(".loader").removeClass('show');
                 }
             }
         });
@@ -166,6 +168,7 @@ $(document).ready(function () {
             form_data.append('video-' + i, file);
         });
         form_data.append("msg_video", files);
+        $(".loader").addClass('show');
         // Send file using ajax
         $.ajax({
             url: base_url + '/user/User/upload_chat_media',
@@ -196,6 +199,7 @@ $(document).ready(function () {
                     }
                     Server.send('message', JSON.stringify(msg));
                 }
+                $(".loader").removeClass('show');
             }
         });
     });

@@ -138,12 +138,12 @@ if (count($recent_images) > 0) {
                                                         <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
                                                     </div>
                                                 </span>
-                                                <span class="input-group-btn upld_icnpad">
+                                            <!--    <span class="input-group-btn upld_icnpad">
                                                     <div class="fileUpload up_img btn">
                                                         <span><img title="Upload file" src="<?php echo DEFAULT_IMAGE_PATH; ?>upload.png"></span>
                                                         <input type="file" name="upload_file" class="upload" id="uploadFile"/>
                                                     </div>
-                                                </span>
+                                                </span>-->
                                                 <span class="input-group-btn upld_icnpad">
                                                     <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
 
