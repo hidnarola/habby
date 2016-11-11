@@ -508,6 +508,10 @@
 img.file_icon {
     height: 70px;
 }
+.chlng2_past_rank_sec {
+  height: 500px;
+  overflow: auto;
+}
 @media(min-width:1583px){
     .row.event_container
     {
