@@ -14,7 +14,6 @@ function share_links() {
         var i = Math.random().toString(36).substring(7);
         $('#url').trigger('preview');
         var preview = $('#url').data('preview');
-//        console.log(preview);
         if (JSON.stringify(preview) != '{}') {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
