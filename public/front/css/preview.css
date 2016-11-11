@@ -160,7 +160,8 @@
   height: 0; }
 
 .clearfix {
-  display: inline-block; }
+  //display: inline-block; 
+}
 
 html[xmlns] .clearfix {
   display: block; }

@@ -107,7 +107,6 @@
         </div>
         <!--Footer content section end here-->
 
-
         <!--  Post modal section start here -->
         <div class="modal" id="post_here">
             <div class="modal-dialog modal-lg">
@@ -141,7 +140,6 @@
                                                         <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                                         <input type="file" name="videofile[]" id="uploadVideo" class="upload" multiple="multiple"/>
                                                     </div>
-
                                                 </div>
                                                 <div class="image_wrapper" style="display:none">
 

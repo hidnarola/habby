@@ -18,6 +18,7 @@ function share_links() {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
                 $('#url').val('');
+//                $(".loader").removeClass('show');
                 $('#url').prop('disabled', false);
                 return false;
             } else {
@@ -43,14 +44,29 @@ function share_links() {
                     group_id: group_id,
                     media: 'links'
                 }
-                Server.send('message', JSON.stringify(msg));
+                if (Server.send('message', JSON.stringify(msg)))
+                {
+                    setTimeout(function () {
+                        $.ajax({
+                            url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                            method: 'post',
+                            async: false,
+                            data: 'media=' + preview,
+                            success: function (resp) {
+                                $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                            }
+                        });
+                    }, 3000);
+                }
                 $('#url').val('');
 //                $('#url').preview({bind: false});
+//                $(".loader").removeClass('show');
                 $('#url').prop('disabled', false);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
             swal("Please correct your Link.");
+//            $(".loader").removeClass('show');
             $('#url').prop('disabled', false);
             return false;
         }
@@ -100,6 +116,7 @@ $(document).ready(function () {
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
+        $(".loader").addClass('show');
         var i;
         $('.message').html();
         var files = !!this.files ? this.files : [];
@@ -171,6 +188,7 @@ $(document).ready(function () {
                     async: false,
                     data: 'media=' + media_data[0].media,
                     success: function (resp) {
+                        $(".loader").removeClass('show');
 //                        $('.imagePreview' + i).parents('.topichat_media_post').data('chat_id', resp);
                         $('.imagePreview' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                     }
@@ -181,6 +199,7 @@ $(document).ready(function () {
     // Video uploading script
     $("#upload_video").on("change", function ()
     {
+        $(".loader").addClass('show');
         var display_file_class = '';
         $('.message').html();
         var files = !!this.files ? this.files : [];
@@ -263,6 +282,7 @@ $(document).ready(function () {
                     async: false,
                     data: 'media=' + media_data[0].media,
                     success: function (resp) {
+                        $(".loader").removeClass('show');
 //                        $('.imagePreview' + i).parents('.topichat_media_post').data('chat_id', resp);
                         $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
                     }
@@ -273,6 +293,7 @@ $(document).ready(function () {
     // File uploading script
     $("#upload_files").on("change", function ()
     {
+        $(".loader").addClass('show');
         var display_file_class = '';
         $('.message').html();
         var files = !!this.files ? this.files : [];
@@ -290,12 +311,73 @@ $(document).ready(function () {
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[key]); // read the local file
                     reader.onloadend = function () { // set image data as background of div
+
+                        console.log("hello");
+
                         var i = Math.random().toString(36).substring(7);
                         display_file_class = 'imagePreview' + i;
                         $('.message').hide();
                         $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
                         $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+
+                        var form_data = new FormData();
+                        $.each(files, function (i, file) {
+                            form_data.append('files-' + i, file);
+                        });
+
+                        form_data.append("msg_files", files);
+                        // Send file using ajax
+                        var media_data;
+                        $.ajax({
+                            url: base_url + '/user/User/upload_chat_media',
+                            dataType: 'script',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
+                            type: 'post',
+                            async: false,
+                            error: function (textStatus, errorThrown) {
+
+                            },
+                            success: function (str)
+                            {
+                                if (str == "601")
+                                {
+                                    var p = $('.' + display_file_class).parent().addClass('wdth_span');
+                                    p.html('<span>Fail to send message</span>');
+                                } else if (str != 0)
+                                {
+                                    var msg = {
+                                        message: str,
+                                        type: 'topic_msg',
+                                        group_id: group_id,
+                                        media: 'files'
+                                    }
+                                    str = JSON.parse(str);
+                                    $('.' + display_file_class).siblings('a').attr('href', base_url + 'topichat/download_file/' + str[0].media);
+                                    $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
+                                    Server.send('message', JSON.stringify(msg));
+                                    media_data = str;
+                                }
+                            },
+                            complete: function () {
+                                $(".loader").removeClass('show');
+                                setTimeout(function(){
+                                    $.ajax({
+                                        url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                                        method: 'post',
+                                        async: false,
+                                        data: 'media=' + media_data[0].media,
+                                        success: function (resp) {
+                                            $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
+                                        }
+                                    });
+                                },1500)
+                            }
+                        });
+
                     }
                 } else
                 {
@@ -308,59 +390,7 @@ $(document).ready(function () {
                 }
             }
         }
-        var form_data = new FormData();
-        $.each(files, function (i, file) {
-            form_data.append('files-' + i, file);
-        });
 
-        form_data.append("msg_files", files);
-        // Send file using ajax
-        var media_data;
-        $.ajax({
-            url: base_url + '/user/User/upload_chat_media',
-            dataType: 'script',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            async: false,
-            error: function (textStatus, errorThrown) {
-
-            },
-            success: function (str)
-            {
-                if (str == "601")
-                {
-                    var p = $('.' + display_file_class).parent().addClass('wdth_span');
-                    p.html('<span>Fail to send message</span>');
-                } else if (str != 0)
-                {
-                    var msg = {
-                        message: str,
-                        type: 'topic_msg',
-                        group_id: group_id,
-                        media: 'files'
-                    }
-                    str = JSON.parse(str);
-                    $('.' + display_file_class).siblings('a').attr('href', base_url + 'topichat/download_file/' + str[0].media);
-                    $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
-                    Server.send('message', JSON.stringify(msg));
-                    media_data = str;
-                }
-            },
-            complete: function (xhr, status) {
-                $.ajax({
-                    url: base_url + '/user/Topichat/get_chat_id_from_media_name',
-                    method: 'post',
-                    async: false,
-                    data: 'media=' + media_data[0].media,
-                    success: function (resp) {
-                        $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
-                    }
-                });
-            }
-        });
     });
 
     // Send update notification to other users
@@ -379,6 +409,7 @@ $(document).ready(function () {
     $('.share_btn').click(function () {
         if ($("#url").val() != "")
         {
+//            $(".loader").addClass('show');
             $('#url').prop('disabled', true);
             share_links();
         } else {
@@ -390,6 +421,7 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             if ($(this).val() != "")
             {
+//                $(".loader").addClass('show');
                 $('#url').prop('disabled', true);
                 share_links();
             } else {
@@ -453,7 +485,7 @@ $(document).ready(function () {
                         '<p>' + description + '</p>' +
                         '</div>' +
                         '</div>' +
-                        '</div></div></div>');
+                        '</div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
