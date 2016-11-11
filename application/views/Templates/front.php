@@ -116,7 +116,7 @@
                         <div class="Profl_addsec home_post">
                             <div class="row pst_here_sec">
                                 <!-- post start here -->
-                                <form method="post" action="home/add_post" enctype="multipart/form-data">
+                                <form method="post" id="post_form" action="home/add_post" enctype="multipart/form-data">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="panel panel-default">
 
@@ -424,8 +424,10 @@
                         }
                     });
                 });
+                $('#post_form').submit(function(){
+                    $(".loader").addClass('show');
+                });
             });
         </script>
     </body>
 </html>
-
