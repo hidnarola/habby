@@ -258,17 +258,19 @@ class Topichat extends CI_Controller {
 
     public function details($Id) {
         $limit = 20;
+        $this->data['Id'] = $Id;
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
         $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
         $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id, $image_limit = 8);
+        $this->data['recent_links'] = $this->Topichat_model->get_recent_links($Id, $image_limit = 2);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
         }
         $this->data['top_rank_post'] = $this->Topichat_model->get_top_rank_media($Id, $this->session->user['id'], $top_rank_limit = 3);
-        $this->data['shared_links'] = $this->Topichat_model->get_shared_media($Id, $this->session->user['id'], $top_rank_limit = 3);
+//        $this->data['shared_links'] = $this->Topichat_model->get_shared_media($Id, $this->session->user['id'], $top_rank_limit = 3);
 //        pr($this->data['top_rank_post'],1);
         $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit);
         krsort($this->data['messages']); // Reverse array
@@ -359,6 +361,7 @@ class Topichat extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['recent_images'] = $this->Topichat_model->load_recent_images($Id, $image_limit = 8);
         $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($Id, $video_limit = 8);
+        $this->data['recent_links'] = $this->Topichat_model->load_recent_links($Id, $link_limit = 5);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video['media'])[0] . "_thumb.png";

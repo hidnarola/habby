@@ -43,6 +43,18 @@
                 <!-- popular image and video section End here -->
                 <?php
             }
+            if (count($recent_links) > 0) {
+                ?>
+                <div class="panel panel-default popular_img_sec media">
+                    <div class="panel-heading"><b><?php echo lang('Shared'); ?></b></div>
+                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Links'); ?></b></div>
+                    <div class="panel-body link_wrapper">
+                        <?php
+                        $this->load->view('user/partial/topichat/load_more_links');
+                        ?>
+                    </div>
+                </div>
+            <?php }
             ?>
         </div>
     </div>

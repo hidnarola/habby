@@ -180,6 +180,12 @@ class Challenge extends CI_Controller {
             if (!empty($this->input->post('type'))) {
                 $media = array();
                 $c_id = base64_decode(urldecode($challange_id));
+                $post_added = $this->Challenge_model->check_challenge_post($c_id, $this->session->user['id']);
+                if ($post_added == 0) {
+                    $challenge = $this->Challenge_model->get_challenge_by_id($c_id);
+                    $update_arr['total_coin'] = $this->session->user['total_coin'] + intval($challenge['rewards']);
+                    $this->Users_model->update_user_data($this->session->user['id'], $update_arr); // update last login time
+                }
                 if ($this->input->post('type') == "image") {
                     if (!empty($_FILES['image_upload']['name'])) {
                         $filecount = count($_FILES['image_upload']['name']);
@@ -580,8 +586,15 @@ class Challenge extends CI_Controller {
     }
 
     public function quit_challenge($id) {
-        echo $id;
-//        exit;
+        if ($id != null) {
+            $upd_data = array(
+                'is_quit' => true,
+                'challange_date' => date('Y-m-d H:i:s')
+            );
+            $is_applied_id = $this->Challenge_model->quit_challenge($id, $this->data['user_data']['id'], $upd_data);
+            $this->session->set_flashdata('message', array('message' => lang('Challenge Quit successfully.'), 'class' => 'alert alert-success'));
+            redirect('challenge');
+        }
     }
 
 }

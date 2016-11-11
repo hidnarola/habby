@@ -221,6 +221,20 @@ class Challenge_model extends CI_Model {
         }
     }
 
+    /* v! Select challanges by id from challanges table 
+     * develop by : HPA
+     */
+
+    public function quit_challenge($id, $user_id, $data) {
+        if ($id != null) {
+            $this->db->where('cu.challange_id', $id);
+            $this->db->where('cu.user_id', $user_id);
+            $this->db->update('challange_user cu', $data);
+            $last_id = $this->db->affected_rows();
+            return $last_id;
+        }
+    }
+
     /* v! Select created challanges from challanges table 
      * develop by : HPA
      */
@@ -430,6 +444,23 @@ class Challenge_model extends CI_Model {
         $this->db->where('id', $post_id);
         $row = $this->db->get('challange_post')->row_array();
         return $row['user_id'];
+    }
+
+    /*
+     * check user have already post in perticular challenge or not
+     * @param $user_id	int 	specify user_id
+     * @param $post_id 	int 	specify post_id
+     *
+     * @return boolean 	true, if user entry exist for post
+     * 					false, if not exist
+     * developed by : hpa
+     */
+
+    public function check_challenge_post($ch_id, $user_id) {
+        $where['user_id'] = $user_id;
+        $where['challange_id'] = $ch_id;
+        $this->db->where($where);
+        return $this->db->get('challange_post')->num_rows();
     }
 
     /*

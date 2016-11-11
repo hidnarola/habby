@@ -337,6 +337,24 @@ class Topichat_model extends CI_Model {
         $arr = $this->db->get('topic_group_chat')->result_array();
         return array_column($arr, 'media');
     }
+    /*
+     * get_recent_links used to fetch recent shared links from database related to particular group
+     * @param   $group_id   int     specify group_id
+     * @param   $limit      int     specify limit
+     * 
+     * @return  array   one dimensional array having link details
+     * developed by : HPA
+     */
+
+    public function get_recent_links($group_id, $limit) {
+        $this->db->select('media');
+        $this->db->where('media_type', 'links');
+        $this->db->where('topic_group_id', $group_id);
+        $this->db->limit($limit);
+        $this->db->order_by('created_date', 'desc');
+        $arr = $this->db->get('topic_group_chat')->result_array();
+        return array_column($arr, 'media');
+    }
 
     /*
      * load_recent_videos is used to fetch more message for given group
@@ -378,6 +396,30 @@ class Topichat_model extends CI_Model {
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.media IS NOT NULL');
         $this->db->where('tg.media_type', 'image');
+        if (!is_null($last_image_id)) {
+            $this->db->where('tg.id < ', $last_image_id);
+        }
+        $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->limit($limit, 0);
+        $this->db->order_by('tg.id', 'desc');
+        $res_data = $this->db->get('topic_group_chat tg')->result_array();
+        return $res_data;
+    }
+    /*
+     * load_recent_links is used to fetch more links for given group
+     * @param $group_id int specify group id to which message will fetch
+     * @param $last_msg_id int specify last message that displayed
+     * 
+     * @return array[][] message data
+     *          boolean false, if fail
+     * developed by : ar
+     */
+
+    public function load_recent_links($group_id, $limit, $last_image_id = null) {
+        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->where('tg.topic_group_id', $group_id);
+        $this->db->where('tg.media IS NOT NULL');
+        $this->db->where('tg.media_type', 'links');
         if (!is_null($last_image_id)) {
             $this->db->where('tg.id < ', $last_image_id);
         }

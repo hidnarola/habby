@@ -241,7 +241,7 @@ $lang["Add New Meeting"] = "Add New Meeting";
 $lang["Meeting Details"] = "Meeting Details";
 $lang["Add"] = "Add";
 
-    //---flash---
+//---flash---
 $lang["League image was not uploaded."] = "League image was not uploaded.";
 $lang["League logo was not uploaded."] = "League logo was not uploaded.";
 $lang['There was some problem while creating league'] = 'There was some problem while creating league';
@@ -278,10 +278,11 @@ $lang["No Joined Event available."] = "No Joined Event available.";
 $lang["No Event available"] = "No Event available";
 $lang["Event join request"] = "Event join request";
 $lang["wants to join"] = "wants to join";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
 
+
+$lang["Challenge Quit successfully."] = "Challenge Quit successfully.";
+$lang["Challenge Quit Error occured."] = "Challenge Quit Error occured.";
+$lang["Links"] = "Links";
+$lang[""] = "";
+$lang[""] = "";
 ?>

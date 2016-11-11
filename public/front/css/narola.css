@@ -544,6 +544,15 @@ img.file_icon {
     margin-top : -16px;
 }
 
+.topic_frame .fileshare {
+    margin: 5px;
+}
+
+.topichat_link_wrapper.links{
+    padding: 5px;
+    height: auto;
+    margin-bottom: 11px;
+}
 @media(min-width:1583px){
     .row.event_container
     {
