@@ -569,4 +569,19 @@ class Challenge extends CI_Controller {
         }
     }
 
+    public function finish_challenge($id) {
+        if ($id != null) {
+            $upd_data = array(
+                'is_finished' => 1
+            );
+            $this->Challenge_model->update_challenge($id, $upd_data);
+            redirect('challenge/details/' . urlencode(base64_encode($id)));
+        }
+    }
+
+    public function quit_challenge($id) {
+        echo $id;
+//        exit;
+    }
+
 }

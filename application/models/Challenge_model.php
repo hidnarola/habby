@@ -39,7 +39,7 @@ class Challenge_model extends CI_Model {
      */
 
     public function update_challenge($id, $data) {
-        $data['modified_date'] = date('Y-m-d H:i:s');
+//        $data['modified_date'] = date('Y-m-d H:i:s');
         if (is_array($id)) {
             $this->db->where($id);
         } else {

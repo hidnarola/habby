@@ -17,8 +17,8 @@ function share_links() {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
                 $('#url').val('');
-                $('#url').trigger('close');
-//                $('#url').preview({bind: false});
+//                $('#url').trigger('close');
+                $('#url').preview({bind: false});
                 $('#url').prop('disabled', false);
                 return false;
             } else {
@@ -50,13 +50,13 @@ function share_links() {
 //                }
 //                console.log('after written');
                 $('#url').val('');
-//                $('#url').trigger('close');
+                $('#url').preview({bind: false});
                 $('#url').prop('disabled', false);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
             swal("Please correct your Link.");
-            $('#url').trigger('close');
+            $('#url').preview({bind: false});
             $('#url').prop('disabled', false);
             return false;
         }
@@ -239,7 +239,7 @@ $(document).ready(function () {
             processData: false,
             data: form_data,
             type: 'post',
-            async : false,
+            async: false,
             error: function (textStatus, errorThrown) {
 
             },
@@ -340,8 +340,7 @@ $(document).ready(function () {
                 {
                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
                     p.html('<span>Fail to send message</span>');
-                }
-                else if (str != 0)
+                } else if (str != 0)
                 {
                     var msg = {
                         message: str,
@@ -384,8 +383,12 @@ $(document).ready(function () {
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
     $('.share_btn').click(function () {
-        $('#url').prop('disabled', true);
-        share_links();
+        if ($.trim($("#url") == ""))
+        {
+            $('#url').prop('disabled', true);
+            share_links();
+        }
+        return false;
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {

@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chalng_upld_col">
-                        <div class="chalng_upld clearfix">
+                        <div class="chalng_upld">
                             <form method="post" enctype="multipart/form-data" id="media_form" action="challenge/upload_media/<?php echo urlencode(base64_encode($group_id)); ?>">
                                 <input type="hidden" name="type" class="type" value=""/>
                                 <div class="upld_sec">
@@ -76,7 +76,25 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p class="text-right"><a href="#" class="pstbtn">Quit</a></p>
+                        <?php
+                        if ($challenge != null && !empty($challenge)) {
+                            if ($user_data['id'] == $challenge['user_id']) {
+                                if ($challenge['is_finished'] == 0) {
+                                    ?>
+                                    <p class="text-right"><a href="<?php echo base_url() . "challenge/finish_challenge/" . $challenge['id'] ?>" class="pstbtn">Finish</a></p>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <p class="text-right"><a href="javascript:void(0)" class="pstbtn">Finished</a></p>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <p class="text-right"><a href="<?php echo base_url() . "challenge/quit_challenge/" . $challenge['id'] ?>" class="pstbtn">Quit</a></p>
+                                <?php
+                            }
+                        }
+                        ?>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="slmt_grp">
@@ -229,11 +247,17 @@
                                         </ul>
                                         <div id="field">
                                             <button type="button" id="add" class="add add_btn smlr_btn">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($post['is_ranked'] && $post['rank'])?'challeng_arrow_ranked.png':'challeng_arrow.png') ?>">
+                                                <img src="<?php
+                                                echo DEFAULT_IMAGE_PATH;
+                                                echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png')
+                                                ?>">
                                             </button>
                                             <span class="rank_rate"><?php echo $post['positive_rank'] - $post['negetive_rank']; ?></span>
                                             <button type="button" id="sub" class="sub smlr_btn">
-                                                <img src="<?php echo DEFAULT_IMAGE_PATH; echo (($post['is_ranked'] && !$post['rank'])?'challeng_arrow_ranked.png':'challeng_arrow.png') ?>">
+                                                <img src="<?php
+                                                echo DEFAULT_IMAGE_PATH;
+                                                echo (($post['is_ranked'] && !$post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png')
+                                                ?>">
                                             </button>
                                         </div>
                                     </div>

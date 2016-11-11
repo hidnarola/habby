@@ -82,7 +82,7 @@
                                                 ?>
                                                 <div class = "large-9 column">
                                                     <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
-                                                    <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                                                    <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
                                                 </div>
                                             </div>
                                         </div>
