@@ -459,11 +459,18 @@
     display: block;
     clear: both;
     margin-bottom: 30px;
+    position: relative;
 
+}
+.share_2 .topichat_media_rank {
+    position: absolute;
+    top: 25%;
+    left: -30px;
 }
 .share_1.clearfix {
     float: left;
-    clear: left;
+    /*clear: left;*/
+    clear: both;
     max-width: 500px;
     /*margin-top: 30PX;*/
     margin-bottom: 30px;

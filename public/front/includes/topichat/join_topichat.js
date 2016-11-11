@@ -12,13 +12,13 @@ function send(text) {
 function share_links() {
     setTimeout(function () {
         var i = Math.random().toString(36).substring(7);
+        $('#url').trigger('preview');
         var preview = $('#url').data('preview');
+//        console.log(preview);
         if (JSON.stringify(preview) != '{}') {
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
                 $('#url').val('');
-                $('#url').trigger('close');
-//                $('#url').preview({bind: false});
                 $('#url').prop('disabled', false);
                 return false;
             } else {
@@ -45,22 +45,17 @@ function share_links() {
                     media: 'links'
                 }
                 Server.send('message', JSON.stringify(msg));
-//                {
-//                    console.log('in if');
-//                }
-//                console.log('after written');
                 $('#url').val('');
-//                $('#url').trigger('close');
+//                $('#url').preview({bind: false});
                 $('#url').prop('disabled', false);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
             swal("Please correct your Link.");
-            $('#url').trigger('close');
             $('#url').prop('disabled', false);
             return false;
         }
-    }, 7000);
+    }, 5000);
 }
 
 $(document).ready(function () {
@@ -239,7 +234,7 @@ $(document).ready(function () {
             processData: false,
             data: form_data,
             type: 'post',
-            async : false,
+            async: false,
             error: function (textStatus, errorThrown) {
 
             },
@@ -340,8 +335,7 @@ $(document).ready(function () {
                 {
                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
                     p.html('<span>Fail to send message</span>');
-                }
-                else if (str != 0)
+                } else if (str != 0)
                 {
                     var msg = {
                         message: str,
@@ -384,20 +378,25 @@ $(document).ready(function () {
     $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
     $('.share_btn').click(function () {
-        $('#url').prop('disabled', true);
-        share_links();
+        if ($("#url").val() != "")
+        {
+            $('#url').prop('disabled', true);
+            share_links();
+        } else {
+            swal("Please Enter url.");
+            return false;
+        }
     });
     $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
-            if ($.trim($(this) == ""))
+            if ($(this).val() != "")
             {
                 $('#url').prop('disabled', true);
                 share_links();
+            } else {
+                swal("Please Enter url");
+                return false;
             }
-            return false;
-        } else if (e.charCode == 32 && $.trim($(this)) == '')
-        {
-            return false;
         }
     });
 

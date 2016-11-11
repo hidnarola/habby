@@ -18,9 +18,8 @@ function select($query) {
     }
 }
 
-function insert_id()
-{
-    global  $conn;
+function insert_id() {
+    global $conn;
     return mysqli_insert_id($conn);
 }
 
@@ -85,7 +84,7 @@ function send_topic_msg($group_id, $sender_id, $msg) {
 function send_topic_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     if ($media_type == 'links') {
-        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn,$msg) . "','" . $media_type . "',NULL)";
+        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -135,7 +134,7 @@ function get_groupplan_users($group_id) {
 
 function send_groupplan_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" .mysqli_real_escape_string($conn,$msg) . "',NULL,NULL,NULL)";
+    $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . mysqli_real_escape_string($conn, $msg) . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
@@ -154,7 +153,7 @@ function send_groupplan_media($group_id, $sender_id, $msg, $media_type) {
 
 function get_challenge_users($group_id) {
     global $conn;
-    $result = mysqli_query($conn, "select user_id from challange_user where challange_id = $group_id");
+    $result = mysqli_query($conn, "select user_id from challange_user where challange_id = $group_id AND is_quit=0");
     if (mysqli_num_rows($result) > 0) {
         $arr = array();
         while ($row = mysqli_fetch_assoc($result)) {
