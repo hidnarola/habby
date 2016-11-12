@@ -71,6 +71,7 @@
     DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
     last_video = '<?php echo (count($recent_videos) > 0) ? $recent_videos[count($recent_videos) - 1]['id'] : 0 ?>';
     last_image = '<?php echo (count($recent_images) > 0) ? $recent_images[count($recent_images) - 1]['id'] : 0 ?>';
+    last_link = '<?php echo (count($recent_links) > 0) ? $recent_links[count($recent_links) - 1]['id'] : 0 ?>';
     upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>

@@ -220,6 +220,12 @@
                             <!-- Challenge each section end here -->
                             <?php
                         }
+                    } else {
+                        ?>
+                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                            <p> No Newest Challenge.</p>
+                        </div>
+                        <?php
                     }
                     ?>
                 </div>
@@ -421,6 +427,12 @@
 
                             <?php
                         }
+                    } else {
+                        ?>
+                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                            <p> No Popular Challenge.</p>
+                        </div>
+                        <?php
                     }
                     ?>
                 </div>
@@ -434,7 +446,15 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <ul class="list-inline clng_ttl_ul">
                             <li>Recommended</li>
-                            <li><a href="<?php echo base_url() . "challenge/challenges?ch=recommended" ?>" class="pstbtn more_challenge">More</a></li>
+                            <?php
+                            if (($Recom_Challenges != "" && !empty($Recom_Challenges))) {
+                                if (count($Recom_Challenges) > 0) {
+                                    ?>
+                                    <li><a href="<?php echo base_url() . "challenge/challenges?ch=recommended" ?>" class="pstbtn more_challenge">More</a></li>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </ul>
                     </div>
                     <!-- Challenge Title Section section end here -->
@@ -465,14 +485,14 @@
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
                                                 <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
-                                                    echo DEFAULT_IMAGE_PATH;
-                                                    echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                    ?>"></button>
+                    echo DEFAULT_IMAGE_PATH;
+                    echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                            ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Recom_Challenge['average_rank'] ?>" class="field rank_rate" />
                                                 <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
-                                                    echo DEFAULT_IMAGE_PATH;
-                                                    echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                    ?>"></button>
+                                                                                                         echo DEFAULT_IMAGE_PATH;
+                                                                                                         echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                            ?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
@@ -507,6 +527,12 @@
                             <!-- Challenge each section end here -->
                             <?php
                         }
+                    } else {
+                        ?>
+                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                            <p> No Recommended Challenge.</p>
+                        </div>
+                        <?php
                     }
                     ?>
                 </div>

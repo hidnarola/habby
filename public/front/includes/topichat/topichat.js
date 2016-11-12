@@ -197,6 +197,41 @@ $('document').ready(function () {
             }
         });
     }
+    var load_links = true;
+    var in_progress_link = false;
+    $('.link_wrapper').scroll(function () {
+        if (load_links && !in_progress_link)
+        {
+            if ($('.link_wrapper').scrollTop() + $('.link_wrapper').innerHeight() >= $('.link_wrapper')[0].scrollHeight) {
+                if (!in_progress_link)
+                {
+                    loadlinks();
+                    in_progress_link = false;
+                }
+            }
+        }
+    });
+    function loadlinks()
+    {
+        $.ajax({
+            url: base_url + 'topichat/load_more_links/' + group_id,
+            method: 'post',
+            async: false,
+            data: 'last_link=' + last_link,
+            success: function (more) {
+                more = JSON.parse(more);
+                if (more.status)
+                {
+                    $('.link_wrapper').append(more.view);
+                    last_link = more.last_link_id;
+                } else
+                {
+                    load_links = false;
+                }
+                in_progress_link = false;
+            }
+        });
+    }
 
     $('.file_download').click(function () {
         var media = $(this).data('file');

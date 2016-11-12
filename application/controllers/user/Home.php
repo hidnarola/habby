@@ -359,6 +359,7 @@ class Home extends CI_Controller {
         $this->data['challenge_accepted'] = $this->Challenge_model->get_challenge_accepted($user_id);
         $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
         $this->data['followings'] = $this->Users_model->get_user_following($user_id);
+        $this->data['finish_challenges'] = $this->Challenge_model->get_finished_challenge($user_id);
         $this->template->load('front', 'user/challenge/home_challenge', $this->data);
     }
 

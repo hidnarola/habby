@@ -22,45 +22,45 @@
                             }
                             ?>
                         </div>
-                            <?php
-                        }
-                        ?>
+                        <?php
+                    }
+                    ?>
                     <?php
                     if ($user_data['id'] == $this->session->user['id']) {
                         ?>
                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 ">
-                        <?php
-                    } else {
-                        ?>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                             <?php
-                        }
-                        ?>
+                        } else {
+                            ?>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                <?php
+                            }
+                            ?>
                             <h2><?php echo lang('Group'); ?></h2>
                             <div class="row grp_3sec">
                                 <h2 class="subgroup"><?php echo lang('My Groups'); ?></h2>
-                            <?php
-                            if ($my_topichats != null && !empty($my_topichats)) {
-                                foreach ($my_topichats as $my_topichat) {
-                                    ?>
+                                <?php
+                                if ($my_topichats != null && !empty($my_topichats)) {
+                                    foreach ($my_topichats as $my_topichat) {
+                                        ?>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                             <div class="grp_prsnl_innr">
                                                 <h2><?php echo $my_topichat['topic_name'] ?></h2>
                                             </div>
                                             <p class="enter_btn">
-        <?php
-        if ($user_data['id'] == $this->session->user['id']) {
-            ?>
+                                                <?php
+                                                if ($user_data['id'] == $this->session->user['id']) {
+                                                    ?>
                                                     <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($my_topichat['id'])) ?>"><?php echo lang('Enter'); ?></a>
                                                     <?php
                                                 }
                                                 ?>
                                             </p>
                                         </div>
-                                                <?php
-                                            }
-                                        } else {
-                                            ?>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <p> <?php echo lang('No Groups.'); ?></p>
                                     </div>
@@ -80,19 +80,19 @@
                                                 <h2><?php echo $joined_topichat['topic_name'] ?></h2>
                                             </div>
                                             <p class="enter_btn">
-                                        <?php
-                                        if ($user_data['id'] == $this->session->user['id']) {
-                                            ?>
+                                                <?php
+                                                if ($user_data['id'] == $this->session->user['id']) {
+                                                    ?>
                                                     <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($joined_topichat['id'])) ?>"><?php echo lang('Enter'); ?></a>
-            <?php
-        }
-        ?>
+                                                    <?php
+                                                }
+                                                ?>
                                             </p>
                                         </div>
-                                                <?php
-                                            }
-                                        } else {
-                                            ?>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <p> <?php echo lang('No Groups.'); ?></p>
                                     </div>

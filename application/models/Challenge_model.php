@@ -39,7 +39,7 @@ class Challenge_model extends CI_Model {
      */
 
     public function update_challenge($id, $data) {
-//        $data['modified_date'] = date('Y-m-d H:i:s');
+        $data['modified_date'] = date('Y-m-d H:i:s');
         if (is_array($id)) {
             $this->db->where($id);
         } else {
@@ -61,6 +61,7 @@ class Challenge_model extends CI_Model {
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
         $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
         // $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
         $this->db->group_by('ch.id');
@@ -79,6 +80,7 @@ class Challenge_model extends CI_Model {
         $this->db->join('users', 'users.id = ch.user_id');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
         $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         //$this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
         $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.average_rank', 'DESC');
@@ -203,6 +205,20 @@ class Challenge_model extends CI_Model {
         }
     }
 
+    /* v! Select popular challanges which is not created by logged in user from challanges table 
+     * develop by : HPA
+     */
+
+    public function get_finished_challenge() {
+        $user_id = logged_in_user_id();
+        $this->db->select('ch.name,ch.modified_date');
+        $this->db->where('ch.is_finished', 1);
+        $this->db->where('ch.user_id =' . $user_id);
+        $this->db->order_by('ch.modified_date', 'DESC');
+        $res_data = $this->db->get('challanges ch')->result_array();
+        return $res_data;
+    }
+
     /* v! Select challanges by id from challanges table 
      * develop by : HPA
      */
@@ -242,7 +258,7 @@ class Challenge_model extends CI_Model {
     public function get_my_challenge($user_id) {
         $this->db->select('ch.*');
         $this->db->where('ch.user_id =' . $user_id);
-        $this->db->where('ch.is_finished', 0);
+//        $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
@@ -255,7 +271,7 @@ class Challenge_model extends CI_Model {
     public function get_joined_challenge($user_id) {
         $this->db->select('ch.*');
         $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND ch.user_id != cu.user_id');
-        $this->db->where('ch.is_finished', 0);
+//        $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
