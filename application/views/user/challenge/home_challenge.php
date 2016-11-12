@@ -34,43 +34,36 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 topi_prsnl topi_prsnl_btm">
                             <div class="chalng_tbl_sec">
-
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 prsnl_sm_sec">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
                                         <h2>Finished:</h2>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 prsnl_sm_sec">
-                                        <h2 class="text-center">Updated files</h2>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  col-xs-offset-1 prsnl_sm_sec">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
                                         <h2>Dates</h2>
                                     </div>
                                 </div>
-
-                                <div class="row chalng_tblrow">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 prsnl_sm_sec">
-                                        <p>Challenge #3</p>
+                                <?php
+                                if (isset($finish_challenges) && !empty($finish_challenges)) {
+                                    foreach ($finish_challenges as $finish_challenge) {
+                                        ?>
+                                        <div class="row chalng_tblrow">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
+                                                <p><?php echo $finish_challenge['name'] ?></p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
+                                                <p><?php echo date('d/m/Y H:i', strtotime($finish_challenge['modified_date'])) ?></p>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class = "row chalng_tblrow">
+                                        <p> No Finished Challenge.</p>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 prsnl_sm_sec">
-                                        <img src="<?php echo DEFAULT_IMAGE_PATH; ?>recent_post_img4.jpg" class="img-responsive center-block">
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  col-xs-offset-1 prsnl_sm_sec">
-                                        <p>8/09/2016</p>
-                                    </div>
-                                </div>
-
-                                <div class="row chalng_tblrow">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 prsnl_sm_sec">
-                                        <p>Challenge #4</p>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 prsnl_sm_sec">
-                                        <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  col-xs-offset-1 prsnl_sm_sec">
-                                        <p>20/09/2016</p>
-                                    </div>
-                                </div>
-
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -99,11 +92,11 @@
                                         </div>
                                         <p class="enter_btn">
                                             <?php
-                                                if ($user_data['id'] == $this->session->user['id']) {
-                                                    ?>
-                                                    <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($my_challenge['id'])) ?>">Enter</a>
-                                                    <?php
-                                                }
+                                            if ($user_data['id'] == $this->session->user['id']) {
+                                                ?>
+                                                <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($my_challenge['id'])) ?>">Enter <?php echo ($my_challenge['is_finished'] == 1) ? "(Finished)" : "" ?></a>
+                                                <?php
+                                            }
                                             ?>
                                         </p>
                                     </div>
@@ -131,11 +124,11 @@
                                         </div>
                                         <p class="enter_btn">
                                             <?php
-                                                if ($user_data['id'] == $this->session->user['id']) {
-                                                    ?>
-                                                    <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($joined_challenge['id'])) ?>">Enter</a>
-                                                    <?php
-                                                }
+                                            if ($user_data['id'] == $this->session->user['id']) {
+                                                ?>
+                                                <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($joined_challenge['id'])) ?>">Enter <?php echo ($joined_challenge['is_finished'] == 1) ? "(Finished)" : "" ?></a>
+                                                <?php
+                                            }
                                             ?>
                                         </p>
                                     </div>

@@ -361,7 +361,7 @@ class Topichat extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['recent_images'] = $this->Topichat_model->load_recent_images($Id, $image_limit = 8);
         $this->data['recent_videos'] = $this->Topichat_model->load_recent_videos($Id, $video_limit = 8);
-        $this->data['recent_links'] = $this->Topichat_model->load_recent_links($Id, $link_limit = 5);
+        $this->data['recent_links'] = $this->Topichat_model->load_recent_links($Id, $link_limit = 6);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video['media'])[0] . "_thumb.png";
@@ -417,6 +417,19 @@ class Topichat extends CI_Controller {
             $data['status'] = 1;
             $data['view'] = $this->load->view('user/partial/topichat/load_more_image', $this->data, true);
             $data['last_image_id'] = $this->data['recent_images'][count($this->data['recent_images']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
+    public function load_more_links($group_id) {
+        $link_limit = 2;
+        $last_link_id = $this->input->post('last_link');
+        $this->data['recent_links'] = $this->Topichat_model->load_recent_links($group_id, $link_limit,$last_link_id);
+        if (count($this->data['recent_links']) > 0) {
+            $data['status'] = 1;
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_links', $this->data, true);
+            $data['last_link_id'] = $this->data['recent_links'][count($this->data['recent_links']) - 1]['id'];
         } else {
             $data['status'] = 0;
         }

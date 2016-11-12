@@ -418,7 +418,7 @@
 .grp_plan_img{height:170px;}
 .chat_area2 {
     bottom: 87px;
-
+    /*bottom: 0px;*/
 }
 .chat_2 span.file_download {
     display: block;
@@ -558,6 +558,23 @@ img.file_icon {
     padding: 5px;
     height: auto;
     margin-bottom: 11px;
+}
+.chalng_tbl_sec {
+    max-height: 275px;
+    /* margin-top: 20px; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.upld_sec.finised {
+    height: 58px;
+}
+.row.finished {
+    height: 85px;
+}
+.panel-body.link_wrapper {
+    max-height: 350px;
+    margin-top: 20px;
+    overflow-y: scroll;
 }
 @media(min-width:1583px){
     .row.event_container

@@ -27,23 +27,37 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chalng_upld_col">
                         <div class="chalng_upld">
-                            <form method="post" enctype="multipart/form-data" id="media_form" action="challenge/upload_media/<?php echo urlencode(base64_encode($group_id)); ?>">
-                                <input type="hidden" name="type" class="type" value=""/>
-                                <div class="upld_sec">
-                                    <div class="fileUpload up_img btn upload_file_img">
-                                        <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                        <input type="file" id="image_upload" class="upload upload_image" name="image_upload">
+                            <?php
+                            if ($challenge != null && !empty($challenge)) {
+                                if ($challenge['is_finished'] == 0) {
+                                    ?>
+                                    <form method="post" enctype="multipart/form-data" id="media_form" action="challenge/upload_media/<?php echo urlencode(base64_encode($group_id)); ?>">
+                                        <input type="hidden" name="type" class="type" value=""/>
+                                        <div class="upld_sec">
+                                            <div class="fileUpload up_img btn upload_file_img">
+                                                <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
+                                                <input type="file" id="image_upload" class="upload upload_image" name="image_upload">
+                                            </div>
+                                            <div class="fileUpload up_img btn">
+                                                <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
+                                                <input type="file" id="video_upload" class="upload upload_video" name="video_upload">
+                                            </div>
+                                        </div>
+                                        <div class="upld_sec">
+                                            <p class="media_name select_file_name">No media selected</p>
+                                            <p class="text-right post_btn "><button type="submit" class="pstbtn upload_btn make_disabled">Post</button></p>
+                                        </div>
+                                    </form>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <div class="upld_sec finised">
+                                        <span>Challenge has been Finished.</span>
                                     </div>
-                                    <div class="fileUpload up_img btn">
-                                        <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
-                                        <input type="file" id="video_upload" class="upload upload_video" name="video_upload">
-                                    </div>
-                                </div>
-                                <div class="upld_sec">
-                                    <p class="media_name select_file_name">No media selected</p>
-                                    <p class="text-right post_btn "><button type="submit" class="pstbtn upload_btn make_disabled">Post</button></p>
-                                </div>
-                            </form>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -119,60 +133,71 @@
 
                     <!-- Type Chat section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="topich_chat_typesec_slmt topich_chat_typesec_chalnge2">
-                            <!-- Smily icon and profile secton start here -->
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="topic_prfle_icon_sec">
+                        <?php
+                        if ($challenge != null && !empty($challenge)) {
+                            if ($challenge['is_finished'] == 0) {
+                                ?>
+                                <div class="topich_chat_typesec_slmt topich_chat_typesec_chalnge2">
+                                    <!-- Smily icon and profile secton start here -->
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="topic_prfle_icon_sec">
 
-                                        <div class="col-lg-6 col-md-6 col-sm-4 col-xs-3">
-                                            <a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="img-responsive cht_pfl_img"></a>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
-                                            <ul class="list-inline type_icon_ul">
-                                                <!--<li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li>-->
-                                                <li>
-                                                    <div class="fileUpload up_img btn">
-                                                        <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
-                                                        <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="fileUpload up_img btn">
-                                                        <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
-                                                        <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-4 col-xs-3">
+                                                    <a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="img-responsive cht_pfl_img"></a>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
+                                                    <ul class="list-inline type_icon_ul">
+                                                        <!--<li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a></li>-->
+                                                        <li>
+                                                            <div class="fileUpload up_img btn">
+                                                                <span><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
+                                                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="fileUpload up_img btn">
+                                                                <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
+                                                                <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
 
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- Smily icon and profile secton end here -->
+                                    <!-- Smily icon and profile secton end here -->
 
-                            <!-- Type area start here -->
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="topic_textarea">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
-                                                <input type="hidden" id='message' name='message' class="form-control"/>
-                                                <span class="input-group-btn">
-                                                    <input class="chat_btn submit_btn" type="submit" value="Send">
-                                                </span>
+                                    <!-- Type area start here -->
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="topic_textarea">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
+                                                        <input type="hidden" id='message' name='message' class="form-control"/>
+                                                        <span class="input-group-btn">
+                                                            <input class="chat_btn submit_btn" type="submit" value="Send">
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Type area end here -->
-
-                        </div>
+                                <!-- Type area end here -->
+                                <?php
+                            } else {
+                                ?>
+                                <div class="topich_chat_typesec_slmt topich_chat_typesec_chalnge2 finised"></div>
+                                <?php
+                            }
+                        }
+                        ?>
                     </div>
                     <!-- Type Chat section end here -->
                 </div>
