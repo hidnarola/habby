@@ -238,6 +238,15 @@ class Event_model extends CI_Model {
         $this->db->group_by('ec.id');
         return $this->db->get('event_chat ec')->result_array();
     }
+    
+    /*
+     * 
+     */
+    public function get_event_members($event_id){
+        $this->db->select('u.id,u.name,u.user_image');
+        $this->db->join('event_users eu','eu.user_id = u.id and eu.event_id = '.$event_id);
+        return $this->db->get('users u')->result_array();
+    }
 }
 
 ?>

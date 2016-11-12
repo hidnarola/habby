@@ -191,7 +191,7 @@ class Home extends CI_Controller {
                     'email' => $this->input->post('email'),
                     'gender' => $this->input->post('gender'),
                     'country' => $this->input->post('country'),
-                    'bio' => $this->input->post('bio'),
+                    'bio' => htmlentities($this->input->post('bio')),
                     'hobby' => $this->input->post('hobby'),
                 );
                 $last_user_id = $this->Users_model->update_user_data($this->data['user_data']['id'], $upd_data); // v!-q Insert Data into Users Table

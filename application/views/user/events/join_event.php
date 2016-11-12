@@ -1,113 +1,109 @@
+<?php // pr($event,1)    ?>
 <div class="row cont_top_1">
     <div class="container topic_2cntnr mble_pd_0">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 event_left_sec">
-            <div class="rate_lg_sec event_msg_sec">
+        <div class="right_lg_sectopic">
+            <!-- Note and topic edit area start here -->
+            <div class="tittl_sec_lgrow">
+                <div class="tittl_sec_lg">
+                    <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
+                        <div class="tittl_sec">
+                            <p><?php echo $event['title']; ?> <span></span></p>
+                            <p>Details : <?php echo $event['details']; ?></p>
 
-                <!-- popular image and video section start here -->
-                <div class="panel panel-default popular_img_sec">
+                        </div>
+                        <div class="close_info" style="float:right">
+                            Event will be closed in 5 days
+                            <a href="javascript:;" class="pstbtn">Close Event</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
+                        <div class="tittl_sec2">
+                            <p class="event_p">
+                            <!--<button class="btn" data-toggle="model" data-target="#edit_grp"><?php echo lang('Edit'); ?></button>-->
+                                <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a>
 
-                    <div class="panel-heading"><b><?php echo lang('UPLOAD'); ?></b> <span style="float: right"><a href="#"><b><?php echo lang('More'); ?></b></a></span></div>
+                            </p>
 
-                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Videos'); ?></b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Note and topic edit area end here -->
 
-                    <div class="panel-body">
+            <!-- Chat area and tupe section start here -->
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="event_content">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
+                            <li><a data-toggle="tab" href="#contacts">Contacts</a></li>
+                            <li><a data-toggle="tab" href="#files">Files</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="notes" class="tab-pane fade in active">
+                                <div class="content_description">
+                                    Notes content will display here
+                                </div>
+                            </div>
+                            <div id="contacts" class="tab-pane fade">
+                                <div class="content_description">
+                                    Contact content will display here
+                                </div>
+                            </div>
+                            <div id="files" class="tab-pane fade">
+                                <div class="content_description">
+                                    Files content will display here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event_members">
                         <?php
-                        if (count($recent_videos) > 0) {
+                        if (count($event_members) > 0) {
                             ?>
-                            <ul class="photo_vdo_ul">
-                                <?php
-                                foreach ($recent_videos_thumb as $key => $image) {
-                                    ?>
-                                    <li class="topi_image_li">
-                                        <a class="fancybox" target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key]; ?>" data-fancybox-group="gallery1">
-                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
-                                        </a>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
-                            </ul>
+                            <h3>Events Members : </h3>
                             <?php
+                            foreach ($event_members as $member) {
+                                ?>
+                                <ul class="list-unstyled revw_ul member_ul">
+                                    <li>
+                                        <a href="javascript;">
+                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $member['user_image'] ?>" class="smlt_usrimg1 img-circle user_chat_thumb">
+                                        </a>
+                                        <span><?php echo $member['name'] ?></span>
+                                    </li>
+                                </ul>
+                                <?php
+                            }
                         } else {
                             ?>
-                            <div class='alert alert-info'>
-                                No video available
-                            </div>
-    <?php
-}
-?>
-
-                    </div>
-
-                    <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images'); ?></b> </div>
-
-                    <div class="panel-body">
-<?php
-if (count($recent_images) > 0) {
-    ?>
-                            <ul class="photo_vdo_ul">
+                            No Member available in this group
                             <?php
-                            foreach ($recent_images as $image) {
-                                ?>
-                                    <li class="topi_image_li">
-                                        <a class="fancybox"  href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
-                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
-                                        </a>
-                                    </li>
-        <?php
-    }
-    ?>
-                            </ul>
-                                <?php
-                            }
-                            else
-                            {
-                                ?>
-                                <div class='alert alert-info'>
-                                    No image available
-                                </div>
-                                <?php
-                            }
-                            ?>
+                        }
+                        ?>
+
+
                     </div>
                 </div>
-                <!-- popular image and video section End here -->
+                <div class="col-lg-8 col-md-8 col-sm-12">
 
-            </div>
-        </div>
-
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pad_lft0 event_right_lg_sec">
-            <div class="right_lg_sectopic">
-                <!-- Note and topic edit area start here -->
-                <div class="tittl_sec_lgrow">
-                    <div class="tittl_sec_lg">
-                        <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
-                            <div class="tittl_sec">
-                                <p><?php echo $event['title'];   ?> <span></span></p>
-                                <p>Details : <?php echo $event['details']; ?></p>
-                            </div>
+                    <div class="col-lg-12 event_details">
+                        <div class="">
+                            <label class="control-label">Number of seats : </label><span class="no_of_seats"><?php echo $event['limit']; ?></span>
                         </div>
-                        <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
-                            <div class="tittl_sec2">
-                                <p class="event_p">
-                                <!--<button class="btn" data-toggle="model" data-target="#edit_grp"><?php echo lang('Edit'); ?></button>-->
-                                    <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a>
-                                </p>
-                            </div>
+                        <div class="">
+                            <label class="control-label">Event Start Time : </label><span class="event_start_time"><?php echo $event['start_time']; ?></span>
+                        </div>
+                        <div class="">
+                            <label class="control-label">Event End Time : </label><span class="event_end_time"><?php echo $event['end_time']; ?></span>
                         </div>
                     </div>
-                </div>
-                <!-- Note and topic edit area end here -->
-
-                <!-- Chat area and tupe section start here -->
-                <div class="row">
 
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                        <div class="chat_area2 event_msg_sec">
-<!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
+                        <div class="chat_area2 event_msg_sec" style="top:270px;width:864px;bottom:42px">
 <?php $this->load->view('user/partial/events/load_more_msg') ?>
-                        </div>
+                        </div>  
                     </div>
                     <!-- Chat area section end here -->
 
@@ -164,8 +160,8 @@ if (count($recent_images) > 0) {
                     </div>
                     <!-- Type Chat section end here -->
                 </div>
-                <!-- Chat area and tupe section end here -->
             </div>
+            <!-- Chat area and tupe section end here -->
         </div>
     </div>
 </div>

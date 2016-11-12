@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Events extends CI_Controller {
@@ -197,6 +196,7 @@ class Events extends CI_Controller {
         $id = base64_decode(urldecode($id));
         $this->data['group_id'] = $id;
         $this->data['event'] = $this->Event_model->get_event_by_id($id);
+        $this->data['event_members'] = $this->Event_model->get_event_members($id);
         $this->data['recent_images'] = array();
         $this->data['recent_videos'] = array();
         $this->data['recent_videos_thumb'] = array();
