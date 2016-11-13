@@ -534,13 +534,13 @@
     </div>
 </div>
 <!--  Edit Profile Detail form modal start here -->
-<div class="modal mdl_frm" id="edit-profile" aria-hidden="false">
+<div class="modal mdl_frm" id="edit-profile1" aria-hidden="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button> 
-                    <b><?php echo lang('edit your profile') ?></b>
+                    <b><?php echo lang('edit your profile') ?>123</b>
                 </div>
                 <form class="" role="form" method="post" action="<?php echo base_url() . "home/profile" ?>">
                     <div class="form-group clearfix">
@@ -552,7 +552,7 @@
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $email = (set_value('email') == false) ? $user_data['email'] : set_value('email'); ?>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>" readonly="">
                         </div>
                     </div>
                     <div class="form-group clearfix">

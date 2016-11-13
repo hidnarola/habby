@@ -124,7 +124,10 @@ class Challenge_model extends CI_Model {
                 // Fetch group according to user's hobby
                 $this->db->select('distinct(c.id)');
                 $this->db->from('challanges c');
-                $this->db->where_not_in('c.id', $ids_not_to_search);
+                if(count($ids_not_to_search) > 0)
+                {
+                    $this->db->where_not_in('c.id', $ids_not_to_search);
+                }
                 $this->db->where('c.is_blocked != 1 and c.is_deleted != 1 and c.is_finished != 1');
                 $this->db->limit($fetch_limit);
                 foreach ($user_hobbies as $hobby) {

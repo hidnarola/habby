@@ -176,13 +176,13 @@ $method_name = $this->router->fetch_method(); //outputs index
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $name = (set_value('name') == false) ? $user_data['name'] : set_value('name'); ?>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>" required>
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $email = (set_value('email') == false) ? $user_data['email'] : set_value('email'); ?>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>" readonly="" required>
                         </div>
                     </div>
                     <div class="form-group clearfix">
@@ -225,13 +225,13 @@ $method_name = $this->router->fetch_method(); //outputs index
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $bio = (set_value('bio') == false) ? $user_data['bio'] : set_value('bio'); ?>
-                            <textarea class="form-control" id="bio" name="bio" placeholder="<?php echo lang('Enter your Bio'); ?>" rows="20" cols="20" ><?php echo $bio; ?></textarea>
+                            <textarea class="form-control" id="bio" name="bio" placeholder="<?php echo lang('Enter your Bio'); ?>" rows="5" cols="20" ><?php echo $bio; ?></textarea>
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $hobby = (set_value('hobby') == false) ? $user_data['hobby'] : set_value('hobby'); ?>
-                            <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma'); ?>" rows="20" cols="20"><?php echo $hobby; ?></textarea>
+                            <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma'); ?>" rows="5" cols="20"><?php echo $hobby; ?></textarea>
                         </div>
                     </div>
                     <div class="form-group clearfix xs_mddle">
