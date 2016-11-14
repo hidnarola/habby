@@ -85,7 +85,7 @@
                                             <div class="col-sm-5 col-xs-12">
                                                 <div class="checkbox logincheck">
                                                     <label class="keep_lgin">
-                                                        <input type="checkbox" name="remember_me" value="1" <?php echo set_checkbox('remember_me', '1', TRUE); ?>> <?php echo lang('Keep me logged in');?>
+                                                        <input type="checkbox" name="remember_me" value="1" > <?php echo lang('Keep me logged in');?>
                                                     </label>
                                                 </div>
                                             </div>

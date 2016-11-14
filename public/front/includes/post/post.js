@@ -111,9 +111,9 @@ $('document').ready(function () {
                 }
                 else
                 {
-                    this.files = '';
                     $('.message').html("Please select proper image");
                     $('.message').show();
+//                    this.files = '';
                 }
             }
         }

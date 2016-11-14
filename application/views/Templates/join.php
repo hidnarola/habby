@@ -406,7 +406,7 @@
                     });
                 });
                 $('.cbp-spmenu-push').on('click', '.emoticon', function () {
-                    console.log("hello");
+//                    console.log("hello");
                     $('#message_div').append($.emoticons.replace($(this).html()));
                     $('#emogis').popover('hide');
                 });
@@ -446,7 +446,7 @@
                                 }
                             } else
                             {
-                                this.files = '';
+//                                this.files = '';
                                 $('.message').html("Please select proper image");
                                 $('.message').show();
                             }
@@ -486,6 +486,15 @@
                             $('.message').show();
                         }
                     }
+                });
+            });
+            $(function () {
+                $('#post_here').on('hidden.bs.modal', function () {
+                    $(this).removeData('bs.modal');
+                    $(this).find('form').trigger('reset');
+                    $('#description').val('').empty();
+                    $('.image_wrapper').html('');
+                    $('.video_wrapper').html('');
                 });
             });
         </script>
