@@ -68,23 +68,26 @@ $('document').ready(function () {
         // If the user has pressed enter
         if (key == 13) {
             var msg = $.trim($(this).val());
-            var post_id = $(this).parents('.pst_full_sec').data('post_id');
-            $.ajax({
-                url: 'user/post/add_comment/' + post_id,
-                method: 'post',
-                data: 'msg=' + msg,
-                success: function (str) {
-                    if (str != 0)
-                    {
-                        t.after(str);
-                        t.parent().children('.no_comment').remove();
-                        var cmt_cnt = t.parents('.post_leftsec').find('.comment_cnt');
-                        console.log(cmt_cnt);
-                        cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+            if (msg != "")
+            {
+                var post_id = $(this).parents('.pst_full_sec').data('post_id');
+                $.ajax({
+                    url: 'user/post/add_comment/' + post_id,
+                    method: 'post',
+                    data: 'msg=' + msg,
+                    success: function (str) {
+                        if (str != 0)
+                        {
+                            t.after(str);
+                            t.parent().children('.no_comment').remove();
+                            var cmt_cnt = t.parents('.post_leftsec').find('.comment_cnt');
+                            console.log(cmt_cnt);
+                            cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+                        }
                     }
-                }
-            });
-            $(this).val('');
+                });
+                $(this).val('');
+            }
             return false;
         }
     });
@@ -145,21 +148,24 @@ $('document').ready(function () {
         if (key == 13) {
             var t = $(this);
             var msg = $.trim($(this).val());
-            var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
-            $.ajax({
-                url: 'user/post/add_comment_reply/' + post_comment_id,
-                method: 'post',
-                data: 'msg=' + msg,
-                success: function (str) {
-                    if (str != 0)
-                    {
-                        t.before(str);
-                        var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
-                        reply.html(parseInt(reply.html()) + 1);
+            if (msg != "")
+            {
+                var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
+                $.ajax({
+                    url: 'user/post/add_comment_reply/' + post_comment_id,
+                    method: 'post',
+                    data: 'msg=' + msg,
+                    success: function (str) {
+                        if (str != 0)
+                        {
+                            t.before(str);
+                            var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
+                            reply.html(parseInt(reply.html()) + 1);
+                        }
                     }
-                }
-            });
-            $(this).val('');
+                });
+                $(this).val('');
+            }
             return false;
         }
     });
@@ -188,7 +194,7 @@ $('document').ready(function () {
     {
         // user id declared on profile page
         $.ajax({
-            url: base_url+'user/home/load_user_post/'+user_id+'/'+page,
+            url: base_url + 'user/home/load_user_post/' + user_id + '/' + page,
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
@@ -222,7 +228,7 @@ $('document').ready(function () {
     {
         // user id declared on profile page
         $.ajax({
-            url: base_url+'user/home/load_user_savepost/'+user_id+'/'+save_page,
+            url: base_url + 'user/home/load_user_savepost/' + user_id + '/' + save_page,
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);

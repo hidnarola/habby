@@ -28,7 +28,7 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Save post to user's IP page
     $('.post_section').on('click', '.pstbtn', function () {
         var t = $(this);
@@ -47,7 +47,7 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Give coin to user post
     $('.post_section').on('click', '.user_coin', function () {
         var t = $(this);
@@ -78,7 +78,7 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Image uploading script
     $("#uploadFile").on("change", function ()
     {
@@ -118,7 +118,7 @@ $('document').ready(function () {
             }
         }
     });
-    
+
     // Video uploading script
     $('#uploadVideo').on("change", function () {
         $('.message').html();
@@ -153,7 +153,7 @@ $('document').ready(function () {
             }
         }
     });
-    
+
     // Add comment to the post
     $(".post_section").on("keypress", ".comment", function (e) {
         var key = e.keyCode;
@@ -161,27 +161,31 @@ $('document').ready(function () {
         // If the user has pressed enter
         if (key == 13) {
             var msg = $.trim($(this).val());
-            var post_id = $(this).parents('.pst_full_sec').data('post_id');
-            $.ajax({
-                url: 'user/post/add_comment/' + post_id,
-                method: 'post',
-                data: 'msg=' + msg,
-                success: function (str) {
-                    if (str != 0)
-                    {
-                        t.after(str);
-                        t.parent().children('.no_comment').remove();
-                        var cmt_cnt = t.parents('.post_leftsec').find('.comment_cnt');
-                        console.log(cmt_cnt);
-                        cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+            if (msg != "")
+            {
+                var post_id = $(this).parents('.pst_full_sec').data('post_id');
+                $.ajax({
+                    url: 'user/post/add_comment/' + post_id,
+                    method: 'post',
+                    data: 'msg=' + msg,
+                    success: function (str) {
+                        if (str != 0)
+                        {
+                            t.after(str);
+                            t.parent().children('.no_comment').remove();
+                            var cmt_cnt = t.parents('.post_leftsec').find('.comment_cnt');
+                            console.log(cmt_cnt);
+                            cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+                        }
                     }
-                }
-            });
-            $(this).val('');
+                });
+                $(this).val('');
+            }
+
             return false;
         }
     });
-    
+
     // Add like to the post comment
     $('.post_section').on('click', '.comment_like_cnt', function () {
         var t = $(this);
@@ -210,7 +214,7 @@ $('document').ready(function () {
             }
         });
     });
-    
+
     // Display comment reply
     $(".post_section").on('click', '.post_comment_reply', function () {
         var $t = $(this).parents('.cmn_dtl').find('.reply_dtl');
@@ -229,7 +233,7 @@ $('document').ready(function () {
             });
         }
     });
-    
+
     // Add reply for the post comment
     $('.post_section').on('keypress', '.comment_reply', function (e) {
         var key = e.keyCode;
@@ -237,25 +241,28 @@ $('document').ready(function () {
         if (key == 13) {
             var t = $(this);
             var msg = $.trim($(this).val());
-            var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
-            $.ajax({
-                url: 'user/post/add_comment_reply/' + post_comment_id,
-                method: 'post',
-                data: 'msg=' + msg,
-                success: function (str) {
-                    if (str != 0)
-                    {
-                        t.before(str);
-                        var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
-                        reply.html(parseInt(reply.html()) + 1);
+            if (msg != "")
+            {
+                var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
+                $.ajax({
+                    url: 'user/post/add_comment_reply/' + post_comment_id,
+                    method: 'post',
+                    data: 'msg=' + msg,
+                    success: function (str) {
+                        if (str != 0)
+                        {
+                            t.before(str);
+                            var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
+                            reply.html(parseInt(reply.html()) + 1);
+                        }
                     }
-                }
-            });
-            $(this).val('');
+                });
+                $(this).val('');
+            }
             return false;
         }
     });
-    
+
     $('.post_section').on('click', '.share-link', function () {
         $(this).popover({
             html: true,
