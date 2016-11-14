@@ -154,7 +154,6 @@ $language = $this->session->userdata('language');
                                             </ul>
                                         </li>
 
-
                                         <li class="dropdown dropdown3">
                                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="<?php echo DEFAULT_IMAGE_PATH . "search_icon.png" ?>" class="img-responsive center-block"></a>
                                             <ul class="dropdown-menu" role="menu" id="srchdrp2">
@@ -162,7 +161,7 @@ $language = $this->session->userdata('language');
                                                 <li>
                                                     <div id="custom-search-input">
                                                         <div class="input-group">
-                                                            <input type="text" class="  search-query form-control" placeholder="Search">
+                                                            <input type="text" class="search-query form-control" placeholder="Search">
                                                         </div>
                                                     </div>
                                                 </li>
