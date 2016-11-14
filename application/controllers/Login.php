@@ -49,6 +49,7 @@ class Login extends CI_Controller {
             $remember_me_decode = $this->encrypt->decode($remember_me);
             $rem_data = $this->Users_model->check_if_user_exist(['id' => $remember_me_decode], false, true);
             $this->session->set_userdata(['user' => $rem_data, 'loggedin' => TRUE]);
+            redirect('home');
         }
         if ($this->input->post()) {
 
@@ -73,12 +74,13 @@ class Login extends CI_Controller {
                             $cookie = array(
                                 'name' => 'Remember_me',
                                 'value' => $this->encrypt->encode($user_data['id']),
-                                'expire' => '172800'
+                                'expire' => '172800',
+                                'domain' => $_SERVER['SERVER_NAME'],
+                                'path' => '/'
                             );
-
                             $this->input->set_cookie($cookie);
-                        } /* // END */
-
+                        }
+                        /* // END */
                         $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
                         $this->session->set_flashdata('message', ['message' => lang('Login Successfully'), 'class' => 'alert alert-success']);
                         $update_arr = array();
@@ -116,6 +118,7 @@ class Login extends CI_Controller {
     public function register() {
         $this->data['user_data'] = $this->session->userdata('user');
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['fb_login_url'] = $this->facebook->get_login_url();
         if (!empty($this->data['user_data'])) {
             $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
             redirect('home');

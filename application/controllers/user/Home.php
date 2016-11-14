@@ -169,7 +169,6 @@ class Home extends CI_Controller {
      */
     public function log_out() {
         $this->session->sess_destroy();
-//        $this->session->unset_userdata('user');
         delete_cookie('Remember_me');
         $this->session->set_flashdata('message', array('message' => lang('Log out Successfully.'), 'class' => 'alert alert-success'));
         redirect('login');

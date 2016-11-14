@@ -422,10 +422,20 @@
                         }
                     });
                 });
-                $('#post_form').submit(function(){
+                $('#post_form').submit(function () {
                     $(".loader").addClass('show');
                 });
             });
+            $(function () {
+                $('#post_here').on('hidden.bs.modal', function () {
+                    $(this).removeData('bs.modal');
+                    $(this).find('form').trigger('reset');
+                    $('#description').val('').empty();
+                    $('.image_wrapper').html('');
+                    $('.video_wrapper').html('');
+                });
+            });
+
         </script>
     </body>
 </html>
