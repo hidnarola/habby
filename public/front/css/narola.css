@@ -565,6 +565,12 @@ img.file_icon {
     max-height: 250px;
     padding:15px;
     border-bottom:1px solid;
+    overflow: hidden;
+}
+
+.add_contact{
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 .content_description {
@@ -593,7 +599,7 @@ img.file_icon {
     margin-top: -6px !important;
 }
 .event_content .tab-pane.fade {
-    height: 150px;
+    height: 200px;
     overflow: auto;
 }
 
@@ -608,17 +614,52 @@ img.file_icon {
     border-right: 1px solid;
 }
 .event-right-section .chat_area2 {
-    top: 200px;
+  top: 210px;
+  bottom:50px !important;
 }
+
+.event-top-details{
+    font-size:14px;
+}
+
 .event_members {
     height: 400px !important;
     overflow: auto;
     padding:15px;
 }
 
-.event-top-section .col-md-11
+.event-top-section
 {
     border-bottom: 1px solid;
+    margin:0px;
+}
+
+.revw_ul li span
+{
+    font-size:13px;
+}
+
+.contact_ul{
+    margin-top:20px;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.contact_ul .row{
+    margin:0px;
+}
+
+.contact-plus{
+    margin-top:-15px;
+}
+
+.event-detail-content
+{
+    font-size:14px;
+}
+
+.event-chat-start
+{
+    border-top: 1px solid;
 }
 .rank_button_modal{clear: both;}
 .rank_button_modal #field{

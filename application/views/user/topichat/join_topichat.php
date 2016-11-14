@@ -476,7 +476,7 @@
                                 <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
                             </div>
                             <div class="row">
-
+ 
                                 <!-- Chat area section start here -->
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                                     <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">

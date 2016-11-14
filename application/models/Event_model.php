@@ -247,6 +247,55 @@ class Event_model extends CI_Model {
         $this->db->join('event_users eu','eu.user_id = u.id and eu.event_id = '.$event_id);
         return $this->db->get('users u')->result_array();
     }
+    
+    /*
+     * 
+     */
+    public function get_event_contact($event_id)
+    {
+        return $this->db->where('event_id',$event_id)->get('event_contact')->result_array();
+    }
+    
+    /*
+     * 
+     */
+    public function add_contact($arr)
+    {
+        return $this->db->insert('event_contact',$arr);
+    }
+    
+    /*
+     * 
+     */
+    public function update_contact($id,$arr)
+    {
+        $this->db->where('id',$id);
+        $this->db->update('event_contact',$arr);
+    }
+    
+    /*
+     * 
+     */
+    public function get_event_recent_images($event_id,$limit)
+    {
+        $this->db->select('media');
+        $this->db->where('media_type','image');
+        $this->db->limit($limit);
+        $this->db->order_by('id','desc');
+        return array_column($this->db->get('event_chat')->result_array(),'media');
+    }
+    
+    /*
+     * 
+     */
+    public function get_event_recent_videos($event_id,$limit)
+    {
+        $this->db->select('media');
+        $this->db->where('media_type','video');
+        $this->db->limit($limit);
+        $this->db->order_by('id','desc');
+        return array_column($this->db->get('event_chat')->result_array(),'media');
+    }
 }
 
 ?>
