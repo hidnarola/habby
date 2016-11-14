@@ -197,15 +197,46 @@ class Events extends CI_Controller {
         $this->data['group_id'] = $id;
         $this->data['event'] = $this->Event_model->get_event_by_id($id);
         $this->data['event_members'] = $this->Event_model->get_event_members($id);
-        $this->data['recent_images'] = array();
-        $this->data['recent_videos'] = array();
+        $this->data['event_contact'] = $this->Event_model->get_event_contact($id);
+        $this->data['recent_images'] = $this->Event_model->get_event_recent_images($id,$image_limit = 3);
+        $this->data['recent_videos'] = $this->Event_model->get_event_recent_videos($id,$image_limit = 3);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
         }
         
-        $this->data['messages'] = $this->Event_model->get_messages($id, $limit);;
+        $this->data['messages'] = $this->Event_model->get_messages($id, $limit);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/events/join_event', $this->data);
+    }
+    
+    /*
+     * 
+     */
+    public function add_contact($event_id){
+        if($this->input->post())
+        {
+            $insert_arr = array(
+                'event_id'=>$event_id,
+                'phone_no'=>$this->input->post('phone'),
+                'email'=>$this->input->post('email'),
+                'others'=>$this->input->post('others')
+            );
+            $this->Event_model->add_contact($insert_arr);
+            redirect('events/details/'. urlencode(base64_encode($event_id)));
+        }
+    }
+    
+    public function edit_contact($id){
+        if($this->input->post())
+        {
+            $update_arr = array(
+                'phone_no'=>$this->input->post('phone'),
+                'email'=>$this->input->post('email'),
+                'others'=>$this->input->post('others')
+            );
+            $this->Event_model->update_contact($id,$update_arr);
+            redirect('events/details/'. urlencode(base64_encode($this->input->post('event_id'))));
+        }
     }
 }

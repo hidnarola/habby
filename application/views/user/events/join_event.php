@@ -1,550 +1,178 @@
-<?php // pr($event,1)      ?>
+<?php // pr($event,1)            ?>
 <div class="row cont_top_1">
     <section class="event-page">
         <div class="row event-top-section">
             <div class="col-md-11">
-                <h2 class="text-center">video event</h2>
-                <p class="text-center">Details : This event contains video in the uploaded media. check with the video</p>
+                <h2 class="text-center"><?php echo $event['title']; ?></h2>
+                <p class="text-center event-top-details">Details : <?php echo $event['details']; ?></p>
                 <div style="float:right" class="close_info">
                     Event will be closed in 5 days
                     <a class="pstbtn" href="javascript:;">Close Event</a>
                 </div>
             </div>
-            <div class="col-md-1"><a class="pstbtn" href="javascript:;">edit</a></div>
+            <div class="col-md-1"><a class="pstbtn" href="javascript:;"  data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a></div>
         </div>
-        <div class="row">
+        <div class="event-bottom-section">
             <div class="col-md-4 event-left-section">
                 <div class="event_content">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#notes" data-toggle="tab">Notes</a></li>
-                        <li><a href="#contacts" data-toggle="tab">Contacts</a></li>
-                        <li><a href="#files" data-toggle="tab">Files</a></li>
+                        <li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
+                        <li><a data-toggle="tab" href="#contacts">Contacts</a></li>
+                        <li><a data-toggle="tab" href="#files">Files</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="notes">
+                        <div id="notes" class="tab-pane fade in active">
                             <div class="content_description">
                                 Notes content will display here
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="contacts">
+                        <div id="contacts" class="tab-pane fade">
+                            <div class="add_contact col-md-12">
+                                <span class="pull-right"><button class="btn btn-icon" data-toggle="modal" data-target="#contact_add"><i class="fa fa-plus"></i>Add Contact</button></span>
+                            </div>
                             <div class="content_description">
-                                Contact content will display here
+
+                                <?php
+                                if (count($event_contact) > 0) {
+                                    foreach ($event_contact as $contact) {
+                                        ?>
+                                        <div class="contact_ul" data-id="<?php echo $contact['id'] ?>">
+                                            <div class="row">
+                                                <span class="first_span col-md-4">
+                                                    <a href="javascript;">
+                                                        Phone Number
+                                                    </a>
+                                                </span>
+                                                <span class="col-md-6" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
+                                                <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
+                                            </div>
+                                            <div class="row">
+                                                <span class="first_span col-md-4">
+                                                    <a href="javascript;">
+                                                        Email
+                                                    </a>
+                                                </span>
+                                                <span class="col-md-8" id="email_info"><?php echo $contact['email'] ?></span>
+                                            </div>
+                                            <div class="row">
+                                                <span class="first_span col-md-4">
+                                                    <a href="javascript;">
+                                                        Others
+                                                    </a>
+                                                </span>
+                                                <span class="col-md-8" id="others_info"><?php echo $contact['others'] ?></span>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    No Contact available
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="files">
+                        <div id="files" class="tab-pane fade">
                             <div class="content_description">
-                                Files content will display here
+                                <div class="content_images">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Images <span class="load_more_image pull-right">More</span></div>
+                                            <div class="panel-body">
+                                            <?php
+                                                if(count($recent_images) > 0)
+                                                {
+                                                    foreach($recent_images as $image)
+                                                    {
+                                                        ?>
+                                                        <a class="fancybox col-sm-4" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
+                                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
+                                                        </a>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                        No Images were uploaded.
+                                                    <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content_videos">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Videos <span class="load_more_image pull-right">More</span></div>
+                                            <div class="panel-body">
+                                            <?php
+                                                if(count($recent_videos_thumb) > 0)
+                                                {
+                                                    foreach($recent_videos_thumb as $video)
+                                                    {
+                                                        ?>
+                                                        <a class="fancybox col-sm-4" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $video; ?>" data-fancybox-group="gallery1">
+                                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $video; ?>" class="img-responsive topi_image">
+                                                        </a>
+                                                        <?php
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    ?>
+                                                        No Videos were uploaded.
+                                                    <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="event_members">
-                    <h3>Events Members : </h3>
-                    <ul class="list-unstyled revw_ul member_ul">
-                        <li>
-                            <a href="javascript;">
-                                <img class="smlt_usrimg1 img-circle user_chat_thumb" src="http://habby/uploads/user_profile//e713d316820b83ded970f5998632c18b.jpg">
-                            </a>
-                            <span>Hemadri Parmar</span>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled revw_ul member_ul">
-                        <li>
-                            <a href="javascript;">
-                                <img class="smlt_usrimg1 img-circle user_chat_thumb" src="http://habby/uploads/user_profile//542029f439260d721fbeb0ae9ad1a4d6.jpg">
-                            </a>
-                            <span>Ashish Rana</span>
-                        </li>
-                    </ul>
-
-
+                    <?php
+                    if (count($event_members) > 0) {
+                        ?>
+                        <h4>Events Members : </h4>
+                        <?php
+                        foreach ($event_members as $member) {
+                            ?>
+                            <ul class="list-unstyled revw_ul member_ul">
+                                <li>
+                                    <a href="javascript;">
+                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $member['user_image'] ?>" class="smlt_usrimg1 img-circle user_chat_thumb">
+                                    </a>
+                                    <span><?php echo $member['name'] ?></span>
+                                </li>
+                            </ul>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        No Member available in this group
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="col-md-8 event-right-section">
-                <div class="">
-                    <label class="control-label">Number of seats : </label><span class="no_of_seats">450</span>
+                <div class="event-detail-content">
+                    <label class="control-label">Number of seats : </label><span class="no_of_seats"><?php echo $event['limit']; ?></span>
                 </div>
-                <div class="">
-                    <label class="control-label">Event Start Time : </label><span class="event_start_time">2016-11-03 17:02:00</span>
+                <div class="event-detail-content">
+                    <label class="control-label">Event Start Time : </label><span class="event_start_time"><?php echo $event['start_time']; ?></span>
                 </div>
-                <div class="">
-                    <label class="control-label">Event End Time : </label><span class="event_end_time">2016-11-14 17:02:00</span>
+                <div class="event-detail-content">
+                    <label class="control-label">Event End Time : </label><span class="event_end_time"><?php echo $event['end_time']; ?></span>
                 </div>
-          <div class="row">
-
+                <div class="row event-chat-start">
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2 topichat_msg_sec">
-<!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-                            
-                        <div data-chat_id="436" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.nextaway.com/images/banner1.jpg" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://nextaway.com">Holiday Rentals | Vacation Rentals | Holiday Home Rentals | Holiday Homes to Rent</a>
-                                <p>Vacation rentals direct from owner, events, travel articles and information. Discover great destinations, places to stay, events and travel tips! For Holiday Rentals, it has to be Next Away.</p>
-                            </div>
+                            <?php $this->load->view('user/partial/events/load_more_msg'); ?>
                         </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="437" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.google.com/logos/doodles/2016/united-states-elections-2016-4829342880235520.2-thp.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://google.com">Google</a>
-                                <p>Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="438" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://d2x4jr3za92gxl.cloudfront.net/landingbanner/19/86ee9a5723746253a44de313453233_666x450.jpg" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="https://www.souqplace.com/">First Emarati online shopping Marketplace in UAE to Buy and Sell Electroincs, Fashion, Home, Gifts | Shop in Dubai, Abu Dhabi, Sharjah, Ajman | Souqplace.com</a>
-                                <p>First Emarati online shopping marketplace where buyers and sellers buy and sell electronics, arts, gifts, clothes, fashion items from home in UAE.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="440" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://d2x4jr3za92gxl.cloudfront.net/category_banner/71/751af91706ea2d38577d35e8281aa7_870x287.jpg" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="https://www.souqplace.com/search/all/71-watches-and-accessories/154-watches-for-men">Search items in Souqplace.com</a>
-                                <p>SouqPlace</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="441" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13266724_1733690000179780_507789625_n.jpg?ig_cache_key=MTI1ODgzNDA5OTM0NDYzNDg2NQ%3D%3D.2" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="https://www.instagram.com/p/BF4RvGalfPx/">It's official... The #lob is the most adaptable #haircut to suit all face shapes. If you face is long and oval, add layers or bangs and texture. People with sharp jawlines or rounder faces can work a blunter cut! Experiment with the look to make it work for you. #hairspiration</a>
-                                <p>See this Instagram photo by @follea * 22 likes</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="464" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.google.com/logos/doodles/2016/united-states-elections-2016-4829342880235520.2-thp.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://google.com">Google</a>
-                                <p>Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="467" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://plus.google.com">Google+</a>
-                                <p>Google+ is a place to discover amazing things and connect with passionate people.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="468" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.nextaway.com/images/banner1.jpg" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://nextaway.com">Holiday Rentals | Vacation Rentals | Holiday Home Rentals | Holiday Homes to Rent</a>
-                                <p>Vacation rentals direct from owner, events, travel articles and information. Discover great destinations, places to stay, events and travel tips! For Holiday Rentals, it has to be Next Away.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="469" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13266724_1733690000179780_507789625_n.jpg?ig_cache_key=MTI1ODgzNDA5OTM0NDYzNDg2NQ%3D%3D.2" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="https://www.instagram.com/p/BF4RvGalfPx/">It's official... The #lob is the most adaptable #haircut to suit all face shapes. If you face is long and oval, add layers or bangs and texture. People with sharp jawlines or rounder faces can work a blunter cut! Experiment with the look to make it work for you. #hairspiration</a>
-                                <p>See this Instagram photo by @follea * 22 likes</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="470" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://scontent.cdninstagram.com/t51.2885-15/s480x480/e35/13266724_1733690000179780_507789625_n.jpg?ig_cache_key=MTI1ODgzNDA5OTM0NDYzNDg2NQ%3D%3D.2" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="https://www.instagram.com/p/BF4RvGalfPx/.">It's official... The #lob is the most adaptable #haircut to suit all face shapes. If you face is long and oval, add layers or bangs and texture. People with sharp jawlines or rounder faces can work a blunter cut! Experiment with the look to make it work for you. #hairspiration</a>
-                                <p>See this Instagram photo by @follea * 22 likes</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="471" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://i.ytimg.com/vi/iCUV3iv9xOs/hqdefault.jpg" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="https://www.youtube.com/watch?v=iCUV3iv9xOs&amp;list=PL442FA2C127377F07">Beginner PHP Tutorial - 1 - Introduction to PHP</a>
-                                <p>Facebook - https://www.facebook.com/TheNewBoston-464114846956315/ GitHub - https://github.com/buckyroberts Google+ - https://plus.google.com/+BuckyRoberts LinkedIn - https://www.linkedin.com/in/buckyroberts reddit - https://www.reddit.com/r/thenewboston/ Support - https://www.patreon.com/thenewboston thenewboston - https://thenewboston.com/ Twitter - https://twitter.com/bucky_roberts</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="472" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                        <div class="large-9 column">
-                                <a target="_blank" href="http://www.seeviral.com">SeeViral is on the way...</a>
-                                <p>We are a promote Content platform. Quality Content Deserve Quality Views. We get brand content seen and shared on the most social sites on the web. Plain and simple.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="479" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://plus.google.com">Google+</a>
-                                <p>Google+ is a place to discover amazing things and connect with passionate people.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="480" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.google.com/logos/doodles/2016/united-states-elections-2016-4829342880235520.2-thp.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://google.com">Google</a>
-                                <p>Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="481" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://www.facebook.com/images/fb_icon_325x325.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://facebook.com">Facebook - Log In or Sign Up</a>
-                                <p>Create an account or log into Facebook. Connect with friends, family and other people you know. Share photos and videos, send messages and get updates.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="482" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.google.com/logos/doodles/2016/united-states-elections-2016-4829342880235520.2-thp.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://google.com">Google</a>
-                                <p>Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="486" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="http://www.google.com/logos/doodles/2016/united-states-elections-2016-4829342880235520.2-thp.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://google.com">Google</a>
-                                <p>Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="487" class="share_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb">
-                    <div class="fileshare">
-                        <div class="">
-                                                            <div class="large-3 columns">
-                                    <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="thumb">
-                                </div>
-                                                            <div class="large-9 column">
-                                <a target="_blank" href="http://plus.google.com">Google+</a>
-                                <p>Google+ is a place to discover amazing things and connect with passionate people.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                </div>
-                
-                        <div data-chat_id="495" class="share_2 clearfix topichat_media_post">
-                    <div class="topichat_media_rank" id="field">
-                        <button class="add add_btn smlr_btn" id="add" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                        <span class="rank_rate">0</span>
-                        <button class="sub smlr_btn" id="sub" type="button">
-                            <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow.png">
-                        </button>
-                    </div>
-                    <div class="fileshare">
-                        <div class="">
-                                                        <div class="large-9 column">
-                                <a target="_blank" href="https://open.spotify.com/user/spotifyenespaol/playlist/0vN89keyJdSIwb5o4Uza6u"></a>
-                                <p></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                        
-                        <div style="float:left;clear:left" data-chat_id="565" class="chat_1 clearfix topichat_media_post">
-                    <img title="Hemadri Parmar" src="http://habby/uploads/user_profile/e713d316820b83ded970f5998632c18b.jpg" class="user_chat_thumb"> 
-                    <div style="float: left" class="media_wrapper">
-
-                        <span id="imagePreview_msg" class="imagePreview">
-                            <video style="height:180px;" src="http://habby/uploads/chat_media/3f871b0abd02ac6c9f52506fb5a8e2f3.mp4" controls=""></video>
-                        </span>
-                        <div class="topichat_media_rank" id="field">
-                            <button class="add add_btn smlr_btn" id="add" type="button">
-                                <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow_ranked.png">
-                            </button>
-                            <span class="rank_rate">1</span>
-                            <button class="sub smlr_btn" id="sub" type="button">
-                                <img class="rank_img_sec" src="http://habby/public/front/img/challeng_arrow_ranked.png">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                                        </div>
                     </div>
                     <!-- Chat area section end here -->
 
@@ -599,8 +227,79 @@
                 </div>
 
             </div>
+        </div>
     </section>
 </div>
+
+<!-- Contact add modal -->
+<div id="contact_add" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Contact</h4>
+            </div>
+            <form name="contact_form" action="<?php echo base_url() . '/events/add_contact/' . $group_id; ?>" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" name="phone" class="form-control" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" name="email" class="form-control" id="email" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Others:</label>
+                        <input type="text" name="others" class="form-control" id="others" required="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Contact add modal over -->
+
+<!-- Contact edit modal -->
+<div id="contact_edit" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Contact</h4>
+            </div>
+            <form id="contact_edit_form" name="contact_edit_form" action="<?php echo base_url() . '/events/edit_contact/'; ?>" method="post">
+                <input type="hidden" value="<?php echo $group_id; ?>" name="event_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" name="phone" id="edit_phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" name="email" id="edit_email" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="others">Others:</label>
+                        <input type="text" name="others" id="edit_others" class="form-control" required="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Contact edit modal over -->
+
 <!--Topichat Popular section start here -->
 <div class = "modal" id = "edit_grp">
     <div class = "modal-dialog modal-lg">
@@ -653,7 +352,7 @@
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-?></span>
+                            ?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>
@@ -710,3 +409,13 @@
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/event/join_event.js"></script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>
+<script type="text/javascript">
+    $('.contact-plus').click(function () {
+        var contact_id = $(this).parents('.contact_ul').data('id');
+        $('#contact_edit_form').attr('action', $('#contact_edit_form').attr('action') + '/' + contact_id);
+        $('#contact_edit_form').find('#edit_phone').val($(this).parents('.contact_ul').find('#phone_no_info').html());
+        $('#contact_edit_form').find('#edit_email').val($(this).parents('.contact_ul').find('#email_info').html());
+        $('#contact_edit_form').find('#edit_others').val($(this).parents('.contact_ul').find('#others_info').html());
+        $('#contact_edit').modal('show');
+    });
+</script>
