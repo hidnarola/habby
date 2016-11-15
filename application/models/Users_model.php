@@ -10,7 +10,7 @@ class Users_model extends CI_Model {
 
     public function check_if_user_exist($data = array(), $is_total_rows = false, $is_single = false) {
         $this->db->where($data);
-        $this->db->where('is_blocked !=', 1);
+        $this->db->where('is_blocked=0 AND is_deleted =0');
         $this->db->where('is_active', 1);
         if ($is_total_rows == true) {
             $res_data = $this->db->get('users')->num_rows();

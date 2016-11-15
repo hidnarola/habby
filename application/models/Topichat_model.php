@@ -69,105 +69,94 @@ class Topichat_model extends CI_Model {
     public function get_recommended_group($start, $limit) {
         $user_id = logged_in_user_id();
 
-        $joined_group = array_column($this->db->select('topic_id')->where('user_id',$user_id)->get('topic_group_user')->result_array(),'topic_id');
-        
+        $joined_group = array_column($this->db->select('topic_id')->where('user_id', $user_id)->get('topic_group_user')->result_array(), 'topic_id');
+
         // Fetch group in which user's friends are joined and user has not joined
         $this->db->select('distinct(tgu.topic_id)');
         $this->db->from('topic_group_user tgu');
-        $this->db->join('users u','u.id = tgu.user_id');
-        $this->db->join('topic_group tg','tg.id = tgu.topic_id and tg.is_blocked != 1 and tg.is_deleted != 1');
-        $this->db->join('follower f','(f.follower_id = '.$user_id.' and f.user_id = u.id) or (f.user_id = '.$user_id.' and f.follower_id = u.id)'); // follower or following user
-        $friends_group = array_column($this->db->get()->result_array(),'topic_id');
-        
+        $this->db->join('users u', 'u.id = tgu.user_id');
+        $this->db->join('topic_group tg', 'tg.id = tgu.topic_id and tg.is_blocked != 1 and tg.is_deleted != 1');
+        $this->db->join('follower f', '(f.follower_id = ' . $user_id . ' and f.user_id = u.id) or (f.user_id = ' . $user_id . ' and f.follower_id = u.id)'); // follower or following user
+        $friends_group = array_column($this->db->get()->result_array(), 'topic_id');
+
         // removed those group whoes user's already joined
-        $recommanded_group = array_diff($friends_group,$joined_group);
-        
-        if(count($recommanded_group) >= ($start + $limit)) // Checking limit is sufficient
-        {
-            $ids_to_fetch = array_slice($recommanded_group,$start,$limit);
+        $recommanded_group = array_diff($friends_group, $joined_group);
+
+        if (count($recommanded_group) >= ($start + $limit)) { // Checking limit is sufficient
+            $ids_to_fetch = array_slice($recommanded_group, $start, $limit);
             return $this->fetch_topic_groups_by_ids($ids_to_fetch);
-        }
-        else // Need to fetch more groups
-        {
-            $ids_not_to_search = (array_merge($joined_group,$recommanded_group));
-            
+        } else { // Need to fetch more groups
+            $ids_not_to_search = (array_merge($joined_group, $recommanded_group));
+
             // Fetch hobby of user
-            $user_hobbies = array_map("trim",explode(",",$this->db->select('hobby')->where('id',$user_id)->get('users')->row_array()['hobby']));
-            if(count($user_hobbies) > 0) // If hobby exist
-            {
+            $user_hobbies = array_map("trim", explode(",", $this->db->select('hobby')->where('id', $user_id)->get('users')->row_array()['hobby']));
+            if (count($user_hobbies) > 0) { // If hobby exist
                 $fetch_limit = (($start + $limit) - count($recommanded_group));
                 // Fetch group according to user's hobby
                 $this->db->select('distinct(tg.id)');
                 $this->db->from('topic_group tg');
-                $this->db->where_not_in('tg.id',$ids_not_to_search);
+                $this->db->where_not_in('tg.id', $ids_not_to_search);
                 $this->db->where('tg.is_blocked != 1 and tg.is_deleted != 1');
                 $this->db->limit($fetch_limit);
-                foreach($user_hobbies as $hobby)
-                {
-                    $this->db->or_like('topic_name',$hobby);
-                    $this->db->or_like('notes',$hobby);
+                foreach ($user_hobbies as $hobby) {
+                    $this->db->or_like('topic_name', $hobby);
+                    $this->db->or_like('notes', $hobby);
                 }
-                $interested_group_id = array_column($this->db->get()->result_array(),'id');
-                $ids_not_to_search = array_merge($ids_not_to_search,$interested_group_id);
-                
-                $recommanded_group = array_merge($recommanded_group,$interested_group_id);
-                
-                if($fetch_limit > count($interested_group_id))
-                {
+                $interested_group_id = array_column($this->db->get()->result_array(), 'id');
+                $ids_not_to_search = array_merge($ids_not_to_search, $interested_group_id);
+
+                $recommanded_group = array_merge($recommanded_group, $interested_group_id);
+
+                if ($fetch_limit > count($interested_group_id)) {
                     $fetch_limit = (($start + $limit) - count($recommanded_group));
                     // Fetch old group, that user has not joined
                     $this->db->select('distinct(tg.id)');
                     $this->db->from('topic_group tg');
-                    $this->db->where_not_in('tg.id',$ids_not_to_search);
+                    $this->db->where_not_in('tg.id', $ids_not_to_search);
                     $this->db->where('tg.is_blocked != 1 and tg.is_deleted != 1');
                     $this->db->limit($fetch_limit);
-                    $this->db->order_by('id','asc');
-                    $old_group_id = array_column($this->db->get()->result_array(),'id');
-                    
-                    $recommanded_group = array_merge($recommanded_group,$old_group_id);
+                    $this->db->order_by('id', 'asc');
+                    $old_group_id = array_column($this->db->get()->result_array(), 'id');
+
+                    $recommanded_group = array_merge($recommanded_group, $old_group_id);
                 }
-                $ids_to_fetch = array_slice($recommanded_group,$start,$limit);
+                $ids_to_fetch = array_slice($recommanded_group, $start, $limit);
                 return $this->fetch_topic_groups_by_ids($ids_to_fetch);
-            }
-            else // If hobby not available
-            {
+            } else { // If hobby not available
                 // Fetch old group, that user has not joined
                 $fetch_limit = (($start + $limit) - count($recommanded_group));
                 // Fetch Old groups
                 $this->db->select('distinct(tg.id)');
                 $this->db->from('topic_group tg');
-                $this->db->where_not_in('tg.id',$ids_not_to_search);
+                $this->db->where_not_in('tg.id', $ids_not_to_search);
                 $this->db->where('tg.is_blocked != 1 and tg.is_deleted != 1');
                 $this->db->limit($fetch_limit);
-                $this->db->order_by('id','asc');
-                $old_group_id = array_column($this->db->get()->result_array(),'id');
-                $recommanded_group = array_merge($recommanded_group,$old_group_id);
-                $ids_to_fetch = array_slice($recommanded_group,$start,$limit);
+                $this->db->order_by('id', 'asc');
+                $old_group_id = array_column($this->db->get()->result_array(), 'id');
+                $recommanded_group = array_merge($recommanded_group, $old_group_id);
+                $ids_to_fetch = array_slice($recommanded_group, $start, $limit);
                 return $this->fetch_topic_groups_by_ids($ids_to_fetch);
             }
         }
     }
-    
+
     /*
      * 
      */
-    public function fetch_topic_groups_by_ids($ids)
-    {
-        if(count($ids) > 0)
-        {
+
+    public function fetch_topic_groups_by_ids($ids) {
+        if (count($ids) > 0) {
             $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.*,users.name as display_name,users.user_image');
             $this->db->join('users', 'users.id = tg.user_id');
-            $this->db->where_in('tg.id',$ids);
+            $this->db->where_in('tg.id', $ids);
             $this->db->group_by('tg.id');
             return $this->db->get('topic_group tg')->result_array();
-        }
-        else
-        {
+        } else {
             $arr = array();
             return $arr;
         }
     }
-    
+
     /* v! Select popular topichat group from topic_group table 
      * develop by : HPA
      */
@@ -337,6 +326,7 @@ class Topichat_model extends CI_Model {
         $arr = $this->db->get('topic_group_chat')->result_array();
         return array_column($arr, 'media');
     }
+
     /*
      * get_recent_links used to fetch recent shared links from database related to particular group
      * @param   $group_id   int     specify group_id
@@ -405,6 +395,7 @@ class Topichat_model extends CI_Model {
         $res_data = $this->db->get('topic_group_chat tg')->result_array();
         return $res_data;
     }
+
     /*
      * load_recent_links is used to fetch more links for given group
      * @param $group_id int specify group id to which message will fetch
@@ -543,9 +534,30 @@ class Topichat_model extends CI_Model {
     public function get_chat_id_from_media_name($media) {
         $this->db->select('id');
         $id = $this->db->where('media', $media)->get('topic_group_chat')->row_array()['id'];
-        echo $id;
-        die;
         return $id;
+    }
+
+    public function get_media_details($id, $type) {
+        $this->db->select('tc.id,tc.media,tc.topic_group_id,u.name,u.user_image');
+        $this->db->join('users u', 'u.id = tc.user_id');
+        $this->db->where('media_type', $type);
+        $this->db->where('tc.media', $id);
+        $res_data = $this->db->get('topic_group_chat tc')->row_array();
+        return $res_data;
+    }
+
+    /* v! Select accepted Topichat users from topichats_user table 
+     * develop by : HPA
+     */
+
+    public function get_topichats_users($id) {
+        if ($id != null) {
+            $this->db->select('tu.id,users.name as display_name,users.user_image');
+            $this->db->join('users', 'users.id = tu.user_id');
+            $this->db->where('tu.topic_id', $id);
+            $res_data = $this->db->get('topic_group_user tu')->result_array();
+            return $res_data;
+        }
     }
 
 }

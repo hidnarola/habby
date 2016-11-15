@@ -17,7 +17,8 @@
                             <?php
                             foreach ($notification as $n) {
                                 ?>
-                                <p><span class="by_spn"><?php echo $n['topic_name'] ?></span><span><?php echo $n['description']; ?>&nbsp;<a href="<?php echo base_url() . '/user_profile/' . $n['from_user_id']; ?>"><?php echo $n['user_name'] ?></a></span></p>
+                            <p class="topi_msg"><span class="by_spn"><?php echo $n['topic_name'] ?></span><span class="topi_msg_span2"><span class="topi_msg_link"><?php echo $n['description']; ?>&nbsp;<a href="<?php echo base_url() . '/user_profile/' . $n['from_user_id']; ?>"><?php echo $n['user_name'] ?></a></span></span></p>
+<!--                                <p><span class="by_spn"><?php echo $n['topic_name'] ?></span><span><?php echo $n['description']; ?>&nbsp;<a href="<?php echo base_url() . '/user_profile/' . $n['from_user_id']; ?>"><?php echo $n['user_name'] ?></a></span></p>-->
                                 <?php
                             }
                             ?>

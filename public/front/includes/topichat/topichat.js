@@ -246,11 +246,10 @@ $('document').ready(function () {
 //        });
     });
     $("#mediaModal").on("show.bs.modal", function (e) {
-        e.preventDefault();
+//        e.preventDefault();
         //get data-id attribute of the clicked element
         var image = $(e.relatedTarget).data('image');
         var type = $(e.relatedTarget).data('type');
-        console.log(image + "" + type);
         $.ajax({
             url: base_url + 'topichat/media_details',
             method: 'post',
@@ -258,8 +257,22 @@ $('document').ready(function () {
             data: 'image=' + image + "&type=" + type,
             success: function (data) {
                 console.log(data);
-                return false;
-                $('#mediaModal').modal('toggle');
+                var data = JSON.parse(data);
+                var type = data.media_type;
+                var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;
+                var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
+                var media_details = data['media_content'];
+                $('.topichat_media_user').attr('src', DEFAULT_PROFILE_IMAGE_PATH + media_details.user_image);
+                $('.topichat_media_details').html(media_details.name + ' shared a ' + type);
+                var media = '<a class="post_images" href="javascript:;">'
+                if (type == 'image') {
+                    media += '<img src="' + DEFAULT_CHAT_IMAGE_PATH + media_details.media + '" class="img-responsive center-block">';
+                } else {
+                    media += '<video controls="" src="' + DEFAULT_CHAT_IMAGE_PATH + media_details.media + '" style="height:180px;"></video>';
+                }
+                media += '</a>';
+                $('.topichat_media_popup').html(media);
+                return true;
             }
         });
     });

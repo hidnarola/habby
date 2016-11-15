@@ -669,7 +669,7 @@ img.file_icon {
 }
 .topichat_msg_sec_modal{top: 69px;    bottom: 152px;}
 .topichat_msg_sec_modal,
-.topich_chat_typesec_modal{width:auto !important;}
+.topich_chat_typesec_modal{width:56% !important;}
 .topich_chat_typesec_modal{bottom: 66px;}
 .usr_post_img_modal.usr_post_img{    width: 60px;
                                      display: inline-block;
@@ -682,6 +682,54 @@ img.file_icon {
     border-bottom: 1px solid #ccc !important;
     padding-bottom: 13px;
 }
+.modal-dialog.topichat_media_modal {
+    width: 1220px;
+    margin: 75px auto;
+}
+.topi_msg{display: flex;}
+.topi_msg .by_spn{
+    max-width:150px;
+    min-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.topi_msg .topi_msg_span2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 30px 10px 10px;
+}
+.topi_msg .topi_msg_link{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    padding-left: 0px;
+}
+.topichat_groups .topichat_txt1{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 30px 10px 10px;
+}
+.topichat_groups .topichat_txt2{
+  display: -webkit-box;
+  max-width: 400px;
+  height: 50px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topchat_p {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+.topichat_notes{
+    height: 55px;
+    overflow: auto;
+}
+
 @media(min-width:1583px){
     .row.event_container
     {
@@ -689,9 +737,18 @@ img.file_icon {
         width: 1289px;
     }
 }
-@media (min-width: 768px){
-    #mediaModal.modal-dialog {
-        width: 1220px;
-        margin: 30px auto;
+@media(max-width:1400px){
+    .modal-dialog.topichat_media_modal {
+        margin: 75px auto;
+        width: 75%;
     }
+}
+@media(max-width:767px){
+    .topichat_msg_sec_modal, .topich_chat_typesec_modal {
+        position: relative;
+        width: 100% !important;
+    }
+}
+@media(max-width:480px){
+
 }

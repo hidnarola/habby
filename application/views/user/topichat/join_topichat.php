@@ -164,8 +164,8 @@
                                     foreach ($recent_videos_thumb as $key => $image) {
                                         ?>
                                         <li class="topi_image_li">
-                                            <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $image ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];     ?>"-->
+                                            <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];         ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -220,7 +220,7 @@
                         <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
                             <div class="tittl_sec">
                                 <p><?php echo $topichat['topic_name']; ?> <span></span></p>
-                                <p>Note : <?php echo $topichat['notes']; ?> </p>
+                                <p class="topichat_notes">Note : <?php echo $topichat['notes']; ?> </p>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
@@ -432,23 +432,24 @@
     </div>
 </div>
 <div class="modal fade in" id="mediaModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog topichat_media_modal">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
 
-                    <div class="col-md-5">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="usr_post_img usr_post_img_modal">
-                            <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
+                            <img class="img-circle img-responsive topichat_media_user" src="">
                         </div>
-                        <div class="event_post_details">
-                            testing post having image of car          
+                        <div class="topichat_media_details">
+                                 
                         </div>
                         <div class="event_media event_media_modal">
                             <div class="row">
-                                <div class="col-md-1 rank_button_modal"><div id="field" class="topichat_media_rank">
+                                <div class="col-md-1 rank_button_modal">
+                                    <div id="field" class="topichat_media_rank">
                                         <button type="button" id="add" class="add add_btn smlr_btn">
                                             <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
                                         </button>
@@ -456,14 +457,15 @@
                                         <button type="button" id="sub" class="sub smlr_btn">
                                             <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
                                         </button>
-                                    </div></div>
-                                <div class="col-md-11"><a class="post_images" href="javascript:;">
-                                        <img src="http://habby/uploads/event_post/e26e60f247862da3970b832169c643b1.jpg" class="img-responsive center-block">
-                                    </a></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-11 topichat_media_popup">
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
                             <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
                         </div>
@@ -471,22 +473,7 @@
 
                             <!-- Chat area section start here -->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">
-                                    <div class="chat_1 clearfix topichat_media_post" data-chat_id="690" style="float:left;clear:left">
-                                        <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                        <div class="wdth_span media_wrapper img_media_wrapper">
-                                            <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="4539735b0f58371f2fb6417578434245.txt"></span><a href="http://habby/topichat/download_file/4539735b0f58371f2fb6417578434245.txt"><span class="filename">4539735b0f58371f2fb6417578434245.txt</span></a>
-                                            <div id="field" class="topichat_media_rank">
-                                                <button type="button" id="add" class="add add_btn smlr_btn">
-                                                    <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                </button>
-                                                <span class="rank_rate">0</span>
-                                                <button type="button" id="sub" class="sub smlr_btn">
-                                                    <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">                                    
                                 </div>
                             </div>
                             <!-- Chat area section end here -->
@@ -502,7 +489,8 @@
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"> <a href="#"><img src="http://habby/public/front/img/pst_prfl_icon.png" class="cht_pfl_img"></a></span>	
-                                                            <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
+                                                            <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url"/>
+
                                                             <span class="input-group-btn scl_mda_img">
                                                                 <a href="https://www.google.co.in/" target="_blank"><img src="http://habby/public/front/img/google_img.jpg"></a>
                                                             </span>
@@ -518,6 +506,7 @@
                                                             <span class="input-group-btn">
                                                                 <input class="chat_btn share_btn" type="submit" value="Share">
                                                             </span>
+
                                                         </div>
                                                     </div>
                                                 </div>

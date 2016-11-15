@@ -440,7 +440,19 @@ class Topichat extends CI_Controller {
 
     public function media_details() {
         if ($this->input->post()) {
-            pr($this->input->post());
+            $media = $this->input->post('image');
+            $type = $this->input->post('type');
+            $this->data['media_type'] = $type;
+            $this->data['DEFAULT_PROFILE_IMAGE_PATH'] = DEFAULT_PROFILE_IMAGE_PATH;
+            $this->data['DEFAULT_CHAT_IMAGE_PATH'] = DEFAULT_CHAT_IMAGE_PATH;
+            $this->data['media_content'] = $this->Topichat_model->get_media_details($media, $type);
+            $group_id = $this->data['media_content']['topic_group_id'];
+            $data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
+            $this->data['users'] = $this->Topichat_model->get_topichats_users($group_id);
+            krsort($data['messages']); // Reverse array
+            $this->data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $data, true);
+            echo json_encode($this->data);
+            exit;
         }
     }
 
