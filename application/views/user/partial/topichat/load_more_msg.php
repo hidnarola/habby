@@ -81,7 +81,7 @@ foreach ($messages as $message) {
                                 ?>" class="rank_img_sec"/>
                             </button>
                         </div>
-                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "topichat/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
+                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
                     </div>
                 </div>
                 <?php
@@ -199,7 +199,7 @@ foreach ($messages as $message) {
                 <div class="chat_1 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>"  style="float:left;clear:left">
                     <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'> 
                     <div class="wdth_span media_wrapper img_media_wrapper">
-                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "topichat/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
+                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
                         <div id="field" class="topichat_media_rank">
                             <button type="button" id="add" class="add add_btn smlr_btn">
                                 <img src="<?php

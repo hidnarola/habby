@@ -61,7 +61,7 @@
                                         <?php
                                     } else if ($post['media_type'] == "files") {
                                         ?>
-                                        <a class="files" href="<?php echo base_url() . "topichat/download_file/" . $post['media'] ?>" data-fancybox-group="gallerytopichat1">
+                                        <a class="files" href="<?php echo base_url() . "user/download_file/" . $post['media'] ?>" data-fancybox-group="gallerytopichat1">
                                             <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">
                                             <span class="filename"><?php echo $post['media'] ?></span>
                                         </a>

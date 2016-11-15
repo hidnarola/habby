@@ -228,7 +228,7 @@ $(document).ready(function () {
                         var i = Math.random().toString(36).substring(7);
                         display_file_class = 'imagePreview' + i;
                         $('.message').hide();
-                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
                         $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
 
@@ -267,6 +267,7 @@ $(document).ready(function () {
                                         media: 'files'
                                     }
                                     str = JSON.parse(str);
+                                    console.log('file sent : ',str);
                                     $('.' + display_file_class).siblings('a').attr('href', base_url + 'user/download_file/' + str[0].media);
                                     $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
                                     Server.send('message', JSON.stringify(msg));
@@ -334,6 +335,13 @@ $(document).ready(function () {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
+            }
+            else if (userdata.media_type == "files")
+            {
+                var i = Math.random().toString(36).substring(7);
+                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'user/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a></div></div>');
+                $('.imagePreview' + i).data('file', userdata.media);
+                $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
