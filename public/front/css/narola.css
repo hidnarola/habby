@@ -614,8 +614,15 @@ img.file_icon {
     border-right: 1px solid;
 }
 .event-right-section .chat_area2 {
-  top: 210px;
-  bottom:50px !important;
+    top: 210px;
+    bottom:50px !important;
+}
+
+.event_file_name{
+    display: block;
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .event-top-details{

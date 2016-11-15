@@ -154,8 +154,9 @@
                                                 foreach ($recent_shared_files as $file) {
                                                     ?>
                                                     <a class="col-sm-4" href="<?php echo base_url() . "user/download_file/" . $file ?>" target="_blank" data-fancybox-group="gallery1">
-                                                        <div class="video-w-icon">
+                                                        <div class="">
                                                             <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive topi_image" />
+                                                            <span class="event_file_name"><?php echo $file ?></span>
                                                         </div>
                                                     </a>
                                                     <?php
