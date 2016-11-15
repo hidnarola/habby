@@ -464,12 +464,12 @@
                             
 
                         </div>
-                        <div class="event_seat">
+<!--                        <div class="event_seat">
                             <span class="seat_details">Number of seat : 150</span>
                             <a class="join_btn pstbtn" href="javascript:;">Join</a><br>
                             <span class="start_time">Event Start Time : 2016-11-02 17:12:00</span><br>
                             <span class="end_time">Event End Time : 2016-11-10 17:11:00</span>
-                        </div>
+                        </div>-->
                     </div>
                         <div class="col-md-7">
                             <div class="usr_post_img user_post_image_right">
