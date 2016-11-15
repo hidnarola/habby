@@ -68,7 +68,6 @@ function get_topichat_users($group_id) {
         while ($row = mysqli_fetch_assoc($result)) {
             $arr[] = $row['user_id'];
         }
-        print_r($arr);
         return $arr;
     } else {
         return 0;
@@ -77,9 +76,12 @@ function get_topichat_users($group_id) {
 }
 
 function send_topic_msg($group_id, $sender_id, $msg) {
+    echo "in message function";
     global $conn;
     $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
+    
     if (mysqli_query($conn, $query)) {
+        echo "record inserted";
         return true;
     }
     return false;
