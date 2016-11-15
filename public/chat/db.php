@@ -84,6 +84,7 @@ function send_topic_msg($group_id, $sender_id, $msg) {
         echo "record inserted";
         return true;
     }
+    echo "return false";
     return false;
 }
 
