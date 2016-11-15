@@ -22,6 +22,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
 
     if (!empty($message->type)) {
         if ($message->type == 'room_bind' && empty($Server->wsClients[$clientID]['user_data'])) {
+            echo "room bind";
             $Server->wsClients[$clientID]['user_data'] = $message->message;
             $Server->wsClients[$clientID]['room_type'] = $message->room_type;
             if($Server->wsClients[$clientID]['room_type'] != "topic_notification"){
@@ -30,6 +31,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
+                echo "message sent";
                 $user_ids = get_topichat_users($message->group_id);
                 foreach($Server->wsClients as $id=>$client)
                 {
