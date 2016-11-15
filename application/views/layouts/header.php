@@ -2,6 +2,7 @@
 <?php
 $language = $this->session->userdata('language');
 ?>
+<input type="hidden" id="location" name="location"/>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left visible-xs" id="cbp-spmenu-s1">
     <div class="clearfix nav_logo">
         <ul Class="list-inline mobile_chatsec">
@@ -40,12 +41,12 @@ $language = $this->session->userdata('language');
                                     <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a></li>
                                 </ul>
                             </li>
-<!--                            <li>
-                                <a href="#" data-toggle="modal" data-target="#msg_here">
-                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
-                                    <?php echo lang('Chat'); ?>
-                                </a>
-                            </li>-->
+                            <!--                            <li>
+                                                            <a href="#" data-toggle="modal" data-target="#msg_here">
+                                                                <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
+                            <?php echo lang('Chat'); ?>
+                                                            </a>
+                                                        </li>-->
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#post_here">
                                     <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_img.png" ?>">
@@ -130,12 +131,12 @@ $language = $this->session->userdata('language');
                                         <li><a href="personal_account.html" class="pull-left personal_account_link"><img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"> <br> Lorem Ipsum</a>
                                             <div class="inline-block lang_sec_mobile pull-right">
                                                 <div class="lang_sec lang-change">
-                                    <select data-style="btn-info" class="selectpicker">
-                                        <option selected="" value="eng">English</option>
-                                        <option value="fr">French</option>
-                                        <option value="ru">Russian</option>
-                                    </select>
-                                </div>
+                                                    <select data-style="btn-info" class="selectpicker">
+                                                        <option selected="" value="eng">English</option>
+                                                        <option value="fr">French</option>
+                                                        <option value="ru">Russian</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>

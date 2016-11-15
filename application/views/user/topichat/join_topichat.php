@@ -164,8 +164,8 @@
                                     foreach ($recent_videos_thumb as $key => $image) {
                                         ?>
                                         <li class="topi_image_li">
-                                            <a data-toggle="modal" data-target="#myModal" class="video-w-icon" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];   ?>"-->
+                                            <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $image ?>" data-type="video" >
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];     ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -191,7 +191,7 @@
                                     foreach ($recent_images as $image) {
                                         ?>
                                         <li class="topi_image_li">
-                                            <a data-toggle="modal" data-target="#myModal" >
+                                            <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $image ?>" data-type="image" >
                                                 <!--href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
@@ -431,7 +431,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade in" id="myModal" role="dialog">
+<div class="modal fade in" id="mediaModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -441,202 +441,41 @@
 
                     <div class="col-md-5">
                         <div class="usr_post_img usr_post_img_modal">
-                                <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
-                            </div>
+                            <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
+                        </div>
                         <div class="event_post_details">
                             testing post having image of car          
                         </div>
                         <div class="event_media event_media_modal">
                             <div class="row">
                                 <div class="col-md-1 rank_button_modal"><div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div></div>
+                                        <button type="button" id="add" class="add add_btn smlr_btn">
+                                            <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
+                                        </button>
+                                        <span class="rank_rate">0</span>
+                                        <button type="button" id="sub" class="sub smlr_btn">
+                                            <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
+                                        </button>
+                                    </div></div>
                                 <div class="col-md-11"><a class="post_images" href="javascript:;">
-                                <img src="http://habby/uploads/event_post/e26e60f247862da3970b832169c643b1.jpg" class="img-responsive center-block">
-                            </a></div>
+                                        <img src="http://habby/uploads/event_post/e26e60f247862da3970b832169c643b1.jpg" class="img-responsive center-block">
+                                    </a></div>
                             </div>
-                            
-
-                        </div>
-                        <div class="event_seat">
-                            <span class="seat_details">Number of seat : 150</span>
-                            <a class="join_btn pstbtn" href="javascript:;">Join</a><br>
-                            <span class="start_time">Event Start Time : 2016-11-02 17:12:00</span><br>
-                            <span class="end_time">Event End Time : 2016-11-10 17:11:00</span>
                         </div>
                     </div>
-                        <div class="col-md-7">
-                            <div class="usr_post_img user_post_image_right">
-                                <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
-                            </div>
-                            <div class="row">
- 
-                                <!-- Chat area section start here -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                                    <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">
-            <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
+                    <div class="col-md-7">
+                        <div class="usr_post_img user_post_image_right">
+                            <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
+                        </div>
+                        <div class="row">
 
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="690" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-                                                <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="4539735b0f58371f2fb6417578434245.txt"></span><a href="http://habby/topichat/download_file/4539735b0f58371f2fb6417578434245.txt"><span class="filename">4539735b0f58371f2fb6417578434245.txt</span></a>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="692" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-                                                <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="8b85c8af2cc3879a82923c2f15d081af.txt"></span><a href="http://habby/topichat/download_file/8b85c8af2cc3879a82923c2f15d081af.txt"><span class="filename">8b85c8af2cc3879a82923c2f15d081af.txt</span></a>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="693" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-                                                <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="ae5168931c3688bd2d27a70d1fb3814d.txt"></span><a href="http://habby/topichat/download_file/ae5168931c3688bd2d27a70d1fb3814d.txt"><span class="filename">ae5168931c3688bd2d27a70d1fb3814d.txt</span></a>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="694" style="float:right;clear:right">
-                                            <div class="wdth_span media_wrapper">
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                                <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="e2e0d5873c2902bf706f5beb5156f55f.txt"></span><a href="http://habby/topichat/download_file/e2e0d5873c2902bf706f5beb5156f55f.txt"><span class="filename">e2e0d5873c2902bf706f5beb5156f55f.txt</span></a>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="695" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-                                                <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="956196cc0770079ffb07219d457543be.txt"></span><a href="http://habby/topichat/download_file/956196cc0770079ffb07219d457543be.txt"><span class="filename">956196cc0770079ffb07219d457543be.txt</span></a>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="696" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-                                                <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="2b51602d864989b83a2a6a89920c5727.txt"></span><a href="http://habby/topichat/download_file/2b51602d864989b83a2a6a89920c5727.txt"><span class="filename">2b51602d864989b83a2a6a89920c5727.txt</span></a>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">1</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="706" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-
-                                                <span class="imagePreview" style="background-image:url(&quot;http://habby/uploads/chat_media/128c0cba63e09c9943c3c7440aee93b3.jpg&quot;)" id="imagePreview_msg"></span>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="707" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <div class="wdth_span media_wrapper img_media_wrapper">
-
-                                                <span class="imagePreview" style="background-image:url(&quot;http://habby/uploads/chat_media/8148f0a9933c7d590601d59ea3deaa33.jpg&quot;)" id="imagePreview_msg"></span>
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="712" style="float:right;clear:right">
-                                            <span class="wdth_span">
-                                                <span>Helo</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="713" style="float:right;clear:right">
-                                            <span class="wdth_span">
-                                                <span>Hii</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="714" style="float:right;clear:right">
-                                            <span class="wdth_span">
-                                                <span>Hello</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="715" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <span class="wdth_span">
-                                                <span>Hello Hems Here<br></span>
-                                            </span>
-                                        </div>
-
-                                        <div class="share_2 clearfix topichat_media_post" data-chat_id="716">
+                            <!-- Chat area section start here -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
+                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">
+                                    <div class="chat_1 clearfix topichat_media_post" data-chat_id="690" style="float:left;clear:left">
+                                        <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
+                                        <div class="wdth_span media_wrapper img_media_wrapper">
+                                            <span class="imagePreview file_download" style="background-image:url(&quot;http://habby/public/front/img/filedownload.jpg&quot;)" id="" data-file="4539735b0f58371f2fb6417578434245.txt"></span><a href="http://habby/topichat/download_file/4539735b0f58371f2fb6417578434245.txt"><span class="filename">4539735b0f58371f2fb6417578434245.txt</span></a>
                                             <div id="field" class="topichat_media_rank">
                                                 <button type="button" id="add" class="add add_btn smlr_btn">
                                                     <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
@@ -645,206 +484,125 @@
                                                 <button type="button" id="sub" class="sub smlr_btn">
                                                     <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
                                                 </button>
-                                            </div>
-                                            <div class="fileshare">
-                                                <div class="">
-                                                    <div class="large-3 columns">
-                                                        <img class="thumb" src="http://www.google.com/logos/doodles/2016/veterans-day-2016-6213878699524096.4-thp.png">
-                                                    </div>
-                                                    <div class="large-9 column">
-                                                        <a href="http://Google.com" target="_blank">Google</a>
-                                                        <p>Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="717" style="float:right;clear:right">
-                                            <span class="wdth_span">
-                                                <span>Hello</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="718" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/profile_img.jpg" title="@Demo"> 
-                                            <span class="wdth_span">
-                                                <span>Hello</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_1 clearfix topichat_media_post" data-chat_id="719" style="float:left;clear:left">
-                                            <img class="user_chat_thumb" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg" title="Ashish Rana"> 
-                                            <span class="wdth_span">
-                                                <span>hii</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="725" style="float:right;clear:right">
-                                            <span class="wdth_span">
-                                                <span>Yes</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="726" style="float:right;clear:right">
-                                            <span class="wdth_span">
-                                                <span>It is working now</span>
-                                            </span>
-                                        </div>
-
-                                        <div class="share_2 clearfix topichat_media_post" data-chat_id="727">
-                                            <div id="field" class="topichat_media_rank">
-                                                <button type="button" id="add" class="add add_btn smlr_btn">
-                                                    <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                </button>
-                                                <span class="rank_rate">0</span>
-                                                <button type="button" id="sub" class="sub smlr_btn">
-                                                    <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                </button>
-                                            </div>
-                                            <div class="fileshare">
-                                                <div class="">
-                                                    <div class="large-3 columns">
-                                                        <img class="thumb" src="http://www.w3schools.com/images/colorpicker.gif">
-                                                    </div>
-                                                    <div class="large-9 column">
-                                                        <a href="http://www.w3schools.com/jsref/prop_textarea_value.asp" target="_blank">HTML DOM Textarea value Property</a>
-                                                        <p>Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, and XML.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="chat_2 clearfix topichat_media_post" data-chat_id="742" style="float:right;clear:right">
-                                            <div class="wdth_span media_wrapper">
-                                                <div id="field" class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow_ranked.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">1</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow_ranked.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-
-                                                <span class="imagePreview" style="background-image:url(&quot;http://habby/uploads/chat_media/8911e8f676009916130a260965b33686.jpg&quot;)" id="imagePreview_msg"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Chat area section end here -->
+                            </div>
+                            <!-- Chat area section end here -->
 
-                                <!-- Type Chat section start here -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="topich_chat_typesec topich_chat_typesec_modal">
-                                        <!-- Smily icon and profile secton start here -->
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="topic_prfle_icon_sec topc_link_sharesec">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"> <a href="#"><img src="http://habby/public/front/img/pst_prfl_icon.png" class="cht_pfl_img"></a></span>	
-                                                                <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
-                                                                <span class="input-group-btn scl_mda_img">
-                                                                    <a href="https://www.google.co.in/" target="_blank"><img src="http://habby/public/front/img/google_img.jpg"></a>
-                                                                </span>
-                                                                <span class="input-group-btn scl_mda_img">
-                                                                    <a href="https://www.youtube.com/" target="_blank"><img src="http://habby/public/front/img/youtube_img.jpg"></a>
-                                                                </span>
-                                                                <span class="input-group-btn scl_mda_img">
-                                                                    <a href="https://plus.google.com/" target="_blank"><img src="http://habby/public/front/img/google_plus_img.jpg"></a>
-                                                                </span>
-                                                                <span class="input-group-btn scl_mda_img">
-                                                                    <a href="https://twitter.com/" target="_blank"><img src="http://habby/public/front/img/twitter_img.jpg"></a>
-                                                                </span>
-                                                                <span class="input-group-btn">
-                                                                    <input class="chat_btn share_btn" type="submit" value="Share">
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Smily icon and profile secton end here -->
-
-                                        <!-- Type area start here -->
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="topic_textarea">
+                            <!-- Type Chat section start here -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="topich_chat_typesec topich_chat_typesec_modal">
+                                    <!-- Smily icon and profile secton start here -->
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="topic_prfle_icon_sec topc_link_sharesec">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
-                                                            <input type="hidden" id="message" name="message" class="form-control">
-                                                            <!--<span class="input-group-btn upld_icnpad">
-                                                                <a href="#"><img src="http://habby/public/front/img/type_symbol1.png"></a>
-                                                            </span>-->
-                                                            <span class="input-group-btn upld_icnpad">
-                                                                <div class="fileUpload up_img btn">
-                                                                    <span><img title="Upload image" src="http://habby/public/front/img/type_symbol2.png"></span>
-                                                                    <input type="file" name="uploadfile[]" class="upload" id="uploadFile">
-                                                                </div>
+                                                            <span class="input-group-addon"> <a href="#"><img src="http://habby/public/front/img/pst_prfl_icon.png" class="cht_pfl_img"></a></span>	
+                                                            <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
+                                                            <span class="input-group-btn scl_mda_img">
+                                                                <a href="https://www.google.co.in/" target="_blank"><img src="http://habby/public/front/img/google_img.jpg"></a>
                                                             </span>
-                                                            <span class="input-group-btn upld_icnpad">
-                                                                <div class="fileUpload up_img btn">
-                                                                    <span><img title="Upload video" src="http://habby/public/front/img/video_record_img.png"></span>
-                                                                    <input type="file" id="upload_video" name="upload_video" class="upload">
-                                                                </div>
+                                                            <span class="input-group-btn scl_mda_img">
+                                                                <a href="https://www.youtube.com/" target="_blank"><img src="http://habby/public/front/img/youtube_img.jpg"></a>
                                                             </span>
-                                                            <span class="input-group-btn upld_icnpad">
-                                                                <div class="fileUpload up_img btn">
-                                                                    <span><img title="Upload file" src="http://habby/public/front/img/upload.png"></span>
-                                                                    <input type="file" name="upload_files" class="upload" id="upload_files">
-                                                                </div>
+                                                            <span class="input-group-btn scl_mda_img">
+                                                                <a href="https://plus.google.com/" target="_blank"><img src="http://habby/public/front/img/google_plus_img.jpg"></a>
                                                             </span>
-                                                            <span class="input-group-btn upld_icnpad">
-                                                                <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="http://habby/public/front/img/type_symbol3.png"></a>
+                                                            <span class="input-group-btn scl_mda_img">
+                                                                <a href="https://twitter.com/" target="_blank"><img src="http://habby/public/front/img/twitter_img.jpg"></a>
                                                             </span>
                                                             <span class="input-group-btn">
-                                                                <input class="submit_btn chat_btn" type="submit" value="Send">
+                                                                <input class="chat_btn share_btn" type="submit" value="Share">
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Type area end here -->
-
                                     </div>
+                                    <!-- Smily icon and profile secton end here -->
+
+                                    <!-- Type area start here -->
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="topic_textarea">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
+                                                        <input type="hidden" id="message" name="message" class="form-control">
+                                                        <!--<span class="input-group-btn upld_icnpad">
+                                                            <a href="#"><img src="http://habby/public/front/img/type_symbol1.png"></a>
+                                                        </span>-->
+                                                        <span class="input-group-btn upld_icnpad">
+                                                            <div class="fileUpload up_img btn">
+                                                                <span><img title="Upload image" src="http://habby/public/front/img/type_symbol2.png"></span>
+                                                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile">
+                                                            </div>
+                                                        </span>
+                                                        <span class="input-group-btn upld_icnpad">
+                                                            <div class="fileUpload up_img btn">
+                                                                <span><img title="Upload video" src="http://habby/public/front/img/video_record_img.png"></span>
+                                                                <input type="file" id="upload_video" name="upload_video" class="upload">
+                                                            </div>
+                                                        </span>
+                                                        <span class="input-group-btn upld_icnpad">
+                                                            <div class="fileUpload up_img btn">
+                                                                <span><img title="Upload file" src="http://habby/public/front/img/upload.png"></span>
+                                                                <input type="file" name="upload_files" class="upload" id="upload_files">
+                                                            </div>
+                                                        </span>
+                                                        <span class="input-group-btn upld_icnpad">
+                                                            <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="http://habby/public/front/img/type_symbol3.png"></a>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <input class="submit_btn chat_btn" type="submit" value="Send">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Type area end here -->
+
                                 </div>
-                                <!-- Type Chat section end here -->
                             </div>
+                            <!-- Type Chat section end here -->
                         </div>
                     </div>
                 </div>
-                 <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>   
         </div>
 
 
-        </div>
     </div>
+</div>
 
-    <!-- Global variable for join_topichat.js -->
-    <script>
-        data = '<?php echo json_encode($this->session->user); ?>';
-        group_id = '<?php echo $group_id; ?>';
-        DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
-        DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
-        last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
-        upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
-    </script>
-    <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>
-    <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>
-    <script type="text/javascript">
-        $('document').ready(function () {
-            setTimeout(function () {
-                $(".fancybox").fancybox({
-                    'width': 300, // set the width
-                    'height': 300, // set the height
-                    'type': 'iframe'       // tell the script to create an iframe
-                });
-            }, 100);
-        });
-    </script>
+<!-- Global variable for join_topichat.js -->
+<script>
+    data = '<?php echo json_encode($this->session->user); ?>';
+    group_id = '<?php echo $group_id; ?>';
+    DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
+    DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
+    last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
+    upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
+</script>
+<script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>
+<script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>
+<script type="text/javascript">
+    $('document').ready(function () {
+        setTimeout(function () {
+            $(".fancybox").fancybox({
+                'width': 300, // set the width
+                'height': 300, // set the height
+                'type': 'iframe'       // tell the script to create an iframe
+            });
+        }, 100);
+    });
+</script>

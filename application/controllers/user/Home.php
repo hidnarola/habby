@@ -485,6 +485,7 @@ class Home extends CI_Controller {
     }
 
     public function get_location() {
+        var_dump($_SERVER);
         $ip = !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
         pr($ip);
         $url = "http://freegeoip.net/json/$ip";

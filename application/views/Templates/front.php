@@ -53,6 +53,7 @@
                         lng: position.coords.longitude
                     };
                     console.log(pos);
+                    $("#location").val(pos);
                 }, function () {
                     handleLocationError(true, infoWindow, map.getCenter());
                 });

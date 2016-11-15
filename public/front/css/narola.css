@@ -697,7 +697,7 @@ img.file_icon {
     }
 }
 @media (min-width: 768px){
-    .modal-dialog {
+    #mediaModal.modal-dialog {
         width: 1220px;
         margin: 30px auto;
     }

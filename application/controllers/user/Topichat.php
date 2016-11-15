@@ -199,8 +199,7 @@ class Topichat extends CI_Controller {
         // Add entry in modification table
         $arr['user_id'] = $this->session->user['id'];
         $arr['description'] = "Information has been changed by";
-        if($this->Topichat_model->insert_topichat_group_modification($arr))
-        {
+        if ($this->Topichat_model->insert_topichat_group_modification($arr)) {
             
         }
         redirect('topichat/details/' . urlencode(base64_encode($group_id)));
@@ -400,10 +399,11 @@ class Topichat extends CI_Controller {
         }
         echo json_encode($data);
     }
+
     public function load_more_links($group_id) {
         $link_limit = 2;
         $last_link_id = $this->input->post('last_link');
-        $this->data['recent_links'] = $this->Topichat_model->load_recent_links($group_id, $link_limit,$last_link_id);
+        $this->data['recent_links'] = $this->Topichat_model->load_recent_links($group_id, $link_limit, $last_link_id);
         if (count($this->data['recent_links']) > 0) {
             $data['status'] = 1;
             $data['view'] = $this->load->view('user/partial/topichat/load_more_links', $this->data, true);
@@ -413,7 +413,6 @@ class Topichat extends CI_Controller {
         }
         echo json_encode($data);
     }
-
 
     public function get_content() {
         $url = "https://img.youtube.com/vi/AbzdfUNsSsM/0.jpg";
@@ -429,12 +428,20 @@ class Topichat extends CI_Controller {
         exit;
         return $image;
     }
-    
+
     /*
      * 
      */
-    public function get_chat_id_from_media_name(){
+
+    public function get_chat_id_from_media_name() {
         $media = $this->input->post('media');
         echo $this->Topichat_model->get_chat_id_from_media_name($media);
-    }    
+    }
+
+    public function media_details() {
+        if ($this->input->post()) {
+            pr($this->input->post());
+        }
+    }
+
 }
