@@ -614,8 +614,8 @@ img.file_icon {
     border-right: 1px solid;
 }
 .event-right-section .chat_area2 {
-  top: 210px;
-  bottom:50px !important;
+    top: 210px;
+    bottom:50px !important;
 }
 
 .event-top-details{
@@ -690,7 +690,7 @@ img.file_icon {
     }
 }
 @media (min-width: 768px){
-    .modal-dialog {
+    #mediaModal.modal-dialog {
         width: 1220px;
         margin: 30px auto;
     }
