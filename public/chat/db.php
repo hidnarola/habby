@@ -1,7 +1,7 @@
 <?php
 
 // Connection settings
-$conn = mysqli_connect("192.168.1.201", "habby", "6735C63zY35gOwF", "habby");
+$conn = mysqli_connect("habby-go.c2k2g1789ryk.us-west-2.rds.amazonaws.com", "habby_go", "df098gdf790gdf7890gdf8g", "habby");
 mysqli_set_charset($conn, "utf8");
 
 function select($query) {
