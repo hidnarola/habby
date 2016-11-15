@@ -200,6 +200,9 @@ class Events extends CI_Controller {
         $this->data['event_contact'] = $this->Event_model->get_event_contact($id);
         $this->data['recent_images'] = $this->Event_model->get_event_recent_images($id,$image_limit = 3);
         $this->data['recent_videos'] = $this->Event_model->get_event_recent_videos($id,$video_limit = 3);
+        $this->data['event_media'] = $this->Event_model->get_event_media_by_id($id);
+        $this->data['remaining_days'] = floor((strtotime($this->data['event']['end_time']) - time()) / (60 * 60 * 24));
+
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
@@ -238,6 +241,35 @@ class Events extends CI_Controller {
             );
             $this->Event_model->update_contact($id,$update_arr);
             redirect('events/details/'. urlencode(base64_encode($this->input->post('event_id'))));
+        }
+    }
+    
+    /*
+     * 
+     */
+    public function update_event($id){
+        if($this->input->post())
+        {
+            $update_arr = array(
+                'title'=>$this->input->post('title'),
+                'details'=> $this->input->post('details'),
+                'start_time'=> $this->input->post('start_time'),
+                'end_time'=> $this->input->post('end_time'),
+                'limit'=> $this->input->post('limit'),
+                'release_distance_range'=> $this->input->post('distance_range'),
+                'approval_needed'=>$this->input->post('approval')
+            );
+            $this->Event_model->update_event($id,$update_arr);
+            redirect('user/events/details/'.  urlencode(base64_encode($id)));
+        }
+    }
+    
+    public function update_notes($id)
+    {
+        if($this->input->post())
+        {
+            $update_arr['notes'] = $this->input->post('notes');
+            $this->Event_model->update_event($id,$update_arr);
         }
     }
 }
