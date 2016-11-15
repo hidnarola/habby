@@ -245,4 +245,22 @@ $('document').ready(function () {
 //            }
 //        });
     });
+    $("#mediaModal").on("show.bs.modal", function (e) {
+        e.preventDefault();
+        //get data-id attribute of the clicked element
+        var image = $(e.relatedTarget).data('image');
+        var type = $(e.relatedTarget).data('type');
+        console.log(image + "" + type);
+        $.ajax({
+            url: base_url + 'topichat/media_details',
+            method: 'post',
+            async: false,
+            data: 'image=' + image + "&type=" + type,
+            success: function (data) {
+                console.log(data);
+                return false;
+                $('#mediaModal').modal('toggle');
+            }
+        });
+    });
 });
