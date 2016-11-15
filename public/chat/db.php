@@ -24,6 +24,7 @@ function insert_id() {
 }
 
 function get_league_users($group_id) {
+    
     global $conn;
     $result = mysqli_query($conn, "select user_id from league_members where league_id = $group_id");
     if (mysqli_num_rows($result) > 0) {
@@ -58,13 +59,16 @@ function send_league_media($group_id, $sender_id, $msg, $media_type) {
 }
 
 function get_topichat_users($group_id) {
+    echo "called";
     global $conn;
     $result = mysqli_query($conn, "select user_id from topic_group_user where topic_id = $group_id");
+    
     if (mysqli_num_rows($result) > 0) {
         $arr = array();
         while ($row = mysqli_fetch_assoc($result)) {
             $arr[] = $row['user_id'];
         }
+        print_r($arr);
         return $arr;
     } else {
         return 0;
