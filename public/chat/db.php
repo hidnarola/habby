@@ -210,10 +210,17 @@ function send_event_msg($group_id, $sender_id, $msg) {
 
 function send_event_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
-    foreach ($msg as $media) {
-        $query = "insert into event_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
+    if ($media_type == 'links') {
+        $query = "insert into event_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
+        }
+    } else {
+        foreach ($msg as $media) {
+            $query = "insert into event_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
+            if (mysqli_query($conn, $query)) {
+                return true;
+            }
         }
     }
 }

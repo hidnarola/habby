@@ -199,11 +199,12 @@ class Events extends CI_Controller {
         $this->data['event_members'] = $this->Event_model->get_event_members($id);
         $this->data['event_contact'] = $this->Event_model->get_event_contact($id);
         $this->data['recent_images'] = $this->Event_model->get_event_recent_images($id,$image_limit = 3);
-        $this->data['recent_videos'] = $this->Event_model->get_event_recent_videos($id,$image_limit = 3);
+        $this->data['recent_videos'] = $this->Event_model->get_event_recent_videos($id,$video_limit = 3);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
             $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
         }
+        $this->data['recent_shared_files'] = $this->Event_model->get_event_recent_files($id,$file_limit = 3);
         
         $this->data['messages'] = $this->Event_model->get_messages($id, $limit);
         krsort($this->data['messages']); // Reverse array

@@ -245,6 +245,28 @@ class User extends CI_Controller {
         echo json_encode($media);
     }
 
+    public function download_file($fileName) {
+        $this->load->helper('download');
+        ob_clean();
+        $file = 'uploads/chat_media/' . $fileName;
+        if (!file_exists($file))
+            die("I'm sorry, the file doesn't seem to exist.");
+
+        $type = filetype($file);
+        // Get a date and timestamp
+        $today = date("F j, Y, g:i a");
+        $time = time();
+        // Send file headers
+        header("Content-type: $type");
+        header("Content-Disposition: attachment;filename=$fileName");
+        header("Content-Transfer-Encoding: binary");
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        // Send the file contents.
+        set_time_limit(0);
+        readfile($file);
+    }
+    
     /* v! Redirect Url for the login with facebook define in the application/config/config.php */
 
     public function facebook_callback() {

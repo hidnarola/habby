@@ -204,6 +204,95 @@ $(document).ready(function () {
         });
     });
 
+    // File uploading script
+    $("#upload_files").on("change", function ()
+    {
+        $(".loader").addClass('show');
+        var display_file_class = '';
+        $('.message').html();
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            $('.message').html("No file selected.");
+            $('.message').show();
+            return; // no file selected, or no FileReader support
+        }
+        for (var key in files)
+        {
+            if (key != "length" && key != "item")
+            {
+                if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type)) || /vnd.openxmlformats-officedocument.wordprocessingml.document$/.test(files[key].type) || /.docx$/.test(files[key].name) || /.doc$/.test(files[key].name) || /.xls$/.test(files[key].name) || /.xlsx$/.test(files[key].name)) { // only pdf and text files 
+                    var file_name = files[key].name;
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
+                    reader.onloadend = function () { // set image data as background of div
+                        var i = Math.random().toString(36).substring(7);
+                        display_file_class = 'imagePreview' + i;
+                        $('.message').hide();
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
+                        $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
+                        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+
+                        var form_data = new FormData();
+                        $.each(files, function (i, file) {
+                            form_data.append('files-' + i, file);
+                        });
+
+                        form_data.append("msg_files", files);
+                        // Send file using ajax
+                        var media_data;
+                        $.ajax({
+                            url: base_url + '/user/User/upload_chat_media',
+                            dataType: 'script',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
+                            type: 'post',
+                            async: false,
+                            error: function (textStatus, errorThrown) {
+
+                            },
+                            success: function (str)
+                            {
+                                if (str == "601")
+                                {
+                                    var p = $('.' + display_file_class).parent().addClass('wdth_span');
+                                    p.html('<span>Fail to send message</span>');
+                                } else if (str != 0)
+                                {
+                                    var msg = {
+                                        message: str,
+                                        type: 'event_msg',
+                                        group_id: group_id,
+                                        media: 'files'
+                                    }
+                                    str = JSON.parse(str);
+                                    $('.' + display_file_class).siblings('a').attr('href', base_url + 'user/download_file/' + str[0].media);
+                                    $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
+                                    Server.send('message', JSON.stringify(msg));
+                                    media_data = str;
+                                }
+                            },
+                            complete: function () {
+                                $(".loader").removeClass('show');
+                            }
+                        });
+
+                    }
+                } else
+                {
+                    $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper files (pdf/txt/xls/doc)</span></span></div>");
+                    //this.files = '';
+                    $('.message').html("Please select proper files (pdf/txt/xls/doc)");
+                    $('.message').show();
+                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                    return;
+                }
+            }
+        }
+
+    });
+
     //Let the user know we're connected
     Server.bind('open', function () {
         // Fire when user connect first time
