@@ -213,10 +213,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 // database entry for event
                 if(isset($message->media))
                 {
-                    if($message->media != 'links')
-                    {
-                        $message->message = json_decode($message->message);
-                    }
+                    $message->message = json_decode($message->message);
                     send_event_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
                 }
                 else

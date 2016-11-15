@@ -137,6 +137,38 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="content_files">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Files 
+                                            <?php
+                                            if (count($recent_shared_files) >= 3) {
+                                                ?>
+                                                <span class="load_more_image pull-right">More</span>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php
+                                            if (count($recent_shared_files) > 0) {
+                                                foreach ($recent_shared_files as $file) {
+                                                    ?>
+                                                    <a class="col-sm-4" href="<?php echo base_url() . "user/download_file/" . $file ?>" target="_blank" data-fancybox-group="gallery1">
+                                                        <div class="video-w-icon">
+                                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive topi_image" />
+                                                        </div>
+                                                    </a>
+                                                    <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                No Videos were uploaded.
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
