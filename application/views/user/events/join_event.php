@@ -1,4 +1,4 @@
-<?php // pr($event,1)            ?>
+<?php // pr($event,1)                ?>
 <div class="row cont_top_1">
     <section class="event-page">
         <div class="row event-top-section">
@@ -77,52 +77,62 @@
                             <div class="content_description">
                                 <div class="content_images">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">Images <span class="load_more_image pull-right">More</span></div>
-                                            <div class="panel-body">
+                                        <div class="panel-heading">Images 
                                             <?php
-                                                if(count($recent_images) > 0)
-                                                {
-                                                    foreach($recent_images as $image)
-                                                    {
-                                                        ?>
-                                                        <a class="fancybox col-sm-4" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
-                                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
-                                                        </a>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
+                                            if (count($recent_images) >= 3) {
+                                                ?>
+                                                <span class="load_more_image pull-right">More</span>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php
+                                            if (count($recent_images) > 0) {
+                                                foreach ($recent_images as $image) {
                                                     ?>
-                                                        No Images were uploaded.
+                                                    <a class="fancybox col-sm-4" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1">
+                                                        <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image"/>
+                                                    </a>
                                                     <?php
                                                 }
+                                            } else {
+                                                ?>
+                                                No Images were uploaded.
+                                                <?php
+                                            }
                                             ?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="content_videos">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">Videos <span class="load_more_image pull-right">More</span></div>
-                                            <div class="panel-body">
+                                        <div class="panel-heading">Videos 
                                             <?php
-                                                if(count($recent_videos_thumb) > 0)
-                                                {
-                                                    foreach($recent_videos_thumb as $video)
-                                                    {
-                                                        ?>
-                                                        <a class="fancybox col-sm-4" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $video; ?>" data-fancybox-group="gallery1">
-                                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $video; ?>" class="img-responsive topi_image">
-                                                        </a>
-                                                        <?php
-                                                    }
-                                                }
-                                                else
-                                                {
+                                            if (count($recent_videos_thumb) >= 3) {
+                                                ?>
+                                                <span class="load_more_image pull-right">More</span>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php
+                                            if (count($recent_videos_thumb) > 0) {
+                                                foreach ($recent_videos_thumb as $key => $video) {
                                                     ?>
-                                                        No Videos were uploaded.
+                                                    <a class="fancybox col-sm-4" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key]; ?>" target="_blank" data-fancybox-group="gallery1">
+                                                        <div class="video-w-icon">
+                                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $video; ?>" class="img-responsive topi_image" />
+                                                        </div>
+                                                    </a>
                                                     <?php
                                                 }
+                                            } else {
+                                                ?>
+                                                No Videos were uploaded.
+                                                <?php
+                                            }
                                             ?>
                                         </div>
                                     </div>

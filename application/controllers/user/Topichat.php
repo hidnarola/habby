@@ -387,28 +387,6 @@ class Topichat extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function download_file($fileName) {
-        $this->load->helper('download');
-        ob_clean();
-        $file = 'uploads/chat_media/' . $fileName;
-        if (!file_exists($file))
-            die("I'm sorry, the file doesn't seem to exist.");
-
-        $type = filetype($file);
-        // Get a date and timestamp
-        $today = date("F j, Y, g:i a");
-        $time = time();
-        // Send file headers
-        header("Content-type: $type");
-        header("Content-Disposition: attachment;filename=$fileName");
-        header("Content-Transfer-Encoding: binary");
-        header('Pragma: no-cache');
-        header('Expires: 0');
-        // Send the file contents.
-        set_time_limit(0);
-        readfile($file);
-    }
-
     public function load_more_image($group_id) {
         $limit = 4;
         $last_image_id = $this->input->post('last_image');
@@ -458,7 +436,5 @@ class Topichat extends CI_Controller {
     public function get_chat_id_from_media_name(){
         $media = $this->input->post('media');
         echo $this->Topichat_model->get_chat_id_from_media_name($media);
-    }
-    
-    
+    }    
 }
