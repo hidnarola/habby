@@ -26,7 +26,7 @@ function insert_id() {
 function get_league_users($group_id) {
     
     global $conn;
-    $result = mysqli_query($conn, "select user_id from league_members where league_id = $group_id");
+    $result = mysqli_query($conn, "select user_id from league_members where league_id = $group_id") or mysqli_error($conn);
     if (mysqli_num_rows($result) > 0) {
         $arr = array();
         while ($row = mysqli_fetch_assoc($result)) {
