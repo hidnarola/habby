@@ -84,7 +84,7 @@ function send_topic_msg($group_id, $sender_id, $msg) {
         echo "record inserted";
         return true;
     }
-    mysqli_error($conn);
+    echo mysqli_error($conn);
     echo "return false";
     return false;
 }
