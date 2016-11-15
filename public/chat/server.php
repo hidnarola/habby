@@ -23,6 +23,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
     if (!empty($message->type)) {
         if ($message->type == 'room_bind' && empty($Server->wsClients[$clientID]['user_data'])) {
             echo "room bind";
+            print_r($Server->wsClients);
             $Server->wsClients[$clientID]['user_data'] = $message->message;
             $Server->wsClients[$clientID]['room_type'] = $message->room_type;
             if($Server->wsClients[$clientID]['room_type'] != "topic_notification"){
