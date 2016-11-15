@@ -311,6 +311,22 @@ class Event_model extends CI_Model {
         $this->db->order_by('id','desc');
         return array_column($this->db->get('event_chat')->result_array(),'media');
     }
+    
+    /*
+     * 
+     */
+    public function update_event($id,$arr)
+    {
+        $this->db->where('id',$id);
+        $this->db->update('events',$arr);
+    }
+    
+    /*
+     * 
+     */
+    public function get_event_media_by_id($id){
+        return $this->db->where('event_id',$id)->get('event_media')->result_array();
+    }
 }
 
 ?>

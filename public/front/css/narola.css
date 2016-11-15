@@ -618,6 +618,17 @@ img.file_icon {
     bottom:50px !important;
 }
 
+.event_file_name{
+    display: block;
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.update_notes{
+    margin-top: -8px;
+}
+
 .event-top-details{
     font-size:14px;
 }
