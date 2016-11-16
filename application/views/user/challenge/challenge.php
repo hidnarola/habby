@@ -27,516 +27,531 @@
     <div class="row grp_pnl_row newest-post flter_sec_row">
         <div class="container grp_pnl_container">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 challenge_container">
-                <div class="row">
-                    <!-- Challenge Title Section section start here -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <ul class="list-inline clng_ttl_ul">
-                            <li>Newest</li>
-                            <li><a href="<?php echo base_url() . "challenge/challenges?ch=newest" ?>" class="pstbtn more_challenge">More</a></li>
-                        </ul>
+
+                <?php
+                if (count($Newest_Challenges) > 0) {
+                    ?>
+
+                    <div class="row">
+                        <!-- Challenge Title Section section start here -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ul class="list-inline clng_ttl_ul">
+                                <li>Newest</li>
+                                <li><a href="<?php echo base_url() . "challenge/challenges?ch=newest" ?>" class="pstbtn more_challenge">More</a></li>
+                            </ul>
+                        </div>
+                        <!-- Challenge Title Section section end here -->
                     </div>
-                    <!-- Challenge Title Section section end here -->
-                </div>
-                <div class="row challenge_container">
-                    <?php
-                    if ($Newest_Challenges != "" && !empty($Newest_Challenges)) {
-                        foreach ($Newest_Challenges as $Newest_Challenge) {
+                    <div class="row challenge_container">
+                        <?php
+                        if ($Newest_Challenges != "" && !empty($Newest_Challenges)) {
+                            foreach ($Newest_Challenges as $Newest_Challenge) {
 //                        pr($Newest_Challenge);
-                            ?>
+                                ?>
 
-                            <!-- Challenge each section start here -->
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec" data-challenge_id="<?php echo $Newest_Challenge['id']; ?>">
-                                    <!-- Challenge header section start here -->
-                                    <div class="challenge_cont_sec row">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
-                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Newest_Challenge['user_image']; ?>" class="img-responsive center-block ">
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
-                                            <h2 class="chlng_hdg"><?php echo $Newest_Challenge['name']; ?> <img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
-                                        </div>
-                                    </div>
-                                    <!-- Challenge header section end here -->
-
-                                    <!-- Challenge content section start here -->
-
-                                    <div class="challenge_cont_sec2 row">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
-                                            <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
-                                                    echo DEFAULT_IMAGE_PATH;
-                                                    echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                    ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Newest_Challenge['average_rank']; ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
-                                                    echo DEFAULT_IMAGE_PATH;
-                                                    echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                    ?>"></button>
+                                <!-- Challenge each section start here -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                                    <div class="challenge_sec" data-challenge_id="<?php echo $Newest_Challenge['id']; ?>">
+                                        <!-- Challenge header section start here -->
+                                        <div class="challenge_cont_sec row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
+                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Newest_Challenge['user_image']; ?>" class="img-responsive center-block ">
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
+                                                <h2 class="chlng_hdg"><?php echo $Newest_Challenge['name']; ?> <img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
                                             </div>
                                         </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
-                                            <p class="chlng_para">
-                                                <?php echo $Newest_Challenge['description'] ?>
-                                            </p>
-                                        </div>
-                                    </div>
+                                        <!-- Challenge header section end here -->
 
-                                    <!-- Challenge content section end here -->
+                                        <!-- Challenge content section start here -->
 
-                                    <!-- Challenge buttons section start here -->
-                                    <div class="challenge_cont_sec3 row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Newest_Challenge['rewards'] ?></span></li>
-                                                <li class="winner">
-                                                    <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Newest_Challenge['id']; ?>">
-                                                        Winners
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <?php
-                                                    if ($Newest_Challenge['is_applied']) {
-                                                        ?>
-                                                        <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Enter</a>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <!-- Challenge buttons section end here -->
-
-                                    <!-- Winner Popup start here -->
-                                    <div class="dropdownpln">
-                                        <div class="winner_popup winner_popup_n_<?php echo $Newest_Challenge['id']; ?>" role="menu">
-
-                                            <div class="winner_hdg_sec">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <h2 class="winner_hdg">Winner</h2>
+                                        <div class="challenge_cont_sec2 row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
+                                                <div id="field">
+                                                    <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                    echo DEFAULT_IMAGE_PATH;
+                    echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                ?>"></button>
+                                                    <input type="text" id="1" value="<?php echo $Newest_Challenge['average_rank']; ?>" class="field rank_rate" />
+                                                    <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                                                                                         echo DEFAULT_IMAGE_PATH;
+                                                                                                         echo ($Newest_Challenge['is_ranked'] && $Newest_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                ?>"></button>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
+                                                <p class="chlng_para">
+                                                    <?php echo $Newest_Challenge['description'] ?>
+                                                </p>
+                                            </div>
+                                        </div>
 
-                                            <div class="dicrp_section">
-                                                <div class="dicrp_sectioninr">
+                                        <!-- Challenge content section end here -->
 
-                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
-                                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "challenge-prfl.jpg"; ?>" class="img-responsive center-block ">
+                                        <!-- Challenge buttons section start here -->
+                                        <div class="challenge_cont_sec3 row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <ul class="list-inline chlng_ul2">
+                                                    <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Newest_Challenge['rewards'] ?></span></li>
+                                                    <li class="winner">
+                                                        <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Newest_Challenge['id']; ?>">
+                                                            Winners
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <?php
+                                                        if ($Newest_Challenge['is_applied']) {
+                                                            ?>
+                                                            <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                            <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Newest_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <!-- Challenge buttons section end here -->
+
+                                        <!-- Winner Popup start here -->
+                                        <div class="dropdownpln">
+                                            <div class="winner_popup winner_popup_n_<?php echo $Newest_Challenge['id']; ?>" role="menu">
+
+                                                <div class="winner_hdg_sec">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <h2 class="winner_hdg">Winner</h2>
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
-                                                        <!-- <h2 class="chlng_hdg">Work description</h2> -->
-                                                        <p class="chlng_para">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </p>
-                                                    </div>
+                                                <div class="dicrp_section">
+                                                    <div class="dicrp_sectioninr">
 
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_pstr">
-                                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "grp_pln_img4.jpg"; ?>">
-                                                    </div>
+                                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
+                                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "challenge-prfl.jpg"; ?>" class="img-responsive center-block ">
+                                                        </div>
 
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_cmnt">
+                                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
+                                                            <!-- <h2 class="chlng_hdg">Work description</h2> -->
+                                                            <p class="chlng_para">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                                            </p>
+                                                        </div>
 
-                                                        <ul class="list-inline winr_ul">
-                                                            <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png"; ?>"><br><span> 10 </span></a></li>
-                                                            <li class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "like_img.png"; ?>"><br><span>20 Likes  </span>
-                                                                </a>
-                                                                <ul class="dropdown-menu opn_drpdwn" role="menu">
-                                                                    <li><a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li><a role="button" class="cmnt_winner"><img src="<?php echo DEFAULT_IMAGE_PATH . "comment_icon.png"; ?>"><br><span> Comments  </span></a></li>
-                                                        </ul>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_pstr">
+                                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "grp_pln_img4.jpg"; ?>">
+                                                        </div>
 
-                                                        <div class="winner-comnt">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_cmnt">
 
-                                                            <p class="cmn_txtnw"> Comment Here</p>
-                                                            <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                                            <ul class="list-inline winr_ul">
+                                                                <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png"; ?>"><br><span> 10 </span></a></li>
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                                                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "like_img.png"; ?>"><br><span>20 Likes  </span>
+                                                                    </a>
+                                                                    <ul class="dropdown-menu opn_drpdwn" role="menu">
+                                                                        <li><a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li><a role="button" class="cmnt_winner"><img src="<?php echo DEFAULT_IMAGE_PATH . "comment_icon.png"; ?>"><br><span> Comments  </span></a></li>
+                                                            </ul>
 
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="commnt_visit_sec clearfix">
-                                                                        <div class="cmn_img">
-                                                                            <img src="images/likeimg.jpg" class="img-responsive">
+                                                            <div class="winner-comnt">
+
+                                                                <p class="cmn_txtnw"> Comment Here</p>
+                                                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                        <div class="commnt_visit_sec clearfix">
+                                                                            <div class="cmn_img">
+                                                                                <img src="images/likeimg.jpg" class="img-responsive">
+                                                                            </div>
+                                                                            <div class="cmn_dtl">
+
+                                                                                <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
+
+                                                                                <ul class="cmnt_p clearfix">
+                                                                                    <li><a href="#">Like</a></li>
+                                                                                    <li><a href="#">Reply</a></li>
+                                                                                    <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                                    <li class="stlnon"><span>- 10 October at 22:18</span></li>
+                                                                                </ul>
+
+                                                                                <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
+
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="cmn_dtl">
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                        <div class="commnt_visit_sec clearfix">
+                                                                            <div class="cmn_img">
+                                                                                <img src="images/likeimg.jpg" class="img-responsive">
+                                                                            </div>
+                                                                            <div class="cmn_dtl">
 
-                                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
+                                                                                <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
 
-                                                                            <ul class="cmnt_p clearfix">
-                                                                                <li><a href="#">Like</a></li>
-                                                                                <li><a href="#">Reply</a></li>
-                                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                                            </ul>
+                                                                                <ul class="cmnt_p clearfix">
+                                                                                    <li><a href="#">Like</a></li>
+                                                                                    <li><a href="#">Reply</a></li>
+                                                                                    <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                                    <li class="stlnon"><span>- 10 October at 22:18</span></li>
+                                                                                </ul>
 
-                                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
+                                                                                <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="commnt_visit_sec clearfix">
-                                                                        <div class="cmn_img">
-                                                                            <img src="images/likeimg.jpg" class="img-responsive">
-                                                                        </div>
-                                                                        <div class="cmn_dtl">
 
-                                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
-
-                                                                            <ul class="cmnt_p clearfix">
-                                                                                <li><a href="#">Like</a></li>
-                                                                                <li><a href="#">Reply</a></li>
-                                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                                            </ul>
-
-                                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
                                                             </div>
 
                                                         </div>
-
                                                     </div>
-                                                </div>
 
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- Winner Popup start here -->
                                     </div>
-                                    <!-- Winner Popup start here -->
                                 </div>
-                            </div>
-                            <!-- Challenge each section end here -->
-                            <?php
-                        }
-                    } else {
-                        ?>
-                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                            <p> No Newest Challenge.</p>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <!-- Challenge row section end here -->
-
-                <!-- Challenge row section start here -->
-
-                <div class="row">
-                    <!-- Challenge Title Section section start here -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <ul class="list-inline clng_ttl_ul">
-                            <li>Popular</li>
-                            <li><a href="<?php echo base_url() . "challenge/challenges?ch=popular" ?>" class="pstbtn more_challenge">More</a></li>
-                        </ul>
-                    </div>
-                    <!-- Challenge Title Section section end here -->
-                </div>
-                <div class="row challenge_container">				
-                    <?php
-                    if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
-                        foreach ($Popular_Challenges as $Popular_Challenge) {
-                            ?>
-
-                            <!-- Challenge each section start here -->
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec" data-challenge_id="<?php echo $Popular_Challenge['id']; ?>">
-                                    <!-- Challenge header section start here -->
-                                    <div class="challenge_cont_sec row">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
-                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Popular_Challenge['user_image'] ?>" class="img-responsive center-block ">
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
-                                            <h2 class="chlng_hdg"><?php echo $Popular_Challenge['name'] ?> <img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
-                                        </div>
-                                    </div>
-                                    <!-- Challenge header section end here -->
-
-                                    <!-- Challenge content section start here -->
-
-                                    <div class="challenge_cont_sec2 row">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
-                                            <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
-                                                    echo DEFAULT_IMAGE_PATH;
-                                                    echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                    ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Popular_Challenge['average_rank'] ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
-                                                    echo DEFAULT_IMAGE_PATH;
-                                                    echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                    ?>"></button>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
-                                            <p class="chlng_para">
-                                                <?php echo $Popular_Challenge['description'] ?>
-                                            </p>
-                                        </div>
-
-                                    </div>
-
-                                    <!-- Challenge content section end here -->
-
-                                    <!-- Challenge buttons section start here -->
-                                    <div class="challenge_cont_sec3 row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Popular_Challenge['rewards'] ?></span></li>
-                                                <li class="winner">
-                                                    <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Popular_Challenge['id']; ?>">
-                                                        Winners
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <?php
-                                                    if ($Popular_Challenge['is_applied']) {
-                                                        ?>
-                                                        <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Enter</a>
-                                                        <?php
-                                                    } else {
-                                                        ?>
-                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- Challenge buttons section end here -->
-
-                                    <!-- Winner Popup start here -->
-                                    <div class="dropdownpln">
-                                        <div class="winner_popup winner_popup_p_<?php echo $Popular_Challenge['id'] ?>" role="menu">
-
-                                            <div class="winner_hdg_sec">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <h2 class="winner_hdg">Winner</h2>
-                                                </div>
-                                            </div>
-
-                                            <div class="dicrp_section">
-                                                <div class="dicrp_sectioninr">
-
-                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
-                                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "challenge-prfl.jpg"; ?>" class="img-responsive center-block ">
-                                                    </div>
-
-
-                                                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
-                                                        <!-- <h2 class="chlng_hdg">Work description</h2> -->
-                                                        <p class="chlng_para">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_pstr">
-                                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "grp_pln_img4.jpg"; ?>">
-                                                    </div>
-
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_cmnt">
-
-                                                        <ul class="list-inline winr_ul">
-                                                            <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png"; ?>"><br><span> 10 </span></a></li>
-                                                            <li class="dropdown">
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
-                                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "like_img.png"; ?>"><br><span>20 Likes  </span>
-                                                                </a>
-                                                                <ul class="dropdown-menu opn_drpdwn" role="menu">
-                                                                    <li><a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li><a role="button" class="cmnt_winner"><img src="<?php echo DEFAULT_IMAGE_PATH . "comment_icon.png"; ?>"><br><span> Comments  </span></a></li>
-                                                        </ul>
-
-                                                        <div class="winner-comnt">
-
-                                                            <p class="cmn_txtnw"> Comment Here</p>
-                                                            <textarea class="form-control" rows="3" id="textArea"></textarea>
-
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="commnt_visit_sec clearfix">
-                                                                        <div class="cmn_img">
-                                                                            <img src="images/likeimg.jpg" class="img-responsive">
-                                                                        </div>
-                                                                        <div class="cmn_dtl">
-
-                                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
-
-                                                                            <ul class="cmnt_p clearfix">
-                                                                                <li><a href="#">Like</a></li>
-                                                                                <li><a href="#">Reply</a></li>
-                                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                                            </ul>
-
-                                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                                    <div class="commnt_visit_sec clearfix">
-                                                                        <div class="cmn_img">
-                                                                            <img src="images/likeimg.jpg" class="img-responsive">
-                                                                        </div>
-                                                                        <div class="cmn_dtl">
-
-                                                                            <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
-
-                                                                            <ul class="cmnt_p clearfix">
-                                                                                <li><a href="#">Like</a></li>
-                                                                                <li><a href="#">Reply</a></li>
-                                                                                <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                                <li class="stlnon"><span>- 10 October at 22:18</span></li>
-                                                                            </ul>
-
-                                                                            <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Winner Popup start here -->
-                                </div>
-                            </div>
-                            <!-- Challenge each section end here -->
-
-                            <?php
-                        }
-                    } else {
-                        ?>
-                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                            <p> No Popular Challenge.</p>
-                        </div>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <!-- Challenge row section end here -->
-
-
-                <!-- Challenge row section start here -->
-
-                <div class="row">
-                    <!-- Challenge Title Section section start here -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <ul class="list-inline clng_ttl_ul">
-                            <li>Recommended</li>
-                            <?php
-                            if (($Recom_Challenges != "" && !empty($Recom_Challenges))) {
-                                if (count($Recom_Challenges) > 0) {
-                                    ?>
-                                    <li><a href="<?php echo base_url() . "challenge/challenges?ch=recommended" ?>" class="pstbtn more_challenge">More</a></li>
-                                    <?php
-                                }
+                                <!-- Challenge each section end here -->
+                                <?php
                             }
+                        } else {
                             ?>
-                        </ul>
+                            <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                                <p> No Newest Challenge.</p>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
-                    <!-- Challenge Title Section section end here -->
-                </div>
-                <div class="row">					
-                    <?php
-                    if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
-                        foreach ($Recom_Challenges as $Recom_Challenge) {
-                            ?>
+                    <!-- Challenge row section end here -->
 
-                            <!-- Challenge each section start here -->
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                                <div class="challenge_sec" data-challenge_id="<?php echo $Recom_Challenge['id']; ?>">
-                                    <!-- Challenge header section start here -->
-                                    <div class="challenge_cont_sec row">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
-                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Recom_Challenge['user_image'] ?>" class="img-responsive center-block ">
+                    <!-- Challenge row section start here -->
+
+                    <div class="row">
+                        <!-- Challenge Title Section section start here -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ul class="list-inline clng_ttl_ul">
+                                <li>Popular</li>
+                                <li><a href="<?php echo base_url() . "challenge/challenges?ch=popular" ?>" class="pstbtn more_challenge">More</a></li>
+                            </ul>
+                        </div>
+                        <!-- Challenge Title Section section end here -->
+                    </div>
+                    <div class="row challenge_container">				
+                        <?php
+                        if ($Popular_Challenges != "" && !empty($Popular_Challenges)) {
+                            foreach ($Popular_Challenges as $Popular_Challenge) {
+                                ?>
+
+                                <!-- Challenge each section start here -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                                    <div class="challenge_sec" data-challenge_id="<?php echo $Popular_Challenge['id']; ?>">
+                                        <!-- Challenge header section start here -->
+                                        <div class="challenge_cont_sec row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
+                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Popular_Challenge['user_image'] ?>" class="img-responsive center-block ">
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
+                                                <h2 class="chlng_hdg"><?php echo $Popular_Challenge['name'] ?> <img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
-                                            <h2 class="chlng_hdg"><?php echo $Recom_Challenge['name'] ?><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
+                                        <!-- Challenge header section end here -->
+
+                                        <!-- Challenge content section start here -->
+
+                                        <div class="challenge_cont_sec2 row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
+                                                <div id="field">
+                                                    <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                    echo DEFAULT_IMAGE_PATH;
+                    echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                ?>"></button>
+                                                    <input type="text" id="1" value="<?php echo $Popular_Challenge['average_rank'] ?>" class="field rank_rate" />
+                                                    <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                                                                                         echo DEFAULT_IMAGE_PATH;
+                                                                                                         echo ($Popular_Challenge['is_ranked'] && $Popular_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                ?>"></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
+                                                <p class="chlng_para">
+                                                    <?php echo $Popular_Challenge['description'] ?>
+                                                </p>
+                                            </div>
+
                                         </div>
+
+                                        <!-- Challenge content section end here -->
+
+                                        <!-- Challenge buttons section start here -->
+                                        <div class="challenge_cont_sec3 row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <ul class="list-inline chlng_ul2">
+                                                    <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Popular_Challenge['rewards'] ?></span></li>
+                                                    <li class="winner">
+                                                        <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Popular_Challenge['id']; ?>">
+                                                            Winners
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <?php
+                                                        if ($Popular_Challenge['is_applied']) {
+                                                            ?>
+                                                            <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                            <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Popular_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Challenge buttons section end here -->
+
+                                        <!-- Winner Popup start here -->
+                                        <div class="dropdownpln">
+                                            <div class="winner_popup winner_popup_p_<?php echo $Popular_Challenge['id'] ?>" role="menu">
+
+                                                <div class="winner_hdg_sec">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <h2 class="winner_hdg">Winner</h2>
+                                                    </div>
+                                                </div>
+
+                                                <div class="dicrp_section">
+                                                    <div class="dicrp_sectioninr">
+
+                                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
+                                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "challenge-prfl.jpg"; ?>" class="img-responsive center-block ">
+                                                        </div>
+
+
+                                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
+                                                            <!-- <h2 class="chlng_hdg">Work description</h2> -->
+                                                            <p class="chlng_para">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_pstr">
+                                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "grp_pln_img4.jpg"; ?>">
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 winnr_cmnt">
+
+                                                            <ul class="list-inline winr_ul">
+                                                                <li><a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png"; ?>"><br><span> 10 </span></a></li>
+                                                                <li class="dropdown">
+                                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                                                                        <img src="<?php echo DEFAULT_IMAGE_PATH . "like_img.png"; ?>"><br><span>20 Likes  </span>
+                                                                    </a>
+                                                                    <ul class="dropdown-menu opn_drpdwn" role="menu">
+                                                                        <li><a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="#"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a></li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li><a role="button" class="cmnt_winner"><img src="<?php echo DEFAULT_IMAGE_PATH . "comment_icon.png"; ?>"><br><span> Comments  </span></a></li>
+                                                            </ul>
+
+                                                            <div class="winner-comnt">
+
+                                                                <p class="cmn_txtnw"> Comment Here</p>
+                                                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                        <div class="commnt_visit_sec clearfix">
+                                                                            <div class="cmn_img">
+                                                                                <img src="images/likeimg.jpg" class="img-responsive">
+                                                                            </div>
+                                                                            <div class="cmn_dtl">
+
+                                                                                <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
+
+                                                                                <ul class="cmnt_p clearfix">
+                                                                                    <li><a href="#">Like</a></li>
+                                                                                    <li><a href="#">Reply</a></li>
+                                                                                    <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                                    <li class="stlnon"><span>- 10 October at 22:18</span></li>
+                                                                                </ul>
+
+                                                                                <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                                        <div class="commnt_visit_sec clearfix">
+                                                                            <div class="cmn_img">
+                                                                                <img src="images/likeimg.jpg" class="img-responsive">
+                                                                            </div>
+                                                                            <div class="cmn_dtl">
+
+                                                                                <p class="cmnt_txt1"><span>John Doe</span> Interesting</p>
+
+                                                                                <ul class="cmnt_p clearfix">
+                                                                                    <li><a href="#">Like</a></li>
+                                                                                    <li><a href="#">Reply</a></li>
+                                                                                    <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                                    <li class="stlnon"><span>- 10 October at 22:18</span></li>
+                                                                                </ul>
+
+                                                                                <p class="cmmnt_para">World Wide Web warned on Saturday that the freedom of the internet is under threat by governments</p>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Winner Popup start here -->
                                     </div>
-                                    <!-- Challenge header section end here -->
+                                </div>
+                                <!-- Challenge each section end here -->
 
-                                    <!-- Challenge content section start here -->
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                                <p> No Popular Challenge.</p>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <!-- Challenge row section end here -->
 
-                                    <div class="challenge_cont_sec2 row">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
-                                            <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+
+                    <!-- Challenge row section start here -->
+
+                    <div class="row">
+                        <!-- Challenge Title Section section start here -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ul class="list-inline clng_ttl_ul">
+                                <li>Recommended</li>
+                                <?php
+                                if (($Recom_Challenges != "" && !empty($Recom_Challenges))) {
+                                    if (count($Recom_Challenges) > 0) {
+                                        ?>
+                                        <li><a href="<?php echo base_url() . "challenge/challenges?ch=recommended" ?>" class="pstbtn more_challenge">More</a></li>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <!-- Challenge Title Section section end here -->
+                    </div>
+                    <div class="row">					
+                        <?php
+                        if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
+                            foreach ($Recom_Challenges as $Recom_Challenge) {
+                                ?>
+
+                                <!-- Challenge each section start here -->
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                                    <div class="challenge_sec" data-challenge_id="<?php echo $Recom_Challenge['id']; ?>">
+                                        <!-- Challenge header section start here -->
+                                        <div class="challenge_cont_sec row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3 chlng_pflsec">
+                                                <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $Recom_Challenge['user_image'] ?>" class="img-responsive center-block ">
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8">
+                                                <h2 class="chlng_hdg"><?php echo $Recom_Challenge['name'] ?><img src="<?php echo DEFAULT_IMAGE_PATH . "challeng_arrow.png"; ?>" class="pull-right"></h2>
+                                            </div>
+                                        </div>
+                                        <!-- Challenge header section end here -->
+
+                                        <!-- Challenge content section start here -->
+
+                                        <div class="challenge_cont_sec2 row">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
+                                                <div id="field">
+                                                    <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
                     echo DEFAULT_IMAGE_PATH;
                     echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                            ?>"></button>
-                                                <input type="text" id="1" value="<?php echo $Recom_Challenge['average_rank'] ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                ?>"></button>
+                                                    <input type="text" id="1" value="<?php echo $Recom_Challenge['average_rank'] ?>" class="field rank_rate" />
+                                                    <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
                                                                                                          echo DEFAULT_IMAGE_PATH;
                                                                                                          echo ($Recom_Challenge['is_ranked'] && $Recom_Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                            ?>"></button>
+                                ?>"></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
+                                                <p class="chlng_para">
+                                                    <?php echo $Recom_Challenge['description'] ?>
+                                                </p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
-                                            <p class="chlng_para">
-                                                <?php echo $Recom_Challenge['description'] ?>
-                                            </p>
+
+                                        <!-- Challenge content section end here -->
+
+                                        <!-- Challenge buttons section start here -->
+                                        <div class="challenge_cont_sec3 row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <ul class="list-inline chlng_ul2">
+                                                    <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Recom_Challenge['rewards'] ?></span></li>
+                                                    <li class="winner">
+                                                        <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Recom_Challenge['id']; ?>">
+                                                            Winners
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
                                         </div>
+                                        <!-- Challenge buttons section end here -->
                                     </div>
-
-                                    <!-- Challenge content section end here -->
-
-                                    <!-- Challenge buttons section start here -->
-                                    <div class="challenge_cont_sec3 row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Recom_Challenge['rewards'] ?></span></li>
-                                                <li class="winner">
-                                                    <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Recom_Challenge['id']; ?>">
-                                                        Winners
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Recom_Challenge['id'])) ?>" class="pstbtn">Accept</a>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-                                    </div>
-                                    <!-- Challenge buttons section end here -->
                                 </div>
+                                <!-- Challenge each section end here -->
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
+                                <p> No Recommended Challenge.</p>
                             </div>
-                            <!-- Challenge each section end here -->
                             <?php
                         }
-                    } else {
                         ?>
-                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
-                            <p> No Recommended Challenge.</p>
-                        </div>
-                        <?php
-                    }
+                    </div>
+                    <!-- Challenge row section end here -->
+                    <?php
+                } else {
                     ?>
-                </div>
-                <!-- Challenge row section end here -->
+                    <div class='alert alert-info text-center'>
+                        No Challenge available.
+                    </div>
+                    <?php
+                }
+                ?>
+
             </div>
         </div>
     </div>

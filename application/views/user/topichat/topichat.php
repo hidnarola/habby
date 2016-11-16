@@ -112,7 +112,7 @@
                     }
                     else {
                         ?>
-                        <div class="">
+                        <div class="alert alert-info text-center">
                             <?php echo lang('No Topichat found.'); ?>
                         </div>
                         <?php

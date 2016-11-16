@@ -74,7 +74,6 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $servername = $_SERVER['SERVER_NAME'];
- $servername = "";
 if ($servername == 'habby') {
     $db['default'] = array(
 	'dsn'	=> '',

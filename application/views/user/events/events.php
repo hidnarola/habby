@@ -48,7 +48,7 @@
                         $this->load->view('user/partial/events/display_events');
                     } else {
                         ?>
-                        <div class="">
+                        <div class="alert alert-info text-center">
                             <?php echo lang('No Events found.'); ?>
                         </div>
                         <?php
