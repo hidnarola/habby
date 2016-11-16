@@ -49,13 +49,15 @@
                                     <?php
                                     if ($post['media_type'] == "image") {
                                         ?>
-                                        <a class="fancybox" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1">
+                                        <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $post['media'] ?>" data-type="image" >
+                                            <!--class="fancybox" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" class="img-responsive center-block ">
                                         </a>
                                         <?php
                                     } else if ($post['media_type'] == "video") {
                                         ?>
-                                        <a class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1">
+                                        <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $post['media'] ?>" data-type="video" >
+                                            <!--class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH ; ?>" data-fancybox-group="gallerytopichat1"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
                                         </a>
                                         <?php
