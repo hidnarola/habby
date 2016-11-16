@@ -1,4 +1,4 @@
-<?php // pr($event,1)                     ?>
+<?php // pr($event,1)                        ?>
 <div class="row cont_top_1">
     <section class="event-page">
         <div class="row event-top-section">
@@ -403,41 +403,41 @@
                                 <textarea class="form-control" name="details" placeholder="<?php echo lang("Events details and who you are looking for"); ?>"><?php echo $event['details']; ?></textarea>
                             </div>
                         </div>
-                        
+
                         <div class="panel-body">
                             <div class="panel-heading">
                                 Existing media
                             </div>
                             <div class="">
                                 <?php
-                                    if(count($event_media) > 0)
-                                    {
-                                        foreach ($event_media as $media) {
-                                            if($media['media_type'] == "image")
-                                            {
-                                                ?>
-                                                <div class="col-md-4 col-sm-6 col-xs-12 media_wrapper">
-                                                    <img src="<?php // echo DEFAUL ?>"
-                                                </div>
-                                                <?php
-                                            }
-                                            else if ($media['media_type'] == "video")
-                                            {
-                                                ?>
-                                                <?php
-                                            }
+                                if (count($event_media) > 0) {
+                                    foreach ($event_media as $media) {
+                                        if ($media['media_type'] == "image") {
+                                            ?>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 media_wrapper">
+                                                <img src="<?php echo DEFAULT_EVENT_MEDIA_PATH . '/' . $media['media']; ?>" style="max-width: 100%;"/>
+                                            </div>
+                                            <?php
+                                        } else if ($media['media_type'] == "video") {
+                                            ?>
+                                            <div class="col-md-4 col-sm-6 col-xs-12 media_wrapper">
+                                                <video controls class="img-responsive center-block myvideo" >
+                                                    <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $media['media']; ?>"></source>
+                                                    Seems like your browser doesn't support video tag.
+                                                </video>
+                                            </div>
+                                            <?php
                                         }
                                     }
-                                    else
-                                    {
-                                        ?>
-                                        No media added
-                                        <?php
-                                    }
+                                } else {
+                                    ?>
+                                    No media added
+                                    <?php
+                                }
                                 ?>
                             </div>
                         </div>
-                        
+
                         <!-- Upload images or video section start here -->
                         <div class="panel-body">
                             <div class="message alert alert-danger" style="display:none"></div>
@@ -455,7 +455,6 @@
 
                             </div>
                             <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
-
                             </div>
                         </div>
                         <!-- Upload images or video section end here -->
@@ -592,5 +591,44 @@
         locale: 'en',
         useCurrent: false,
         format: 'YYYY-MM-DD HH:mm:SS'
+    });
+    
+    // Image uploading script
+    $("#edit_event").on("change","#uploadFile", function ()
+    {
+        $('.message').html();
+        $('.image_wrapper').html('');
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            $('.message').html("No file selected.");
+            $('.message').show();
+            return; // no file selected, or no FileReader support
+        }
+        var i = 0;
+        for (var key in files)
+        {
+            if (key != "length" && key != "item")
+            {
+                if (/^image/.test(files[key].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
+
+                    reader.onloadend = function () { // set image data as background of div
+                        // $('#imagePreview').addClass('imagePreview');
+                        $('.message').hide();
+                        $('.image_wrapper').show();
+                        $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                        $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                        ++i;
+                    }
+                }
+                else
+                {
+                    this.files = '';
+                    $('.message').html("Please select proper image");
+                    $('.message').show();
+                }
+            }
+        }
     });
 </script>

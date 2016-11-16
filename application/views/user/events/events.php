@@ -10,7 +10,6 @@
         <a href="#" data-toggle="modal" data-target="#new_event"><?php echo lang('New'); ?> <br><?php echo lang('Event'); ?></a>
         <!-- New Group button end-->
     </div>
-
 </div>
 <!-- Topicaht Post and bannner section end here -->
 
