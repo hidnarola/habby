@@ -752,6 +752,7 @@ img.img-circle.img-responsive.topichat_user {
 }
 
 .load_more_event_image:nth-child(2n+1){
+    /*// I changed this*/
     clear:both;
 }
 
