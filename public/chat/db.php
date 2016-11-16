@@ -84,7 +84,7 @@ function get_topichat_users($group_id) {
 function send_topic_msg($group_id, $sender_id, $msg) {
     echo "in message function";
     global $conn;
-    $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,'".date('Y-m-d H:i:s')."')";
+    $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     
     if (mysqli_query($conn, $query)) {
         echo "record inserted";
