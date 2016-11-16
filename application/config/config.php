@@ -25,12 +25,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   |
  */
 
-$servername = $_SERVER['SERVER_NAME'];
 if ($servername == 'habby') {
     $config['base_url'] = 'http://habby';
-} else {
+} else if ($servername == "clientapp.narola.online") {
     $config['base_url'] = "http://clientapp.narola.online/HD/habby";
+} else {
+    $config['base_url'] = "http://35.163.171.67";
 }
+
 
 /*
   |--------------------------------------------------------------------------
