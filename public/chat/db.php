@@ -1,4 +1,5 @@
 <?php
+print_r($_SERVER);
 $servername = $_SERVER['SERVER_NAME'];
 // Connection settings
 if ($servername == 'habby') {
