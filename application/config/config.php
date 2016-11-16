@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-
+$servername = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'';
 if ($servername == 'habby') {
     $config['base_url'] = 'http://habby';
 } else if ($servername == "clientapp.narola.online") {

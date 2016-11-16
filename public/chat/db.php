@@ -1,5 +1,5 @@
 <?php
-$servername = $_SERVER['SERVER_NAME'];
+$servername = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'';
 // Connection settings
 if ($servername == 'habby') {
     $conn = mysqli_connect("192.168.1.201", "habby", "6735C63zY35gOwF", "habby");

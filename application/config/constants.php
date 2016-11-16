@@ -85,8 +85,7 @@ defined('EXIT_DATABASE') OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN') OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX') OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-$servername = $_SERVER['SERVER_NAME'];
-
+$servername = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'';
 if ($servername == 'habby') {
     defined('Asset_path') OR define('Asset_path', 'http://habby/');
     defined("ROOT_PATH") OR define("ROOT_PATH","c:/wamp/www/habby/");
