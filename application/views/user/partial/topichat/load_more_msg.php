@@ -33,7 +33,7 @@ foreach ($messages as $message) {
                             </button>
                         </div>
 
-                        <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg'></span>
+                        <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="image"></span>
                     </div>
                 </div>
                 <?php
@@ -56,7 +56,7 @@ foreach ($messages as $message) {
                                 ?>" class="rank_img_sec"/>
                             </button>
                         </div>
-                        <span class='imagePreview' id='imagePreview_msg'>
+                        <span class='imagePreview' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="video">
                             <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:180px;"></video>
                         </span>
                     </div>
@@ -81,7 +81,9 @@ foreach ($messages as $message) {
                                 ?>" class="rank_img_sec"/>
                             </button>
                         </div>
-                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'></span><a href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
+                        <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'>
+                        </span>
+                        <a href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>"><span class="filename"><?php echo $message['media'] ?></span></a>
                     </div>
                 </div>
                 <?php
@@ -148,7 +150,7 @@ foreach ($messages as $message) {
                     <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'> 
                     <div class="wdth_span media_wrapper img_media_wrapper">
 
-                        <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg'></span>
+                        <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="image"></span>
                         <div id="field" class="topichat_media_rank">
                             <button type="button" id="add" class="add add_btn smlr_btn">
                                 <img src="<?php
@@ -173,7 +175,7 @@ foreach ($messages as $message) {
                     <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'> 
                     <div class="media_wrapper" style="float: left">
 
-                        <span class='imagePreview' id='imagePreview_msg'>
+                        <span class='imagePreview' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="video">
                             <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:180px;"></video>
                         </span>
                         <div id="field" class="topichat_media_rank">
