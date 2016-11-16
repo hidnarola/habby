@@ -29,6 +29,14 @@
                                         <?php
                                     }
                                 }
+                                else
+                                {
+                                    ?>
+                                    <div class="col-sm-12 alert alert-info">
+                                        No Challenge notification available.
+                                    </div>
+                                    <?php
+                                }
                                 ?>
                             </div>
                         </div>
@@ -58,8 +66,8 @@
                                     }
                                 } else {
                                     ?>
-                                    <div class = "row chalng_tblrow">
-                                        <p> No Finished Challenge.</p>
+                                    <div class = "alert alert-info text-center">
+                                        No Finished Challenge.
                                     </div>
                                     <?php
                                 }
@@ -104,8 +112,8 @@
                                 }
                             } else {
                                 ?>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <p> No Challenges.</p>
+                                <div class="col-sm-12 alert alert-info">
+                                    You haven't created your challenge.
                                 </div>
                                 <?php
                             }
@@ -136,8 +144,8 @@
                                 }
                             } else {
                                 ?>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <p> No Challenges.</p>
+                                <div class="col-sm-12 alert alert-info">
+                                    You havan't joined any challenge.
                                 </div>
                                 <?php
                             }

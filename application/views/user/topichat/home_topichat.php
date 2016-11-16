@@ -70,11 +70,11 @@
                                     }
                                 } else {
                                     ?>
-
-                                    <div class="alert alert-info text-center">
-                                        <?php echo lang('No Groups.'); ?>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="alert alert-info text-center">
+                                            <?php echo lang('No Groups.'); ?>
+                                        </div>
                                     </div>
-
                                     <?php
                                 }
                                 ?>
@@ -104,11 +104,11 @@
                                     }
                                 } else {
                                     ?>
-
-                                    <div class="alert alert-info text-center">
-                                        <?php echo lang('No Groups.'); ?>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="alert alert-info text-center">
+                                            <?php echo lang('No Groups.'); ?>
+                                        </div>
                                     </div>
-
                                     <?php
                                 }
                                 ?>
