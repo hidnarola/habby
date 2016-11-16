@@ -746,6 +746,20 @@ img.img-circle.img-responsive.topichat_user {
     margin-right: 10px;
 }
 
+.load_more_event_image
+{
+    padding-bottom:10px;
+}
+
+.load_more_event_image:nth-child(2n+1){
+    clear:both;
+}
+
+#load_more_modal .modal-body{
+    height: 400px;
+    overflow: auto;
+}
+
 @media(min-width:1583px){
     .row.event_container
     {
