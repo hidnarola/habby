@@ -43,6 +43,7 @@
 <![endif]-->
         <script>
             var base_url = '<?php echo base_url(); ?>';
+            var socket_server = '<?php echo WS_SOCKET_SERVER ?>'
         </script>
     </head>
     <body class="cbp-spmenu-push">
