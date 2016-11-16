@@ -265,9 +265,6 @@ $Server->bind('open', 'wsOnOpen');
 $Server->bind('close', 'wsOnClose');
 // for other computers to connect, you will probably need to change this to your LAN IP or external IP,
 // alternatively use: gethostbyaddr(gethostbyname($_SERVER['SERVER_NAME']))
-print_r($_SERVER);
-die;
-echo (isset($_SERVER['SERVER_NAME']) && ($_SERVER['SERVER_NAME'] == "habby" || $_SERVER['SERVER_NAME'] == "clientapp.narola.online" )) ? '192.168.1.143' : '172.31.47.209';
-exit;
-$Server->wsStartServer((isset($_SERVER['SERVER_NAME']) && ($_SERVER['SERVER_NAME'] == "habby" || $_SERVER['SERVER_NAME'] == "clientapp.narola.online" )) ? '192.168.1.143' : '172.31.47.209', 9300);
+
+$Server->wsStartServer('192.168.1.143', 9300);
 ?>
