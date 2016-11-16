@@ -85,14 +85,18 @@ defined('EXIT_DATABASE') OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN') OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX') OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-$servername = $_SERVER['SERVER_NAME'];
-
+$servername = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'';
 if ($servername == 'habby') {
     defined('Asset_path') OR define('Asset_path', 'http://habby/');
     defined("ROOT_PATH") OR define("ROOT_PATH","c:/wamp/www/habby/");
-} else {
+} else if($servername == "clientapp.narola.online") {
     defined('Asset_path') OR define('Asset_path', 'http://clientapp.narola.online/HD/habby/');
     defined("ROOT_PATH") OR define("ROOT_PATH","D:/wamp/www/HD/habby/");
+}
+else
+{
+    defined('Asset_path') OR define('Asset_path', 'http://35.163.171.67/');
+    defined("ROOT_PATH") OR define("ROOT_PATH","/var/www/html/");
 }
 
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code
