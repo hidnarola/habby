@@ -11,8 +11,7 @@ function send(text) {
 }
 
 $(document).ready(function () {
-    Server = new FancyWebSocket('ws://192.168.1.186:9300');
-//    Server = new FancyWebSocket('ws://127.0.0.1:9300');
+    Server = new FancyWebSocket(socket_server);
     // Send message to server
     $('#message_div').keypress(function (e) {
         if (e.keyCode == 13) {

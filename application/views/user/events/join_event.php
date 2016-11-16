@@ -1,4 +1,4 @@
-<?php // pr($event,1)                         ?>
+<?php // pr($event,1)                          ?>
 <div class="row cont_top_1">
     <section class="event-page">
         <div class="row event-top-section">
@@ -141,7 +141,7 @@
                                             <?php
                                             if (count($recent_videos_thumb) >= 3) {
                                                 ?>
-                                                <span class="load_more_image pull-right">More</span>
+                                                <span class="load_more_video pull-right">More</span>
                                                 <?php
                                             }
                                             ?>
@@ -173,7 +173,7 @@
                                             <?php
                                             if (count($recent_shared_files) >= 3) {
                                                 ?>
-                                                <span class="load_more_image pull-right">More</span>
+                                                <span class="load_more_file pull-right">More</span>
                                                 <?php
                                             }
                                             ?>
@@ -537,10 +537,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">More Images</h4>
             </div>
             <div class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -649,5 +649,15 @@
                 }
             }
         }
+    });
+
+    $('.load_more_image').click(function () {
+        $('#load_more_modal').modal('show');
+        $.ajax({
+            url: base_url + '/events/load_more_images/' + group_id,
+            success: function (str) {
+                $('#load_more_modal').find('.modal-body').html(str);
+            }
+        });
     });
 </script>

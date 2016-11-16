@@ -319,4 +319,8 @@ class Events extends CI_Controller {
         }
     }
 
+    public function load_more_images($event_id){
+        $data['images'] = $this->Event_model->get_event_recent_images($event_id,-1);
+        $this->load->view('user/partial/events/load_more_images',$data);
+    }
 }
