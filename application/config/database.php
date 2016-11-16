@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.1.201',
-	'username' => 'habby',
-	'password' => '6735C63zY35gOwF',
+	'hostname' => 'habby-go.c2k2g1789ryk.us-west-2.rds.amazonaws.com:3306',
+	'username' => 'habby_go',
+	'password' => 'df098gdf790gdf7890gdf8g',
 	'database' => 'habby',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
