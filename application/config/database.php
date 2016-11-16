@@ -73,7 +73,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-$db['default'] = array(
+$servername = $_SERVER['SERVER_NAME'];
+if ($servername == 'habby') {
+    $db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => '192.168.1.201',
+	'username' => 'habby',
+	'password' => '6735C63zY35gOwF',
+	'database' => 'habby',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+} else {
+    $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'habby-go.c2k2g1789ryk.us-west-2.rds.amazonaws.com:3306',
 	'username' => 'habby_go',
@@ -94,3 +118,6 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+}
+
+
