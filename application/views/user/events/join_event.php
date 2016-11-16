@@ -1,4 +1,4 @@
-<?php // pr($event,1)                        ?>
+<?php // pr($event,1)                         ?>
 <div class="row cont_top_1">
     <section class="event-page">
         <div class="row event-top-section">
@@ -530,6 +530,25 @@
     </div>
 </div>
 
+<!-- Load more popup -->
+<div id="load_more_modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Global variable for join_topichat.js -->
 <script>
     data = '<?php echo json_encode($this->session->user); ?>';
@@ -592,9 +611,9 @@
         useCurrent: false,
         format: 'YYYY-MM-DD HH:mm:SS'
     });
-    
+
     // Image uploading script
-    $("#edit_event").on("change","#uploadFile", function ()
+    $("#edit_event").on("change", "#uploadFile", function ()
     {
         $('.message').html();
         $('.image_wrapper').html('');

@@ -89,14 +89,17 @@ $servername = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'';
 if ($servername == 'habby') {
     defined('Asset_path') OR define('Asset_path', 'http://habby/');
     defined("ROOT_PATH") OR define("ROOT_PATH","c:/wamp/www/habby/");
+    defined("WS_SOCKET_SERVER") OR define("WS_SOCKET_SERVER","ws://192.168.1.143:9300");
 } else if($servername == "clientapp.narola.online") {
     defined('Asset_path') OR define('Asset_path', 'http://clientapp.narola.online/HD/habby/');
     defined("ROOT_PATH") OR define("ROOT_PATH","D:/wamp/www/HD/habby/");
+    defined("WS_SOCKET_SERVER") OR define("WS_SOCKET_SERVER","ws://192.168.1.143:9300");
 }
 else
 {
     defined('Asset_path') OR define('Asset_path', 'http://35.163.171.67/');
     defined("ROOT_PATH") OR define("ROOT_PATH","/var/www/html/");
+    defined("WS_SOCKET_SERVER") OR define("WS_SOCKET_SERVER","ws://35.163.171.67:9300");
 }
 
 defined('DEFAULT_IMAGE_PATH') OR define('DEFAULT_IMAGE_PATH', Asset_path . 'public/front/img/'); // highest automatically-assigned error code

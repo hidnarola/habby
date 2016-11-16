@@ -248,7 +248,7 @@
                             }
                         } else {
                             ?>
-                            <div class="alert alert-danger text-center">
+                            <div class="alert alert-info text-center">
                                 No post available.
                             </div>
                             <?php
@@ -503,7 +503,7 @@
                             }
                         } else {
                             ?>
-                            <div class="alert alert-danger text-center">
+                            <div class="alert alert-info text-center">
                                 No saved post available.
                             </div>
                             <?php
