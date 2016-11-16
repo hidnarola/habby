@@ -95,7 +95,7 @@ if ($servername == 'habby') {
 }
 else
 {
-    defined('Asset_path') OR define('Asset_path', 'http://35.163.171.67');
+    defined('Asset_path') OR define('Asset_path', 'http://35.163.171.67/');
     defined("ROOT_PATH") OR define("ROOT_PATH","/var/www/html/");
 }
 
