@@ -38,7 +38,13 @@ $('document').ready(function () {
         });
     }
 
-    $('#emogis').popover({
+    $(document).find('#emogis').popover({
+        html: true,
+        content: function () {
+            return $("#popover-content").html();
+        }
+    });
+    $('#mediaModal').find('#emogis').popover({
         html: true,
         content: function () {
             return $("#popover-content").html();
@@ -248,6 +254,7 @@ $('document').ready(function () {
     $("#mediaModal").on("show.bs.modal", function (e) {
 //        e.preventDefault();
         //get data-id attribute of the clicked element
+        $('#emogis').popover('hide');
         var image = $(e.relatedTarget).data('image');
         var type = $(e.relatedTarget).data('type');
         $.ajax({

@@ -251,7 +251,7 @@
                     <!-- Chat area section end here -->
 
                     <!-- Type Chat section start here -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainchatarea">
                         <div class="topich_chat_typesec">
                             <!-- Smily icon and profile secton start here -->
                             <div class="row">
