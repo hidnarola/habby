@@ -725,12 +725,12 @@ img.file_icon {
     padding: 10px 30px 10px 10px;
 }
 .topichat_groups .topichat_txt2{
-  display: -webkit-box;
-  max-width: 400px;
-  height: 50px;
-  margin: 0 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    display: -webkit-box;
+    max-width: 400px;
+    height: 50px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .topchat_p {
     padding-top: 10px;
@@ -739,6 +739,11 @@ img.file_icon {
 .topichat_notes{
     height: 55px;
     overflow: auto;
+}
+
+img.img-circle.img-responsive.topichat_user {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 @media(min-width:1583px){

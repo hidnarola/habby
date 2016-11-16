@@ -555,6 +555,7 @@ class Topichat_model extends CI_Model {
             $this->db->select('tu.id,users.name as display_name,users.user_image');
             $this->db->join('users', 'users.id = tu.user_id');
             $this->db->where('tu.topic_id', $id);
+            $this->db->limit(10, 0);
             $res_data = $this->db->get('topic_group_user tu')->result_array();
             return $res_data;
         }

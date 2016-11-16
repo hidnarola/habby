@@ -451,11 +451,11 @@
                                 <div class="col-md-1 rank_button_modal">
                                     <div id="field" class="topichat_media_rank">
                                         <button type="button" id="add" class="add add_btn smlr_btn">
-                                            <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
+                                            <img src="<?php echo DEFAULT_IMAGE_PATH ?>challeng_arrow.png" class="rank_img_sec">
                                         </button>
                                         <span class="rank_rate">0</span>
                                         <button type="button" id="sub" class="sub smlr_btn">
-                                            <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
+                                            <img src="<?php echo DEFAULT_IMAGE_PATH ?>challeng_arrow.png" class="rank_img_sec">
                                         </button>
                                     </div>
                                 </div>
@@ -467,7 +467,8 @@
                     </div>
                     <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
-                            <img class="img-circle img-responsive event_user" src="http://habby/uploads/user_profile/542029f439260d721fbeb0ae9ad1a4d6.jpg">
+                            
+                            
                         </div>
                         <div class="row">
 

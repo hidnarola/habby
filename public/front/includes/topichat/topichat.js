@@ -256,12 +256,14 @@ $('document').ready(function () {
             async: false,
             data: 'image=' + image + "&type=" + type,
             success: function (data) {
-                console.log(data);
+//                console.log(data);
                 var data = JSON.parse(data);
                 var type = data.media_type;
                 var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;
                 var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
                 var media_details = data['media_content'];
+                var view = data['view'];
+                var users = data['users'];
                 $('.topichat_media_user').attr('src', DEFAULT_PROFILE_IMAGE_PATH + media_details.user_image);
                 $('.topichat_media_details').html(media_details.name + ' shared a ' + type);
                 var media = '<a class="post_images" href="javascript:;">'
@@ -272,6 +274,13 @@ $('document').ready(function () {
                 }
                 media += '</a>';
                 $('.topichat_media_popup').html(media);
+                var user = "";
+                users.forEach(function (data) {
+                    user += '<img class="img-circle img-responsive topichat_user" src="' + DEFAULT_PROFILE_IMAGE_PATH + data.user_image + '" title="' + data.display_name + '">';
+                });
+                $('.user_post_image_right').html(user);
+                $('.topichat_msg_sec_modal').html(view).animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+
                 return true;
             }
         });

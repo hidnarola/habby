@@ -92,13 +92,13 @@ function send_topic_msg($group_id, $sender_id, $msg) {
 function send_topic_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     if ($media_type == 'links') {
-        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL)";
+        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',".time().")";
         if (mysqli_query($conn, $query)) {
             return true;
         }
     } else {
         foreach ($msg as $media) {
-            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',".time().")";
             if (mysqli_query($conn, $query)) {
                 return true;
             }
