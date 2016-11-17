@@ -1,6 +1,7 @@
 <div class="row">
     <div class="container">
-        <a href="<?php echo $fb_login_url; ?>"><img src="<?php echo DEFAULT_IMAGE_PATH . "facebook-sign-in.png" ?>" style="height:80px;width:225px;float: right;" /></a>
+        
+<!--        <a href="<?php echo $fb_login_url; ?>"><img src="<?php echo DEFAULT_IMAGE_PATH . "facebook-sign-in.png" ?>" style="height:80px;width:225px;float: right;" /></a>-->
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-md-offset-3 col-sm-offset-2">
             <div class="signup_sec">
                 <h2 class="wlcm_habby"><?php echo lang('Welcome to Habby'); ?></h2>

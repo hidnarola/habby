@@ -70,6 +70,7 @@ class User extends CI_Controller {
      * develop by : HPA
      */
     public function forgot_password() {
+        $this->data['fb_login_url'] = $this->facebook->get_login_url();
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
 
         if ($this->form_validation->run() == FALSE) {
@@ -174,8 +175,7 @@ class User extends CI_Controller {
                     $media[] = $media_arr;
                 }
             }
-        } 
-        else if (!empty($_FILES['video-0']['name'])) {
+        } else if (!empty($_FILES['video-0']['name'])) {
             $filecount = count($_FILES['video-0']['name']);
             for ($i = 0; $i < $filecount; ++$i) {
                 $_FILES['video']['name'] = $_FILES['video-0']['name'][$i];
@@ -207,8 +207,7 @@ class User extends CI_Controller {
                     exec($cmd);
                 }
             }
-        } 
-        else if (!empty($_FILES['files-0']['name'])) {
+        } else if (!empty($_FILES['files-0']['name'])) {
             $filecount = count($_FILES['files-0']['name']);
             for ($i = 0; $i < $filecount; ++$i) {
                 $_FILES['files']['name'] = $_FILES['files-0']['name'][$i];
@@ -237,8 +236,7 @@ class User extends CI_Controller {
                     $media[] = $media_arr;
                 }
             }
-        } 
-        else {
+        } else {
             echo "601";
             die;
         }
@@ -266,7 +264,7 @@ class User extends CI_Controller {
         set_time_limit(0);
         readfile($file);
     }
-    
+
     /* v! Redirect Url for the login with facebook define in the application/config/config.php */
 
     public function facebook_callback() {
@@ -362,4 +360,5 @@ class User extends CI_Controller {
             return $img_name;
         }
     }
+
 }

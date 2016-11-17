@@ -167,7 +167,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];           ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];              ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -260,7 +260,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"> <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="cht_pfl_img"></a></span>	
+                                                    <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>	
                                                     <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
                                                     <span class="input-group-btn scl_mda_img">
                                                         <a href="https://www.google.co.in/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_img.jpg"></a>
@@ -441,7 +441,7 @@
             <div class="modal-body">
                 <div class="row">
 
-                    <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="usr_post_img usr_post_img_modal">
                             <img class="img-circle img-responsive topichat_media_user" src="">
                         </div>
@@ -461,7 +461,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-7 col-xs-12">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
 
 
@@ -479,37 +479,35 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="topich_chat_typesec topich_chat_typesec_modal">
                                     <!-- Smily icon and profile secton start here -->
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="topic_prfle_icon_sec topc_link_sharesec">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"> <a href="#"><img src="http://habby/public/front/img/pst_prfl_icon.png" class="cht_pfl_img"></a></span>	
-                                                            <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url"/>
-
-                                                            <span class="input-group-btn scl_mda_img">
-                                                                <a href="https://www.google.co.in/" target="_blank"><img src="http://habby/public/front/img/google_img.jpg"></a>
-                                                            </span>
-                                                            <span class="input-group-btn scl_mda_img">
-                                                                <a href="https://www.youtube.com/" target="_blank"><img src="http://habby/public/front/img/youtube_img.jpg"></a>
-                                                            </span>
-                                                            <span class="input-group-btn scl_mda_img">
-                                                                <a href="https://plus.google.com/" target="_blank"><img src="http://habby/public/front/img/google_plus_img.jpg"></a>
-                                                            </span>
-                                                            <span class="input-group-btn scl_mda_img">
-                                                                <a href="https://twitter.com/" target="_blank"><img src="http://habby/public/front/img/twitter_img.jpg"></a>
-                                                            </span>
-                                                            <span class="input-group-btn">
-                                                                <input class="chat_btn share_btn" type="submit" value="Share">
-                                                            </span>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--                                    <div class="row">
+                                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                                <div class="topic_prfle_icon_sec topc_link_sharesec">
+                                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-group">
+                                                                                                <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>	
+                                                                                                <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
+                                                                                                <span class="input-group-btn scl_mda_img">
+                                                                                                    <a href="https://www.google.co.in/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_img.jpg"></a>
+                                                                                                </span>
+                                                                                                <span class="input-group-btn scl_mda_img">
+                                                                                                    <a href="https://www.youtube.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>youtube_img.jpg"></a>
+                                                                                                </span>
+                                                                                                <span class="input-group-btn scl_mda_img">
+                                                                                                    <a href="https://plus.google.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_plus_img.jpg"></a>
+                                                                                                </span>
+                                                                                                <span class="input-group-btn scl_mda_img">
+                                                                                                    <a href="https://twitter.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>twitter_img.jpg"></a>
+                                                                                                </span>
+                                                                                                <span class="input-group-btn">
+                                                                                                    <input class="chat_btn share_btn" type="submit" value="<?php echo lang('Share'); ?>">
+                                                                                                </span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
                                     <!-- Smily icon and profile secton end here -->
 
                                     <!-- Type area start here -->
@@ -518,12 +516,13 @@
                                             <div class="topic_textarea">
                                                 <div class="form-group">
                                                     <div class="input-group">
+                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
                                                         <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
                                                         <input type="hidden" id="message" name="message" class="form-control">
                                                         <!--<span class="input-group-btn upld_icnpad">
                                                             <a href="#"><img src="http://habby/public/front/img/type_symbol1.png"></a>
                                                         </span>-->
-                                                        <span class="input-group-btn upld_icnpad">
+<!--                                                        <span class="input-group-btn upld_icnpad">
                                                             <div class="fileUpload up_img btn">
                                                                 <span><img title="Upload image" src="http://habby/public/front/img/type_symbol2.png"></span>
                                                                 <input type="file" name="uploadfile[]" class="upload" id="uploadFile">
@@ -540,7 +539,7 @@
                                                                 <span><img title="Upload file" src="http://habby/public/front/img/upload.png"></span>
                                                                 <input type="file" name="upload_files" class="upload" id="upload_files">
                                                             </div>
-                                                        </span>
+                                                        </span>-->
                                                         <span class="input-group-btn upld_icnpad">
                                                             <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="http://habby/public/front/img/type_symbol3.png"></a>
                                                         </span>

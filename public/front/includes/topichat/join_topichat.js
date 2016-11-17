@@ -50,7 +50,7 @@ function share_links(url) {
                 {
                     setTimeout(function () {
                         $.ajax({
-                            url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                            url: base_url + 'user/Topichat/get_chat_id_from_media_name',
                             method: 'post',
                             async: false,
                             data: 'media=' + preview,
@@ -58,7 +58,7 @@ function share_links(url) {
                                 $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                             }
                         });
-                    }, 2000);
+                    }, 3000);
                 }
                 url.val('');
                 url.prop('disabled', false);

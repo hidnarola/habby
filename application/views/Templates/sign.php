@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Philosopher:400,400i,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "narola.css" ?>"/>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -49,43 +50,34 @@
 
                                 <div class="login_frm">
                                     <form class="" role="form" method="post" action="<?php echo base_url() . "login" ?>">
-                                        <?php
-                                        $message = $this->session->flashdata('message');
-                                        if (!empty($message) && isset($message)) {
-                                            ($message['class'] != '') ? $message['class'] : '';
-                                            echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
-                                        }
 
-                                        $all_errors = validation_errors();
-                                        if (isset($all_errors) && !empty($all_errors)) {
-                                            echo '<div class="alert alert-danger">' . $all_errors . '</div>';
-                                        }
-                                        ?>
                                         <div class="form-group">
                                             <div class="col-sm-4 col-xs-12">
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="<?php echo lang('E-mail');?>" value="<?php echo set_value('email'); ?>">
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo set_value('email'); ?>">
                                             </div>
                                             <div class="col-sm-4 col-xs-12">
-                                                <input type="password" class="form-control" name="password" id="pwd" placeholder="<?php echo lang('Password');?>">
+                                                <input type="password" class="form-control" name="password" id="pwd" placeholder="<?php echo lang('Password'); ?>">
                                             </div>
                                             <div class="col-sm-2 col-xs-12">
-                                                <input type="submit" class="login_btn" value="<?php echo lang('Login');?>">
+                                                <input type="submit" class="login_btn" value="<?php echo lang('Login'); ?>">
+
                                             </div>
+
                                             <div class="col-sm-2 col-xs-12">
-                                                    <div class="lang_sec lang-change">
-                                        <select class="selectpicker" data-style="btn-info">
-                                            <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
-                                            <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
-                                            <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
-                                        </select>
-                                    </div>
+                                                <div class="lang_sec lang-change">
+                                                    <select class="selectpicker" data-style="btn-info">
+                                                        <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
+                                                        <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
+                                                        <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-5 col-xs-12">
                                                 <div class="checkbox logincheck">
                                                     <label class="keep_lgin">
-                                                        <input type="checkbox" name="remember_me" value="1" > <?php echo lang('Keep me logged in');?>
+                                                        <input type="checkbox" name="remember_me" value="1" > <?php echo lang('Keep me logged in'); ?>
                                                     </label>
                                                 </div>
                                             </div>
@@ -93,10 +85,19 @@
                                                 <label class="forgt_lnk">
                                                     <a href="<?php echo base_url() . "user/forgot_password" ?>"><?php echo lang("I've forgotten my password"); ?> </a>
                                                 </label>
+
+                                            </div>
+                                            <div class="col-sm-5 col-xs-12">
+                                                <div class="social">
+                                                    <ul>
+                                                        <li><a href="<?php echo $fb_login_url; ?>"><img src="<?php echo DEFAULT_IMAGE_PATH . "facebook.png" ?>" /></a></li>
+                                                        <li><a href="javascript:void(0)"><img src="<?php echo DEFAULT_IMAGE_PATH . "google_plus.png" ?>" /></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
-                                
+
                                 </div>
                             </div>
                         </div>
@@ -112,6 +113,21 @@
 
         <!--Content Start-->
         <div class="container-fluid">
+            <div class="alert-msg">
+                <?php
+                $message = $this->session->flashdata('message');
+                if (!empty($message) && isset($message)) {
+                    ($message['class'] != '') ? $message['class'] : '';
+                    echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+                }
+
+                $all_errors = validation_errors();
+                if (isset($all_errors) && !empty($all_errors)) {
+                    echo '<div class="alert alert-danger">' . $all_errors . '</div>';
+                }
+                ?>
+            </div>
+
             <?php
             if (isset($body) && !empty($body)) {
                 echo $body;
