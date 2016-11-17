@@ -343,13 +343,40 @@ class Events extends CI_Controller {
     /*
      * 
      */
-    public function filter_event(){
-        if($this->input->post()){
-            $search_data = array(
-                'user_lat'=>$this->input->post('lat'),
-                'user_long'=>$this->input->post('long')
-            );
+    public function filter_event($page = 1){
+        $limit = 2;
+        $start = ($page - 1) * $limit;
+        if($page == 1)
+        {
+            if($this->input->post()){
+                $search_data = array(
+                    'user_lat'=>$this->input->post('lat'),
+                    'user_long'=>$this->input->post('long'),
+                    'release_date'=>$this->input->post('release_date'),
+                    'from_seat'=>$this->input->post('from_seat'),
+                    'to_seat'=>$this->input->post('to_seat'),
+                    'distance_range' => $this->input->post('distance_range'),
+                    'approval_needed'=>$this->input->post('approval_needed')
+                );
+                $this->session->set_flashdata('event_filter',$search_data);
+                $this->data['event_posts'] = $this->Event_model->filter_event($search_data,$this->session->user['id'],$limit,$start);
+                $this->template->load('front', 'user/events/events', $this->data);
+            }
+            else
+            {
+                redirect('/events');
+            }
+        }
+        else {
+            $this->data['event_posts'] = $this->Event_model->filter_event($this->session->flashdata('event_filter'),$this->session->user['id'],$limit,$start);
+            $data = array();
+            if (count($this->data['event_posts']) > 0) {
+                $data['view'] = $this->load->view('user/partial/events/display_events', $this->data, true);
+                $data['status'] = 1;
+            } else {
+                $data['status'] = 0;
+            }
+            echo json_encode($data);
         }
     }
-    
 }
