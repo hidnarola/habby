@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $servername = $_SERVER['SERVER_NAME'];
-if ($servername == 'habby') {
+if ($servername == 'habby' || $servername == 'clientapp.narola.online' ) {
     $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '192.168.1.201',

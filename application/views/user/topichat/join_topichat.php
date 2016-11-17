@@ -57,7 +57,7 @@
                                     } else if ($post['media_type'] == "video") {
                                         ?>
                                         <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $post['media'] ?>" data-type="video" >
-                                            <!--class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH ; ?>" data-fancybox-group="gallerytopichat1"-->
+                                            <!--class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>" data-fancybox-group="gallerytopichat1"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
                                         </a>
                                         <?php
@@ -167,7 +167,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];         ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];           ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -446,31 +446,25 @@
                             <img class="img-circle img-responsive topichat_media_user" src="">
                         </div>
                         <div class="topichat_media_details">
-                                 
+
                         </div>
-                        <div class="event_media event_media_modal">
-                            <div class="row">
+                        <div class="event_media event_media_modal topichat_msg_sec">
+                            <div class="row topichat_media_post topichat_media_post_modal" data-chat_id="123">
                                 <div class="col-md-1 rank_button_modal">
-                                    <div id="field" class="topichat_media_rank">
-                                        <button type="button" id="add" class="add add_btn smlr_btn">
-                                            <img src="<?php echo DEFAULT_IMAGE_PATH ?>challeng_arrow.png" class="rank_img_sec">
-                                        </button>
-                                        <span class="rank_rate">0</span>
-                                        <button type="button" id="sub" class="sub smlr_btn">
-                                            <img src="<?php echo DEFAULT_IMAGE_PATH ?>challeng_arrow.png" class="rank_img_sec">
-                                        </button>
+                                    <div id="field" class="topichat_media_rank topichat_media_rank_modal">
+
                                     </div>
                                 </div>
                                 <div class="col-md-11 topichat_media_popup">
-                                    
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
-                            
-                            
+
+
                         </div>
                         <div class="row">
 

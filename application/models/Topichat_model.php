@@ -538,7 +538,11 @@ class Topichat_model extends CI_Model {
     }
 
     public function get_media_details($id, $type) {
-        $this->db->select('tc.id,tc.media,tc.topic_group_id,u.name,u.user_image');
+        $logged_in_user = logged_in_user_id();
+        $this->db->select('tc.id,tc.media,tc.topic_group_id,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+        $this->db->join('topic_group_chat_rank trp', 'tc.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
+        $this->db->join('topic_group_chat_rank trn', 'tc.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
+        $this->db->join('topic_group_chat_rank tru', 'tc.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->join('users u', 'u.id = tc.user_id');
         $this->db->where('media_type', $type);
         $this->db->where('tc.media', $id);

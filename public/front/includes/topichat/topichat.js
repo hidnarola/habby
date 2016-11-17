@@ -55,7 +55,6 @@ $('document').ready(function () {
     $('.topichat_msg_sec').on('click', '.add', function () {
         var t = $(this);
         var chat_id = t.parents('.topichat_media_post').data('chat_id');
-        console.log(chat_id);
         $.ajax({
             url: base_url + 'user/topichat/add_rank_to_chat_post/' + chat_id,
             success: function (str) {
@@ -268,6 +267,7 @@ $('document').ready(function () {
                 var type = data.media_type;
                 var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;
                 var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
+                var DEFAULT_IMAGE_PATH = data.DEFAULT_IMAGE_PATH;
                 var media_details = data['media_content'];
                 var view = data['view'];
                 var users = data['users'];
@@ -281,13 +281,20 @@ $('document').ready(function () {
                 }
                 media += '</a>';
                 $('.topichat_media_popup').html(media);
+                console.log(media_details.id);
+                console.log($('.topichat_media_post_modal').data('chat_id'));
+
+                $('.topichat_media_post_modal').data('chat_id', media_details.id);
+                var rank_image = (media_details.is_ranked == 1 && media_details.rank == 1) ? DEFAULT_IMAGE_PATH + "challeng_arrow_ranked.png" : DEFAULT_IMAGE_PATH + "challeng_arrow.png";
+                var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
+                var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
+                $('.topichat_media_rank_modal').html(rank);
                 var user = "";
                 users.forEach(function (data) {
                     user += '<img class="img-circle img-responsive topichat_user" src="' + DEFAULT_PROFILE_IMAGE_PATH + data.user_image + '" title="' + data.display_name + '">';
                 });
                 $('.user_post_image_right').html(user);
                 $('.topichat_msg_sec_modal').html(view).animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-
                 return true;
             }
         });

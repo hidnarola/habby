@@ -443,6 +443,7 @@ class Topichat extends CI_Controller {
             $media = $this->input->post('image');
             $type = $this->input->post('type');
             $this->data['media_type'] = $type;
+            $this->data['DEFAULT_IMAGE_PATH'] = DEFAULT_IMAGE_PATH;
             $this->data['DEFAULT_PROFILE_IMAGE_PATH'] = DEFAULT_PROFILE_IMAGE_PATH;
             $this->data['DEFAULT_CHAT_IMAGE_PATH'] = DEFAULT_CHAT_IMAGE_PATH;
             $this->data['media_content'] = $this->Topichat_model->get_media_details($media, $type);

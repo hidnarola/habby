@@ -1,7 +1,9 @@
 <?php
-$conn = mysqli_connect("habby-go.c2k2g1789ryk.us-west-2.rds.amazonaws.com", "habby_go", "df098gdf790gdf7890gdf8g", "habby");
+
+$conn = mysqli_connect("192.168.1.201", "habby", "6735C63zY35gOwF", "habby");
 mysqli_set_charset($conn, "utf8");
 
+//    $conn = mysqli_connect("habby-go.c2k2g1789ryk.us-west-2.rds.amazonaws.com", "habby_go", "df098gdf790gdf7890gdf8g", "habby");
 function select($query) {
     global $conn;
     $result = mysqli_query($conn, $query);
@@ -39,7 +41,7 @@ function get_league_users($group_id) {
 
 function send_league_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into league_messages value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+    $query = "insert into league_messages value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
@@ -49,7 +51,7 @@ function send_league_msg($group_id, $sender_id, $msg) {
 function send_league_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into league_messages value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        $query = "insert into league_messages value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -57,7 +59,6 @@ function send_league_media($group_id, $sender_id, $msg, $media_type) {
 }
 
 function get_topichat_users($group_id) {
-    echo "called";
     global $conn;
     $result = mysqli_query($conn, "select user_id from topic_group_user where topic_id = $group_id");
 
@@ -74,29 +75,25 @@ function get_topichat_users($group_id) {
 }
 
 function send_topic_msg($group_id, $sender_id, $msg) {
-    echo "in message function";
     global $conn;
-    $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+    $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
 
     if (mysqli_query($conn, $query)) {
-        echo "record inserted";
         return true;
     }
-    echo mysqli_error($conn);
-    echo "return false";
     return false;
 }
 
 function send_topic_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     if ($media_type == 'links') {
-        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
     } else {
         foreach ($msg as $media) {
-            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
             if (mysqli_query($conn, $query)) {
                 return true;
             }
@@ -106,7 +103,7 @@ function send_topic_media($group_id, $sender_id, $msg, $media_type) {
 
 function send_soulmate_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+    $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
@@ -116,7 +113,7 @@ function send_soulmate_msg($group_id, $sender_id, $msg) {
 function send_soulmate_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        $query = "insert into soulmate_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -140,7 +137,7 @@ function get_groupplan_users($group_id) {
 
 function send_groupplan_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . mysqli_real_escape_string($conn, $msg) . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+    $query = "insert into group_chat value(NULL,$group_id,$sender_id,'" . mysqli_real_escape_string($conn, $msg) . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
@@ -150,7 +147,7 @@ function send_groupplan_msg($group_id, $sender_id, $msg) {
 function send_groupplan_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        $query = "insert into group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -174,7 +171,7 @@ function get_challenge_users($group_id) {
 
 function send_challenge_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+    $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
@@ -184,7 +181,7 @@ function send_challenge_msg($group_id, $sender_id, $msg) {
 function send_challenge_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        $query = "insert into challange_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -207,7 +204,7 @@ function get_event_users($group_id) {
 
 function send_event_msg($group_id, $sender_id, $msg) {
     global $conn;
-    $query = "insert into event_chat value(NULL,$group_id,$sender_id,'" . mysqli_real_escape_string($conn, $msg) . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+    $query = "insert into event_chat value(NULL,$group_id,$sender_id,'" . mysqli_real_escape_string($conn, $msg) . "',NULL,NULL,NULL)";
     if (mysqli_query($conn, $query)) {
         return true;
     }
@@ -217,7 +214,7 @@ function send_event_msg($group_id, $sender_id, $msg) {
 function send_event_media($group_id, $sender_id, $msg, $media_type) {
     global $conn;
     foreach ($msg as $media) {
-        $query = "insert into event_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        $query = "insert into event_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL)";
         if (mysqli_query($conn, $query)) {
             return true;
         }
@@ -235,9 +232,9 @@ function send_topic_notification($group_id, $sender_id, $users_id, $notification
     }
     $sql = array();
     foreach ($users_id as $user_id) {
-        $sql[] = '("' . mysqli_real_escape_string($conn, $group_id) . '","' . mysqli_real_escape_string($conn, $user_id) . '","' . mysqli_real_escape_string($conn, $sender_id) . '","' . mysqli_real_escape_string($conn, $desc) . '","' . mysqli_real_escape_string($conn, $notification_type) . '","' . date('Y-m-d H:i:s') . '")';
+        $sql[] = '("' . mysqli_real_escape_string($conn, $group_id) . '","' . mysqli_real_escape_string($conn, $user_id) . '","' . mysqli_real_escape_string($conn, $sender_id) . '","' . mysqli_real_escape_string($conn, $desc) . '","' . mysqli_real_escape_string($conn, $notification_type) . '")';
     }
-    $query = "insert into topic_notification (topic_group_id,user_id,from_user_id,description,type,created_date) values " . implode(',', $sql);
+    $query = "insert into topic_notification (topic_group_id,user_id,from_user_id,description,type) values " . implode(',', $sql);
     if (mysqli_query($conn, $query)) {
         return true;
     }
