@@ -756,9 +756,42 @@ img.img-circle.img-responsive.topichat_user {
     clear:both;
 }
 
-#load_more_modal .modal-body{
-    height: 400px;
+.load_more_event_file
+{
+    padding-bottom:10px;
+}
+
+.load_more_event_file:nth-child(3n+1){
+    /*// I changed this*/
+    clear:both;
+}
+
+#load_more_image .modal-body{
+    height:100%;
+    max-height: 400px;
     overflow: auto;
+}
+
+#load_more_video .modal-body{
+    height:100%;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.filter_div_row{
+    display: flex;
+    padding-bottom:15px;
+}
+
+#load_more_file .modal-body{
+    height:100%;
+    max-height: 400px;
+    overflow: auto;
+}
+
+
+.cursor_hand{
+    cursor:pointer;
 }
 
 @media(min-width:1583px){

@@ -45,7 +45,9 @@ class Events extends CI_Controller {
                 'limit' => $this->input->post('limit'),
                 'release_distance_range' => $this->input->post('distance_range'),
                 'approval_needed' => ($this->input->post('approval') == "Yes") ? '1' : '0',
-                'user_id' => $this->session->user['id']
+                'user_id' => $this->session->user['id'],
+                'latitude'=>$this->input->post('lat'),
+                'longitude'=>$this->input->post('long')
             );
             if ($event_id = $this->Event_model->insert_event($ins_data)) {
                 // Join user event
@@ -323,4 +325,31 @@ class Events extends CI_Controller {
         $data['images'] = $this->Event_model->get_event_recent_images($event_id,-1);
         $this->load->view('user/partial/events/load_more_images',$data);
     }
+    
+    public function load_more_videos($event_id){
+        $data['videos'] = $this->Event_model->get_event_recent_videos($event_id,-1);
+        $data['recent_videos_thumb'] = array();
+        foreach ($data['videos'] as $video) {
+            $data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+        }
+        $this->load->view('user/partial/events/load_more_videos',$data);
+    }
+    
+    public function load_more_files($event_id){
+        $data['files'] = $this->Event_model->get_event_recent_files($event_id,-1);
+        $this->load->view('user/partial/events/load_more_files',$data);
+    }
+
+    /*
+     * 
+     */
+    public function filter_event(){
+        if($this->input->post()){
+            $search_data = array(
+                'user_lat'=>$this->input->post('lat'),
+                'user_long'=>$this->input->post('long')
+            );
+        }
+    }
+    
 }

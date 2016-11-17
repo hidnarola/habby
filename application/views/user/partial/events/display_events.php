@@ -51,7 +51,7 @@ foreach ($event_posts as $event) {
                 <?php
                     if ($event['is_joined']) {
                         ?>
-                        <a href='<?php echo base_url() . '/events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'>Enter</a>
+                        <a href='<?php echo base_url() . 'events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'>Enter</a>
                         <?php
                     } else if ($event['is_requested']) {
                         ?>

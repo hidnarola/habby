@@ -296,7 +296,10 @@ class Event_model extends CI_Model {
     {
         $this->db->select('media');
         $this->db->where('media_type','video');
-        $this->db->limit($limit);
+        if($limit > 0)
+        {
+            $this->db->limit($limit);
+        }
         $this->db->where('event_id',$event_id);
         $this->db->order_by('id','desc');
         return array_column($this->db->get('event_chat')->result_array(),'media');
@@ -309,7 +312,10 @@ class Event_model extends CI_Model {
     {
         $this->db->select('media');
         $this->db->where('media_type','files');
-        $this->db->limit($limit);
+        if($limit > 0)
+        {
+            $this->db->limit($limit);
+        }
         $this->db->where('event_id',$event_id);
         $this->db->order_by('id','desc');
         return array_column($this->db->get('event_chat')->result_array(),'media');

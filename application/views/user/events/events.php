@@ -17,7 +17,7 @@
 <div class="row filter_row">
     <div class="container">
         <div class="txt_white">
-            <?php echo lang('Filters'); ?>
+            <span class="cursor_hand" data-toggle="modal" data-target="#filterModal"><?php echo lang('Filters'); ?></span>
         </div>
     </div>
 </div>
@@ -190,12 +190,104 @@
                             <input type="submit" class="pstbtn" value="<?php echo lang('Create') ?>"/>
                         </div>
                     </div>
+                    <input type="hidden" name="lat" id="lat" value="">
+                    <input type="hidden" name="long" id="long" value="">
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Filter popup -->
+<div id="filterModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form method="post" action="<?php echo base_url() . "events/filter_event"; ?>">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Enter your searching criteria</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Filter By : </div>
+                        <div class="panel-body">
+                            <div class="filter_div_row">
+                                <label class="control-label col-sm-4" >Release Date:</label>
+                                <div class="col-sm-8">
+                                    <div>
+                                        <input type="radio" class="" name="release_date" value="new_first" checked> From Newest to Oldest
+                                    </div>
+                                    <div>
+                                        <input type="radio" class="" name="release_date" value="old_first"> From Oldest to Newest
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter_div_row">
+                                <label class="control-label col-sm-4" >Number of seat:</label>
+                                <div class="col-sm-8">
+                                    From <input type="number" class="form-control" style="width:30%;display:inline-block;" name="from_seat"> 
+                                    to <input type="number" class="form-control" style="width:30%;display:inline-block;" name="to_seat">
+                                </div>
+                            </div>
+                            <div class="filter_div_row">
+                                <label class="control-label col-sm-4" >Range Distance:</label>
+                                <div class="col-sm-8">
+                                    <select class='form-control' name="distance_range" required="true" style="width:30%;display:inline-block;">
+                                        <?php
+                                        for ($i = 1; $i <= 10; ++$i) {
+                                            ?>
+                                            <option value='<?php echo $i; ?>'><?php echo $i; ?> Mile</option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php echo lang("From current location"); ?>
+                                </div>
+                            </div>
+                            <div class="filter_div_row">
+                                <label class="control-label col-sm-4" >Approval needed:</label>
+                                <div class="col-sm-8">
+                                    <div>
+                                        <input type="radio" class="" name="approval_needed" value="yes"> Yes
+                                    </div>
+                                    <div>
+                                        <input type="radio" class="" name="approval_needed" value="no"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
 <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH ?>/moment.min.js"></script>
 <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH ?>/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo USER_JS; ?>event/event.js"></script>
 <script src="<?php echo DEFAULT_ADMIN_JS_PATH . "sweetalert.min.js"; ?>"></script>
+
+<!-- Get current latitude and longitude -->
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+        $('#lat').val(position.coords.latitude);
+        $('#long').val(position.coords.longitude);
+    }
+    getLocation();
+</script>
