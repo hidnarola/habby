@@ -97,7 +97,7 @@ if ($servername == 'habby') {
 }
 else
 {
-    defined('Asset_path') OR define('Asset_path', 'http://35.163.171.67/');
+    defined('Asset_path') OR define('Asset_path', 'http://www.habby-go.com/');
     defined("ROOT_PATH") OR define("ROOT_PATH","/var/www/html/");
     defined("WS_SOCKET_SERVER") OR define("WS_SOCKET_SERVER","ws://35.163.171.67:9300");
 }
