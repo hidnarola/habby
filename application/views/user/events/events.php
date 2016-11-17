@@ -121,7 +121,6 @@
 
                         </div>
                         <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
-
                         </div>
                     </div>
                     <!-- Upload images or video section end here -->
@@ -159,7 +158,7 @@
                             <input type="number" class="form-control" min="1" name="limit" required="true">
                         </div>
                     </div>
-                    <div class="form-group clearfix">
+<!--                    <div class="form-group clearfix">
                         <div class="col-md-3">
                             <label class="control-label"><?php echo lang("Post release distance range"); ?></label>
                         </div>
@@ -175,7 +174,7 @@
                             </select>
                             <label class="control-label"><?php echo lang("From current location"); ?></label>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group clearfix">
                         <div class="col-md-3">
                             <label class="control-label"><?php echo lang("Approval needed"); ?></label>
@@ -190,8 +189,8 @@
                             <input type="submit" class="pstbtn" value="<?php echo lang('Create') ?>"/>
                         </div>
                     </div>
-                    <input type="hidden" name="lat" id="lat" value="">
-                    <input type="hidden" name="long" id="long" value="">
+                    <input type="hidden" name="lat" class="lat" value="">
+                    <input type="hidden" name="long" class="long" value="">
                 </form>
             </div>
         </div>
@@ -201,7 +200,7 @@
 <!-- Filter popup -->
 <div id="filterModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
+        <?php $search_data = $this->session->flashdata('event_filter'); ?>
         <!-- Modal content-->
         <div class="modal-content">
             <form method="post" action="<?php echo base_url() . "events/filter_event"; ?>">
@@ -217,10 +216,10 @@
                                 <label class="control-label col-sm-4" >Release Date:</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="radio" class="" name="release_date" value="new_first" checked> From Newest to Oldest
+                                        <input type="radio" class="" name="release_date" value="desc" checked> From Newest to Oldest
                                     </div>
                                     <div>
-                                        <input type="radio" class="" name="release_date" value="old_first"> From Oldest to Newest
+                                        <input type="radio" class="" name="release_date" value="asc"> From Oldest to Newest
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +249,7 @@
                                 <label class="control-label col-sm-4" >Approval needed:</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="radio" class="" name="approval_needed" value="yes"> Yes
+                                        <input type="radio" class="" name="approval_needed" value="yes" checked=""> Yes
                                     </div>
                                     <div>
                                         <input type="radio" class="" name="approval_needed" value="no"> No
@@ -264,6 +263,8 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-default">Search</button>
                 </div>
+                <input type="hidden" name="lat" class="lat" value="">
+                <input type="hidden" name="long" class="long" value="">
             </form>
         </div>
 
@@ -286,8 +287,8 @@
     }
     function showPosition(position) {
         console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
-        $('#lat').val(position.coords.latitude);
-        $('#long').val(position.coords.longitude);
+        $('.lat').val(position.coords.latitude);
+        $('.long').val(position.coords.longitude);
     }
     getLocation();
 </script>

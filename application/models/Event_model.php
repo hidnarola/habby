@@ -336,6 +336,57 @@ class Event_model extends CI_Model {
     public function get_event_media_by_id($id){
         return $this->db->where('event_id',$id)->get('event_media')->result_array();
     }
+    
+    /*
+     * 
+     */
+    public function filter_event($search_arr,$logged_in_user,$limit,$start){
+        $this->db->select('e.*,u.name,u.user_image,count(distinct eu.id) as is_joined,count(distinct er.id) as is_requested, ( 3959 * acos( cos( radians('. $search_arr['user_lat'] .') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians('. $search_arr['user_long'] .') ) + sin( radians('. $search_arr['user_lat'] .') ) * sin( radians( latitude ) ) ) ) AS distance');
+        $this->db->from('events e');
+        $this->db->join('users u','e.user_id = u.id');
+        $this->db->join('event_users eu','eu.event_id = e.id and eu.user_id = '.$logged_in_user,'left');
+        $this->db->join('event_request er','er.event_id = e.id and er.user_id = '.$logged_in_user,'left');
+
+        if(!empty($search_arr['from_seat']) && !empty($search_arr['to_seat']))
+        {
+            $this->db->where('limit between '.$search_arr['from_seat'].' and '.$search_arr['to_seat']);
+        }
+        else if(!empty($search_arr['from_seat']))
+        {
+            $this->db->where('limit >= ',$search_arr['from_seat']);
+        }
+        else if(!empty($search_arr['to_seat']))
+        {
+            $this->db->where('limit <= ',$search_arr['to_seat']);
+        }
+        
+        if($search_arr['approval_needed'] == "yes")
+        {
+            $this->db->where('approval_needed','1');
+        }
+        else if($search_arr['approval_needed'] == "no")
+        {
+            $this->db->where('approval_needed','0');
+        }
+        
+        $this->db->order_by('e.start_time','desc');
+        $this->db->group_by('e.id');
+        $this->db->having('distance <= ',$search_arr['distance_range']);
+        $this->db->limit($limit,$start);
+        
+        $post = $this->db->get()->result_array();
+        $event_ids = array_column($post, 'id');
+        if(count($event_ids) > 0)
+        {
+            $this->db->where_in('event_id',$event_ids);
+            $media = $this->db->get('event_media')->result_array();
+            foreach ($media as $event_media) {
+                $post[array_search($event_media['event_id'],$event_ids)]['media'][] = $event_media;
+            }
+        }
+
+        return $post;
+    }
 }
 
 ?>
