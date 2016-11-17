@@ -28,10 +28,10 @@
         <script src="<?php echo DEFAULT_ADMIN_JS_PATH . "sweetalert.min.js"; ?>"></script>
         <script type="text/javascript" src="<?php echo USER_JS; ?>post/post.js"></script>
 
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw&callback=initMap">
-        </script>
+<!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw&callback=initMap">
+        </script>-->
     <div id="map" style="display:none"></div>
-    <script>
+<!--    <script>
         // Note: This example requires that you consent to location sharing when
         // prompted by your browser. If you see the error "The Geolocation service
         // failed.", it means you probably did not give permission for the browser to
@@ -69,7 +69,7 @@
                     'Error: The Geolocation service failed.' :
                     'Error: Your browser doesn\'t support geolocation.');
         }
-    </script>
+    </script>-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
