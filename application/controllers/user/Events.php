@@ -18,6 +18,10 @@ class Events extends CI_Controller {
     }
 
     public function index($page = 1) {
+        if($this->session->has_userdata('event_filter'))
+        {
+            $this->session->unset_userdata('event_filter');
+        }
         $limit = 2;
         $start = ($page - 1) * $limit;
         $this->data['event_posts'] = $this->Event_model->get_event_post($data = array(), $this->session->user['id'], $start, $limit);
@@ -367,7 +371,8 @@ class Events extends CI_Controller {
                 redirect('/events');
             }
         }
-        else {
+        else if($this->session->has_userdata('event_filter'))
+        {
             $this->data['event_posts'] = $this->Event_model->filter_event($this->session->flashdata('event_filter'),$this->session->user['id'],$limit,$start);
             $data = array();
             if (count($this->data['event_posts']) > 0) {
@@ -377,6 +382,10 @@ class Events extends CI_Controller {
                 $data['status'] = 0;
             }
             echo json_encode($data);
+        }
+        else
+        {
+            redirect('/events');
         }
     }
 }

@@ -66,8 +66,20 @@ $(function () {
 
     function loaddata()
     {
+        uri = window.location.href;
+        console.log(uri);
+        var url;
+        if(uri.indexOf('filter_event') > -1)
+        {
+            url = base_url + 'events/filter_event/'+page;
+        }
+        else
+        {
+            url = base_url + 'events/'+page;
+        }
+        
         $.ajax({
-            url: base_url + 'events/' + page,
+            url: url,
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
