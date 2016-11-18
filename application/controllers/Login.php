@@ -37,9 +37,6 @@ class Login extends CI_Controller {
             $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
             redirect('home');
         }
-        if ($this->session->userdata('language') == FALSE) {
-            $this->session->set_userdata('language', 'english');
-        }
         $this->data['fb_login_url'] = $this->facebook->get_login_url();
         $remember_me = get_cookie('Remember_me');
         /* 	If Remember_key Cookie exists in browser then it wil fetch data using it's value and 
@@ -188,13 +185,23 @@ class Login extends CI_Controller {
     public function change_lang() {
         if ($this->input->post()) {
             $lang = $this->input->post('lang');
+            $cookie = array(
+                'name' => 'language',
+                'expire' => '172800',
+                'domain' => isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : "",
+                'path' => '/'
+            );
             if ($lang == 'eng') {
                 $this->session->set_userdata('language', 'english');
+                $cookie['value'] = 'english';
             } else if ($lang == 'fr') {
                 $this->session->set_userdata('language', 'french');
+                $cookie['value'] = 'french';
             } else if ($lang == 'ru') {
                 $this->session->set_userdata('language', 'russian');
+                $cookie['value'] = 'russian';
             }
+            $this->input->set_cookie($cookie);
         }
     }
 

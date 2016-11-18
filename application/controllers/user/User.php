@@ -85,7 +85,6 @@ class User extends CI_Controller {
                 $ins_data = [
                     'forgot_token' => $token,
                 ];
-
                 $this->Users_model->update_user_data($user_id, $ins_data);
 
                 // ------------------------------------------------------------------------
@@ -105,11 +104,14 @@ class User extends CI_Controller {
                         ->subject('Change Password Request')
                         ->message($message);
 
-                $this->email->send();
-
                 // ------------------------------------------------------------------------
-                $this->session->set_flashdata('message', ['message' => lang('We have sent an email to you, please click on the link in your email to reset your password!!'), 'class' => 'alert alert-success']);
-                redirect('user/forgot_password');
+
+                if ($this->email->send()) {
+                    $this->session->set_flashdata('message', ['message' => lang('We have sent an email to you, please click on the link in your email to reset your password!!'), 'class' => 'alert alert-success']);
+                    redirect('user/forgot_password');
+                } else {
+                    echo $this->email->print_debugger();
+                }
             } else {
                 $this->session->set_flashdata('message', ['message' => lang('Incorrect Email Id.Please try again.'), 'class' => 'alert alert-danger']);
                 redirect('user/forgot_password');
@@ -123,6 +125,7 @@ class User extends CI_Controller {
      */
     public function reset_password($token = null) {
         //Token base 64 encode and decode
+        $this->data['fb_login_url'] = $this->facebook->get_login_url();
         $fetch_token_data = $this->Users_model->fetch_email_token(['forgot_token' => $token]);
         if (empty($fetch_token_data)) {
             $this->session->set_flashdata('message', ['message' => lang('Invalid Token'), 'class' => 'alert alert-danger']);

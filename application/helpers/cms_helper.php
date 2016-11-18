@@ -21,10 +21,10 @@ function mail_config() {
 
     $configs = array(
         'protocol' => 'smtp',
-        'smtp_host' => 'ssl://smtp.gmail.com',
+        'smtp_host' => 'ssl://smtp.googlemail.com',
         'smtp_port' => 465,
-        'smtp_user' => 'demo.narola@gmail.com',
-        'smtp_pass' => 'Ke6g7sE70Orq3Rqaqa',
+        'smtp_user' => 'hpa.narola@gmail.com',
+        'smtp_pass' => 'narola21',
         'transport' => 'Smtp',
         'charset' => 'utf-8',
         'newline' => "\r\n",
