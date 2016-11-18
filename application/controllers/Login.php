@@ -209,7 +209,7 @@ class Login extends CI_Controller {
      * 
      */
     public function google_login(){
-        $this->load->library('google');
+        $this->load->library('Googleplus');
         $d = $this->googleplus->client->createAuthUrl();
         redirect($d);
     }
@@ -218,6 +218,7 @@ class Login extends CI_Controller {
      * 
      */
     public function google_callback() {
+        echo "Callback called";
         try {
             $this->googleplus->client->setScopes(array('https://www.googleapis.com/auth/plus.profile.emails.read', 'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me'));
             if (isset($_GET['code'])) {
@@ -262,7 +263,7 @@ class Login extends CI_Controller {
                         if (!empty($me['birthday'])) {
                             $save_result['birthday'] = date('Y-m-d', strtotime($me['birthday']));
                         }
-
+                        var_dump($save_result);
 //                        $id = $this->db->insert('shopsy_users', $save_result);
 //                        if ($id) {
 //
