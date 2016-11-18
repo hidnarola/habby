@@ -121,7 +121,7 @@ class Login extends CI_Controller {
             redirect('home');
         }
         if ($this->input->post()) {
-            $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));     
+            $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail'), 'is_unique' => lang('Email is already exists')));
             $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|matches[re_password]', array('required' => lang('Please fill the field') . ' %s .', 'min_length' => lang('Please enter password min 6 letter'), 'matches' => lang('Please enter same password')));
             $this->form_validation->set_rules('re_password', lang('Repeat Password'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
@@ -208,17 +208,19 @@ class Login extends CI_Controller {
     /*
      * 
      */
-    public function google_login(){
+
+    public function google_login() {
         $this->load->library('Googleplus');
         $d = $this->googleplus->client->createAuthUrl();
         redirect($d);
     }
-    
+
     /*
      * 
      */
+
     public function google_callback() {
-        echo "Callback called";
+        $this->load->library('Googleplus');
         try {
             $this->googleplus->client->setScopes(array('https://www.googleapis.com/auth/plus.profile.emails.read', 'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me'));
             if (isset($_GET['code'])) {
@@ -232,57 +234,122 @@ class Login extends CI_Controller {
 
             if (isset($_SESSION['access_token']) && $this->googleplus->client->getAccessToken()) {
                 $me = $this->googleplus->plus->people->get('me');
-
                 if (!empty($me)) {
                     $email = $me["emails"][0]["value"];
-                    $result = $this->check_user(['email' => $email]);
-                    if (!empty($result)) {
-                        if (!empty($result['google']) && $result['loginUserType'] == 'google') {
+                    $email_exist = $this->is_email_exist($email);
 
-                            if ($result['status'] != 'Active') {
-                                $this->session->set_flashdata('error', 'Your Account is In-active');
+                    if ($email_exist) {
+                        // User alerady available
+                        $result = $this->fetch_user_by_email($email);
+                        if ($result['signup_type'] == '3') {
+                            if ($result['is_blocked']) {
+                                $this->session->set_flashdata('message', ['message' => 'Your Account is blocked', 'class' => 'alert alert-danger']);
+                                redirect('login');
+                            } else if ($result['is_deleted']) {
+                                $this->session->set_flashdata('message', ['message' => 'Your Account is deleted', 'class' => 'alert alert-danger']);
+                                redirect('login');
+                            } else if (!$result['is_active']) {
+                                $this->session->set_flashdata('message', ['message' => 'Your Account is inactive', 'class' => 'alert alert-danger']);
                                 redirect('login');
                             }
-                            $this->login_user($email);
+                            $this->google_user_login($email);
                         } else {
-                            $this->session->set_flashdata('error', 'Account with ' . $email . ' already exist and it\'s not belongs to Google!');
+                            $this->session->set_flashdata('message', ['message' => 'Account with ' . $email . ' already exist and it\'s not belongs to Google!', 'class' => 'alert alert-danger']);
                             redirect('login');
                         }
                     } else {
-                        $save_result = [
-                            'last_name' => $me["name"]["familyName"],
-                            'full_name' => $me["name"]["givenName"],// . ' ' . $me["name"]["familyName"],
-                            'email' => $email,
-                            'loginUserType' => 'google',
-                            'google' => $me['id'],
-                            'user_name' => $email,
-                            'is_verified' => 'Yes',
-                            'status' => 'Active'
-                        ];
-
-                        if (!empty($me['birthday'])) {
-                            $save_result['birthday'] = date('Y-m-d', strtotime($me['birthday']));
+                        // New user // need to register
+                        
+                        $profile_image = $this->fetch_google_image($me['image']['url']);
+                        
+                        $new_user = array(
+                            'name' => $me['displayName'],
+                            'role_id'=>2,
+                            'email'=>$me["emails"][0]["value"],
+                            'gender'=>$me['gender'],
+                            'bio'=>$me['skills'],
+                            'external_id' => $me['id'],
+                            'signup_type' => 3,
+                            'user_image' => $profile_image,
+                            'is_active' => 1
+                        );
+                        $last_user_id = $this->Users_model->insert_user_data($new_user);
+                        if($last_user_id != null)
+                        {
+                            $this->google_user_login($me["emails"][0]["value"]);
                         }
-                        var_dump($save_result);
-//                        $id = $this->db->insert('shopsy_users', $save_result);
-//                        if ($id) {
-//
-//                            $checkUser = $this->user_model->get_all_details(USERS, array('email' => $email));
-//                            $this->send_confirm_mail($checkUser);
-//                            $this->login_user($email);
-//                        }
+                        else
+                        {
+                            $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'],"There was problem to login with Google. Please try again!");
+                            redirect("/login");
+                        }
                     }
                 } else {
-                    $this->session->set_flashdata("error", "There was problem to login with Google Plus. Please try again!");
+                    $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'],"There was problem to login with Google. Please try again!");
                     redirect("/login");
                 }
             } else {
-                $this->session->set_flashdata("error", "There was problem to login with Google Plus. Please try again!");
+                $this->session->set_flashdata("message",['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
                 redirect("/login");
             }
         } catch (Exception $e) {
-            $this->session->set_flashdata("error", "There was problem to login with Google Plus. Please try again!");
+            $this->session->set_flashdata("message",['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
             redirect("/login");
         }
+    }
+
+    /*
+     * 
+     */
+
+    public function is_email_exist($email) {
+        return $this->Users_model->is_email_exist($email);
+    }
+
+    /*
+     * 
+     */
+
+    public function fetch_user_by_email($email) {
+        return $this->Users_model->fetch_user_by_email($email);
+    }
+
+    /*
+     * 
+     */
+
+    public function google_user_login($email) {
+        //check_if_user_exist - three params 1->where condition 2->is get num_rows for query 3->is fetech single or all data
+        $user_data = $this->Users_model->check_if_user_exist(['email' => $email], false, true);
+        $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
+        $this->session->set_flashdata('message', ['message' => lang('Login Successfully'), 'class' => 'alert alert-success']);
+        $update_arr = array();
+        if ($user_data['last_login'] < date("Y-m-d H:i:s\n", strtotime('today'))) {
+            $update_arr['total_coin'] = $user_data['total_coin'] + 5;
+        }
+        $update_arr['last_login'] = date('Y-m-d H:i:s');
+        $this->Users_model->update_user_data($user_data['id'], $update_arr); // update last login time
+
+        $user_redirect = $this->session->userdata('user_redirect');
+        if (!empty($user_redirect)) {
+            $this->session->unset_userdata('user_redirect');
+            redirect($user_redirect);
+        } else {
+            redirect('home');
+        }
+    }
+
+    /*
+     * 
+     */
+    public function fetch_google_image($url){
+        $url = explode("?",$url);
+        $data = file_get_contents($url[0]);
+        $img_name = random_string('alnum', 20) . '.jpg';
+        $img_path = 'uploads/user_profile/' . $img_name;
+        $file_handler = fopen($img_path, 'w+');
+        fputs($file_handler, $data);
+        fclose($file_handler);
+        return $img_name;
     }
 }

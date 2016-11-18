@@ -91,7 +91,7 @@
                                                 <div class="social">
                                                     <ul>
                                                         <li><a href="<?php echo $fb_login_url; ?>"><img src="<?php echo DEFAULT_IMAGE_PATH . "facebook.png" ?>" /></a></li>
-                                                        <li><a href="javascript:void(0)"><img src="<?php echo DEFAULT_IMAGE_PATH . "google_plus.png" ?>" /></a></li>
+                                                        <li><a href="<?php echo base_url() ?>/login/google_login"><img src="<?php echo DEFAULT_IMAGE_PATH . "google_plus.png" ?>" /></a></li>
                                                     </ul>
                                                 </div>
                                             </div>

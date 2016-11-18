@@ -122,6 +122,19 @@ class Users_model extends CI_Model {
         }
     }
 
+    /*
+     * 
+     */
+    public function is_email_exist($email){
+        return $this->db->get_where('users', ['email' => $email])->num_rows();
+    }
+    
+    /*
+     * 
+     */
+    public function fetch_user_by_email($email){
+        return $this->db->get_where('users',['email'=>$email])->row_array();
+    }
 }
 
 ?>

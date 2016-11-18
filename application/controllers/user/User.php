@@ -275,7 +275,7 @@ class User extends CI_Controller {
         $sess_user_data = $this->session->userdata('user');
         if (!empty($user_detail)) {
             if (!empty($sess_user_data)) {
-                pr($sess_user_data, 1);
+//                pr($sess_user_data, 1);
                 $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
                 if ($res_fb_account == 0) {
                     //update users table with new facebook ID

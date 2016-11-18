@@ -16,7 +16,8 @@ class Googleplus {
         $this->client->setApplicationName('HabbyClient');
         $this->client->setClientId('133668988783-mvk4cfujidugai2gbj0kh1kfu1vhp86d.apps.googleusercontent.com');
         $this->client->setClientSecret('5J8BSsJC2J5gZYKWZo9u3-ik');
-        $this->client->setRedirectUri('http://clientapp.narola.online/HD/habby/login/google_callback');
+        
+        $this->client->setRedirectUri(base_url().'/login/google_callback');
         $this->client->setDeveloperKey('AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw');
         $this->client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/plus.me'));
         $this->plus = new Google_Service_Plus($this->client);
