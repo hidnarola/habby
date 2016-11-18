@@ -198,4 +198,83 @@ class Login extends CI_Controller {
         }
     }
 
+    /*
+     * 
+     */
+    public function google_login(){
+        $this->load->library('google');
+        $d = $this->googleplus->client->createAuthUrl();
+        redirect($d);
+    }
+    
+    /*
+     * 
+     */
+    public function google_callback() {
+        try {
+            $this->googleplus->client->setScopes(array('https://www.googleapis.com/auth/plus.profile.emails.read', 'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.me'));
+            if (isset($_GET['code'])) {
+                $this->googleplus->client->authenticate($_GET['code']);
+                $_SESSION['access_token'] = $this->googleplus->client->getAccessToken();
+            }
+
+            if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
+                $this->googleplus->client->setAccessToken($_SESSION['access_token']);
+            }
+
+            if (isset($_SESSION['access_token']) && $this->googleplus->client->getAccessToken()) {
+                $me = $this->googleplus->plus->people->get('me');
+
+                if (!empty($me)) {
+                    $email = $me["emails"][0]["value"];
+                    $result = $this->check_user(['email' => $email]);
+                    if (!empty($result)) {
+                        if (!empty($result['google']) && $result['loginUserType'] == 'google') {
+
+                            if ($result['status'] != 'Active') {
+                                $this->session->set_flashdata('error', 'Your Account is In-active');
+                                redirect('login');
+                            }
+                            $this->login_user($email);
+                        } else {
+                            $this->session->set_flashdata('error', 'Account with ' . $email . ' already exist and it\'s not belongs to Google!');
+                            redirect('login');
+                        }
+                    } else {
+                        $save_result = [
+                            'last_name' => $me["name"]["familyName"],
+                            'full_name' => $me["name"]["givenName"],// . ' ' . $me["name"]["familyName"],
+                            'email' => $email,
+                            'loginUserType' => 'google',
+                            'google' => $me['id'],
+                            'user_name' => $email,
+                            'is_verified' => 'Yes',
+                            'status' => 'Active'
+                        ];
+
+                        if (!empty($me['birthday'])) {
+                            $save_result['birthday'] = date('Y-m-d', strtotime($me['birthday']));
+                        }
+
+//                        $id = $this->db->insert('shopsy_users', $save_result);
+//                        if ($id) {
+//
+//                            $checkUser = $this->user_model->get_all_details(USERS, array('email' => $email));
+//                            $this->send_confirm_mail($checkUser);
+//                            $this->login_user($email);
+//                        }
+                    }
+                } else {
+                    $this->session->set_flashdata("error", "There was problem to login with Google Plus. Please try again!");
+                    redirect("/login");
+                }
+            } else {
+                $this->session->set_flashdata("error", "There was problem to login with Google Plus. Please try again!");
+                redirect("/login");
+            }
+        } catch (Exception $e) {
+            $this->session->set_flashdata("error", "There was problem to login with Google Plus. Please try again!");
+            redirect("/login");
+        }
+    }
 }
