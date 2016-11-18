@@ -167,7 +167,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];              ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];               ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -516,7 +516,7 @@
                                             <div class="topic_textarea">
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
+                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb" style="width:25% !important"></a></span>
                                                         <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
                                                         <input type="hidden" id="message" name="message" class="form-control">
                                                         <!--<span class="input-group-btn upld_icnpad">
@@ -541,7 +541,7 @@
                                                             </div>
                                                         </span>-->
                                                         <span class="input-group-btn upld_icnpad">
-                                                            <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="http://habby/public/front/img/type_symbol3.png"></a>
+                                                            <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
                                                         </span>
                                                         <span class="input-group-btn">
                                                             <input class="submit_btn chat_btn" type="submit" value="Send">
