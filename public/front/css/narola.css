@@ -856,6 +856,22 @@ img.img-circle.img-responsive.topichat_user {
 img.user_chat_thumb {
     border-radius: 15px;
 }
+
+#filter_load_more {
+    background-color: #76469e;
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    box-shadow: 0 1px 1px #cccccc;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    transition: all 600ms ease-in-out 0s;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0px;
+}
+
 @media(min-width:1583px){
     .row.event_container
     {
@@ -876,5 +892,5 @@ img.user_chat_thumb {
     }
 }
 @media(max-width:480px){
-
+    
 }

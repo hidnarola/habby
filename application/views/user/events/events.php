@@ -1,3 +1,6 @@
+<?php 
+    $search_data = $this->session->flashdata('event_filter');
+?>
 <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "bootstrap-datetimepicker.min.css" ?>"/>
 <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_ADMIN_CSS_PATH . "sweetalert.css"; ?>">
 
@@ -17,7 +20,7 @@
 <div class="row filter_row">
     <div class="container">
         <div class="txt_white">
-            <span class="cursor_hand" data-toggle="modal" data-target="#filterModal"><?php echo lang('Filters'); ?></span>
+            <span class="cursor_hand open_modal"><?php echo lang('Filters'); ?></span>
         </div>
     </div>
 </div>
@@ -200,7 +203,6 @@
 <!-- Filter popup -->
 <div id="filterModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <?php $search_data = $this->session->flashdata('event_filter'); ?>
         <!-- Modal content-->
         <div class="modal-content">
             <form method="post" action="<?php echo base_url() . "events/filter_event"; ?>">
@@ -216,18 +218,18 @@
                                 <label class="control-label col-sm-4" >Release Date:</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="radio" class="" name="release_date" value="desc" checked> From Newest to Oldest
+                                        <input type="radio" class="" name="release_date" value="desc" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc")?'':'checked' ?>> From Newest to Oldest
                                     </div>
                                     <div>
-                                        <input type="radio" class="" name="release_date" value="asc"> From Oldest to Newest
+                                        <input type="radio" class="" name="release_date" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc")?'checked':'' ?> value="asc"> From Oldest to Newest
                                     </div>
                                 </div>
                             </div>
                             <div class="filter_div_row">
                                 <label class="control-label col-sm-4" >Number of seat:</label>
                                 <div class="col-sm-8">
-                                    From <input type="number" class="form-control" style="width:30%;display:inline-block;" name="from_seat"> 
-                                    to <input type="number" class="form-control" style="width:30%;display:inline-block;" name="to_seat">
+                                    From <input type="number" class="form-control" value="<?php echo ($this->session->has_userdata('event_filter'))?$this->session->userdata('event_filter')['from_seat']:'' ?>" min="0" style="width:30%;display:inline-block;" name="from_seat"> 
+                                    to <input type="number" value="<?php echo ($this->session->has_userdata('event_filter'))?$this->session->userdata('event_filter')['to_seat']:'' ?>" min="1" class="form-control" style="width:30%;display:inline-block;" name="to_seat">
                                 </div>
                             </div>
                             <div class="filter_div_row">
@@ -237,7 +239,8 @@
                                         <?php
                                         for ($i = 1; $i <= 10; ++$i) {
                                             ?>
-                                            <option value='<?php echo $i; ?>'><?php echo $i; ?> Mile</option>
+                                            
+                                            <option value='<?php echo $i; ?>' <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['distance_range'] == $i)?'selected':''; ?>><?php echo $i; ?> Mile</option>
                                             <?php
                                         }
                                         ?>
@@ -249,10 +252,10 @@
                                 <label class="control-label col-sm-4" >Approval needed:</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="radio" class="" name="approval_needed" value="yes" checked=""> Yes
+                                        <input type="radio" class="" name="approval_needed" value="yes" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['approval_needed'] == "no")?'':'checked' ?>> Yes
                                     </div>
                                     <div>
-                                        <input type="radio" class="" name="approval_needed" value="no"> No
+                                        <input type="radio" class="" name="approval_needed" value="no" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['approval_needed'] == "no")?'checked':'' ?>> No
                                     </div>
                                 </div>
                             </div>
@@ -287,8 +290,17 @@
     }
     function showPosition(position) {
         console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+        <?php
+            //$latlong['lat'] = 
+        ?>
         $('.lat').val(position.coords.latitude);
         $('.long').val(position.coords.longitude);
+        $('#filterModal').modal('show');
     }
-    getLocation();
+    
+    $('document').ready(function(){
+        $('.open_modal').click(function(){
+            getLocation();
+        });
+    });
 </script>
