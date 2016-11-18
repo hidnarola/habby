@@ -145,6 +145,7 @@ $lang['No limit'] = 'No limit';
 $lang['customise'] = 'customise';
 $lang['Note'] = 'Note';
 $lang['Topic Notification'] = 'Topic Notification';
+$lang['No notification available.'] = 'No notification available.';
 //--Home--
 $lang['Topichat'] = 'Topichat';
 $lang['Enter'] = 'Enter';
@@ -278,7 +279,6 @@ $lang["No Joined Event available."] = "No Joined Event available.";
 $lang["No Event available"] = "No Event available";
 $lang["Event join request"] = "Event join request";
 $lang["wants to join"] = "wants to join";
-
 
 $lang["Challenge Quit successfully."] = "Challenge Quit successfully.";
 $lang["Challenge Quit Error occured."] = "Challenge Quit Error occured.";
