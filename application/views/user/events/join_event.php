@@ -1,28 +1,37 @@
-<?php // pr($event,1)                          ?>
+<?php // pr($event,1)                             ?>
 <div class="row cont_top_1">
-    <section class="event-page">
-        <div class="row event-top-section">
-            <div class="col-md-11">
-                <h2 class="text-center"><?php echo $event['title']; ?></h2>
-                <p class="text-center event-top-details">Details : <?php echo $event['details']; ?></p>
-                <div style="float:right" class="close_info">
-                    <?php
-                    if ($remaining_days < 0) {
-                        ?>
-                        Event closed <?php echo abs($remaining_days); ?> days ago
-                        <?php
-                    } else {
-                        ?>
-                        Event will be closed in <?php echo $remaining_days; ?> days
-                        <a class="pstbtn" href="javascript:;">Close Event</a>
-                        <?php
-                    }
-                    ?>
+    <div class="row event-top-section">
+        <div class="bg-image">
+            <img class="image-responsive" src="http://habby/uploads/user_profile/2e05f4832e19f0a39aef0d617b5d4db1.jpg">
+            <div class="heading-section">
+                <div class-="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center"><?php echo $event['title']; ?></h2>
 
+                        <div class="edit-btn"><a class="pstbtn" href="javascript:;"  data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a></div>
+                        <div style="float:right" class="close_info">
+                            <?php
+                            if ($remaining_days < 0) {
+                                ?>
+                                Event closed <?php echo abs($remaining_days); ?> days ago
+                                <?php
+                            } else {
+                                ?>
+                                Event will be closed in <?php echo $remaining_days; ?> days
+                                <a class="pstbtn" href="javascript:;">Close Event</a>
+                                <?php
+                            }
+                            ?>
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-1"><a class="pstbtn" href="javascript:;"  data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a></div>
         </div>
+
+
+    </div>
+    <section class="event-page">
         <div class="event-bottom-section">
             <div class="col-md-4 event-left-section">
                 <div class="event_content">
@@ -68,29 +77,34 @@
                                         ?>
                                         <div class="contact_ul" data-id="<?php echo $contact['id'] ?>">
                                             <div class="row">
+                                                <div class="col-md-1">
+                                                    <a href="javascript;">
+                                                        <img src="http://habby/uploads/user_profile//ef05ec5e14f05bc7e314b5bc44ca6a2d.jpg" class="smlt_usrimg1 img-circle user_chat_thumb">
+                                                    </a>
+                                                </div>
                                                 <span class="first_span col-md-4">
                                                     <a href="javascript;">
                                                         Phone Number
                                                     </a>
                                                 </span>
-                                                <span class="col-md-6" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
+                                                <span class="col-md-5" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
                                                 <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
                                             </div>
                                             <div class="row">
-                                                <span class="first_span col-md-4">
+                                                <span class="first_span col-md-4 col-md-offset-1">
                                                     <a href="javascript;">
                                                         Email
                                                     </a>
                                                 </span>
-                                                <span class="col-md-8" id="email_info"><?php echo $contact['email'] ?></span>
+                                                <span class="col-md-7" id="email_info"><?php echo $contact['email'] ?></span>
                                             </div>
                                             <div class="row">
-                                                <span class="first_span col-md-4">
+                                                <span class="first_span col-md-4 col-md-offset-1">
                                                     <a href="javascript;">
                                                         Others
                                                     </a>
                                                 </span>
-                                                <span class="col-md-8" id="others_info"><?php echo $contact['others'] ?></span>
+                                                <span class="col-md-7" id="others_info"><?php echo $contact['others'] ?></span>
                                             </div>
                                         </div>
                                         <?php
@@ -231,14 +245,16 @@
                 </div>
             </div>
             <div class="col-md-8 event-right-section">
-                <div class="event-detail-content">
-                    <label class="control-label">Number of seats : </label><span class="no_of_seats"><?php echo $event['limit']; ?></span>
-                </div>
-                <div class="event-detail-content">
-                    <label class="control-label">Event Start Time : </label><span class="event_start_time"><?php echo $event['start_time']; ?></span>
-                </div>
-                <div class="event-detail-content">
-                    <label class="control-label">Event End Time : </label><span class="event_end_time"><?php echo $event['end_time']; ?></span>
+                <div class="details">
+                    <div class="event-detail-content">
+                        <label class="control-label">Details :  <span>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></label>
+                    </div>
+                    <div class="event-detail-content">
+                        <label class="control-label">Location : </label><span class="event_start_time"><?php echo $event['start_time']; ?> </span><a href="#map" class="map pstbtn">map</a>
+                    </div>
+                    <div class="event-detail-content">
+                        <label class="control-label">Even Time : </label><span class="event_end_time"><?php echo $event['end_time']; ?></span>
+                    </div>
                 </div>
                 <div class="row event-chat-start">
                     <!-- Chat area section start here -->
@@ -578,7 +594,7 @@
                 <h4 class="modal-title">More Files</h4>
             </div>
             <div class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -622,8 +638,7 @@
         if ($('#edited_notes').val() != "")
         {
             $('#notes_content').html($('#edited_notes').val());
-        }
-        else
+        } else
         {
             $('#notes_content').html("No contents available");
         }
@@ -678,8 +693,7 @@
                         $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                         ++i;
                     }
-                }
-                else
+                } else
                 {
                     this.files = '';
                     $('.message').html("Please select proper image");
@@ -698,7 +712,7 @@
             }
         });
     });
-    
+
     $('.load_more_video').click(function () {
         $('#load_more_video').modal('show');
         $.ajax({
@@ -708,7 +722,7 @@
             }
         });
     });
-    
+
     $('.load_more_file').click(function () {
         $('#load_more_file').modal('show');
         $.ajax({
@@ -718,5 +732,5 @@
             }
         });
     });
-    
+
 </script>

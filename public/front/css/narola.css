@@ -631,7 +631,7 @@ img.file_icon {
     border-right: 1px solid;
 }
 .event-right-section .chat_area2 {
-    top: 210px;
+    top: 376px;
     bottom:50px !important;
 }
 
@@ -871,7 +871,40 @@ img.user_chat_thumb {
     display: block;
     margin: 10px 0px;
 }
-
+.bg-image{
+    position: relative;
+    height: 150px;
+    width: 100%;}
+.bg-image img{
+    height: 100%;
+    width: 100%;
+}
+.bg-image .heading-section {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    height: 100%;
+    padding: 35px 30px;
+    color: #fff;
+}
+.bg-image .heading-section .edit-btn{
+        position: absolute;
+    right: 15px;
+    top: -15px;
+}
+.event-detail-content span {
+    font-size: 12px;
+    color: #555555;
+    font-weight: 600;
+    padding: 0px;
+}
+.event-detail-content:first-child{border-bottom: 1px solid #555555;margin-bottom:10px}
+.details{    padding: 10px;}
+.member_ul {
+    max-height: 340px;
+    overflow: initial;
+}
 @media(min-width:1583px){
     .row.event_container
     {
