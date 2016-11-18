@@ -146,6 +146,8 @@ $lang['Number of People'] = 'Число людей';
 $lang['No limit'] = 'Безлимитный';
 $lang['customise'] = 'настроить';
 $lang['Note'] = 'Заметка';
+$lang['Topic Notification'] = 'тема Уведомление';
+$lang['No notification available.'] = 'Нет извещения о наличии.';
     //--Home--
 $lang['Topichat'] = 'Topichat';
 $lang['Enter'] = 'Войти';
