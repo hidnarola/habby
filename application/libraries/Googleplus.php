@@ -2,14 +2,14 @@
 
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-set_include_path(__DIR__ . '/vendor/' . PATH_SEPARATOR . get_include_path());
+set_include_path(__DIR__ . '/Vendor/' . PATH_SEPARATOR . get_include_path());
 
 class Googleplus {
 
     public function __construct() {
 
         $CI = & get_instance();
-        require __DIR__ . '/vendor/Google/autoload.php';
+        require __DIR__ . '/Vendor/Google/autoload.php';
         $cache_path = $CI->config->item('cache_path');
         $GLOBALS['apiConfig']['ioFileCache_directory'] = ($cache_path == '') ? APPPATH . 'cache/' : $cache_path;
         $this->client = new Google_Client();
