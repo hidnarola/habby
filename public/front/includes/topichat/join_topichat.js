@@ -10,19 +10,18 @@ function send(text) {
     Server.send('message', JSON.stringify(msg));
 }
 
-function share_links(url) {
+function share_links() {
     setTimeout(function () {
         var i = Math.random().toString(36).substring(7);
-        url.trigger('preview');
-        var preview = url.data('preview');
-        console.log(url.val());
-        console.log(preview);
+        $('#url').trigger('preview');
+        var preview = $('#url').data('preview');
         if (JSON.stringify(preview) != '{}') {
+            console.log(preview);
             if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
                 swal("No content found");
-                url.val('');
+                $('#url').val('');
 //                $(".loader").removeClass('show');
-                url.prop('disabled', false);
+                $('#url').prop('disabled', false);
                 return false;
             } else {
                 var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
@@ -38,6 +37,7 @@ function share_links(url) {
                         '</div>';
                 $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
                 $('.fileshare' + i).append(html);
+
                 // Send file using ajax
                 preview = JSON.stringify(preview);
                 var msg = {
@@ -50,7 +50,7 @@ function share_links(url) {
                 {
                     setTimeout(function () {
                         $.ajax({
-                            url: base_url + 'user/Topichat/get_chat_id_from_media_name',
+                            url: base_url + '/user/Topichat/get_chat_id_from_media_name',
                             method: 'post',
                             async: false,
                             data: 'media=' + preview,
@@ -60,14 +60,16 @@ function share_links(url) {
                         });
                     }, 3000);
                 }
-                url.val('');
-                url.prop('disabled', false);
+                $('#url').val('');
+//                $('#url').preview({bind: false});
+//                $(".loader").removeClass('show');
+                $('#url').prop('disabled', false);
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
             swal("Please correct your Link.");
 //            $(".loader").removeClass('show');
-            url.prop('disabled', false);
+            $('#url').prop('disabled', false);
             return false;
         }
     }, 5000);
@@ -117,7 +119,8 @@ function upload_image(files) {
         data: form_data,
         type: 'post',
         async: false,
-        error: function (textStatus, errorThrown) {},
+        error: function (textStatus, errorThrown) {
+        },
         success: function (str)
         {
             if (str != 0)
@@ -201,7 +204,8 @@ function upload_video(files) {
         data: form_data,
         type: 'post',
         async: false,
-        error: function (textStatus, errorThrown) {},
+        error: function (textStatus, errorThrown) {
+        },
         success: function (str)
         {
             if (str == "601")
@@ -421,36 +425,25 @@ $(document).ready(function () {
         Server.send('message', JSON.stringify(msg));
     });
     // Set up preview.
-
+    $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
-    $('.share_btn').on('click', function () {
-        if ($("#mediaModal").data('bs.modal') && $('#mediaModal').data('bs.modal').isShown) {
-            url = $('#mediaModal').find('#url');
-        } else {
-            url = $('.mainchatarea').find('#url');
-        }
-        url.preview({key: '18566814981d41358f03a7635f716d8a'});
-        if (url.val() != "")
+    $('.share_btn').click(function () {
+        if ($("#url").val() != "")
         {
-            url.prop('disabled', true);
-            share_links(url);
+            $('#url').prop('disabled', true);
+            share_links();
         } else {
             swal("Please Enter url.");
             return false;
         }
     });
-    $(document).on('keypress', '#url', function (e) {
+    $('#url').keypress(function (e) {
         if (e.keyCode == 13) {
-            if ($("#mediaModal").data('bs.modal') && $('#mediaModal').data('bs.modal').isShown) {
-                url = $('#mediaModal').find('#url');
-            } else {
-                url = $('.mainchatarea').find('#url');
-            }
-            url.preview({key: '18566814981d41358f03a7635f716d8a'});
-            if (url.val() != "")
+            if ($(this).val() != "")
             {
-                url.prop('disabled', true);
-                share_links(url);
+//                $(".loader").addClass('show');
+                $('#url').prop('disabled', true);
+                share_links();
             } else {
                 swal("Please Enter url");
                 return false;
@@ -470,7 +463,8 @@ $(document).ready(function () {
     });
 
     //OH NOES! Disconnection occurred.
-    Server.bind('close', function (data) {});
+    Server.bind('close', function (data) {
+    });
 
     //Log any messages sent from server
     Server.bind('message', function (payload) {
