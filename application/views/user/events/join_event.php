@@ -354,7 +354,7 @@ if (isset($json_decode->results[0])) {
                         <label class="control-label">Details :  <span><?php echo $event['details'] ?></span></label>
                     </div>
                     <div class="event-detail-content">
-                        <label class="control-label">Location : </label><span class="location"><?php echo $location; ?></span><a href="javascript:;" class="map_btn pstbtn">map</a>
+                        <label class="control-label">Location : </label><span class="location"><?php echo (isset($location) && !empty($location))?$location:'No Lcation found'; ?></span><a href="javascript:;" class="map_btn pstbtn">map</a>
                     </div>
                     <div class="event-detail-content">
                         <label class="control-label">Even Time : </label><span class="event_start_time"><?php echo $event['start_time']; ?> </span> to <span class="event_end_time"><?php echo $event['end_time']; ?></span>
