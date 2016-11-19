@@ -337,13 +337,20 @@ class Topichat_model extends CI_Model {
      */
 
     public function get_recent_links($group_id, $limit) {
-        $this->db->select('media');
+        $this->db->select('media,youtube_video');
         $this->db->where('media_type', 'links');
         $this->db->where('topic_group_id', $group_id);
         $this->db->limit($limit);
         $this->db->order_by('created_date', 'desc');
         $arr = $this->db->get('topic_group_chat')->result_array();
-        return array_column($arr, 'media');
+        foreach ($arr as $a) {
+            if ($a['youtube_video'] != null) {
+                $array['youtube_video'] = $a['youtube_video'];
+            } else {
+                $array['media'] = $a['media'];
+            }
+        }
+        return $array;
     }
 
     /*
@@ -539,7 +546,7 @@ class Topichat_model extends CI_Model {
 
     public function get_media_details($id, $type) {
         $logged_in_user = logged_in_user_id();
-        $this->db->select('tc.id,tc.media,tc.topic_group_id,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+        $this->db->select('tc.id,tc.media,tc.topic_group_id,tc.youtube_video,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->join('topic_group_chat_rank trp', 'tc.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
         $this->db->join('topic_group_chat_rank trn', 'tc.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
         $this->db->join('topic_group_chat_rank tru', 'tc.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');

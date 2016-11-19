@@ -88,10 +88,8 @@ foreach ($messages as $message) {
                 </div>
                 <?php
             } else if ($message['media_type'] == "links") {
-                $media = json_decode($message['media']);
-//                pr($media);
                 ?>
-                <div class = "share_2 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>">
+                <div class = "share_2 clearfix topichat_media_post <?php echo ($message['youtube_video'] != Null) ? "youtube_video" : "" ?>" data-chat_id="<?php echo $message['id'] ?>">
                     <div id="field" class="topichat_media_rank">
                         <button type="button" id="add" class="add add_btn smlr_btn">
                             <img src="<?php
@@ -107,23 +105,44 @@ foreach ($messages as $message) {
                             ?>" class="rank_img_sec"/>
                         </button>
                     </div>
-                    <div class = "fileshare">
-                        <div class = "">
+                    <?php
+                    if ($message['youtube_video'] != Null) {
+                        ?>
+                        <div class = "fileshare">
                             <?php
                             if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
                                 ?>
-                                <div class = "large-3 columns">
+                                <div class="videoPreview" data-toggle="modal" data-target="#mediaModal" data-type="links" data-id='<?php echo $message['id']; ?>'>
                                     <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
                                 </div>
                                 <?php
                             }
                             ?>
-                            <div class = "large-9 column">
-                                <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
-                                <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                        </div>
+                        <?php
+                    } else {
+                        $media = json_decode($message['media']);
+                        ?>
+                        <div class = "fileshare">
+                            <div class = "">
+                                <?php
+                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                    ?>
+                                    <div class = "large-3 columns">
+                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <div class = "large-9 column">
+                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                    <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <?php
+                    }
+                    ?>
                 </div>
                 <?php
             }
@@ -223,25 +242,43 @@ foreach ($messages as $message) {
             } else if ($message['media_type'] == "links") {
                 $media = json_decode($message['media']);
                 ?>
-                <div class = "share_1 clearfix topichat_media_post" data-chat_id="<?php echo $message['id'] ?>">
+                <div class = "share_1 clearfix topichat_media_post <?php echo ($message['youtube_video'] != Null) ? "youtube_video" : "" ?>" data-chat_id="<?php echo $message['id'] ?>">
                     <img class = "user_chat_thumb" src = "<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title="<?php echo $message['name'] ?>">
-                    <div class = "fileshare">
-                        <div class = "">
+                    <?php
+                    if ($message['youtube_video'] != Null) {
+                        ?>
+                        <div class = "fileshare" >
                             <?php
                             if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
                                 ?>
-                                <div class = "large-3 columns">
+                                <div class="videoPreview" data-toggle="modal" data-target="#mediaModal" data-type="links" data-id='<?php echo $message['id']; ?>'>
                                     <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
                                 </div>
                                 <?php
                             }
                             ?>
-                            <div class = "large-9 column">
-                                <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
-                                <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class = "fileshare">
+                            <div class = "">
+                                <?php
+                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                    ?>
+                                    <div class = "large-3 columns">
+                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <div class = "large-9 column">
+                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                    <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php } ?>
                     <div id="field" class="topichat_media_rank">
                         <button type="button" id="add" class="add add_btn smlr_btn">
                             <img src="<?php

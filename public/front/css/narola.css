@@ -889,7 +889,7 @@ img.user_chat_thumb {
     color: #fff;
 }
 .bg-image .heading-section .edit-btn{
-        position: absolute;
+    position: absolute;
     right: 15px;
     top: -15px;
 }
@@ -904,6 +904,10 @@ img.user_chat_thumb {
 .member_ul {
     max-height: 340px;
     overflow: initial;
+}
+.share_1.youtube_video,
+.share_2.youtube_video {
+    max-width: none !important;
 }
 @media(min-width:1583px){
     .row.event_container
@@ -925,5 +929,5 @@ img.user_chat_thumb {
     }
 }
 @media(max-width:480px){
-    
+
 }

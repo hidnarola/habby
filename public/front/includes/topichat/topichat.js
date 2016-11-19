@@ -251,7 +251,7 @@ $('document').ready(function () {
 //        });
     });
     $("#mediaModal").on("show.bs.modal", function (e) {
-//        e.preventDefault();
+        e.preventDefault();
         //get data-id attribute of the clicked element
         $('#emogis').popover('hide');
         var image = $(e.relatedTarget).data('image');

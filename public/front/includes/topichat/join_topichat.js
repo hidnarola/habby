@@ -13,44 +13,53 @@ function send(text) {
 function share_links() {
     setTimeout(function () {
         var i = Math.random().toString(36).substring(7);
+        var youtube_video_html = null, html = '';
         $('#url').trigger('preview');
         var preview = $('#url').data('preview');
         if (JSON.stringify(preview) != '{}') {
-            console.log(preview);
-            if (preview.title == null && preview.description == null && typeof (data.media) == 'undefined') {
+            if (preview.title == null && preview.description == null) {
                 swal("No content found");
                 $('#url').val('');
-//                $(".loader").removeClass('show');
                 $('#url').prop('disabled', false);
                 return false;
             } else {
-                var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
-                        '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
-                        '</div>' : "";
-                var title = (preview.title != null) ? preview.title : "";
-                var description = (preview.description != null) ? preview.description : "";
-                html = '<div class="">' + thumbnail_url +
-                        '<div class="large-9 column">' +
-                        '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
-                        '<p>' + description + '</p>' +
-                        '</div>' +
-                        '</div>';
                 $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
-                $('.fileshare' + i).append(html);
+                if ($.isEmptyObject(preview.media)) {
+                    var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
+                            '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                            '</div>' : "";
+                    var title = (preview.title != null) ? preview.title : "";
+                    var description = (preview.description != null) ? preview.description : "";
+                    html = '<div class="">' + thumbnail_url +
+                            '<div class="large-9 column">' +
+                            '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
+                            '<p>' + description + '</p>' +
+                            '</div>' +
+                            '</div>';
 
+                } else {
+                    if (preview.provider_name == "YouTube") {
+                        var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? preview.thumbnail_url : "";
+                        html = '<div class="videoPreview"><img class="thumb" src="' + thumbnail_url + '"></img></div>';
+                        youtube_video_html = preview.media.html;
+                        $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
+                    }
+                }
+                $('.fileshare' + i).append(html);
                 // Send file using ajax
                 preview = JSON.stringify(preview);
                 var msg = {
                     message: preview,
                     type: 'topic_msg',
                     group_id: group_id,
-                    media: 'links'
+                    media: 'links',
+                    youtube_video: youtube_video_html
                 }
                 if (Server.send('message', JSON.stringify(msg)))
                 {
                     setTimeout(function () {
                         $.ajax({
-                            url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                            url: base_url + 'user/Topichat/get_chat_id_from_media_name',
                             method: 'post',
                             async: false,
                             data: 'media=' + preview,
@@ -58,7 +67,7 @@ function share_links() {
                                 $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                             }
                         });
-                    }, 3000);
+                    }, 4000);
                 }
                 $('#url').val('');
 //                $('#url').preview({bind: false});
@@ -239,7 +248,6 @@ function upload_video(files) {
             }, 1000);
         }
     });
-
 }
 function upload_files(files) {
     var i = Math.random().toString(36).substring(7);
@@ -265,14 +273,11 @@ function upload_files(files) {
                     $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
                     $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-
                     var form_data = new FormData();
                     $.each(files, function (i, file) {
                         form_data.append('files-' + i, file);
                     });
-
                     form_data.append("msg_files", files);
-
                     // Send file using ajax
                     var media_data;
                     $.ajax({
@@ -339,7 +344,6 @@ function upload_files(files) {
 
 $(document).ready(function () {
     Server = new FancyWebSocket(socket_server);
-
     // Send message to server
     $(document).on('keypress', '#message_div', function (e) {
         if (e.keyCode == 13) {
@@ -461,11 +465,9 @@ $(document).ready(function () {
         }
         Server.send('message', JSON.stringify(msg));
     });
-
     //OH NOES! Disconnection occurred.
     Server.bind('close', function (data) {
     });
-
     //Log any messages sent from server
     Server.bind('message', function (payload) {
         userdata = JSON.parse(payload);
@@ -492,19 +494,26 @@ $(document).ready(function () {
                 $('.imagePreview' + i).data('file', userdata.media);
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             } else if (userdata.media_type == "links") {
-                userlink = JSON.parse(userdata.message);
-                var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
-                        '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
-                        '</div>' : "";
-                var title = (userlink.title != null) ? userlink.title : "";
-                var description = (userlink.description != null) ? userlink.description : "";
-                $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare"><div class="">' + thumbnail_url +
-                        '<div class="large-9 column">' +
-                        '<a href="' + userlink.original_url + '" target="_blank">' + title + '</a>' +
-                        '<p>' + description + '</p>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? userlink.thumbnail_url : "";
+                var youtube_video = '<div class="videoPreview"><img class="thumb" src="' + thumbnail_url + '"></img></div>';
+                if (youtube_video != null) {
+                    $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post youtube_video" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare">' + youtube_video + '<div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                } else {
+                    userlink = JSON.parse(userdata.message);
+                    var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
+                            '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
+                            '</div>' : "";
+                    var title = (userlink.title != null) ? userlink.title : "";
+                    var description = (userlink.description != null) ? userlink.description : "";
+                    $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare"><div class="">' + thumbnail_url +
+                            '<div class="large-9 column">' +
+                            '<a href="' + userlink.original_url + '" target="_blank">' + title + '</a>' +
+                            '<p>' + description + '</p>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+
+                }
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
