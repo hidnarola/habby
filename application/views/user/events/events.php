@@ -10,7 +10,7 @@
     <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
     <div class="new_grp">
         <!-- New Group button start-->
-        <a href="#" data-toggle="modal" data-target="#new_event"><?php echo lang('New'); ?> <br><?php echo lang('Event'); ?></a>
+        <a href="javascript:;" class="create_event_btn"><?php echo lang('New'); ?> <br><?php echo lang('Event'); ?></a>
         <!-- New Group button end-->
     </div>
 </div>
@@ -112,12 +112,12 @@
                         <div class="upld_sec">
                             <div class="fileUpload up_img btn">
                                 <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile" multiple="multiple"/>
+                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
                             </div>
-                            <div class="fileUpload up_img btn">
+<!--                            <div class="fileUpload up_img btn">
                                 <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                 <input type="file" name="videofile[]" id="uploadVideo" class="upload" multiple="multiple"/>
-                            </div>
+                            </div>-->
 
                         </div>
                         <div class="image_wrapper" style="display:none">
@@ -290,17 +290,30 @@
     }
     function showPosition(position) {
         console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
-        <?php
-            //$latlong['lat'] = 
-        ?>
         $('.lat').val(position.coords.latitude);
         $('.long').val(position.coords.longitude);
         $('#filterModal').modal('show');
     }
     
+    function event_getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(event_showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    function event_showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+        $('#new_event').find('.lat').val(position.coords.latitude);
+        $('#new_event').find('.long').val(position.coords.longitude);
+        $('#new_event').modal('show');
+    }
+    
     $('document').ready(function(){
-        $('.open_modal').click(function(){
-            getLocation();
+        $('.create_event_btn').click(function(){
+            event_getLocation();
         });
     });
+    
+    
 </script>

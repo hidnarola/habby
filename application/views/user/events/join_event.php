@@ -1,14 +1,101 @@
-<?php // pr($event,1)                             ?>
+<?php
+$geolocation = $event['latitude'] . ',' . $event['longitude'];
+$request = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $geolocation . '&sensor=false';
+$file_contents = file_get_contents($request);
+$json_decode = json_decode($file_contents);
+if (isset($json_decode->results[0])) {
+    $response = array();
+    foreach ($json_decode->results[0]->address_components as $addressComponet) {
+        if (in_array('political', $addressComponet->types)) {
+            $response[] = $addressComponet->long_name;
+        }
+    }
+
+    $location = array();
+
+    if (isset($response[1])) {
+        $location[] = $response[1];
+    }
+    if (isset($response[2])) {
+        $location[] = $response[2];
+    }
+    if (isset($response[3])) {
+        $location[] = $response[3];
+    }
+    if (count($location) > 0) {
+        $location = implode(", ", $location);
+    } else {
+        $location = "";
+    }
+}
+?>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw"></script>
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw"></script>-->
+<script type="text/javascript">
+    var marker;
+    var map;
+    var event_lat = <?php echo $event['latitude']; ?>;
+    var event_long = <?php echo $event['longitude']; ?>;
+    function initMap() {
+        var centerOfMap = new google.maps.LatLng(event_lat, event_long);
+        var myLatLng = {lat: event_lat, lng: event_long};
+        var options = {
+            center: centerOfMap,
+            zoom: 12
+        };
+        map = new google.maps.Map(document.getElementById('map'), options);
+        marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            draggable: true,
+        });
+        marker.setMap(map);
+        map.setCenter(myLatLng);
+    }
+
+//Load the map when the page has finished loading.
+    google.maps.event.addDomListener(window, 'load', initMap);
+    google.maps.event.addDomListener(window, "resize", resizingMap());
+    $('#mapModal').on('show.bs.modal', function () {
+        console.log('resixe calling');
+        resizeMap();
+    })
+
+// Resizing is used to open map in Bootstrap modal
+    function resizeMap() {
+        console.log('resize called');
+        if (typeof map == "undefined")
+            return;
+        setTimeout(function () {
+            resizingMap();
+        }, 400);
+    }
+
+    function resizingMap() {
+        console.log('resizing');
+        if (typeof map == "undefined")
+            return;
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    }
+</script>
+
 <div class="row cont_top_1">
     <div class="row event-top-section">
         <div class="bg-image">
-            <img class="image-responsive" src="http://habby/uploads/user_profile/2e05f4832e19f0a39aef0d617b5d4db1.jpg">
+            <img class="image-responsive" src="<?php echo (isset($event_media) && !empty($event_media) ? DEFAULT_EVENT_MEDIA_PATH . $event_media[0]['media'] : '') ?>">
             <div class="heading-section">
                 <div class-="row">
                     <div class="col-md-12">
                         <h2 class="text-center"><?php echo $event['title']; ?></h2>
-
-                        <div class="edit-btn"><a class="pstbtn" href="javascript:;"  data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a></div>
+                        <?php
+                        if ($event['user_id'] == $this->session->user['id']) {
+                            ?>
+                            <div class="edit-btn"><a class="pstbtn" href="javascript:;"  data-toggle="modal" data-target="#edit_event"><?php echo lang('Edit'); ?></a></div>
+                            <?php
+                        }
+                        ?>
                         <div style="float:right" class="close_info">
                             <?php
                             if ($remaining_days < 0) {
@@ -18,7 +105,13 @@
                             } else {
                                 ?>
                                 Event will be closed in <?php echo $remaining_days; ?> days
-                                <a class="pstbtn" href="javascript:;">Close Event</a>
+                                <?php
+                                if ($event['user_id'] == $this->session->user['id']) {
+                                    ?>
+                                    <a class="pstbtn close_event_btn" href="javascript:;">Close Event</a>
+                                    <?php
+                                }
+                                ?>
                                 <?php
                             }
                             ?>
@@ -33,7 +126,7 @@
     </div>
     <section class="event-page">
         <div class="event-bottom-section">
-            <div class="col-md-4 event-left-section">
+            <div class="col-md-5 event-left-section">
                 <div class="event_content">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
@@ -79,16 +172,27 @@
                                             <div class="row">
                                                 <div class="col-md-1">
                                                     <a href="javascript;">
-                                                        <img src="http://habby/uploads/user_profile//ef05ec5e14f05bc7e314b5bc44ca6a2d.jpg" class="smlt_usrimg1 img-circle user_chat_thumb">
+                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $contact['user_image'] ?>" class="smlt_usrimg1 img-circle user_chat_thumb">
                                                     </a>
                                                 </div>
-                                                <span class="first_span col-md-4">
+                                                <span class="first_span col-md-9"><?php echo $contact['name']; ?></span>
+                                                <?php
+                                                    if($contact['contact_user_id'] == $this->session->user['id'])
+                                                    {
+                                                        ?>
+                                                        <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
+                                                        <?php
+                                                    }
+                                                ?>
+                                            </div>
+                                            <div class="row">
+                                                <span class="first_span col-md-4 col-md-offset-1">
                                                     <a href="javascript;">
                                                         Phone Number
                                                     </a>
                                                 </span>
                                                 <span class="col-md-5" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
-                                                <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
+
                                             </div>
                                             <div class="row">
                                                 <span class="first_span col-md-4 col-md-offset-1">
@@ -244,16 +348,16 @@
                     ?>
                 </div>
             </div>
-            <div class="col-md-8 event-right-section">
+            <div class="col-md-7 event-right-section">
                 <div class="details">
                     <div class="event-detail-content">
-                        <label class="control-label">Details :  <span>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</span></label>
+                        <label class="control-label">Details :  <span><?php echo $event['details'] ?></span></label>
                     </div>
                     <div class="event-detail-content">
-                        <label class="control-label">Location : </label><span class="event_start_time"><?php echo $event['start_time']; ?> </span><a href="#map" class="map pstbtn">map</a>
+                        <label class="control-label">Location : </label><span class="location"><?php echo (isset($location) && !empty($location))?$location:'No Lcation found'; ?></span><a href="javascript:;" class="map_btn pstbtn">map</a>
                     </div>
                     <div class="event-detail-content">
-                        <label class="control-label">Even Time : </label><span class="event_end_time"><?php echo $event['end_time']; ?></span>
+                        <label class="control-label">Even Time : </label><span class="event_start_time"><?php echo $event['start_time']; ?> </span> to <span class="event_end_time"><?php echo $event['end_time']; ?></span>
                     </div>
                 </div>
                 <div class="row event-chat-start">
@@ -460,12 +564,12 @@
                             <div class="upld_sec">
                                 <div class="fileUpload up_img btn">
                                     <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                    <input type="file" name="uploadfile[]" class="upload" id="uploadFile" multiple="multiple"/>
+                                    <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
                                 </div>
-                                <div class="fileUpload up_img btn">
-                                    <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
-                                    <input type="file" name="videofile[]" id="uploadVideo" class="upload" multiple="multiple"/>
-                                </div>
+                                <!--                                <div class="fileUpload up_img btn">
+                                                                    <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
+                                                                    <input type="file" name="videofile[]" id="uploadVideo" class="upload" multiple="multiple"/>
+                                                                </div>-->
                             </div>
                             <div class="image_wrapper" style="display:none">
 
@@ -603,6 +707,30 @@
     </div>
 </div>
 
+
+<!-- Modal for display map -->
+<!-- Modal -->
+<div id="mapModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Event Location</h4>
+            </div>
+            <div class="modal-body">
+                <div id="map" style="height:250px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Map Modal over-->
+
+
 <!-- Global variable for join_topichat.js -->
 <script>
     data = '<?php echo json_encode($this->session->user); ?>';
@@ -733,4 +861,20 @@
         });
     });
 
+    $('.close_event_btn').click(function () {
+        $.ajax({
+            url: base_url + 'events/close_event/' + group_id,
+            success: function (str) {
+                if (str != 0)
+                {
+                    $('.close_info').html(str);
+                }
+            }
+        });
+    });
+
+    $('.map_btn').click(function () {
+        $('#mapModal').modal('show');
+        resizeMap();
+    });
 </script>

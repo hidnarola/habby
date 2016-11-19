@@ -624,17 +624,30 @@ img.file_icon {
 .event-page {
     background: #ffffff none repeat scroll 0 0;
     margin: 0 auto;
-    max-width: 1361px;
+    max-width: 1140px;
     height: 100%;
 }
+.chat_area2, .topich_chat_typesec {
+    width: 650px;
+}
+.event_media_post img.user_chat_thumb {
+    width: 7%;
+}
+.event_media_post .media_wrapper{width: 90%;}
 .col-md-4.event-left-section {
     border-right: 1px solid;
 }
 .event-right-section .chat_area2 {
-    top: 376px;
+    top: 350px;
     bottom:50px !important;
 }
-
+.heading-section h2{
+width: 800px;
+margin: 0px auto;
+height: 68px;
+word-break: break-all;
+overflow: hidden;
+}
 .event_file_name{
     display: block;
     width: 98%;
@@ -899,7 +912,12 @@ img.user_chat_thumb {
     font-weight: 600;
     padding: 0px;
 }
-.event-detail-content:first-child{border-bottom: 1px solid #555555;margin-bottom:10px}
+.event-detail-content:first-child {
+    border-bottom: 1px solid #555555;
+    height: 67px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
 .details{    padding: 10px;}
 .member_ul {
     max-height: 340px;
