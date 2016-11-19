@@ -348,4 +348,6 @@ $(document).ready(function () {
     });
 
     Server.connect();
+    
+    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
 });

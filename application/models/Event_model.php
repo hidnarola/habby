@@ -253,7 +253,10 @@ class Event_model extends CI_Model {
      */
     public function get_event_contact($event_id)
     {
-        return $this->db->where('event_id',$event_id)->get('event_contact')->result_array();
+        $this->db->select('ec.*,u.id as contact_user_id,u.name,u.user_image');
+        $this->db->where('ec.event_id',$event_id);
+        $this->db->join('users u','u.id = ec.user_id');
+        return $this->db->get('event_contact ec')->result_array();
     }
     
     /*
@@ -326,8 +329,11 @@ class Event_model extends CI_Model {
      */
     public function update_event($id,$arr)
     {
-        $this->db->where('id',$id);
-        $this->db->update('events',$arr);
+        if($this->db->where('id',$id)->update('events',$arr))
+        {
+            return true;
+        }
+        return false;
     }
     
     /*
@@ -388,5 +394,4 @@ class Event_model extends CI_Model {
         return $post;
     }
 }
-
 ?>

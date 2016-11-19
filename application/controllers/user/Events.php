@@ -213,7 +213,8 @@ class Events extends CI_Controller {
                 'event_id' => $event_id,
                 'phone_no' => $this->input->post('phone'),
                 'email' => $this->input->post('email'),
-                'others' => $this->input->post('others')
+                'others' => $this->input->post('others'),
+                'user_id'=>$this->session->user['id']
             );
             $this->Event_model->add_contact($insert_arr);
             redirect('events/details/' . urlencode(base64_encode($event_id)));
@@ -386,6 +387,21 @@ class Events extends CI_Controller {
         else
         {
             redirect('/events');
+        }
+    }
+
+    /*
+     * 
+     */
+    public function close_event($event_id){
+        $update_arr['end_time'] = date('Y-m-d H:i:s');
+        if($this->Event_model->update_event($event_id, $update_arr))
+        {
+            echo 'Event Closed';
+        }
+        else
+        {
+            echo '0';
         }
     }
 }
