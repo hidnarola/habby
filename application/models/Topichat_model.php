@@ -343,6 +343,7 @@ class Topichat_model extends CI_Model {
         $this->db->limit($limit);
         $this->db->order_by('created_date', 'desc');
         $arr = $this->db->get('topic_group_chat')->result_array();
+        $array = array();
         foreach ($arr as $a) {
             if ($a['youtube_video'] != null) {
                 $array['youtube_video'] = $a['youtube_video'];
