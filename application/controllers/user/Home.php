@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Post_model', 'Event_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model'));
+        $this->load->model(array('Users_model', 'Post_model', 'Event_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model','Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -27,8 +27,8 @@ class Home extends CI_Controller {
      */
 
     public function index() {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Smile share');
         $this->data['posts'] = $this->Post_model->smileshare_post($data = array(), $this->session->user['id'], 0, 3);
-//      //   pr($this->data['posts'],1);
         $this->template->load('front', 'user/home.php', $this->data);
     }
 
@@ -43,6 +43,7 @@ class Home extends CI_Controller {
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->smileshare_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
+            $this->data['meta_data'] = $this->Seo_model->get_page_meta('Smile share');
             $this->template->load('front', 'user/home.php', $this->data);
         } else {
             $data['view'] = $this->load->view('user/partial/load_post_data', $this->data, true);
@@ -65,6 +66,7 @@ class Home extends CI_Controller {
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->challange_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
+            $this->data['meta_data'] = $this->Seo_model->get_page_meta('Challenge post');
             $this->template->load('front', 'user/challenge.php', $this->data);
         } else {
             $data['view'] = $this->load->view('user/partial/load_chellenge_post', $this->data, true);
@@ -179,6 +181,7 @@ class Home extends CI_Controller {
      * develop by : HPA
      */
     public function profile() {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Profile');
         if ($this->input->post()) {
             $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
@@ -311,6 +314,7 @@ class Home extends CI_Controller {
      * develop by : HPA
      */
     public function topichat($user_id = 0) {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Topichat Profile');
         if ($user_id == 0) {
             $user_id = $this->session->user['id'];
             $this->data['notification'] = $this->Topichat_model->get_topic_notification_by_user_id($user_id, $start = 0, $limit = 10);
@@ -354,6 +358,7 @@ class Home extends CI_Controller {
      * develop by : HPA
      */
     public function challenges($user_id = 0) {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Challenge Profile');
         if ($user_id == 0) {
             $user_id = $this->session->user['id'];
         } else {
@@ -374,6 +379,7 @@ class Home extends CI_Controller {
      * develop by : HPA
      */
     public function league($user_id = 0) {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('League Profile');
         if ($user_id == 0) {
             $user_id = $this->session->user['id'];
         } else {
@@ -398,6 +404,7 @@ class Home extends CI_Controller {
     }
 
     public function events($user_id = 0) {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Event Profile');
         if ($user_id == 0) {
             $user_id = $this->session->user['id'];
         } else {

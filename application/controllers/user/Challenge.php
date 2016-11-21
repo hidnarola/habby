@@ -12,7 +12,7 @@ class Challenge extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Challenge_model', 'Common_functionality'));
+        $this->load->model(array('Users_model', 'Challenge_model', 'Common_functionality','Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('challenge');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -29,6 +29,7 @@ class Challenge extends CI_Controller {
     public function index($page = 1) {
         $limit = 3;
         $start = ($page - 1) * $limit;
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Challenge');
         $this->data['Newest_Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
         $this->data['Popular_Challenges'] = $this->Challenge_model->get_popular_challenges($start, $limit);
         $this->data['Recom_Challenges'] = $this->Challenge_model->get_recommended_challenges($start, $limit);
@@ -86,10 +87,13 @@ class Challenge extends CI_Controller {
             $start = ($page - 1) * $limit;
             $filterby = $this->input->get('ch');
             if ($filterby == 'popular') {
+                $this->data['meta_data'] = $this->Seo_model->get_page_meta('Popular Challenge');
                 $this->data['Challenges'] = $this->Challenge_model->get_popular_challenges($start, $limit);
             } else if ($filterby == 'recommended') {
+                $this->data['meta_data'] = $this->Seo_model->get_page_meta('Recommanded Challenge');
                 $this->data['Challenges'] = $this->Challenge_model->get_recommended_challenges($start, $limit);
             } else {
+                $this->data['meta_data'] = $this->Seo_model->get_page_meta('Newest Challenge');
                 $this->data['Challenges'] = $this->Challenge_model->get_challenges($start, $limit);
             }
             $this->template->load('front', 'user/challenge/challenges', $this->data);

@@ -4,6 +4,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <?php
+            if(isset($meta_data) && count($meta_data) > 0)
+            {
+                ?>
+                <meta name='title' content="<?php echo $meta_data['meta_title'] ?>">
+                <meta name='keywords' content="<?php echo $meta_data['meta_keyword'] ?>">
+                <meta name='description' content="<?php echo $meta_data['meta_description'] ?>">
+                <?php
+            }
+        ?>
         <base href="<?php echo base_url(); ?>"/>
         <title>Habby</title>
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "bootstrap.css" ?>"/>

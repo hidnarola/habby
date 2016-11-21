@@ -13,7 +13,7 @@ class League extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Common_functionality', 'League_model'));
+        $this->load->model(array('Users_model', 'Common_functionality', 'League_model','Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('league');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -33,6 +33,7 @@ class League extends CI_Controller {
         $this->data['search_topic'] = (($this->input->get('topic')) ? $this->input->get('topic') : '');
         $this->data['league'] = $this->League_model->get_leagues($this->data['search_topic'], $this->data['filterby'], $start, $limit);
         if ($page == 1) {
+            $this->data['meta_data'] = $this->Seo_model->get_page_meta('League and alliance');
             $this->template->load('front', 'user/league/league', $this->data);
         } else {
             $data = array();
