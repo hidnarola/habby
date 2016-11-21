@@ -627,7 +627,7 @@ img.file_icon {
     max-width: 1140px;
     height: 100%;
 }
-.chat_area2, .topich_chat_typesec {
+.event-chat-start .chat_area2,.event-chat-start .topich_chat_typesec {
     width: 650px;
 }
 .event_media_post img.user_chat_thumb {

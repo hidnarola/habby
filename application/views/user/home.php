@@ -184,9 +184,8 @@
                                                                     </span>
                                                                 </a>
                                                             </li>
-                                                            <li>
+                                                            <li class="btn_popover_head">
                                                                 <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['id'] ?>">
-
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                     <span>
                                                                         <?php // echo $post['post_share'] ?> Shares
@@ -210,9 +209,7 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-
                                                             </li>
-
                                                         </ul>
                                                     </div>
 
@@ -328,13 +325,21 @@
             }
         });
         page++;
-
-
         stButtons.locateElements();
 // or if you want to be a bit defensive about whether the lib has been
 // loaded or not:
         if (window.stButtons) {
             stButtons.locateElements();
         } // Parse ShareThis markup
+        
+        $('.share-link').click(function(){
+            setTimeout(function(){
+                console.log('called');
+                stButtons.locateElements();
+                if (window.stButtons) {
+                    stButtons.locateElements();
+                } // Parse ShareThis markup
+            },2000);
+        });
     }
 </script>
