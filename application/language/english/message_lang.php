@@ -280,6 +280,7 @@ $lang["No Event available"] = "No Event available";
 $lang["Event join request"] = "Event join request";
 $lang["wants to join"] = "wants to join";
 
+/*21-11-2016 (NEW)*/
 $lang["Challenge Quit successfully."] = "Challenge Quit successfully.";
 $lang["Challenge Quit Error occured."] = "Challenge Quit Error occured.";
 $lang["Links"] = "Links";
@@ -300,6 +301,51 @@ $lang["My Challenges"] = "My Challenges";
 $lang["You haven't created your challenge."] = "You haven't created your challenge.";
 $lang["Accepted Challenges"] = "Accepted Challenges";
 
+//Topichat
+$lang["New message by"] = "New message by";
+$lang["Information has been changed by"] = "Information has been changed by";
+
+//Profile
+$lang["Comment Here"] = "Comment Here";
+$lang["Like"] = "Like";
+$lang["Unlike"] = "Unlike";
+$lang["Reply"] = "Reply";
+$lang["No comments available"] = "No comments available";
+$lang["Seems like your browser doesn't support video tag."] = "Seems like your browser doesn't support video tag.";
+$lang["Likes"] = "Likes";
+$lang["Comments"] = "Comments";
+$lang["Shares"] = "Shares";
+$lang["Interesting"] = "Interesting";
+
+//Edit Profile
+$lang["Edit Profile"] = "Edit Profile";
+$lang["Followed"] = "Followed";
+$lang["Follow"] = "Follow";
+$lang["No Follower."] = "No Follower.";
+$lang["No Followee."] = "No Followee.";
+$lang["Are you sure?"] = "Are you sure?";
+$lang["You would like to follow this user!"] = "You would like to follow this user!";
+$lang["Yes, Follow!"] = "Yes, Follow!";
+$lang["No, cancel plz!"] = "No, cancel plz!";
+$lang["User have been followed."] = "User have been followed.";
+$lang["success"] = "success";
+$lang["Cancelled"] = "Cancelled";
+$lang["You are not follow this user :)"] = "You are not follow this user :)";
+$lang["You would like to unfollow this user!"] = "You would like to unfollow this user!";
+$lang["Yes, Unfollow!"] = "Yes, Unfollow!";
+$lang["No, cancel plz!"] = "No, cancel plz!";
+$lang["Unfollowed"] = "Unfollowed";
+$lang["User have been Unfollowed."] = "User have been Unfollowed.";
+$lang["You are not unfollow this user :)"] = "You are not unfollow this user :)";
+$lang["No more data found"] = "No more data found";
+$lang["No more post found"] = "No more post found";
+$lang["No more saved post found"] = "No more saved post found";
+$lang["You can't take back given coin"] = "You can't take back given coin";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
+$lang[""] = "";
 $lang[""] = "";
 $lang[""] = "";
 ?>
