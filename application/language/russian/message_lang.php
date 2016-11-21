@@ -251,4 +251,51 @@ $lang["League event inserted sucessfully."] = "событие Лига вста�
 $lang["Find your soulmate"] = "Найти свою вторую половинку";
 $lang["Requested"] = "запрошенный";
 $lang["Group name"] = "Название группы";
+
+// Events
+$lang["Events"] = "Мероприятия";
+$lang["Event"] = "Мероприятие";
+$lang["Filters"] = "фильтры";
+$lang["No Events found."] = "События не найдены.";
+$lang["Create New Event"] = "Создать событие";
+$lang["Event title"] = "название события";
+$lang["Events details and who you are looking for"] = "События и детали, которые вы ищете";
+$lang["Event start time"] = "Время начала мероприятия";
+$lang["Event end time"] = "Конец события Время";
+$lang["Number of people to join"] = "Количество людей, чтобы присоединиться";
+$lang["Approval needed"] = "требуется утверждение";
+
+$lang["Post release distance range"] = "Post release distance range";
+$lang["From current location"] = "From current location";
+$lang["Yes"] = "Yes";
+$lang["No"] = "No";
+$lang["Number of seat"] = "Number of seat";
+$lang["Created Events"] = "Created Events";
+$lang["Joined Events"] = "Joined Events";
+$lang["No more event found"] = "No more event found";
+$lang["No Joined Event available"] = "No Joined Event available";
+$lang["No Joined Event available."] = "No Joined Event available.";
+$lang["No Event available"] = "No Event available";
+$lang["Event join request"] = "Event join request";
+$lang["wants to join"] = "wants to join";
+
+$lang["Challenge Quit successfully."] = "Challenge Quit successfully.";
+$lang["Challenge Quit Error occured."] = "Challenge Quit Error occured.";
+$lang["Links"] = "Links";
+$lang["Deny"] = "Deny";
+$lang["Accept"] = "Accept";
+$lang["No new request available"] = "No new request available";
+
+// Challenges
+$lang["Challenges"] = "Challenges";
+$lang["accepted by"] = "accepted by";
+$lang["Challenge accepted"] = "Challenge accepted";
+$lang["Accepted date"] = "Accepted date";
+$lang["No Challenge notification available."] = "No Challenge notification available.";
+$lang["Finished"] = "Finished";
+$lang["Dates"] = "Dates";
+$lang["No Finished Challenge."] = "No Finished Challenge.";
+$lang["My Challenges"] = "My Challenges";
+$lang["You haven't created your challenge."] = "You haven't created your challenge.";
+$lang["Accepted Challenges"] = "Accepted Challenges";
 ?>

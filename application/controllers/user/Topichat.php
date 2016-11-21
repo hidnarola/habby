@@ -457,4 +457,22 @@ class Topichat extends CI_Controller {
         }
     }
 
+    public function youtube_video_details() {
+        if ($this->input->post()) {
+            $id = $this->input->post('id');
+            $this->data['media_type'] = 'Links';
+            $this->data['DEFAULT_IMAGE_PATH'] = DEFAULT_IMAGE_PATH;
+            $this->data['DEFAULT_PROFILE_IMAGE_PATH'] = DEFAULT_PROFILE_IMAGE_PATH;
+            $this->data['DEFAULT_CHAT_IMAGE_PATH'] = DEFAULT_CHAT_IMAGE_PATH;
+            $this->data['media_content'] = $this->Topichat_model->get_youtube_media_details($id);
+            $group_id = $this->data['media_content']['topic_group_id'];
+            $data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
+            $this->data['users'] = $this->Topichat_model->get_topichats_users($group_id);
+            krsort($data['messages']); // Reverse array
+            $this->data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $data, true);
+            echo json_encode($this->data);
+            exit;
+        }
+    }
+
 }

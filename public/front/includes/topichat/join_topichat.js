@@ -40,7 +40,7 @@ function share_links() {
                 } else {
                     if (preview.provider_name == "YouTube") {
                         var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? preview.thumbnail_url : "";
-                        html = '<div class="videoPreview"><img class="thumb" src="' + thumbnail_url + '"></img></div>';
+                        html = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
                         youtube_video_html = preview.media.html;
                         $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
                     }
@@ -65,6 +65,7 @@ function share_links() {
                             data: 'media=' + preview,
                             success: function (resp) {
                                 $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                                $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
                             }
                         });
                     }, 4000);
@@ -494,12 +495,12 @@ $(document).ready(function () {
                 $('.imagePreview' + i).data('file', userdata.media);
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             } else if (userdata.media_type == "links") {
+                userlink = JSON.parse(userdata.message);
                 var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? userlink.thumbnail_url : "";
-                var youtube_video = '<div class="videoPreview"><img class="thumb" src="' + thumbnail_url + '"></img></div>';
-                if (youtube_video != null) {
+                var youtube_video = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=' + userdata.chat_id + '><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
+                if (userdata.youtube_video != null) {
                     $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post youtube_video" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare">' + youtube_video + '<div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 } else {
-                    userlink = JSON.parse(userdata.message);
                     var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
                             '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
                             '</div>' : "";
