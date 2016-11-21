@@ -69,6 +69,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
                         $send_object['youtube_video'] = (isset($message->youtube_video) ? $message->youtube_video : NULL);
                         $send_object['group'] = get_topic_name($message->group_id);
+                        print_r($send_object);
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {
                                 $Server->wsSend($id, json_encode($send_object));
