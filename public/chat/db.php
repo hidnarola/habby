@@ -82,10 +82,10 @@ function send_topic_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
-function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_video=NULL) {
+function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_video=null) {
     global $conn;
     if ($media_type == 'links') {
-        if( $youtube_video != NULL)
+        if( !is_null($youtube_video))
         {
             $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "','".$youtube_video."'," . date('Y-m-d H:i:s') . "')";
         }
