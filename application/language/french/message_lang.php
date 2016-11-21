@@ -76,7 +76,7 @@ $lang['Invalid Token'] = 'jeton invalide';
 $lang['Your password is successfully changed! Please login to access your account!'] = "Votre mot de passe est changé avec succès! S'il vous plaît vous connecter pour accéder à votre compte!";
 $lang['User Profile has been updated successfully.'] = "L'image a été téléchargé avec succès";
 $lang['Image has been uploaded successfully'] = 'Изображение было загружено успешно';
-$lang['Topic added successfully'] = 'Topic added successfully.';
+$lang['Topic added successfully'] = 'Sujet ajouté avec succès.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
 $lang['Group plan added successfully'] = 'Plan de Groupe ajouté avec succès';
 

@@ -77,7 +77,7 @@ $lang['Your password is successfully changed! Please login to access your accoun
 $lang['User Profile has been updated successfully.'] = 'Профиль пользователя был успешно обновлен.';
 $lang['Image has been uploaded successfully'] = 'Изображение было загружено успешно';
 
-$lang['Topic added successfully'] = 'Topic added successfully.';
+$lang['Topic added successfully'] = 'Тема успешно добавлена.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
 $lang['Group plan added successfully'] = 'План группы успешно добавлен';
 

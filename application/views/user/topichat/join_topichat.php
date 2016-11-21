@@ -1,7 +1,7 @@
 <div class="row cont_top_1">
     <div class="container topic_2cntnr mble_pd_0">
         <p class="mr_p visible-xs" >
-            <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
+            <a href="<?php echo base_url() . "topichat/media/" . $Id ?>" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
         </p>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 topichat_left_sec">
             <div class="rate_lg_sec topichat_msg_sec">
@@ -184,7 +184,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                  ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                    ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -239,7 +239,7 @@
                         <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
                             <div class="tittl_sec">
                                 <p><?php echo $topichat['topic_name']; ?> <span></span></p>
-                                <p class="topichat_notes">Note : <?php echo $topichat['notes']; ?> </p>
+                                <p class="topichat_notes"><?php echo lang('Note') . " :" . $topichat['notes']; ?> </p>
                             </div>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-12">
