@@ -106,13 +106,14 @@ foreach ($messages as $message) {
                         </button>
                     </div>
                     <?php
+                    $media = json_decode($message['media']);
                     if ($message['youtube_video'] != Null) {
                         ?>
                         <div class = "fileshare">
                             <?php
                             if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
                                 ?>
-                                <div class="videoPreview" data-toggle="modal" data-target="#mediaModal" data-type="links" data-id='<?php echo $message['id']; ?>'>
+                                <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id='<?php echo $message['id']; ?>'>
                                     <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
                                     <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                 </div>
@@ -122,7 +123,6 @@ foreach ($messages as $message) {
                         </div>
                         <?php
                     } else {
-                        $media = json_decode($message['media']);
                         ?>
                         <div class = "fileshare">
                             <div class = "">
@@ -252,7 +252,7 @@ foreach ($messages as $message) {
                             <?php
                             if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
                                 ?>
-                                <div class="videoPreview" data-toggle="modal" data-target="#mediaModal" data-type="links" data-id='<?php echo $message['id']; ?>'>
+                                <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id='<?php echo $message['id']; ?>'>
                                     <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
                                     <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                 </div>

@@ -29,8 +29,8 @@
                                                 <label class='control-label'><?php echo $request['title'] ?></label>
                                             </div>
                                             <div class='actions'>
-                                                <button class='pstbtn deny'>Deny</button>
-                                                <button class='pstbtn accept'>Accept</button>
+                                                <button class='pstbtn deny'><?php echo lang('Deny'); ?></button>
+                                                <button class='pstbtn accept'><?php echo lang('Accept'); ?></button>
                                             </div>
                                         </div>
                                         <?php
@@ -38,7 +38,7 @@
                                 } else {
                                     ?>
                                     <div class='alert alert-info text-center' style='margin:15px'>
-                                        No new request available
+                                        <?php echo lang('No new request available'); ?>
                                     </div>
                                     <?php
                                 }
@@ -176,17 +176,17 @@
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="gender" id="gender" value="Male" <?php
-                                if ($user_data['gender'] == 'Male') {
-                                    echo 'checked';
-                                }
-                                ?>><?php echo lang('Male'); ?>
+                                    if ($user_data['gender'] == 'Male') {
+                                        echo 'checked';
+                                    }
+                                    ?>><?php echo lang('Male'); ?>
                                 </label>
                                 <label>
                                     <input type="radio" name="gender" id="gender" value="Female" <?php
                                     if ($user_data['gender'] == 'Female') {
                                         echo 'checked';
                                     }
-                                ?>><?php echo lang('Female'); ?>
+                                    ?>><?php echo lang('Female'); ?>
                                 </label>
                             </div>
                         </div>

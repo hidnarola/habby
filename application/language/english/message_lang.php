@@ -283,6 +283,23 @@ $lang["wants to join"] = "wants to join";
 $lang["Challenge Quit successfully."] = "Challenge Quit successfully.";
 $lang["Challenge Quit Error occured."] = "Challenge Quit Error occured.";
 $lang["Links"] = "Links";
+$lang["Deny"] = "Deny";
+$lang["Accept"] = "Accept";
+$lang["No new request available"] = "No new request available";
+
+// Challenges
+$lang["Challenges"] = "Challenges";
+$lang["accepted by"] = "accepted by";
+$lang["Challenge accepted"] = "Challenge accepted";
+$lang["Accepted date"] = "Accepted date";
+$lang["No Challenge notification available."] = "No Challenge notification available.";
+$lang["Finished"] = "Finished";
+$lang["Dates"] = "Dates";
+$lang["No Finished Challenge."] = "No Finished Challenge.";
+$lang["My Challenges"] = "My Challenges";
+$lang["You haven't created your challenge."] = "You haven't created your challenge.";
+$lang["Accepted Challenges"] = "Accepted Challenges";
+
 $lang[""] = "";
 $lang[""] = "";
 ?>

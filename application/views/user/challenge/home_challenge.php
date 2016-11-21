@@ -2,7 +2,7 @@
 <div class="row personal_act_sec personal_act_sec3">
     <div class="container prsna_coner personal_cntner">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prsnl_sm_sec">
-            <h2>Challenges</h2>
+            <h2><?php echo lang('Challenges') ?></h2>
         </div>
         <?php
         if ($user_data['id'] == $this->session->user['id']) {
@@ -13,7 +13,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 topi_prsnl topi_prsnl_btm">
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 prsnl_sm_sec">
-                                    <h2 class="nexttab_h2">Challenge accepted <span class="nexttab">Accepted date</span></h2>
+                                    <h2 class="nexttab_h2"><?php echo lang('Challenge accepted') ?> <span class="nexttab"><?php echo lang('Accepted date') ?></span></h2>
                                 </div>
                                 <?php
                                 if ($challenge_accepted != null && !empty($challenge_accepted)) {
@@ -21,19 +21,17 @@
 //                                    pr($challenge);
                                         ?>
                                         <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 prsnl_sm_sec">
-                                            <p><?php echo $challenge['name'] . " accepted by " . $challenge['display_name'] ?> </p>
+                                            <p><?php echo $challenge['name'] . " " . lang("accepted by") . " " . $challenge['display_name'] ?> </p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 prsnl_sm_sec">
                                             <p><?php echo date('d/m/Y h:i', strtotime($challenge['challange_date'])); ?></p>
                                         </div>
                                         <?php
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     ?>
                                     <div class="col-sm-12 alert alert-info">
-                                        No Challenge notification available.
+                                        <?php echo lang('No Challenge notification available.') ?>
                                     </div>
                                     <?php
                                 }
@@ -44,10 +42,10 @@
                             <div class="chalng_tbl_sec">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
-                                        <h2>Finished:</h2>
+                                        <h2><?php echo lang('Finished') ?>:</h2>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
-                                        <h2>Dates</h2>
+                                        <h2><?php echo lang('Dates') ?></h2>
                                     </div>
                                 </div>
                                 <?php
@@ -67,7 +65,7 @@
                                 } else {
                                     ?>
                                     <div class = "alert alert-info text-center">
-                                        No Finished Challenge.
+                                        <?php echo lang('No Finished Challenge.') ?>
                                     </div>
                                     <?php
                                 }
@@ -89,7 +87,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="row grp_3sec">
-                            <h2 class="subgroup">My Challenges</h2>
+                            <h2 class="subgroup"><?php echo lang('My Challenges') ?></h2>
                             <?php
                             if ($my_challenges != null && !empty($my_challenges)) {
                                 foreach ($my_challenges as $my_challenge) {
@@ -102,7 +100,7 @@
                                             <?php
                                             if ($user_data['id'] == $this->session->user['id']) {
                                                 ?>
-                                                <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($my_challenge['id'])) ?>">Enter <?php echo ($my_challenge['is_finished'] == 1) ? "(Finished)" : "" ?></a>
+                                                <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($my_challenge['id'])) ?>"><?php echo lang('Enter') ?> <?php echo ($my_challenge['is_finished'] == 1) ? "(" . lang('Finished') . ")" : "" ?></a>
                                                 <?php
                                             }
                                             ?>
@@ -113,7 +111,7 @@
                             } else {
                                 ?>
                                 <div class="col-sm-12 alert alert-info">
-                                    You haven't created your challenge.
+                                    <?php echo lang("You haven't created your challenge.") ?>
                                 </div>
                                 <?php
                             }
@@ -121,7 +119,7 @@
                         </div>
                         <hr>
                         <div class="row grp_3sec">
-                            <h2 class="subgroup">Accepted Challenges</h2>
+                            <h2 class="subgroup"><?php echo lang('Accepted Challenges') ?></h2>
                             <?php
                             if ($joined_challenges != null && !empty($joined_challenges)) {
                                 foreach ($joined_challenges as $joined_challenge) {
@@ -134,7 +132,7 @@
                                             <?php
                                             if ($user_data['id'] == $this->session->user['id']) {
                                                 ?>
-                                                <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($joined_challenge['id'])) ?>">Enter <?php echo ($joined_challenge['is_finished'] == 1) ? "(Finished)" : "" ?></a>
+                                                <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($joined_challenge['id'])) ?>"><?php echo lang('Enter') ?> <?php echo ($joined_challenge['is_finished'] == 1) ? "(" . lang('Finished') . ")" : "" ?></a>
                                                 <?php
                                             }
                                             ?>
@@ -145,7 +143,7 @@
                             } else {
                                 ?>
                                 <div class="col-sm-12 alert alert-info">
-                                    You havan't joined any challenge.
+                                    <?php echo lang("You havan't joined any challenge.") ?>
                                 </div>
                                 <?php
                             }

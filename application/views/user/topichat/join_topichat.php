@@ -117,10 +117,23 @@
                             <div class="topic_frame">
                                 <?php
                                 foreach ($recent_links as $key => $recent_link) {
-                                    if ($key == 'youtube_video') {
-                                        echo "<div class = 'fileshare'>" . $recent_link . "</div>";
+                                    $media = json_decode($recent_link['media']);
+                                    if ($recent_link['youtube_video'] != null) {
+                                        ?>
+                                        <div class = "fileshare">
+                                            <?php
+                                            if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                                ?>
+                                                <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-type="links" data-id='<?php echo $recent_link['id']; ?>'>
+                                                    <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                                    <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <?php
                                     } else {
-                                        $media = json_decode($recent_link);
                                         ?>
                                         <div class = "fileshare">
                                             <div class = "">
@@ -171,7 +184,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                         ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                  ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -544,6 +557,87 @@
                                                                 <input type="file" name="upload_files" class="upload" id="upload_files">
                                                             </div>
                                                         </span>-->
+                                                        <span class="input-group-btn upld_icnpad">
+                                                            <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <input class="submit_btn chat_btn" type="submit" value="Send">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Type area end here -->
+
+                                </div>
+                            </div>
+                            <!-- Type Chat section end here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>   
+        </div>
+
+
+    </div>
+</div>
+<div class="modal fade in" id="linkModal" role="dialog">
+    <div class="modal-dialog topichat_media_modal">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                        <div class="usr_post_img usr_post_img_modal">
+                            <img class="img-circle img-responsive topichat_media_user" src="">
+                        </div>
+                        <div class="topichat_media_details">
+
+                        </div>
+                        <div class="event_media event_media_modal topichat_msg_sec">
+                            <div class="row topichat_media_post topichat_media_post_modal" data-chat_id="123">
+                                <div class="col-md-1 rank_button_modal">
+                                    <div id="field" class="topichat_media_rank topichat_media_rank_modal">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-11 topichat_media_popup">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="usr_post_img user_post_image_right">
+
+
+                        </div>
+                        <div class="row">
+
+                            <!-- Chat area section start here -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
+                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">                                    
+                                </div>
+                            </div>
+                            <!-- Chat area section end here -->
+
+                            <!-- Type Chat section start here -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="topich_chat_typesec topich_chat_typesec_modal">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="topic_textarea">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb" style="width:25% !important"></a></span>
+                                                        <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
+                                                        <input type="hidden" id="message" name="message" class="form-control">
                                                         <span class="input-group-btn upld_icnpad">
                                                             <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
                                                         </span>

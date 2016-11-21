@@ -940,6 +940,13 @@ img.user_chat_thumb {
     vertical-align: middle;
 }
 .videoPreview .youtube-icon img{height: 50px;width: 50px;}
+#linkModal iframe.embedly-embed {
+    height: 405px;
+    width: 720px;
+}
+#linkModal .topichat_media_popup {
+    margin-top: 20px;
+}
 @media(min-width:1583px){
     .row.event_container
     {
