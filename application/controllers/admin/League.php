@@ -263,7 +263,7 @@ class League extends CI_Controller {
                     $this->Admin_league_model->update_record('league', $where, $upd_data);
                     $ins_user_data = array(
                         'league_id' => $league_group_id,
-                        'user_id' => $this->session->user['id']
+                        'user_id' => $this->session->admin['id']
                     );
                     $this->League_model->insert_league_user($ins_user_data);
                     $this->session->set_flashdata('success', 'League Group successfully Added!');

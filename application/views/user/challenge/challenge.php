@@ -575,12 +575,12 @@
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="description" placeholder="Required Details : " name="description">
+                            <input type="text" class="form-control" id="description" placeholder="Required Details : " name="description" required="">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="rewards" placeholder="Rewards: " name="rewards">
+                            <input type="number" class="form-control" id="rewards" placeholder="Rewards: (Rewards must be between 1 to 10 coin)" min="1" max="10" name="rewards" required>
                         </div>
                     </div>
                     <div class="form-group clearfix xs_mddle">
@@ -588,7 +588,7 @@
                             <input type="submit" class="pstbtn" value="<?php echo lang('Create') ?>"/>
                         </div>
                     </div>
-                </form>	
+                </form>
             </div>
         </div>
     </div>

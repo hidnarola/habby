@@ -144,7 +144,7 @@
                                             <div class="topic_prfle_icon_sec">
 
                                                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-3">
-                                                    <a href="personal_account.html"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>pst_prfl_icon.png" class="img-responsive cht_pfl_img"></a>
+                                                    <a href="javascript:;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$challenge['user_image']; ?>" class="img-responsive cht_pfl_img user_chat_thumb"></a>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
                                                     <ul class="list-inline type_icon_ul">

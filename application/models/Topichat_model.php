@@ -45,11 +45,13 @@ class Topichat_model extends CI_Model {
 
     public function get_topichat_group($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
+        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id) as Total_User,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
 //        $this->db->where('tg.user_id !=' . $user_id . ' AND tt.user_id IS NULL');
         $this->db->order_by('tg.created_date', 'DESC');
+        $this->db->where('tg.is_blocked','0');
+        $this->db->where('tg.is_deleted','0');
         $this->db->limit($limit, $start);
         $this->db->group_by('tg.id');
         $res_data = $this->db->get('topic_group tg')->result_array();
@@ -168,6 +170,8 @@ class Topichat_model extends CI_Model {
         $this->db->join('users', 'users.id = tg.user_id');
         //$this->db->where('tg.user_id !=' . $user_id . ' AND tt.user_id IS NULL');
         $this->db->order_by('Total_User', 'DESC');
+        $this->db->where('tg.is_blocked','0');
+        $this->db->where('tg.is_deleted','0');
         $this->db->group_by('tg.id');
         $this->db->limit($limit, $start);
         $res_data = $this->db->get('topic_group tg')->result_array();
@@ -193,6 +197,8 @@ class Topichat_model extends CI_Model {
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         $this->db->like('tg.topic_name', $search_topic);
+        $this->db->where('tg.is_blocked','0');
+        $this->db->where('tg.is_deleted','0');
 //        $this->db->where('tg.user_id !=' . $user_id . ' AND tt.user_id IS NULL');
         $this->db->limit($limit, $start);
         $this->db->group_by('tg.id');
@@ -221,6 +227,8 @@ class Topichat_model extends CI_Model {
 //        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         $this->db->where('tg.user_id =' . $user_id);
+        $this->db->where('tg.is_blocked','0');
+        $this->db->where('tg.is_deleted','0');
         $this->db->order_by('tg.created_date', 'DESC');
         $this->db->group_by('tg.id');
         $res_data = $this->db->get('topic_group tg')->result_array();
@@ -236,6 +244,8 @@ class Topichat_model extends CI_Model {
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id . ' AND tg.user_id != tt.user_id', 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         $this->db->where('tt.user_id IS NOT NULL');
+        $this->db->where('tg.is_blocked','0');
+        $this->db->where('tg.is_deleted','0');
         $this->db->order_by('tg.created_date', 'DESC');
         $this->db->group_by('tg.id');
         $res_data = $this->db->get('topic_group tg')->result_array();

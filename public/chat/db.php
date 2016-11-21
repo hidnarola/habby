@@ -82,10 +82,17 @@ function send_topic_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
-function send_topic_media($group_id, $sender_id, $msg, $media_type) {
+function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_video=NULL) {
     global $conn;
     if ($media_type == 'links') {
-        $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "','" . date('Y-m-d H:i:s') . "')";
+        if( $youtube_video != NULL)
+        {
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "','".$youtube_video."'," . date('Y-m-d H:i:s') . "')";
+        }
+        else
+        {
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL,'" . date('Y-m-d H:i:s') . "')";
+        }
         if (mysqli_query($conn, $query)) {
             return true;
         }
