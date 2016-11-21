@@ -8,6 +8,7 @@ class Login extends CI_Controller {
         parent::__construct();
         $this->load->library(['facebook']);
         $this->load->model(array('Users_model'));
+        $this->load->model(array('Seo_model'));
     }
 
     /**
@@ -33,6 +34,7 @@ class Login extends CI_Controller {
     public function index() {
         $this->data['user_data'] = $this->session->userdata('user');
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Login');
         if (!empty($this->data['user_data'])) {
             $this->Users_model->update_user_data($data['user_data']['id'], ['last_login' => date('Y-m-d H:i:s')]);
             redirect('home');

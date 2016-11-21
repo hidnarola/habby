@@ -25,7 +25,7 @@ class User extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(['facebook']);
-        $this->load->model(array('Users_model', 'Common_functionality'));
+        $this->load->model(array('Users_model', 'Common_functionality','Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
     }
 
@@ -70,6 +70,7 @@ class User extends CI_Controller {
      * develop by : HPA
      */
     public function forgot_password() {
+        $this->data['meta_data'] = $this->Seo_model->get_page_meta('Forgot Password');
         $this->data['fb_login_url'] = $this->facebook->get_login_url();
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
 

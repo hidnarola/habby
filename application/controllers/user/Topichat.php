@@ -9,7 +9,7 @@ class Topichat extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('download');
-        $this->load->model(array('Users_model', 'Topichat_model', 'Common_functionality'));
+        $this->load->model(array('Users_model', 'Topichat_model', 'Common_functionality','Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('topichat');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -40,6 +40,7 @@ class Topichat extends CI_Controller {
             $this->data['topichat_groups'] = $this->Topichat_model->get_topichat_group($start, $limit);
         }
         if ($page == 1) {
+            $this->data['meta_data'] = $this->Seo_model->get_page_meta('Topichat');
             $this->template->load('front', 'user/topichat/topichat', $this->data);
         } else {
             $data = array();

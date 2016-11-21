@@ -123,10 +123,14 @@ if (!empty($user_data['user_image'])) {
                                     </li>
                                     <li class="<?php echo ($controller == 'league') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/league'; ?>"><i class="icon-users4"></i> <span>League and Alliance</span></a>
-                                    </li><!--
-                                    <li class="<?php echo ($controller == 'header_footer_control') ? 'active' : ''; ?>">
-                                        <a href="<?php echo base_url() . 'admin/header_footer_control'; ?>"><i class="icon-stack2"></i> <span>Header/Footer Setting</span></a>-->
                                     </li>
+                                    <li class="<?php echo ($controller == 'seo') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/seo'; ?>"><i class="icon-users4"></i> <span>SEO</span></a>
+                                    </li>
+                                    <!--
+                                    <li class="<?php echo ($controller == 'header_footer_control') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/header_footer_control'; ?>"><i class="icon-stack2"></i> <span>Header/Footer Setting</span></a>
+                                    </li>-->
                                     <li class="">
                                         <a href="<?php echo base_url() . "admin/logout"; ?>"><i class="icon-switch2"></i> <span>Logout</span></a>
                                     </li>

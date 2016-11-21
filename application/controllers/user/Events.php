@@ -8,7 +8,7 @@ class Events extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Event_model', 'Common_functionality'));
+        $this->load->model(array('Users_model', 'Event_model', 'Common_functionality','Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('events');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -26,6 +26,7 @@ class Events extends CI_Controller {
         $start = ($page - 1) * $limit;
         $this->data['event_posts'] = $this->Event_model->get_event_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {
+            $this->data['meta_data'] = $this->Seo_model->get_page_meta('Event');
             $this->template->load('front', 'user/events/events', $this->data);
         } else {
             $data = array();
