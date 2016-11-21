@@ -114,6 +114,7 @@ foreach ($messages as $message) {
                                 ?>
                                 <div class="videoPreview" data-toggle="modal" data-target="#mediaModal" data-type="links" data-id='<?php echo $message['id']; ?>'>
                                     <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                    <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                 </div>
                                 <?php
                             }
@@ -253,6 +254,7 @@ foreach ($messages as $message) {
                                 ?>
                                 <div class="videoPreview" data-toggle="modal" data-target="#mediaModal" data-type="links" data-id='<?php echo $message['id']; ?>'>
                                     <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                    <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                 </div>
                                 <?php
                             }
