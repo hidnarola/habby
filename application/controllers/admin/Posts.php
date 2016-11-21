@@ -100,7 +100,7 @@ class Posts extends CI_Controller {
             $this->template->load('admin_main', 'admin/posts/manage', $this->data);
         } else {
             $post_arr['description'] = $this->input->post('description');
-            $post_arr['user_id'] = $this->session->user['id'];
+            $post_arr['user_id'] = $this->session->admin['id'];
             if ($post_id != '') {
                 $where = 'id = ' . $this->db->escape($post_id);
                 if (!empty($_FILES['uploadfile']['name'])) {

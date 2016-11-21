@@ -223,6 +223,7 @@ class Challenge_model extends CI_Model {
         $this->db->select('ch.name,ch.modified_date');
         $this->db->where('ch.is_finished', 1);
         $this->db->where('ch.user_id =' . $user_id);
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         $this->db->order_by('ch.modified_date', 'DESC');
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
@@ -269,6 +270,7 @@ class Challenge_model extends CI_Model {
         $this->db->where('ch.user_id =' . $user_id);
 //        $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
     }
@@ -279,9 +281,10 @@ class Challenge_model extends CI_Model {
 
     public function get_joined_challenge($user_id) {
         $this->db->select('ch.*');
-        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND ch.user_id != cu.user_id');
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND ch.user_id != cu.user_id AND cu.is_quit = 0');
 //        $this->db->where('ch.is_finished', 0);
         $this->db->order_by('ch.created_date', 'DESC');
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         $res_data = $this->db->get('challanges ch')->result_array();
         return $res_data;
     }

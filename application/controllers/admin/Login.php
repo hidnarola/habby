@@ -29,7 +29,7 @@ class Login extends CI_Controller {
         }
 
         if ($this->input->post()) {
-            pr($this->input->post());
+            
             $email = $this->input->post('username');
             $password = $this->input->post('password');
             $remember_me = $this->input->post('remember_me');

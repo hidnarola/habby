@@ -127,24 +127,28 @@ $('document').ready(function () {
         // If the user has pressed enter
         if (key == 13) {
             var msg = $.trim($(this).val());
-            var post_id = $(this).parents('.rank_lg_sec').data('post_id');
-            $.ajax({
-                url: 'user/challenge/add_comment/' + post_id,
-                method: 'post',
-                data: 'msg=' + msg,
-                success: function (str) {
-                    if (str != 0)
-                    {
-                        t.after(str);
-                        t.parent().children('.no_comment').remove();
-                        var cmt_cnt = t.parents('.rank_lg_sec').find('.comment_cnt');
-                        console.log(cmt_cnt);
-                        cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+            if(msg != '')
+            {
+                var post_id = $(this).parents('.rank_lg_sec').data('post_id');
+                $.ajax({
+                    url: 'user/challenge/add_comment/' + post_id,
+                    method: 'post',
+                    data: 'msg=' + msg,
+                    success: function (str) {
+                        if (str != 0)
+                        {
+                            t.after(str);
+                            t.parent().children('.no_comment').remove();
+                            var cmt_cnt = t.parents('.rank_lg_sec').find('.comment_cnt');
+                            console.log(cmt_cnt);
+                            cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+                        }
                     }
-                }
-            });
-            $(this).val('');
+                });
+                $(this).val('');
+            }
             return false;
+            
         }
     });
     // Add like to the post comment
@@ -205,22 +209,25 @@ $('document').ready(function () {
         if (key == 13) {
             var t = $(this);
             var msg = $.trim($(this).val());
-            var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
-            $.ajax({
-                url: 'user/challenge/add_comment_reply/' + post_comment_id,
-                method: 'post',
-                data: 'msg=' + msg,
-                success: function (str) {
-                    if (str != 0)
-                    {
-                        t.before(str);
-                        var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
-                        reply.html(parseInt(reply.html()) + 1);
+            if(msg != '')
+            {
+                var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
+                $.ajax({
+                    url: 'user/challenge/add_comment_reply/' + post_comment_id,
+                    method: 'post',
+                    data: 'msg=' + msg,
+                    success: function (str) {
+                        if (str != 0)
+                        {
+                            t.before(str);
+                            var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
+                            reply.html(parseInt(reply.html()) + 1);
+                        }
                     }
-                }
-            });
-            $(this).val('');
-            return false;
+                });
+                $(this).val('');
+                return false;
+            }
         }
     });
 
