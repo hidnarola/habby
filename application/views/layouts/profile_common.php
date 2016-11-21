@@ -45,20 +45,20 @@ $method_name = $this->router->fetch_method(); //outputs index
                                         <?php
                                         if ($user_data['id'] == $this->session->user['id']) {
                                             ?>
-                                            <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn">Edit Profile</a></p>
+                                            <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn"><?php echo lang("Edit Profile"); ?></a></p>
                                             <?php
                                         } else {
                                             if (isset($followers) && !empty($followers)) {
                                                 foreach ($followers as $follower) {
                                                     if ($follower['follower_id'] == $this->session->user['id']) {
                                                         ?>
-                                                        <p class="follow_p"><a href="javascript:void(0)" class="unfollowbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>">Followed</a></p>
+                                                        <p class="follow_p"><a href="javascript:void(0)" class="unfollowbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>"><?php echo lang("Followed"); ?></a></p>
                                                         <?php
                                                     }
                                                 }
                                             } else {
                                                 ?>
-                                                <p class="follow_p"><a href="javascript:void(0)" class="followbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>">Follow</a></p>
+                                                <p class="follow_p"><a href="javascript:void(0)" class="followbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>"><?php echo lang("Follow"); ?></a></p>
                                                 <?php
                                             }
                                         }
@@ -91,7 +91,7 @@ $method_name = $this->router->fetch_method(); //outputs index
                                             <?php
                                         }
                                     } else {
-                                        echo "<li>No Follower.</li>";
+                                        echo "<li>" . lang('No Follower.') . "</li>";
                                     }
                                     ?>
                                 </ul>
@@ -113,7 +113,7 @@ $method_name = $this->router->fetch_method(); //outputs index
                                             <?php
                                         }
                                     } else {
-                                        echo "<li>No Followee.</li>";
+                                        echo "<li>" . lang('No Followee.') . "</li>";
                                     }
                                     ?>
                                 </ul>
@@ -150,9 +150,9 @@ $method_name = $this->router->fetch_method(); //outputs index
                     ?>
                     <li class="<?php echo ($controller == 'Home' && $method_name == 'user_profile') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/" . $user_data['id']; ?>"><?php echo lang('IP'); ?></a></li>
                     <li class="<?php echo ($controller == 'Home' && $method_name == 'topichat') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/topichat/" . $user_data['id']; ?>"><?php echo lang('Topichat'); ?></a></li>
-    <!--                        <li><a href="<?php echo base_url() . "user_profile/soulmate/" . $user_data['id']; ?>"><?php echo lang('Soulmate'); ?></a></li>
+    <!--                        <li><a href="<?php echo base_url() . "user_profile/soulmate/" . $user_data['id']; ?>><?php echo lang('Soulmate'); ?></a></li>
                     <li><a href="<?php echo base_url() . "user_profile/groupplan/" . $user_data['id']; ?>"><?php echo lang('Group Plan'); ?></a></li>-->
-                    <li class="<?php echo ($controller == 'Home' && $method_name == 'events') ? 'active' : ''; ?>><a href="<?php echo base_url() . "user_profile/events/".$user_data['id']; ?>"><?php echo lang('Events'); ?></a></li>
+                    <li class="<?php echo ($controller == 'Home' && $method_name == 'events') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/events/" . $user_data['id']; ?>"><?php echo lang('Events'); ?></a></li>
                     <li class="<?php echo ($controller == 'Home' && $method_name == 'challenges') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/challenges/" . $user_data['id']; ?>"><?php echo lang('Challenge'); ?></a></li>
                     <li class="<?php echo ($controller == 'Home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/league/" . $user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>
                     <?php
@@ -254,13 +254,13 @@ $method_name = $this->router->fetch_method(); //outputs index
         $('.followbtn').click(function () {
             var user_id = $(this).data('userid');
             swal({
-                title: "Are you sure?",
-                text: "You would like to follow this user!",
+                title: "<?php echo lang('Are you sure?') ?>",
+                text: "<?php echo lang('You would like to follow this user!') ?>",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, Follow!",
-                cancelButtonText: "No, cancel plz!",
+                confirmButtonText: "<?php echo lang("Yes, Follow!"); ?>",
+                cancelButtonText: "<?php echo lang("No, cancel plz!"); ?>",
                 closeOnConfirm: false,
                 closeOnCancel: false
             },
@@ -271,12 +271,12 @@ $method_name = $this->router->fetch_method(); //outputs index
                                 type: 'POST',
                                 data: {user_id: user_id},
                                 success: function (data) {
-                                    $('.followbtn').text("Followed");
-                                    swal("Followed!", "User have been followed.", "success");
+                                    $('.followbtn').text("<?php echo lang('Followed') ?>");
+                                    swal("<?php echo lang("Followed"); ?>!", "<?php echo lang("User have been followed."); ?>", "<?php echo lang("success"); ?>");
                                 }
                             });
                         } else {
-                            swal("Cancelled", "You are not follow this user :)", "error");
+                            swal("<?php echo lang("Cancelled"); ?>", "<?php echo lang("You are not follow this user :)"); ?>", "<?php echo lang("error"); ?>");
                         }
                     });
         });
@@ -284,13 +284,13 @@ $method_name = $this->router->fetch_method(); //outputs index
         $('.unfollowbtn').click(function () {
             var user_id = $(this).data('userid');
             swal({
-                title: "Are you sure?",
-                text: "You would like to unfollow this user!",
+                title: "<?php echo lang("Are you sure?"); ?>",
+                text: "<?php echo lang("You would like to unfollow this user!"); ?>",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, Unfollow!",
-                cancelButtonText: "No, cancel plz!",
+                confirmButtonText: "<?php echo lang("Yes, Unfollow!"); ?>",
+                cancelButtonText: "<?php echo lang("No, cancel plz!"); ?>",
                 closeOnConfirm: false,
                 closeOnCancel: false
             },
@@ -301,12 +301,12 @@ $method_name = $this->router->fetch_method(); //outputs index
                                 type: 'POST',
                                 data: {user_id: user_id},
                                 success: function (data) {
-                                    $('.unfollowbtn').text("Follow");
-                                    swal("Followed!", "User have been Unfollowed.", "success");
+                                    $('.unfollowbtn').text("<?php echo lang("Follow"); ?>");
+                                    swal("<?php echo lang("Unfollowed"); ?>!", "<?php echo lang("User have been Unfollowed."); ?>", "<?php echo lang("success"); ?>");
                                 }
                             });
                         } else {
-                            swal("Cancelled", "You are not unfollow this user :)", "error");
+                            swal("<?php echo lang("Cancelled"); ?>", "<?php echo lang("You are not unfollow this user :)"); ?>", "<?php echo lang("error"); ?>");
                         }
                     });
         });

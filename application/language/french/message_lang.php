@@ -297,4 +297,5 @@ $lang["No Finished Challenge."] = "No Finished Challenge.";
 $lang["My Challenges"] = "My Challenges";
 $lang["You haven't created your challenge."] = "You haven't created your challenge.";
 $lang["Accepted Challenges"] = "Accepted Challenges";
+
 ?>
