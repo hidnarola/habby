@@ -44,7 +44,7 @@ $(function () {
     {
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -57,7 +57,7 @@ $(function () {
                 $("#imagePreview").css("background-image", "url(" + this.result + ")");
             }
         } else {
-            $('.message').html("Please select proper image");
+            $('.message').html(proper_image);
             $('.message').show();
         }
     });

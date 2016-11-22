@@ -290,7 +290,7 @@
 
                                                     <!-- Comment window -->
                                                     <div class="post_leftsec_hddn post_leftsec_hddn1 hidden-xs">
-                                                        <p class="cmn_txtnw"> Comment Here</p>
+                                                        <p class="cmn_txtnw"><?php echo lang('Comment Here'); ?></p>
                                                         <textarea class="form-control comment" rows="3" id="comment"></textarea>
                                                         <!-- Comment portion -->
                                                         <?php
@@ -616,9 +616,5 @@
 </div>
 <script type="text/javascript">
     user_id = '<?php echo $user_data['id']; ?>'; // change this id with the user_id for which post is going to display
-    no_post = "<?php echo lang('No more post found'); ?>";
-    no_saved_post = "<?php echo lang('No more saved post found'); ?>";
-    cannot_take_back = "<?php echo lang("You can't take back given coin"); ?>";
-    enough_coin = "<?php echo lang("You don't have enough coin to give"); ?>";
 </script>
 <script type="text/javascript" src="<?php echo USER_JS; ?>post/profile_post.js"></script>

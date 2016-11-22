@@ -1,7 +1,7 @@
 <div class="row solmate_lg_row">
     <div class="container topic_2cntnr">
         <p class="mr_p visible-xs" >
-            <a href="#" class="pstbtn" id="more_rate">Files</a>
+            <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
         </p>
 
         <!-- make a challenge to public sec start here -->
@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="chalng_descpn">
-                            <p>Upload Challenge Post</p>
+                            <p><?php echo lang("Upload Challenge Post"); ?></p>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chalng_upld_col">
@@ -44,7 +44,7 @@
                                             </div>
                                         </div>
                                         <div class="upld_sec">
-                                            <p class="media_name select_file_name">No media selected</p>
+                                            <p class="media_name select_file_name"><?php echo lang("No media selected"); ?></p>
                                             <p class="text-right post_btn "><button type="submit" class="pstbtn upload_btn make_disabled">Post</button></p>
                                         </div>
                                     </form>
@@ -52,7 +52,7 @@
                                 } else {
                                     ?>
                                     <div class="upld_sec finised">
-                                        <span>Challenge has been Finished.</span>
+                                        <span><?php echo lang("Challenge has been Finished."); ?></span>
                                     </div>
                                     <?php
                                 }
@@ -67,7 +67,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="chlng_user_2">
                             <div class="tdy_pln_btn tdy_pln_btn">
-                                <p class="usr_p"><span>Member</span> </p>
+                                <p class="usr_p"><span><?php echo lang("Member"); ?></span> </p>
                                 <div class="dropdownpln">
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
@@ -95,16 +95,16 @@
                             if ($user_data['id'] == $challenge['user_id']) {
                                 if ($challenge['is_finished'] == 0) {
                                     ?>
-                                    <p class="text-right"><a href="<?php echo base_url() . "challenge/finish_challenge/" . $challenge['id'] ?>" class="pstbtn">Finish</a></p>
+                                    <p class="text-right"><a href="<?php echo base_url() . "challenge/finish_challenge/" . $challenge['id'] ?>" class="pstbtn"><?php echo lang("Finish"); ?></a></p>
                                     <?php
                                 } else {
                                     ?>
-                                    <p class="text-right"><a href="javascript:void(0)" class="pstbtn">Finished</a></p>
+                                    <p class="text-right"><a href="javascript:void(0)" class="pstbtn"><?php echo lang("Finished"); ?></a></p>
                                     <?php
                                 }
                             } else {
                                 ?>
-                                <p class="text-right"><a href="<?php echo base_url() . "challenge/quit_challenge/" . $challenge['id'] ?>" class="pstbtn">Quit</a></p>
+                                <p class="text-right"><a href="<?php echo base_url() . "challenge/quit_challenge/" . $challenge['id'] ?>" class="pstbtn"><?php echo lang("Quit"); ?></a></p>
                                 <?php
                             }
                         }
@@ -144,7 +144,7 @@
                                             <div class="topic_prfle_icon_sec">
 
                                                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-3">
-                                                    <a href="javascript:;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH.$challenge['user_image']; ?>" class="img-responsive cht_pfl_img user_chat_thumb"></a>
+                                                    <a href="javascript:;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge['user_image']; ?>" class="img-responsive cht_pfl_img user_chat_thumb"></a>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-8 col-xs-9">
                                                     <ul class="list-inline type_icon_ul">
@@ -220,7 +220,7 @@
                             <div class="mak_chlng_sec">
                                 <h2 class="chlng_ttl">
                                     <span ><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge['user_image']; ?>" class="smlt_usrimg1 img-circle user_chat_thumb"> "<?php echo $challenge['display_name'] ?>"</span>
-                                    <span>  makes a challenge to public</span>
+                                    <span><?php echo " " . lang("makes a challenge to public"); ?></span>
                                 </h2>
                                 <div class="mak_chlng_sec_innr">
                                     <div class="chlng2_cnt">
@@ -229,7 +229,7 @@
 
                                     <div class="row rwrds_chlng2">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <p>Rewards: <span><?php echo $challenge['rewards'] ?></span> Coins</p>
+                                            <p><?php echo lang("Rewards"); ?>: <span><?php echo $challenge['rewards'] ?></span> <?php echo lang("Coins"); ?></p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <p><?php echo date('d/m/Y', strtotime($challenge['created_date'])) ?></p>
@@ -247,7 +247,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="chalng_descpn chalng_descpn2">
                             <p>
-                                Rank
+                                <?php echo lang("Rank"); ?>
                             </p>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
                                                     <video controls class="img-responsive center-block">
                                                         <source src="<?php echo DEFAULT_CHALLENGE_IMAGE_PATH . '/' . $post['media']; ?>">
                                                         </source>
-                                                        Seems like your browser doesn't support video tag.
+                                                        <?php echo lang("Seems like your browser doesn't support video tag."); ?>
                                                     </video>
                                                 </a>
                                                 <?php
@@ -324,7 +324,7 @@
                                                     echo DEFAULT_IMAGE_PATH;
                                                     echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
                                                     ?>"/><br/>
-                                                    <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> Coins
+                                                    <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> <?php echo lang("Coins"); ?>
                                                 </a>
                                             </li>
                                             <li class="dropdown">
@@ -334,7 +334,7 @@
                                                     echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
                                                     ?>" class="like_img"><br/>
                                                     <span>
-                                                        <span class="like_cnt"><?php echo $post['tot_like'] ?></span> Likes
+                                                        <span class="like_cnt"><?php echo $post['tot_like'] ?></span> <?php echo lang("Likes"); ?>
                                                     </span>
                                                 </a>
                                             </li>
@@ -342,13 +342,13 @@
                                                 <a role="button" class="cmnt_winner">
                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br/>
                                                     <span> 
-                                                        <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> Comments
+                                                        <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> <?php echo lang("Comments"); ?>
                                                     </span>
                                                 </a>
                                             </li>
                                         </ul>
                                         <div class="winner-comnt">
-                                            <p class="cmn_txtnw"> Comment Here</p>
+                                            <p class="cmn_txtnw"> <?php echo lang("Comment Here"); ?></p>
                                             <textarea class="form-control comment" rows="3" id="comment"></textarea>
 
                                             <?php
@@ -366,8 +366,8 @@
                                                                 <p class=""><?php echo $comment['created_date'] ?></p>
                                                                 <ul class="cmnt_p clearfix">
                                                                     <li class="stlnon"><span></span></li>
-                                                                    <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
-                                                                    <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                                    <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like"); ?></a></li>
+                                                                    <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply"); ?></a></li>
                                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                                                 </ul>
                                                                 <div class="reply_dtl" style="display:none"></div>
@@ -379,7 +379,7 @@
                                             } else {
                                                 ?>
                                                 <div class="commnt_visit_sec clearfix no_comment">
-                                                    No comments available
+                                                    <?php echo lang("No comments available"); ?>
                                                 </div>
                                                 <?php
                                             }

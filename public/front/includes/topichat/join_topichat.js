@@ -77,7 +77,7 @@ function share_links() {
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
         } else {
-            swal("Please correct your Link.");
+            swal(correct_link);
 //            $(".loader").removeClass('show');
             $('#url').prop('disabled', false);
             return false;
@@ -90,7 +90,7 @@ function upload_image(files) {
     $(".loader").addClass('show');
     $('.message').html();
     if (!files.length || !window.FileReader) {
-        $('.message').html("No file selected.");
+        $('.message').html(no_selected_file);
         $('.message').show();
         return; // no file selected, or no FileReader support
     }
@@ -109,7 +109,7 @@ function upload_image(files) {
             }
         } else
         {
-            $('.message').html("Please select proper image");
+            $('.message').html("proper_image");
             $('.message').show();
         }
     }
@@ -169,7 +169,7 @@ function upload_video(files) {
     $(".loader").addClass('show');
     $('.message').html();
     if (!files.length || !window.FileReader) {
-        $('.message').html("No file selected.");
+        $('.message').html(no_selected_file);
         $('.message').show();
         return; // no file selected, or no FileReader support
     }
@@ -191,7 +191,7 @@ function upload_video(files) {
             {
                 $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
                 //this.files = '';
-                $('.message').html("Please select proper Video");
+                $('.message').html(proper_video);
                 $('.message').show();
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 return;
@@ -221,7 +221,7 @@ function upload_video(files) {
             if (str == "601")
             {
                 var p = $('.' + display_file_class).parent().addClass('wdth_span');
-                p.html('<span>Fail to send message</span>');
+                p.html('<span>' + fail_message + '</span>');
             } else if (str != 0)
             {
                 var msg = {
@@ -256,7 +256,7 @@ function upload_files(files) {
     var display_file_class = '';
     $('.message').html();
     if (!files.length || !window.FileReader) {
-        $('.message').html("No file selected.");
+        $('.message').html(no_selected_file);
         $('.message').show();
         return; // no file selected, or no FileReader support
     }
@@ -298,7 +298,7 @@ function upload_files(files) {
                             if (str == "601")
                             {
                                 var p = $('.' + display_file_class).parent().addClass('wdth_span');
-                                p.html('<span>Fail to send message</span>');
+                                p.html('<span>' + fail_message + '</span>');
                             } else if (str != 0)
                             {
                                 var msg = {
@@ -332,9 +332,9 @@ function upload_files(files) {
                 }
             } else
             {
-                $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper files (pdf/txt/xls/doc)</span></span></div>");
+                $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + proper_file + " (pdf/txt/xls/doc)</span></span></div>");
                 //this.files = '';
-                $('.message').html("Please select proper files (pdf/txt/xls/doc)");
+                $('.message').html(proper_file + " (pdf/txt/xls/doc)");
                 $('.message').show();
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 return;
@@ -389,6 +389,17 @@ $(document).ready(function () {
             $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
         }
     });
+    $('#linkModal').on('click', '.submit_btn', function () {
+        msg1 = $('#linkModal').find('#message_div').html();
+        if (msg1.trim() != '')
+        {
+            $('.chat_area2,.topichat_msg_sec_modal').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg1 + "</span></span></div>");
+            $('#linkModal').find('#message_div').html('');
+            $('#linkModal').find('#message').val('');
+            send(msg1);
+            $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+        }
+    });
     // Image uploading script
     $('#mediaModal').on('change', '#uploadFile', function () {
         var files = !!this.files ? this.files : [];
@@ -438,7 +449,7 @@ $(document).ready(function () {
             $('#url').prop('disabled', true);
             share_links();
         } else {
-            swal("Please Enter url.");
+            swal(enter_url);
             return false;
         }
     });
@@ -450,7 +461,7 @@ $(document).ready(function () {
                 $('#url').prop('disabled', true);
                 share_links();
             } else {
-                swal("Please Enter url");
+                swal(enter_url);
                 return false;
             }
         }

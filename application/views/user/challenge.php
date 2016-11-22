@@ -15,8 +15,7 @@
             ?>
             <section class="post_masonry_section grid">
                 <?php
-                if(count($posts) > 0)
-                {
+                if (count($posts) > 0) {
                     foreach ($posts as $post) {
                         ?>
                         <!-- Each Rank section start here-->
@@ -44,7 +43,7 @@
                                                 <img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['post_user_image']; ?>" title="<?php echo $post['post_user'] ?>">
                                             </div>
                                             <div class="col-lg-8">
-                                                1st Rank
+                                                <?php echo lang('1st Rank'); ?>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -62,7 +61,7 @@
                                                         <video controls class="img-responsive center-block">
                                                             <source src="<?php echo DEFAULT_CHALLENGE_IMAGE_PATH . '/' . $post['media']; ?>">
                                                             </source>
-                                                            Seems like your browser doesn't support video tag.
+                                                            <?php echo lang("Seems like your browser doesn't support video tag.") ?>
                                                         </video>
                                                     </a>
                                                     <?php
@@ -79,7 +78,7 @@
                                             <ul class="list-inline winr_ul rank_ul2 chellange_options">
                                                 <li>
                                                     <button class="btn btn-primary others_rank" data-toggle="modal" data-target="#rank_modal">
-                                                        Others
+                                                        <?php echo lang("Others"); ?>
                                                     </button>
                                                 </li>
                                                 <li>
@@ -88,7 +87,7 @@
                                                         echo DEFAULT_IMAGE_PATH;
                                                         echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
                                                         ?>"/><br/>
-                                                        <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> Coins
+                                                        <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> <?php echo lang("Coins");?>
                                                     </a>
                                                 </li>
                                                 <li class="dropdown">
@@ -98,7 +97,7 @@
                                                         echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
                                                         ?>" class="like_img"><br/>
                                                         <span>
-                                                            <span class="like_cnt"><?php echo $post['tot_like'] ?></span> Likes
+                                                            <span class="like_cnt"><?php echo $post['tot_like'] ?></span> <?php echo lang("Likes");?>
                                                         </span>
                                                     </a>
                                                 </li>
@@ -106,7 +105,7 @@
                                                     <a role="button" class="cmnt_winner">
                                                         <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br/>
                                                         <span> 
-                                                            <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> Comments
+                                                            <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> <?php echo lang("Comments");?>
                                                         </span>
                                                     </a>
                                                 </li>
@@ -114,7 +113,7 @@
                                                     <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['challange_post_id'] ?>">
                                                         <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                         <span>
-                                                            <?php //echo $post['post_share'] ?> Shares
+                                                            <?php //echo $post['post_share']  ?> <?php echo lang("Shares");?>
                                                         </span>
                                                     </a>
                                                     <div id="popover-content" class="hide">
@@ -138,7 +137,7 @@
                                                 </li>
                                             </ul>
                                             <div class="winner-comnt">
-                                                <p class="cmn_txtnw"> Comment Here</p>
+                                                <p class="cmn_txtnw"> <?php echo lang("Comment Here");?></p>
                                                 <textarea class="form-control comment" rows="3" id="comment"></textarea>
 
                                                 <?php
@@ -156,8 +155,8 @@
                                                                     <p class=""><?php echo $comment['created_date'] ?></p>
                                                                     <ul class="cmnt_p clearfix">
                                                                         <li class="stlnon"><span></span></li>
-                                                                        <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
-                                                                        <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                                        <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like");?></a></li>
+                                                                        <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply");?></a></li>
                                                                         <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -170,7 +169,7 @@
                                                 } else {
                                                     ?>
                                                     <div class="commnt_visit_sec clearfix no_comment">
-                                                        No comments available
+                                                        <?php echo lang("No comments available");?>
                                                     </div>
                                                     <?php
                                                 }
@@ -185,12 +184,10 @@
                         <!-- Each Rank section end here-->
                         <?php
                     }
-                }
-                else
-                {
+                } else {
                     ?>
                     <div class="alert alert-info text-center">
-                        No challenge post available.
+                        <?php echo lang("No challenge post available.");?>
                     </div>
                     <?php
                 }
@@ -213,7 +210,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
             </div>
         </div>
     </div>

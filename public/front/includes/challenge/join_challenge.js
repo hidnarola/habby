@@ -55,7 +55,7 @@ $(document).ready(function () {
         $('.message').html();
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -78,7 +78,7 @@ $(document).ready(function () {
             else
             {
                 //this.files = '';
-                $('.message').html("Please select proper image");
+                $('.message').html(proper_image);
                 $('.message').show();
             }
         }
@@ -102,7 +102,7 @@ $(document).ready(function () {
             },
             success: function (str)
             {
-                console.log(str);
+//                console.log(str);
                 if (str != 0)
                 {
                     var msg = {
@@ -126,7 +126,7 @@ $(document).ready(function () {
         $('.message').html();
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -153,7 +153,7 @@ $(document).ready(function () {
                 {
                     $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
                     //this.files = '';
-                    $('.message').html("Please select proper Video");
+                    $('.message').html(proper_video);
                     $('.message').show();
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                     return;
@@ -180,7 +180,7 @@ $(document).ready(function () {
             },
             success: function (str)
             {
-                console.log(str);
+//                console.log(str);
                 if (str != 0)
                 {
                     var msg = {
@@ -229,7 +229,6 @@ $(document).ready(function () {
             }
             else if (userdata.media_type == "video")
             {
-                console.log("video message");
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");

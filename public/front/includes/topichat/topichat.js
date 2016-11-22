@@ -30,7 +30,7 @@ $('document').ready(function () {
                 } else
                 {
                     load = false;
-                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                    $('.chat_area2').prepend('<div class="text-center">' + no_message + '</div>');
                     $(".chat_area2").animate({scrollTop: 0}, 500);
                 }
                 in_progress = false;
@@ -106,7 +106,7 @@ $('document').ready(function () {
         console.log('on change fired');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -121,7 +121,7 @@ $('document').ready(function () {
                 $("#imagePreview").css("background-image", "url(" + this.result + ")");
             }
         } else {
-            $('.message').html("Please select proper image");
+            $('.message').html(proper_image);
             $('.message').show();
         }
     });
@@ -307,11 +307,11 @@ $('document').ready(function () {
             async: false,
             data: 'id=' + id,
             success: function (data) {
-                console.log(data);
+//                console.log(data);
                 var data = JSON.parse(data);
                 var type = data.media_type;
                 var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;
-                var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
+//                var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
                 var DEFAULT_IMAGE_PATH = data.DEFAULT_IMAGE_PATH;
                 var media_details = data['media_content'];
                 var view = data['view'];

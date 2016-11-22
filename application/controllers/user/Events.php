@@ -82,7 +82,7 @@ class Events extends CI_Controller {
 
                         if (!$this->upload->do_upload('userFile')) {
                             $error = array('error' => $this->upload->display_errors());
-                            $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                            $this->session->set_flashdata('msg', lang('Problem occurs during image uploading.'));
                         } else {
                             $data = $this->upload->data();
                             $media_arr = array();
@@ -112,7 +112,7 @@ class Events extends CI_Controller {
 
                         if (!$this->upload->do_upload('userFile')) {
                             $error = array('error' => $this->upload->display_errors());
-                            $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                            $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
                         } else {
                             $data = $this->upload->data();
                             $media_arr = array();
@@ -126,9 +126,9 @@ class Events extends CI_Controller {
                 if (count($media) > 0) {
                     $this->Event_model->insert_event_media($media);
                 }
-                $this->session->set_flashdata('msg', 'Event added successfully');
+                $this->session->set_flashdata('msg', lang('Event added successfully'));
             } else {
-                $this->session->set_flashdata('msg', 'Event not added');
+                $this->session->set_flashdata('msg', lang('Event not added'));
             }
         }
         redirect('events');
@@ -271,7 +271,7 @@ class Events extends CI_Controller {
 
                     if (!$this->upload->do_upload('userFile')) {
                         $error = array('error' => $this->upload->display_errors());
-                        $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                        $this->session->set_flashdata('msg', lang('Problem occurs during image uploading.'));
                     } else {
                         $data = $this->upload->data();
                         $media_arr = array();
@@ -301,7 +301,7 @@ class Events extends CI_Controller {
 
                     if (!$this->upload->do_upload('userFile')) {
                         $error = array('error' => $this->upload->display_errors());
-                        $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                        $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
                     } else {
                         $data = $this->upload->data();
                         $media_arr = array();

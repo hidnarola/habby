@@ -225,7 +225,7 @@
                                                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
                                                                     </div>
                                                                     <div class="cmn_dtl">
-                                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> Interesting</p>
+                                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> <?php echo lang('Interesting') ?></p>
                                                                         <ul class="cmnt_p clearfix">
                                                                             <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> <?php echo lang('Like') ?></a></li>
                                                                             <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang('Reply') ?></a></li>

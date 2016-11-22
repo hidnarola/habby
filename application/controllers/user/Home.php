@@ -110,7 +110,7 @@ class Home extends CI_Controller {
 
                             if (!$this->upload->do_upload('userFile')) {
                                 $error = array('error' => $this->upload->display_errors());
-                                $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                                $this->session->set_flashdata('msg', lang('Problem occurs during image uploading.'));
                             } else {
                                 $data = $this->upload->data();
                                 $media_arr = array();
@@ -140,7 +140,7 @@ class Home extends CI_Controller {
 
                             if (!$this->upload->do_upload('userFile')) {
                                 $error = array('error' => $this->upload->display_errors());
-                                $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                                $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
                             } else {
                                 $data = $this->upload->data();
                                 $media_arr = array();
@@ -154,12 +154,12 @@ class Home extends CI_Controller {
                     if (count($media) > 0) {
                         $this->Post_model->insert_post_media($media);
                     }
-                    $this->session->set_flashdata('msg', 'post added successfully');
+                    $this->session->set_flashdata('msg', lang('post added successfully'));
                 } else {
-                    $this->session->set_flashdata('msg', 'Post not added');
+                    $this->session->set_flashdata('msg', lang('Post not added'));
                 }
             } else {
-                $this->session->set_flashdata('msg', 'Invalid data entered for post');
+                $this->session->set_flashdata('msg', lang('Invalid data entered for post'));
             }
         }
         redirect('home');
