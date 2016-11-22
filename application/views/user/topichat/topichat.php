@@ -163,7 +163,7 @@
                                                 <div class = "form-group clearfix">
                                                     <label for = "select" class = "col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Topic'); ?> : </label>
                                                     <div class = "col-lg-11 col-md-11 col-sm-10 col-xs-9">
-                                                        <textarea class = "form-control topichat_txtarea" rows = "3" id = "textArea" placeholder = "#<?php echo lang('Topic'); ?>" name = "topic_name" required = "required"></textarea>
+                                                        <textarea class = "form-control topichat_txtarea" rows = "3" id = "topic_name" placeholder = "#<?php echo lang('Topic'); ?>" name = "topic_name" required = "required"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +175,7 @@
                                                     <div class = "col-lg-7 col-md-7 col-sm-7 col-xs-7">
                                                         <div class = "radio topchat_1_rdo">
                                                             <label>
-                                                                <input type = "radio" name = "person_limit" id = "optionsRadios1" value = "-1" checked = "">
+                                                                <input type = "radio" name = "person_limit" id = "no_limit" value = "-1" checked = "">
                                                                 <?php echo lang('No limit'); ?>
                                                             </label>
                                                             <label>
@@ -213,7 +213,7 @@
                                                 <div class="form-group clearfix">
                                                     <label for="select" class="col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Note'); ?> :</label>
                                                     <div class="col-lg-11 col-md-11 col-sm-10 col-xs-9">
-                                                        <textarea class="form-control topichat_txtarea" rows="3" id="textArea" name="notes"></textarea>
+                                                        <textarea class="form-control topichat_txtarea" rows="3" id="note_textArea" name="notes"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -367,4 +367,15 @@
         page++;
     }
 
+    $(function () {
+        $('#new_grp').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+            $(this).find('form').trigger('reset');
+            $('#topic_name').val('').empty();
+            $('#no_limit').prop('checked', true);
+            $('#txt_No_of_person').val('').empty();
+            $('.image_wrapper').html('');
+            $('#note_textArea').html('');
+        });
+    });
 </script>

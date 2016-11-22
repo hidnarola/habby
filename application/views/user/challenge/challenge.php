@@ -430,3 +430,14 @@
 </script>
 <script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge_list.js"></script>
 <script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge_popup.js"></script>
+<script>
+    $(function () {
+        $('#new_grp').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+            $(this).find('form').trigger('reset');
+            $('#name').val('').empty();
+            $('#description').val('').empty();
+            $('#rewards').val('').empty();
+        });
+    });
+</script>

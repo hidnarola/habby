@@ -487,7 +487,6 @@
                 $('.video_wrapper').html('');
             });
         });
-
     </script>
 </body>
 </html>

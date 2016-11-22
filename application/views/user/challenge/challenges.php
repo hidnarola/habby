@@ -55,11 +55,13 @@
                                     <div class="challenge_cont_sec2 row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH;
-                    echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                            ?>"></button>
+                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH;
+                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                                                                                         echo DEFAULT_IMAGE_PATH;
                                                                                                          echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
                                                                                                          ?>"></button>
                                             </div>
@@ -417,4 +419,15 @@
         });
     });
 
+</script>
+<script>
+    $(function () {
+        $('#new_grp').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+            $(this).find('form').trigger('reset');
+            $('#name').val('').empty();
+            $('#description').val('').empty();
+            $('#rewards').val('').empty();
+        });
+    });
 </script>
