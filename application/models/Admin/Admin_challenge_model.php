@@ -13,7 +13,7 @@ class Admin_challenge_model extends CI_Model {
      */
     public function get_all_challenge() {
         $start = $this->input->get('start');
-        $columns = ['ch.id', 'ch.name', 'ch.rewards', 'COUNT(chu.user_id) as total_joined', 'ch.average_rank', 'ch.is_finished', 'u.name'];
+        $columns = ['ch.id', 'ch.name', 'ch.rewards', 'COUNT(chu.user_id)', 'ch.average_rank', 'ch.is_finished', 'u.name'];
         $this->db->select('ch.id,@a:=@a+1 AS test_id,ch.name,ch.rewards,COUNT(chu.user_id) as total_joined,ch.average_rank,ch.is_finished,u.name as user_name,ch.is_deleted,ch.is_blocked', false);
         $this->db->join('challange_user chu', 'chu.challange_id = ch.id', 'left');
         $this->db->join('users u', 'u.id = ch.user_id');
@@ -35,7 +35,7 @@ class Admin_challenge_model extends CI_Model {
      * @author : HPA
      */
     public function get_challenge_count() {
-        $columns = ['ch.id', 'ch.name', 'ch.rewards', 'total_joined', 'ch.average_rank', 'ch.is_finished', 'u.name'];
+        $columns = ['ch.id', 'ch.name', 'ch.rewards', 'COUNT(chu.user_id)', 'ch.average_rank', 'ch.is_finished', 'u.name'];
         $this->db->join('challange_user chu', 'chu.challange_id = ch.id', 'left');
         $this->db->join('users u', 'u.id = ch.user_id');
         $this->db->where('ch.is_deleted', 0);

@@ -158,12 +158,21 @@ class Topichat extends CI_Controller {
         $group_id = base64_decode(urldecode($group_id));
         $image_name = "";
         if ($this->input->post()) {
-            $update_data = array(
-                'topic_name' => $this->input->post('topic_name'),
-                'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
-                'notes' => $this->input->post('notes'),
-                    //'user_id' => $this->data['user_data']['id'],
-            );
+            $limit= $this->Topichat_model->is_group_limit_exceed($group_id);
+            if($this->input->post('person_limit') != -1 && $limit['joined_user'] > $this->input->post('No_of_person'))
+            {
+                $this->session->set_flashdata('message', array('message' => lang('You can not set person limit less then no. of joined user.'), 'class' => 'alert alert-warning text-center flashmsg'));
+                redirect('topichat/details/' . urlencode(base64_encode($group_id)));
+            }
+            else
+            {
+                $update_data = array(
+                    'topic_name' => $this->input->post('topic_name'),
+                    'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
+                    'notes' => $this->input->post('notes'),
+                        //'user_id' => $this->data['user_data']['id'],
+                );
+            }
         }
         if ($_FILES['group_cover']['name'] != NULL || $_FILES['group_cover']['name'] != "") {
             /* v! If Image is uploaded then use upload library for the codeigniter to upload image */
@@ -243,12 +252,20 @@ class Topichat extends CI_Controller {
 
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
-        $ins_data = array(
-            'topic_id' => $id,
-            'user_id' => $this->data['user_data']['id'],
-        );
-        $this->Topichat_model->insert_topic_group_user($ins_data);
-        redirect('topichat/details/' . $topic_id);
+        $limit= $this->Topichat_model->is_group_limit_exceed($id);
+        if($limit['person_limit'] != -1 && $limit['person_limit'] > $limit['joined_user']){
+            $ins_data = array(
+                'topic_id' => $id,
+                'user_id' => $this->data['user_data']['id'],
+            );
+            $this->Topichat_model->insert_topic_group_user($ins_data);
+            redirect('topichat/details/' . $topic_id);
+        }
+        else
+        {
+            $this->session->set_flashdata('message', array('message' => lang('You can not join this group as it reaches its limit.'), 'class' => 'alert alert-warning text-center flashmsg'));
+            redirect('topichat');
+        }
     }
 
     /*

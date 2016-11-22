@@ -25,7 +25,7 @@ $method_name = $this->router->fetch_method(); //outputs index
                                                     <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() . "home/profile_upload" ?>" id="upload_user_image">
                                                         <div class="fileUpload up_img btn">
                                                             <span><i class="fa fa-camera" aria-hidden="true"></i> <?php echo lang('UPLOAD PROFILE PICTURE'); ?></span>
-                                                            <input type="file" class="upload" name="user_image">
+                                                            <input type="file" class="upload user_profile_upload" name="user_image">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -248,7 +248,7 @@ $method_name = $this->router->fetch_method(); //outputs index
 <script>
     $("#country").val('<?php echo $user_data['country']; ?>');
     $(function () {
-        $('.upload').change(function () {
+        $('.user_profile_upload').change(function () {
             $('#upload_user_image').submit();
         });
         $('.followbtn').click(function () {
