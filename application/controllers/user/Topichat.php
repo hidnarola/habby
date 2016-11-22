@@ -127,7 +127,7 @@ class Topichat extends CI_Controller {
                     $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                 }
                 $image_name = "topichat_img1.jpg";
-                $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
+                $this->session->set_flashdata('message', ['message' => lang('Group cover is not uploaded.'), 'class' => 'alert alert-danger']);
             } else {
                 $data_upload = array('upload_data' => $this->upload->data());
                 $image_name = $data_upload['upload_data']['file_name'];
@@ -198,7 +198,7 @@ class Topichat extends CI_Controller {
                     $image_height = $image_info[1];
                     $error .= lang(' Current Image Width: ') . $image_width . lang(' & Image Height: ') . $image_height;
                 }
-                $this->session->set_flashdata('message', ['message' => 'Group cover is not uploaded.', 'class' => 'alert alert-danger']);
+                $this->session->set_flashdata('message', ['message' => lang('Group cover is not uploaded.'), 'class' => 'alert alert-danger']);
             } else {
                 $data_upload = array('upload_data' => $this->upload->data());
                 $update_data['group_cover'] = $data_upload['upload_data']['file_name'];

@@ -340,12 +340,110 @@ $lang["You are not unfollow this user :)"] = "You are not unfollow this user :)"
 $lang["No more data found"] = "No more data found";
 $lang["No more post found"] = "No more post found";
 $lang["No more saved post found"] = "No more saved post found";
+
+//JS Constant
 $lang["You can't take back given coin"] = "You can't take back given coin";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
+$lang["Please correct your Link."] = "Please correct your Link.";
+$lang["No file selected."] = "No file selected.";
+$lang["Please select proper image"] = "Please select proper image";
+$lang["Please select proper Video"] = "Please select proper Video";
+$lang["Please select proper file"] = "Please select proper file";
+$lang["Fail to send message"] = "Fail to send message";
+$lang["Please Enter url."] = "Please Enter url.";
+$lang["No more messages to show"] = "No more messages to show";
+$lang["saved"] = "saved";
+$lang["save failed"] = "save failed";
+$lang["You don't have enough coin to give"] = "You don't have enough coin to give";
+$lang["You have already requested for this event"] = "You have already requested for this event";
+$lang["You can't join this event as event reached at its maximum limit"] = "You can't join this event as event reached at its maximum limit";
+$lang["Something went wrong"] = "Something went wrong";
+$lang["You have joined this event"] = "You have joined this event";
+$lang["You have made request for join this event"] = "You have made request for join this event";
+$lang["No more event found"] = "No more event found";
+$lang["No more group found"] = "No more group found";
+
+//--Flash--
+$lang["Problem occurs during image uploading."] = "Problem occurs during image uploading.";
+$lang['Image has succesfully uploaded'] = 'Image has succesfully uploaded';
+$lang['Problem occurs during video uploading.'] = 'Problem occurs during video uploading.';
+$lang['Video has succesfully uploaded'] = 'Video has succesfully uploaded';
+$lang["Please select image or video."] = "Please select image or video.";
+$lang['post added successfully'] = 'post added successfully';
+$lang['Post not added'] = 'Post not added';
+$lang['Invalid data entered for post'] = 'Invalid data entered for post';
+$lang['Event added successfully'] = 'Event added successfully';
+$lang['Event not added'] = 'Event not added';
+$lang['Group cover is not uploaded.'] = 'Group cover is not uploaded.';
+$lang['You can not join this group as it reaches its limit.'] = 'You can not join this group as it reaches its limit.';
+$lang['You can not set person limit less then no. of joined user.'] = 'You can not set person limit less then no. of joined user.';
+
+//--View File--
+$lang["1st Rank"] = "1st Rank";
+$lang["Close"] = "Close";
+$lang["Coins"] = "Coins";
+$lang["Others"] = "Others";
+    //---challenge---
+$lang["Rewards"] = "Rewards";
+$lang["makes a challenge to public"] = "makes a challenge to public";
+$lang["Quit"] = "Quit";
+$lang["Finish"] = "Finish";
+$lang["Challenge has been Finished."] = "Challenge has been Finished.";
+$lang["No media selected"] = "No media selected";
+$lang["Challenge"] = "Challenge";
+$lang["Winners"] = "Winners";
+$lang["Winner"] = "Winner";
+$lang["No Newest Challenge."] = "No Newest Challenge.";
+$lang["No Popular Challenge."] = "No Popular Challenge.";
+$lang["Recommended"] = "Recommended";
+$lang["No Recommended Challenge."] = "No Recommended Challenge.";
+$lang["CREATE NEW CHALLENGE"] = "CREATE NEW CHALLENGE";
+$lang["Required Details"] = "Required Details";
+$lang["(Rewards must be between 1 to 10 coin)"] = "(Rewards must be between 1 to 10 coin)";
+$lang["No Challenge found."] = "No Challenge found.";
+    
+    //---Events---
+$lang["Event closed"] = "Event closed";
+$lang["days ago"] = "days ago";
+$lang["Event will be closed in"] = "Event will be closed in";
+$lang["days"] = "days";
+$lang["Close Event"] = "Close Event";
+$lang["Contacts"] = "Contacts";
+$lang["Notes Content"] = "Notes Content";
+$lang["No Content available"] = "No Content available";
+$lang["Add Contact"] = "Add Contact";
+$lang["Phone Number"] = "Phone Number";
+$lang["Email"] = "Email";
+$lang["No Contact available"] = "No Contact available";
+$lang["No Images were uploaded."] = "No Images were uploaded.";
+$lang["No Videos were uploaded."] = "No Videos were uploaded.";
+$lang["No Files were uploaded."] = "No Files were uploaded.";
+$lang["Events Members"] = "Events Members";
+$lang["No Member available in this group"] = "No Member available in this group";
+$lang["Details"] = "Details";
+$lang["Location"] = "Location";
+$lang["Event Time"] = "Event Time";
+$lang["Submit"] = "Submit";
+$lang["Edit Contact"] = "Edit Contact";
+$lang["Existing media"] = "Existing media";
+$lang["No media added."] = "No media added.";
+$lang["More Images"] = "More Images";
+$lang["More Videos"] = "More Videos";
+$lang["More Files"] = "More Files";
+$lang["Event Location"] = "Event Location";
+$lang["Enter your searching criteria"] = "Enter your searching criteria";
+$lang["Filter By"] = "Filter By";
+$lang["Release Date"] = "Release Date";
+$lang["From Newest to Oldest"] = "From Newest to Oldest";
+$lang["Number of seat"] = "Number of seat";
+$lang["Range Distance"] = "Range Distance";
+$lang["Mile"] = "Mile";
+$lang["Approval needed"] = "Approval needed";
+$lang["Yes"] = "Yes";
+$lang["No"] = "No";
+$lang["Search"] = "Search";
+    //--Topichat--
+$lang["Existing Image"] = "Existing Image";
+$lang["New Image"] = "New Image";
+    //--Partial--
+$lang["View Details"] = "View Details";
 ?>

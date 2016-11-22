@@ -418,11 +418,11 @@
                                     </div>
                                     <div class="image_wrapper">
                                         <div class="col-sm-6">
-                                            <div class="panel-heading text-center">Existing Image </div>
+                                            <div class="panel-heading text-center"><?php echo lang('Existing Image')?> </div>
                                             <img class="img-responsive" src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat['group_cover'] ?>" style="margin-top:9px;"/>
                                         </div>
                                         <div class="col-sm-6 new_image_wrapper" style="display:none">
-                                            <div class="panel-heading text-center">New Image </div>
+                                            <div class="panel-heading text-center"><?php echo lang('New Image') ?> </div>
                                             <div id="imagePreview"></div>
                                         </div>
                                     </div>
@@ -502,37 +502,6 @@
                             <!-- Type Chat section start here -->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="topich_chat_typesec topich_chat_typesec_modal">
-                                    <!-- Smily icon and profile secton start here -->
-                                    <!--                                    <div class="row">
-                                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                                                <div class="topic_prfle_icon_sec topc_link_sharesec">
-                                                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-group">
-                                                                                                <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>	
-                                                                                                <input type="text" class="form-control" placeholder="Copy Link Here" id="url" name="url">
-                                                                                                <span class="input-group-btn scl_mda_img">
-                                                                                                    <a href="https://www.google.co.in/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_img.jpg"></a>
-                                                                                                </span>
-                                                                                                <span class="input-group-btn scl_mda_img">
-                                                                                                    <a href="https://www.youtube.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>youtube_img.jpg"></a>
-                                                                                                </span>
-                                                                                                <span class="input-group-btn scl_mda_img">
-                                                                                                    <a href="https://plus.google.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>google_plus_img.jpg"></a>
-                                                                                                </span>
-                                                                                                <span class="input-group-btn scl_mda_img">
-                                                                                                    <a href="https://twitter.com/" target="_blank"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>twitter_img.jpg"></a>
-                                                                                                </span>
-                                                                                                <span class="input-group-btn">
-                                                                                                    <input class="chat_btn share_btn" type="submit" value="<?php echo lang('Share'); ?>">
-                                                                                                </span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
-                                    <!-- Smily icon and profile secton end here -->
 
                                     <!-- Type area start here -->
                                     <div class="row">
@@ -543,32 +512,11 @@
                                                         <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb" style="width:25% !important"></a></span>
                                                         <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
                                                         <input type="hidden" id="message" name="message" class="form-control">
-                                                        <!--<span class="input-group-btn upld_icnpad">
-                                                            <a href="#"><img src="http://habby/public/front/img/type_symbol1.png"></a>
-                                                        </span>-->
-<!--                                                        <span class="input-group-btn upld_icnpad">
-                                                            <div class="fileUpload up_img btn">
-                                                                <span><img title="Upload image" src="http://habby/public/front/img/type_symbol2.png"></span>
-                                                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile">
-                                                            </div>
-                                                        </span>
-                                                        <span class="input-group-btn upld_icnpad">
-                                                            <div class="fileUpload up_img btn">
-                                                                <span><img title="Upload video" src="http://habby/public/front/img/video_record_img.png"></span>
-                                                                <input type="file" id="upload_video" name="upload_video" class="upload">
-                                                            </div>
-                                                        </span>
-                                                        <span class="input-group-btn upld_icnpad">
-                                                            <div class="fileUpload up_img btn">
-                                                                <span><img title="Upload file" src="http://habby/public/front/img/upload.png"></span>
-                                                                <input type="file" name="upload_files" class="upload" id="upload_files">
-                                                            </div>
-                                                        </span>-->
                                                         <span class="input-group-btn upld_icnpad">
                                                             <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
                                                         </span>
                                                         <span class="input-group-btn">
-                                                            <input class="submit_btn chat_btn" type="submit" value="Send">
+                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send')?>">
                                                         </span>
                                                     </div>
                                                 </div>
@@ -585,7 +533,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close')?></button>
             </div>   
         </div>
 
@@ -649,7 +597,7 @@
                                                             <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
                                                         </span>
                                                         <span class="input-group-btn">
-                                                            <input class="submit_btn chat_btn" type="submit" value="Send">
+                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send')?>">
                                                         </span>
                                                     </div>
                                                 </div>
@@ -666,11 +614,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close')?></button>
             </div>   
         </div>
-
-
     </div>
 </div>
 

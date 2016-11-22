@@ -63,7 +63,7 @@ if (isset($json_decode->results[0])) {
 
 // Resizing is used to open map in Bootstrap modal
     function resizeMap() {
-        console.log('resize called');
+//        console.log('resize called');
         if (typeof map == "undefined")
             return;
         setTimeout(function () {
@@ -72,7 +72,7 @@ if (isset($json_decode->results[0])) {
     }
 
     function resizingMap() {
-        console.log('resizing');
+//        console.log('resizing');
         if (typeof map == "undefined")
             return;
         var center = map.getCenter();
@@ -100,15 +100,15 @@ if (isset($json_decode->results[0])) {
                             <?php
                             if ($remaining_days < 0) {
                                 ?>
-                                Event closed <?php echo abs($remaining_days); ?> days ago
+                                <?php echo lang('Event closed') . " " . abs($remaining_days) . " " . lang('days ago'); ?> 
                                 <?php
                             } else {
                                 ?>
-                                Event will be closed in <?php echo $remaining_days; ?> days
+                                <?php echo lang('Event will be closed in') . " " . $remaining_days . " " . lang('days'); ?> 
                                 <?php
                                 if ($event['user_id'] == $this->session->user['id']) {
                                     ?>
-                                    <a class="pstbtn close_event_btn" href="javascript:;">Close Event</a>
+                                    <a class="pstbtn close_event_btn" href="javascript:;"><?php echo lang('Close Event'); ?></a>
                                     <?php
                                 }
                                 ?>
@@ -129,23 +129,23 @@ if (isset($json_decode->results[0])) {
             <div class="col-md-5 event-left-section">
                 <div class="event_content">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#notes">Notes</a></li>
-                        <li><a data-toggle="tab" href="#contacts">Contacts</a></li>
-                        <li><a data-toggle="tab" href="#files">Files</a></li>
+                        <li class="active"><a data-toggle="tab" href="#notes"><?php echo lang("Notes"); ?></a></li>
+                        <li><a data-toggle="tab" href="#contacts"><?php echo lang("Contacts"); ?></a></li>
+                        <li><a data-toggle="tab" href="#files"><?php echo lang("Files"); ?></a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="notes" class="tab-pane fade in active">
                             <div class="content_description" style="height:100%;">
                                 <div class="panel panel-default" style="min-height: 85%;">
-                                    <div class="panel-heading">Notes Content
+                                    <div class="panel-heading"><?php echo lang("Notes Content"); ?>
                                         <span class="pull-right event_notes_edit"><i class="fa fa-edit"></i></span>
-                                        <span class="pull-right event_notes_update" style="display: none"><button class="btn btn-primary update_notes">Update</button></span>
+                                        <span class="pull-right event_notes_update" style="display: none"><button class="btn btn-primary update_notes"><?php echo lang("Update"); ?></button></span>
                                     </div>
                                     <div class="panel-body">
                                         <div class="notes_content" id="notes_content">
                                             <?php
                                             if (empty($event['notes'])) {
-                                                echo "No Content available";
+                                                echo lang("No Content available");
                                             } else {
                                                 echo $event['notes'];
                                             }
@@ -160,7 +160,7 @@ if (isset($json_decode->results[0])) {
                         </div>
                         <div id="contacts" class="tab-pane fade">
                             <div class="add_contact col-md-12">
-                                <span class="pull-right"><button class="btn btn-icon" data-toggle="modal" data-target="#contact_add"><i class="fa fa-plus"></i>Add Contact</button></span>
+                                <span class="pull-right"><button class="btn btn-icon" data-toggle="modal" data-target="#contact_add"><i class="fa fa-plus"></i><?php echo lang("Add Contact"); ?></button></span>
                             </div>
                             <div class="content_description">
 
@@ -177,18 +177,17 @@ if (isset($json_decode->results[0])) {
                                                 </div>
                                                 <span class="first_span col-md-9"><?php echo $contact['name']; ?></span>
                                                 <?php
-                                                    if($contact['contact_user_id'] == $this->session->user['id'])
-                                                    {
-                                                        ?>
-                                                        <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
-                                                        <?php
-                                                    }
+                                                if ($contact['contact_user_id'] == $this->session->user['id']) {
+                                                    ?>
+                                                    <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
+                                                    <?php
+                                                }
                                                 ?>
                                             </div>
                                             <div class="row">
                                                 <span class="first_span col-md-4 col-md-offset-1">
                                                     <a href="javascript;">
-                                                        Phone Number
+                                                        <?php echo lang("Phone Number"); ?>
                                                     </a>
                                                 </span>
                                                 <span class="col-md-5" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
@@ -197,7 +196,7 @@ if (isset($json_decode->results[0])) {
                                             <div class="row">
                                                 <span class="first_span col-md-4 col-md-offset-1">
                                                     <a href="javascript;">
-                                                        Email
+                                                        <?php echo lang("Email"); ?>
                                                     </a>
                                                 </span>
                                                 <span class="col-md-7" id="email_info"><?php echo $contact['email'] ?></span>
@@ -205,7 +204,7 @@ if (isset($json_decode->results[0])) {
                                             <div class="row">
                                                 <span class="first_span col-md-4 col-md-offset-1">
                                                     <a href="javascript;">
-                                                        Others
+                                                        <?php echo lang("Others"); ?>
                                                     </a>
                                                 </span>
                                                 <span class="col-md-7" id="others_info"><?php echo $contact['others'] ?></span>
@@ -215,7 +214,7 @@ if (isset($json_decode->results[0])) {
                                     }
                                 } else {
                                     ?>
-                                    No Contact available
+                                    <?php echo lang("No Contact available"); ?>
                                     <?php
                                 }
                                 ?>
@@ -225,11 +224,11 @@ if (isset($json_decode->results[0])) {
                             <div class="content_description">
                                 <div class="content_images">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">Images 
+                                        <div class="panel-heading"><?php echo lang("Images"); ?> 
                                             <?php
                                             if (count($recent_images) >= 3) {
                                                 ?>
-                                                <span class="load_more_image cursor_hand pull-right">More</span>
+                                                <span class="load_more_image cursor_hand pull-right"><?php echo lang("More"); ?></span>
                                                 <?php
                                             }
                                             ?>
@@ -246,7 +245,7 @@ if (isset($json_decode->results[0])) {
                                                 }
                                             } else {
                                                 ?>
-                                                No Images were uploaded.
+                                                <?php echo lang("No Images were uploaded."); ?>
                                                 <?php
                                             }
                                             ?>
@@ -255,11 +254,11 @@ if (isset($json_decode->results[0])) {
                                 </div>
                                 <div class="content_videos">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">Videos 
+                                        <div class="panel-heading"><?php echo lang("Videos"); ?> 
                                             <?php
                                             if (count($recent_videos_thumb) >= 3) {
                                                 ?>
-                                                <span class="load_more_video cursor_hand pull-right">More</span>
+                                                <span class="load_more_video cursor_hand pull-right"><?php echo lang("More"); ?></span>
                                                 <?php
                                             }
                                             ?>
@@ -278,7 +277,7 @@ if (isset($json_decode->results[0])) {
                                                 }
                                             } else {
                                                 ?>
-                                                No Videos were uploaded.
+                                                <?php echo lang("No Videos were uploaded."); ?>
                                                 <?php
                                             }
                                             ?>
@@ -287,11 +286,11 @@ if (isset($json_decode->results[0])) {
                                 </div>
                                 <div class="content_files">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">Files 
+                                        <div class="panel-heading"><?php echo lang("Files"); ?> 
                                             <?php
                                             if (count($recent_shared_files) >= 3) {
                                                 ?>
-                                                <span class="load_more_file cursor_hand pull-right">More</span>
+                                                <span class="load_more_file cursor_hand pull-right"><?php echo lang("More"); ?></span>
                                                 <?php
                                             }
                                             ?>
@@ -311,7 +310,7 @@ if (isset($json_decode->results[0])) {
                                                 }
                                             } else {
                                                 ?>
-                                                No Videos were uploaded.
+                                                <?php echo lang("No Files were uploaded."); ?>
                                                 <?php
                                             }
                                             ?>
@@ -326,7 +325,7 @@ if (isset($json_decode->results[0])) {
                     <?php
                     if (count($event_members) > 0) {
                         ?>
-                        <h4>Events Members : </h4>
+                        <h4><?php echo lang("Events Members"); ?> : </h4>
                         <?php
                         foreach ($event_members as $member) {
                             ?>
@@ -342,7 +341,7 @@ if (isset($json_decode->results[0])) {
                         }
                     } else {
                         ?>
-                        No Member available in this group
+                        <?php echo lang("No Member available in this group"); ?>
                         <?php
                     }
                     ?>
@@ -351,13 +350,13 @@ if (isset($json_decode->results[0])) {
             <div class="col-md-7 event-right-section">
                 <div class="details">
                     <div class="event-detail-content">
-                        <label class="control-label">Details :  <span><?php echo $event['details'] ?></span></label>
+                        <label class="control-label"><?php echo lang("Details"); ?> :  <span><?php echo $event['details'] ?></span></label>
                     </div>
                     <div class="event-detail-content">
-                        <label class="control-label">Location : </label><span class="location"><?php echo (isset($location) && !empty($location))?$location:'No Lcation found'; ?></span><a href="javascript:;" class="map_btn pstbtn">map</a>
+                        <label class="control-label"><?php echo lang("Location"); ?> : </label><span class="location"><?php echo (isset($location) && !empty($location)) ? $location : 'No Lcation found'; ?></span><a href="javascript:;" class="map_btn pstbtn">map</a>
                     </div>
                     <div class="event-detail-content">
-                        <label class="control-label">Even Time : </label><span class="event_start_time"><?php echo $event['start_time']; ?> </span> to <span class="event_end_time"><?php echo $event['end_time']; ?></span>
+                        <label class="control-label"><?php echo lang("Event Time"); ?> : </label><span class="event_start_time"><?php echo $event['start_time']; ?> </span> to <span class="event_end_time"><?php echo $event['end_time']; ?></span>
                     </div>
                 </div>
                 <div class="row event-chat-start">
@@ -405,7 +404,7 @@ if (isset($json_decode->results[0])) {
                                                     <a data-placement="top" data-toggle="popover" data-container="body" id="emogis" href="javascript:void(0);" data-original-title="" title=""><img src="http://habby/public/front/img/type_symbol3.png"></a>
                                                 </span>
                                                 <span class="input-group-btn">
-                                                    <input type="submit" value="Send" class="submit_btn chat_btn">
+                                                    <input type="submit" value="<?php echo lang("Send"); ?>" class="submit_btn chat_btn">
                                                 </span>
                                             </div>
                                         </div>
@@ -431,26 +430,26 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Contact</h4>
+                <h4 class="modal-title"><?php echo lang("Add Contact"); ?></h4>
             </div>
             <form name="contact_form" action="<?php echo base_url() . '/events/add_contact/' . $group_id; ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="phone">Phone Number:</label>
+                        <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
                         <input type="text" name="phone" class="form-control" id="phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email address:</label>
+                        <label for="email"><?php echo lang("Email"); ?>:</label>
                         <input type="email" name="email" class="form-control" id="email" required="">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Others:</label>
+                        <label for="phone"><?php echo lang("Others"); ?>:</label>
                         <input type="text" name="others" class="form-control" id="others" required="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
+                    <button type="submit" class="btn btn-default"><?php echo lang("Submit"); ?></button>
                 </div>
             </form>
         </div>
@@ -465,27 +464,27 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit Contact</h4>
+                <h4 class="modal-title"><?php echo lang("Edit Contact"); ?></h4>
             </div>
             <form id="contact_edit_form" name="contact_edit_form" action="<?php echo base_url() . '/events/edit_contact/'; ?>" method="post">
                 <input type="hidden" value="<?php echo $group_id; ?>" name="event_id">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="phone">Phone Number:</label>
+                        <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
                         <input type="text" name="phone" id="edit_phone" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email address:</label>
+                        <label for="email"><?php echo lang("Email"); ?>:</label>
                         <input type="email" name="email" id="edit_email" class="form-control" required="">
                     </div>
                     <div class="form-group">
-                        <label for="others">Others:</label>
+                        <label for="others"><?php echo lang("Others"); ?>:</label>
                         <input type="text" name="others" id="edit_others" class="form-control" required="">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
+                    <button type="submit" class="btn btn-default"><?php echo lang("Submit"); ?></button>
                 </div>
             </form>
         </div>
@@ -526,7 +525,7 @@ if (isset($json_decode->results[0])) {
 
                         <div class="panel-body">
                             <div class="panel-heading">
-                                Existing media
+                                <?php echo lang("Existing media"); ?>
                             </div>
                             <div class="">
                                 <?php
@@ -543,7 +542,7 @@ if (isset($json_decode->results[0])) {
                                             <div class="col-md-4 col-sm-6 col-xs-12 media_wrapper">
                                                 <video controls class="img-responsive center-block myvideo" >
                                                     <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $media['media']; ?>"></source>
-                                                    Seems like your browser doesn't support video tag.
+                                                    <?php echo lang("Seems like your browser doesn't support video tag."); ?>
                                                 </video>
                                             </div>
                                             <?php
@@ -551,7 +550,7 @@ if (isset($json_decode->results[0])) {
                                     }
                                 } else {
                                     ?>
-                                    No media added
+                                    <?php echo lang("No media added."); ?>
                                     <?php
                                 }
                                 ?>
@@ -642,8 +641,8 @@ if (isset($json_decode->results[0])) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                    <button type="submit" class="btn btn-primary"><?php echo lang("Update");?></button>
                 </div>
             </form>
         </div>
@@ -657,13 +656,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">More Images</h4>
+                <h4 class="modal-title"><?php echo lang("More Images");?></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
             </div>
         </div>
     </div>
@@ -676,13 +675,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">More Videos</h4>
+                <h4 class="modal-title"><?php echo lang("More Videos");?></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
             </div>
         </div>
     </div>
@@ -695,13 +694,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">More Files</h4>
+                <h4 class="modal-title"><?php echo lang("More Files");?></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
             </div>
         </div>
     </div>
@@ -716,13 +715,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Event Location</h4>
+                <h4 class="modal-title"><?php echo lang("Event Location");?></h4>
             </div>
             <div class="modal-body">
                 <div id="map" style="height:250px;"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
             </div>
         </div>
 
@@ -768,7 +767,7 @@ if (isset($json_decode->results[0])) {
             $('#notes_content').html($('#edited_notes').val());
         } else
         {
-            $('#notes_content').html("No contents available");
+            $('#notes_content').html(no_content);
         }
         $.ajax({
             url: base_url + '/events/update_notes/' + group_id,
@@ -800,7 +799,7 @@ if (isset($json_decode->results[0])) {
         $('.image_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -824,7 +823,7 @@ if (isset($json_decode->results[0])) {
                 } else
                 {
                     this.files = '';
-                    $('.message').html("Please select proper image");
+                    $('.message').html(proper_image);
                     $('.message').show();
                 }
             }

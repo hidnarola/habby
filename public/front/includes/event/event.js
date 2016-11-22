@@ -16,39 +16,33 @@ $(function () {
             success: function (str) {
                 if (str == 0)
                 {
-                    swal("You have already joined this event");
+                    swal(already_joined);
                     $this.removeClass('event_join');
-                    $this.html('Enter');
-                }
-                else if (str == 1)
+                    $this.html(Enter);
+                } else if (str == 1)
                 {
-                    swal("You have already requested for this event");
+                    swal(already_requested);
                     $this.removeClass('event_join');
-                    $this.html('Requested');
-                }
-                else if (str == 2)
+                    $this.html(Requested);
+                } else if (str == 2)
                 {
-                    swal("You can't join this event as event reached at its maximum limit");
-                }
-                else if (str == 3 || str == 5)
+                    swal(cant_join);
+                } else if (str == 3 || str == 5)
                 {
-                    swal("Something went wrong");
-                }
-                else if (str == 4)
+                    swal(wrong);
+                } else if (str == 4)
                 {
-                    swal("You have joined this event");
+                    swal(joined);
                     $this.removeClass('event_join');
-                    $this.html('Enter');
-                }
-                else if (str == 6)
+                    $this.html(Enter);
+                } else if (str == 6)
                 {
-                    swal("You have made request for join this event");
+                    swal(made_request);
                     $this.removeClass('event_join');
-                    $this.html('Requested');
-                }
-                else
+                    $this.html(Requested);
+                } else
                 {
-                    swal("Something went wrong");
+                    swal(wrong);
                 }
             }
         });
@@ -69,15 +63,14 @@ $(function () {
         uri = window.location.href;
         console.log(uri);
         var url;
-        if(uri.indexOf('filter_event') > -1)
+        if (uri.indexOf('filter_event') > -1)
         {
-            url = base_url + 'events/filter_event/'+page;
-        }
-        else
+            url = base_url + 'events/filter_event/' + page;
+        } else
         {
-            url = base_url + 'events/'+page;
+            url = base_url + 'events/' + page;
         }
-        
+
         $.ajax({
             url: url,
             method: 'get',
@@ -86,15 +79,14 @@ $(function () {
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.event_container').append("<div class='col-sm-12 alert alert-info text-center'>No more event found</div>");
+                    $('.event_container').append("<div class='col-sm-12 alert alert-info text-center'>" + no_events + "</div>");
                     $('#loadMore').remove();
-                }
-                else
+                } else
                 {
                     $('.event_container').append(data.view);
                     setTimeout(function () {
                         $('.event_post').each(function () {
-                            if ($(this).offset().left > 250 )
+                            if ($(this).offset().left > 250)
                             {
                                 $(this).addClass('right');
                             }

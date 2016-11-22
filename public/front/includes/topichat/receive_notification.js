@@ -22,7 +22,7 @@ $(document).ready(function () {
     });
     //Log any messages sent from server
     Server.bind('message', function (payload) {
-        console.log("message received : ", payload);
+//        console.log("message received : ", payload);
         userdata = JSON.parse(payload);
         if (userdata.media_type == null)
         {

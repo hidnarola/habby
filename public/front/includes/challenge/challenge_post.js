@@ -14,15 +14,15 @@ $('document').ready(function () {
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
                 } else if (str == 2)
                 {
-                    alert("You can't take back given coin");
+                    alert(cannot_take_back);
                     // t.find('.coin_cnt').html((coin - 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
                 } else if (str == 3)
                 {
-                    alert("You don't have enough coin to give");
+                    alert(enough_coin);
                 } else
                 {
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -49,7 +49,7 @@ $('document').ready(function () {
                 } else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -67,7 +67,7 @@ $('document').ready(function () {
         // If the user has pressed enter
         if (key == 13) {
             var msg = $.trim($(this).val());
-            if(msg != '')
+            if (msg != '')
             {
                 var post_id = $(this).parents('.rank_lg_sec').data('post_id');
                 $.ajax({
@@ -80,7 +80,7 @@ $('document').ready(function () {
                             t.after(str);
                             t.parent().children('.no_comment').remove();
                             var cmt_cnt = t.parents('.rank_lg_sec').find('.comment_cnt');
-                            console.log(cmt_cnt);
+//                            console.log(cmt_cnt);
                             cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
                         }
                     }
@@ -112,7 +112,7 @@ $('document').ready(function () {
                 } else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -147,7 +147,7 @@ $('document').ready(function () {
         if (key == 13) {
             var t = $(this);
             var msg = $.trim($(this).val());
-            if(msg != '')
+            if (msg != '')
             {
                 var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
                 $.ajax({
@@ -203,7 +203,7 @@ $('document').ready(function () {
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                    $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
                 } else
                 {
                     setTimeout(function () {

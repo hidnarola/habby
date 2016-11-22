@@ -4,7 +4,7 @@
     <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
     <div class="new_grp">
         <!-- New Group button start-->
-        <a href="#" data-toggle="modal" data-target="#new_grp">New <br>Challenge</a>
+        <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang("New"); ?> <br><?php echo lang("Challenge"); ?></a>
         <!-- New Group button end-->
     </div>
 
@@ -55,14 +55,18 @@
                                     <div class="challenge_cont_sec2 row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                                             <div id="field">
-                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Challenge['is_ranked']  && $Challenge['given_rank'] == 1)?'challeng_arrow_ranked.png': "challeng_arrow.png"; ?>"></button>
+                                                <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH;
+                    echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                            ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field rank_rate" />
-                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH; echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0)?'challeng_arrow_ranked.png': "challeng_arrow.png";?>"></button>
+                                                <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH;
+                                                                                                         echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                                                                         ?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                                             <p class="chlng_para">
-                                                <?php echo $Challenge['description'] ?>
+        <?php echo $Challenge['description'] ?>
                                             </p>
                                         </div>
                                     </div>
@@ -73,20 +77,19 @@
                                     <div class="challenge_cont_sec3 row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <ul class="list-inline chlng_ul2">
-                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH."coin_icon.png" ?>"/><?php echo $Challenge['rewards'] ?></span></li>
+                                                <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Challenge['rewards'] ?></span></li>
                                                 <li class="winner">
-                                                    <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Challenge['id']; ?>">
-                                                        Winners
+                                                    <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Challenge['id']; ?>"><?php echo lang("Winners"); ?>
                                                     </a>
                                                 </li>
                                                 <?php
                                                 if (isset($Challenge['is_applied']) && $Challenge['is_applied']) {
                                                     ?>
-                                                    <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Enter</a>
+                                                    <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn"><?php echo lang("Enter"); ?></a>
                                                     <?php
                                                 } else {
                                                     ?>
-                                                    <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                                    <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn"><?php echo lang("Accept"); ?></a></li>
                                                     <?php
                                                 }
                                                 ?>
@@ -95,7 +98,7 @@
                                         </div>
                                     </div>
                                     <!-- Challenge buttons section end here -->
-                                    
+
                                 </div>
                             </div>
                             <!-- Challenge each section end here -->
@@ -104,7 +107,7 @@
                     } else {
                         ?>
                         <div class="">
-                            No Challenge found.
+                        <?php echo lang("No Challenge found."); ?>
                         </div>
                         <?php
                     }
@@ -123,7 +126,7 @@
         <div class = "row">
             <div class = "container">
                 <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
-                    <a id = "loadMore" href = "javascript:;">Load More</a>
+                    <a id = "loadMore" href = "javascript:;"><?php echo lang("Load More"); ?></a>
                     <p class = "totop">
                         <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
                     </p>
@@ -146,17 +149,17 @@
                 <form class="" role="form" method="post" action="<?php echo base_url() . "challenge/add_group"; ?>" enctype="multipart/form-data">
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="name" placeholder="Challenge:" name="name" required="true">
+                            <input type="text" class="form-control" id="name" placeholder="<?php echo lang("Challenge"); ?>:" name="name" required="true">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="description" placeholder="Required Details : " name="description">
+                            <input type="text" class="form-control" id="description" placeholder="<?php echo lang("Required Details"); ?> : " name="description">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <input type="text" class="form-control" id="rewards" placeholder="Rewards: " name="rewards">
+                            <input type="number" class="form-control" id="rewards" placeholder="<?php echo lang("Rewards"); ?>: <?php echo lang("(Rewards must be between 1 to 10 coin)"); ?>" min="1" max="10" name="rewards" required>
                         </div>
                     </div>
                     <div class="form-group clearfix xs_mddle">
@@ -203,7 +206,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
             </div>
         </div>
     </div>
@@ -213,7 +216,7 @@
 <!-- Soulmate new group form popup end here -->
 <script type="text/javascript">
     DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
-    
+
     $('#groupplan1post').on('show.bs.modal', function (e) {
 
         //get data-id attribute of the clicked element
@@ -232,7 +235,7 @@
         //        console.log('on change fired');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -248,7 +251,7 @@
                 $("#imagePreview").css("background-image", "url(" + this.result + ")");
             }
         } else {
-            $('.message').html("Please select proper image");
+            $('.message').html(proper_image);
             $('.message').show();
         }
     });
@@ -338,7 +341,7 @@
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.challenges').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                    $('.challenges').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
                     $('#loadMore').remove();
                 } else
                 {
@@ -366,8 +369,7 @@
                     c.find('.rank_rate').each(function () {
                         $(this).val(parseInt($(this).val()) + 1);
                     });
-                }
-                else if (str == 2)
+                } else if (str == 2)
                 {
                     c.find('.add').find('img').each(function () {
                         $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
@@ -399,8 +401,7 @@
                     c.find('.rank_rate').each(function () {
                         $(this).val(parseInt(t.siblings('.rank_rate').val()) - 1);
                     });
-                }
-                else if (str == -2)
+                } else if (str == -2)
                 {
                     c.find('.sub').find('img').each(function () {
                         $(this).attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');

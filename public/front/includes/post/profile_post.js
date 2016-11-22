@@ -21,7 +21,7 @@ $('document').ready(function () {
                 } else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -50,7 +50,7 @@ $('document').ready(function () {
                     alert(enough_coin);
                 } else
                 {
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });

@@ -25,11 +25,10 @@ $('document').ready(function () {
                     $('.chat_area2').prepend(more.view);
                     last_msg = more.last_msg_id;
                     $(".chat_area2").animate({scrollTop: 200}, 500);
-                }
-                else
+                } else
                 {
                     load = false;
-                    $('.chat_area2').prepend('<div class="text-center">No more messages to show</div>');
+                    $('.chat_area2').prepend('<div class="text-center">' + no_message + '</div>');
                     $(".chat_area2").animate({scrollTop: 0}, 500);
                 }
                 in_progress = false;
@@ -70,20 +69,17 @@ $('document').ready(function () {
                 {
                     t.find('.coin_cnt').html((coin + 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
-                }
-                else if (str == 2)
+                } else if (str == 2)
                 {
-                    alert("You can't take back given coin");
+                    alert(cannot_take_back);
                     // t.find('.coin_cnt').html((coin - 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
-                }
-                else if (str == 3)
+                } else if (str == 3)
                 {
-                    alert("You don't have enough coin to give");
-                }
-                else
+                    alert(enough_coin);
+                } else
                 {
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -101,17 +97,15 @@ $('document').ready(function () {
                     // User liked images
                     t.find('.like_cnt').html((like + 1));
                     t.find('.like_img').attr('src', base_url + 'public/front/img/liked_img.png');
-                }
-                else if (str == -1)
+                } else if (str == -1)
                 {
                     // User disliked the post
                     t.find('.like_cnt').html((like - 1));
                     t.find('.like_img').attr('src', base_url + 'public/front/img/like_img.png');
-                }
-                else
+                } else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -127,7 +121,7 @@ $('document').ready(function () {
         // If the user has pressed enter
         if (key == 13) {
             var msg = $.trim($(this).val());
-            if(msg != '')
+            if (msg != '')
             {
                 var post_id = $(this).parents('.rank_lg_sec').data('post_id');
                 $.ajax({
@@ -148,7 +142,7 @@ $('document').ready(function () {
                 $(this).val('');
             }
             return false;
-            
+
         }
     });
     // Add like to the post comment
@@ -164,17 +158,15 @@ $('document').ready(function () {
                     // User liked images
                     t.find('.post_comment_like').html((like + 1));
                     t.find('.post_comment_text').html('Unlike');
-                }
-                else if (str == -1)
+                } else if (str == -1)
                 {
                     // User disliked the post
                     t.find('.post_comment_like').html((like - 1));
                     t.find('.post_comment_text').html('Like');
-                }
-                else
+                } else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -209,7 +201,7 @@ $('document').ready(function () {
         if (key == 13) {
             var t = $(this);
             var msg = $.trim($(this).val());
-            if(msg != '')
+            if (msg != '')
             {
                 var post_comment_id = $(this).parents('.commnt_visit_sec').data('post_comment_id');
                 $.ajax({
@@ -242,8 +234,7 @@ $('document').ready(function () {
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 1);
-                }
-                else if (str == 2)
+                } else if (str == 2)
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.sub').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
@@ -264,8 +255,7 @@ $('document').ready(function () {
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 1);
-                }
-                else if (str == -2)
+                } else if (str == -2)
                 {
                     t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
                     t.siblings('.add').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');

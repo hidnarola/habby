@@ -109,8 +109,7 @@
                             <!-- Topichat #1 each section start here -->
                             <?php
                         }
-                    }
-                    else {
+                    } else {
                         ?>
                         <div class="alert alert-info text-center">
                             <?php echo lang('No Topichat found.'); ?>
@@ -285,7 +284,7 @@
         //        console.log('on change fired');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -301,7 +300,7 @@
                 $("#imagePreview").css("background-image", "url(" + this.result + ")");
             }
         } else {
-            $('.message').html("Please select proper image");
+            $('.message').html(proper_image);
             $('.message').show();
         }
     });
@@ -357,7 +356,7 @@
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.topichat_groups').append("<div class='col-sm-12 alert alert-info text-center'>No more group found</div>");
+                    $('.topichat_groups').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
                     $('#loadMore').remove();
                 } else
                 {

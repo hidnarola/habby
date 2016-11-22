@@ -1,4 +1,30 @@
 <!-- Mobile Toggle Menu start here -->
+<script>
+    var correct_link =<?php echo lang("Please correct your Link."); ?>
+    var no_selected_file =<?php echo lang('No file selected.'); ?>
+    var proper_image =<?php echo lang('Please select proper image'); ?>
+    var proper_video =<?php echo lang('Please select proper Video'); ?>
+    var proper_file =<?php echo lang('Please select proper file'); ?>
+    var fail_message =<?php echo lang('Fail to send message'); ?>
+    var enter_url =<?php echo lang('Please Enter url.'); ?>
+    var no_message =<?php echo lang('No more messages to show'); ?>
+    var saved =<?php echo lang('saved'); ?>
+    var save_failed =<?php echo lang('save failed'); ?>
+    var no_post = "<?php echo lang('No more post found'); ?>";
+    var no_saved_post = "<?php echo lang('No more saved post found'); ?>";
+    var cannot_take_back = "<?php echo lang("You can't take back given coin"); ?>";
+    var enough_coin = "<?php echo lang("You don't have enough coin to give"); ?>";
+    var Enter =<?php echo lang('Enter'); ?>
+    var already_requested =<?php echo lang('You have already requested for this event'); ?>
+    var Requested =<?php echo lang('Requested'); ?>
+    var cant_join =<?php echo lang("You can't join this event as event reached at its maximum limit"); ?>
+    var wrong =<?php echo lang('Something went wrong'); ?>
+    var joined =<?php echo lang('You have joined this event'); ?>
+    var made_request =<?php echo lang('You have made request for join this event'); ?>
+    var no_events =<?php echo lang('No more event found'); ?>
+    var no_groups =<?php echo lang('No more group found'); ?>
+    var no_content =<?php echo lang('No contents available'); ?>
+</script>
 <?php
 $language = $this->session->userdata('language');
 ?>

@@ -23,7 +23,7 @@ $('document').ready(function () {
                 else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -38,11 +38,11 @@ $('document').ready(function () {
             success: function (str) {
                 if (str == 1)
                 {
-                    t.html('saved')
+                    t.html(saved)
                 }
                 else
                 {
-                    t.html('save failed');
+                    t.html(save_failed);
                 }
             }
         });
@@ -63,17 +63,17 @@ $('document').ready(function () {
                 }
                 else if (str == 2)
                 {
-                    alert("You can't take back given coin");
+                    alert(cannot_take_back);
                     // t.find('.coin_cnt').html((coin - 1));
                     t.find('.img-coin').attr('src', base_url + 'public/front/img/coined_icon.png');
                 }
                 else if (str == 3)
                 {
-                    alert("You don't have enough coin to give");
+                    alert(enough_coin);
                 }
                 else
                 {
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });
@@ -86,7 +86,7 @@ $('document').ready(function () {
         $('.image_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -111,7 +111,7 @@ $('document').ready(function () {
                 }
                 else
                 {
-                    $('.message').html("Please select proper image");
+                    $('.message').html(proper_image);
                     $('.message').show();
 //                    this.files = '';
                 }
@@ -125,7 +125,7 @@ $('document').ready(function () {
         $('.video_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
-            $('.message').html("No file selected.");
+            $('.message').html(no_selected_file);
             $('.message').show();
             return; // no file selected, or no FileReader support
         }
@@ -148,7 +148,7 @@ $('document').ready(function () {
             }
             else
             {
-                $('.message').html("Please select proper video");
+                $('.message').html(proper_video);
                 $('.message').show();
             }
         }
@@ -209,7 +209,7 @@ $('document').ready(function () {
                 else
                 {
                     // like failed
-                    console.log('fail');
+//                    console.log('fail');
                 }
             }
         });

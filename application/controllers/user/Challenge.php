@@ -12,7 +12,7 @@ class Challenge extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Challenge_model', 'Common_functionality','Seo_model'));
+        $this->load->model(array('Users_model', 'Challenge_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('challenge');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -215,7 +215,7 @@ class Challenge extends CI_Controller {
 
                             if (!$this->upload->do_upload('userFile')) {
                                 $error = array('error' => $this->upload->display_errors());
-                                $this->session->set_flashdata('msg', 'Problem occurs during image uploading.');
+                                $this->session->set_flashdata('msg', lang('Problem occurs during image uploading.'));
                             } else {
                                 $data = $this->upload->data();
                                 $media_arr = array();
@@ -228,7 +228,7 @@ class Challenge extends CI_Controller {
                         }
                         if (count($media) > 0) {
                             $this->Challenge_model->insert_challenge_media($media);
-                            $this->session->set_flashdata('msg', 'Image has succesfully uploaded');
+                            $this->session->set_flashdata('msg', lang('Image has succesfully uploaded'));
                         }
                     }
                 } else if ($this->input->post('type') == "video") {
@@ -256,7 +256,7 @@ class Challenge extends CI_Controller {
 
                             if (!$this->upload->do_upload('userFile')) {
                                 $error = array('error' => $this->upload->display_errors());
-                                $this->session->set_flashdata('msg', 'Problem occurs during video uploading.');
+                                $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
                             } else {
                                 $data = $this->upload->data();
                                 $media_arr = array();
@@ -269,17 +269,17 @@ class Challenge extends CI_Controller {
                         }
                         if (count($media) > 0) {
                             $this->Challenge_model->insert_challenge_media($media);
-                            $this->session->set_flashdata('msg', 'Video has succesfully uploaded');
+                            $this->session->set_flashdata('msg', lang('Video has succesfully uploaded'));
                         }
                     }
                 } else {
-                    $this->session->set_flashdata("msg", "Something went wrong.");
+                    $this->session->set_flashdata("msg", lang('Something went wrong'));
                 }
             } else {
-                $this->session->set_flashdata("msg", "Please select image or video.");
+                $this->session->set_flashdata("msg", lang('Please select image or video.'));
             }
         } else {
-            $this->session->set_flashdata("msg", "Something went wrong.");
+            $this->session->set_flashdata("msg", lang('Something went wrong'));
         }
         redirect('challenge/details/' . $challange_id);
     }

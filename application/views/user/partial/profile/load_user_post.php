@@ -9,7 +9,7 @@ foreach ($posts as $post) {
 
                         <!-- Comment window -->
                         <div class="post_leftsec_hddn post_leftsec_hddn1 hidden-xs">
-                            <p class="cmn_txtnw"> Comment Here</p>
+                            <p class="cmn_txtnw"> <?php echo lang("Comment Here");?></p>
                             <textarea class="form-control comment" rows="3" id="comment"></textarea>
                             <!-- Comment portion -->
                             <?php
@@ -26,8 +26,8 @@ foreach ($posts as $post) {
                                             <p class=""><?php echo $comment['created_date'] ?></p>
                                             <ul class="cmnt_p clearfix">
                                                 <li class="stlnon"><span></span></li>
-                                                <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
-                                                <li class="post_comment_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like");?></a></li>
+                                                <li class="post_comment_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply");?></a></li>
                                                 <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                             </ul>
                                             <div class="reply_dtl" style="display:none"></div>
@@ -38,7 +38,7 @@ foreach ($posts as $post) {
                             } else {
                                 ?>
                                 <div class="commnt_visit_sec clearfix no_comment">
-                                    No comments available
+                                    <?php echo lang("No comments available");?>
                                 </div>
                                 <?php
                             }
@@ -77,7 +77,7 @@ foreach ($posts as $post) {
                                             <a class="fancybox post_images"  href="javascript:;" data-fancybox-group="gallery">
                                                 <video controls class="img-responsive center-block">
                                                     <source src="uploads/user_post/<?php echo $value['media']; ?>"></source>
-                                                    Seems like your browser doesn't support video tag.
+                                                    <?php echo lang("Seems like your browser doesn't support video tag.");?>
                                                 </video>
                                             </a>
                                             <?php
@@ -142,7 +142,7 @@ foreach ($posts as $post) {
                                                 echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
                                                 ?>" class="like_img"><br>
                                                 <span>
-                                                    <span class="like_cnt"><?php echo $post['post_like'] ?></span> Likes
+                                                    <span class="like_cnt"><?php echo $post['post_like'] ?></span> <?php echo lang("Likes");?>
                                                 </span>
                                             </a>
                                         </li>
@@ -150,7 +150,7 @@ foreach ($posts as $post) {
                                             <a role="button" id="chat1" class="chat1">
                                                 <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br>
                                                 <span> 
-                                                    <span class="comment_cnt"><?php echo $post['post_comment'] ?></span> Comments
+                                                    <span class="comment_cnt"><?php echo $post['post_comment'] ?></span> <?php echo lang("Comments");?>
                                                 </span>
                                             </a>
                                         </li>
@@ -159,7 +159,7 @@ foreach ($posts as $post) {
 
                                                 <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                 <span>
-                                                    <?php echo $post['post_share'] ?> Shares
+                                                    <?php echo $post['post_share'] ?> <?php echo lang("Shares");?>
                                                 </span>
                                             </a>
 
@@ -186,7 +186,7 @@ foreach ($posts as $post) {
                                 </div>
 
                                 <div class="post_leftsec_hddn post_leftsec_hddn1 visible-xs">
-                                    <p class="cmn_txtnw"> Comment Here</p>
+                                    <p class="cmn_txtnw"> <?php echo lang("Comment Here");?></p>
                                     <textarea class="form-control comment" rows="3" id="comment"></textarea>
                                     <?php
                                     if (isset($post['comments']) && count($post['comments']) > 0) {
@@ -197,10 +197,10 @@ foreach ($posts as $post) {
                                                     <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
                                                 </div>
                                                 <div class="cmn_dtl">
-                                                    <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> Interesting</p>
+                                                    <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> <?php echo lang("Interesting");?></p>
                                                     <ul class="cmnt_p clearfix">
-                                                        <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
-                                                        <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                        <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like");?></a></li>
+                                                        <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply");?></a></li>
                                                         <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                                         <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
                                                     </ul>
@@ -212,7 +212,7 @@ foreach ($posts as $post) {
                                     } else {
                                         ?>
                                         <div class="commnt_visit_sec clearfix no_comment">
-                                            No comments available
+                                            <?php echo lang("No comments available");?>
                                         </div>
                                         <?php
                                     }
