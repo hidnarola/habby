@@ -25,7 +25,7 @@ class Admin_posts_model extends CI_Model {
         $this->db->group_by('p.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('description LIKE "%' . $keyword['value'] . '%" OR user_name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('description LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $this->db->limit($this->input->get('length'), $this->input->get('start'));
@@ -51,7 +51,7 @@ class Admin_posts_model extends CI_Model {
         $this->db->group_by('p.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('p.description LIKE "%' . $keyword['value'] . '%" OR user_name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('p.description LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $res_data = $this->db->get('post p')->num_rows();

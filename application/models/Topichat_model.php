@@ -594,6 +594,16 @@ class Topichat_model extends CI_Model {
         }
     }
 
+    /*
+     * 
+     */
+    public function is_group_limit_exceed($group_id)
+    {
+        $this->db->select('tg.person_limit, count(DISTINCT tgu.id) as joined_user');
+        $this->db->where('tg.id',$group_id);
+        $this->db->join('topic_group_user tgu','tgu.topic_id = tg.id');
+        $this->db->group_by('tg.id');
+        return $this->db->get('topic_group tg')->row_array();
+    }
 }
-
 ?>

@@ -233,6 +233,13 @@
 
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pad_lft0 topic_right_lg_sec">
             <div class="right_lg_sectopic">
+                <?php
+                    $message = $this->session->flashdata('message');
+                    if (!empty($message) && isset($message)) {
+                        ($message['class'] != '') ? $message['class'] : '';
+                        echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+                    }
+                ?>
                 <!-- Note and topic edit area start here -->
                 <div class="tittl_sec_lgrow">
                     <div class="tittl_sec_lg">
