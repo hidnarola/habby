@@ -87,6 +87,7 @@ if ($this->session->flashdata('success')) {
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 lengthMenu: '<span>Show:</span> _MENU_',
+                searchPlaceholder: "Search by username or post description",
                 paginate: {'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;'}
             },
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',

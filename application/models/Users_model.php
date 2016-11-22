@@ -6,17 +6,32 @@ class Users_model extends CI_Model {
     /*
       v! Function will check if user is exist or not (spark id - vpa)
       check_if_user_exist - three params 1->where condition 2->is get num_rows for query 3->is fetech single or all data
+     * 
+     * @return  int 801     user is deleted
+     *          int 802     user is blocked
+     *          int 803     user is inactive
      */
 
     public function check_if_user_exist($data = array(), $is_total_rows = false, $is_single = false) {
         $this->db->where($data);
-        $this->db->where('is_blocked=0 AND is_deleted =0');
-        $this->db->where('is_active', 1);
+        //$this->db->where('is_blocked=0 AND is_deleted =0');
+        //$this->db->where('is_active', 1);
         if ($is_total_rows == true) {
             $res_data = $this->db->get('users')->num_rows();
         } else {
             if ($is_single == true) {
                 $res_data = $this->db->get('users')->row_array();
+                if($res_data['is_deleted']){
+                    return 801;
+                }
+                else if($res_data['is_blocked'])
+                {
+                    return 802;
+                }
+                else if(!$res_data['is_active'])
+                {
+                    return 803;
+                }
             } else {
                 $res_data = $this->db->get('users')->result_array();
             }

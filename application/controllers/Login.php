@@ -65,41 +65,61 @@ class Login extends CI_Controller {
                 //check_if_user_exist - three params 1->where condition 2->is get num_rows for query 3->is fetech single or all data
                 $user_data = $this->Users_model->check_if_user_exist(['email' => $email], false, true);
                 if (!empty($user_data)) {
-                    $db_pass = $this->encrypt->decode($user_data['password']);
-                    if ($db_pass == $password) {
-                        /* If remember Me Checkbox is clicked */
-                        /* Set Cookie IF Start */
-                        if ($remember_me == '1') {
-                            $cookie = array(
-                                'name' => 'Remember_me',
-                                'value' => $this->encrypt->encode($user_data['id']),
-                                'expire' => '172800',
-                                'domain' => $_SERVER['SERVER_NAME'],
-                                'path' => '/'
-                            );
-                            $this->input->set_cookie($cookie);
-                        }
-                        /* // END */
-                        $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
-                        $this->session->set_flashdata('message', ['message' => lang('Login Successfully'), 'class' => 'alert alert-success']);
-                        $update_arr = array();
-                        if ($user_data['last_login'] < date("Y-m-d H:i:s\n", strtotime('today'))) {
-                            $update_arr['total_coin'] = $user_data['total_coin'] + 5;
-                        }
-                        $update_arr['last_login'] = date('Y-m-d H:i:s');
-                        $this->Users_model->update_user_data($user_data['id'], $update_arr); // update last login time
-
-                        $user_redirect = $this->session->userdata('user_redirect');
-                        if (!empty($user_redirect)) {
-                            $this->session->unset_userdata('user_redirect');
-                            redirect($user_redirect);
-                        } else {
-                            redirect('home');
-                        }
-                    } else {
-                        $this->session->set_flashdata('message', ['message' => lang('Password is incorrect.'), 'class' => 'alert alert-danger']);
+                    if($user_data == 801)
+                    {
+                        $this->session->set_flashdata('message', ['message' => lang('Your account is deleted by admin.'), 'class' => 'alert alert-danger']);
                         redirect('login');
-                    } // End of else for if($db_pass == $password) condition
+                    }
+                    else if($user_data == 802)
+                    {
+                        $this->session->set_flashdata('message', ['message' => lang('Your account is blocked by admin.'), 'class' => 'alert alert-danger']);
+                        redirect('login');
+                    }
+                    else if($user_data == 803)
+                    {
+                        $this->session->set_flashdata('message', ['message' => lang('Your account is inactive.'), 'class' => 'alert alert-danger']);
+                        redirect('login');
+                    }
+                    else
+                    {
+                        
+                        $db_pass = $this->encrypt->decode($user_data['password']);
+                        if ($db_pass == $password) {
+                            /* If remember Me Checkbox is clicked */
+                            /* Set Cookie IF Start */
+                            if ($remember_me == '1') {
+                                $cookie = array(
+                                    'name' => 'Remember_me',
+                                    'value' => $this->encrypt->encode($user_data['id']),
+                                    'expire' => '172800',
+                                    'domain' => $_SERVER['SERVER_NAME'],
+                                    'path' => '/'
+                                );
+                                $this->input->set_cookie($cookie);
+                            }
+                            /* // END */
+                            $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
+                            $this->session->set_flashdata('message', ['message' => lang('Login Successfully'), 'class' => 'alert alert-success']);
+                            $update_arr = array();
+                            if ($user_data['last_login'] < date("Y-m-d H:i:s\n", strtotime('today'))) {
+                                $update_arr['total_coin'] = $user_data['total_coin'] + 5;
+                            }
+                            $update_arr['last_login'] = date('Y-m-d H:i:s');
+
+                            $this->Users_model->update_user_data($user_data['id'], $update_arr); // update last login time
+
+                            $user_redirect = $this->session->userdata('user_redirect');
+                            if (!empty($user_redirect)) {
+                                $this->session->unset_userdata('user_redirect');
+                                redirect($user_redirect);
+                            } else {
+                                redirect('home');
+                            }
+                        } else {
+                            $this->session->set_flashdata('message', ['message' => lang('Password is incorrect.'), 'class' => 'alert alert-danger']);
+                            redirect('login');
+                        } // End of else for if($db_pass == $password) condition
+                    }
                 } else {
                     $this->session->set_flashdata('message', ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger']);
                     redirect('login');

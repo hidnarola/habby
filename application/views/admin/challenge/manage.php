@@ -68,7 +68,7 @@ if ($this->session->flashdata('success')) {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Rewards</label>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" placeholder="Enter Challenge Rewards" name="rewards" value="<?php echo (isset($Challenges['rewards'])) ? $Challenges['rewards'] : set_value('rewards'); ?>"> 
+                                <input type="number" class="form-control" min="1" max="10" placeholder="Enter Challenge Rewards" name="rewards" value="<?php echo (isset($Challenges['rewards'])) ? $Challenges['rewards'] : set_value('rewards'); ?>" required> 
                             </div>
                         </div> 
                         <div class="text-right">

@@ -298,6 +298,7 @@ class Challenge_model extends CI_Model {
         $this->db->join('users', 'users.id = cu.user_id');
         $this->db->join('challanges ch', 'cu.challange_id = ch.id AND ch.user_id =' . $user_id);
         $this->db->where('ch.is_finished', 0);
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         $this->db->order_by('cu.challange_date', 'DESC');
         $res_data = $this->db->get('challange_user cu')->result_array();
         return $res_data;

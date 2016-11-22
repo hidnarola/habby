@@ -204,6 +204,8 @@ class Home extends CI_Controller {
                     'hobby' => $this->input->post('hobby'),
                 );
                 $last_user_id = $this->Users_model->update_user_data($this->data['user_data']['id'], $upd_data); // v!-q Insert Data into Users Table
+                $user_data = $this->Users_model->check_if_user_exist(['email' => $this->input->post('email')], false, true);
+                $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
                 $this->session->set_flashdata('message', array('message' => lang('User Profile has been updated successfully.'), 'class' => 'alert alert-success'));
                 redirect('home/profile');
             }

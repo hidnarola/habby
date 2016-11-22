@@ -80,6 +80,21 @@ class User extends CI_Controller {
             $email = $this->input->post('email');
             $res_data = $this->Users_model->check_if_user_exist(array('email' => $email), false, true);
             if (!empty($res_data)) {
+                if($res_data == 801)
+                {
+                    $this->session->set_flashdata('message', ['message' => lang('User is deleted by admin.'), 'class' => 'alert alert-danger']);
+                    redirect('user/forgot_password');
+                }
+                else if($res_data == 802)
+                {
+                    $this->session->set_flashdata('message', ['message' => lang('User is blocked by admin.'), 'class' => 'alert alert-danger']);
+                    redirect('user/forgot_password');
+                }
+                else if($res_data == 803)
+                {
+                    $this->session->set_flashdata('message', ['message' => lang('User is marked as inactive.'), 'class' => 'alert alert-danger']);
+                    redirect('user/forgot_password');
+                }
                 $user_id = $res_data['id'];
 //                $forgot_pass_data = $this->Users_model->fetch_email_token($user_id);
                 $token = random_string('alnum', 20);
@@ -114,7 +129,7 @@ class User extends CI_Controller {
                     echo $this->email->print_debugger();
                 }
             } else {
-                $this->session->set_flashdata('message', ['message' => lang('Incorrect Email Id.Please try again.'), 'class' => 'alert alert-danger']);
+                $this->session->set_flashdata('message', ['message' => lang('Email id is not registered with Habby.'), 'class' => 'alert alert-danger']);
                 redirect('user/forgot_password');
             }
         }

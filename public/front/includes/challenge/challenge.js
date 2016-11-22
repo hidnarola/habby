@@ -218,8 +218,8 @@ $('document').ready(function () {
                     }
                 });
                 $(this).val('');
-                return false;
             }
+            return false;
         }
     });
 
