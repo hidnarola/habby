@@ -121,7 +121,7 @@ function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_vid
         }
     } else {
         foreach ($msg as $media) {
-            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL,'" . date('Y-m-d H:i:s') . "')";
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
             if (mysqli_query($conn, $query)) {
                 $id = mysqli_insert_id($conn);
                 close_connection($conn);
