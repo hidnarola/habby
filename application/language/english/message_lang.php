@@ -446,4 +446,6 @@ $lang["Existing Image"] = "Existing Image";
 $lang["New Image"] = "New Image";
     //--Partial--
 $lang["View Details"] = "View Details";
+$lang['saved'] = 'Saved';
+$lang['save'] = 'Save';
 ?>

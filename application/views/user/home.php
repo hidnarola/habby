@@ -78,7 +78,7 @@
                                             <div class="mov_sec mov_sec1">
                                                 <div class="sav-n-orgnl clearfix">
                                                     <p class="sav_p">
-                                                        <a href="javascript:;" class="pstbtn"><?php echo ($post['is_saved']) ? lang('saved') : lang('save'); ?></a>
+                                                        <a href="javascript:;" class="pstbtn"><?php echo ($post['is_saved']) ? lang('Saved') : lang('Save'); ?></a>
                                                     </p>
                                                 </div>
 
