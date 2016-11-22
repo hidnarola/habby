@@ -13,8 +13,7 @@
         </div>
     </div>
     <?php
-    
-    foreach ($rank_post as $key=>$post) {
+    foreach ($rank_post as $key => $post) {
         ?>
         <div class="rank_lg_sec bdr-right-clng" data-post_id="<?php echo $post['id']; ?>">
             <div class="cmnt_newsec_row">
@@ -25,7 +24,7 @@
                                 <img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['user_image']; ?>" title="<?php echo $post['name'] ?>">
                             </div>
                             <div class="col-lg-8">
-                                <?php echo ($key + 1) ?> Rank
+                                <?php echo ($key + 1) ?> <?php echo lang("Rank"); ?>
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -43,7 +42,7 @@
                                         <video controls class="img-responsive center-block">
                                             <source src="<?php echo DEFAULT_CHALLENGE_IMAGE_PATH . '/' . $post['media']; ?>">
                                             </source>
-                                            Seems like your browser doesn't support video tag.
+                                            <?php echo lang("Seems like your browser doesn't support video tag."); ?>
                                         </video>
                                     </a>
                                     <?php
@@ -61,20 +60,20 @@
                                 <li>
                                     <a href="javascript:;" class="user_coin">
                                         <img class="img-coin" src="<?php
-                            echo DEFAULT_IMAGE_PATH;
-                            echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
-                                ?>"/><br/>
-                                        <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> Coins
+                                        echo DEFAULT_IMAGE_PATH;
+                                        echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
+                                        ?>"/><br/>
+                                        <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> <?php echo lang("Coins"); ?>
                                     </a>
                                 </li>
                                 <li class="dropdown">
                                     <a href="javascript:;" class="user_like">
                                         <img src="<?php
-                                         echo DEFAULT_IMAGE_PATH;
-                                         echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
-                                ?>" class="like_img"><br/>
+                                        echo DEFAULT_IMAGE_PATH;
+                                        echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
+                                        ?>" class="like_img"><br/>
                                         <span>
-                                            <span class="like_cnt"><?php echo $post['tot_like'] ?></span> Likes
+                                            <span class="like_cnt"><?php echo $post['tot_like'] ?></span> <?php echo lang("Likes"); ?>
                                         </span>
                                     </a>
                                 </li>
@@ -82,13 +81,13 @@
                                     <a role="button" class="cmnt_winner">
                                         <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br/>
                                         <span> 
-                                            <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> Comments
+                                            <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> <?php echo lang("Comments"); ?>
                                         </span>
                                     </a>
                                 </li>
                             </ul>
                             <div class="winner-comnt">
-                                <p class="cmn_txtnw"> Comment Here</p>
+                                <p class="cmn_txtnw"> <?php echo lang("Comment Here"); ?></p>
                                 <textarea class="form-control comment" rows="3" id="comment"></textarea>
 
                                 <?php
@@ -106,8 +105,8 @@
                                                     <p class=""><?php echo $comment['created_date'] ?></p>
                                                     <ul class="cmnt_p clearfix">
                                                         <li class="stlnon"><span></span></li>
-                                                        <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> Like</a></li>
-                                                        <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> Reply</a></li>
+                                                        <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like"); ?></a></li>
+                                                        <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply"); ?></a></li>
                                                         <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                                     </ul>
                                                     <div class="reply_dtl" style="display:none"></div>
@@ -119,7 +118,7 @@
                                 } else {
                                     ?>
                                     <div class="commnt_visit_sec clearfix no_comment">
-                                        No comments available
+                                        <?php echo lang("No comments available"); ?>
                                     </div>
                                     <?php
                                 }

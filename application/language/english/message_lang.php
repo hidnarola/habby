@@ -374,6 +374,8 @@ $lang['Invalid data entered for post'] = 'Invalid data entered for post';
 $lang['Event added successfully'] = 'Event added successfully';
 $lang['Event not added'] = 'Event not added';
 $lang['Group cover is not uploaded.'] = 'Group cover is not uploaded.';
+$lang['You can not join this group as it reaches its limit.'] = 'You can not join this group as it reaches its limit.';
+$lang['You can not set person limit less then no. of joined user.'] = 'You can not set person limit less then no. of joined user.';
 
 //--View File--
 $lang["1st Rank"] = "1st Rank";
@@ -400,14 +402,48 @@ $lang["(Rewards must be between 1 to 10 coin)"] = "(Rewards must be between 1 to
 $lang["No Challenge found."] = "No Challenge found.";
     
     //---Events---
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
-$lang[""] = "";
+$lang["Event closed"] = "Event closed";
+$lang["days ago"] = "days ago";
+$lang["Event will be closed in"] = "Event will be closed in";
+$lang["days"] = "days";
+$lang["Close Event"] = "Close Event";
+$lang["Contacts"] = "Contacts";
+$lang["Notes Content"] = "Notes Content";
+$lang["No Content available"] = "No Content available";
+$lang["Add Contact"] = "Add Contact";
+$lang["Phone Number"] = "Phone Number";
+$lang["Email"] = "Email";
+$lang["No Contact available"] = "No Contact available";
+$lang["No Images were uploaded."] = "No Images were uploaded.";
+$lang["No Videos were uploaded."] = "No Videos were uploaded.";
+$lang["No Files were uploaded."] = "No Files were uploaded.";
+$lang["Events Members"] = "Events Members";
+$lang["No Member available in this group"] = "No Member available in this group";
+$lang["Details"] = "Details";
+$lang["Location"] = "Location";
+$lang["Event Time"] = "Event Time";
+$lang["Submit"] = "Submit";
+$lang["Edit Contact"] = "Edit Contact";
+$lang["Existing media"] = "Existing media";
+$lang["No media added."] = "No media added.";
+$lang["More Images"] = "More Images";
+$lang["More Videos"] = "More Videos";
+$lang["More Files"] = "More Files";
+$lang["Event Location"] = "Event Location";
+$lang["Enter your searching criteria"] = "Enter your searching criteria";
+$lang["Filter By"] = "Filter By";
+$lang["Release Date"] = "Release Date";
+$lang["From Newest to Oldest"] = "From Newest to Oldest";
+$lang["Number of seat"] = "Number of seat";
+$lang["Range Distance"] = "Range Distance";
+$lang["Mile"] = "Mile";
+$lang["Approval needed"] = "Approval needed";
+$lang["Yes"] = "Yes";
+$lang["No"] = "No";
+$lang["Search"] = "Search";
+    //--Topichat--
+$lang["Existing Image"] = "Existing Image";
+$lang["New Image"] = "New Image";
+    //--Partial--
+$lang["View Details"] = "View Details";
 ?>

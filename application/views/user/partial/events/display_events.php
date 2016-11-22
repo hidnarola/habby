@@ -33,7 +33,7 @@ foreach ($event_posts as $event) {
                             <a class="post_images" href="javascript:;">
                                 <video controls class="img-responsive center-block myvideo" >
                                     <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>"></source>
-                                    Seems like your browser doesn't support video tag.
+                                    <?php echo lang("Seems like your browser doesn't support video tag."); ?>
                                 </video>
                             </a>
                             <?php
@@ -47,21 +47,21 @@ foreach ($event_posts as $event) {
             </div>
             <div class='event_seat' data-start="<?php echo $event['start_time'] ?>" data-end="<?php echo $event['end_time'] ?>">
                 <span class="seat_details"><?php echo lang("Number of seat") . " : " . $event['limit']; ?></span>
-                <a href="javascript:;" class="view_details pstbtn">View Details</a>
+                <a href="javascript:;" class="view_details pstbtn"><?php echo lang('View Details') ?></a>
                 <?php
-                    if ($event['is_joined']) {
-                        ?>
-                        <a href='<?php echo base_url() . 'events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'>Enter</a>
-                        <?php
-                    } else if ($event['is_requested']) {
-                        ?>
-                        <a href='javascript:;' class='join_btn pstbtn'>Requested</a>
-                        <?php
-                    } else {
-                        ?>
-                        <a href='javascript:;' class='join_btn pstbtn event_join'>Join</a>
-                        <?php
-                    }
+                if ($event['is_joined']) {
+                    ?>
+                    <a href='<?php echo base_url() . 'events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'><?php echo lang("Enter");?></a>
+                    <?php
+                } else if ($event['is_requested']) {
+                    ?>
+                    <a href='javascript:;' class='join_btn pstbtn'><?php echo lang("Requested");?></a>
+                    <?php
+                } else {
+                    ?>
+                    <a href='javascript:;' class='join_btn pstbtn event_join'><?php echo lang("Join");?></a>
+                    <?php
+                }
                 ?>
             </div>
         </div>
@@ -107,9 +107,9 @@ foreach ($event_posts as $event) {
             modal.find('.event_media').html(event_post.find('.event_media').html());
             modal.find('.seat_details').html(event_post.find('.seat_details').html());
             modal.find('.join_btn').html(event_post.find('.join_btn').html());
-            modal.find('.join_btn').attr('href',event_post.find('.join_btn').attr('href'));
-            modal.find('.start_time').html('Event Start Time : '+event_post.find('.event_seat').data('start'));
-            modal.find('.end_time').html('Event End Time : '+event_post.find('.event_seat').data('end'));
+            modal.find('.join_btn').attr('href', event_post.find('.join_btn').attr('href'));
+            modal.find('.start_time').html('Event Start Time : ' + event_post.find('.event_seat').data('start'));
+            modal.find('.end_time').html('Event End Time : ' + event_post.find('.event_seat').data('end'));
             modal.modal('show');
         });
     });

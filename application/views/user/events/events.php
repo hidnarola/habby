@@ -208,39 +208,39 @@
             <form method="post" action="<?php echo base_url() . "events/filter_event"; ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Enter your searching criteria</h4>
+                    <h4 class="modal-title"><?php echo lang('Enter your searching criteria')?></h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Filter By : </div>
+                        <div class="panel-heading"><?php echo lang("Filter By");?> : </div>
                         <div class="panel-body">
                             <div class="filter_div_row">
-                                <label class="control-label col-sm-4" >Release Date:</label>
+                                <label class="control-label col-sm-4" ><?php echo lang("");?>:</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="radio" class="" name="release_date" value="desc" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc")?'':'checked' ?>> From Newest to Oldest
+                                        <input type="radio" class="" name="release_date" value="desc" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc")?'':'checked' ?>> <?php echo lang("From Newest to Oldest");?>
                                     </div>
                                     <div>
-                                        <input type="radio" class="" name="release_date" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc")?'checked':'' ?> value="asc"> From Oldest to Newest
+                                        <input type="radio" class="" name="release_date" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc")?'checked':'' ?> value="asc"> <?php echo lang("From Oldest to Newest");?>
                                     </div>
                                 </div>
                             </div>
                             <div class="filter_div_row">
-                                <label class="control-label col-sm-4" >Number of seat:</label>
+                                <label class="control-label col-sm-4" ><?php echo lang("Number of seat");?>:</label>
                                 <div class="col-sm-8">
-                                    From <input type="number" class="form-control" value="<?php echo ($this->session->has_userdata('event_filter'))?$this->session->userdata('event_filter')['from_seat']:'' ?>" min="0" style="width:30%;display:inline-block;" name="from_seat"> 
-                                    to <input type="number" value="<?php echo ($this->session->has_userdata('event_filter'))?$this->session->userdata('event_filter')['to_seat']:'' ?>" min="1" class="form-control" style="width:30%;display:inline-block;" name="to_seat">
+                                    <?php echo lang("");?>From <input type="number" class="form-control" value="<?php echo ($this->session->has_userdata('event_filter'))?$this->session->userdata('event_filter')['from_seat']:'' ?>" min="0" style="width:30%;display:inline-block;" name="from_seat"> 
+                                    <?php echo lang("");?>to <input type="number" value="<?php echo ($this->session->has_userdata('event_filter'))?$this->session->userdata('event_filter')['to_seat']:'' ?>" min="1" class="form-control" style="width:30%;display:inline-block;" name="to_seat">
                                 </div>
                             </div>
                             <div class="filter_div_row">
-                                <label class="control-label col-sm-4" >Range Distance:</label>
+                                <label class="control-label col-sm-4" ><?php echo lang("Range Distance");?>:</label>
                                 <div class="col-sm-8">
                                     <select class='form-control' name="distance_range" required="true" style="width:30%;display:inline-block;">
                                         <?php
                                         for ($i = 1; $i <= 10; ++$i) {
                                             ?>
                                             
-                                            <option value='<?php echo $i; ?>' <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['distance_range'] == $i)?'selected':''; ?>><?php echo $i; ?> Mile</option>
+                                            <option value='<?php echo $i; ?>' <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['distance_range'] == $i)?'selected':''; ?>><?php echo $i; ?> <?php echo lang("Mile");?></option>
                                             <?php
                                         }
                                         ?>
@@ -249,13 +249,13 @@
                                 </div>
                             </div>
                             <div class="filter_div_row">
-                                <label class="control-label col-sm-4" >Approval needed:</label>
+                                <label class="control-label col-sm-4" ><?php echo lang("Approval needed");?>:</label>
                                 <div class="col-sm-8">
                                     <div>
-                                        <input type="radio" class="" name="approval_needed" value="yes" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['approval_needed'] == "no")?'':'checked' ?>> Yes
+                                        <input type="radio" class="" name="approval_needed" value="yes" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['approval_needed'] == "no")?'':'checked' ?>> <?php echo lang("Yes");?>
                                     </div>
                                     <div>
-                                        <input type="radio" class="" name="approval_needed" value="no" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['approval_needed'] == "no")?'checked':'' ?>> No
+                                        <input type="radio" class="" name="approval_needed" value="no" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['approval_needed'] == "no")?'checked':'' ?>> <?php echo lang("No");?>
                                     </div>
                                 </div>
                             </div>
@@ -263,8 +263,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-default">Search</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                    <button type="submit" class="btn btn-default"><?php echo lang("Search");?></button>
                 </div>
                 <input type="hidden" name="lat" class="lat" value="">
                 <input type="hidden" name="long" class="long" value="">
@@ -285,7 +285,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
         } else {
-            console.log("Geolocation is not supported by this browser.");
+//            console.log("Geolocation is not supported by this browser.");
         }
     }
     function showPosition(position) {
@@ -299,11 +299,11 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(event_showPosition);
         } else {
-            console.log("Geolocation is not supported by this browser.");
+//            console.log("Geolocation is not supported by this browser.");
         }
     }
     function event_showPosition(position) {
-        console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+//        console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
         $('#new_event').find('.lat').val(position.coords.latitude);
         $('#new_event').find('.long').val(position.coords.longitude);
         $('#new_event').modal('show');

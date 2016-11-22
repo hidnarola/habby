@@ -23,6 +23,7 @@
     var made_request =<?php echo lang('You have made request for join this event'); ?>
     var no_events =<?php echo lang('No more event found'); ?>
     var no_groups =<?php echo lang('No more group found'); ?>
+    var no_content =<?php echo lang('No contents available'); ?>
 </script>
 <?php
 $language = $this->session->userdata('language');

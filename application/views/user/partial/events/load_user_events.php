@@ -33,7 +33,7 @@ foreach ($event_post as $event) {
                             <a class="fancybox post_images"  href="javascript:;" data-fancybox-group="gallery">
                                 <video controls class="img-responsive center-block">
                                     <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>"></source>
-                                    Seems like your browser doesn't support video tag.
+                                    <?php echo lang("Seems like your browser doesn't support video tag.");?>
                                 </video>
                             </a>
                             <?php

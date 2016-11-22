@@ -14,14 +14,14 @@
                     <span class="post_comment_like">
                         <?php echo $comment['cnt_like']; ?>
                     </span> 
-                    <span class="post_comment_text">Like</span>
+                    <span class="post_comment_text"><?php echo lang("Like");?></span>
                 </a>
             </li>
             <li class="post_comment_reply">
                 <a href="javascript:;">
                     <span class="comment_reply_cnt">
                         <?php echo $comment['cnt_reply']; ?>
-                    </span> Reply
+                    </span> <?php echo lang("Reply");?>
                 </a>
             </li>
             <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>

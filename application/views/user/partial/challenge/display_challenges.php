@@ -21,16 +21,20 @@ if ($Challenges != "" && !empty($Challenges)) {
                 <div class="challenge_cont_sec2 row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-3">
                         <div id="field">
-                            <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH;
-        echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png"; ?>"></button>
+                            <button type="button" id="add" class="add add_btn smlr_btn"><img src="<?php
+                                echo DEFAULT_IMAGE_PATH;
+                                echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 1) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                ?>"></button>
                             <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>"  class="field rank_rate" />
-                            <button type="button" id="sub" class="sub smlr_btn"><img src="<?php echo DEFAULT_IMAGE_PATH;
-        echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png"; ?>"></button>
+                            <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
+                                echo DEFAULT_IMAGE_PATH;
+                                echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                ?>"></button>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                         <p class="chlng_para">
-        <?php echo $Challenge['description'] ?>
+                            <?php echo $Challenge['description'] ?>
                         </p>
                     </div>
                 </div>
@@ -44,17 +48,17 @@ if ($Challenges != "" && !empty($Challenges)) {
                             <li><span title="Rewards"><img class="reward_img" src="<?php echo DEFAULT_IMAGE_PATH . "coin_icon.png" ?>"/><?php echo $Challenge['rewards'] ?></span></li>
                             <li class="winner">
                                 <a class="pstbtn others_rank" data-toggle="modal" data-target="#rank_modal" data-id="<?php echo $Challenge['id']; ?>">
-                                    Winners
+                                    <?php echo lang("Winners");?>
                                 </a>
                             </li>
                             <?php
                             if (isset($Challenge['is_applied']) && $Challenge['is_applied']) {
                                 ?>
-                                <li><a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Enter</a></li>
+                                <li><a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn"><?php echo lang("Enter");?></a></li>
                                 <?php
                             } else {
                                 ?>
-                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn">Accept</a></li>
+                                <li><a href="<?php echo base_url() . "challenge/accept/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn"><?php echo lang("Accept");?></a></li>
                                     <?php
                                 }
                                 ?>
