@@ -47,10 +47,10 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     if($message->media != 'links')
                     {
                         $message->message = json_decode($message->message);
-                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video);
+                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
                     }
                     else {
-                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
+                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video);
                     }
                 }
                 else
