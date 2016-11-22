@@ -547,6 +547,12 @@ class Topichat_model extends CI_Model {
         return $id;
     }
 
+    public function get_chat_id_from_link($media){
+        $this->db->select('id');
+        $id = $this->db->where('link_id', $media)->get('topic_group_chat')->row_array()['id'];
+        return $id;
+    }
+    
     public function get_media_details($id, $type) {
         $logged_in_user = logged_in_user_id();
         $this->db->select('tc.id,tc.media,tc.topic_group_id,tc.youtube_video,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');

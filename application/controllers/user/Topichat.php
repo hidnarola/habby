@@ -438,7 +438,12 @@ class Topichat extends CI_Controller {
         $media = $this->input->post('media');
         echo $this->Topichat_model->get_chat_id_from_media_name($media);
     }
-
+    
+    public function get_chat_id_from_link_id() {
+        $media = $this->input->post('link_id');
+        echo $this->Topichat_model->get_chat_id_from_link($media);
+    }
+    
     public function media_details() {
         if ($this->input->post()) {
             $media = $this->input->post('image');

@@ -47,14 +47,17 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     if($message->media != 'links')
                     {
                         $message->message = json_decode($message->message);
+                        $chat_id = send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
                     }
-                    send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
+                    else {
+                        $chat_id = send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video,$message->link_id);
+                    }
                 }
                 else
                 {
-                    send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                    $chat_id = send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
-                $chat_id = insert_id();
+//                $chat_id = insert_id();
                 // Send message to user
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {
@@ -68,6 +71,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['chat_id'] = $chat_id;
                         $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
                         $send_object['youtube_video'] = (isset($message->youtube_video) ? $message->youtube_video : NULL);
+//                        $send_object['link_id'] = (isset($message->link_id) ? $message->link_id : NULL);
                         $send_object['group'] = get_topic_name($message->group_id);
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == $message->type) {

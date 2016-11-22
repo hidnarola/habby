@@ -53,16 +53,17 @@ function share_links() {
                     type: 'topic_msg',
                     group_id: group_id,
                     media: 'links',
-                    youtube_video: youtube_video_html
+                    youtube_video: youtube_video_html,
+                    link_id : i
                 }
                 if (Server.send('message', JSON.stringify(msg)))
                 {
                     setTimeout(function () {
                         $.ajax({
-                            url: base_url + 'user/Topichat/get_chat_id_from_media_name',
+                            url: base_url + 'user/Topichat/get_chat_id_from_link_id',
                             method: 'post',
                             async: false,
-                            data: 'media=' + preview,
+                            data: 'link_id='+i,
                             success: function (resp) {
                                 $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                                 $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
