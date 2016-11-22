@@ -374,6 +374,10 @@ $lang['Event not added'] = 'Event not added';
 $lang['Group cover is not uploaded.'] = 'Group cover is not uploaded.';
 $lang['You can not join this group as it reaches its limit.'] = 'You can not join this group as it reaches its limit.';
 $lang['You can not set person limit less then no. of joined user.'] = 'You can not set person limit less then no. of joined user.';
+$lang['Email id is not registered with Habby.'] = 'Email id is not registered with Habby.';
+$lang['User is deleted by admin.'] = 'User is deleted by admin.';
+$lang['User is blocked by admin.'] = 'User is blocked by admin.';
+$lang['User is marked as inactive.'] = 'User is marked as inactive.';
 
 //--View File--
 $lang["1st Rank"] = "1st Rank";
@@ -444,5 +448,7 @@ $lang["Existing Image"] = "Existing Image";
 $lang["New Image"] = "New Image";
     //--Partial--
 $lang["View Details"] = "View Details";
+$lang['saved'] = 'Saved';
+$lang['save'] = 'Save';
 
 ?>

@@ -280,7 +280,7 @@ $lang["No Event available"] = "No Event available";
 $lang["Event join request"] = "Event join request";
 $lang["wants to join"] = "wants to join";
 
-/*21-11-2016 (NEW)*/
+/* 21-11-2016 (NEW) */
 $lang["Challenge Quit successfully."] = "Challenge Quit successfully.";
 $lang["Challenge Quit Error occured."] = "Challenge Quit Error occured.";
 $lang["Links"] = "Links";
@@ -376,13 +376,20 @@ $lang['Event not added'] = 'Event not added';
 $lang['Group cover is not uploaded.'] = 'Group cover is not uploaded.';
 $lang['You can not join this group as it reaches its limit.'] = 'You can not join this group as it reaches its limit.';
 $lang['You can not set person limit less then no. of joined user.'] = 'You can not set person limit less then no. of joined user.';
+$lang['Email id is not registered with Habby.'] = 'Email id is not registered with Habby.';
+$lang['User is deleted by admin.'] = 'User is deleted by admin.';
+$lang['User is blocked by admin.'] = 'User is blocked by admin.';
+$lang['User is marked as inactive.'] = 'User is marked as inactive.';
+$lang['Your account is inactive.'] = 'Your account is inactive.';
+$lang['Your account is blocked by admin.'] = 'Your account is blocked by admin.';
+$lang['Your account is deleted by admin.'] = 'Your account is deleted by admin.';
 
 //--View File--
 $lang["1st Rank"] = "1st Rank";
 $lang["Close"] = "Close";
 $lang["Coins"] = "Coins";
 $lang["Others"] = "Others";
-    //---challenge---
+//---challenge---
 $lang["Rewards"] = "Rewards";
 $lang["makes a challenge to public"] = "makes a challenge to public";
 $lang["Quit"] = "Quit";
@@ -400,8 +407,8 @@ $lang["CREATE NEW CHALLENGE"] = "CREATE NEW CHALLENGE";
 $lang["Required Details"] = "Required Details";
 $lang["(Rewards must be between 1 to 10 coin)"] = "(Rewards must be between 1 to 10 coin)";
 $lang["No Challenge found."] = "No Challenge found.";
-    
-    //---Events---
+
+//---Events---
 $lang["Event closed"] = "Event closed";
 $lang["days ago"] = "days ago";
 $lang["Event will be closed in"] = "Event will be closed in";
@@ -441,9 +448,11 @@ $lang["Approval needed"] = "Approval needed";
 $lang["Yes"] = "Yes";
 $lang["No"] = "No";
 $lang["Search"] = "Search";
-    //--Topichat--
+//--Topichat--
 $lang["Existing Image"] = "Existing Image";
 $lang["New Image"] = "New Image";
-    //--Partial--
+//--Partial--
 $lang["View Details"] = "View Details";
+$lang['saved'] = 'Saved';
+$lang['save'] = 'Save';
 ?>

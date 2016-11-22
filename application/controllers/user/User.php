@@ -25,7 +25,7 @@ class User extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(['facebook']);
-        $this->load->model(array('Users_model', 'Common_functionality','Seo_model'));
+        $this->load->model(array('Users_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
     }
 
@@ -111,7 +111,7 @@ class User extends CI_Controller {
                 $path = base_url() . 'user/reset_password/' . $token;
                 $message = "<p>Welcome " . $res_data['name'] . "</p>";
                 $message .= "<p>You have requested to have your password reset on Habby.Please click the link below to reset your password now:</p>";
-                $message .= "<p><a href='" . $path . "'>Click Here</a></p>";
+                $message .= "<p><a href='" . $path . "'>" . $path . "</a></p>";
                 $message .= "<p>Thanks</p>";
 
                 $this->email

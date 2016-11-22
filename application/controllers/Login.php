@@ -174,7 +174,7 @@ class Login extends CI_Controller {
                     $path = base_url() . 'user/verify_email/' . $token;
 
                     $message = "<p>Hello " . $this->input->post('name') . "</p>";
-                    $message .= "<p>You recently entered a contact email address. To confirm your contact email, follow the link below: <br/><a href='" . $path . "'>Click Here</a></p>";
+                    $message .= "<p>You recently entered a contact email address. To confirm your contact email, follow the link below: <br/><a href='" . $path . "'>" . $path . "</a></p>";
                     $message .= "<p>Thanks</p>";
 
 
@@ -281,41 +281,38 @@ class Login extends CI_Controller {
                         }
                     } else {
                         // New user // need to register
-                        
+
                         $profile_image = $this->fetch_google_image($me['image']['url']);
-                        
+
                         $new_user = array(
                             'name' => $me['displayName'],
-                            'role_id'=>2,
-                            'email'=>$me["emails"][0]["value"],
-                            'gender'=>$me['gender'],
-                            'bio'=>$me['skills'],
+                            'role_id' => 2,
+                            'email' => $me["emails"][0]["value"],
+                            'gender' => $me['gender'],
+                            'bio' => $me['skills'],
                             'external_id' => $me['id'],
                             'signup_type' => 3,
                             'user_image' => $profile_image,
                             'is_active' => 1
                         );
                         $last_user_id = $this->Users_model->insert_user_data($new_user);
-                        if($last_user_id != null)
-                        {
+                        if ($last_user_id != null) {
                             $this->google_user_login($me["emails"][0]["value"]);
-                        }
-                        else
-                        {
-                            $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'],"There was problem to login with Google. Please try again!");
+                        } else {
+                            $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
                             redirect("/login");
                         }
                     }
                 } else {
-                    $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'],"There was problem to login with Google. Please try again!");
+                    $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
                     redirect("/login");
                 }
             } else {
-                $this->session->set_flashdata("message",['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
+                $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
                 redirect("/login");
             }
         } catch (Exception $e) {
-            $this->session->set_flashdata("message",['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
+            $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
             redirect("/login");
         }
     }
@@ -364,8 +361,9 @@ class Login extends CI_Controller {
     /*
      * 
      */
-    public function fetch_google_image($url){
-        $url = explode("?",$url);
+
+    public function fetch_google_image($url) {
+        $url = explode("?", $url);
         $data = file_get_contents($url[0]);
         $img_name = random_string('alnum', 20) . '.jpg';
         $img_path = 'uploads/user_profile/' . $img_name;
@@ -374,4 +372,5 @@ class Login extends CI_Controller {
         fclose($file_handler);
         return $img_name;
     }
+
 }
