@@ -95,8 +95,9 @@ function send_topic_msg($group_id, $sender_id, $msg) {
     $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'" . $msg . "',NULL,NULL,NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
 
     if (mysqli_query($conn, $query)) {
+        $id = mysqli_insert_id($conn);
         close_connection($conn);
-        return true;
+        return $id;
     }
     close_connection($conn);
     return false;
@@ -114,15 +115,17 @@ function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_vid
             $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL,'".$link_id."','" . date('Y-m-d H:i:s') . "')";
         }
         if (mysqli_query($conn, $query)) {
+            $id = mysqli_insert_id($conn);
             close_connection($conn);
-            return true;
+            return $id;
         }
     } else {
         foreach ($msg as $media) {
             $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL,'" . date('Y-m-d H:i:s') . "')";
             if (mysqli_query($conn, $query)) {
+                $id = mysqli_insert_id($conn);
                 close_connection($conn);
-                return true;
+                return $id;
             }
         }
     }

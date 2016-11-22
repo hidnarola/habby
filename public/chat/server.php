@@ -47,17 +47,17 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     if($message->media != 'links')
                     {
                         $message->message = json_decode($message->message);
-                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
+                        $chat_id = send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
                     }
                     else {
-                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video,$message->link_id);
+                        $chat_id = send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video,$message->link_id);
                     }
                 }
                 else
                 {
-                    send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
+                    $chat_id = send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
-                $chat_id = insert_id();
+//                $chat_id = insert_id();
                 // Send message to user
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {
