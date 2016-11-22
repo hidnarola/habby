@@ -48,7 +48,6 @@ function share_links() {
                 $('.fileshare' + i).append(html);
                 // Send file using ajax
                 preview = JSON.stringify(preview);
-                console.log(youtube_video_html);
                 var msg = {
                     message: preview,
                     type: 'topic_msg',
