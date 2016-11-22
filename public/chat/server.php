@@ -50,7 +50,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media);
                     }
                     else {
-                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video);
+                        send_topic_media($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message,$message->media,$message->youtube_video,$message->link_id);
                     }
                 }
                 else
