@@ -7,7 +7,13 @@ $search_data = $this->session->flashdata('event_filter');
 <!-- Topicaht Post and bannner section end here -->
 
 <div class="row topic_banner">
-    <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    <?php if ($banner_image != "" && $banner_image != null) { ?>
+        <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    <?php } else {
+        ?>
+        <div class="raw col-sm-12">&nbsp;</div>
+    <?php }
+    ?>
     <div class="new_grp">
         <!-- New Group button start-->
         <a href="javascript:;" class="create_event_btn"><?php echo lang('New'); ?> <br><?php echo lang('Event'); ?></a>
@@ -153,7 +159,7 @@ $search_data = $this->session->flashdata('event_filter');
                             <input type="number" class="form-control" min="1" name="limit" required="true" id="limit">
                         </div>
                     </div>
-                    
+
                     <div class="form-group clearfix">
                         <div class="col-md-3">
                             <label class="control-label"><?php echo lang("Approval needed"); ?></label>

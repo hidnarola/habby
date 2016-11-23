@@ -1,7 +1,9 @@
 <!-- Topicaht Post and bannner section end here -->
 
 <div class="row topic_banner">
-    <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    <?php if ($banner_image != "" && $banner_image != null) { ?>
+        <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    <?php } ?>
     <div class="new_grp">
         <!-- New Group button start-->
         <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang("New"); ?> <br><?php echo lang("Challenge"); ?></a>

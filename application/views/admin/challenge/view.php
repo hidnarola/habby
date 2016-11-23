@@ -66,7 +66,7 @@ if ($this->session->flashdata('success')) {
                             <div class="thumbnail challenge-details-thumbnail">
                                 <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenges['user_image']; ?>"> <?php echo $challenges['user_name']; ?></h3>
                                 <div class="caption">
-                                    <h6 class="no-margin-top"><span class="text-semibold">Name : </span><?php echo $challenges['name'] ?></h6>
+                                    <h6 class="no-margin-top"><span class="text-semibold">Name : </span><span class="word-break"><?php echo $challenges['name'] ?></span></h6>
                                     <h6 class="no-margin-top"><span class="text-semibold">Description : </span><?php echo $challenges['description'] ?></h6>
                                     <h6 class="no-margin-top"><span class="text-semibold">Date : </span><?php echo date('d-m-Y h:i a', strtotime($challenges['created_date'])) ?></h6>
                                 </div>

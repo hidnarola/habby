@@ -1,6 +1,8 @@
-<div class="row home_banner">
-    <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
-</div>
+<?php if ($banner_image != "" && $banner_image != null) { ?>
+    <div class="row home_banner">
+        <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    </div>
+<?php } ?>
 <div class="row cont_sec1">
     <div class="home_lg_sec">
         <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 col-lg-offset-1 post_section">
