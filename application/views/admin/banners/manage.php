@@ -55,15 +55,18 @@ if ($this->session->flashdata('success')) {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Page Name <span class="text-danger">*</span></label>
                             <div class="col-lg-3">
-                                <select class="form-control" name="page" id="page">
-                                    <option value="home" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "home") ? "selected='selected'" : ""; ?>>Home</option>
-                                    <option value="topichat" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "topichat") ? "selected='selected'" : ""; ?>>Topichat</option>
-                                    <option value="soulmate" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "soulmate") ? "selected='selected'" : ""; ?>>Soulmate</option>
-                                    <option value="grupplan" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "grupplan") ? "selected='selected'" : ""; ?>>Group Plan</option>
-                                    <option value="challenge" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "challenge") ? "selected='selected'" : ""; ?>>Challenge</option>
-                                    <option value="leauge" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "leauge") ? "selected='selected'" : ""; ?>>Leauge And Alliance</option>
-                                </select>
-<!--                                <input type="text" name="page" id="page" placeholder="Enter page name" class="form-control" value="<?php echo (isset($banner_datas['page'])) ? $banner_datas['page'] : set_value('page'); ?>">-->
+                                <?php if (isset($banner_datas) && !empty($banner_datas)) { ?>
+                                    <input type="text" name="page" placeholder="Enter page name" class="form-control" value="<?php echo (isset($banner_datas['page'])) ? $banner_datas['page'] : set_value('page'); ?>" disabled="disabled">
+                                <?php } else { ?>
+                                    <select class="form-control" name="page" id="page">
+                                        <option value="home" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "home") ? "selected='selected'" : ""; ?>>Home</option>
+                                        <option value="topichat" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "topichat") ? "selected='selected'" : ""; ?>>Topichat</option>
+                                        <option value="soulmate" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "soulmate") ? "selected='selected'" : ""; ?>>Soulmate</option>
+                                        <option value="grupplan" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "grupplan") ? "selected='selected'" : ""; ?>>Group Plan</option>
+                                        <option value="challenge" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "challenge") ? "selected='selected'" : ""; ?>>Challenge</option>
+                                        <option value="leauge" <?php echo ((isset($banner_datas['page'])) && $banner_datas['page'] == "leauge") ? "selected='selected'" : ""; ?>>Leauge And Alliance</option>
+                                    </select>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -83,17 +86,19 @@ if ($this->session->flashdata('success')) {
                                 <img src="<?php echo (isset($banner_datas['image'])) ? DEFAULT_BANNER_IMAGE_PATH . $banner_datas['image'] : ""; ?>" style="max-width: 100%"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-lg-3">Do you want to active banner? </label>
-                            <div class="col-lg-9">
-                                <div class="checkbox checkbox-switch">
-                                    <label>
-                                        <input type="checkbox" name="is_active" data-on-text="Yes" data-off-text="No" class="switch">
-                                        Activate/Deactivate Banner
-                                    </label>
+                        <?php if (empty($banner_datas)) { ?>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3">Do you want to active banner? </label>
+                                <div class="col-lg-9">
+                                    <div class="checkbox checkbox-switch">
+                                        <label>
+                                            <input type="checkbox" name="is_active" data-on-text="Yes" data-off-text="No" class="switch">
+                                            Activate/Deactivate Banner
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
                         <div class="text-right">
                             <button class="btn btn-success" type="submit">Save <i class="icon-arrow-right14 position-right"></i></button>
                         </div>

@@ -70,19 +70,27 @@ class Banners extends CI_Controller {
             $this->data['title'] = 'Habby - Admin add banner';
             $this->data['heading'] = 'Add Banner';
         }
-        $this->form_validation->set_rules('page', 'Page Name', 'trim|required');
-        $this->form_validation->set_rules('image_name', 'Image Name', 'trim|required');
-//        $this->form_validation->set_rules('image', 'Image', 'trim|required');
+        if (is_numeric($id)) {
+            $this->form_validation->set_rules('image_name', 'Image Name', 'trim|required');
+        } else {
+            $this->form_validation->set_rules('page', 'Page Name', 'trim|required');
+            $this->form_validation->set_rules('image_name', 'Image Name', 'trim|required');
+        }
         if ($this->form_validation->run() == FALSE) {
             $this->template->load('admin_main', 'admin/banners/manage', $this->data);
         } else {
             $update_array = $this->input->post(null);
 
-            if (!empty($_FILES['image']['name'])) {
-                $image_name = $this->upload_image('image', 'uploads/banners');
-//                pr($image_name, 1);
+            if (is_numeric($id)) {
+                if (!empty($_FILES['image']['name'])) {
+                    $image_name = $this->upload_image('image', 'uploads/banners');
+                }
             } else {
-                $image_name = 'home_banner.jpg';
+                if (!empty($_FILES['image']['name'])) {
+                    $image_name = $this->upload_image('image', 'uploads/banners');
+                } else {
+                    $image_name = 'home_banner.jpg';
+                }
             }
             if (isset($image_name)) {
                 if (is_array($image_name) && array_key_exists('errors', $image_name)) {
@@ -104,7 +112,7 @@ class Banners extends CI_Controller {
                     );
                     $this->Admin_banners_model->update_record('banner_images', $wheres, $updates_array);
                     $update_array['is_active'] = 1;
-                } else {;
+                } else {
                     $update_array['is_active'] = 0;
                 }
                 $this->Admin_banners_model->insert('banner_images', $update_array);

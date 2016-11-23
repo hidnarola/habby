@@ -1,7 +1,13 @@
 <!-- Topicaht Post and bannner section end here -->
 
 <div class="row topic_banner">
-    <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    <?php if ($banner_image != "" && $banner_image != null) { ?>
+        <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+    <?php } else {
+        ?>
+        <div class="raw col-sm-12">&nbsp;</div>
+    <?php }
+    ?>
     <div class="new_grp">
         <!-- New Group button start-->
         <a href="#" data-toggle="modal" data-target="#new_grp"><?php echo lang("New"); ?> <br><?php echo lang("Challenge"); ?></a>
@@ -61,14 +67,14 @@
                                                     ?>"></button>
                                                 <input type="text" id="1" value="<?php echo $Challenge['average_rank']; ?>" class="field rank_rate" />
                                                 <button type="button" id="sub" class="sub smlr_btn"><img src="<?php
-                                                                                                         echo DEFAULT_IMAGE_PATH;
-                                                                                                         echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
-                                                                                                         ?>"></button>
+                                                    echo DEFAULT_IMAGE_PATH;
+                                                    echo ($Challenge['is_ranked'] && $Challenge['given_rank'] == 0) ? 'challeng_arrow_ranked.png' : "challeng_arrow.png";
+                                                    ?>"></button>
                                             </div>
                                         </div>
                                         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-8 pad_lft0">
                                             <p class="chlng_para">
-        <?php echo $Challenge['description'] ?>
+                                                <?php echo $Challenge['description'] ?>
                                             </p>
                                         </div>
                                     </div>
@@ -109,7 +115,7 @@
                     } else {
                         ?>
                         <div class="">
-                        <?php echo lang("No Challenge found."); ?>
+                            <?php echo lang("No Challenge found."); ?>
                         </div>
                         <?php
                     }

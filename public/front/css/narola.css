@@ -6,7 +6,7 @@
 .post_leftsec_hddn
 {
     max-height:100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .image_wrapper{
     height:auto;
@@ -602,7 +602,7 @@ img.file_icon {
 .chalng_tbl_sec {
     max-height: 275px;
     /* margin-top: 20px; */
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 .upld_sec.finised {
@@ -957,6 +957,16 @@ img.user_chat_thumb {
 .grp_prsnl_innr h2,
 h2.chlng_hdg ,
 .prsnl_sm_sec p{word-break: break-all; }
+.morecontent span {
+    display: none;
+}
+.morelink,a.morelink:hover, a.morelink:focus{
+    display: inline-block;
+    color: #76469e;
+    font-weight: bold;
+    margin-bottom: 15px;
+
+}
 @media(min-width:1583px){
     .row.event_container
     {

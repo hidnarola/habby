@@ -100,8 +100,9 @@ class Users extends CI_Controller {
                 $this->session->set_flashdata('success', 'User successfully updated!');
                 redirect('admin/users');
             }
+        } else {
+            $this->template->load('admin_main', 'admin/users/manage', $this->data);
         }
-        $this->template->load('admin_main', 'admin/users/manage', $this->data);
     }
 
 }
