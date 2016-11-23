@@ -421,24 +421,24 @@ if (isset($json_decode->results[0])) {
                                                 </span>-->
                                                 <span class="input-group-btn upld_icnpad">
                                                     <div class="fileUpload up_img btn">
-                                                        <span><img src="<?php echo base_url() . "type_symbol2.png"; ?>" title="Upload image"></span>
+                                                        <span><img src="<?php echo DEFAULT_IMAGE_PATH . "type_symbol2.png"; ?>" title="Upload image"></span>
                                                         <input type="file" id="uploadFile" class="upload" name="uploadfile[]">
                                                     </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
                                                     <div class="fileUpload up_img btn">
-                                                        <span><img src="<?php echo base_url() . "video_record_img.png"; ?>" title="Upload video"></span>
+                                                        <span><img src="<?php echo DEFAULT_IMAGE_PATH . "video_record_img.png"; ?>" title="Upload video"></span>
                                                         <input type="file" class="upload" name="upload_video" id="upload_video">
                                                     </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
                                                     <div class="fileUpload up_img btn">
-                                                        <span><img src="<?php echo base_url() . "upload.png"; ?>" title="Upload file"></span>
+                                                        <span><img src="<?php echo DEFAULT_IMAGE_PATH . "upload.png"; ?>" title="Upload file"></span>
                                                         <input type="file" id="upload_files" class="upload" name="upload_files">
                                                     </div>
                                                 </span>
                                                 <span class="input-group-btn upld_icnpad">
-                                                    <a data-placement="top" data-toggle="popover" data-container="body" id="emogis" href="javascript:void(0);" data-original-title="" title=""><img src="<?php echo base_url() . "type_symbol3.png"; ?>"></a>
+                                                    <a data-placement="top" data-toggle="popover" data-container="body" id="emogis" href="javascript:void(0);" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH . "type_symbol3.png"; ?>"></a>
                                                 </span>
                                                 <span class="input-group-btn">
                                                     <input type="submit" value="<?php echo lang("Send"); ?>" class="submit_btn chat_btn">
