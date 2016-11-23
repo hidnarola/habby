@@ -108,6 +108,15 @@ if (isset($json_decode->results[0])) {
     .event-bottom-section,.event-page{
         background-color: #ffffff; 
     }
+    .event-detail-content:first-child{
+        height:100px;
+    }
+    .event-detail-content:last-child
+    {
+        padding-top:5px;
+        padding-bottom:5px;
+        border-bottom:1px solid;
+    }
     @media(min-width:991px){
         .event-page{
             width: 80%;
