@@ -192,6 +192,7 @@ div#logPreview {
     border-radius: 3px;
 }
 input#No_of_person{margin-top: 10px;}
+
 .content.flashmsg {
     padding-bottom: 0;
 }
@@ -200,4 +201,16 @@ input#No_of_person{margin-top: 10px;}
 }
 .word-break{
     word-break: break-all;
+
+.event_notes{
+    max-height: 100px;
+    overflow: auto;
+}
+
+.event_contact_wrapper{
+    max-height:250px;
+    overflow:auto;
+}
+.event_contact_wrapper .contact_ul{
+    width:95%;
 }

@@ -3,7 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Seo extends CI_Controller {
-
     public function __construct() {
         parent::__construct();
         $this->load->model(['admin/Admin_seo_model', 'Users_model']);

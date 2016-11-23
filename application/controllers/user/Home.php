@@ -19,6 +19,7 @@ class Home extends CI_Controller {
         if (empty($this->data['user_data'])) {
             redirect('login');
         }
+        
     }
 
     /*

@@ -80,7 +80,44 @@ if (isset($json_decode->results[0])) {
         map.setCenter(center);
     }
 </script>
-
+<style>
+    .bg-image{ height: 200px;}
+    .row.cont_top_1{
+    bottom: 0;
+    left: 0;
+    position: relative;
+    right: 0;
+    top: 0;
+        padding-top: 0;
+    }
+    .event-right-section .chat_area2{
+        position: relative;
+         bottom: 0 !important;
+    height: 500px;
+    top: 0;
+    }
+    .topich_chat_typesec{
+        background-color: #ffffff;
+    border: 1px solid #dcdee3;
+    bottom: 0;
+    margin-bottom: 0;
+    position: relative;
+    top: auto;
+    width: 872px;
+    }
+    .event-bottom-section,.event-page{
+       background-color: #ffffff; 
+    }
+    @media(min-width:991px){
+        .event-page{
+            width: 80%;
+        }
+        .event-chat-start .chat_area2, .event-chat-start .topich_chat_typesec{
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+</style>
 <div class="row cont_top_1">
     <div class="row event-top-section">
         <div class="bg-image">
@@ -419,6 +456,7 @@ if (isset($json_decode->results[0])) {
                 </div>
 
             </div>
+            <div class="clearfix"></div>
         </div>
     </section>
 </div>
