@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <?php
 if (!empty($user_data['user_image'])) {
-
     $image = DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'];
 } else {
-
     $image = DEFAULT_IMAGE_PATH . "user-img.jpg";
 }
 ?>
@@ -120,6 +118,9 @@ if (!empty($user_data['user_image'])) {
                                     </li>-->
                                     <li class="<?php echo ($controller == 'challenge') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/challenge'; ?>"><i class="icon-users4"></i> <span>Challenges</span></a>
+                                    </li>
+                                    <li class="<?php echo ($controller == 'event') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url() . 'admin/event'; ?>"><i class="icon-users4"></i> <span>Events</span></a>
                                     </li>
                                     <li class="<?php echo ($controller == 'league') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url() . 'admin/league'; ?>"><i class="icon-users4"></i> <span>League and Alliance</span></a>

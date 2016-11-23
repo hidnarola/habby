@@ -13,31 +13,33 @@ class Users_model extends CI_Model {
      */
 
     public function check_if_user_exist($data = array(), $is_total_rows = false, $is_single = false) {
-        $this->db->where($data);
-        //$this->db->where('is_blocked=0 AND is_deleted =0');
-        //$this->db->where('is_active', 1);
-        if ($is_total_rows == true) {
-            $res_data = $this->db->get('users')->num_rows();
-        } else {
-            if ($is_single == true) {
-                $res_data = $this->db->get('users')->row_array();
-                if($res_data['is_deleted']){
-                    return 801;
-                }
-                else if($res_data['is_blocked'])
-                {
-                    return 802;
-                }
-                else if(!$res_data['is_active'])
-                {
-                    return 803;
-                }
+        
+            $this->db->where($data);
+            //$this->db->where('is_blocked=0 AND is_deleted =0');
+            //$this->db->where('is_active', 1);
+            if ($is_total_rows == true) {
+                $res_data = $this->db->get('users')->num_rows();
             } else {
-                $res_data = $this->db->get('users')->result_array();
+                if ($is_single == true) {
+                    $res_data = $this->db->get('users')->row_array();
+                    if(empty($res_data))
+                    {
+                        return false;
+                    }
+                    else if ($res_data['is_deleted']) {
+                        return 801;
+                    } else if ($res_data['is_blocked']) {
+                        return 802;
+                    } else if (!$res_data['is_active']) {
+                        return 803;
+                    }
+                } else {
+                    $res_data = $this->db->get('users')->result_array();
+                }
             }
-        }
 //        echo $this->db->last_query();
-        return $res_data;
+            return $res_data;
+        
     }
 
     /* v! Insert data into users table */
