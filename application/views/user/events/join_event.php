@@ -83,30 +83,39 @@ if (isset($json_decode->results[0])) {
 <style>
     .bg-image{ height: 200px;}
     .row.cont_top_1{
-    bottom: 0;
-    left: 0;
-    position: relative;
-    right: 0;
-    top: 0;
+        bottom: 0;
+        left: 0;
+        position: relative;
+        right: 0;
+        top: 0;
         padding-top: 0;
     }
     .event-right-section .chat_area2{
         position: relative;
-         bottom: 0 !important;
-    height: 500px;
-    top: 0;
+        bottom: 0 !important;
+        height: 500px;
+        top: 0;
     }
     .topich_chat_typesec{
         background-color: #ffffff;
-    border: 1px solid #dcdee3;
-    bottom: 0;
-    margin-bottom: 0;
-    position: relative;
-    top: auto;
-    width: 872px;
+        border: 1px solid #dcdee3;
+        bottom: 0;
+        margin-bottom: 0;
+        position: relative;
+        top: auto;
+        width: 872px;
     }
     .event-bottom-section,.event-page{
-       background-color: #ffffff; 
+        background-color: #ffffff; 
+    }
+    .event-detail-content:first-child{
+        height:100px;
+    }
+    .event-detail-content:last-child
+    {
+        padding-top:5px;
+        padding-bottom:5px;
+        border-bottom:1px solid;
     }
     @media(min-width:991px){
         .event-page{
@@ -679,8 +688,8 @@ if (isset($json_decode->results[0])) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
-                    <button type="submit" class="btn btn-primary"><?php echo lang("Update");?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
+                    <button type="submit" class="btn btn-primary"><?php echo lang("Update"); ?></button>
                 </div>
             </form>
         </div>
@@ -694,13 +703,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><?php echo lang("More Images");?></h4>
+                <h4 class="modal-title"><?php echo lang("More Images"); ?></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
             </div>
         </div>
     </div>
@@ -713,13 +722,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><?php echo lang("More Videos");?></h4>
+                <h4 class="modal-title"><?php echo lang("More Videos"); ?></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
             </div>
         </div>
     </div>
@@ -732,13 +741,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><?php echo lang("More Files");?></h4>
+                <h4 class="modal-title"><?php echo lang("More Files"); ?></h4>
             </div>
             <div class="modal-body">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
             </div>
         </div>
     </div>
@@ -753,13 +762,13 @@ if (isset($json_decode->results[0])) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><?php echo lang("Event Location");?></h4>
+                <h4 class="modal-title"><?php echo lang("Event Location"); ?></h4>
             </div>
             <div class="modal-body">
                 <div id="map" style="height:250px;"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
             </div>
         </div>
 

@@ -151,13 +151,13 @@ if ($this->session->flashdata('success')) {
                         var action = '';
                         if (full.is_blocked == '0') {
                             action += '<a href="<?php echo base_url(); ?>admin/event/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded btn-sm" title="View Details"><i class="icon-eye4"></i></a>';
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
+                            //action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
+                            //action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
+                            //action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
                         } else {
                             action += '<a href="<?php echo base_url(); ?>admin/event/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded"  title="View Details"><i class="icon-eye4"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
-                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
+                            //action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
+                            //action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
                         }
                         return action;
                     }
