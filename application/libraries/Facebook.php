@@ -86,6 +86,7 @@ class Facebook {
     }
 
     public function get_user() {
+        die("get_user");
         if ($this->session) {
             try {
                 $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
