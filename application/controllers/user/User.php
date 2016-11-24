@@ -24,7 +24,7 @@ class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(['facebook']);
+        $this->load->library(array('facebook'));
         $this->load->model(array('Users_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
     }
@@ -282,6 +282,7 @@ class User extends CI_Controller {
     /* v! Redirect Url for the login with facebook define in the application/config/config.php */
 
     public function facebook_callback() {
+        pr($this->facebook, 1);
         $user_detail = $this->facebook->get_user();
         pr($user_detail, 1);
         $sess_user_data = $this->session->userdata('user');
