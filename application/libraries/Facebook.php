@@ -6,6 +6,9 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+echo  __DIR__ . '/Vendor/Facebook/GraphObject.php';
+exit();
+
 require_once( __DIR__ . '/Vendor/Facebook/GraphObject.php' );
 require_once( __DIR__ . '/Vendor/Facebook/GraphSessionInfo.php' );
 require_once( __DIR__ . '/Vendor/Facebook/FacebookSession.php' );
