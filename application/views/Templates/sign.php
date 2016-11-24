@@ -63,7 +63,7 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-4 col-xs-12">
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo set_value('email'); ?>">
+                                                <input type="text" class="form-control" name="login_email" id="login_email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo set_value('login_email'); ?>">
                                             </div>
                                             <div class="col-sm-4 col-xs-12">
                                                 <input type="password" class="form-control" name="password" id="pwd" placeholder="<?php echo lang('Password'); ?>">

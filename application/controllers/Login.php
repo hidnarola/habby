@@ -52,13 +52,13 @@ class Login extends CI_Controller {
         }
         if ($this->input->post()) {
 
-            $this->form_validation->set_rules('email', 'E-Mail', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
+            $this->form_validation->set_rules('login_email', 'E-Mail', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
             $this->form_validation->set_rules('password', lang('Password'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
 
             if ($this->form_validation->run() == FALSE) {
                 $this->template->load('sign', 'user/login', $this->data);
             } else {
-                $email = $this->input->post('email');
+                $email = $this->input->post('login_email');
                 $password = $this->input->post('password');
                 $remember_me = $this->input->post('remember_me');
 
