@@ -85,15 +85,18 @@ class Facebook {
     }
 
     public function get_user() {
-        echo "here facebook";die;
         if ($this->session) {
+            echo "if";
             try {
                 $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
                 $user = $request->getGraphObject()->asArray();
+                pr($user);
                 return $user;
             } catch (FacebookRequestException $e) {
                 return false;
             }
+        }else{
+            echo "else";die;
         }
     }
 
