@@ -3,7 +3,6 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 if (session_status() == PHP_SESSION_NONE) {
-    echo "session";die;
     session_start();
 }
 
@@ -45,31 +44,23 @@ class Facebook {
         $this->helper = new FacebookRedirectLoginHelper($this->ci->config->item('redirect_url', 'facebook'));
 
         if ($this->ci->session->userdata('fb_token')) {
-            echo "if";;
             $this->session = new FacebookSession($this->ci->session->userdata('fb_token'));
 
             // Validate the access_token to make sure it's still valid
             try {
-                echo "if try";
                 if (!$this->session->validate()) {
-                    echo "if try if";
                     $this->session = false;
                 }
             } catch (Exception $e) {
                 // Catch any exceptions
                 $this->session = false;
-                echo "if catch";
             }
         } else {
-            echo "else";
-            try {                
+            try {
                 $this->session = $this->helper->getSessionFromRedirect();
-                echo "else try";
             } catch (FacebookRequestException $ex) {
-                echo "else catch1";
                 // When Facebook returns an error
             } catch (\Exception $ex) {
-                echo "else catch2";
                 // When validation fails or other local issues
             }
         }
@@ -95,17 +86,13 @@ class Facebook {
 
     public function get_user() {
         if ($this->session) {
-            echo "if";
             try {
                 $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
                 $user = $request->getGraphObject()->asArray();
-                pr($user);
                 return $user;
             } catch (FacebookRequestException $e) {
                 return false;
             }
-        }else{
-            echo "else";die;
         }
     }
 
