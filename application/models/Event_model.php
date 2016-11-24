@@ -25,6 +25,14 @@ class Event_model extends CI_Model {
     public function insert_event_media($arr) {
         return $this->db->insert_batch('event_media', $arr);
     }
+    
+    /*
+     * 
+     */
+    public function delete_old_media($event_id)
+    {
+        $this->db->where('event_id',$event_id)->delete('event_media');
+    }
 
     public function get_event_post($where,$logged_in_user,$start,$limit){
         if(!empty($where) && count($where)>0)
@@ -36,6 +44,8 @@ class Event_model extends CI_Model {
         $this->db->join('users u','e.user_id = u.id');
         $this->db->join('event_users eu','eu.event_id = e.id and eu.user_id = '.$logged_in_user,'left');
         $this->db->join('event_request er','er.event_id = e.id and er.user_id = '.$logged_in_user,'left');
+        $this->db->where('e.is_block','0');
+        $this->db->where('e.is_deleted','0');
         $this->db->group_by('e.id');
         $this->db->order_by('e.id','desc');
         $this->db->limit($limit,$start);

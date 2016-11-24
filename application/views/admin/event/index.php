@@ -68,7 +68,6 @@ if ($this->session->flashdata('success')) {
                         <th>Start Time</th>
                         <th>End Time</th>
                         <th>Person Limit</th>
-                        <th>Release Distance Range</th>
                         <th>Approval needed</th>
                         <th>Created Date</th>
                         <th width="100px">Action</th>
@@ -122,10 +121,6 @@ if ($this->session->flashdata('success')) {
                     visible: true
                 },
                 {
-                    data: "release_distance_range",
-                    visible: true
-                },
-                {
                     data: "approval_needed",
                     visible: true,
                     render: function (data, type, full, meta) {
@@ -149,15 +144,15 @@ if ($this->session->flashdata('success')) {
                     width: 200,
                     render: function (data, type, full, meta) {
                         var action = '';
-                        if (full.is_blocked == '0') {
+                        if (full.is_block == 0) {
                             action += '<a href="<?php echo base_url(); ?>admin/event/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded btn-sm" title="View Details"><i class="icon-eye4"></i></a>';
-                            //action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
-                            //action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
-                            //action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/event/edit/' + full.id + '" class="btn border-primary text-primary-600 btn-flat btn-icon btn-rounded btn-sm" title="Edit"><i class="icon-pencil3"></i></a>';
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/event/block/' + full.id + '" class="btn border-orange text-orange-600 btn-flat btn-icon btn-rounded"  title="Block"><i class="icon-lock2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_event(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
                         } else {
                             action += '<a href="<?php echo base_url(); ?>admin/event/view/' + full.id + '" class="btn border-info text-info-600 btn-flat btn-icon btn-rounded"  title="View Details"><i class="icon-eye4"></i></a>'
-                            //action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/topichat/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
-                            //action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_topichat(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="<?php echo base_url(); ?>admin/event/activate/' + full.id + '" class="btn border-green text-green-600 btn-flat btn-icon btn-rounded"  title="Unblock"><i class="icon-unlocked2"></i></a>'
+                            action += '&nbsp;&nbsp;<a href="javascript:void(0)" class="btn border-danger text-danger-600 btn-flat btn-icon btn-rounded delete-group" onclick="delete_event(' + full.id + ')" title="Delete"><i class="icon-cross2"></i></a>'
                         }
                         return action;
                     }
@@ -170,10 +165,10 @@ if ($this->session->flashdata('success')) {
         });
 
     });
-    function delete_topichat(id) {
+    function delete_event(id) {
         swal({
             title: "Are you sure?",
-            text: "You will not be able to recover this Topichat Group!",
+            text: "You will not be able to recover this Event!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -184,10 +179,10 @@ if ($this->session->flashdata('success')) {
         },
                 function (isConfirm) {
                     if (isConfirm) {
-                        window.location.href = "<?php echo base_url(); ?>admin/topichat/delete/" + id;
+                        window.location.href = "<?php echo base_url(); ?>admin/event/delete/" + id;
 //                        swal("Deleted!", "Your Topichat Group has been deleted.", "success");
                     } else {
-                        swal("Cancelled", "Your Topichat Group is safe :)", "error");
+                        swal("Cancelled", "Your Event is safe :)", "error");
                     }
                 });
     }

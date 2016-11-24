@@ -42,15 +42,47 @@ class Events extends CI_Controller {
 
     public function add_event() {
         if ($this->input->post()) {
+            
+            $geolocation = $this->input->post('lat') . ',' . $this->input->post('long');
+            $request = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $geolocation . '&sensor=false';
+            $file_contents = file_get_contents($request);
+            $json_decode = json_decode($file_contents);
+            if (isset($json_decode->results[0])) {
+                $response = array();
+                foreach ($json_decode->results[0]->address_components as $addressComponet) {
+                    if (in_array('political', $addressComponet->types)) {
+                        $response[] = $addressComponet->long_name;
+                    }
+                }
+
+                $location = array();
+
+                if (isset($response[1])) {
+                    $location[] = $response[1];
+                }
+                if (isset($response[2])) {
+                    $location[] = $response[2];
+                }
+                if (isset($response[3])) {
+                    $location[] = $response[3];
+                }
+                if (count($location) > 0) {
+                    $location = implode(", ", $location);
+                } else {
+                    $location = "";
+                }
+            }
+            
             $ins_data = array(
                 'title' => $this->input->post('title'),
                 'details' => $this->input->post('details'),
                 'start_time' => date("Y-m-d H:i:s", strtotime($this->input->post('start_time'))),
                 'end_time' => date("Y-m-d H:i:s", strtotime($this->input->post('end_time'))),
                 'limit' => $this->input->post('limit'),
-                'release_distance_range' => $this->input->post('distance_range'),
+//                'release_distance_range' => $this->input->post('distance_range'),
                 'approval_needed' => ($this->input->post('approval') == "Yes") ? '1' : '0',
                 'user_id' => $this->session->user['id'],
+                'location_name'=>$location,
                 'latitude'=>$this->input->post('lat'),
                 'longitude'=>$this->input->post('long')
             );
@@ -93,7 +125,7 @@ class Events extends CI_Controller {
                         }
                     }
                 }
-                if (!empty($_FILES['videofile']['name'])) {
+                /*if (!empty($_FILES['videofile']['name'])) {
                     $filecount = count($_FILES['videofile']['name']);
                     for ($i = 0; $i < $filecount; ++$i) {
                         $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
@@ -122,7 +154,7 @@ class Events extends CI_Controller {
                             $media[] = $media_arr;
                         }
                     }
-                }
+                }*/
                 if (count($media) > 0) {
                     $this->Event_model->insert_event_media($media);
                 }
@@ -282,37 +314,9 @@ class Events extends CI_Controller {
                     }
                 }
             }
-            if (!empty($_FILES['videofile']['name'])) {
-                $filecount = count($_FILES['videofile']['name']);
-                for ($i = 0; $i < $filecount; ++$i) {
-                    $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
-                    $_FILES['userFile']['type'] = $_FILES['videofile']['type'][$i];
-                    $_FILES['userFile']['tmp_name'] = $_FILES['videofile']['tmp_name'][$i];
-                    $_FILES['userFile']['error'] = $_FILES['videofile']['error'][$i];
-                    $_FILES['userFile']['size'] = $_FILES['videofile']['size'][$i];
-
-                    // Code of image uploading
-                    $config['upload_path'] = './uploads/event_post';
-                    $config['allowed_types'] = 'mp4|mov|3gp';
-                    $config['max_size'] = 4000000;
-                    $config['file_name'] = md5(uniqid(mt_rand()));
-
-                    $this->upload->initialize($config);
-
-                    if (!$this->upload->do_upload('userFile')) {
-                        $error = array('error' => $this->upload->display_errors());
-                        $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
-                    } else {
-                        $data = $this->upload->data();
-                        $media_arr = array();
-                        $media_arr['event_id'] = $id;
-                        $media_arr['media_type'] = 'video';
-                        $media_arr['media'] = $data['file_name'];
-                        $media[] = $media_arr;
-                    }
-                }
-            }
+            
             if (count($media) > 0) {
+                $this->Event_model->delete_old_media($id);
                 $this->Event_model->insert_event_media($media);
             }
 

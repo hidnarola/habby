@@ -49,7 +49,7 @@ if ($this->session->flashdata('success')) {
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <form class="form-horizontal form-validate" action="" id="post_info" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal form-validate" action="" id="event_info" method="POST" enctype="multipart/form-data">
                 <div class="panel panel-flat">
                     <div class="panel-body">
                         <div class="message alert alert-danger" style="display:none"></div>
@@ -79,38 +79,51 @@ if ($this->session->flashdata('success')) {
                             <label class="col-lg-3 control-label">Event Start time<span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
                                 <div class='input-group date' id='start_time'>
-                                    <input type='text' class="form-control" name="start_time" id="start_time_txt" required/>
+                                    <?php
+                                        //$start = new DateTime($events['start_time']);
+                                    ?>
+                                    <input type='text' class="form-control" name="start_time" id="start_time_txt" data-abc="<?php echo (isset($events['start_time'])) ? $events['start_time'] : set_value('start_time'); ?>" required/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-3 control-label">Event Title <span class="text-danger">*</span> </label>
-                            <div class="col-lg-7">
-                                <input type="text" id="title" name="title" placeholder="Enter event title" class="form-control" value="<?php echo (isset($events['title'])) ? $events['title'] : set_value('title'); ?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Event End time<span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
                                 <div class='input-group date' id='end_time'>
-                                    <input type='text' class="form-control" name="end_time" id="start_end_txt" required/>
+                                    <?php
+                                  //      $end = new DateTime($events['end_time']);
+                                    ?>
+                                    <input type='text' class="form-control" name="end_time" id="end_time_txt" data-abc="<?php echo (isset($events['end_time'])) ? $events['end_time'] : set_value('end_time'); ?>" required/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Person limit <span class="text-danger">*</span> </label>
+                            <div class="col-lg-7">
+                                <input type="number" name="limit" placeholder="Enter person limit" class="form-control" value="<?php echo (isset($events['limit'])) ? $events['limit'] : set_value('limit'); ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Approval needed <span class="text-danger">*</span> </label>
+                            <div class="col-lg-7">
+                                <input type="radio" class="" name="approval_needed" value="1" <?php echo (isset($events['approval_needed']) && $events['approval_needed']) ? "checked" : "" ?>>&nbsp;&nbsp;Yes &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" class="" name="approval_needed" value="0" <?php echo (isset($events['approval_needed']) && $events['approval_needed']) ? "" : "checked" ?>>&nbsp;&nbsp;No
+                            </div>
+                        </div>
                         <?php
-                        if (isset($Topichats['group_cover']) && !empty($Topichats['group_cover'])) {
+                        if (isset($events['media']) && !empty($events['media'])) {
                             ?>
                             <div class="col-lg-12 col-sm-12">
                                 <div class="thumbnail">
                                     <div class="thumb">
                                         <div class="thumb-inner">
-                                            <img src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $events['group_cover']; ?>" alt="">
+                                            <img src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $events['media']; ?>" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -120,6 +133,8 @@ if ($this->session->flashdata('success')) {
                         ?>
                         <div class="image_wrapper" style="display:none">
                         </div>
+                        <input type="hidden" name="lat" class="lat" value="">
+                        <input type="hidden" name="long" class="long" value="">
                         <div class="text-right">
                             <button class="btn btn-success" type="submit">Save <i class="icon-arrow-right14 position-right"></i></button>
                         </div>
@@ -155,7 +170,7 @@ if ($this->session->flashdata('success')) {
         background-size: cover;
         -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     }
-    
+
 </style>
 <script>
     var base_url = '<?php echo base_url(); ?>';
@@ -195,12 +210,67 @@ if ($this->session->flashdata('success')) {
             }
         }
     });
-    
-        //set date and time picker for start time and end time
-    $('#start_time').datetimepicker({
-        locale: 'en'
-    });
-    $('#end_time').datetimepicker({
-        locale: 'en'
-    });
+
+    function event_getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(event_showPosition);
+        } else {
+//            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+    function event_showPosition(position) {
+//        console.log("Latitude: " + position.coords.latitude +"Longitude: " + position.coords.longitude);
+        $('#event_info').find('.lat').val(position.coords.latitude);
+        $('#event_info').find('.long').val(position.coords.longitude);
+    }
+
+
+
 </script>
+<?php
+if (isset($events['title'])) {
+    ?>
+    <script>
+        console.log('edit');
+        $('document').ready(function () {
+            event_getLocation();
+            
+            start = $('#start_time_txt').data('abc');
+            end = $('#end_time_txt').data('abc');
+            console.log(start+"  ,  "+end);
+            //set date and time picker for start time and end time
+            $('#start_time').datetimepicker({
+                locale: 'en',
+                useCurrent: false,
+                format: 'YYYY-MM-DD HH:mm:ss',
+                defaultDate: start
+            });
+            $('#end_time').datetimepicker({
+                locale: 'en',
+                useCurrent: false,
+                format: 'YYYY-MM-DD HH:mm:ss',
+                defaultDate: end
+            });
+            /*            $('#start_time').datetimepicker('update', new Date($('#start_time').data('value')));
+             $('#end_time').datetimepicker('update', new Date($('#end_time').data('value')));*/
+        });
+
+    </script>
+    <?php
+} else {
+    ?>
+    <script>
+        $('document').ready(function () {
+            console.log('add');
+            //set date and time picker for start time and end time
+            $('#start_time').datetimepicker({
+                locale: 'en'
+            });
+            $('#end_time').datetimepicker({
+                locale: 'en'
+            });
+        });
+    </script>
+    <?php
+}
+?>

@@ -13,15 +13,15 @@ class Admin_event_model extends CI_Model {
      */
     public function get_all_events() {
         $start = $this->input->get('start');
-        $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.release_distance_range','e.approval_needed','e.created_date'];
-        $this->db->select('e.id,@a:=@a+1 AS test_id,e.title,DATE_FORMAT(e.start_time,"%d %b %Y <br> %l:%i %p") as start_time,DATE_FORMAT(e.end_time,"%d %b %Y <br> %l:%i %p") as end_time,e.limit,e.release_distance_range,e.approval_needed,DATE_FORMAT(e.created_date,"%d %b %Y <br> %l:%i %p") as created_date,u.name as username',false);
+        $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.approval_needed','e.created_date'];
+        $this->db->select('e.id,@a:=@a+1 AS test_id,e.title,DATE_FORMAT(e.start_time,"%d %b %Y <br> %l:%i %p") as start_time,DATE_FORMAT(e.end_time,"%d %b %Y <br> %l:%i %p") as end_time,e.limit,e.approval_needed,DATE_FORMAT(e.created_date,"%d %b %Y <br> %l:%i %p") as created_date,u.name as username,e.is_block,e.is_deleted',false);
 
         $this->db->join('users u', 'u.id = e.user_id');
         $this->db->where('e.is_deleted', 0);
         $this->db->group_by('e.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('e.title LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%" OR e.limit LIKE "%' . $keyword['value'] . '%" OR e.release_distance_range LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('e.title LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%" OR e.limit LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $this->db->limit($this->input->get('length'), $this->input->get('start'));
@@ -35,13 +35,13 @@ class Admin_event_model extends CI_Model {
      * @author : ar
      */
     public function get_event_count() {
-        $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.release_distance_range','e.approval_needed','e.created_date'];
+        $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.approval_needed','e.created_date'];
         $this->db->join('users u', 'u.id = e.user_id');
         $this->db->where('e.is_deleted', 0);
         $this->db->group_by('e.id');
         $keyword = $this->input->get('search');
         if (!empty($keyword['value'])) {
-            $this->db->having('e.title LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%"', NULL);
+            $this->db->having('e.title LIKE "%' . $keyword['value'] . '%" OR u.name LIKE "%' . $keyword['value'] . '%" OR e.limit LIKE "%' . $keyword['value'] . '%"', NULL);
         }
         $this->db->order_by($columns[$this->input->get('order')[0]['column']], $this->input->get('order')[0]['dir']);
         $res_data = $this->db->get('events e')->num_rows();

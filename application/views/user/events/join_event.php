@@ -1,34 +1,3 @@
-<?php
-$geolocation = $event['latitude'] . ',' . $event['longitude'];
-$request = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $geolocation . '&sensor=false';
-$file_contents = file_get_contents($request);
-$json_decode = json_decode($file_contents);
-if (isset($json_decode->results[0])) {
-    $response = array();
-    foreach ($json_decode->results[0]->address_components as $addressComponet) {
-        if (in_array('political', $addressComponet->types)) {
-            $response[] = $addressComponet->long_name;
-        }
-    }
-
-    $location = array();
-
-    if (isset($response[1])) {
-        $location[] = $response[1];
-    }
-    if (isset($response[2])) {
-        $location[] = $response[2];
-    }
-    if (isset($response[3])) {
-        $location[] = $response[3];
-    }
-    if (count($location) > 0) {
-        $location = implode(", ", $location);
-    } else {
-        $location = "";
-    }
-}
-?>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw"></script>
 <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMB7rGcXMQgirVaq7epH6wS_usmzpdaPw"></script>-->
 <script type="text/javascript">
@@ -399,6 +368,9 @@ if (isset($json_decode->results[0])) {
                         <label class="control-label"><?php echo lang("Details"); ?> :  <span><?php echo $event['details'] ?></span></label>
                     </div>
                     <div class="event-detail-content">
+                        <?php
+                            $location = $event['location_name'];
+                        ?>
                         <label class="control-label"><?php echo lang("Location"); ?> : </label><span class="location"><?php echo (isset($location) && !empty($location)) ? $location : 'No Lcation found'; ?></span><a href="javascript:;" class="map_btn pstbtn">map</a>
                     </div>
                     <div class="event-detail-content">

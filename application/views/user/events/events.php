@@ -119,7 +119,7 @@ $search_data = $this->session->flashdata('event_filter');
                             <div class="fileUpload up_img btn">
                                 <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
                                 <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
-                            </div>                         
+                            </div>
                         </div>
                         <div class="image_wrapper" style="display:none">
                         </div>
