@@ -24,7 +24,7 @@ class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(array('facebook'));
+        $this->load->library(array('Facebook'));
         $this->load->model(array('Users_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
     }
