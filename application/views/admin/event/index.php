@@ -85,6 +85,7 @@ if ($this->session->flashdata('success')) {
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 lengthMenu: '<span>Show:</span> _MENU_',
+				searchPlaceholder: "Search by title, username or limit",
 //                width:250px,
                 paginate: {'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;'}
             },
@@ -124,7 +125,7 @@ if ($this->session->flashdata('success')) {
                     data: "approval_needed",
                     visible: true,
                     render: function (data, type, full, meta) {
-                        if (full.approval_needed) {
+                        if (full.approval_needed == 1) {
                             return "Yes";
                         } else {
                             return "No";

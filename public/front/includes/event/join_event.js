@@ -90,7 +90,7 @@ $(document).ready(function () {
         $(".loader").addClass('show');
         // Send file using ajax
         $.ajax({
-            url: base_url + '/user/User/upload_chat_media',
+            url: base_url + 'user/upload_chat_media',
             dataType: 'script',
             cache: false,
             contentType: false,
@@ -167,7 +167,7 @@ $(document).ready(function () {
         $(".loader").addClass('show');
         // Send file using ajax
         $.ajax({
-            url: base_url + '/user/User/upload_chat_media',
+            url: base_url + 'user/upload_chat_media',
             dataType: 'script',
             cache: false,
             contentType: false,
@@ -236,7 +236,7 @@ $(document).ready(function () {
                         // Send file using ajax
                         var media_data;
                         $.ajax({
-                            url: base_url + '/user/User/upload_chat_media',
+                            url: base_url + 'user/upload_chat_media',
                             dataType: 'script',
                             cache: false,
                             contentType: false,

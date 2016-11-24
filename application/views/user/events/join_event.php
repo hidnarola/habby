@@ -59,6 +59,18 @@
         top: 0;
         padding-top: 0;
     }
+	.event-chat-start .chat_2 video{
+		float:right;
+	}
+	.event-chat-start .chat_2 #imagePreview_msg{
+		background-position: right !important;
+	}
+	.event-chat-start .chat_1 #imagePreview_msg{
+		background-position: left !important;
+	}
+	.chat_1 .img_media_wrapper{
+		padding-left:40px;
+	}
     .event-right-section .chat_area2{
         position: relative;
         bottom: 0 !important;

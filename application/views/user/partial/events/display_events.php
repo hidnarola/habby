@@ -81,7 +81,7 @@ foreach ($event_posts as $event) {
 
                 </div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body event_post" data-id="">
 
                 <div class="event_post_details"></div>
                 <div class="event_media"></div>
@@ -101,13 +101,18 @@ foreach ($event_posts as $event) {
         $('.event_post').on('click', '.view_details', function (str) {
             var modal = $("#myModal");
             var event_post = $(this).parents('.event_post');
-
+			modal.find('.event_post').data('id',event_post.data('id'));
             modal.find('.event_profile_sec').html(event_post.find('.event_profile_sec').html());
             modal.find('.event_post_details').html(event_post.find('.event_post_details').html());
             modal.find('.event_media').html(event_post.find('.event_media').html());
             modal.find('.seat_details').html(event_post.find('.seat_details').html());
             modal.find('.join_btn').html(event_post.find('.join_btn').html());
             modal.find('.join_btn').attr('href', event_post.find('.join_btn').attr('href'));
+			
+			if(event_post.find('.join_btn').hasClass('event_join')){
+				modal.find('.join_btn').addClass('event_join');
+			}
+			
             modal.find('.start_time').html('Event Start Time : ' + event_post.find('.event_seat').data('start'));
             modal.find('.end_time').html('Event End Time : ' + event_post.find('.event_seat').data('end'));
             modal.modal('show');

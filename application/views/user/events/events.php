@@ -276,7 +276,7 @@ $search_data = $this->session->flashdata('event_filter');
         $('.long').val(position.coords.longitude);
         $('#filterModal').modal('show');
     }
-
+	
     function event_getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(event_showPosition);
@@ -291,9 +291,15 @@ $search_data = $this->session->flashdata('event_filter');
         $('#new_event').modal('show');
     }
 
+
+	
     $(function () {
         $('.create_event_btn').click(function () {
             event_getLocation();
+        });
+		
+		$('.open_modal').click(function(){
+            getLocation();
         });
 
         $('#new_event').on('hidden.bs.modal', function () {

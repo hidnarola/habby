@@ -253,7 +253,7 @@ class Topichat extends CI_Controller {
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
         $limit= $this->Topichat_model->is_group_limit_exceed($id);
-        if($limit['person_limit'] != -1 && $limit['person_limit'] > $limit['joined_user']){
+        if($limit['person_limit'] == -1 || $limit['person_limit'] > $limit['joined_user']){
             $ins_data = array(
                 'topic_id' => $id,
                 'user_id' => $this->data['user_data']['id'],
