@@ -56,13 +56,13 @@ if ($this->session->flashdata('success')) {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Event Title <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <input type="text" id="title" name="title" placeholder="Enter event title" class="form-control" value="<?php echo (isset($events['title'])) ? $events['title'] : set_value('title'); ?>">
+                                <input type="text" id="title" name="title" placeholder="Enter event title" class="form-control" value="<?php echo (isset($events['title'])) ? $events['title'] : set_value('title'); ?>" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Event details <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <textarea id="title" name="details" placeholder="Enter event details" class="form-control"><?php echo (isset($events['details'])) ? $events['details'] : set_value('details'); ?></textarea>
+                                <textarea id="details" name="details" placeholder="Enter event details" class="form-control" required><?php echo (isset($events['details'])) ? $events['details'] : set_value('details'); ?></textarea>
                             </div>
                         </div>
                         <div class="form-group form-group-material">
@@ -80,7 +80,7 @@ if ($this->session->flashdata('success')) {
                             <div class="col-lg-7">
                                 <div class='input-group date' id='start_time'>
                                     <?php
-                                        //$start = new DateTime($events['start_time']);
+                                    //$start = new DateTime($events['start_time']);
                                     ?>
                                     <input type='text' class="form-control" name="start_time" id="start_time_txt" data-abc="<?php echo (isset($events['start_time'])) ? $events['start_time'] : set_value('start_time'); ?>" required/>
                                     <span class="input-group-addon">
@@ -94,7 +94,7 @@ if ($this->session->flashdata('success')) {
                             <div class="col-lg-7">
                                 <div class='input-group date' id='end_time'>
                                     <?php
-                                  //      $end = new DateTime($events['end_time']);
+                                    //      $end = new DateTime($events['end_time']);
                                     ?>
                                     <input type='text' class="form-control" name="end_time" id="end_time_txt" data-abc="<?php echo (isset($events['end_time'])) ? $events['end_time'] : set_value('end_time'); ?>" required/>
                                     <span class="input-group-addon">
@@ -106,7 +106,7 @@ if ($this->session->flashdata('success')) {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Person limit <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <input type="number" name="limit" placeholder="Enter person limit" class="form-control" value="<?php echo (isset($events['limit'])) ? $events['limit'] : set_value('limit'); ?>">
+                                <input type="number" name="limit" placeholder="Enter person limit" class="form-control" value="<?php echo (isset($events['limit'])) ? $events['limit'] : set_value('limit'); ?>" required="" min="1">
                             </div>
                         </div>
                         <div class="form-group">
@@ -234,10 +234,10 @@ if (isset($events['title'])) {
         console.log('edit');
         $('document').ready(function () {
             event_getLocation();
-            
+
             start = $('#start_time_txt').data('abc');
             end = $('#end_time_txt').data('abc');
-            console.log(start+"  ,  "+end);
+            console.log(start + "  ,  " + end);
             //set date and time picker for start time and end time
             $('#start_time').datetimepicker({
                 locale: 'en',
@@ -251,8 +251,13 @@ if (isset($events['title'])) {
                 format: 'YYYY-MM-DD HH:mm:ss',
                 defaultDate: end
             });
-            /*            $('#start_time').datetimepicker('update', new Date($('#start_time').data('value')));
-             $('#end_time').datetimepicker('update', new Date($('#end_time').data('value')));*/
+            $("#start_time").on("dp.change", function(e) {
+                console.log(e.date);
+                $('#end_time').data("DateTimePicker").minDate(e.date);
+            });
+            $("#end_time").on("dp.change", function (e) {
+                $('#start_time').data("DateTimePicker").maxDate(e.date);
+            });
         });
 
     </script>
@@ -264,10 +269,23 @@ if (isset($events['title'])) {
             console.log('add');
             //set date and time picker for start time and end time
             $('#start_time').datetimepicker({
-                locale: 'en'
+                locale: 'en',
             });
             $('#end_time').datetimepicker({
-                locale: 'en'
+                locale: 'en',
+//                onClose: function (current_time, $input) {
+//                    var endDate = $("#end_time").val();
+//                    if (startDate > endDate) {
+//                        alert('Please select date gretar than start time');
+//                    }
+//                }
+            });
+            $("#start_time").on("dp.change", function(e) {
+                console.log(e.date);
+                $('#end_time').data("DateTimePicker").minDate(e.date);
+            });
+            $("#end_time").on("dp.change", function (e) {
+                $('#start_time').data("DateTimePicker").maxDate(e.date);
             });
         });
     </script>
