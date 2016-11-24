@@ -44,23 +44,31 @@ class Facebook {
         $this->helper = new FacebookRedirectLoginHelper($this->ci->config->item('redirect_url', 'facebook'));
 
         if ($this->ci->session->userdata('fb_token')) {
+            echo "if";;
             $this->session = new FacebookSession($this->ci->session->userdata('fb_token'));
 
             // Validate the access_token to make sure it's still valid
             try {
+                echo "if try";
                 if (!$this->session->validate()) {
+                    echo "if try if";
                     $this->session = false;
                 }
             } catch (Exception $e) {
                 // Catch any exceptions
                 $this->session = false;
+                echo "if catch";
             }
         } else {
-            try {
+            echo "else";
+            try {                
                 $this->session = $this->helper->getSessionFromRedirect();
+                echo "else try";
             } catch (FacebookRequestException $ex) {
+                echo "else catch1";
                 // When Facebook returns an error
             } catch (\Exception $ex) {
+                echo "else catch2";
                 // When validation fails or other local issues
             }
         }
