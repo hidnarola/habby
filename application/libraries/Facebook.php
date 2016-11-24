@@ -3,6 +3,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 if (session_status() == PHP_SESSION_NONE) {
+    echo "session";die;
     session_start();
 }
 
