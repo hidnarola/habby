@@ -72,7 +72,7 @@ if ($this->session->flashdata('success')) {
                                     <h6 class="no-margin-top "><span class="text-semibold">Approval needed : </span><?php echo ($events['approval_needed']) ? 'Yes' : 'No'; ?></h6>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h6 class="no-margin-top "><span class="text-semibold">Release Distance Range : </span><?php echo $events['release_distance_range']; ?></h6>
+                                    <h6 class="no-margin-top "><span class="text-semibold">Location : </span><?php echo $events['location_name']; ?></h6>
                                     <h6 class="no-margin-top"><span class="text-semibold">End Time : </span><?php echo date('d-m-Y h:i a', strtotime($events['end_time'])) ?></h6>
                                     <h6 class="no-margin-top"><span class="text-semibold">Creation Time : </span><?php echo date('d-m-Y h:i a', strtotime($events['created_date'])) ?></h6>
                                 </div>

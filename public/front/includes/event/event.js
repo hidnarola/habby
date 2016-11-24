@@ -7,6 +7,14 @@ $(function () {
         locale: 'en'
     });
 
+    $("#start_time").on("dp.change", function(e) {
+        console.log(e.date);
+        $('#end_time').data("DateTimePicker").minDate(e.date);
+    });
+    $("#end_time").on("dp.change", function (e) {
+        $('#start_time').data("DateTimePicker").maxDate(e.date);
+    });
+
     // Join event
     $('.event_container').on('click', '.event_join', function () {
         $this = $(this);

@@ -632,23 +632,6 @@
                         </div>
                         <div class="form-group clearfix">
                             <div class="col-md-3">
-                                <label class="control-label"><?php echo lang("Post release distance range"); ?></label>
-                            </div>
-                            <div class="col-md-9">
-                                <select class='form-control' name="distance_range" required="true" style="width:15%;display:inline-block;">
-                                    <?php
-                                    for ($i = 1; $i <= 10; ++$i) {
-                                        ?>
-                                        <option value='<?php echo $i; ?>' <?php echo ($i == $event['release_distance_range']) ? 'selected' : ''; ?>><?php echo $i; ?> Mile</option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                                <label class="control-label"><?php echo lang("From current location"); ?></label>
-                            </div>
-                        </div>
-                        <div class="form-group clearfix">
-                            <div class="col-md-3">
                                 <label class="control-label"><?php echo lang("Approval needed"); ?></label>
                             </div>
                             <div class="col-md-9">
@@ -809,6 +792,14 @@
         locale: 'en',
         useCurrent: false,
         format: 'YYYY-MM-DD HH:mm:SS'
+    });
+
+    $("#start_time").on("dp.change", function(e) {
+        console.log(e.date);
+        $('#end_time').data("DateTimePicker").minDate(e.date);
+    });
+    $("#end_time").on("dp.change", function (e) {
+        $('#start_time').data("DateTimePicker").maxDate(e.date);
     });
 
     // Image uploading script

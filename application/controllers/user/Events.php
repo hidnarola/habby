@@ -278,7 +278,6 @@ class Events extends CI_Controller {
                 'start_time' => $this->input->post('start_time'),
                 'end_time' => $this->input->post('end_time'),
                 'limit' => $this->input->post('limit'),
-                'release_distance_range' => $this->input->post('distance_range'),
                 'approval_needed' => $this->input->post('approval')
             );
             $this->Event_model->update_event($id, $update_arr);
