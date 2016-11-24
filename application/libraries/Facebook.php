@@ -90,8 +90,10 @@ class Facebook {
             try {
                 $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
                 $user = $request->getGraphObject()->asArray();
+                die("if");
                 return $user;
             } catch (FacebookRequestException $e) {
+                die("else");
                 return false;
             }
         }
