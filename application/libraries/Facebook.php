@@ -85,9 +85,7 @@ class Facebook {
     }
 
     public function get_user() {
-        
-        echo __DIR__ . '/Vendor/Facebook/GraphObject.php';
-        exit;
+       
         if ($this->session) {
             try {
                 $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
