@@ -40,6 +40,8 @@ class Facebook {
     var $session;
 
     public function __construct() {
+        echo "facebook";
+        die;
         $this->ci = & get_instance();
         FacebookSession::setDefaultApplication($this->ci->config->item('api_id', 'facebook'), $this->ci->config->item('app_secret', 'facebook'));
         $this->helper = new FacebookRedirectLoginHelper($this->ci->config->item('redirect_url', 'facebook'));
