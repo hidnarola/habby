@@ -1,5 +1,7 @@
 <?php
 
+echo "here";
+exit;
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -40,8 +42,6 @@ class Facebook {
     var $session;
 
     public function __construct() {
-        echo "facebook";
-        die;
         $this->ci = & get_instance();
         FacebookSession::setDefaultApplication($this->ci->config->item('api_id', 'facebook'), $this->ci->config->item('app_secret', 'facebook'));
         $this->helper = new FacebookRedirectLoginHelper($this->ci->config->item('redirect_url', 'facebook'));
@@ -88,15 +88,12 @@ class Facebook {
     }
 
     public function get_user() {
-        die("get_user");
         if ($this->session) {
             try {
                 $request = (new FacebookRequest($this->session, 'GET', '/me?fields=id,name,email,first_name,last_name,education,gender,location'))->execute();
                 $user = $request->getGraphObject()->asArray();
-                die("if");
                 return $user;
             } catch (FacebookRequestException $e) {
-                die("else");
                 return false;
             }
         }
