@@ -7,7 +7,7 @@ class Admin_event_model extends CI_Model {
     }
 
     /**
-     * @uses : this function is used to get result based on datatable in user list page
+     * @uses : retrive all events for pagination
      * @param : @table 
      * @author : ar
      */
