@@ -455,7 +455,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
-                        <input type="text" name="phone" class="form-control" id="phone" required>
+                        <input type="text" name="phone" class="form-control" id="phone" required pattern="[789][0-9]{9}" />
                     </div>
                     <div class="form-group">
                         <label for="email"><?php echo lang("Email"); ?>:</label>
@@ -490,7 +490,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
-                        <input type="text" name="phone" id="edit_phone" class="form-control" required>
+                        <input type="text" name="phone" id="edit_phone" class="form-control" required pattern="[789][0-9]{9}"/>
                     </div>
                     <div class="form-group">
                         <label for="email"><?php echo lang("Email"); ?>:</label>
@@ -768,7 +768,7 @@
         {
             $('#notes_content').html($('#edited_notes').val());
         } else
-        {
+        {           
             $('#notes_content').html(no_content);
         }
         $.ajax({

@@ -200,11 +200,22 @@ if ($this->session->flashdata('success')) {
                                                                             <div class="media-content"><img src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" alt="" style="display: block;max-width:100% !important;max-height: 180px !important;"> </div>
                                                                         </div>
                                                                         <?php
-                                                                    } else {
+                                                                    } else if ($message['media'] != null && $message['media_type'] == 'video') {
                                                                         ?>
                                                                         <div class="media-body">
                                                                             <div class="media-content">
                                                                                 <video controls="" src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" style="height:180px;"></video></div>
+                                                                        </div>
+                                                                        <?php
+                                                                    } else if ($message['media'] != null && $message['media_type'] == 'files') {
+                                                                        ?>
+                                                                        <div class="media-body files_content">
+                                                                            <div class="media-content">
+                                                                                <a class="files" href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>" data-fancybox-group="gallerytopichat1">
+                                                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">
+                                                                                    <span class="filename"><?php echo $message['media'] ?></span>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
                                                                         <?php
                                                                     }
