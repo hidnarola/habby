@@ -142,7 +142,7 @@ if ($this->session->flashdata('success')) {
                                                                         <?php
                                                                     } else if ($message['media'] != null && $message['media_type'] == 'files') {
                                                                         ?>
-                                                                        <div class="media-body" style='position: relative;height: 180px;'>
+                                                                        <div class="media-body files_content">
                                                                             <div class="media-content">
                                                                                 <a class="files" href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>" data-fancybox-group="gallerytopichat1">
                                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">

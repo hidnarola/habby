@@ -312,6 +312,6 @@ $search_data = $this->session->flashdata('event_filter');
             $('#end_time_txt').val('').empty();
             $('#limit').val('').empty();
             $('#approval').prop('checked', true);
-        });
+        }); 
     });
 </script>

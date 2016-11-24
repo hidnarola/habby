@@ -705,7 +705,7 @@ img.file_icon {
 
 .event-chat-start
 {
- //   border-top: 1px solid;
+    //   border-top: 1px solid;
 }
 .rank_button_modal{clear: both;}
 .rank_button_modal #field{
@@ -966,6 +966,9 @@ h2.chlng_hdg ,
     font-weight: bold;
     margin-bottom: 15px;
 
+}
+.event_seat a.join_btn.pstbtn {
+    margin-top: -7px;
 }
 @media(min-width:1583px){
     .row.event_container

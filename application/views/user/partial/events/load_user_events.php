@@ -10,7 +10,7 @@ foreach ($event_post as $event) {
                 </div>
                 <div class="post_title">
                     <span><label class="control-label"><?php echo $event['name']; ?></label></span>
-                     creates an event "<?php echo $event['title']; ?>"
+                    creates an event "<?php echo $event['title']; ?>"
                 </div>
             </div>
             <div class='event_post_details'>
@@ -33,7 +33,7 @@ foreach ($event_post as $event) {
                             <a class="fancybox post_images"  href="javascript:;" data-fancybox-group="gallery">
                                 <video controls class="img-responsive center-block">
                                     <source src="<?php echo DEFAULT_EVENT_MEDIA_PATH . $value['media']; ?>"></source>
-                                    <?php echo lang("Seems like your browser doesn't support video tag.");?>
+                                    <?php echo lang("Seems like your browser doesn't support video tag."); ?>
                                 </video>
                             </a>
                             <?php
@@ -46,6 +46,7 @@ foreach ($event_post as $event) {
             </div>
             <div class='event_seat'>
                 <span><?php echo lang("Number of seat") . " : " . $event['limit']; ?></span>
+                <a href='<?php echo base_url() . 'events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'><?php echo lang("Enter"); ?></a>
             </div>
         </div>
     </div>
