@@ -24,7 +24,7 @@ class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library(['facebook']);
+        $this->load->library(array('Facebook'));
         $this->load->model(array('Users_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
     }
@@ -80,18 +80,13 @@ class User extends CI_Controller {
             $email = $this->input->post('email');
             $res_data = $this->Users_model->check_if_user_exist(array('email' => $email), false, true);
             if (!empty($res_data)) {
-                if($res_data == 801)
-                {
+                if ($res_data == 801) {
                     $this->session->set_flashdata('message', ['message' => lang('User is deleted by admin.'), 'class' => 'alert alert-danger']);
                     redirect('user/forgot_password');
-                }
-                else if($res_data == 802)
-                {
+                } else if ($res_data == 802) {
                     $this->session->set_flashdata('message', ['message' => lang('User is blocked by admin.'), 'class' => 'alert alert-danger']);
                     redirect('user/forgot_password');
-                }
-                else if($res_data == 803)
-                {
+                } else if ($res_data == 803) {
                     $this->session->set_flashdata('message', ['message' => lang('User is marked as inactive.'), 'class' => 'alert alert-danger']);
                     redirect('user/forgot_password');
                 }
@@ -288,6 +283,7 @@ class User extends CI_Controller {
 
     public function facebook_callback() {
         $user_detail = $this->facebook->get_user();
+        pr($user_detail);die;
         $sess_user_data = $this->session->userdata('user');
         if (!empty($user_detail)) {
             if (!empty($sess_user_data)) {
