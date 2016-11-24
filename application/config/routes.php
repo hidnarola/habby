@@ -98,6 +98,7 @@ $route['user_profile/challenges/(:any)'] = 'user/Home/challenges/$1';
 $route['user_profile/league/(:any)'] = 'user/Home/league/$1';
 $route['user_profile/events/(:any)'] = 'user/Home/events/$1';
 $route['user_profile/(:any)'] = "user/Home/user_profile/$1";
+$route['user/(:any)/(:any)'] = "user/user/$1/$2";
 
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
