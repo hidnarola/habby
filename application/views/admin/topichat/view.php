@@ -133,21 +133,66 @@ if ($this->session->flashdata('success')) {
                                                                             <div class="media-content"><img src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" alt="" style="display: block;max-width:100% !important;max-height: 180px !important;"> </div>
                                                                         </div>
                                                                         <?php
-                                                                    } else {
+                                                                    } else if ($message['media'] != null && $message['media_type'] == 'video') {
                                                                         ?>
                                                                         <div class="media-body">
                                                                             <div class="media-content">
                                                                                 <video controls="" src="<?php echo DEFAULT_CHAT_MEDIA_PATH . $message['media'] ?>" style="height:180px;"></video></div>
                                                                         </div>
                                                                         <?php
+                                                                    } else if ($message['media'] != null && $message['media_type'] == 'files') {
+                                                                        ?>
+                                                                        <div class="media-body" style='position: relative;height: 180px;'>
+                                                                            <div class="media-content">
+                                                                                <a class="files" href="<?php echo base_url() . "user/download_file/" . $message['media'] ?>" data-fancybox-group="gallerytopichat1">
+                                                                                    <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">
+                                                                                    <span class="filename"><?php echo $message['media'] ?></span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php
+                                                                    } else if ($message['media'] != null && $message['media_type'] == 'links') {
+                                                                        $media = json_decode($message['media']);
+                                                                        if ($message['youtube_video'] != null) {
+                                                                            ?>
+                                                                            <div class="media-body">
+                                                                                <div class="media-content">
+                                                                                    <?php echo $message['youtube_video']; ?>
+                                                                                </div>
+                                                                            </div>
+                                                                            <?php
+                                                                        } else {
+                                                                            ?>
+                                                                            <div class="media-body">
+                                                                                <div class="media-content">
+                                                                                    <div class = "fileshare">
+                                                                                        <div class = "">
+                                                                                            <?php
+                                                                                            if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                                                                                ?>
+                                                                                                <div class = "large-3 columns">
+                                                                                                    <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                                                                                </div>
+                                                                                                <?php
+                                                                                            }
+                                                                                            ?>
+                                                                                            <div class = "large-9 column">
+                                                                                                <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                                                                                <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <?php
+                                                                        }
                                                                     }
                                                                     ?>
-
-                                                                <?php } ?>
-                                                            </li>
-                                                            <?php
+                                                                </li>
+                                                                <?php
+                                                            }
                                                         }
-                                                    }else{
+                                                    } else {
                                                         echo "No Message";
                                                     }
                                                     ?>
