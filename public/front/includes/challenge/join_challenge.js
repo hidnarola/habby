@@ -12,7 +12,6 @@ function send(text) {
 
 $(document).ready(function () {
     Server = new FancyWebSocket(socket_server);
-
     // Send message to server
     $('#message_div').keypress(function (e) {
         if (e.keyCode == 13) {
@@ -62,62 +61,64 @@ $(document).ready(function () {
 
         for (var key in files)
         {
-            if (/^image/.test(files[key].type)) { // only image file
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[key]); // read the local file
-
-                reader.onloadend = function () { // set image data as background of div
-                    var i = Math.random().toString(36).substring(7);
-                    // $('#imagePreview').addClass('imagePreview');
-                    $('.message').hide();
-                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
-                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-                }
-            }
-            else
+            if (key != 'item' && key != 'length')
             {
-                //this.files = '';
-                $('.message').html(proper_image);
-                $('.message').show();
+                $(".loader").addClass('show');
+                if (/^image/.test(files[key].type)) { // only image file
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
+
+                    reader.onloadend = function () { // set image data as background of div
+                        var i = Math.random().toString(36).substring(7);
+                        // $('#imagePreview').addClass('imagePreview');
+                        $('.message').hide();
+                        $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" style="float:right;clear:right"><div class="wdth_span media_wrapper"><span class="imagePreview' + i + '"  id="imagePreview_msg"></span></div></div>');
+                        $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                        var form_data = new FormData();
+                        $.each(files, function (i, file) {
+                            form_data.append('image-' + i, file);
+                        });
+                        form_data.append("msg_image", files);
+
+                        // Send file using ajax
+                        $.ajax({
+                            url: base_url + 'user/upload_chat_media',
+                            dataType: 'script',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
+                            type: 'post',
+                            error: function (textStatus, errorThrown) {
+
+                            },
+                            success: function (str)
+                            {
+                                if (str != 0)
+                                {
+                                    var msg = {
+                                        message: str,
+                                        type: 'challenge_msg',
+                                        group_id: group_id,
+                                        media: 'image'
+                                    }
+                                    Server.send('message', JSON.stringify(msg));
+                                }
+                            },
+                            complete: function () {
+                                $(".loader").removeClass('show');
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    swal(proper_image);
+                    $(".loader").removeClass('show');
+                }
             }
         }
-        var form_data = new FormData();
-        $.each(files, function (i, file) {
-            form_data.append('image-' + i, file);
-        });
-        form_data.append("msg_image", files);
-        $(".loader").addClass('show');
-        // Send file using ajax
-        $.ajax({
-            url: base_url + '/user/User/upload_chat_media',
-            dataType: 'script',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            error: function (textStatus, errorThrown) {
-
-            },
-            success: function (str)
-            {
-//                console.log(str);
-                if (str != 0)
-                {
-                    var msg = {
-                        message: str,
-                        type: 'challenge_msg',
-                        group_id: group_id,
-                        media: 'image'
-                    }
-                    Server.send('message', JSON.stringify(msg));
-                }
-            },
-            complete : function(){
-                $(".loader").removeClass('show');
-            }
-        });
     });
 
     // Video uploading script
@@ -135,6 +136,7 @@ $(document).ready(function () {
         {
             if (key != "length" && key != "item")
             {
+                $(".loader").addClass('show');
                 if (/^video/.test(files[key].type)) { // only image file
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[key]); // read the local file
@@ -147,55 +149,53 @@ $(document).ready(function () {
                         //$('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                         $('.imagePreview' + i).html("<video controls='' src='" + this.result + "' style='height:180px'>");
                         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                        var form_data = new FormData();
+                        $.each(files, function (i, file) {
+                            form_data.append('video-' + i, file);
+                        });
+                        form_data.append("msg_video", files);
+
+                        // Send file using ajax
+                        $.ajax({
+                            url: base_url + 'user/upload_chat_media',
+                            dataType: 'script',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
+                            type: 'post',
+                            error: function (textStatus, errorThrown) {
+
+                            },
+                            success: function (str)
+                            {
+//                console.log(str);
+                                if (str != 0)
+                                {
+                                    var msg = {
+                                        message: str,
+                                        type: 'challenge_msg',
+                                        group_id: group_id,
+                                        media: 'video'
+                                    }
+                                    Server.send('message', JSON.stringify(msg));
+                                }
+                            },
+                            complete: function () {
+                                $(".loader").removeClass('show');
+                            }
+                        });
                     }
                 }
                 else
                 {
-                    $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
-                    //this.files = '';
-                    $('.message').html(proper_video);
-                    $('.message').show();
-                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                    swal(proper_video);
+                    $(".loader").removeClass('show');
                     return;
                 }
             }
         }
-        var form_data = new FormData();
-        $.each(files, function (i, file) {
-            form_data.append('video-' + i, file);
-        });
-        form_data.append("msg_video", files);
-        $(".loader").addClass('show');
-        // Send file using ajax
-        $.ajax({
-            url: base_url + '/user/User/upload_chat_media',
-            dataType: 'script',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            error: function (textStatus, errorThrown) {
 
-            },
-            success: function (str)
-            {
-//                console.log(str);
-                if (str != 0)
-                {
-                    var msg = {
-                        message: str,
-                        type: 'challenge_msg',
-                        group_id: group_id,
-                        media: 'video'
-                    }
-                    Server.send('message', JSON.stringify(msg));
-                }
-            },
-            complete : function(){
-                $(".loader").removeClass('show');
-            }
-        });
     });
 
     //Let the user know we're connected

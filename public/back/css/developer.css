@@ -1,4 +1,6 @@
-
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    width: 20em !important;
+}
 .thumbnail h3{    margin: 0;
                   padding: 5px;
                   width: 100%;}
@@ -230,6 +232,7 @@ input#No_of_person{margin-top: 10px;}
     .event_contact_wrapper .contact_ul{
         width:95%;
     }
+    
 
 
 

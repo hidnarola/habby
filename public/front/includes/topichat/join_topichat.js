@@ -15,7 +15,9 @@ function share_links(url) {
     var i = Math.random().toString(36).substring(7);
     var embedlyAPI = "http://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
     var youtube_video_html = null, html = '';
+    console.log('going to call');
     $(".loader").addClass('show');
+    console.log('going to call123');
     $.ajax({
         url: embedlyAPI,
         async: false,
@@ -78,7 +80,6 @@ function share_links(url) {
                     }
                     Server.send('message', JSON.stringify(msg))
                     $('#url').val('');
-
                     $('#url').prop('disabled', false);
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 }
@@ -96,26 +97,26 @@ function share_links(url) {
             }
         },
         complete: function (xhr, status) {
-            $.ajax({
-                url: base_url + 'topichat/get_chat_id_from_link_id',
-                method: 'post',
-                async: false,
-                data: 'link_id=' + i,
-                success: function (resp) {
-                    $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
-                    $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
-                },
-                complete:function(xhr,status){
-                    $(".loader").removeClass('show');
-                }
-            });
+            setTimeout(function(){
+                $.ajax({
+                    url: base_url + 'topichat/get_chat_id_from_link_id',
+                    method: 'post',
+                    async: false,
+                    data: 'link_id=' + i,
+                    success: function (resp) {
+                        $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                        $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
+                    },
+                    complete:function(xhr,status){
+                        $(".loader").removeClass('show');
+                    }
+                });
+            },1500);
         }
     });
 }
-
 function upload_image(files) {
     var i = Math.random().toString(36).substring(7);
-    $(".loader").addClass('show');
     $('.message').html();
     if (!files.length || !window.FileReader) {
         $('.message').html(no_selected_file);
@@ -126,6 +127,7 @@ function upload_image(files) {
     {
         if (key != 'item' && key != 'length')
         {
+            $(".loader").addClass('show');
             if (/^image/.test(files[key].type)) { // only image file
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
@@ -197,7 +199,7 @@ function upload_image(files) {
 function upload_video(files) {
     var i = Math.random().toString(36).substring(7);
     var display_file_class = '';
-    $(".loader").addClass('show');
+
     $('.message').html();
     if (!files.length || !window.FileReader) {
         $('.message').html(no_selected_file);
@@ -208,6 +210,7 @@ function upload_video(files) {
     {
         if (key != "length" && key != "item")
         {
+            $(".loader").addClass('show');
             if (/^video/.test(files[key].type)) { // only video file
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
@@ -285,7 +288,6 @@ function upload_video(files) {
 }
 function upload_files(files) {
     var i = Math.random().toString(36).substring(7);
-    $(".loader").addClass('show');
     var display_file_class = '';
     $('.message').html();
     if (!files.length || !window.FileReader) {
@@ -297,6 +299,7 @@ function upload_files(files) {
     {
         if (key != "length" && key != "item")
         {
+            $(".loader").addClass('show');
             if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type)) || /vnd.openxmlformats-officedocument.wordprocessingml.document$/.test(files[key].type) || /.docx$/.test(files[key].name) || /.doc$/.test(files[key].name) || /.xls$/.test(files[key].name) || /.xlsx$/.test(files[key].name)) { // only pdf and text files 
 //                var file_name = files[key].name;
                 var reader = new FileReader(); // instance of the FileReader
@@ -379,7 +382,8 @@ $(document).ready(function () {
     Server = new FancyWebSocket(socket_server);
     // Send message to server
     $(document).on('keypress', '#message_div', function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode == 13) 
+        {
             if ($.trim($(this).html()) != '')
             {
                 msg = $(this).html();
@@ -390,10 +394,12 @@ $(document).ready(function () {
                 $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
             }
             return false;
-        } else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        }
+        else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
-        } else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        }
+        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
         {
             $(this).html('');
             return false;
@@ -519,7 +525,8 @@ $(document).ready(function () {
         if (userdata.media_type == null)
         {
             $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
-        } else
+        }
+        else
         {
             if (userdata.media_type == "image")
             {
