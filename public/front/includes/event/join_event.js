@@ -99,6 +99,13 @@ $(document).ready(function () {
                                 console.log(str);
                                 if (str != 0)
                                 {
+                                    if($('.content_images').find('.panel-body').find('a').length == 3)
+                                    {
+                                       $('.content_images').find('.panel-body').find('a').last().remove();
+                                    }
+                                    media_file = JSON.parse(str);
+                                    var html = '<a data-fancybox-group="gallery1" href="'+upload_path+str[0].media+'" class="fancybox col-sm-4"><img class="img-responsive topi_image" src="'+upload_path+media_file[0].media+'"></a>';
+                                    $('.content_images').find('.panel-body').prepend(html);
                                     var msg = {
                                         message: str,
                                         type: 'event_msg',
@@ -172,13 +179,21 @@ $(document).ready(function () {
                             },
                             success: function (str)
                             {
-//                console.log('in video uploading response : ' + str);
                                 if (str == "601")
                                 {
                                     var p = $('.' + display_file_class).parent().addClass('wdth_span');
                                     p.html('<span>' + fail_message + '</span>');
                                 } else if (str != 0)
                                 {
+                                    media_file = JSON.parse(str);
+                                    video_thumb = media_file[0].media.split('.')[0]+'_thumb.png';
+                                    if($('.content_videos').find('.panel-body').find('a').length == 3)
+                                    {
+                                       $('.content_videos').find('.panel-body').find('a').last().remove();
+                                    }
+                                    
+                                    var html = '<a class="fancybox col-sm-4" href="'+upload_path+media_file[0].media+'" target="_blank" data-fancybox-group="gallery1"><div class="video-w-icon"><img src="'+upload_path+video_thumb+'" class="img-responsive topi_image"></div></a>';
+                                    $('.content_videos').find('.panel-body').prepend(html);
                                     var msg = {
                                         message: str,
                                         type: 'event_msg',
@@ -325,11 +340,27 @@ $(document).ready(function () {
                 $('.chat_area2').append('<div class="chat_1 clearfix event_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
 
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
+                
+                if($('.content_images').find('.panel-body').find('a').length == 3){
+                    $('.content_images').find('.panel-body').find('a').last().remove();
+                }
+                var html = '<a data-fancybox-group="gallery1" href="'+upload_path + userdata.media+'" class="fancybox col-sm-4"><img class="img-responsive topi_image" src="'+upload_path + userdata.media+'"></a>';
+                $('.content_images').find('.panel-body').prepend(html);
             } else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span></div></div>');
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
+                
+                video_thumb = userdata.media.split('.')[0]+'_thumb.png';
+                if($('.content_videos').find('.panel-body').find('a').length == 3)
+                {
+                   $('.content_videos').find('.panel-body').find('a').last().remove();
+                }
+
+                var html = '<a class="fancybox col-sm-4" href="'+upload_path+userdata.media+'" target="_blank" data-fancybox-group="gallery1"><div class="video-w-icon"><img src="'+upload_path+video_thumb+'" class="img-responsive topi_image"></div></a>';
+                $('.content_videos').find('.panel-body').prepend(html);
+                
             } else if (userdata.media_type == "files")
             {
                 var i = Math.random().toString(36).substring(7);
