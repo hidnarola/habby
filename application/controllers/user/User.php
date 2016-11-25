@@ -369,6 +369,7 @@ class User extends CI_Controller {
             $img_name = random_string('alnum', 20) . '.jpg';
             $img_path = 'uploads/user_profile/' . $img_name;
             $file_handler = fopen($img_path, 'w+');
+            pr($file_handler, 1);
             fputs($file_handler, $data);
             fclose($file_handler);
             return $img_name;
