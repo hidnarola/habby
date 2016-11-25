@@ -316,8 +316,6 @@ class User extends CI_Controller {
             //IF New User then it will enter all data into database otherwise it will create login-session for him/her
             if ($res_data == 0 && $res_fb_account == 0) {
                 $profile_image = $this->use_facebook_photo($user_detail['id']);
-                echo $profile_image;
-                exit;
                 $ins_data = array(
                     'name' => $display_name,
                     'email' => $email,
@@ -366,21 +364,10 @@ class User extends CI_Controller {
 
     public function use_facebook_photo($facebook_id) {
         if (!empty($facebook_id)) {
-            echo $facebook_id;
             $data = file_get_contents('https://graph.facebook.com/' . $facebook_id . '/picture?type=large');
             $img_name = random_string('alnum', 20) . '.jpg';
             $img_path = '/var/www/html/uploads/user_profile/' . $img_name;            
             file_put_contents($img_path, $data);
-            
-            echo $img_path;die;
-            
-            
-            $file_handler = fopen($img_path, 'w+');
-            echo $img_path;
-            pr($file_handler);
-            pr($file_handler, 1);
-            fputs($file_handler, $data);
-            fclose($file_handler);
             return $img_name;
         }
     }
