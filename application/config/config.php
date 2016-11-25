@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-$servername = isset($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:'';
+$servername = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
 if ($servername == 'habby') {
     $config['base_url'] = 'http://habby/';
 } else if ($servername == "clientapp.narola.online") {
@@ -379,7 +379,8 @@ $config['encryption_key'] = 'IqpOgqzrv3letXoT5CWUnJ91zrkRxo2u';
  */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = -1;
+$config['sess_expire_on_close'] = TRUE;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;

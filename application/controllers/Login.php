@@ -75,7 +75,6 @@ class Login extends CI_Controller {
                         $this->session->set_flashdata('message', ['message' => lang('Your account is inactive.'), 'class' => 'alert alert-danger']);
                         redirect('login');
                     } else {
-
                         $db_pass = $this->encrypt->decode($user_data['password']);
                         if ($db_pass == $password) {
                             /* If remember Me Checkbox is clicked */
