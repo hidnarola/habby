@@ -283,12 +283,6 @@ class User extends CI_Controller {
 
     public function facebook_callback() {
         $user_detail = $this->facebook->get_user();
-        $data['login_url'] = $this->facebook->get_login_url();
-        $data['user_me'] =  $this->facebook->get_user();
-        $data['logout_url'] = $this->facebook->get_logout_url();
-        
-        pr($data);die;
-        
         $sess_user_data = $this->session->userdata('user');
         if (!empty($user_detail)) {
             if (!empty($sess_user_data)) {
