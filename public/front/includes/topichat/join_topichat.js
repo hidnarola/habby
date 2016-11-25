@@ -190,70 +190,76 @@ function upload_image(files) {
 
     for (var key in files)
     {
-        if (/^image/.test(files[key].type)) { // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[key]); // read the local file
-            reader.onloadend = function () { // set image data as background of div
-                // $('#imagePreview').addClass('imagePreview');
-                $('.message').hide();
-                $('.chat_area2,.topichat_msg_sec_modal').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview' + i + '"  id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="" data-type="image"></span></div></div>');
-                $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
-            }
-        } else
+        if(key != 'item' && key != 'length')
         {
-            $('.message').html("proper_image");
-            $('.message').show();
+            if (/^image/.test(files[key].type)) { // only image file
+                console.log('image');
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[key]); // read the local file
+                reader.onloadend = function () { // set image data as background of div
+                    // $('#imagePreview').addClass('imagePreview');
+                    $('.message').hide();
+                    $('.chat_area2,.topichat_msg_sec_modal').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview' + i + '"  id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="" data-type="image"></span></div></div>');
+                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                    $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+
+                    var form_data = new FormData();
+                    $.each(files, function (i, file) {
+                        form_data.append('image-' + i, file);
+                    });
+                    form_data.append("msg_image", files);
+                    // Send file using ajax
+                    var media_data;
+                    $.ajax({
+                        url: base_url + 'user/upload_chat_media',
+                        dataType: 'script',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,
+                        type: 'post',
+                        async: false,
+                        error: function (textStatus, errorThrown) {
+                        },
+                        success: function (str)
+                        {
+                            if (str != 0)
+                            {
+                                var msg = {
+                                    message: str,
+                                    type: 'topic_msg',
+                                    group_id: group_id,
+                                    media: 'image'
+                                }
+                                Server.send('message', JSON.stringify(msg));
+                                media_data = JSON.parse(str);
+                            }
+                        },
+                        complete: function (xhr, status) {
+                            $.ajax({
+                                url: base_url + 'topichat/get_chat_id_from_media_name',
+                                method: 'post',
+                                async: false,
+                                data: 'media=' + media_data[0].media,
+                                success: function (resp) {
+                                    $('.imagePreview' + i).data('image', media_data[0].media);
+                                    $('.imagePreview' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                                },
+                                complete : function(xhr,status){
+                                    $(".loader").removeClass('show');
+                                }
+                            });
+                        }
+                    });
+                }
+            } 
+            else
+            {
+                swal('Please select proper image');
+                $(".loader").removeClass('show');
+            }
         }
     }
-    var form_data = new FormData();
-    $.each(files, function (i, file) {
-        form_data.append('image-' + i, file);
-    });
-    form_data.append("msg_image", files);
-    // Send file using ajax
-    var media_data;
-    $.ajax({
-        url: base_url + 'user/upload_chat_media',
-        dataType: 'script',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,
-        type: 'post',
-        async: false,
-        error: function (textStatus, errorThrown) {
-        },
-        success: function (str)
-        {
-            if (str != 0)
-            {
-                var msg = {
-                    message: str,
-                    type: 'topic_msg',
-                    group_id: group_id,
-                    media: 'image'
-                }
-                Server.send('message', JSON.stringify(msg));
-                media_data = JSON.parse(str);
-            }
-        },
-        complete: function (xhr, status) {
-            setTimeout(function () {
-                $.ajax({
-                    url: base_url + 'topichat/get_chat_id_from_media_name',
-                    method: 'post',
-                    async: false,
-                    data: 'media=' + media_data[0].media,
-                    success: function (resp) {
-                        $(".loader").removeClass('show');
-                        $('.imagePreview' + i).data('image', media_data[0].media);
-                        $('.imagePreview' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
-                    }
-                });
-            }, 1000);
-        }
-    });
 }
 
 function upload_video(files) {
