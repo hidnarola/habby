@@ -31,7 +31,6 @@ function share_links(url) {
                     return false;
                 } else {
                     $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
-
                     if ($.isEmptyObject(preview.media)) {
                         var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
                                 '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
@@ -123,7 +122,6 @@ function upload_image(files) {
         $('.message').show();
         return; // no file selected, or no FileReader support
     }
-
     for (var key in files)
     {
         if(key != 'item' && key != 'length')
@@ -191,7 +189,7 @@ function upload_image(files) {
             } 
             else
             {
-                swal('Please select proper image');
+                swal('Please select proper video');
                 $(".loader").removeClass('show');
             }
         }
@@ -224,12 +222,7 @@ function upload_video(files) {
                 }
             } else
             {
-                $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>Please select proper video</span></span></div>");
-                //this.files = '';
-                $('.message').html(proper_video);
-                $('.message').show();
-                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-                return;
+                
             }
         }
     }
