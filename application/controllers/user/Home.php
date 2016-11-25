@@ -12,14 +12,13 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Post_model', 'Event_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model','Seo_model'));
+        $this->load->model(array('Users_model', 'Post_model', 'Event_model', 'Common_functionality', 'Topichat_model', 'Soulmate_model', 'Groupplan_model', 'Challenge_model', 'League_model', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('home');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
         if (empty($this->data['user_data'])) {
             redirect('login');
         }
-        
     }
 
     /*
