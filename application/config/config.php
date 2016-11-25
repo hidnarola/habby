@@ -535,3 +535,4 @@ $config['facebook']['permissions'] = array(
     'user_friends',
     'public_profile'
 );
+echo $config['facebook']['redirect_url'] = $config['base_url'] . '/user/facebook_callback';die;
