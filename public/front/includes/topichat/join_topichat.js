@@ -15,12 +15,13 @@ function share_links(url) {
     var i = Math.random().toString(36).substring(7);
     var embedlyAPI = "http://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
     var youtube_video_html = null, html = '';
+    $(".loader").addClass('show');
     $.ajax({
         url: embedlyAPI,
         async: false,
         dataType: 'json', // Choosing a JSON datatype
         beforeSend: function () {
-            $(".loader").addClass('show');
+
         },
         success: function (preview) {
             if (JSON.stringify(preview) != '{}') {
@@ -75,29 +76,14 @@ function share_links(url) {
                         youtube_video: youtube_video_html,
                         link_id: i
                     }
-                    if (Server.send('message', JSON.stringify(msg)))
-                    {
-                        setTimeout(function () {
-                            $.ajax({
-                                url: base_url + 'topichat/get_chat_id_from_link_id',
-                                method: 'post',
-                                async: false,
-                                data: 'link_id=' + i,
-                                success: function (resp) {
-                                    $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
-                                    $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
-                                }
-                            });
-                        }, 4000);
-                    }
+                    Server.send('message', JSON.stringify(msg))
                     $('#url').val('');
-                    $(".loader").removeClass('show');
+
                     $('#url').prop('disabled', false);
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 }
             } else {
                 swal(correct_link);
-                $(".loader").removeClass('show');
                 $('#url').prop('disabled', false);
                 return false;
             }
@@ -106,10 +92,24 @@ function share_links(url) {
             var error_list = new Array("error", "abort", "timeout", "parsererror");
             if (error_list.indexOf(t) !== -1)
             {
-                $(".loader").removeClass('show');
                 swal('Looking back, it seems we can not find what you are looking for or network is slow. Please try agian');
             }
         },
+        complete: function (xhr, status) {
+            $.ajax({
+                url: base_url + 'topichat/get_chat_id_from_link_id',
+                method: 'post',
+                async: false,
+                data: 'link_id=' + i,
+                success: function (resp) {
+                    $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                    $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
+                },
+                complete:function(xhr,status){
+                    $(".loader").removeClass('show');
+                }
+            });
+        }
     });
 }
 
@@ -124,10 +124,9 @@ function upload_image(files) {
     }
     for (var key in files)
     {
-        if(key != 'item' && key != 'length')
+        if (key != 'item' && key != 'length')
         {
             if (/^image/.test(files[key].type)) { // only image file
-                console.log('image');
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
                 reader.onloadend = function () { // set image data as background of div
@@ -179,23 +178,22 @@ function upload_image(files) {
                                     $('.imagePreview' + i).data('image', media_data[0].media);
                                     $('.imagePreview' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                                 },
-                                complete : function(xhr,status){
+                                complete: function (xhr, status) {
                                     $(".loader").removeClass('show');
                                 }
                             });
                         }
                     });
                 }
-            } 
+            }
             else
             {
-                swal('Please select proper video');
+                swal(proper_image);
                 $(".loader").removeClass('show');
             }
         }
     }
 }
-
 function upload_video(files) {
     var i = Math.random().toString(36).substring(7);
     var display_file_class = '';
@@ -219,64 +217,71 @@ function upload_video(files) {
                     $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="float:right"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + '"  id="imagePreview_msg"></span></div></div>');
                     $('.' + display_file_class).html("<video controls='' src='" + this.result + "' style='height:180px;'>");
                     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+
+                    var form_data = new FormData();
+                    $.each(files, function (i, file) {
+                        form_data.append('video-' + i, file);
+                    });
+                    form_data.append("msg_video", files);
+                    var media_data;
+                    // Send file using ajax
+                    $.ajax({
+                        url: base_url + 'user/upload_chat_media',
+                        dataType: 'script',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,
+                        type: 'post',
+                        async: false,
+                        error: function (textStatus, errorThrown) {
+                        },
+                        success: function (str)
+                        {
+                            if (str == "601")
+                            {
+                                var p = $('.' + display_file_class).parent().addClass('wdth_span');
+                                p.html('<span>' + fail_message + '</span>');
+                            }
+                            else if (str != 0)
+                            {
+                                var msg = {
+                                    message: str,
+                                    type: 'topic_msg',
+                                    group_id: group_id,
+                                    media: 'video'
+                                }
+                                Server.send('message', JSON.stringify(msg));
+                                media_data = JSON.parse(str);
+                            }
+                        },
+                        complete: function (xhr, status) {
+
+                            $.ajax({
+                                url: base_url + 'topichat/get_chat_id_from_media_name',
+                                method: 'post',
+                                async: false,
+                                data: 'media=' + media_data[0].media,
+                                success: function (resp) {
+                                    $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
+                                },
+                                complete: function (xhr, status)
+                                {
+                                    $(".loader").removeClass('show');
+                                }
+                            });
+                        }
+                    });
                 }
-            } else
+            }
+            else
             {
-                
+                swal(proper_video);
+                $(".loader").removeClass('show');
+                return;
             }
         }
     }
-    var form_data = new FormData();
-    $.each(files, function (i, file) {
-        form_data.append('video-' + i, file);
-    });
-    form_data.append("msg_video", files);
-    var media_data;
-    // Send file using ajax
-    $.ajax({
-        url: base_url + 'user/upload_chat_media',
-        dataType: 'script',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,
-        type: 'post',
-        async: false,
-        error: function (textStatus, errorThrown) {
-        },
-        success: function (str)
-        {
-            if (str == "601")
-            {
-                var p = $('.' + display_file_class).parent().addClass('wdth_span');
-                p.html('<span>' + fail_message + '</span>');
-            } else if (str != 0)
-            {
-                var msg = {
-                    message: str,
-                    type: 'topic_msg',
-                    group_id: group_id,
-                    media: 'video'
-                }
-                Server.send('message', JSON.stringify(msg));
-                media_data = JSON.parse(str);
-            }
-        },
-        complete: function (xhr, status) {
-            setTimeout(function () {
-                $.ajax({
-                    url: base_url + 'topichat/get_chat_id_from_media_name',
-                    method: 'post',
-                    async: false,
-                    data: 'media=' + media_data[0].media,
-                    success: function (resp) {
-                        $(".loader").removeClass('show');
-                        $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
-                    }
-                });
-            }, 1000);
-        }
-    });
 }
 function upload_files(files) {
     var i = Math.random().toString(36).substring(7);
@@ -343,28 +348,27 @@ function upload_files(files) {
                             }
                         },
                         complete: function () {
-                            $(".loader").removeClass('show');
-                            setTimeout(function () {
-                                $.ajax({
-                                    url: base_url + 'topichat/get_chat_id_from_media_name',
-                                    method: 'post',
-                                    async: false,
-                                    data: 'media=' + media_data[0].media,
-                                    success: function (resp) {
-                                        $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
-                                    }
-                                });
-                            }, 1500)
+                            $.ajax({
+                                url: base_url + 'topichat/get_chat_id_from_media_name',
+                                method: 'post',
+                                async: false,
+                                data: 'media=' + media_data[0].media,
+                                success: function (resp) {
+                                    $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
+                                },
+                                complete: function (xhr, status) {
+                                    $(".loader").removeClass('show');
+                                }
+                            });
                         }
                     });
                 }
-            } else
+            }
+            else
             {
-                $('.chat_area2').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + proper_file + " (pdf/txt/xls/doc)</span></span></div>");
                 //this.files = '';
-                $('.message').html(proper_file + " (pdf/txt/xls/doc)");
-                $('.message').show();
-                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                swal(proper_file + " (pdf/txt/xls/doc)");
+                $(".loader").removeClass('show');
                 return;
             }
         }
