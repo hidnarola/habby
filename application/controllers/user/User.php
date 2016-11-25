@@ -316,6 +316,8 @@ class User extends CI_Controller {
             //IF New User then it will enter all data into database otherwise it will create login-session for him/her
             if ($res_data == 0 && $res_fb_account == 0) {
                 $profile_image = $this->use_facebook_photo($user_detail['id']);
+                echo $profile_image;
+                exit;
                 $ins_data = array(
                     'name' => $display_name,
                     'email' => $email,
