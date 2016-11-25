@@ -66,7 +66,6 @@ class Facebook {
                 pr($ex);
                 // When validation fails or other local issues
             }
-            die;
         }
 
         if ($this->session) {
