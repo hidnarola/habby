@@ -89,9 +89,9 @@
             <div class="social">
                 <ul>
 <!--                    <li><a href="<?php echo $fb_login_url; ?>"><img src="<?php echo DEFAULT_IMAGE_PATH . "facebook.png" ?>" /></a></li>-->
-                    <li><a href="https://www.facebook.com/v2.0/dialog/oauth?client_id=1681712568714868&amp;redirect_uri=https%3A%2F%2Fdoukani.com%2Flogin%2Ffacebook_login&amp;state=5b4766d17dab31b2b58d656d1cfa9d13&amp;sdk=php-sdk-4.0.7&amp;scope=email%2Cuser_location%2Cuser_birthday%2Cuser_friends%2Cpublic_profile" class="btn btn-block btn-fb"><i class="fa fa-facebook"></i>Sign Up With Facebook</a></li>
+                    <li><a href="<?php echo $fb_login_url; ?>" class="btn btn-block btn-fb"><i class="fa fa-facebook"></i>Sign Up With Facebook</a></li>
 <!--                    <li><a href="<?php echo base_url() ?>/login/google_login"><img src="<?php echo DEFAULT_IMAGE_PATH . "google_plus.png" ?>" /></a></li>-->
-                    <li> <a href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Fdoukani.com%2Flogin%2Fgoogle_login&amp;client_id=224475287005-fkuik20t7kivign6jbhrd6d3n0hvq46m.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fplus.me&amp;access_type=online&amp;approval_prompt=auto" class="btn btn-block btn-g-plus"><i class="fa fa-google-plus"></i>Sign Up With Google+</a></li>
+                    <li> <a href="<?php echo base_url() ?>" class="btn btn-block btn-g-plus"><i class="fa fa-google-plus"></i>Sign Up With Google+</a></li>
                 </ul>
             </div>
         </div>
