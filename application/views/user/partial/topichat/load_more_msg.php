@@ -111,10 +111,10 @@ foreach ($messages as $message) {
                         ?>
                         <div class = "fileshare">
                             <?php
-                            if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                            if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                 ?>
                                 <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id='<?php echo $message['id']; ?>'>
-                                    <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                    <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                     <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                 </div>
                                 <?php

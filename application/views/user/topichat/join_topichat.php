@@ -74,10 +74,10 @@
                                         <div class = "fileshare">
                                             <div class = "">
                                                 <?php
-                                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                                if (isset($media->thumbnail_url) && $media->images[0]->url != null) {
                                                     ?>
                                                     <div class = "large-3 columns">
-                                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                                        <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                                     </div>
                                                     <?php
                                                 }
@@ -122,10 +122,10 @@
                                         ?>
                                         <div class = "fileshare">
                                             <?php
-                                            if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                            if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                                 ?>
                                                 <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-type="links" data-id='<?php echo $recent_link['id']; ?>'>
-                                                    <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                                    <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                                     <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                                 </div>
                                                 <?php
@@ -184,7 +184,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                    ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                      ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -234,11 +234,11 @@
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pad_lft0 topic_right_lg_sec">
             <div class="right_lg_sectopic">
                 <?php
-                    $message = $this->session->flashdata('message');
-                    if (!empty($message) && isset($message)) {
-                        ($message['class'] != '') ? $message['class'] : '';
-                        echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
-                    }
+                $message = $this->session->flashdata('message');
+                if (!empty($message) && isset($message)) {
+                    ($message['class'] != '') ? $message['class'] : '';
+                    echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+                }
                 ?>
                 <!-- Note and topic edit area start here -->
                 <div class="tittl_sec_lgrow">
@@ -418,7 +418,7 @@
                                     </div>
                                     <div class="image_wrapper">
                                         <div class="col-sm-6">
-                                            <div class="panel-heading text-center"><?php echo lang('Existing Image')?> </div>
+                                            <div class="panel-heading text-center"><?php echo lang('Existing Image') ?> </div>
                                             <img class="img-responsive" src="<?php echo DEFAULT_TOPICHAT_IMAGE_PATH . $topichat['group_cover'] ?>" style="margin-top:9px;"/>
                                         </div>
                                         <div class="col-sm-6 new_image_wrapper" style="display:none">
@@ -516,7 +516,7 @@
                                                             <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
                                                         </span>
                                                         <span class="input-group-btn">
-                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send')?>">
+                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send') ?>">
                                                         </span>
                                                     </div>
                                                 </div>
@@ -533,7 +533,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close')?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close') ?></button>
             </div>   
         </div>
 
@@ -597,7 +597,7 @@
                                                             <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
                                                         </span>
                                                         <span class="input-group-btn">
-                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send')?>">
+                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send') ?>">
                                                         </span>
                                                     </div>
                                                 </div>
@@ -614,7 +614,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close')?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close') ?></button>
             </div>   
         </div>
     </div>

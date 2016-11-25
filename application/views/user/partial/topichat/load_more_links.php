@@ -8,15 +8,7 @@ foreach ($recent_links as $links) {
             <div class='topichat_link_wrapper links'>
                 <div class = "fileshare">
                     <?php
-                    if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
-                        echo $links['youtube_video'];
-                        ?>
-            <!--                        <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id='<?php echo $links['id']; ?>'>
-                                <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
-                                <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
-                            </div>-->
-                        <?php
-                    }
+                    echo $links['youtube_video'];
                     ?>
                 </div>
             </div>
