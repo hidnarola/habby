@@ -177,14 +177,14 @@ if ($this->session->flashdata('success')) {
                                         if ($challenge_post['media_type'] == 'image') {
                                             ?>
                                             <div class="thumb-inner">
-                                                <img src="<?php echo DEFAULT_POST_IMAGE_PATH . $challenge_post['media']; ?>" alt="">
+                                                <img src="<?php echo DEFAULT_CHALLENGE_IMAGE_PATH . $challenge_post['media']; ?>" alt="">
                                             </div>
                                             <?php
                                         } else {
                                             ?>
                                             <div class="thumb-inner">
                                                 <video controls class="img-responsive center-block">
-                                                    <source src="<?php echo DEFAULT_POST_IMAGE_PATH . $challenge_post['media']; ?>"></source>
+                                                    <source src="<?php echo DEFAULT_CHALLENGE_IMAGE_PATH . $challenge_post['media']; ?>"></source>
                                                 </video>
                                             </div>
                                             <?php

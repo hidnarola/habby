@@ -15,9 +15,7 @@ function share_links(url) {
     var i = Math.random().toString(36).substring(7);
     var embedlyAPI = "http://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
     var youtube_video_html = null, html = '';
-    console.log('going to call');
     $(".loader").addClass('show');
-    console.log('going to call123');
     $.ajax({
         url: embedlyAPI,
         async: false,
@@ -35,14 +33,14 @@ function share_links(url) {
                 } else {
                     $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
                     if ($.isEmptyObject(preview.media)) {
-                        var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
-                                '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                        var thumbnail_url = (typeof (preview.images[0].url) != "undefined") ? '<div class="large-3 columns">' +
+                                '<img class="thumb" src="' + preview.images[0].url + '"></img>' +
                                 '</div>' : "";
                         var title = (preview.title != null) ? preview.title : "";
                         var description = (preview.description != null) ? preview.description : "";
                         html = '<div class="">' + thumbnail_url +
                                 '<div class="large-9 column">' +
-                                '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
+                                '<a href="' + preview.url + '" target="_blank">' + title + '</a>' +
                                 '<p>' + description + '</p>' +
                                 '</div>' +
                                 '</div>';
@@ -54,14 +52,14 @@ function share_links(url) {
                             youtube_video_html = preview.media.html;
                             $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
                         } else {
-                            var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
-                                    '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                            var thumbnail_url = (typeof (preview.images[0].url) != "undefined") ? '<div class="large-3 columns">' +
+                                    '<img class="thumb" src="' + preview.images[0].url + '"></img>' +
                                     '</div>' : "";
                             var title = (preview.title != null) ? preview.title : "";
                             var description = (preview.description != null) ? preview.description : "";
                             html = '<div class="">' + thumbnail_url +
                                     '<div class="large-9 column">' +
-                                    '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
+                                    '<a href="' + preview.url + '" target="_blank">' + title + '</a>' +
                                     '<p>' + description + '</p>' +
                                     '</div>' +
                                     '</div>';
@@ -93,11 +91,12 @@ function share_links(url) {
             var error_list = new Array("error", "abort", "timeout", "parsererror");
             if (error_list.indexOf(t) !== -1)
             {
+                $('#url').prop('disabled', false);
                 swal('Looking back, it seems we can not find what you are looking for or network is slow. Please try agian');
             }
         },
         complete: function (xhr, status) {
-            setTimeout(function(){
+            setTimeout(function () {
                 $.ajax({
                     url: base_url + 'topichat/get_chat_id_from_link_id',
                     method: 'post',
@@ -107,11 +106,11 @@ function share_links(url) {
                         $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                         $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
                     },
-                    complete:function(xhr,status){
+                    complete: function (xhr, status) {
                         $(".loader").removeClass('show');
                     }
                 });
-            },1500);
+            }, 1500);
         }
     });
 }
@@ -187,8 +186,7 @@ function upload_image(files) {
                         }
                     });
                 }
-            }
-            else
+            } else
             {
                 swal(proper_image);
                 $(".loader").removeClass('show');
@@ -245,8 +243,7 @@ function upload_video(files) {
                             {
                                 var p = $('.' + display_file_class).parent().addClass('wdth_span');
                                 p.html('<span>' + fail_message + '</span>');
-                            }
-                            else if (str != 0)
+                            } else if (str != 0)
                             {
                                 var msg = {
                                     message: str,
@@ -276,8 +273,7 @@ function upload_video(files) {
                         }
                     });
                 }
-            }
-            else
+            } else
             {
                 swal(proper_video);
                 $(".loader").removeClass('show');
@@ -366,8 +362,7 @@ function upload_files(files) {
                         }
                     });
                 }
-            }
-            else
+            } else
             {
                 //this.files = '';
                 swal(proper_file + " (pdf/txt/xls/doc)");
@@ -382,7 +377,7 @@ $(document).ready(function () {
     Server = new FancyWebSocket(socket_server);
     // Send message to server
     $(document).on('keypress', '#message_div', function (e) {
-        if (e.keyCode == 13) 
+        if (e.keyCode == 13)
         {
             if ($.trim($(this).html()) != '')
             {
@@ -394,12 +389,10 @@ $(document).ready(function () {
                 $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
             }
             return false;
-        }
-        else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        } else if (e.charCode == 32 && $.trim($(this).html()) == '')
         {
             return false;
-        }
-        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        } else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
         {
             $(this).html('');
             return false;
@@ -525,8 +518,7 @@ $(document).ready(function () {
         if (userdata.media_type == null)
         {
             $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
-        }
-        else
+        } else
         {
             if (userdata.media_type == "image")
             {
@@ -547,19 +539,19 @@ $(document).ready(function () {
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             } else if (userdata.media_type == "links") {
                 userlink = JSON.parse(userdata.message);
-                var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? userlink.thumbnail_url : "";
+                var thumbnail_url = (typeof (userlink.images[0].url) != "undefined") ? userlink.images[0].url : "";
                 var youtube_video = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=' + userdata.chat_id + '><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
                 if (userdata.youtube_video != null) {
                     $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post youtube_video" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare">' + youtube_video + '<div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 } else {
-                    var thumbnail_url = (typeof (userlink.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
-                            '<img class="thumb" src="' + userlink.thumbnail_url + '"></img>' +
+                    var thumbnail_url = (typeof (userlink.images[0].url) != "undefined") ? '<div class="large-3 columns">' +
+                            '<img class="thumb" src="' + userlink.images[0].url + '"></img>' +
                             '</div>' : "";
                     var title = (userlink.title != null) ? userlink.title : "";
                     var description = (userlink.description != null) ? userlink.description : "";
                     $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare"><div class="">' + thumbnail_url +
                             '<div class="large-9 column">' +
-                            '<a href="' + userlink.original_url + '" target="_blank">' + title + '</a>' +
+                            '<a href="' + userlink.url + '" target="_blank">' + title + '</a>' +
                             '<p>' + description + '</p>' +
                             '</div>' +
                             '</div>' +
