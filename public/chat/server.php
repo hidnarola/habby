@@ -38,7 +38,6 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $online_users[] = $client['user_data']->id;
                     }
                 }
-//                print_r($online_users);
                 
                 send_topic_notification($message->group_id, $Server->wsClients[$clientID]['user_data']->id,array_diff($user_ids, $online_users), 'new message');
                 // database entry for topichat
@@ -57,7 +56,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 {
                     $chat_id = send_topic_msg($message->group_id, $Server->wsClients[$clientID]['user_data']->id, $message->message);
                 }
-//                $chat_id = insert_id();
+
                 // Send message to user
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {

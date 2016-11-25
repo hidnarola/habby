@@ -214,7 +214,7 @@ function upload_image(files) {
     // Send file using ajax
     var media_data;
     $.ajax({
-        url: base_url + '/user/User/upload_chat_media',
+        url: base_url + 'user/upload_chat_media',
         dataType: 'script',
         cache: false,
         contentType: false,
@@ -241,7 +241,7 @@ function upload_image(files) {
         complete: function (xhr, status) {
             setTimeout(function () {
                 $.ajax({
-                    url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                    url: base_url + 'topichat/get_chat_id_from_media_name',
                     method: 'post',
                     async: false,
                     data: 'media=' + media_data[0].media,
@@ -299,7 +299,7 @@ function upload_video(files) {
     var media_data;
     // Send file using ajax
     $.ajax({
-        url: base_url + '/user/User/upload_chat_media',
+        url: base_url + 'user/upload_chat_media',
         dataType: 'script',
         cache: false,
         contentType: false,
@@ -330,7 +330,7 @@ function upload_video(files) {
         complete: function (xhr, status) {
             setTimeout(function () {
                 $.ajax({
-                    url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                    url: base_url + 'topichat/get_chat_id_from_media_name',
                     method: 'post',
                     async: false,
                     data: 'media=' + media_data[0].media,
@@ -375,7 +375,7 @@ function upload_files(files) {
                     // Send file using ajax
                     var media_data;
                     $.ajax({
-                        url: base_url + '/user/User/upload_chat_media',
+                        url: base_url + 'user/upload_chat_media',
                         dataType: 'script',
                         cache: false,
                         contentType: false,
@@ -411,7 +411,7 @@ function upload_files(files) {
                             $(".loader").removeClass('show');
                             setTimeout(function () {
                                 $.ajax({
-                                    url: base_url + '/user/Topichat/get_chat_id_from_media_name',
+                                    url: base_url + 'topichat/get_chat_id_from_media_name',
                                     method: 'post',
                                     async: false,
                                     data: 'media=' + media_data[0].media,
