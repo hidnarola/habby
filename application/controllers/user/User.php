@@ -282,7 +282,6 @@ class User extends CI_Controller {
     /* v! Redirect Url for the login with facebook define in the application/config/config.php */
 
     public function facebook_callback() {
-        phpinfo();die;
         $user_detail = $this->facebook->get_user();
         $data['login_url'] = $this->facebook->get_login_url();
         $data['user_me'] =  $this->facebook->get_user();
