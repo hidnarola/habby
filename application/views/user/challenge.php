@@ -19,7 +19,7 @@
                     foreach ($posts as $post) {
                         ?>
                         <!-- Each Rank section start here-->
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 rank_lg_sec grid-item" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
+                        <div class="rank_lg_sec grid-item" data-challenge_id="<?php echo $post['id']; ?>" data-post_id="<?php echo $post['challange_post_id']; ?>">
                             <div class="cmnt_newsec_row">
                                 <div class="challange_info">
                                     <div class="challenge_header row">

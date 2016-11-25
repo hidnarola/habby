@@ -742,7 +742,7 @@ img.file_icon {
     width: 90%;
     margin: 75px auto;
 }
-.modal-dialog.topichat_media_modal .modal-body{min-height: 550px;}
+.modal-dialog.topichat_media_modal .modal-body{min-height: 430px;}
 .col-md-11.topichat_media_popup .post_images video{
     height: 280px !important;
     margin-top: 20px;
@@ -849,21 +849,17 @@ img.img-circle.img-responsive.topichat_user {
     margin: 20px auto;
 }
 .social{
-    margin-top: -10px;
-    margin-right: 35px;     
-    position: absolute;
-    right: 20px;
-    /* top: 13px; */
-    background: #fff;
     padding: 10px 0px 0px 10px;
 }
 .social ul{
     float: right;padding-left: 0px;
+    width: 100%;
 }
 .social ul li{    
-    display: inline-block;
-    float: left;
+       display: block;
+    float: none;
     padding-right: 10px;
+    margin-bottom: 10px;
 }
 .social ul li a{
     text-decoration: none;
@@ -969,6 +965,35 @@ h2.chlng_hdg ,
 }
 .event_seat a.pstbtn {
     margin-top: -7px;
+}
+.rank_lg_sec.grid-item {
+    float: left;
+    padding: 0 15px 30px;
+    width: 33.33%;
+}
+.social a {
+    color: #ffffff !important;
+    font-size: 16px;
+    white-space: normal;
+    padding: 10px 20px;
+}
+.btn-fb {
+    background: #3b5998;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+}
+.social_main a i {
+    float: left;
+    font-size: 24px;
+}
+.fa {
+    vertical-align: middle;
+    padding-right: 10px;
+}
+.btn-g-plus {
+    background: #c63d2d;
 }
 @media(min-width:1583px){
     .row.event_container

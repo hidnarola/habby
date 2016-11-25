@@ -221,4 +221,12 @@ $('document').ready(function () {
         });
         page++;
     }
+   
+    $('.grid').masonry({
+//        // set itemSelector so .grid-sizer is not used in layout
+        itemSelector: '.grid-item',
+        // use element for option
+//        columnWidth: '33.33333333%',
+        percentPosition: true
+    });
 });
