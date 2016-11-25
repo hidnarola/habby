@@ -107,7 +107,7 @@ function share_links(url) {
                     return false;
                 } else {
                     $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
-                    console.log(preview.media);
+
                     if ($.isEmptyObject(preview.media)) {
                         var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
                                 '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
@@ -123,10 +123,22 @@ function share_links(url) {
 
                     } else {
                         if (preview.provider_name == "YouTube") {
-                            var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? preview.thumbnail_url : "";
+                            var thumbnail_url = (typeof (preview.images[0].url) != "undefined") ? preview.images[0].url : "";
                             html = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
                             youtube_video_html = preview.media.html;
                             $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
+                        } else {
+                            var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
+                                    '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                                    '</div>' : "";
+                            var title = (preview.title != null) ? preview.title : "";
+                            var description = (preview.description != null) ? preview.description : "";
+                            html = '<div class="">' + thumbnail_url +
+                                    '<div class="large-9 column">' +
+                                    '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
+                                    '<p>' + description + '</p>' +
+                                    '</div>' +
+                                    '</div>';
                         }
                     }
                     $('.fileshare' + i).append(html);
