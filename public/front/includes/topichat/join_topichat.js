@@ -10,80 +10,172 @@ function send(text) {
     Server.send('message', JSON.stringify(msg));
 }
 
-function share_links() {
-    setTimeout(function () {
-        var i = Math.random().toString(36).substring(7);
-        var youtube_video_html = null, html = '';
-        $('#url').trigger('preview');
-        var preview = $('#url').data('preview');
-        if (JSON.stringify(preview) != '{}') {
-            if (preview.title == null && preview.description == null) {
-                swal("No content found");
-                $('#url').val('');
+//function share_links() {
+//    setTimeout(function () {
+//        var i = Math.random().toString(36).substring(7);
+//        var youtube_video_html = null, html = '';
+//        $('#url').trigger('preview');
+//        var preview = $('#url').data('preview');
+//        console.log(preview);
+//        if (JSON.stringify(preview) != '{}') {
+//            if (preview.title == null && preview.description == null) {
+//                swal("No content found");
+//                $('#url').val('');
+//                $('#url').prop('disabled', false);
+//                return false;
+//            } else {
+//                $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
+//                if ($.isEmptyObject(preview.media)) {
+//                    var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
+//                            '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+//                            '</div>' : "";
+//                    var title = (preview.title != null) ? preview.title : "";
+//                    var description = (preview.description != null) ? preview.description : "";
+//                    html = '<div class="">' + thumbnail_url +
+//                            '<div class="large-9 column">' +
+//                            '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
+//                            '<p>' + description + '</p>' +
+//                            '</div>' +
+//                            '</div>';
+//
+//                } else {
+//                    if (preview.provider_name == "YouTube") {
+//                        var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? preview.thumbnail_url : "";
+//                        html = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
+//                        youtube_video_html = preview.media.html;
+//                        $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
+//                    }
+//                }
+//                $('.fileshare' + i).append(html);
+//                // Send file using ajax
+//                preview = JSON.stringify(preview);
+//                var msg = {
+//                    message: preview,
+//                    type: 'topic_msg',
+//                    group_id: group_id,
+//                    media: 'links',
+//                    youtube_video: youtube_video_html,
+//                    link_id: i
+//                }
+//                if (Server.send('message', JSON.stringify(msg)))
+//                {
+//                    setTimeout(function () {
+//                        $.ajax({
+//                            url: base_url + 'user/Topichat/get_chat_id_from_link_id',
+//                            method: 'post',
+//                            async: false,
+//                            data: 'link_id=' + i,
+//                            success: function (resp) {
+//                                $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+//                                $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
+//                            }
+//                        });
+//                    }, 4000);
+//                }
+//                $('#url').val('');
+////                $('#url').preview({bind: false});
+////                $(".loader").removeClass('show');
+//                $('#url').prop('disabled', false);
+//                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+//            }
+//        } else {
+//            swal(correct_link);
+////            $(".loader").removeClass('show');
+//            $('#url').prop('disabled', false);
+//            return false;
+//        }
+//    }, 5000);
+//}
+function share_links(url) {
+    var api_key = '18566814981d41358f03a7635f716d8a';
+    var i = Math.random().toString(36).substring(7);
+    var embedlyAPI = "http://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
+    var youtube_video_html = null, html = '';
+    $.ajax({
+        url: embedlyAPI,
+        async: false,
+        dataType: 'json', // Choosing a JSON datatype
+        beforeSend: function () {
+            $(".loader").addClass('show');
+        },
+        success: function (preview) {
+            if (JSON.stringify(preview) != '{}') {
+                if (preview.title == null && preview.description == null) {
+                    swal("No content found");
+                    $('#url').val('');
+                    $('#url').prop('disabled', false);
+                    return false;
+                } else {
+                    $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
+                    console.log(preview.media);
+                    if ($.isEmptyObject(preview.media)) {
+                        var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
+                                '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
+                                '</div>' : "";
+                        var title = (preview.title != null) ? preview.title : "";
+                        var description = (preview.description != null) ? preview.description : "";
+                        html = '<div class="">' + thumbnail_url +
+                                '<div class="large-9 column">' +
+                                '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
+                                '<p>' + description + '</p>' +
+                                '</div>' +
+                                '</div>';
+
+                    } else {
+                        if (preview.provider_name == "YouTube") {
+                            var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? preview.thumbnail_url : "";
+                            html = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
+                            youtube_video_html = preview.media.html;
+                            $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
+                        }
+                    }
+                    $('.fileshare' + i).append(html);
+                    // Send file using ajax
+                    preview = JSON.stringify(preview);
+                    var msg = {
+                        message: preview,
+                        type: 'topic_msg',
+                        group_id: group_id,
+                        media: 'links',
+                        youtube_video: youtube_video_html,
+                        link_id: i
+                    }
+                    if (Server.send('message', JSON.stringify(msg)))
+                    {
+                        setTimeout(function () {
+                            $.ajax({
+                                url: base_url + 'user/Topichat/get_chat_id_from_link_id',
+                                method: 'post',
+                                async: false,
+                                data: 'link_id=' + i,
+                                success: function (resp) {
+                                    $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
+                                    $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
+                                }
+                            });
+                        }, 4000);
+                    }
+                    $('#url').val('');
+                    $(".loader").removeClass('show');
+                    $('#url').prop('disabled', false);
+                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                }
+            } else {
+                swal(correct_link);
+                $(".loader").removeClass('show');
                 $('#url').prop('disabled', false);
                 return false;
-            } else {
-                $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
-                if ($.isEmptyObject(preview.media)) {
-                    var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? '<div class="large-3 columns">' +
-                            '<img class="thumb" src="' + preview.thumbnail_url + '"></img>' +
-                            '</div>' : "";
-                    var title = (preview.title != null) ? preview.title : "";
-                    var description = (preview.description != null) ? preview.description : "";
-                    html = '<div class="">' + thumbnail_url +
-                            '<div class="large-9 column">' +
-                            '<a href="' + preview.original_url + '" target="_blank">' + title + '</a>' +
-                            '<p>' + description + '</p>' +
-                            '</div>' +
-                            '</div>';
-
-                } else {
-                    if (preview.provider_name == "YouTube") {
-                        var thumbnail_url = (typeof (preview.thumbnail_url) != "undefined") ? preview.thumbnail_url : "";
-                        html = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
-                        youtube_video_html = preview.media.html;
-                        $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
-                    }
-                }
-                $('.fileshare' + i).append(html);
-                // Send file using ajax
-                preview = JSON.stringify(preview);
-                var msg = {
-                    message: preview,
-                    type: 'topic_msg',
-                    group_id: group_id,
-                    media: 'links',
-                    youtube_video: youtube_video_html,
-                    link_id : i
-                }
-                if (Server.send('message', JSON.stringify(msg)))
-                {
-                    setTimeout(function () {
-                        $.ajax({
-                            url: base_url + 'user/Topichat/get_chat_id_from_link_id',
-                            method: 'post',
-                            async: false,
-                            data: 'link_id='+i,
-                            success: function (resp) {
-                                $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
-                                $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
-                            }
-                        });
-                    }, 4000);
-                }
-                $('#url').val('');
-//                $('#url').preview({bind: false});
-//                $(".loader").removeClass('show');
-                $('#url').prop('disabled', false);
-                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
             }
-        } else {
-            swal(correct_link);
-//            $(".loader").removeClass('show');
-            $('#url').prop('disabled', false);
-            return false;
-        }
-    }, 5000);
+        },
+        error: function (x, t, m) {
+            var error_list = new Array("error", "abort", "timeout", "parsererror");
+            if (error_list.indexOf(t) !== -1)
+            {
+                $(".loader").removeClass('show');
+                swal('Looking back, it seems we can not find what you are looking for or network is slow. Please try agian');
+            }
+        },
+    });
 }
 
 function upload_image(files) {
@@ -442,13 +534,14 @@ $(document).ready(function () {
         Server.send('message', JSON.stringify(msg));
     });
     // Set up preview.
-    $('#url').preview({key: '18566814981d41358f03a7635f716d8a'})
     // On submit add hidden inputs to the form.
+//        $('#url').preview({key: '18566814981d41358f03a7635f716d8a'});
     $('.share_btn').click(function () {
         if ($("#url").val() != "")
         {
+            var url = $("#url").val();
             $('#url').prop('disabled', true);
-            share_links();
+            share_links(url);
         } else {
             swal(enter_url);
             return false;
@@ -458,9 +551,9 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             if ($(this).val() != "")
             {
-//                $(".loader").addClass('show');
+                var url = $(this).val();
                 $('#url').prop('disabled', true);
-                share_links();
+                share_links(url);
             } else {
                 swal(enter_url);
                 return false;
