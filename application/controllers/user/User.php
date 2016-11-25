@@ -369,7 +369,7 @@ class User extends CI_Controller {
             echo $facebook_id;
             $data = file_get_contents('https://graph.facebook.com/' . $facebook_id . '/picture?type=large');
             $img_name = random_string('alnum', 20) . '.jpg';
-            $img_path = dirname(__file__).'/uploads/user_profile/' . $img_name;            
+            $img_path = '/var/www/html/uploads/user_profile/' . $img_name;            
             file_put_contents($img_path, $data);
             
             echo $img_path;die;
