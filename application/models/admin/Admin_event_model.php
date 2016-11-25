@@ -7,11 +7,11 @@ class Admin_event_model extends CI_Model {
     }
 
     /**
-     * @uses : this function is used to get result based on datatable in user list page
+     * @uses : retrive all events for pagination.
      * @param : @table 
      * @author : ar
      */
-    public function get_all_events() {
+    public function get_all_events() { 
         $start = $this->input->get('start');
         $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.approval_needed','e.created_date'];
         $this->db->select('e.id,@a:=@a+1 AS test_id,e.title,DATE_FORMAT(e.start_time,"%d %b %Y <br> %l:%i %p") as start_time,DATE_FORMAT(e.end_time,"%d %b %Y <br> %l:%i %p") as end_time,e.limit,e.approval_needed,DATE_FORMAT(e.created_date,"%d %b %Y <br> %l:%i %p") as created_date,u.name as username,e.is_block,e.is_deleted',false);

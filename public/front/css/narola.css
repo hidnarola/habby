@@ -967,7 +967,7 @@ h2.chlng_hdg ,
     margin-bottom: 15px;
 
 }
-.event_seat a.join_btn.pstbtn {
+.event_seat a.pstbtn {
     margin-top: -7px;
 }
 @media(min-width:1583px){
