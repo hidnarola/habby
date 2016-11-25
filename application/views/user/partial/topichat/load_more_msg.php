@@ -127,16 +127,16 @@ foreach ($messages as $message) {
                         <div class = "fileshare">
                             <div class = "">
                                 <?php
-                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                     ?>
                                     <div class = "large-3 columns">
-                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                        <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                     </div>
                                     <?php
                                 }
                                 ?>
                                 <div class = "large-9 column">
-                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                    <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
                                     <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
                                 </div>
                             </div>
@@ -250,10 +250,10 @@ foreach ($messages as $message) {
                         ?>
                         <div class = "fileshare" >
                             <?php
-                            if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                            if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                 ?>
                                 <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id='<?php echo $message['id']; ?>'>
-                                    <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                    <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                     <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                 </div>
                                 <?php
@@ -266,16 +266,16 @@ foreach ($messages as $message) {
                         <div class = "fileshare">
                             <div class = "">
                                 <?php
-                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                     ?>
                                     <div class = "large-3 columns">
-                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                        <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                     </div>
                                     <?php
                                 }
                                 ?>
                                 <div class = "large-9 column">
-                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                    <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
                                     <p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>
                                 </div>
                             </div>

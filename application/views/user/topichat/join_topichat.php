@@ -74,7 +74,7 @@
                                         <div class = "fileshare">
                                             <div class = "">
                                                 <?php
-                                                if (isset($media->thumbnail_url) && $media->images[0]->url != null) {
+                                                if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                                     ?>
                                                     <div class = "large-3 columns">
                                                         <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
@@ -83,7 +83,7 @@
                                                 }
                                                 ?>
                                                 <div class = "large-9 column">
-                                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                                    <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
                                                     <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
                                                 </div>
                                             </div>
@@ -138,16 +138,16 @@
                                         <div class = "fileshare">
                                             <div class = "">
                                                 <?php
-                                                if (isset($media->thumbnail_url) && $media->thumbnail_url != null) {
+                                                if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                                     ?>
                                                     <div class = "large-3 columns">
-                                                        <img class = "thumb" src = "<?php echo $media->thumbnail_url ?>"></img>
+                                                        <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                                     </div>
                                                     <?php
                                                 }
                                                 ?>
                                                 <div class = "large-9 column">
-                                                    <a href = "<?php echo (isset($media->original_url)) ? $media->original_url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                                    <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
                                                     <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
                                                 </div>
                                             </div>
@@ -184,7 +184,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                      ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                       ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
