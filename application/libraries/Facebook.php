@@ -60,10 +60,8 @@ class Facebook {
             try {
                 $this->session = $this->helper->getSessionFromRedirect();
             } catch (FacebookRequestException $ex) {
-                pr($ex);
                 // When Facebook returns an error
             } catch (\Exception $ex) {
-                pr($ex);
                 // When validation fails or other local issues
             }
         }
