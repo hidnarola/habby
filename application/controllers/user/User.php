@@ -366,12 +366,15 @@ class User extends CI_Controller {
 
     public function use_facebook_photo($facebook_id) {
         if (!empty($facebook_id)) {
+            echo $facebook_id;
             $url = 'https://graph.facebook.com/' . $facebook_id . '/picture?type=large';
             $data = file_get_contents($url);
             $img_name = random_string('alnum', 20) . '.jpg';
             $img_path = 'uploads/user_profile/' . $img_name;
             $file_handler = fopen($img_path, 'w+');
-            pr($file_handler, 1);
+            echo $img_path;
+            pr($file_handler);
+            pr($data, 1);
             fputs($file_handler, $data);
             fclose($file_handler);
             return $img_name;
