@@ -65,24 +65,17 @@ class Login extends CI_Controller {
                 //check_if_user_exist - three params 1->where condition 2->is get num_rows for query 3->is fetech single or all data
                 $user_data = $this->Users_model->check_if_user_exist(['email' => $email], false, true);
                 if (!empty($user_data)) {
-                    if($user_data == 801)
-                    {
+                    if ($user_data == 801) {
                         $this->session->set_flashdata('message', ['message' => lang('Your account is deleted by admin.'), 'class' => 'alert alert-danger']);
                         redirect('login');
-                    }
-                    else if($user_data == 802)
-                    {
+                    } else if ($user_data == 802) {
                         $this->session->set_flashdata('message', ['message' => lang('Your account is blocked by admin.'), 'class' => 'alert alert-danger']);
                         redirect('login');
-                    }
-                    else if($user_data == 803)
-                    {
+                    } else if ($user_data == 803) {
                         $this->session->set_flashdata('message', ['message' => lang('Your account is inactive.'), 'class' => 'alert alert-danger']);
                         redirect('login');
-                    }
-                    else
-                    {
-                        
+                    } else {
+
                         $db_pass = $this->encrypt->decode($user_data['password']);
                         if ($db_pass == $password) {
                             /* If remember Me Checkbox is clicked */
@@ -96,6 +89,13 @@ class Login extends CI_Controller {
                                     'path' => '/'
                                 );
                                 $this->input->set_cookie($cookie);
+                            } else {
+                                $remember_me_c = get_cookie('Remember_me');
+                                if (isset($remember_me_c)) {
+                                    delete_cookie('Remember_me');
+                                    echo "delete";
+                                    exit;
+                                }
                             }
                             /* // END */
                             $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]); // Start Loggedin User Session
