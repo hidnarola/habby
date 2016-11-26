@@ -995,6 +995,99 @@ h2.chlng_hdg ,
 .btn-g-plus {
     background: #c63d2d;
 }
+.challenge_post_display .alert-info{
+     bottom: -70px;
+    position: absolute;
+}
+.bg_image_close_info{
+    position: absolute;
+    right: 30px;
+    bottom: 5px;
+}
+.bg_image_close_info{
+    color: #fff;
+}
+.event-right-section .details .event-detail-content label.control-label{
+    font-size: 24px;
+}
+.event-right-section .details .event-detail-content label.control-label span,.event-right-section .details .event-detail-content  span,.event-right-section .details .event-detail-content {
+    font-size: 20px;
+}
+.event-detail-content a.pstbtn{
+    float: none;
+    margin-left: 15px;
+}
+.popover-content-custom{
+     background-clip: padding-box;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    left: 0;
+    line-height: 1.42857;
+    max-width: 276px;
+    padding: 1px;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    white-space: normal;
+    z-index: 1060;
+     left: -67px;
+    position: absolute;
+    top: -65px;
+    width: 125px;
+    padding: 5px;
+}
+.popover-content-custom > .arrow, .popover-content-custom > .arrow::after {
+    border-color: rgba(0, 0, 0, 0);
+    border-style: solid;
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.popover-content-custom > .arrow {
+    border-width: 11px;
+}
+.popover-content-custom > .arrow {
+    border-bottom-width: 0;
+    border-top-color: rgba(0, 0, 0, 0.25);
+    bottom: -11px;
+    left: 50%;
+    margin-left: -11px;
+}
+.popover-content-custom > .arrow, .popover-content-custom > .arrow::after {
+    border-color: rgba(0, 0, 0, 0);
+    border-style: solid;
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+}
+.popover-content-custom > .arrow::after {
+    border-width: 10px;
+    content: "";
+}
+.popover-content-custom > .arrow::after {
+    border-bottom-width: 0;
+    border-top-color: #ffffff;
+    bottom: 1px;
+    content: " ";
+    margin-left: -10px;
+}
+.challenge_post_display .winner-comnt{
+    background-color: #ffffff;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+    margin-left: -38px;
+    margin-right: -38px;
+    padding: 0 30px;
+    position: relative;
+    z-index: 9999;
+}
 @media(min-width:1583px){
     .row.event_container
     {

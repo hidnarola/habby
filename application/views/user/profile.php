@@ -18,7 +18,6 @@
                         <?php
                         if (count($posts) > 0) {
                             foreach ($posts as $post) {
-//                                pr($post);
                                 ?>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pst_full_sec post_masonry_article" data-post_id="<?php echo $post['id']; ?>">
                                     <div class="cmnt_newsec_row">
@@ -173,16 +172,16 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-                                                                    <li>
-                                                                        <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['id'] ?>">
-
+                                                                    <li style="position: relative;">
+                                                                        <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['id'] ?>">
                                                                             <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                             <span>
-                                                                                <?php echo $post['post_share'] ?> <?php echo lang('Shares'); ?>
+                                                                                <?php // echo $post['post_share'] ?> <?php echo lang('Shares'); ?>
                                                                             </span>
                                                                         </a>
 
-                                                                        <div id="popover-content" class="hide">
+                                                                        <div id="" class="hide popover-content-custom">
+                                                                            <div class="arrow" style="left: 79.3706%;"></div>
                                                                             <ul class="share-icon-list">
                                                                                 <li>
                                                                                     <?php
@@ -199,7 +198,6 @@
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
-
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -435,26 +433,32 @@
                                                                             </span>
                                                                         </a>
                                                                     </li>
-                                                                    <li>
-                                                                        <a href="#">
+                                                                    <li style="position: relative;">
+                                                                        <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['id'] ?>">
                                                                             <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                             <span>
-                                                                                <?php echo $post['post_share'] ?> <?php echo lang("Shares"); ?>
+                                                                                <?php // echo $post['post_share'] ?> <?php echo lang('Shares'); ?>
                                                                             </span>
                                                                         </a>
-                                                                        <!--
-                                                                        <?php
-                                                                        $media_url = (isset($post['media']) && is_array($post['media']) && count($post['media']) > 0) ? $post['media'][0]['media'] : '';
-                                                                        $media = " st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
-                                                                        $sharethis_content = "st_url='" . base_url() . "post/display_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
-                                                                        ?>
-                                                                        <span class='st_facebook' displayText='Facebook' <?php echo $sharethis_content ?>></span>
-                                                                        <span class='st_twitter' displayText='Tweet' <?php echo $sharethis_content ?>></span>
-                                                                        <span class='st_linkedin' displayText='LinkedIn' <?php echo $sharethis_content ?>></span>
-                                                                        <span class='st_pinterest' displayText='Pinterest' <?php echo $sharethis_content ?>></span>
-                                                                        <span class='st_googleplus' displayText='Google +' <?php echo $sharethis_content ?>></span>
-                                                                        <span class='st_reddit' displayText='Reddit' <?php echo $sharethis_content ?>></span>
-                                                                        -->
+
+                                                                        <div id="" class="hide popover-content-custom">
+                                                                            <div class="arrow" style="left: 79.3706%;"></div>
+                                                                            <ul class="share-icon-list">
+                                                                                <li>
+                                                                                    <?php
+                                                                                    $media_url = (isset($post['media']) && is_array($post['media']) && count($post['media']) > 0) ? $post['media'][0]['media'] : '';
+                                                                                    $media = " st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
+                                                                                    $sharethis_content = "st_url='" . base_url() . "post/display_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
+                                                                                    ?>
+                                                                                    <span class='st_facebook' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                                    <span class='st_twitter' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                                    <span class='st_linkedin' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                                    <span class='st_pinterest' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                                    <span class='st_googleplus' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                                    <span class='st_reddit' displayText='' <?php echo $sharethis_content ?>></span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -617,4 +621,10 @@
 <script type="text/javascript">
     user_id = '<?php echo $user_data['id']; ?>'; // change this id with the user_id for which post is going to display
 </script>
+<!-- Share this scripts -->
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+    stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
+</script>
+<!-- Share this scripts over -->
 <script type="text/javascript" src="<?php echo USER_JS; ?>post/profile_post.js"></script>

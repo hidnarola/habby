@@ -164,12 +164,15 @@ $('document').ready(function () {
     });
 
     $('.post_section').on('click', '.share-link', function () {
-        $(this).popover({
-            html: true,
-            content: function () {
-                return $(this).siblings("#popover-content").html();
-            }
-        });
+        $popover = $(this).siblings('.popover-content-custom');
+        if ($popover.hasClass('hide'))
+        {
+            $popover.removeClass('hide').addClass('show');
+        }
+        else
+        {
+            $popover.removeClass('show').addClass('hide');
+        }
     });
 
     // Lazy loading for post
@@ -196,9 +199,14 @@ $('document').ready(function () {
                     load = false;
                     $('#users_post').append("<div class='col-sm-12 alert alert-info text-center'>" + no_post + "</div>");
                     $('#loadMore_post').remove();
-                } else
+                }
+                else
                 {
                     $('#users_post').append(data.view);
+                    stButtons.locateElements();
+                    if (window.stButtons) {
+                        stButtons.locateElements();
+                    }
                 }
             }
         });
@@ -232,6 +240,10 @@ $('document').ready(function () {
                 } else
                 {
                     $('#saved_post').append(data.view);
+                    stButtons.locateElements();
+                    if (window.stButtons) {
+                        stButtons.locateElements();
+                    }
                 }
             }
         });

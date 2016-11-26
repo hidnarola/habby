@@ -153,15 +153,16 @@ if (count($posts) > 0) {
                                                     </span>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top">
+                                            <li style="position: relative;">
+                                                <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['id'] ?>">
                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                     <span>
                                                         <?php // echo $post['post_share'] ?> <?php echo lang("");?>Shares
                                                     </span>
                                                 </a>
 
-                                                <div id="popover-content" class="hide">
+                                                <div id="" class="hide popover-content-custom">
+                                                    <div class="arrow" style="left: 79.3706%;"></div>
                                                     <ul class="share-icon-list">
                                                         <li>
                                                             <?php
