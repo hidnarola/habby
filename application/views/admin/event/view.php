@@ -245,7 +245,7 @@ if ($this->session->flashdata('success')) {
 <script type="text/javascript">
     $('document').ready(function () {
         last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
-        $(".chat-list").animate({scrollTop: $('.chat-list').height() + 10000}, 1000);
+//        $(".chat-list").animate({scrollTop: $('.chat-list').height() + 10000}, 1000);
         var load = true;
         var in_progress = false;
         $('.chat_area2').scroll(function () {

@@ -61,7 +61,7 @@ if ($this->session->flashdata('success')) {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-3">
-                                <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control" value="<?php echo (isset($user_datas['email'])) ? $user_datas['email'] : set_value('email'); ?>">
+                                <input type="text" name="email" id="email" placeholder="Enter Email" class="form-control" value="<?php echo (isset($user_datas['email'])) ? $user_datas['email'] : set_value('email'); ?>">
                             </div>
                         </div>
                         <div class="form-group">

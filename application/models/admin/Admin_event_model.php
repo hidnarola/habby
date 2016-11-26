@@ -11,10 +11,10 @@ class Admin_event_model extends CI_Model {
      * @param : @table 
      * @author : ar
      */
-    public function get_all_events() { 
+    public function get_all_events() {
         $start = $this->input->get('start');
-        $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.approval_needed','e.created_date'];
-        $this->db->select('e.id,@a:=@a+1 AS test_id,e.title,DATE_FORMAT(e.start_time,"%d %b %Y <br> %l:%i %p") as start_time,DATE_FORMAT(e.end_time,"%d %b %Y <br> %l:%i %p") as end_time,e.limit,e.approval_needed,DATE_FORMAT(e.created_date,"%d %b %Y <br> %l:%i %p") as created_date,u.name as username,e.is_block,e.is_deleted',false);
+        $columns = ['e.id', 'e.title', 'u.name', 'e.start_time', 'e.end_time', 'e.limit', 'e.approval_needed', 'e.created_date'];
+        $this->db->select('e.id,@a:=@a+1 AS test_id,e.title,DATE_FORMAT(e.start_time,"%d %b %Y <br> %l:%i %p") as start_time,DATE_FORMAT(e.end_time,"%d %b %Y <br> %l:%i %p") as end_time,e.limit,e.approval_needed,DATE_FORMAT(e.created_date,"%d %b %Y <br> %l:%i %p") as created_date,u.name as username,e.is_block,e.is_deleted', false);
 
         $this->db->join('users u', 'u.id = e.user_id');
         $this->db->where('e.is_deleted', 0);
@@ -35,7 +35,7 @@ class Admin_event_model extends CI_Model {
      * @author : ar
      */
     public function get_event_count() {
-        $columns = ['e.id','e.title','u.name','e.start_time','e.end_time','e.limit','e.approval_needed','e.created_date'];
+        $columns = ['e.id', 'e.title', 'u.name', 'e.start_time', 'e.end_time', 'e.limit', 'e.approval_needed', 'e.created_date'];
         $this->db->join('users u', 'u.id = e.user_id');
         $this->db->where('e.is_deleted', 0);
         $this->db->group_by('e.id');
@@ -69,11 +69,11 @@ class Admin_event_model extends CI_Model {
      */
     public function get_event_result($group_id) {
         $this->db->select('e.*,u.name as username,u.user_image,em.media');
-        $this->db->join('users u','u.id = e.user_id');
-        $this->db->join('event_media em','em.event_id = e.id','left');
-        $this->db->where('e.id',$group_id);
+        $this->db->join('users u', 'u.id = e.user_id');
+        $this->db->join('event_media em', 'em.event_id = e.id', 'left');
+        $this->db->where('e.id', $group_id);
         $res_data = $this->db->get('events e')->row_array();
-        
+
         return $res_data;
     }
 
@@ -111,6 +111,7 @@ class Admin_event_model extends CI_Model {
         $this->db->join('users u', 'ec.user_id = u.id');
 //        $this->db->limit($limit, 0);
         $this->db->group_by('ec.id');
+        $this->db->order_by('ec.id', 'desc');
         $res_data = $this->db->get('event_chat ec')->result_array();
         return $res_data;
     }

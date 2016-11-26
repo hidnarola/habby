@@ -1,6 +1,5 @@
 <?php
 $this->load->view('layouts/profile_common');
-date_default_timezone_set('Asia/Kolkata');
 ?>
 <div class="row personal_act_sec personal_act_sec3">
     <div class="container prsna_coner personal_cntner">

@@ -73,7 +73,9 @@ $('document').ready(function () {
                 $.ajax({
                     url: 'user/challenge/add_comment/' + post_id,
                     method: 'post',
-                    data: 'msg=' + msg,
+                    data: {
+                        msg: msg
+                    },
                     success: function (str) {
                         if (str != 0)
                         {
@@ -153,7 +155,9 @@ $('document').ready(function () {
                 $.ajax({
                     url: 'user/challenge/add_comment_reply/' + post_comment_id,
                     method: 'post',
-                    data: 'msg=' + msg,
+                    data: {
+                        msg: msg
+                    },
                     success: function (str) {
                         if (str != 0)
                         {
@@ -221,7 +225,7 @@ $('document').ready(function () {
         });
         page++;
     }
-   
+
     $('.grid').masonry({
 //        // set itemSelector so .grid-sizer is not used in layout
         itemSelector: '.grid-item',

@@ -91,7 +91,7 @@ class Users extends CI_Controller {
         }
         if ($this->input->post()) {
             $this->form_validation->set_rules('name', 'Name', 'trim|required');
-            $this->form_validation->set_rules('email', 'E-Mail', 'trim|required', array('required' => 'Please fill the field' . ' %s .'));
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
             if ($this->form_validation->run() == FALSE) {
                 $this->template->load('admin_main', 'admin/users/manage', $this->data);
             } else {
