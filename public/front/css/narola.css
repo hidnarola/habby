@@ -1098,6 +1098,11 @@ h2.chlng_hdg ,
         width: 1289px;
     }
 }
+@media(min-width:1400){
+    .topich_chat_typesec_modal{
+        width: 450px !important;
+    }
+}
 @media(max-width:1400px){
     .modal-dialog.topichat_media_modal {
         margin: 75px auto;
