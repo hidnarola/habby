@@ -62,8 +62,8 @@ if ($this->session->flashdata('success')) {
                         if (isset($posts) && !empty($posts)) {
 //                            pr($posts);
                             ?>
-                            <div class="thumbnail">
-                                <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $posts['post_user_profile'];?>"> <?php echo  $posts['post_user'];?></h3>
+                            <div class="thumbnail post-thumbnail">
+                                <h3><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $posts['post_user_profile']; ?>"> <?php echo $posts['post_user']; ?></h3>
                                 <div class="thumb grid">
                                     <div class="grid-sizer"></div>
                                     <?php
