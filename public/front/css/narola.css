@@ -1088,11 +1088,19 @@ h2.chlng_hdg ,
     position: relative;
     z-index: 9999;
 }
+.challenge_post_display{
+    min-height: 425px;
+}
 @media(min-width:1583px){
     .row.event_container
     {
         margin: 0 auto;
         width: 1289px;
+    }
+}
+@media(min-width:1400){
+    .topich_chat_typesec_modal{
+        width: 450px !important;
     }
 }
 @media(max-width:1400px){

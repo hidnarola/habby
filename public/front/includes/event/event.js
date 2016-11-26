@@ -42,6 +42,8 @@ $(function () {
                 {
                     swal(joined);
                     $this.removeClass('event_join');
+                    console.log("href = "+base_url+'events/details/'+btoa(event_id));
+                    $this.attr('href',base_url+'events/details/'+encodeURIComponent(btoa(event_id)));
                     $this.html(Enter);
                 } else if (str == 6)
                 {
