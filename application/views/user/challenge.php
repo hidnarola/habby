@@ -13,7 +13,7 @@
                 <?php
             }
             ?>
-            <section class="post_masonry_section grid">
+            <section class="post_masonry_section grid challenge_post_display">
                 <?php
                 if (count($posts) > 0) {
                     foreach ($posts as $post) {
@@ -87,7 +87,7 @@
                                                         echo DEFAULT_IMAGE_PATH;
                                                         echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
                                                         ?>"/><br/>
-                                                        <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> <?php echo lang("Coins");?>
+                                                        <span class="coin_cnt"><?php echo $post['tot_coin'] ?></span> <?php echo lang("Coins"); ?>
                                                     </a>
                                                 </li>
                                                 <li class="dropdown">
@@ -97,7 +97,7 @@
                                                         echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
                                                         ?>" class="like_img"><br/>
                                                         <span>
-                                                            <span class="like_cnt"><?php echo $post['tot_like'] ?></span> <?php echo lang("Likes");?>
+                                                            <span class="like_cnt"><?php echo $post['tot_like'] ?></span> <?php echo lang("Likes"); ?>
                                                         </span>
                                                     </a>
                                                 </li>
@@ -105,18 +105,19 @@
                                                     <a role="button" class="cmnt_winner">
                                                         <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br/>
                                                         <span> 
-                                                            <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> <?php echo lang("Comments");?>
+                                                            <span class="comment_cnt"><?php echo $post['tot_comment'] ?></span> <?php echo lang("Comments"); ?>
                                                         </span>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="javascript:void(0);"  class="share-link" data-container="body" data-toggle="popover" data-placement="top" data-id="<?php echo $post['challange_post_id'] ?>">
+                                                <li style="position: relative;">
+                                                    <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['challange_post_id'] ?>">
                                                         <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                         <span>
-                                                            <?php //echo $post['post_share']  ?> <?php echo lang("Shares");?>
+                                                            <?php //echo $post['post_share']  ?> <?php echo lang("Shares"); ?>
                                                         </span>
                                                     </a>
-                                                    <div id="popover-content" class="hide">
+                                                    <div id="" class="hide popover-content-custom">
+                                                        <div class="arrow" style="left: 79.3706%;"></div>
                                                         <ul class="share-icon-list">
                                                             <li>
 
@@ -137,7 +138,7 @@
                                                 </li>
                                             </ul>
                                             <div class="winner-comnt">
-                                                <p class="cmn_txtnw"> <?php echo lang("Comment Here");?></p>
+                                                <p class="cmn_txtnw"> <?php echo lang("Comment Here"); ?></p>
                                                 <textarea class="form-control comment" rows="3" id="comment"></textarea>
 
                                                 <?php
@@ -155,8 +156,8 @@
                                                                     <p class=""><?php echo $comment['created_date'] ?></p>
                                                                     <ul class="cmnt_p clearfix">
                                                                         <li class="stlnon"><span></span></li>
-                                                                        <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like");?></a></li>
-                                                                        <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply");?></a></li>
+                                                                        <li class="comment_like_cnt"><a href="javascript:;"><span class="post_comment_like"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like"); ?></a></li>
+                                                                        <li class="post_reply"><a href="javascript:;"><span class="comment_reply_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply"); ?></a></li>
                                                                         <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -166,10 +167,13 @@
                                                         </div>
                                                         <?php
                                                     }
+                                                    ?>
+                                                    <div class="clearfix"></div>
+                                                    <?php
                                                 } else {
                                                     ?>
                                                     <div class="commnt_visit_sec clearfix no_comment">
-                                                        <?php echo lang("No comments available");?>
+                                                        <?php echo lang("No comments available"); ?>
                                                     </div>
                                                     <?php
                                                 }
@@ -187,7 +191,7 @@
                 } else {
                     ?>
                     <div class="alert alert-info text-center">
-                        <?php echo lang("No challenge post available.");?>
+                        <?php echo lang("No challenge post available."); ?>
                     </div>
                     <?php
                 }
@@ -210,29 +214,16 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close");?></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang("Close"); ?></button>
             </div>
         </div>
     </div>
 </div>
 <!-- Rank modal over -->
-
-<script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge_post.js"></script>
-<script>
-//    setTimeout(function () {
-//        $('.post_masonry_article').each(function () {
-//            console.log($(this).data('post_id') + " having left " + $(this).offset().left);
-//            if ($(this).offset().left > 250)
-//            {
-//                $(this).addClass('right');
-//            }
-//        });
-//    }, 1500);
-//    $('.grid').masonry({
-//        // set itemSelector so .grid-sizer is not used in layout
-//        itemSelector: '.grid-item',
-//        // use element for option
-////        columnWidth: '33.33333333%',
-//        percentPosition: true
-//    });
+<!-- Share this scripts -->
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+    stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
 </script>
+<!-- Share this scripts over -->
+<script type="text/javascript" src="<?php echo USER_JS; ?>challenge/challenge_post.js"></script>

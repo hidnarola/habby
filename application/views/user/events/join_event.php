@@ -123,29 +123,30 @@
                             <?php
                         }
                         ?>
-                        <div style="float:right" class="close_info">
-                            <?php
-                            if ($remaining_days < 0) {
-                                ?>
-                                <?php echo lang('Event closed') . " " . abs($remaining_days) . " " . lang('days ago'); ?> 
-                                <?php
-                            } else {
-                                ?>
-                                <?php echo lang('Event will be closed in') . " " . $remaining_days . " " . lang('days'); ?> 
-                                <?php
-                                if ($event['user_id'] == $this->session->user['id']) {
-                                    ?>
-                                    <a class="pstbtn close_event_btn" href="javascript:;"><?php echo lang('Close Event'); ?></a>
-                                    <?php
-                                }
-                                ?>
-                                <?php
-                            }
-                            ?>
 
-                        </div>
                     </div>
+
                 </div>
+            </div>
+            <div style="float:right" class="close_info bg_image_close_info">
+                <?php
+                if ($remaining_days < 0) {
+                    ?>
+                    <?php echo lang('Event closed') . " " . abs($remaining_days) . " " . lang('days ago'); ?> 
+                    <?php
+                } else {
+                    ?>
+                    <?php echo lang('Event will be closed in') . " " . $remaining_days . " " . lang('days'); ?> 
+                    <?php
+                    if ($event['user_id'] == $this->session->user['id']) {
+                        ?>
+                        <a class="pstbtn close_event_btn" href="javascript:;"><?php echo lang('Close Event'); ?></a>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     </div>

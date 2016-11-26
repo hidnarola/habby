@@ -186,7 +186,7 @@
                                                                     </span>
                                                                 </a>
                                                             </li>
-                                                            <li class="btn_popover_head">
+                                                            <li style="position: relative;">
                                                                 <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['id'] ?>">
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                     <span>
@@ -194,7 +194,8 @@
                                                                     </span>
                                                                 </a>
 
-                                                                <div id="popover-content" class="hide">
+                                                                <div id="" class="hide popover-content-custom">
+                                                                    <div class="arrow" style="left: 79.3706%;"></div>
                                                                     <ul class="share-icon-list">
                                                                         <li>
                                                                             <?php
@@ -269,6 +270,12 @@
         </div>
     </div>
 </div>
+<!-- Share this scripts -->
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">
+    stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
+</script>
+<!-- Share this scripts over -->
 <script type="text/javascript">
     // Lazy loading on scroll event for post
     var page = 2;
@@ -286,11 +293,6 @@
                         }
                     });
                 }, 1500);
-//                       $('.post_section').masonry({
-//                            itemSelector: '.pst_full_sec',
-//                             columnWidth: 100
-//                        });
-
             }
         }
     });
@@ -311,51 +313,24 @@
                 {
                     $('.post_section').append(data.view);
                 }
-                $('.share-link').popover({
-                    html: true,
-                    content: function () {
-                        return $(this).siblings("#popover-content").html();
-                    }
-                });
                 stButtons.locateElements();
-// or if you want to be a bit defensive about whether the lib has been
-// loaded or not:
                 if (window.stButtons) {
                     stButtons.locateElements();
-                } // Parse ShareThis markup
+                }
             }
         });
         page++;
-        stButtons.locateElements();
-// or if you want to be a bit defensive about whether the lib has been
-// loaded or not:
-        if (window.stButtons) {
-            stButtons.locateElements();
-        } // Parse ShareThis markup
-
     }
-    $('.share-link').click(function () {
-        setTimeout(function () {
-            console.log('called');
-            stButtons.locateElements();
-            if (window.stButtons) {
-                stButtons.locateElements();
-            } // Parse ShareThis markup
-        }, 2000);
 
-    });
-
-    $('.post_masonry_section').on('click', '.share-link', function () {
-        var t = $(this);
-        $(this).popover({
-            html: true,
-            content: function () {
-                return t.parent().find('#popover-content').html();
-            },
-            placement: 'top',
-            callback: function () {
-                stButtons.locateElements();
-            }
-        });
+    $('.post_section').on('click', '.share-link', function () {
+        $popover = $(this).siblings('.popover-content-custom');
+        if ($popover.hasClass('hide'))
+        {
+            $popover.removeClass('hide').addClass('show');
+        }
+        else
+        {
+            $popover.removeClass('show').addClass('hide');
+        }
     });
 </script>

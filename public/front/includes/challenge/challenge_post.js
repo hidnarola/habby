@@ -210,16 +210,12 @@ $('document').ready(function () {
                     $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
                 } else
                 {
-                    setTimeout(function () {
-                        $('.grid').masonry({
-                            // set itemSelector so .grid-sizer is not used in layout
-                            itemSelector: '.grid-item',
-                            // use element for option
-//                            columnWidth: '33.33333333%',
-                            percentPosition: true
-                        });
-                    }, 1000);
-                    $('.post_masonry_section').append(data.view);
+                    $('.grid').append(data.view).masonry('reloadItems');
+                    $('.grid').masonry();
+                    stButtons.locateElements();
+                    if (window.stButtons) {
+                        stButtons.locateElements();
+                    }
                 }
             }
         });
@@ -227,10 +223,20 @@ $('document').ready(function () {
     }
 
     $('.grid').masonry({
-//        // set itemSelector so .grid-sizer is not used in layout
         itemSelector: '.grid-item',
-        // use element for option
-//        columnWidth: '33.33333333%',
         percentPosition: true
+    });
+
+    // Share link popover
+    $('.post_section').on('click', '.share-link', function () {
+        $popover = $(this).siblings('.popover-content-custom');
+        if ($popover.hasClass('hide'))
+        {
+            $popover.removeClass('hide').addClass('show');
+        }
+        else
+        {
+            $popover.removeClass('show').addClass('hide');
+        }
     });
 });
