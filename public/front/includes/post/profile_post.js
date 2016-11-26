@@ -69,7 +69,9 @@ $('document').ready(function () {
                 $.ajax({
                     url: 'user/post/add_comment/' + post_id,
                     method: 'post',
-                    data: 'msg=' + msg,
+                    data: {
+                        msg: msg
+                    },
                     success: function (str) {
                         if (str != 0)
                         {
@@ -147,7 +149,9 @@ $('document').ready(function () {
                 $.ajax({
                     url: 'user/post/add_comment_reply/' + post_comment_id,
                     method: 'post',
-                    data: 'msg=' + msg,
+                    data: {
+                        msg: msg
+                    },
                     success: function (str) {
                         if (str != 0)
                         {

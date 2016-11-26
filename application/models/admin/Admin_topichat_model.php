@@ -117,6 +117,7 @@ class Admin_topichat_model extends CI_Model {
         $this->db->join('users u', 'tg.user_id = u.id');
 //        $this->db->limit($limit, 0);
         $this->db->group_by('tg.id');
+        $this->db->order_by('tg.id', 'desc');
         $res_data = $this->db->get('topic_group_chat tg')->result_array();
         return $res_data;
     }

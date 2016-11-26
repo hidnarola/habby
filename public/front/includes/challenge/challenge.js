@@ -17,7 +17,9 @@ $('document').ready(function () {
             url: base_url + 'challenge/load_more_msg/' + group_id,
             method: 'post',
             async: false,
-            data: 'last_msg=' + last_msg,
+            data: {
+                last_msg: last_msg
+            },
             success: function (more) {
                 more = JSON.parse(more);
                 if (more.status)
@@ -127,7 +129,9 @@ $('document').ready(function () {
                 $.ajax({
                     url: 'user/challenge/add_comment/' + post_id,
                     method: 'post',
-                    data: 'msg=' + msg,
+                    data: {
+                        msg: msg
+                    },
                     success: function (str) {
                         if (str != 0)
                         {
@@ -207,7 +211,9 @@ $('document').ready(function () {
                 $.ajax({
                     url: 'user/challenge/add_comment_reply/' + post_comment_id,
                     method: 'post',
-                    data: 'msg=' + msg,
+                    data: {
+                        msg: msg
+                    },
                     success: function (str) {
                         if (str != 0)
                         {

@@ -455,4 +455,10 @@ $lang["New Image"] = "New Image";
 $lang["View Details"] = "View Details";
 $lang['saved'] = 'Saved';
 $lang['save'] = 'Save';
+
+//---26-11-2016---
+$lang["No saved post available."] = "No saved post available.";
+$lang["No post available."] = "No post available.";
+$lang["You havan't joined any challenge."] = "You havan't joined any challenge.";
+$lang[""] = "";
 ?>
