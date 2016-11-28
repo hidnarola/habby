@@ -1,41 +1,12 @@
-<script>
-function setTimeOffset() {
-    // Create all the dates necessary
-    var now = later = d1 = d2 = new Date(),
-            set = { 'offset': now.getTimezoneOffset(), 'dst': 0 }
-    // Set time for how long the cookie should be saved - 1 year
-    later.setTime(now.getTime() + 365 * 24 * 60 * 60 * 1000);
-    // Date one is set to January 1st of this year
-    // Guaranteed not to be in DST for northern hemisphere and guaranteed to be in DST for southern hemisphere (If DST exists on client PC)
-    d1.setDate(1);
-    d1.setMonth(1);
-    // Date two is set to July 1st of this year
-    // Guaranteed to be in DST for northern hemisphere and guaranteed not to be in DST for southern hemisphere (If DST exists on client PC)
-    d2.setDate(1);
-    d2.setMonth(7);
-
-    // DST exists for this time zone – check if it is currently active
-    if ( parseInt( d1.getTimezoneOffset() ) != parseInt( d2.getTimezoneOffset() ) ) { 
-            // Find out if we are on northern or southern hemisphere - Hemisphere is positive for northern, and negative for southern
-            var hemisphere = parseInt( d1.getTimezoneOffset() ) - parseInt( d2.getTimezoneOffset() );
-
-            if (
-                    ( hemisphere > 0 && parseInt( d1.getTimezoneOffset() ) == parseInt( now.getTimezoneOffset() ) ) ||
-                    ( hemisphere < 0 && parseInt( d2.getTimezoneOffset() ) == parseInt( now.getTimezoneOffset() ) ) 
-            ) {
-                    // DST is active right now
-                    set.dst = 1;
-            }
-    }
-    document.cookie ='time_zone='+ JSON.stringify(set) +'; expires='+ later +'; path=/';
-}
-setTimeOffset();
-</script>
 <?php
     // Check for the time_zone cookie, if set then reset the default timezone
     if ( isset($_COOKIE['time_zone']) ) {
         $time_zone = json_decode( $_COOKIE['time_zone'], true );
         $timezone_name = timezone_name_from_abbr( '', -$time_zone['offset']*60, $time_zone['dst'] );
+    }
+    else
+    {
+        $timezone_name = "Europe/London";
     }
 ?>
 <?php
