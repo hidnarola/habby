@@ -7,7 +7,7 @@ $(function () {
         locale: 'en'
     });
 
-    $("#start_time").on("dp.change", function(e) {
+    $("#start_time").on("dp.change", function (e) {
         console.log(e.date);
         $('#end_time').data("DateTimePicker").minDate(e.date);
     });
@@ -42,8 +42,8 @@ $(function () {
                 {
                     swal(joined);
                     $this.removeClass('event_join');
-                    console.log("href = "+base_url+'events/details/'+btoa(event_id));
-                    $this.attr('href',base_url+'events/details/'+encodeURIComponent(btoa(event_id)));
+                    console.log("href = " + base_url + 'events/details/' + btoa(event_id));
+                    $this.attr('href', base_url + 'events/details/' + encodeURIComponent(btoa(event_id)));
                     $this.html(Enter);
                 } else if (str == 6)
                 {
@@ -86,6 +86,8 @@ $(function () {
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
+                var cnt = data.cnt;
+                console.log(cnt);
                 if (data.status == 0)
                 {
                     load = false;
@@ -94,6 +96,10 @@ $(function () {
                 } else
                 {
                     $('.event_container').append(data.view);
+                    if (cnt < 2) {
+                        load = false;
+                        $('#loadMore').remove();
+                    }
                     setTimeout(function () {
                         $('.event_post').each(function () {
                             if ($(this).offset().left > 250)

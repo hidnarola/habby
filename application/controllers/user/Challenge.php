@@ -127,6 +127,7 @@ class Challenge extends CI_Controller {
             if (count($this->data['Challenges']) > 0) {
                 $data['view'] = $this->load->view('user/partial/challenge/display_challenges', $this->data, true);
                 $data['status'] = 1;
+                $data['cnt'] = count($this->data['Challenges']);
             } else {
                 $data['status'] = 0;
             }

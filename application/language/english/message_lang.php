@@ -79,6 +79,7 @@ $lang['Image has been uploaded successfully'] = 'Image has been uploaded success
 $lang['Topic added successfully'] = 'Topic added successfully.';
 $lang['Soulmate group added successfully'] = 'Soulmate group added successfully.';
 $lang['Group plan added successfully'] = 'Group plan added successfully';
+$lang['Challenge added successfully'] = 'Challenge added successfully';
 //---Profile---
 $lang['Save'] = 'Save';
 $lang['edit your profile'] = 'Edit your profile';

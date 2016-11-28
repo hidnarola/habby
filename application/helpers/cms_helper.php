@@ -24,7 +24,7 @@ function mail_config() {
         'smtp_host' => 'ssl://smtp.googlemail.com',
         'smtp_port' => 465,
         'smtp_user' => 'hpa.narola@gmail.com',
-        'smtp_pass' => 'narola21',
+        'smtp_pass' => 'hems1111',
         'transport' => 'Smtp',
         'charset' => 'utf-8',
         'newline' => "\r\n",

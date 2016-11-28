@@ -93,7 +93,7 @@
                                                 <?php
                                                 if (isset($Challenge['is_applied']) && $Challenge['is_applied']) {
                                                     ?>
-                                                    <a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn"><?php echo lang("Enter"); ?></a>
+                                                    <li><a href="<?php echo base_url() . "challenge/details/" . urlencode(base64_encode($Challenge['id'])) ?>" class="pstbtn"><?php echo lang("Enter"); ?></a></li>
                                                     <?php
                                                 } else {
                                                     ?>
@@ -346,6 +346,7 @@
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
+                var cnt = data.cnt;
                 if (data.status == 0)
                 {
                     load = false;
@@ -354,6 +355,10 @@
                 } else
                 {
                     $('.challenges').append(data.view);
+                    if (cnt < 3) {
+                        load = false;
+                        $('#loadMore').remove();
+                    }
                 }
             }
         });
