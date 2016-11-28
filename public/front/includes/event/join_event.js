@@ -96,7 +96,6 @@ $(document).ready(function () {
                             },
                             success: function (str)
                             {
-                                console.log(str);
                                 if (str != 0)
                                 {
                                     if($('.content_images').find('.panel-body').find('a').length == 3)
@@ -302,7 +301,6 @@ $(document).ready(function () {
                                         media: 'files'
                                     }
                                     str = JSON.parse(str);
-//                                    console.log('file sent : ', str);
                                     $('.' + display_file_class).siblings('a').attr('href', base_url + 'user/download_file/' + str[0].media);
                                     $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
                                     Server.send('message', JSON.stringify(msg));
@@ -396,7 +394,7 @@ $(document).ready(function () {
                    $('.content_files').find('.panel-body').find('a').last().remove();
                 }
                 else if($('.content_files').find('.panel-body').find('a').length == 0){
-                    $('.content_files').find('.panel-body').html();
+                    $('.content_files').find('.panel-body').html('');
                 }
 
                 var html = '<a class="col-sm-4" href="'+base_url + 'user/download_file/' + userdata.media+'" target="_blank" data-fancybox-group="gallery1"><div class=""><img src="'+base_url+'public/front/img/filedownload.jpg" class="img-responsive topi_image"><span class="event_file_name">'+userdata.media+'</span></div></a>';
