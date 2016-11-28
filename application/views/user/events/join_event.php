@@ -466,7 +466,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
-                        <input type="text" name="phone" class="form-control" id="phone" required pattern="[789][0-9]{9}" />
+                        <input type="text" name="phone" class="form-control" id="phone" pattern="^[0-9\+\-\(\)]{7,15}$" title="Enter Phone number only in numeric value. '+','-','(' and ')' are allowed." required/>
                     </div>
                     <div class="form-group">
                         <label for="email"><?php echo lang("Email"); ?>:</label>
@@ -741,11 +741,18 @@
     </div>
 </div>
 <!-- Map Modal over-->
-
-
+<?php 
+    $myuserdata = array(
+        'id'=>$this->session->user['id'],
+        'name'=>$this->session->user['name'],
+        'user_image'=>$this->session->user['user_image'],
+        'email'=>$this->session->user['email']
+    );
+//    $myuserdata['bio'] = str_replace(array("\r\n","\n"),"\\\\n",$myuserdata['bio']);
+?>
 <!-- Global variable for join_topichat.js -->
 <script>
-    data = '<?php echo json_encode($this->session->user); ?>';
+    data = '<?php echo json_encode($myuserdata); ?>';
     group_id = '<?php echo $group_id; ?>';
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
     DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';

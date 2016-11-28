@@ -1,3 +1,43 @@
+<script>
+    function setTimeOffset() {
+        // Create all the dates necessary
+        var now = later = d1 = d2 = new Date(),
+                set = {'offset': now.getTimezoneOffset(), 'dst': 0}
+        // Set time for how long the cookie should be saved - 1 year
+        later.setTime(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+        // Date one is set to January 1st of this year
+        // Guaranteed not to be in DST for northern hemisphere and guaranteed to be in DST for southern hemisphere (If DST exists on client PC)
+        d1.setDate(1);
+        d1.setMonth(1);
+        // Date two is set to July 1st of this year
+        // Guaranteed to be in DST for northern hemisphere and guaranteed not to be in DST for southern hemisphere (If DST exists on client PC)
+        d2.setDate(1);
+        d2.setMonth(7);
+
+        // DST exists for this time zone – check if it is currently active
+        if (parseInt(d1.getTimezoneOffset()) != parseInt(d2.getTimezoneOffset())) {
+            // Find out if we are on northern or southern hemisphere - Hemisphere is positive for northern, and negative for southern
+            var hemisphere = parseInt(d1.getTimezoneOffset()) - parseInt(d2.getTimezoneOffset());
+
+            if (
+                    (hemisphere > 0 && parseInt(d1.getTimezoneOffset()) == parseInt(now.getTimezoneOffset())) ||
+                    (hemisphere < 0 && parseInt(d2.getTimezoneOffset()) == parseInt(now.getTimezoneOffset()))
+                    ) {
+                // DST is active right now
+                set.dst = 1;
+            }
+        }
+        document.cookie = 'time_zone=' + JSON.stringify(set) + '; expires=' + later + '; path=/';
+    }
+    setTimeOffset();
+</script>
+<?php
+// Check for the time_zone cookie, if set then reset the default timezone
+if (isset($_COOKIE['time_zone'])) {
+    $time_zone = json_decode($_COOKIE['time_zone'], true);
+    $timezone_name = timezone_name_from_abbr('', -$time_zone['offset'] * 60, $time_zone['dst']);
+}
+?>
 <?php
 $this->load->view('layouts/profile_common');
 ?>
@@ -26,7 +66,8 @@ $this->load->view('layouts/profile_common');
                                             <p><?php echo $challenge['name'] . " " . lang("accepted by") . " " . $challenge['display_name'] ?> </p>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 prsnl_sm_sec">
-                                            <p><?php echo date('d/m/Y h:i', strtotime($challenge['challange_date'])); ?></p>
+
+                                            <p><?php echo _date("d/m/Y H:i", strtotime($challenge['challange_date']), $timezone_name); ?></p>
                                         </div>
                                         <?php
                                     }
@@ -59,9 +100,8 @@ $this->load->view('layouts/profile_common');
                                                 <p><?php echo $finish_challenge['name'] ?></p>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
-                                                <p><?php
-                                                    echo date('d/m/Y H:i', strtotime($finish_challenge['modified_date']))
-                                                    ?></p>
+
+                                                <p><?php echo _date("d/m/Y H:i", strtotime($finish_challenge['modified_date']), $timezone_name) ?></p>
                                             </div>
                                         </div>
                                         <?php
@@ -159,19 +199,4 @@ $this->load->view('layouts/profile_common');
         </div>
     </div>
 </div>
-<script>
-    // Get current timezone offset for host device
-    function convertUTCDateToLocalDate(date) {
-        var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
 
-        var offset = date.getTimezoneOffset() / 60;
-        var hours = date.getHours();
-
-        newDate.setHours(hours - offset);
-
-        return newDate;
-    }
-
-    var date = convertUTCDateToLocalDate(new Date());
-    console.log(date);
-</script>

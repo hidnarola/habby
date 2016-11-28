@@ -190,13 +190,13 @@ if ($this->session->flashdata('success')) {
         var i = 0;
         for (var key in files) {
             if (/^image/.test(files[key].type)) { // only image file
-                console.log(files);
-                console.log(key);
-                console.log(files[key].type);
+                console.log(files[key].name);
+                $('.filename').html(files[key].name);
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
                 reader.onloadend = function () { // set image data as background of div
                     // $('#imagePreview').addClass('imagePreview');
+                    
                     $('.image_wrapper').show();
                     $('.message').hide();
                     $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");

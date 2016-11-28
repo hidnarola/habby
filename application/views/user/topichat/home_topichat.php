@@ -119,8 +119,18 @@
             </div>
         </div>
     </div>
+    <?php 
+        $myuserdata = array(
+            'id'=>$this->session->user['id'],
+            'name'=>$this->session->user['name'],
+            'user_image'=>$this->session->user['user_image'],
+            'email'=>$this->session->user['email']
+        );
+    //    $myuserdata['bio'] = str_replace(array("\r\n","\n"),"\\\\n",$myuserdata['bio']);
+    ?>
+<!-- Global variable for join_topichat.js -->
     <script>
-        data = '<?php echo json_encode($this->session->user); ?>';
+        data = '<?php echo json_encode($myuserdata); ?>';
     </script>
     <script src="<?php echo DEFAULT_CHAT_DOC_PATH . "fancywebsocket.js" ?>"></script>
     <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/receive_notification.js"></script>

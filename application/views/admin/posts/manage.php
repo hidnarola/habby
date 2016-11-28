@@ -64,7 +64,7 @@ if ($this->session->flashdata('success')) {
                             <div class="col-lg-7">
                                 <div class="uploader">
                                     <input type="file" name="uploadfile[]" id="uploadFile" multiple="multiple" class="file-styled">
-                                    <span class="filename" style="-webkit-user-select: none;"></span>
+                                    <span class="imagefilename filename" style="-webkit-user-select: none;"></span>
                                     <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Images</span>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@ if ($this->session->flashdata('success')) {
                             <div class="col-lg-7">
                                 <div class="uploader">
                                     <input type="file" name="videofile[]" id="uploadVideo" multiple="multiple" class="file-styled">
-                                    <span class="filename" style="-webkit-user-select: none;"></span>
+                                    <span class="videofilename filename" style="-webkit-user-select: none;"></span>
                                     <span class="action btn bg-info-400" style="-webkit-user-select: none;">Choose Videos</span>
                                 </div>
                             </div>
@@ -184,6 +184,7 @@ if ($this->session->flashdata('success')) {
             if (/^image/.test(files[key].type)) { // only image file
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
+                $('.imagefilename').html(files[key].name);
                 reader.onloadend = function () { // set image data as background of div
                     // $('#imagePreview').addClass('imagePreview');
                     $('.image_wrapper').show();
@@ -215,6 +216,7 @@ if ($this->session->flashdata('success')) {
         for (var key in files)
         {
             if (/^video/.test(files[key].type)) { // only image file
+                $('.videofilename').html(files[key].name);
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[key]); // read the local file
 
