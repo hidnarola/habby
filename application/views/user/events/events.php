@@ -197,7 +197,7 @@ $search_data = $this->session->flashdata('event_filter');
                         <div class="panel-heading"><?php echo lang("Filter By"); ?> : </div>
                         <div class="panel-body">
                             <div class="filter_div_row">
-                                <label class="control-label col-sm-4" ><?php echo lang(""); ?>:</label>
+                                <label class="control-label col-sm-4" ><?php echo lang("Release Date"); ?>:</label>
                                 <div class="col-sm-8">
                                     <div>
                                         <input type="radio" class="" name="release_date" value="desc" <?php echo ($this->session->has_userdata('event_filter') && $this->session->userdata('event_filter')['release_date'] == "asc") ? '' : 'checked' ?>> <?php echo lang("From Newest to Oldest"); ?>

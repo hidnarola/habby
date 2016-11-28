@@ -441,6 +441,7 @@ $lang["Enter your searching criteria"] = "Enter your searching criteria";
 $lang["Filter By"] = "Filter By";
 $lang["Release Date"] = "Release Date";
 $lang["From Newest to Oldest"] = "From Newest to Oldest";
+$lang["From Oldest to Newest"] = "From Oldest to Newest";
 $lang["Number of seat"] = "Number of seat";
 $lang["Range Distance"] = "Range Distance";
 $lang["Mile"] = "Mile";
