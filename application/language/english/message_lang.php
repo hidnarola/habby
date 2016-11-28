@@ -146,6 +146,9 @@ $lang['customise'] = 'customise';
 $lang['Note'] = 'Note';
 $lang['Topic Notification'] = 'Topic Notification';
 $lang['No notification available.'] = 'No notification available.';
+$lang['No top rated post found.'] = 'No top rated post found.';
+$lang['No shared link available.'] = 'No shared link available.';
+
 //--Home--
 $lang['Topichat'] = 'Topichat';
 $lang['Enter'] = 'Enter';
