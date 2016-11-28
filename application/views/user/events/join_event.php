@@ -466,7 +466,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
-                        <input type="text" name="phone" class="form-control" id="phone" pattern="^[0-9\+\-\(\)]{7,15}$" title="Enter Phone number only in numeric value. '+','-','(' and ')' are allowed." required/>
+                        <input type="text" name="phone" class="form-control" id="phone" pattern="^[0-9\+\-\(\)]{7,15}$" title="Enter Phone number only in numeric value. '+','-','(' and ')' are allowed.minimum 7 and maximum 15 characters are allowed" required/>
                     </div>
                     <div class="form-group">
                         <label for="email"><?php echo lang("Email"); ?>:</label>
@@ -501,7 +501,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="phone"><?php echo lang("Phone Number"); ?>:</label>
-                        <input type="text" name="phone" id="edit_phone" class="form-control" required pattern="[789][0-9]{9}"/>
+                        <input type="text" name="phone" id="edit_phone" class="form-control" required pattern="^[0-9\+\-\(\)]{7,15}$" title="Enter Phone number only in numeric value. '+','-','(' and ')' are allowed.minimum 7 and maximum 15 characters are allowed"/>
                     </div>
                     <div class="form-group">
                         <label for="email"><?php echo lang("Email"); ?>:</label>

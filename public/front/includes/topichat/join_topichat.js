@@ -161,6 +161,18 @@ function upload_image(files) {
                         {
                             if (str != 0)
                             {
+                                
+                                if($('.topichat_image_ul').find('li').length == 8)
+                                {
+                                   $('.topichat_image_ul').find('li').last().remove();
+                                }
+                                else if($('.topichat_image_ul').find('li').length == 0){
+                                    $('.topichat_image_ul').html('');
+                                }
+                                media_file = JSON.parse(str);
+                                var html = '<a data-fancybox-group="gallery1" href="'+upload_path+str[0].media+'" class="fancybox col-sm-4"><img class="img-responsive topi_image" src="'+upload_path+media_file[0].media+'"></a>';
+                                $('.content_images').find('.panel-body').prepend(html);
+                                
                                 var msg = {
                                     message: str,
                                     type: 'topic_msg',
