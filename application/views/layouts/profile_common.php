@@ -140,7 +140,7 @@ $method_name = $this->router->fetch_method(); //outputs index
                     <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>-->
                     <li class="<?php echo ($controller == 'home' && $method_name == 'events') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/events" ?>"><?php echo lang('Events'); ?></a></li>
                     <li class="<?php echo ($controller == 'home' && $method_name == 'challenges') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
-                    <li class="<?php echo ($controller == 'home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>
+                    <!--<li class="<?php // echo ($controller == 'home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>-->
                     <?php
                 } else {
 //                    echo $controller . " " . $method_name;
@@ -151,7 +151,7 @@ $method_name = $this->router->fetch_method(); //outputs index
                     <li><a href="<?php echo base_url() . "user_profile/groupplan/" . $user_data['id']; ?>"><?php echo lang('Group Plan'); ?></a></li>-->
                     <li class="<?php echo ($controller == 'Home' && $method_name == 'events') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/events/" . $user_data['id']; ?>"><?php echo lang('Events'); ?></a></li>
                     <li class="<?php echo ($controller == 'Home' && $method_name == 'challenges') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/challenges/" . $user_data['id']; ?>"><?php echo lang('Challenge'); ?></a></li>
-                    <li class="<?php echo ($controller == 'Home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/league/" . $user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>
+                    <!--<li class="<?php // echo ($controller == 'Home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "user_profile/league/" . $user_data['id']; ?>"><?php echo lang('League and alliance'); ?></a></li>-->
                     <?php
                 }
                 ?>
