@@ -91,7 +91,7 @@
 <!--                    <li><a href="<?php echo $fb_login_url; ?>"><img src="<?php echo DEFAULT_IMAGE_PATH . "facebook.png" ?>" /></a></li>-->
                     <li><a href="<?php echo $fb_login_url; ?>" class="btn btn-block btn-fb"><i class="fa fa-facebook"></i>Sign Up With Facebook</a></li>
 <!--                    <li><a href="<?php echo base_url() ?>/login/google_login"><img src="<?php echo DEFAULT_IMAGE_PATH . "google_plus.png" ?>" /></a></li>-->
-                    <li> <a href="<?php echo base_url() ?>" class="btn btn-block btn-g-plus"><i class="fa fa-google-plus"></i>Sign Up With Google+</a></li>
+                    <li> <a href="<?php echo base_url() ?>/login/google_login" class="btn btn-block btn-g-plus"><i class="fa fa-google-plus"></i>Sign Up With Google+</a></li>
                 </ul>
             </div>
         </div>
