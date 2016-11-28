@@ -359,6 +359,7 @@
             method: 'get',
             success: function (data) {
                 data = JSON.parse(data);
+                var cnt = data.cnt;
                 if (data.status == 0)
                 {
                     load = false;
@@ -367,6 +368,10 @@
                 } else
                 {
                     $('.topichat_groups').append(data.view);
+                    if (cnt < 3) {
+                        load = false;
+                        $('#loadMore').remove();
+                    }
                 }
             }
         });

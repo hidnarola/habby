@@ -8,7 +8,7 @@ class Events extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('Users_model', 'Event_model', 'Common_functionality','Seo_model'));
+        $this->load->model(array('Users_model', 'Event_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('events');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -18,8 +18,7 @@ class Events extends CI_Controller {
     }
 
     public function index($page = 1) {
-        if($this->session->has_userdata('event_filter'))
-        {
+        if ($this->session->has_userdata('event_filter')) {
             $this->session->unset_userdata('event_filter');
         }
         $limit = 2;
@@ -33,6 +32,7 @@ class Events extends CI_Controller {
             if (count($this->data['event_posts']) > 0) {
                 $data['view'] = $this->load->view('user/partial/events/display_events', $this->data, true);
                 $data['status'] = 1;
+                $data['cnt'] = count($this->data['event_posts']);
             } else {
                 $data['status'] = 0;
             }
@@ -42,7 +42,7 @@ class Events extends CI_Controller {
 
     public function add_event() {
         if ($this->input->post()) {
-            
+
             $geolocation = $this->input->post('lat') . ',' . $this->input->post('long');
             $request = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $geolocation . '&sensor=false';
             $file_contents = file_get_contents($request);
@@ -72,7 +72,7 @@ class Events extends CI_Controller {
                     $location = "";
                 }
             }
-            
+
             $ins_data = array(
                 'title' => $this->input->post('title'),
                 'details' => $this->input->post('details'),
@@ -82,9 +82,9 @@ class Events extends CI_Controller {
 //                'release_distance_range' => $this->input->post('distance_range'),
                 'approval_needed' => ($this->input->post('approval') == "Yes") ? '1' : '0',
                 'user_id' => $this->session->user['id'],
-                'location_name'=>$location,
-                'latitude'=>$this->input->post('lat'),
-                'longitude'=>$this->input->post('long')
+                'location_name' => $location,
+                'latitude' => $this->input->post('lat'),
+                'longitude' => $this->input->post('long')
             );
             if ($event_id = $this->Event_model->insert_event($ins_data)) {
                 // Join user event
@@ -125,36 +125,36 @@ class Events extends CI_Controller {
                         }
                     }
                 }
-                /*if (!empty($_FILES['videofile']['name'])) {
-                    $filecount = count($_FILES['videofile']['name']);
-                    for ($i = 0; $i < $filecount; ++$i) {
-                        $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
-                        $_FILES['userFile']['type'] = $_FILES['videofile']['type'][$i];
-                        $_FILES['userFile']['tmp_name'] = $_FILES['videofile']['tmp_name'][$i];
-                        $_FILES['userFile']['error'] = $_FILES['videofile']['error'][$i];
-                        $_FILES['userFile']['size'] = $_FILES['videofile']['size'][$i];
+                /* if (!empty($_FILES['videofile']['name'])) {
+                  $filecount = count($_FILES['videofile']['name']);
+                  for ($i = 0; $i < $filecount; ++$i) {
+                  $_FILES['userFile']['name'] = $_FILES['videofile']['name'][$i];
+                  $_FILES['userFile']['type'] = $_FILES['videofile']['type'][$i];
+                  $_FILES['userFile']['tmp_name'] = $_FILES['videofile']['tmp_name'][$i];
+                  $_FILES['userFile']['error'] = $_FILES['videofile']['error'][$i];
+                  $_FILES['userFile']['size'] = $_FILES['videofile']['size'][$i];
 
-                        // Code of image uploading
-                        $config['upload_path'] = './uploads/event_post';
-                        $config['allowed_types'] = 'mp4|mov|3gp';
-                        $config['max_size'] = 4000000;
-                        $config['file_name'] = md5(uniqid(mt_rand()));
+                  // Code of image uploading
+                  $config['upload_path'] = './uploads/event_post';
+                  $config['allowed_types'] = 'mp4|mov|3gp';
+                  $config['max_size'] = 4000000;
+                  $config['file_name'] = md5(uniqid(mt_rand()));
 
-                        $this->upload->initialize($config);
+                  $this->upload->initialize($config);
 
-                        if (!$this->upload->do_upload('userFile')) {
-                            $error = array('error' => $this->upload->display_errors());
-                            $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
-                        } else {
-                            $data = $this->upload->data();
-                            $media_arr = array();
-                            $media_arr['event_id'] = $event_id;
-                            $media_arr['media_type'] = 'video';
-                            $media_arr['media'] = $data['file_name'];
-                            $media[] = $media_arr;
-                        }
-                    }
-                }*/
+                  if (!$this->upload->do_upload('userFile')) {
+                  $error = array('error' => $this->upload->display_errors());
+                  $this->session->set_flashdata('msg', lang('Problem occurs during video uploading.'));
+                  } else {
+                  $data = $this->upload->data();
+                  $media_arr = array();
+                  $media_arr['event_id'] = $event_id;
+                  $media_arr['media_type'] = 'video';
+                  $media_arr['media'] = $data['file_name'];
+                  $media[] = $media_arr;
+                  }
+                  }
+                  } */
                 if (count($media) > 0) {
                     $this->Event_model->insert_event_media($media);
                 }
@@ -247,7 +247,7 @@ class Events extends CI_Controller {
                 'phone_no' => $this->input->post('phone'),
                 'email' => $this->input->post('email'),
                 'others' => $this->input->post('others'),
-                'user_id'=>$this->session->user['id']
+                'user_id' => $this->session->user['id']
             );
             $this->Event_model->add_contact($insert_arr);
             redirect('events/details/' . urlencode(base64_encode($event_id)));
@@ -313,7 +313,7 @@ class Events extends CI_Controller {
                     }
                 }
             }
-            
+
             if (count($media) > 0) {
                 $this->Event_model->delete_old_media($id);
                 $this->Event_model->insert_event_media($media);
@@ -330,66 +330,61 @@ class Events extends CI_Controller {
         }
     }
 
-    public function load_more_images($event_id){
-        $data['images'] = $this->Event_model->get_event_recent_images($event_id,-1);
-        $this->load->view('user/partial/events/load_more_images',$data);
+    public function load_more_images($event_id) {
+        $data['images'] = $this->Event_model->get_event_recent_images($event_id, -1);
+        $this->load->view('user/partial/events/load_more_images', $data);
     }
-    
-    public function load_more_videos($event_id){
-        $data['videos'] = $this->Event_model->get_event_recent_videos($event_id,-1);
+
+    public function load_more_videos($event_id) {
+        $data['videos'] = $this->Event_model->get_event_recent_videos($event_id, -1);
         $data['recent_videos_thumb'] = array();
         foreach ($data['videos'] as $video) {
             $data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
         }
-        $this->load->view('user/partial/events/load_more_videos',$data);
+        $this->load->view('user/partial/events/load_more_videos', $data);
     }
-    
-    public function load_more_files($event_id){
-        $data['files'] = $this->Event_model->get_event_recent_files($event_id,-1);
-        $this->load->view('user/partial/events/load_more_files',$data);
+
+    public function load_more_files($event_id) {
+        $data['files'] = $this->Event_model->get_event_recent_files($event_id, -1);
+        $this->load->view('user/partial/events/load_more_files', $data);
     }
 
     /*
      * 
      */
-    public function filter_event($page = 1){
+
+    public function filter_event($page = 1) {
         $limit = 2;
         $start = ($page - 1) * $limit;
-        if($page == 1)
-        {
-            if($this->input->post()){
+        if ($page == 1) {
+            if ($this->input->post()) {
                 $search_data = array(
-                    'user_lat'=>$this->input->post('lat'),
-                    'user_long'=>$this->input->post('long'),
-                    'release_date'=>$this->input->post('release_date'),
-                    'from_seat'=>$this->input->post('from_seat'),
-                    'to_seat'=>$this->input->post('to_seat'),
+                    'user_lat' => $this->input->post('lat'),
+                    'user_long' => $this->input->post('long'),
+                    'release_date' => $this->input->post('release_date'),
+                    'from_seat' => $this->input->post('from_seat'),
+                    'to_seat' => $this->input->post('to_seat'),
                     'distance_range' => $this->input->post('distance_range'),
-                    'approval_needed'=>$this->input->post('approval_needed')
+                    'approval_needed' => $this->input->post('approval_needed')
                 );
-                $this->session->set_flashdata('event_filter',$search_data);
-                $this->data['event_posts'] = $this->Event_model->filter_event($search_data,$this->session->user['id'],$limit,$start);
+                $this->session->set_flashdata('event_filter', $search_data);
+                $this->data['event_posts'] = $this->Event_model->filter_event($search_data, $this->session->user['id'], $limit, $start);
                 $this->template->load('front', 'user/events/events', $this->data);
-            }
-            else
-            {
+            } else {
                 redirect('/events');
             }
-        }
-        else if($this->session->has_userdata('event_filter'))
-        {
-            $this->data['event_posts'] = $this->Event_model->filter_event($this->session->flashdata('event_filter'),$this->session->user['id'],$limit,$start);
+        } else if ($this->session->has_userdata('event_filter')) {
+            $this->data['event_posts'] = $this->Event_model->filter_event($this->session->flashdata('event_filter'), $this->session->user['id'], $limit, $start);
             $data = array();
             if (count($this->data['event_posts']) > 0) {
                 $data['view'] = $this->load->view('user/partial/events/display_events', $this->data, true);
                 $data['status'] = 1;
+                $data['cnt'] = count($this->data['event_posts']);
             } else {
                 $data['status'] = 0;
             }
             echo json_encode($data);
-        }
-        else
-        {
+        } else {
             redirect('/events');
         }
     }
@@ -397,15 +392,14 @@ class Events extends CI_Controller {
     /*
      * 
      */
-    public function close_event($event_id){
+
+    public function close_event($event_id) {
         $update_arr['end_time'] = date('Y-m-d H:i:s');
-        if($this->Event_model->update_event($event_id, $update_arr))
-        {
+        if ($this->Event_model->update_event($event_id, $update_arr)) {
             echo 'Event Closed';
-        }
-        else
-        {
+        } else {
             echo '0';
         }
     }
+
 }

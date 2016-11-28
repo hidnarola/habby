@@ -9,7 +9,7 @@ class Topichat extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('download');
-        $this->load->model(array('Users_model', 'Topichat_model', 'Common_functionality','Seo_model'));
+        $this->load->model(array('Users_model', 'Topichat_model', 'Common_functionality', 'Seo_model'));
         $this->data['banner_image'] = $this->Common_functionality->get_banner_image('topichat');
         $session_data = $this->session->userdata('user');
         $this->data['user_data'] = $this->Users_model->check_if_user_exist(['id' => $session_data['id']], false, true);
@@ -77,6 +77,7 @@ class Topichat extends CI_Controller {
             if (count($this->data['topichat_groups']) > 0) {
                 $data['view'] = $this->load->view('user/partial/topichat/display_topichat_group', $this->data, true);
                 $data['status'] = 1;
+                $data['cnt'] = count($this->data['topichat_groups']);
             } else {
                 $data['status'] = 0;
             }
@@ -158,14 +159,11 @@ class Topichat extends CI_Controller {
         $group_id = base64_decode(urldecode($group_id));
         $image_name = "";
         if ($this->input->post()) {
-            $limit= $this->Topichat_model->is_group_limit_exceed($group_id);
-            if($this->input->post('person_limit') != -1 && $limit['joined_user'] > $this->input->post('No_of_person'))
-            {
+            $limit = $this->Topichat_model->is_group_limit_exceed($group_id);
+            if ($this->input->post('person_limit') != -1 && $limit['joined_user'] > $this->input->post('No_of_person')) {
                 $this->session->set_flashdata('message', array('message' => lang('You can not set person limit less then no. of joined user.'), 'class' => 'alert alert-warning text-center flashmsg'));
                 redirect('topichat/details/' . urlencode(base64_encode($group_id)));
-            }
-            else
-            {
+            } else {
                 $update_data = array(
                     'topic_name' => $this->input->post('topic_name'),
                     'person_limit' => (($this->input->post('person_limit')) == -1) ? $this->input->post('person_limit') : $this->input->post('No_of_person'),
@@ -252,17 +250,15 @@ class Topichat extends CI_Controller {
 
     public function join($topic_id) {
         $id = base64_decode(urldecode($topic_id));
-        $limit= $this->Topichat_model->is_group_limit_exceed($id);
-        if($limit['person_limit'] == -1 || $limit['person_limit'] > $limit['joined_user']){
+        $limit = $this->Topichat_model->is_group_limit_exceed($id);
+        if ($limit['person_limit'] == -1 || $limit['person_limit'] > $limit['joined_user']) {
             $ins_data = array(
                 'topic_id' => $id,
                 'user_id' => $this->data['user_data']['id'],
             );
             $this->Topichat_model->insert_topic_group_user($ins_data);
             redirect('topichat/details/' . $topic_id);
-        }
-        else
-        {
+        } else {
             $this->session->set_flashdata('message', array('message' => lang('You can not join this group as it reaches its limit.'), 'class' => 'alert alert-warning text-center flashmsg'));
             redirect('topichat');
         }
@@ -455,12 +451,12 @@ class Topichat extends CI_Controller {
         $media = $this->input->post('media');
         echo $this->Topichat_model->get_chat_id_from_media_name($media);
     }
-    
+
     public function get_chat_id_from_link_id() {
         $media = $this->input->post('link_id');
         echo $this->Topichat_model->get_chat_id_from_link($media);
     }
-    
+
     public function media_details() {
         if ($this->input->post()) {
             $media = $this->input->post('image');
