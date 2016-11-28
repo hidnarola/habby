@@ -40,7 +40,7 @@
                             <ul class="list-inline clng_ttl_ul">
                                 <li>Newest</li>
                                 <?php
-                                if (count($Newest_Challenges) < 2) {
+                                if (count($Newest_Challenges) >= 3) {
                                     ?>
                                     <li><a href="<?php echo base_url() . "challenge/challenges?ch=newest" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
                                 <?php } ?>
@@ -146,7 +146,7 @@
                             <ul class="list-inline clng_ttl_ul">
                                 <li>Popular</li>
                                 <?php
-                                if (count($Popular_Challenges) < 2) {
+                                if (count($Popular_Challenges) >= 3) {
                                     ?>
                                     <li><a href="<?php echo base_url() . "challenge/challenges?ch=popular" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
                                     <?php
@@ -256,7 +256,7 @@
                                 <li><?php echo lang("Recommended"); ?></li>
                                 <?php
                                 if (($Recom_Challenges != "" && !empty($Recom_Challenges))) {
-                                    if (count($Recom_Challenges) < 2) {
+                                    if (count($Recom_Challenges) >= 3) {
                                         ?>
                                         <li><a href="<?php echo base_url() . "challenge/challenges?ch=recommended" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
                                         <?php
@@ -272,7 +272,6 @@
                         if ($Recom_Challenges != "" && !empty($Recom_Challenges)) {
                             foreach ($Recom_Challenges as $Recom_Challenge) {
                                 ?>
-
                                 <!-- Challenge each section start here -->
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 grp_cl6">
                                     <div class="challenge_sec" data-challenge_id="<?php echo $Recom_Challenge['id']; ?>">
