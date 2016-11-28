@@ -184,7 +184,7 @@
                                         ?>
                                         <li class="topi_image_li">
                                             <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                       ?>"-->
+                                                <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                        ?>"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                             </a>
 
@@ -619,13 +619,13 @@
         </div>
     </div>
 </div>
-<?php 
-    $myuserdata = array(
-        'id'=>$this->session->user['id'],
-        'name'=>$this->session->user['name'],
-        'user_image'=>$this->session->user['user_image'],
-        'email'=>$this->session->user['email']
-    );
+<?php
+$myuserdata = array(
+    'id' => $this->session->user['id'],
+    'name' => $this->session->user['name'],
+    'user_image' => $this->session->user['user_image'],
+    'email' => $this->session->user['email']
+);
 //    $myuserdata['bio'] = str_replace(array("\r\n","\n"),"\\\\n",$myuserdata['bio']);
 ?>
 <!-- Global variable for join_topichat.js -->
