@@ -48,14 +48,11 @@ $method_name = $this->router->fetch_method(); //outputs index
                                             <p class="editprfl_p"><a href="#" data-toggle="modal" data-target="#edit-profile" class="pstbtn"><?php echo lang("Edit Profile"); ?></a></p>
                                             <?php
                                         } else {
-                                            if (isset($followers) && !empty($followers)) {
-                                                foreach ($followers as $follower) {
-                                                    if ($follower['follower_id'] == $this->session->user['id']) {
-                                                        ?>
-                                                        <p class="follow_p"><a href="javascript:void(0)" class="unfollowbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>"><?php echo lang("Followed"); ?></a></p>
-                                                        <?php
-                                                    }
-                                                }
+                                            if (isset($followers) && !empty($followers) && in_array($this->session->user['id'], array_column($followers, 'follower_id'))) {
+                                                ?>
+                                                <p class="follow_p"><a href="javascript:void(0)" class="unfollowbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>"><?php echo lang("Followed"); ?></a></p>
+
+                                                <?php
                                             } else {
                                                 ?>
                                                 <p class="follow_p"><a href="javascript:void(0)" class="followbtn pstbtn" data-userid="<?php echo $user_data['id']; ?>"><?php echo lang("Follow"); ?></a></p>
@@ -311,40 +308,40 @@ $method_name = $this->router->fetch_method(); //outputs index
                     });
         });
     });
-    $(document).ready(function() {
-    // Configure/customize these variables.
-    var showChar = 100;  // How many characters are shown by default
-    var ellipsestext = "...";
-    var moretext = "Show more >";
-    var lesstext = "Show less";
-    
+    $(document).ready(function () {
+        // Configure/customize these variables.
+        var showChar = 100;  // How many characters are shown by default
+        var ellipsestext = "...";
+        var moretext = "Show more >";
+        var lesstext = "Show less";
 
-    $('.more').each(function() {
-        var content = $(this).html();
- 
-        if(content.length > showChar) {
- 
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar, content.length - showChar);
- 
-            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
- 
-            $(this).html(html);
-        }
- 
+
+        $('.more').each(function () {
+            var content = $(this).html();
+
+            if (content.length > showChar) {
+
+                var c = content.substr(0, showChar);
+                var h = content.substr(showChar, content.length - showChar);
+
+                var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+                $(this).html(html);
+            }
+
+        });
+
+        $(".morelink").click(function () {
+            if ($(this).hasClass("less")) {
+                $(this).removeClass("less");
+                $(this).html(moretext);
+            } else {
+                $(this).addClass("less");
+                $(this).html(lesstext);
+            }
+            $(this).parent().prev().toggle();
+            $(this).prev().toggle();
+            return false;
+        });
     });
- 
-    $(".morelink").click(function(){
-        if($(this).hasClass("less")) {
-            $(this).removeClass("less");
-            $(this).html(moretext);
-        } else {
-            $(this).addClass("less");
-            $(this).html(lesstext);
-        }
-        $(this).parent().prev().toggle();
-        $(this).prev().toggle();
-        return false;
-    });
-});
 </script>

@@ -76,7 +76,7 @@
                                                 if ($challenge_users != null && !empty($challenge_users)) {
                                                     foreach ($challenge_users as $challenge_user) {
                                                         ?>
-                                                        <li><a href="javascript;"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle user_chat_thumb"></a> <span><?php echo $challenge_user['display_name'] ?></span></li>
+                                                        <li><a href="<?php echo ($challenge_user['user_id'] == $this->session->user['id']) ? base_url() . 'home/profile' : base_url() . "user_profile/" . $challenge_user['user_id'] ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $challenge_user['user_image']; ?>" class="smlt_usrimg1 img-circle user_chat_thumb"> <span><?php echo $challenge_user['display_name'] ?></span></a></li>
                                                         <?php
                                                     }
                                                 }

@@ -59,7 +59,9 @@ $this->load->view('layouts/profile_common');
                                                 <p><?php echo $finish_challenge['name'] ?></p>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 prsnl_sm_sec">
-                                                <p><?php echo date('d/m/Y H:i', strtotime($finish_challenge['modified_date'])) ?></p>
+                                                <p><?php
+                                                    echo date('d/m/Y H:i', strtotime($finish_challenge['modified_date']))
+                                                    ?></p>
                                             </div>
                                         </div>
                                         <?php
@@ -157,3 +159,19 @@ $this->load->view('layouts/profile_common');
         </div>
     </div>
 </div>
+<script>
+    // Get current timezone offset for host device
+    function convertUTCDateToLocalDate(date) {
+        var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+
+        var offset = date.getTimezoneOffset() / 60;
+        var hours = date.getHours();
+
+        newDate.setHours(hours - offset);
+
+        return newDate;
+    }
+
+    var date = convertUTCDateToLocalDate(new Date());
+    console.log(date);
+</script>

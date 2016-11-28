@@ -357,10 +357,10 @@
                             ?>
                             <ul class="list-unstyled revw_ul member_ul">
                                 <li>
-                                    <a href="javascript;">
+                                    <a href="<?php echo ($member['id'] == $this->session->user['id']) ? base_url() . 'home/profile' : base_url() . "user_profile/" . $member['id'] ?>">
                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $member['user_image'] ?>" class="smlt_usrimg1 img-circle user_chat_thumb">
+                                        <span><?php echo $member['name'] ?></span>
                                     </a>
-                                    <span><?php echo $member['name'] ?></span>
                                 </li>
                             </ul>
                             <?php

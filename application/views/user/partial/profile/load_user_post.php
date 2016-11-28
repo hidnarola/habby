@@ -97,7 +97,7 @@ foreach ($posts as $post) {
                                 <div class="cmnt_newsec">
                                     <ul class="post_opn_ul list-inline">
                                         <li class="pull-left">
-                                            <a href="<?php echo base_url() . "user_profile/" . $post['user_id'] ?>" class="usr_post_img">
+                                            <a href="<?php echo ($post['user_id'] == $this->session->user['id']) ? base_url() . 'home/profile' : base_url() . "user_profile/" . $post['user_id'] ?>" class="usr_post_img">
                                                 <?php
                                                 if (empty($post['post_user_profile'])) {
                                                     ?>
