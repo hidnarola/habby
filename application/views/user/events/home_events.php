@@ -21,7 +21,7 @@
                                         ?>
                                         <div class="request_row" data-id='<?php echo $request['id'] ?>'>
                                             <div class='usr_post_img'>
-                                                <a href="<?php echo ($request['user_id'] == $this->session->user['id']) ? base_url() . 'home/profile' : base_url() . "user_profile/" . $request['user_id'] ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $request['user_image'] ?>" class="img-circle"/></a>
+                                                <a href="javascript:;" class="img-circle"/></a>
                                             </div>
                                             <div class='post_title'>
                                                 <label class='control-label'><?php echo $request['name']; ?></label>
