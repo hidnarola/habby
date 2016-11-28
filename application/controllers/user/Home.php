@@ -305,7 +305,8 @@ class Home extends CI_Controller {
 //                $img_path = 'uploads/user_profile/' . $image_name;
 
                 $this->Users_model->update_user_data($this->data['user_data']['id'], ['user_image' => $image_name]);
-
+                $user_data = $this->Users_model->check_if_user_exist(['user_image' => $image_name], false, true);
+                $this->session->set_userdata(['user' => $user_data, 'loggedin' => TRUE]);
                 $this->session->set_flashdata('message', ['message' => lang('Image has been uploaded successfully'), 'class' => 'alert alert-success']);
                 redirect('home/profile');
             }
