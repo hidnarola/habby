@@ -39,7 +39,11 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <ul class="list-inline clng_ttl_ul">
                                 <li>Newest</li>
-                                <li><a href="<?php echo base_url() . "challenge/challenges?ch=newest" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
+                                <?php
+                                if (count($Newest_Challenges) < 2) {
+                                    ?>
+                                    <li><a href="<?php echo base_url() . "challenge/challenges?ch=newest" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <!-- Challenge Title Section section end here -->
@@ -141,7 +145,13 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <ul class="list-inline clng_ttl_ul">
                                 <li>Popular</li>
-                                <li><a href="<?php echo base_url() . "challenge/challenges?ch=popular" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
+                                <?php
+                                if (count($Popular_Challenges) < 2) {
+                                    ?>
+                                    <li><a href="<?php echo base_url() . "challenge/challenges?ch=popular" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
+                                    <?php
+                                }
+                                ?>
                             </ul>
                         </div>
                         <!-- Challenge Title Section section end here -->
@@ -246,7 +256,7 @@
                                 <li><?php echo lang("Recommended"); ?></li>
                                 <?php
                                 if (($Recom_Challenges != "" && !empty($Recom_Challenges))) {
-                                    if (count($Recom_Challenges) > 0) {
+                                    if (count($Recom_Challenges) < 2) {
                                         ?>
                                         <li><a href="<?php echo base_url() . "challenge/challenges?ch=recommended" ?>" class="pstbtn more_challenge"><?php echo lang("More"); ?></a></li>
                                         <?php
