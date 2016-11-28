@@ -10,7 +10,7 @@ if (count($posts) > 0) {
 
                             <!-- Comment window -->
                             <div class="post_leftsec_hddn post_leftsec_hddn1 hidden-xs">
-                                <p class="cmn_txtnw"> <?php echo lang("Comment Here");?></p>
+                                <p class="cmn_txtnw"> <?php echo lang("Comment Here"); ?></p>
                                 <textarea class="form-control comment" rows="3" id="comment"></textarea>
                                 <!-- Comment portion -->
                                 <?php
@@ -40,7 +40,7 @@ if (count($posts) > 0) {
                                                         <a href="javascript:;">
                                                             <span class="comment_reply_cnt">
                                                                 <?php echo $comment['cnt_reply']; ?>
-                                                            </span> <?php echo lang("Reply");?>
+                                                            </span> <?php echo lang("Reply"); ?>
                                                         </a>
                                                     </li>
                                                     <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
@@ -53,7 +53,7 @@ if (count($posts) > 0) {
                                 } else {
                                     ?>
                                     <div class="commnt_visit_sec clearfix no_comment">
-                                        <?php echo lang("No comments available");?>
+                                        <?php echo lang("No comments available"); ?>
                                     </div>
                                     <?php
                                 }
@@ -96,7 +96,7 @@ if (count($posts) > 0) {
                                     <div class="cmnt_newsec">
                                         <ul class="post_opn_ul list-inline">
                                             <li class="pull-left">
-                                                <a href="#" class="usr_post_img">
+                                                <a href="<?php echo ($post['user_id'] == $this->session->user['id']) ? base_url() . 'home/profile' : base_url() . "user_profile/" . $post['user_id'] ?>" class="usr_post_img">
                                                     <?php
                                                     if (empty($post['post_user_profile'])) {
                                                         ?>
@@ -141,7 +141,7 @@ if (count($posts) > 0) {
                                                     echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
                                                     ?>" class="like_img"><br>
                                                     <span>
-                                                        <span class="like_cnt"><?php echo $post['post_like'] ?></span> <?php echo lang("");?>Likes
+                                                        <span class="like_cnt"><?php echo $post['post_like'] ?></span> <?php echo lang(""); ?>Likes
                                                     </span>
                                                 </a>
                                             </li>
@@ -149,7 +149,7 @@ if (count($posts) > 0) {
                                                 <a role="button" id="chat1" class="chat1">
                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>comment_icon.png"><br>
                                                     <span> 
-                                                        <span class="comment_cnt"><?php echo $post['post_comment'] ?></span> <?php echo lang("Comments");?>
+                                                        <span class="comment_cnt"><?php echo $post['post_comment'] ?></span> <?php echo lang("Comments"); ?>
                                                     </span>
                                                 </a>
                                             </li>
@@ -157,7 +157,7 @@ if (count($posts) > 0) {
                                                 <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['id'] ?>">
                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                     <span>
-                                                        <?php // echo $post['post_share'] ?> <?php echo lang("");?>Shares
+                                                        <?php // echo $post['post_share'] ?> <?php echo lang(""); ?>Shares
                                                     </span>
                                                 </a>
 
@@ -185,7 +185,7 @@ if (count($posts) > 0) {
                                     </div>
 
                                     <div class="post_leftsec_hddn post_leftsec_hddn1 visible-xs">
-                                        <p class="cmn_txtnw"> <?php echo lang("Comment Here");?></p>
+                                        <p class="cmn_txtnw"> <?php echo lang("Comment Here"); ?></p>
                                         <textarea class="form-control comment" rows="3" id="comment"></textarea>
                                         <?php
                                         if (isset($post['comments']) && count($post['comments']) > 0) {
@@ -196,10 +196,10 @@ if (count($posts) > 0) {
                                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
                                                     </div>
                                                     <div class="cmn_dtl">
-                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> <?php echo lang("Interesting");?></p>
+                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> <?php echo lang("Interesting"); ?></p>
                                                         <ul class="cmnt_p clearfix">
-                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like");?></a></li>
-                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply");?></a></li>
+                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> <?php echo lang("Like"); ?></a></li>
+                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang("Reply"); ?></a></li>
                                                             <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
                                                             <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
                                                         </ul>
@@ -211,7 +211,7 @@ if (count($posts) > 0) {
                                         } else {
                                             ?>
                                             <div class="commnt_visit_sec clearfix no_comment">
-                                                <?php echo lang("No comments available");?>
+                                                <?php echo lang("No comments available"); ?>
                                             </div>
                                             <?php
                                         }
@@ -229,7 +229,7 @@ if (count($posts) > 0) {
 } else {
     ?>
     <div class="col-sm-12 alert alert-danger text-center">
-        <?php echo lang("No more post available.");?>
+        <?php echo lang("No more post available."); ?>
     </div>
     <?php
 }
