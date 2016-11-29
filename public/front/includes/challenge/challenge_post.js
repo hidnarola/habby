@@ -127,7 +127,7 @@ $('document').ready(function () {
 
         if ($t.is(':visible')) {
             $t.slideUp();
-            // Other stuff to do on slideUp
+            2            // Other stuff to do on slideUp
         } else {
             // Other stuff to down on slideDown
             var t = $(this);
@@ -211,13 +211,14 @@ $('document').ready(function () {
                 } else
                 {
                     $('.grid').append(data.view).masonry('reloadItems');
-                    setTimeout(function(){
+                    $('.grid').masonry();
+                    setTimeout(function () {
                         $('.grid').masonry();
                         stButtons.locateElements();
                         if (window.stButtons) {
                             stButtons.locateElements();
                         }
-                    },300);
+                    }, 1000);
                 }
             }
         });
@@ -235,8 +236,7 @@ $('document').ready(function () {
         if ($popover.hasClass('hide'))
         {
             $popover.removeClass('hide').addClass('show');
-        }
-        else
+        } else
         {
             $popover.removeClass('show').addClass('hide');
         }
