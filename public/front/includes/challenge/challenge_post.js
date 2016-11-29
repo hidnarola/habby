@@ -217,7 +217,7 @@ $('document').ready(function () {
                         if (window.stButtons) {
                             stButtons.locateElements();
                         }
-                    },1000);
+                    },300);
                 }
             }
         });
