@@ -521,7 +521,7 @@
                                             <div class="topic_textarea">
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb" style="width:25% !important"></a></span>
+                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
                                                         <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
                                                         <input type="hidden" id="message" name="message" class="form-control">
                                                         <span class="input-group-btn upld_icnpad">
@@ -602,7 +602,7 @@
                                             <div class="topic_textarea">
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb" style="width:25% !important"></a></span>
+                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
                                                         <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
                                                         <input type="hidden" id="message" name="message" class="form-control">
                                                         <span class="input-group-btn upld_icnpad">

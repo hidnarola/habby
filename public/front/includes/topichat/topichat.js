@@ -60,13 +60,23 @@ $('document').ready(function () {
             success: function (str) {
                 if (str == 1)
                 {
-                    t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 1);
-                } else if (str == 2)
+                    $('*[data-chat_id="'+chat_id+'"]').each(function(){
+                        console.log($(this));
+                        t = $(this).find('.topichat_media_rank').find('.add');
+                        t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                        t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 1);
+                    });
+                    
+                } 
+                else if (str == 2)
                 {
-                    t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
-                    t.siblings('.sub').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 2);
+                    $('*[data-chat_id="'+chat_id+'"]').each(function(){
+                        console.log($(this));
+                        t = $(this).find('.topichat_media_rank').find('.add');
+                        t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                        t.siblings('.sub').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
+                        t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) + 2);
+                    });
                 }
             }
         });
@@ -81,13 +91,19 @@ $('document').ready(function () {
             success: function (str) {
                 if (str == -1)
                 {
-                    t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 1);
+                    $('*[data-chat_id="'+chat_id+'"]').each(function(){
+                        t = $(this).find('.topichat_media_rank').find('.sub');
+                        t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                        t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 1);
+                    });
                 } else if (str == -2)
                 {
-                    t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
-                    t.siblings('.add').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
-                    t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 2);
+                    $('*[data-chat_id="'+chat_id+'"]').each(function(){
+                        t = $(this).find('.topichat_media_rank').find('.sub');
+                        t.find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow_ranked.png');
+                        t.siblings('.add').find('img').attr('src', DEFAULT_IMAGE_PATH + 'challeng_arrow.png');
+                        t.siblings('.rank_rate').html(parseInt(t.siblings('.rank_rate').html()) - 2);
+                    });
                 }
             }
         });
@@ -281,7 +297,7 @@ $('document').ready(function () {
                 }
                 media += '</a>';
                 $('.topichat_media_popup').html(media);
-                $('.topichat_media_post_modal').data('chat_id', media_details.id);
+                $('.topichat_media_post_modal').attr('data-chat_id', media_details.id);
                 var rank_image = (media_details.is_ranked == 1 && media_details.rank == 1) ? DEFAULT_IMAGE_PATH + "challeng_arrow_ranked.png" : DEFAULT_IMAGE_PATH + "challeng_arrow.png";
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
@@ -319,7 +335,7 @@ $('document').ready(function () {
                 $('.topichat_media_user').attr('src', DEFAULT_PROFILE_IMAGE_PATH + media_details.user_image);
                 $('.topichat_media_details').html(media_details.name + ' shared a ' + type);
                 $('.topichat_media_popup').html(media_details.youtube_video);
-                $('.topichat_media_post_modal').data('chat_id', media_details.id);
+                $('.topichat_media_post_modal').attr('data-chat_id', media_details.id);
                 var rank_image = (media_details.is_ranked == 1 && media_details.rank == 1) ? DEFAULT_IMAGE_PATH + "challeng_arrow_ranked.png" : DEFAULT_IMAGE_PATH + "challeng_arrow.png";
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
