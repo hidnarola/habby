@@ -185,7 +185,8 @@ function upload_image(files) {
                                 if ($('.topichat_image_ul').find('li').length == 8)
                                 {
                                     $('.topichat_image_ul').find('li').last().remove();
-                                } else if ($('.topichat_image_ul').find('li').length == 0) {
+                                }
+                                else if ($('.topichat_image_ul').find('li').length == 0) {
                                     $('.topichat_image_ul').html('');
                                 }
                                 media_file = JSON.parse(str);
@@ -605,10 +606,15 @@ $(document).ready(function () {
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             } else if (userdata.media_type == "links") {
                 userlink = JSON.parse(userdata.message);
+
+                left_link_html = '<div class="fileshare" id="fileshare' + i + '"><div class="">';
+
                 var thumbnail_url = (userlink.images.length > 0) ? userlink.images[0].url : "";
                 var youtube_video = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=' + userdata.chat_id + '><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
                 if (userdata.youtube_video != null) {
                     $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post youtube_video" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare">' + youtube_video + '<div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+
+                    left_link_html += youtube_video;
                 } else {
                     var thumbnail_url = (userlink.images.length > 0) ? '<div class="large-3 columns">' +
                             '<img class="thumb" src="' + userlink.images[0].url + '"></img>' +
@@ -623,7 +629,24 @@ $(document).ready(function () {
                             '</div>' +
                             '</div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
 
+                    left_link_html += thumbnail_url + '<div class="large-9 column"><a href="' + userlink.url + '" target="_blank">' + title + '</a></div>';
                 }
+
+                left_link_html += '</div></div>';
+
+                $('.fileshare' + i).append(html);
+
+                // Add left link in left section
+                if ($('.topic_frame').find('.fileshare').length == 2)
+                {
+                    // If two links are available then remove one
+                    $('.topic_frame').find('.fileshare').last().remove();
+                }
+                else if ($('.topic_frame').find('.fileshare').length == 0)
+                {
+                    $('.topic_frame').html('');
+                }
+                $('.topic_frame').prepend(left_link_html);
             }
         }
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
