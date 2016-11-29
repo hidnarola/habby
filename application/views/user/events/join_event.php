@@ -771,7 +771,7 @@ $myuserdata = array(
         $('#contact_edit_form').find('#edit_others').val($(this).parents('.contact_ul').find('#others_info').html());
         $('#contact_edit').modal('show');
     });
-
+    
     $('.event_notes_edit').click(function () {
         $(this).hide();
         $('.event_notes_update').show();
@@ -904,10 +904,5 @@ $myuserdata = array(
         $('#mapModal').modal('show');
         resizeMap();
     });
-    $(document).find('#emogis').popover({
-        html: true,
-        content: function () {
-            return $("#popover-content").html();
-        }
-    });
+
 </script>
