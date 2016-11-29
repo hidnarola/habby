@@ -80,8 +80,7 @@ function share_links(url) {
                     {
                         // If two links are available then remove one
                         $('.topic_frame').find('.fileshare').last().remove();
-                    }
-                    else if ($('.topic_frame').find('.fileshare').length == 0)
+                    } else if ($('.topic_frame').find('.fileshare').length == 0)
                     {
                         $('.topic_frame').html('');
                     }
@@ -127,7 +126,7 @@ function share_links(url) {
                     success: function (resp) {
                         $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                         $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
-                        $('#fileshare' + i).find('.videoPreview').data('id', resp);
+                        $('#fileshare' + i).find('.videoPreview').attr('data-id', resp);
                     },
                     complete: function (xhr, status) {
                         $(".loader").removeClass('show');
@@ -278,14 +277,12 @@ function upload_video(files) {
                             {
                                 var p = $('.' + display_file_class).parent().addClass('wdth_span');
                                 p.html('<span>' + fail_message + '</span>');
-                            }
-                            else if (str != 0)
+                            } else if (str != 0)
                             {
                                 if ($('.topichat_video_ul').find('li').length == 8)
                                 {
                                     $('.topichat_video_ul').find('li').last().remove();
-                                }
-                                else if ($('.topichat_video_ul').find('li').length == 0) {
+                                } else if ($('.topichat_video_ul').find('li').length == 0) {
                                     $('.topichat_video_ul').html('');
                                 }
                                 media_file = JSON.parse(str);
@@ -577,8 +574,7 @@ $(document).ready(function () {
                 if ($('.topichat_image_ul').find('li').length == 8)
                 {
                     $('.topichat_image_ul').find('li').last().remove();
-                }
-                else if ($('.topichat_image_ul').find('li').length == 0) {
+                } else if ($('.topichat_image_ul').find('li').length == 0) {
                     $('.topichat_image_ul').html('');
                 }
 
@@ -595,8 +591,7 @@ $(document).ready(function () {
                 if ($('.topichat_video_ul').find('li').length == 8)
                 {
                     $('.topichat_video_ul').find('li').last().remove();
-                }
-                else if ($('.topichat_video_ul').find('li').length == 0) {
+                } else if ($('.topichat_video_ul').find('li').length == 0) {
                     $('.topichat_video_ul').html('');
                 }
                 video_thumb = userdata.media.split('.')[0] + '_thumb.png';

@@ -48,8 +48,8 @@ class Dashboard extends CI_Controller {
             $email_unique_str = '|is_unique[users.email]';
         }
 
-        $this->form_validation->set_rules('name', lang('Display name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' . $email_unique_str, array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail')));
+        $this->form_validation->set_rules('name', 'Display name', 'trim|required', array('required' => 'Please fill the field' . ' %s .'));
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' . $email_unique_str, array('required' => 'Please fill the field' . ' %s .', 'valid_email' => 'Please enter valid E-mail'));
         if ($this->form_validation->run() == FALSE) {
             $this->template->load('admin_main', 'admin/profile_edit', $data);
         } else {
@@ -88,11 +88,10 @@ class Dashboard extends CI_Controller {
         $data['heading'] = 'Change Password';
         $sess_pass = $data['user_data']['password'];
         $decode_pass = $this->encrypt->decode($sess_pass);
-
         $user_id = $session_data['id'];
-        $this->form_validation->set_rules('curr_pass', lang('Current Password'), 'trim|required|in_list[' . $decode_pass . ']', ['in_list' => lang('Current Password Incorrect.'), 'required' => lang('Please fill the field') . ' %s .']);
-        $this->form_validation->set_rules('pass', 'Password', 'trim|required|min_length[6]|matches[re_pass]', array('required' => lang('Please fill the field') . ' %s .', 'min_length' => lang('Please enter password min 6 letter'), 'matches' => lang('Please enter same password')));
-        $this->form_validation->set_rules('re_pass', 'Repeat Password', 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
+        $this->form_validation->set_rules('curr_pass', 'Current Password', 'trim|required|in_list[' . $decode_pass . ']', ['in_list' => 'Current Password Incorrect.', 'required' => 'Please fill the field %s .']);
+        $this->form_validation->set_rules('pass', 'Password', 'trim|required|min_length[6]|matches[re_pass]', array('required' => 'Please fill the field %s .', 'min_length' => 'Please enter password min 6 letter', 'matches' => 'Please enter same password'));
+        $this->form_validation->set_rules('re_pass', 'Repeat Password', 'trim|required', array('required' => 'Please fill the field%s .'));
 
         if ($this->form_validation->run() == FALSE) {
             $this->template->load('admin_main', 'admin/change_password', $data);
@@ -103,7 +102,6 @@ class Dashboard extends CI_Controller {
                 redirect('admin/change_password');
             }
             $encode_pass = $this->encrypt->encode($password);
-
             $this->Users_model->update_user_data($user_id, ['password' => $encode_pass]);
             $this->session->set_flashdata('success', 'Password has been set Successfully.');
             redirect('admin/dashboard');
