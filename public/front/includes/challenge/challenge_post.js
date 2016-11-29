@@ -58,6 +58,9 @@ $('document').ready(function () {
     // Open comment part when user click on comment
     $('.post_masonry_section,#rank_modal').on('click', '.cmnt_winner', function () {
         $(this).parents('.rank_lg_sec').find('.winner-comnt').slideToggle(1000);
+        setTimeout(function(){
+            $('.grid').masonry();
+        },1000);
     });
 
     // Add comment to the post
@@ -84,6 +87,9 @@ $('document').ready(function () {
                             var cmt_cnt = t.parents('.rank_lg_sec').find('.comment_cnt');
 //                            console.log(cmt_cnt);
                             cmt_cnt.html(parseInt(cmt_cnt.html()) + 1);
+                            setTimeout(function(){
+                                $('.grid').masonry();
+                            },1000);
                         }
                     }
                 });
