@@ -16,7 +16,6 @@ $(document).ready(function () {
     $(document).find('#emogis').popover({
         html: true,
         content: function () {
-            console.log($("#popover-content").html());
             return $("#popover-content").html();
         }
     });

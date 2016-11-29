@@ -237,6 +237,11 @@
     font-size: 15px;
     padding-top: 10px;
 }
+.event_post_details{
+    max-height: 400px;
+    overflow: auto;
+    margin-bottom: 15px;
+}
 /*
 .chat_1
 {

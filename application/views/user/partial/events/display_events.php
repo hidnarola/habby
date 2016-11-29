@@ -14,7 +14,18 @@ foreach ($event_posts as $event) {
                 </div>
             </div>
             <div class='event_post_details'>
-                <?php echo $event['details']; ?>
+                <?php
+                if (strlen($event['details']) > 150) {
+                    echo substr($event['details'], 0, 150) . '&hellip;';
+                } else {
+                    echo $event['details'];
+                }
+                ?>
+            </div>
+            <div class='event_post_details1' style="display: none">
+                <?php
+                echo $event['details'];
+                ?>
             </div>
             <div class='event_media'>
                 <?php
@@ -51,15 +62,15 @@ foreach ($event_posts as $event) {
                 <?php
                 if ($event['is_joined']) {
                     ?>
-                    <a href='<?php echo base_url() . 'events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'><?php echo lang("Enter");?></a>
+                    <a href='<?php echo base_url() . 'events/details/' . urlencode(base64_encode($event['id'])) ?>' class='join_btn pstbtn'><?php echo lang("Enter"); ?></a>
                     <?php
                 } else if ($event['is_requested']) {
                     ?>
-                    <a href='javascript:;' class='join_btn pstbtn'><?php echo lang("Requested");?></a>
+                    <a href='javascript:;' class='join_btn pstbtn'><?php echo lang("Requested"); ?></a>
                     <?php
                 } else {
                     ?>
-                    <a href='javascript:;' class='join_btn pstbtn event_join'><?php echo lang("Join");?></a>
+                    <a href='javascript:;' class='join_btn pstbtn event_join'><?php echo lang("Join"); ?></a>
                     <?php
                 }
                 ?>
@@ -101,18 +112,18 @@ foreach ($event_posts as $event) {
         $('.event_post').on('click', '.view_details', function (str) {
             var modal = $("#myModal");
             var event_post = $(this).parents('.event_post');
-			modal.find('.event_post').data('id',event_post.data('id'));
+            modal.find('.event_post').data('id', event_post.data('id'));
             modal.find('.event_profile_sec').html(event_post.find('.event_profile_sec').html());
-            modal.find('.event_post_details').html(event_post.find('.event_post_details').html());
+            modal.find('.event_post_details').html(event_post.find('.event_post_details1').html());
             modal.find('.event_media').html(event_post.find('.event_media').html());
             modal.find('.seat_details').html(event_post.find('.seat_details').html());
             modal.find('.join_btn').html(event_post.find('.join_btn').html());
             modal.find('.join_btn').attr('href', event_post.find('.join_btn').attr('href'));
-			
-			if(event_post.find('.join_btn').hasClass('event_join')){
-				modal.find('.join_btn').addClass('event_join');
-			}
-			
+
+            if (event_post.find('.join_btn').hasClass('event_join')) {
+                modal.find('.join_btn').addClass('event_join');
+            }
+
             modal.find('.start_time').html('Event Start Time : ' + event_post.find('.event_seat').data('start'));
             modal.find('.end_time').html('Event End Time : ' + event_post.find('.event_seat').data('end'));
             modal.modal('show');
