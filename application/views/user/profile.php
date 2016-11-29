@@ -550,13 +550,13 @@
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $name = (set_value('name') == false) ? $user_data['name'] : set_value('name'); ?>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>" data-original_value="<?php echo $name; ?>">
                         </div>
                     </div>
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $email = (set_value('email') == false) ? $user_data['email'] : set_value('email'); ?>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>" readonly="">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo lang('E-mail'); ?>" value="<?php echo $email; ?>" readonly="" data-original_value="<?php echo $email; ?>">
                         </div>
                     </div>
                     <div class="form-group clearfix">
