@@ -195,7 +195,7 @@
                                     ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                             ?>"-->
+                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                      ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
 
@@ -662,14 +662,27 @@ $myuserdata = array(
         }, 100);
 
         $('#mediaModal').on('hidden.bs.modal', function () {
-            console.log('modal close');
             $(this).removeData('bs.modal');
             $(this).find('form').trigger('reset');
-            if($(this).find('.topichat_media_popup').find('video').length > 0)
+            if ($(this).find('.topichat_media_popup').find('video').length > 0)
             {
-                console.log('video found');
                 $(this).find('.topichat_media_popup').find('video')[0].pause();
             }
         });
+        $('#linkModal').on('hidden.bs.modal', function () {
+            console.log('modal close');
+            $(this).removeData('bs.modal');
+            if ($(this).find('.topichat_media_popup').find('iframe').length > 0)
+            {
+                console.log('iframe found');
+                var iframe = $(this).find('.topichat_media_popup').find('iframe');
+                console.log(iframe.contents());
+                iframe.contents().find('video').each(function ()
+                {
+                    this.pause();
+                });
+            }
+        });
+
     });
 </script>
