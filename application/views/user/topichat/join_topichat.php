@@ -17,93 +17,91 @@
                     <!-- Top rate heading section end here -->
 
                     <?php
-                    if($top_rank_post){
-                    foreach ($top_rank_post as $post) {
-                        ?>
-                        <div class="panel-body">
-                            <div class="row vote_row topichat_media_post" data-chat_id="<?php echo $post['id'] ?>">
-                                <!-- vote section start here -->
-                                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 vot1">
-                                    <div id="field" class="topichat_media_rank">
-                                        <button type="button" id="add" class="add add_btn smlr_btn">
-                                            <img src="<?php
-                                            echo DEFAULT_IMAGE_PATH;
-                                            echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
-                                            ?>"/>
-                                        </button>
-                                        <span class="rank_rate"><?php echo $post['positive_rank'] - $post['negetive_rank']; ?></span>
-                                        <button type="button" id="sub" class="sub smlr_btn">
-                                            <img src="<?php
-                                            echo DEFAULT_IMAGE_PATH;
-                                            echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
-                                            ?>"/>
-                                        </button>
+                    if ($top_rank_post) {
+                        foreach ($top_rank_post as $post) {
+                            ?>
+                            <div class="panel-body">
+                                <div class="row vote_row topichat_media_post" data-chat_id="<?php echo $post['id'] ?>">
+                                    <!-- vote section start here -->
+                                    <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 vot1">
+                                        <div id="field" class="topichat_media_rank">
+                                            <button type="button" id="add" class="add add_btn smlr_btn">
+                                                <img src="<?php
+                                                echo DEFAULT_IMAGE_PATH;
+                                                echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                                ?>"/>
+                                            </button>
+                                            <span class="rank_rate"><?php echo $post['positive_rank'] - $post['negetive_rank']; ?></span>
+                                            <button type="button" id="sub" class="sub smlr_btn">
+                                                <img src="<?php
+                                                echo DEFAULT_IMAGE_PATH;
+                                                echo (($post['is_ranked'] && $post['rank']) ? 'challeng_arrow_ranked.png' : 'challeng_arrow.png');
+                                                ?>"/>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- vote section end here -->
-                                <div class="col-lg-2 col-md-1 col-sm-2 col-xs-2 pad_lft0 vot2">
-                                    <div class="topc_2prflicn">
-                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $post['user_image']; ?>" class="img-responsive center-block top_rank_profile">
+                                    <!-- vote section end here -->
+                                    <div class="col-lg-2 col-md-1 col-sm-2 col-xs-2 pad_lft0 vot2">
+                                        <div class="topc_2prflicn">
+                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $post['user_image']; ?>" class="img-responsive center-block top_rank_profile">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 vot3">
-                                    <?php
-                                    if ($post['media_type'] == "image") {
-                                        ?>
-                                        <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $post['media'] ?>" data-type="image" >
-                                            <!--class="fancybox" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1"-->
-                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" class="img-responsive center-block ">
-                                        </a>
+                                    <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 vot3">
                                         <?php
-                                    } else if ($post['media_type'] == "video") {
-                                        ?>
-                                        <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $post['media'] ?>" data-type="video" >
-                                            <!--class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>" data-fancybox-group="gallerytopichat1"-->
-                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
-                                        </a>
-                                        <?php
-                                    } else if ($post['media_type'] == "files") {
-                                        ?>
-                                        <a class="files" href="<?php echo base_url() . "user/download_file/" . $post['media'] ?>" data-fancybox-group="gallerytopichat1">
-                                            <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">
-                                            <span class="filename"><?php echo $post['media'] ?></span>
-                                        </a>
-                                        <?php
-                                    } else if ($post['media_type'] == "links") {
-                                        $media = json_decode($post['media']);
-                                        ?>
-                                        <div class = "fileshare">
-                                            <div class = "">
-                                                <?php
-                                                if (isset($media->images[0]->url) && $media->images[0]->url != null) {
-                                                    ?>
-                                                    <div class = "large-3 columns">
-                                                        <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
-                                                    </div>
+                                        if ($post['media_type'] == "image") {
+                                            ?>
+                                            <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $post['media'] ?>" data-type="image" >
+                                                <!--class="fancybox" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1"-->
+                                                <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" class="img-responsive center-block ">
+                                            </a>
+                                            <?php
+                                        } else if ($post['media_type'] == "video") {
+                                            ?>
+                                            <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $post['media'] ?>" data-type="video" >
+                                                <!--class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>" data-fancybox-group="gallerytopichat1"-->
+                                                <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
+                                            </a>
+                                            <?php
+                                        } else if ($post['media_type'] == "files") {
+                                            ?>
+                                            <a class="files" href="<?php echo base_url() . "user/download_file/" . $post['media'] ?>" data-fancybox-group="gallerytopichat1">
+                                                <img src="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>" class="img-responsive center-block file_icon">
+                                                <span class="filename"><?php echo $post['media'] ?></span>
+                                            </a>
+                                            <?php
+                                        } else if ($post['media_type'] == "links") {
+                                            $media = json_decode($post['media']);
+                                            ?>
+                                            <div class = "fileshare">
+                                                <div class = "">
                                                     <?php
-                                                }
-                                                ?>
-                                                <div class = "large-9 column">
-                                                    <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
-                                                    <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
+                                                    if (isset($media->images[0]->url) && $media->images[0]->url != null) {
+                                                        ?>
+                                                        <div class = "large-3 columns">
+                                                            <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <div class = "large-9 column">
+                                                        <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                                        <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <?php
-                    }
-                    }
-                    else
-                    {
+                            <?php
+                        }
+                    } else {
                         ?>
                         <div class='panel-body'>
                             <div class='col-sm-12'>
-                                No top rated post found
+                                <?php echo lang('No top rated post found.'); ?>
                             </div>
                         </div>
                         <?php
@@ -119,14 +117,14 @@
 
                 <!--All files section start here--> 
                 <?php
-                if (isset($recent_links) && !empty($recent_links)) {
-                    ?>
-                    <div class="panel panel-default popular_img_sec">
-                        <div class="panel-heading"><b><?php echo lang('ALL FILES'); ?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
-                        <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared'); ?></b> <span style="float: right"><a href="<?php echo base_url() . "topichat/media/" . $Id ?>"><b><?php echo lang('More'); ?></b></a></span></div>
-                        <div class="panel-body">
-                            <div class="topic_frame">
-                                <?php
+                ?>
+                <div class="panel panel-default popular_img_sec">
+                    <div class="panel-heading"><b><?php echo lang('ALL FILES'); ?></b><span style="float: right"><i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
+                    <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Shared'); ?></b> <span style="float: right"><a href="<?php echo base_url() . "topichat/media/" . $Id ?>"><b><?php echo lang('More'); ?></b></a></span></div>
+                    <div class="panel-body">
+                        <div class="topic_frame">
+                            <?php
+                            if (isset($recent_links) && !empty($recent_links)) {
                                 foreach ($recent_links as $key => $recent_link) {
                                     $media = json_decode($recent_link['media']);
                                     if ($recent_link['youtube_video'] != null) {
@@ -166,13 +164,18 @@
                                         <?php
                                     }
                                 }
+                            } else {
                                 ?>
-                            </div>
+                                <div class='col-sm-12'>
+                                    <?php echo lang('No shared link available.'); ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
-                    <?php
-                }
-                ?>
+                </div>
+                <?php ?>
                 <!--All files section end here--> 
 
 
@@ -181,19 +184,18 @@
 
                     <div class="panel-heading"><b><?php echo lang('UPLOAD'); ?></b> <span style="float: right"><a href="<?php echo base_url() . "topichat/media/" . $Id ?>"><b><?php echo lang('More'); ?></b></a></span></div>
 
-                    <?php
-                    ?>
+                    <?php ?>
                     <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Videos'); ?></b></div>
 
                     <div class="panel-body">
-                        <ul class="photo_vdo_ul">
+                        <ul class="photo_vdo_ul topichat_video_ul">
                             <?php
                             if (count($recent_videos) > 0) {
                                 foreach ($recent_videos_thumb as $key => $image) {
                                     ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                          ?>"-->
+                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                             ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
 
@@ -202,42 +204,40 @@
                                 }
                             } else {
                                 ?>
-                                <div class='col-sm-12'>No Video found</div>
+                                <div class='col-sm-12'><?php echo lang("No Videos were uploaded."); ?></div>
                                 <?php
                             }
                             ?>
                         </ul>
 
                     </div>
-                    <?php
-                    ?>
+                    <?php ?>
 
                     <?php ?>
                     <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images'); ?></b> </div>
 
                     <div class="panel-body">
                         <ul class="photo_vdo_ul topichat_image_ul">
-<?php
-if (count($recent_images) > 0) {
-    foreach ($recent_images as $image) {
-        ?>
+                            <?php
+                            if (count($recent_images) > 0) {
+                                foreach ($recent_images as $image) {
+                                    ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $image ?>" data-type="image" >
-                                            <!--href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
                                     </li>
-        <?php
-    }
-} else {
-    ?>
-                                <div class='col-sm-12'>No Image found</div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <div class='col-sm-12'><?php echo lang("No Images were uploaded."); ?></div>
                                 <?php
                             }
                             ?>
                         </ul>
                     </div>
-                            <?php ?>
+                    <?php ?>
                 </div>
                 <!-- popular image and video section End here -->
             </div>
@@ -245,13 +245,13 @@ if (count($recent_images) > 0) {
 
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pad_lft0 topic_right_lg_sec">
             <div class="right_lg_sectopic">
-<?php
-$message = $this->session->flashdata('message');
-if (!empty($message) && isset($message)) {
-    ($message['class'] != '') ? $message['class'] : '';
-    echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
-}
-?>
+                <?php
+                $message = $this->session->flashdata('message');
+                if (!empty($message) && isset($message)) {
+                    ($message['class'] != '') ? $message['class'] : '';
+                    echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+                }
+                ?>
                 <!-- Note and topic edit area start here -->
                 <div class="tittl_sec_lgrow">
                     <div class="tittl_sec_lg">
@@ -281,7 +281,7 @@ if (!empty($message) && isset($message)) {
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2 topichat_msg_sec">
 <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-<?php $this->load->view('user/partial/topichat/load_more_msg') ?>
+                            <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -424,7 +424,7 @@ if (!empty($message) && isset($message)) {
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-?></span>
+                            ?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>
@@ -660,5 +660,16 @@ $myuserdata = array(
                 'type': 'iframe'       // tell the script to create an iframe
             });
         }, 100);
+
+        $('#mediaModal').on('hidden.bs.modal', function () {
+            console.log('modal close');
+            $(this).removeData('bs.modal');
+            $(this).find('form').trigger('reset');
+            if($(this).find('.topichat_media_popup').find('video').length > 0)
+            {
+                console.log('video found');
+                $(this).find('.topichat_media_popup').find('video')[0].pause();
+            }
+        });
     });
 </script>

@@ -170,8 +170,8 @@ function upload_image(files) {
                                     $('.topichat_image_ul').html('');
                                 }
                                 media_file = JSON.parse(str);
-                                var html = '<a data-fancybox-group="gallery1" href="'+upload_path+str[0].media+'" class="fancybox col-sm-4"><img class="img-responsive topi_image" src="'+upload_path+media_file[0].media+'"></a>';
-                                $('.content_images').find('.panel-body').prepend(html);
+                                var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" data-image="'+media_file[0].media+'" data-type="image"> <img src="'+upload_path+media_file[0].media+'" class="img-responsive topi_image"> </a> </li>';
+                                $('.topichat_image_ul').prepend(html);
                                 
                                 var msg = {
                                     message: str,
@@ -257,8 +257,21 @@ function upload_video(files) {
                             {
                                 var p = $('.' + display_file_class).parent().addClass('wdth_span');
                                 p.html('<span>' + fail_message + '</span>');
-                            } else if (str != 0)
+                            }
+                            else if (str != 0)
                             {
+                                if($('.topichat_video_ul').find('li').length == 8)
+                                {
+                                   $('.topichat_video_ul').find('li').last().remove();
+                                }
+                                else if($('.topichat_video_ul').find('li').length == 0){
+                                    $('.topichat_video_ul').html('');
+                                }
+                                media_file = JSON.parse(str);
+                                video_thumb = media_file[0].media.split('.')[0]+'_thumb.png';
+                                var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="'+media_file[0].media+'" data-type="video" > <img src="'+upload_path+video_thumb+'" class="img-responsive topi_image"> </a> </li>';
+                                $('.topichat_video_ul').prepend(html);
+                                
                                 var msg = {
                                     message: str,
                                     type: 'topic_msg',
@@ -539,12 +552,36 @@ $(document).ready(function () {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="wdth_span media_wrapper img_media_wrapper"><span class="imagePreview' + i + '" id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="' + userdata.media + '" data-type="image"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 $('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
+                
+                if($('.topichat_image_ul').find('li').length == 8)
+                {
+                   $('.topichat_image_ul').find('li').last().remove();
+                }
+                else if($('.topichat_image_ul').find('li').length == 0){
+                    $('.topichat_image_ul').html('');
+                }
+
+                var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" data-image="'+userdata.media+'" data-type="image"> <img src="'+upload_path + userdata.media+'" class="img-responsive topi_image"> </a> </li>';
+                $('.topichat_image_ul').prepend(html);
+                
             } else if (userdata.media_type == "video")
             {
                 var i = Math.random().toString(36).substring(7);
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="float:left"><span class="imagePreview' + i + '" id="imagePreview_msg"></span><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 //$('.imagePreview' + i).css("background-image", "url(" + upload_path + userdata.media + ")");
                 $('.imagePreview' + i).html("<video controls='' src='" + upload_path + userdata.media + "' style='height:180px;'>");
+                
+                if($('.topichat_video_ul').find('li').length == 8)
+                {
+                   $('.topichat_video_ul').find('li').last().remove();
+                }
+                else if($('.topichat_video_ul').find('li').length == 0){
+                    $('.topichat_video_ul').html('');
+                }
+                video_thumb = userdata.media.split('.')[0]+'_thumb.png';
+                var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="'+userdata.media+'" data-type="video" > <img src="'+upload_path+video_thumb+'" class="img-responsive topi_image"> </a> </li>';
+                $('.topichat_video_ul').prepend(html);
+                
             } else if (userdata.media_type == "files")
             {
                 var i = Math.random().toString(36).substring(7);
