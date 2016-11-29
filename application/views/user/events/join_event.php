@@ -741,13 +741,13 @@
     </div>
 </div>
 <!-- Map Modal over-->
-<?php 
-    $myuserdata = array(
-        'id'=>$this->session->user['id'],
-        'name'=>$this->session->user['name'],
-        'user_image'=>$this->session->user['user_image'],
-        'email'=>$this->session->user['email']
-    );
+<?php
+$myuserdata = array(
+    'id' => $this->session->user['id'],
+    'name' => $this->session->user['name'],
+    'user_image' => $this->session->user['user_image'],
+    'email' => $this->session->user['email']
+);
 //    $myuserdata['bio'] = str_replace(array("\r\n","\n"),"\\\\n",$myuserdata['bio']);
 ?>
 <!-- Global variable for join_topichat.js -->
@@ -903,5 +903,11 @@
     $('.map_btn').click(function () {
         $('#mapModal').modal('show');
         resizeMap();
+    });
+    $(document).find('#emogis').popover({
+        html: true,
+        content: function () {
+            return $("#popover-content").html();
+        }
     });
 </script>

@@ -856,7 +856,7 @@ img.img-circle.img-responsive.topichat_user {
     width: 100%;
 }
 .social ul li{    
-       display: block;
+    display: block;
     float: none;
     padding-right: 10px;
     margin-bottom: 10px;
@@ -996,7 +996,7 @@ h2.chlng_hdg ,
     background: #c63d2d;
 }
 .challenge_post_display .alert-info{
-     bottom: -70px;
+    bottom: -70px;
     position: absolute;
 }
 .bg_image_close_info{
@@ -1018,7 +1018,7 @@ h2.chlng_hdg ,
     margin-left: 15px;
 }
 .popover-content-custom{
-     background-clip: padding-box;
+    background-clip: padding-box;
     background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
@@ -1036,7 +1036,7 @@ h2.chlng_hdg ,
     top: 0;
     white-space: normal;
     z-index: 1060;
-     left: -67px;
+    left: -67px;
     position: absolute;
     top: -65px;
     width: 125px;
@@ -1090,6 +1090,11 @@ h2.chlng_hdg ,
 }
 .challenge_post_display{
     min-height: 425px;
+}
+
+.event_profile_sec .post_title{
+    word-break: break-all;
+    display: inline;
 }
 @media(min-width:1583px){
     .row.event_container

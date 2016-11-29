@@ -102,7 +102,7 @@ if ($this->session->flashdata('success')) {
                 {
                     data: "title",
                     visible: true,
-//                    width: '25%',
+                    width: '15%',
                 },
                 {
                     data: "username",
@@ -111,12 +111,14 @@ if ($this->session->flashdata('success')) {
                 {
                     data: "start_time",
                     visible: true,
-                    searchable: true
+                    searchable: true,
+                    width: '14%',
                 },
                 {
                     data: "end_time",
                     visible: true,
                     searchable: true,
+                    width: '14%',
                 },
                 {
                     data: "limit",
