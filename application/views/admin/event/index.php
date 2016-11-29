@@ -85,7 +85,7 @@ if ($this->session->flashdata('success')) {
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 lengthMenu: '<span>Show:</span> _MENU_',
-				searchPlaceholder: "Search by title, username or limit",
+                searchPlaceholder: "Search by title, username or limit",
 //                width:250px,
                 paginate: {'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;'}
             },
@@ -101,7 +101,8 @@ if ($this->session->flashdata('success')) {
                 },
                 {
                     data: "title",
-                    visible: true
+                    visible: true,
+                    width: '25%',
                 },
                 {
                     data: "username",
