@@ -210,8 +210,8 @@ $('document').ready(function () {
                     $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
                 } else
                 {
+                    $('.grid').append(data.view).masonry('reloadItems');
                     setTimeout(function(){
-                        $('.grid').append(data.view).masonry('reloadItems');
                         $('.grid').masonry();
                         stButtons.locateElements();
                         if (window.stButtons) {
