@@ -102,7 +102,7 @@ if ($this->session->flashdata('success')) {
                 {
                     data: "title",
                     visible: true,
-                    width: '25%',
+//                    width: '25%',
                 },
                 {
                     data: "username",

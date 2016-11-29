@@ -266,7 +266,6 @@ if (isset($events['title'])) {
     ?>
     <script>
         $('document').ready(function () {
-            console.log('add');
             //set date and time picker for start time and end time
             $('#start_time').datetimepicker({
                 locale: 'en',
@@ -281,8 +280,7 @@ if (isset($events['title'])) {
 //                }
             });
             $("#start_time").on("dp.change", function(e) {
-                console.log(e.date);
-                $('#end_time').data("DateTimePicker").minDate(e.date);
+//                $('#end_time').data("DateTimePicker").minDate(e.date);
             });
             $("#end_time").on("dp.change", function (e) {
                 $('#start_time').data("DateTimePicker").maxDate(e.date);
