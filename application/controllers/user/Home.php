@@ -62,7 +62,7 @@ class Home extends CI_Controller {
      */
 
     public function challenge($page = 1) {
-        $limit = 2;
+        $limit = 3;
         $start = ($page - 1) * $limit;
         $this->data['posts'] = $this->Post_model->challange_post($data = array(), $this->session->user['id'], $start, $limit);
         if ($page == 1) {

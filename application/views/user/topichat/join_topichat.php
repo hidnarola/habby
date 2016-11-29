@@ -536,7 +536,6 @@
                                         </div>
                                     </div>
                                     <!-- Type area end here -->
-
                                 </div>
                             </div>
                             <!-- Type Chat section end here -->
