@@ -24,7 +24,6 @@ function share_links(url) {
 
         },
         success: function (preview) {
-            console.log(preview);
             if (JSON.stringify(preview) != '{}') {
                 if (preview.title == null && preview.description == null) {
                     swal("No content found");
@@ -33,6 +32,9 @@ function share_links(url) {
                     return false;
                 } else {
                     $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
+                    
+                    left_link_html = '<div class="fileshare" id="fileshare' + i +'"><div class="">';
+                    
                     if ($.isEmptyObject(preview.media)) {
                         var thumbnail_url = (preview.images.length > 0) ? '<div class="large-3 columns">' +
                                 '<img class="thumb" src="' + preview.images[0].url + '"></img>' +
@@ -45,11 +47,13 @@ function share_links(url) {
                                 '<p>' + description + '</p>' +
                                 '</div>' +
                                 '</div>';
+                        left_link_html += thumbnail_url+'<div class="large-9 column"><a href="' + preview.url + '" target="_blank">' + title + '</a></div>';
 
                     } else {
                         if (preview.provider_name == "YouTube") {
                             var thumbnail_url = (preview.images.length > 0) ? preview.images[0].url : "";
                             html = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
+                            left_link_html += html;
                             youtube_video_html = preview.media.html;
                             $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
                         } else {
@@ -64,9 +68,26 @@ function share_links(url) {
                                     '<p>' + description + '</p>' +
                                     '</div>' +
                                     '</div>';
+                            left_link_html += thumbnail_url+'<div class="large-9 column"><a href="' + preview.url + '" target="_blank">' + title + '</a></div>';
                         }
                     }
+                    left_link_html += '</div></div>';
+                    
                     $('.fileshare' + i).append(html);
+                    
+                    // Add left link in left section
+                    if($('.topic_frame').find('.fileshare').length == 2)
+                    {
+                        // If two links are available then remove one
+                        $('.topic_frame').find('.fileshare').last().remove();
+                    }
+                    else if($('.topic_frame').find('.fileshare').length == 0)
+                    {
+                        $('.topic_frame').html('');
+                    }
+                    $('.topic_frame').prepend(left_link_html);
+                    
+                    
                     // Send file using ajax
                     preview = JSON.stringify(preview);
                     var msg = {
@@ -77,7 +98,6 @@ function share_links(url) {
                         youtube_video: youtube_video_html,
                         link_id: i
                     }
-                    console.log(msg);
                     Server.send('message', JSON.stringify(msg))
                     $('#url').val('');
                     $('#url').prop('disabled', false);
@@ -107,6 +127,7 @@ function share_links(url) {
                     success: function (resp) {
                         $('.fileshare' + i).parents('.topichat_media_post').attr('data-chat_id', resp);
                         $('.fileshare' + i).children('.videoPreview').attr('data-id', resp);
+                        $('#fileshare'+i).find('.videoPreview').data('id',resp);
                     },
                     complete: function (xhr, status) {
                         $(".loader").removeClass('show');
