@@ -236,6 +236,9 @@ input#No_of_person{margin-top: 10px;}
         width:95%;
     }
     
-
+    .datatable-basic td{
+        white-space: normal;
+        word-break: break-all;
+    }
 
 
