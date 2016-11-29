@@ -812,11 +812,10 @@ $myuserdata = array(
         format: 'YYYY-MM-DD HH:mm:SS'
     });
 
-    $("#start_time").on("dp.change", function (e) {
-        console.log(e.date);
+    $("#start_time").on("dp.hide", function(e) {
         $('#end_time').data("DateTimePicker").minDate(e.date);
     });
-    $("#end_time").on("dp.change", function (e) {
+    $("#end_time").on("dp.hide", function (e) {
         $('#start_time').data("DateTimePicker").maxDate(e.date);
     });
 
