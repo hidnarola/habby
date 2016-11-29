@@ -167,15 +167,15 @@
                             } else {
                                 ?>
                                 <div class='col-sm-12'>
-                                <?php echo lang('No shared link available.'); ?>
+                                    <?php echo lang('No shared link available.'); ?>
                                 </div>
-                                    <?php
-                                }
-                                ?>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
-<?php ?>
+                <?php ?>
                 <!--All files section end here--> 
 
 
@@ -184,26 +184,26 @@
 
                     <div class="panel-heading"><b><?php echo lang('UPLOAD'); ?></b> <span style="float: right"><a href="<?php echo base_url() . "topichat/media/" . $Id ?>"><b><?php echo lang('More'); ?></b></a></span></div>
 
-<?php ?>
+                    <?php ?>
                     <div class="panel-heading shrd_topc_sec"><b><?php echo lang('Videos'); ?></b></div>
 
                     <div class="panel-body">
-                        <ul class="photo_vdo_ul">
-                    <?php
-                    if (count($recent_videos) > 0) {
-                        foreach ($recent_videos_thumb as $key => $image) {
-                            ?>
+                        <ul class="photo_vdo_ul topichat_video_ul">
+                            <?php
+                            if (count($recent_videos) > 0) {
+                                foreach ($recent_videos_thumb as $key => $image) {
+                                    ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                           ?>"-->
+                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                             ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
 
                                     </li>
-        <?php
-    }
-} else {
-    ?>
+                                    <?php
+                                }
+                            } else {
+                                ?>
                                 <div class='col-sm-12'><?php echo lang("No Videos were uploaded."); ?></div>
                                 <?php
                             }
@@ -211,34 +211,33 @@
                         </ul>
 
                     </div>
-                            <?php ?>
+                    <?php ?>
 
-<?php ?>
+                    <?php ?>
                     <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images'); ?></b> </div>
 
                     <div class="panel-body">
                         <ul class="photo_vdo_ul topichat_image_ul">
-                    <?php
-                    if (count($recent_images) > 0) {
-                        foreach ($recent_images as $image) {
-                            ?>
+                            <?php
+                            if (count($recent_images) > 0) {
+                                foreach ($recent_images as $image) {
+                                    ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $image ?>" data-type="image" >
-                                            <!--href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" data-fancybox-group="gallery1"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
                                     </li>
-        <?php
-    }
-} else {
-    ?>
+                                    <?php
+                                }
+                            } else {
+                                ?>
                                 <div class='col-sm-12'><?php echo lang("No Images were uploaded."); ?></div>
                                 <?php
                             }
                             ?>
                         </ul>
                     </div>
-                            <?php ?>
+                    <?php ?>
                 </div>
                 <!-- popular image and video section End here -->
             </div>
@@ -246,13 +245,13 @@
 
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 pad_lft0 topic_right_lg_sec">
             <div class="right_lg_sectopic">
-<?php
-$message = $this->session->flashdata('message');
-if (!empty($message) && isset($message)) {
-    ($message['class'] != '') ? $message['class'] : '';
-    echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
-}
-?>
+                <?php
+                $message = $this->session->flashdata('message');
+                if (!empty($message) && isset($message)) {
+                    ($message['class'] != '') ? $message['class'] : '';
+                    echo '<div class="' . $message['class'] . '">' . $message['message'] . '</div>';
+                }
+                ?>
                 <!-- Note and topic edit area start here -->
                 <div class="tittl_sec_lgrow">
                     <div class="tittl_sec_lg">
@@ -282,7 +281,7 @@ if (!empty($message) && isset($message)) {
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
                         <div class="chat_area2 topichat_msg_sec">
 <!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-<?php $this->load->view('user/partial/topichat/load_more_msg') ?>
+                            <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
                         </div>
                     </div>
                     <!-- Chat area section end here -->
@@ -425,7 +424,7 @@ if (!empty($message) && isset($message)) {
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-?></span>
+                            ?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>
@@ -661,5 +660,16 @@ $myuserdata = array(
                 'type': 'iframe'       // tell the script to create an iframe
             });
         }, 100);
+
+        $('#mediaModal').on('hidden.bs.modal', function () {
+            console.log('modal close');
+            $(this).removeData('bs.modal');
+            $(this).find('form').trigger('reset');
+            if($(this).find('.topichat_media_popup').find('video').length > 0)
+            {
+                console.log('video found');
+                $(this).find('.topichat_media_popup').find('video')[0].pause();
+            }
+        });
     });
 </script>
