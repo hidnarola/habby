@@ -151,7 +151,7 @@ foreach ($posts as $post) {
                                     <?php
                                 }
                                 ?>
-                                <div class="clearfix"></div>
+                                
                                 <?php
                             } else {
                                 ?>
@@ -161,7 +161,7 @@ foreach ($posts as $post) {
                                 <?php
                             }
                             ?>
-
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>

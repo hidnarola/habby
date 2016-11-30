@@ -1091,7 +1091,7 @@ h2.chlng_hdg ,
     margin-right: -38px;
     padding: 0 30px;
     position: relative;
-    z-index: 9999;
+    z-index: 2;
 }
 .challenge_post_display{
     min-height: 425px;

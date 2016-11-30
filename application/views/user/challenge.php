@@ -168,7 +168,7 @@
                                                         <?php
                                                     }
                                                     ?>
-                                                    <div class="clearfix"></div>
+                                                    
                                                     <?php
                                                 } else {
                                                     ?>
@@ -178,7 +178,7 @@
                                                     <?php
                                                 }
                                                 ?>
-
+                                                <div class="clearfix"></div>
                                             </div>
                                         </div>
                                     </div>

@@ -15,7 +15,7 @@ class Admin_challenge_model extends CI_Model {
         $start = $this->input->get('start');
         $columns = ['ch.id', 'ch.name', 'ch.rewards', 'COUNT(chu.user_id)', 'ch.average_rank', 'ch.is_finished', 'u.name'];
         $this->db->select('ch.id,@a:=@a+1 AS test_id,ch.name,ch.rewards,COUNT(chu.user_id) as total_joined,ch.average_rank,ch.is_finished,u.name as user_name,ch.is_deleted,ch.is_blocked', false);
-        $this->db->join('challange_user chu', 'chu.challange_id = ch.id', 'left');
+        $this->db->join('challange_user chu', 'chu.challange_id = ch.id and chu.is_quit=0', 'left');
         $this->db->join('users u', 'u.id = ch.user_id');
         $this->db->where('ch.is_deleted', 0);
         $this->db->group_by('ch.id');
@@ -36,7 +36,7 @@ class Admin_challenge_model extends CI_Model {
      */
     public function get_challenge_count() {
         $columns = ['ch.id', 'ch.name', 'ch.rewards', 'COUNT(chu.user_id)', 'ch.average_rank', 'ch.is_finished', 'u.name'];
-        $this->db->join('challange_user chu', 'chu.challange_id = ch.id', 'left');
+        $this->db->join('challange_user chu', 'chu.challange_id = ch.id and chu.is_quit=0', 'left');
         $this->db->join('users u', 'u.id = ch.user_id');
         $this->db->where('ch.is_deleted', 0);
         $this->db->group_by('ch.id');
@@ -82,9 +82,9 @@ class Admin_challenge_model extends CI_Model {
      * @author : HPA
      */
     public function get_challenge_results($group_id) {
-        $this->db->select('ch.name,ch.description,ch.rewards,u.name as user_name,u.user_image,(SELECT GROUP_CONCAT(chu1.user_id) from challange_user chu1 JOIN `challanges` `ch1` ON `ch1`.`id`=`chu1`.`challange_id` where chu1.challange_id = ' . $group_id . ')AS joined_user,COUNT(chu.user_id) as Total_User,ch.created_date,(SELECT GROUP_CONCAT(chp.id) from challange_post chp where chp.challange_id = ' . $group_id . ')AS challenge_post');
+        $this->db->select('ch.name,ch.description,ch.rewards,u.name as user_name,u.user_image,(SELECT GROUP_CONCAT(chu1.user_id) from challange_user chu1 JOIN `challanges` `ch1` ON `ch1`.`id`=`chu1`.`challange_id` where chu1.challange_id = ' . $group_id . ' and chu1.is_quit = 0)AS joined_user,COUNT(chu.user_id) as Total_User,ch.created_date,(SELECT GROUP_CONCAT(chp.id) from challange_post chp where chp.challange_id = ' . $group_id . ')AS challenge_post');
         $this->db->join('users u', 'u.id=ch.user_id');
-        $this->db->join('challange_user chu', 'ch.id=chu.user_id');
+        $this->db->join('challange_user chu', 'ch.id=chu.user_id and chu.is_quit=0');
         $this->db->where('ch.id', $group_id);
         $res_data = $this->db->get('challanges ch')->row_array();
         $joied_users = explode(',', $res_data['joined_user']);
