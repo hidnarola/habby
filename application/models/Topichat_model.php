@@ -97,7 +97,10 @@ class Topichat_model extends CI_Model {
                 // Fetch group according to user's hobby
                 $this->db->select('distinct(tg.id)');
                 $this->db->from('topic_group tg');
-                $this->db->where_not_in('tg.id', $ids_not_to_search);
+                if(count($ids_not_to_search) > 0)
+                {
+                    $this->db->where_not_in('tg.id', $ids_not_to_search);
+                }
                 $this->db->where('tg.is_blocked != 1 and tg.is_deleted != 1');
                 $this->db->limit($fetch_limit);
                 foreach ($user_hobbies as $hobby) {
@@ -114,7 +117,10 @@ class Topichat_model extends CI_Model {
                     // Fetch old group, that user has not joined
                     $this->db->select('distinct(tg.id)');
                     $this->db->from('topic_group tg');
-                    $this->db->where_not_in('tg.id', $ids_not_to_search);
+                    if(count($ids_not_to_search) > 0)
+                    {
+                        $this->db->where_not_in('tg.id', $ids_not_to_search);
+                    }
                     $this->db->where('tg.is_blocked != 1 and tg.is_deleted != 1');
                     $this->db->limit($fetch_limit);
                     $this->db->order_by('id', 'asc');
@@ -130,7 +136,10 @@ class Topichat_model extends CI_Model {
                 // Fetch Old groups
                 $this->db->select('distinct(tg.id)');
                 $this->db->from('topic_group tg');
-                $this->db->where_not_in('tg.id', $ids_not_to_search);
+                if(count($ids_not_to_search) > 0)
+                {
+                    $this->db->where_not_in('tg.id', $ids_not_to_search);
+                }
                 $this->db->where('tg.is_blocked != 1 and tg.is_deleted != 1');
                 $this->db->limit($fetch_limit);
                 $this->db->order_by('id', 'asc');
