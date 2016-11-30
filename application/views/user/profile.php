@@ -544,7 +544,7 @@
             <div class="modal-body">
                 <div class="panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button> 
-                    <b><?php echo lang('edit your profile') ?>123</b>
+                    <b><?php echo lang('edit your profile') ?></b>
                 </div>
                 <form class="" role="form" method="post" action="<?php echo base_url() . "home/profile" ?>">
                     <div class="form-group clearfix">

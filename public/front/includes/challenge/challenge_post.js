@@ -133,7 +133,9 @@ $('document').ready(function () {
 
         if ($t.is(':visible')) {
             $t.slideUp();
-            2            // Other stuff to do on slideUp
+            setTimeout(function(){
+                $('.grid').masonry();
+            },200);// Other stuff to do on slideUp
         } else {
             // Other stuff to down on slideDown
             var t = $(this);
@@ -143,6 +145,9 @@ $('document').ready(function () {
                 success: function (str) {
                     t.parents('.cmn_dtl').find('.reply_dtl').html(str);
                     $t.slideDown();
+                    setTimeout(function(){
+                        $('.grid').masonry();
+                    },500);
                 }
             });
         }
@@ -170,6 +175,9 @@ $('document').ready(function () {
                             t.before(str);
                             var reply = t.parents('.commnt_visit_sec').find('.comment_reply_cnt');
                             reply.html(parseInt(reply.html()) + 1);
+                            setTimeout(function(){
+                                $('.grid').masonry();
+                            },1000);
                         }
                     }
                 });

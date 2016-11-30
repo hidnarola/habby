@@ -395,7 +395,7 @@
                                                 <div class = "form-group clearfix">
                                                     <label class = "col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Topic'); ?> : </label>
                                                     <div class = "col-lg-11 col-md-11 col-sm-10 col-xs-9">
-                                                        <textarea class = "form-control topichat_txtarea" rows = "3" id = "textArea" placeholder = "#<?php echo lang('Topic'); ?>" name = "topic_name" required = "required"><?php echo $topichat['topic_name']; ?></textarea>
+                                                        <textarea class = "form-control topichat_txtarea" rows = "3" id = "topic_name" placeholder = "#<?php echo lang('Topic'); ?>" name = "topic_name" required = "required"><?php echo $topichat['topic_name']; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -449,7 +449,7 @@
                                                 <div class="form-group clearfix">
                                                     <label for="select" class="col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Note'); ?> :</label>
                                                     <div class="col-lg-11 col-md-11 col-sm-10 col-xs-9">
-                                                        <textarea class="form-control topichat_txtarea" rows="3" id="textArea" name="notes"><?php echo $topichat['notes']; ?></textarea>
+                                                        <textarea class="form-control topichat_txtarea" rows="3" id="notes" name="notes"><?php echo $topichat['notes']; ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -669,19 +669,40 @@ $myuserdata = array(
             }
         });
         $('#linkModal').on('hidden.bs.modal', function () {
-            console.log('modal close');
             $(this).removeData('bs.modal');
             if ($(this).find('.topichat_media_popup').find('iframe').length > 0)
             {
-                console.log('iframe found');
                 var iframe = $(this).find('.topichat_media_popup').find('iframe');
-                console.log(iframe.contents());
                 iframe.contents().find('video').each(function ()
                 {
                     this.pause();
                 });
             }
         });
-
+        $('#edit_grp').on('hidden.bs.modal', function () {
+            modal = $(this);
+            modal.find('#uploadFile').val('');
+            modal.find('#topic_name').val("<?php echo $topichat['topic_name'] ?>");
+            <?php
+                if($topichat['person_limit'] == -1)
+                {
+                    ?>
+                    modal.find('[name="person_limit"][value="-1"]').prop('checked',true);
+                    modal.find('#txt_No_of_person').prop('disabled',true);
+                    <?php
+                }
+                else
+                {
+                    ?>
+                    modal.find('[name="person_limit"][value="Yes"]').prop('checked',true);
+                    modal.find('#txt_No_of_person').prop('disabled',false);
+                    modal.find('#txt_No_of_person').val('<?php echo $topichat['person_limit']; ?>');
+                    <?php
+                }
+            ?>
+            modal.find('#imagePreview').attr("style","");
+            modal.find('.new_image_wrapper').hide();
+            modal.find("#notes").val("<?php echo $topichat['notes']; ?>");
+        });
     });
 </script>

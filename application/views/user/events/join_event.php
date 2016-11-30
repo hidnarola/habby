@@ -543,13 +543,13 @@
                                     <span><label class="control-label"><?php echo $this->session->user['name']; ?></label></span>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" value="<?php echo $event['title']; ?>" placeholder="<?php echo lang('Event title'); ?>:" name="title" required="true">
+                                    <input type="text" class="form-control" value="<?php echo $event['title']; ?>" placeholder="<?php echo lang('Event title'); ?>:" name="title" required="true" id="title">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <textarea class="form-control" name="details" placeholder="<?php echo lang("Events details and who you are looking for"); ?>"><?php echo $event['details']; ?></textarea>
+                                <textarea class="form-control" name="details" placeholder="<?php echo lang("Events details and who you are looking for"); ?>" id="details"><?php echo $event['details']; ?></textarea>
                             </div>
                         </div>
 
@@ -638,7 +638,7 @@
                                 <label class="control-label"><?php echo lang("Number of people to join"); ?></label>
                             </div>
                             <div class="col-md-9">
-                                <input type="number" class="form-control" min="1" name="limit" value="<?php echo $event['limit']; ?>" required="true">
+                                <input type="number" class="form-control" min="1" id="limit" name="limit" value="<?php echo $event['limit']; ?>" required="true">
                             </div>
                         </div>
                         <div class="form-group clearfix">
@@ -904,4 +904,30 @@ $myuserdata = array(
         resizeMap();
     });
 
+    $('#edit_event').on('hidden.bs.modal', function () {
+        modal = $(this);
+        modal.find('#uploadFile').val('');
+        modal.find('#title').val("<?php echo $event['title']; ?>");
+        modal.find('#details').val("<?php echo $event['details']; ?>");
+        modal.find('#title').val("<?php echo $event['title']; ?>");
+        modal.find('.image_wrapper').html();
+        modal.find('.image_wrapper').hide();
+        modal.find('#limit').val("<?php echo $event['limit'] ?>");
+        $("#start_time").data("DateTimePicker").date('<?php echo $event['start_time'] ?>');
+        $("#end_time").data("DateTimePicker").date('<?php echo $event['end_time'] ?>');
+        <?php 
+            if($event['approval_needed'])
+            {
+                ?>
+                modal.find('[name="approval"][value="Yes"]').prop('checked',true);
+                <?php
+            }
+            else
+            {
+                ?>
+                modal.find('[name="approval"][value="No"]').prop('checked',true);
+                <?php
+            }
+        ?>
+    });
 </script>

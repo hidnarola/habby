@@ -173,7 +173,7 @@ $method_name = $this->router->fetch_method(); //outputs index
                     <div class="form-group clearfix">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <?php $name = (set_value('name') == false) ? $user_data['name'] : set_value('name'); ?>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="<?php echo lang('Display Name'); ?>" value="<?php echo $name; ?>" required >
                         </div>
                     </div>
                     <div class="form-group clearfix">
@@ -315,7 +315,6 @@ $method_name = $this->router->fetch_method(); //outputs index
         var moretext = "Show more >";
         var lesstext = "Show less";
 
-
         $('.more').each(function () {
             var content = $(this).html();
 
@@ -342,6 +341,18 @@ $method_name = $this->router->fetch_method(); //outputs index
             $(this).parent().prev().toggle();
             $(this).prev().toggle();
             return false;
+        });
+        
+        $('#edit-profile').on('hidden.bs.modal', function () {
+            
+            modal = $('#edit-profile');
+            modal.find('#name').val("<?php echo $user_data['name']; ?>");
+            modal.find('#email').val("<?php echo $user_data['email']; ?>");
+            modal.find('#email').val("<?php echo $user_data['email']; ?>");
+            modal.find('#country').val("<?php echo $user_data['country']; ?>");
+            modal.find('[name="gender"][value="<?php echo $user_data['gender'] ?>"]').prop('checked',true);
+            modal.find('#bio').val("<?php echo $user_data['bio'] ?>");
+            modal.find('#hobby').val("<?php echo $user_data['hobby'] ?>");
         });
     });
 </script>
