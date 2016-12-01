@@ -209,6 +209,7 @@ class Post extends CI_Controller {
 
     public function display_post($post_id) {
         $this->data['post'] = $this->Post_model->get_post_details($post_id);
+        $this->data['page'] = 'post';
         $this->load->view('user/post/display_single_post', $this->data);
     }
 
@@ -218,6 +219,7 @@ class Post extends CI_Controller {
 
     public function display_challenge_post($post_id) {
         $this->data['post'] = $this->Post_model->get_challenge_post_details($post_id);
+        $this->data['page'] = 'challenge';
         $this->load->view('user/post/display_single_post', $this->data);
     }
 

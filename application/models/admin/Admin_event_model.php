@@ -68,9 +68,10 @@ class Admin_event_model extends CI_Model {
      * @author : ar
      */
     public function get_event_result($group_id) {
-        $this->db->select('e.*,u.name as username,u.user_image,em.media');
+        $this->db->select('e.*,u.name as username,u.user_image,em.media,count(eu.id) as joined_users');
         $this->db->join('users u', 'u.id = e.user_id');
         $this->db->join('event_media em', 'em.event_id = e.id', 'left');
+        $this->db->join('event_users eu','e.id = eu.event_id','left');
         $this->db->where('e.id', $group_id);
         $res_data = $this->db->get('events e')->row_array();
 

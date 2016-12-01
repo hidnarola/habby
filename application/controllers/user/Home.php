@@ -416,6 +416,8 @@ class Home extends CI_Controller {
         }
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['user_events'] = $this->Event_model->get_users_event($user_id, 0, 3);
+        $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
+        $this->data['followings'] = $this->Users_model->get_user_following($user_id);
         $this->data['joined_events'] = $this->Event_model->get_users_joined_event($user_id, 0, 3);
         if ($user_id == $this->session->user['id']) {
             $this->data['event_request'] = $this->Event_model->get_join_request($user_id);
@@ -519,5 +521,4 @@ class Home extends CI_Controller {
             print_r($sun_info);
         }
     }
-
 }

@@ -203,7 +203,7 @@ class Topichat extends CI_Controller {
             }
         }
         $this->Topichat_model->update_topic_group_data($group_id, $update_data);
-        $this->session->set_flashdata('message', array('message' => lang('Topic updated successfully'), 'class' => 'alert alert-success'));
+        $this->session->set_flashdata('message', array('message' => lang('Topic updated successfully'), 'class' => 'alert alert-success text-center flashmsg'));
         // Add entry in modification table
         $arr['user_id'] = $this->session->user['id'];
         $arr['description'] = "Information has been changed by";
@@ -275,6 +275,8 @@ class Topichat extends CI_Controller {
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
+        $grouplimit = $this->Topichat_model->is_group_limit_exceed($Id);
+        $this->data['joined_user'] = $grouplimit['joined_user'];
         $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
         $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id, $image_limit = 8);
         $this->data['recent_links'] = $this->Topichat_model->get_recent_links($Id, $image_limit = 2);

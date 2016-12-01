@@ -228,7 +228,6 @@
 
 .event_user{
     display:inline-block;
-
 }
 
 .event_profile_sec .usr_post_img {display:inline-block;}
@@ -241,6 +240,11 @@
     max-height: 400px;
     overflow: auto;
     margin-bottom: 15px;
+    word-wrap: break-word;
+}
+
+.event-page .event-detail-content{
+    word-break: break-all;
 }
 /*
 .chat_1
@@ -1073,6 +1077,9 @@ h2.chlng_hdg ,
     position: absolute;
     width: 0;
 }
+.ftr_ul li > a > i.fa{
+    padding: 0px;
+}
 .popover-content-custom > .arrow::after {
     border-width: 10px;
     content: "";
@@ -1101,6 +1108,12 @@ h2.chlng_hdg ,
     word-break: break-all;
     display: inline;
 }
+
+#myModal .modal-content{
+    max-height: 500px;
+    overflow: auto;
+}
+
 @media(min-width:1583px){
     .row.event_container
     {

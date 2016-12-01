@@ -68,11 +68,11 @@
                                 <textarea class="form-control" id="hobby" name="hobby" placeholder="<?php echo lang('Enter your hobby seprate by comma'); ?>" rows="20" cols="20"><?php echo set_value('hobby'); ?></textarea>
                             </div>
                         </div>
-                        <div class="row form-group">
+<!--                        <div class="row form-group">
                             <div class="col-lg-12">
                                 <p class="policy_tag"><?php echo lang('By signing up, you agree to the'); ?> <a href="#"><?php echo lang('User Policy') ?></a></p>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="row form-group">
                             <div class="col-lg-12">
                                 <div class="signbtnsec">

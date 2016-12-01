@@ -638,7 +638,7 @@
                                 <label class="control-label"><?php echo lang("Number of people to join"); ?></label>
                             </div>
                             <div class="col-md-9">
-                                <input type="number" class="form-control" min="1" id="limit" name="limit" value="<?php echo $event['limit']; ?>" required="true">
+                                <input type="number" class="form-control" min="<?php echo count($event_members) ?>" id="limit" name="limit" value="<?php echo $event['limit']; ?>" required="true" title="Please enter numeric value and value must not less then number of current joined user">
                             </div>
                         </div>
                         <div class="form-group clearfix">

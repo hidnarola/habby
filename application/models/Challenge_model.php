@@ -300,6 +300,7 @@ class Challenge_model extends CI_Model {
         $this->db->where('ch.is_finished', 0);
         $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
         $this->db->order_by('cu.challange_date', 'DESC');
+        $this->db->where('cu.is_quit', 0);
         $res_data = $this->db->get('challange_user cu')->result_array();
         return $res_data;
     }

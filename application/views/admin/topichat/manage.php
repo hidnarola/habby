@@ -65,8 +65,11 @@ if ($this->session->flashdata('success')) {
                                 <input type="radio" name="person_limit" id="optionsRadios1" value="-1" <?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] < 0) ? "checked" : "" ?>> No limit
                             </label>
                             <label class="radio-inline">
+                                <?php
+                                    $min = (isset($Topichats))?count($Topichats['joined_user']):1;
+                                ?>
                                 <input type="radio" name="person_limit" id="No_of_person" value="Yes" <?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] > 0 ) ? "checked" : "" ?>>
-                                <input type="number" class="form-control" id="txt_No_of_person" name="No_of_person" value="<?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] > 0) ? intval($Topichats['person_limit']) : "Customise" ?>" placeholder="<?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] > 0) ? intval($Topichats['person_limit']) : "Customise" ?>" disabled min="1">
+                                <input type="number" class="form-control" id="txt_No_of_person" name="No_of_person" value="<?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] > 0) ? intval($Topichats['person_limit']) : "Customise" ?>" placeholder="<?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] > 0) ? intval($Topichats['person_limit']) : "Customise" ?>" <?php echo (isset($Topichats['person_limit']) && $Topichats['person_limit'] > 0 ) ? "" : "disabled" ?> min="<?php echo $min; ?>">
                             </label>
                         </div>
                         <div class="form-group form-group-material">

@@ -123,8 +123,8 @@
 
                                                                 <?php
                                                                 $media_url = (isset($post['media'])) ? $post['media'] : '';
-                                                                $media = "st_via='habby' st_image='" . base_url() . "uploads/user_post/" . $media_url . "'";
-                                                                $sharethis_content = "st_url='" . base_url() . "post/display_challenge_post/" . $post['id'] . "' st_title='" . $post['description'] . "' " . $media;
+                                                                $media = "st_via='habby' st_image='" . base_url() . "uploads/challenge_post/" . $media_url . "'";
+                                                                $sharethis_content = "st_url='" . base_url() . "post/display_challenge_post/" . $post['challange_post_id'] . "' st_title='" . $post['description'] . "' " . $media;
                                                                 ?>
                                                                 <span class='st_facebook' displayText='' <?php echo $sharethis_content ?>></span>
                                                                 <span class='st_twitter' displayText='' <?php echo $sharethis_content ?>></span>

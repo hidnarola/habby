@@ -465,8 +465,9 @@ class Post_model extends CI_Model {
      * 
      */
     public function get_challenge_post_details($post_id) {
-        $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment');
+        $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment,c.description');
         $this->db->from('challange_post p');
+        $this->db->join('challanges c','c.id = p.challange_id');
         $this->db->where('p.id', $post_id);
         $this->db->join('users u', 'p.user_id = u.id');
         $this->db->join('challange_post_coin pc', 'p.id = pc.challange_post_id', 'left');
@@ -477,7 +478,7 @@ class Post_model extends CI_Model {
         $post = $this->db->get()->row_array();
 
         if (!empty($post)) {
-            $this->db->where('p.post_id', $post['id']);
+            $this->db->where('p.challange_post_id', $post['id']);
             $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply');
             $this->db->from('challange_post_comment p');
             $this->db->join('users u', 'p.user_id = u.id');

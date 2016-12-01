@@ -106,7 +106,21 @@ if ($this->session->flashdata('success')) {
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Person limit <span class="text-danger">*</span> </label>
                             <div class="col-lg-7">
-                                <input type="number" name="limit" placeholder="Enter person limit" class="form-control" value="<?php echo (isset($events['limit'])) ? $events['limit'] : set_value('limit'); ?>" required="" min="1">
+                                <?php 
+                                    if(isset($events))
+                                    {
+                                        ?>
+                                        <input type="number" name="limit" placeholder="Enter person limit" class="form-control" value="<?php echo (isset($events['limit'])) ? $events['limit'] : set_value('limit'); ?>" required="" min="<?php echo $events['joined_users'] ?>" title="Please enter numeric value and value must not less then number of current joined user">
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <input type="number" name="limit" placeholder="Enter person limit" class="form-control" value="<?php echo (isset($events['limit'])) ? $events['limit'] : set_value('limit'); ?>" required="" min="1">
+                                        <?php
+                                    }
+                                ?>
+                                
                             </div>
                         </div>
                         <div class="form-group">
