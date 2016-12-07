@@ -30,7 +30,7 @@ if ($servername == 'habby') {
 } else if ($servername == "clientapp.narola.online") {
     $config['base_url'] = "http://clientapp.narola.online/HD/habby/";
 } else {
-    $config['base_url'] = "http://www.habby-go.com/";
+    $config['base_url'] = "https://www.habby-go.com/";
 }
 
 
