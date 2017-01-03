@@ -40,8 +40,8 @@
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout.js" ?>"></script>
         <script src="<?php echo DEFAULT_JS_PATH . "chat/hangout-ui.js" ?>"></script>-->
         <script src="<?php echo DEFAULT_CHAT_DOC_PATH . "fancywebsocket.js" ?>"></script>
-        <script src="http://cdn.embed.ly/jquery.embedly-3.0.5.min.js" type="text/javascript"></script>
-        <script src="http://cdn.embed.ly/jquery.preview-0.3.2.min.js" type="text/javascript"></script>
+        <script src="https://cdn.embed.ly/jquery.embedly-3.0.5.min.js" type="text/javascript"></script>
+        <script src="https://cdn.embed.ly/jquery.preview-0.3.2.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="<?php echo DEFAULT_CSS_PATH . "preview.css" ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_ADMIN_CSS_PATH . "sweetalert.css"; ?>">
         <script src="<?php echo DEFAULT_ADMIN_JS_PATH . "sweetalert.min.js"; ?>"></script>
