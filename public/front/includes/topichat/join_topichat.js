@@ -13,7 +13,7 @@ function send(text) {
 function share_links(url) {
     var api_key = '18566814981d41358f03a7635f716d8a';
     var i = Math.random().toString(36).substring(7);
-    var embedlyAPI = "http://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
+    var embedlyAPI = "https://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
     var youtube_video_html = null, html = '';
     $(".loader").addClass('show');
     $.ajax({
