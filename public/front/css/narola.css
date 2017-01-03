@@ -1125,6 +1125,7 @@ h2.chlng_hdg ,
     .topich_chat_typesec_modal{
         width: 450px !important;
     }
+    
 }
 @media(max-width:1400px){
     .modal-dialog.topichat_media_modal {
@@ -1145,4 +1146,7 @@ h2.chlng_hdg ,
 }
 @media(max-width:480px){
 
+}
+.topic_2cntnr{
+    height: 100%;
 }
