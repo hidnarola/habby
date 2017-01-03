@@ -219,6 +219,9 @@ class User extends CI_Controller {
                     // Create video thumb
                     
                     $cmd = ROOT_PATH . "ffmpeg/bin/ffmpeg -i " . ROOT_PATH . "uploads/chat_media/" . $data['file_name'] . " -ss 00:00:01.435 -f image2 -vframes 1 " . ROOT_PATH . "uploads/chat_media/" . $data['raw_name'] . "_thumb.png";
+                    
+                    echo $cmd;
+                    
                     exec($cmd);
                 }
             }
