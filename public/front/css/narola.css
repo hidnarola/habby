@@ -1125,6 +1125,7 @@ h2.chlng_hdg ,
     top: 0;
     width: 651px;
 }
+.solmate_lg_row_custom .soulmate_past_due_sec2 {margin-bottom: 0px;}
 @media(min-width:1583px){
     .row.event_container
     {
