@@ -1113,6 +1113,7 @@ h2.chlng_hdg ,
     max-height: 500px;
     overflow: auto;
 }
+.solmate_lg_row_custom{top:0;}
 .solmate_lg_row_custom,.solmate_lg_row_custom .chat_area_solmat,
 .solmate_lg_row_custom .topich_chat_typesec_chalnge2{
     position: relative;
