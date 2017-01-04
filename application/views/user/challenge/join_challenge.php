@@ -1,4 +1,4 @@
-<div class="row solmate_lg_row">
+<div class="row solmate_lg_row solmate_lg_row_custom">
     <div class="container topic_2cntnr">
         <p class="mr_p visible-xs" >
             <a href="#" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
