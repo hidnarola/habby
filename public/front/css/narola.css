@@ -1118,7 +1118,8 @@ h2.chlng_hdg ,
     position: relative;
 }
 .solmate_lg_row_custom .chat_area_chalnge2{
-        height: 500px;
+   max-height: 455px;
+    min-height: 455px;
     overflow: auto;
     top: 0;
     width: 651px;
