@@ -399,6 +399,32 @@ class Event_model extends CI_Model {
         return $post;
     }
 
+    /*
+     * 
+     */
+    public function search_event($keyword,$logged_in_user,$limit,$start){
+        $this->db->select('e.*,u.name,u.user_image,count(distinct eu.id) as is_joined,count(distinct er.id) as is_requested');
+        $this->db->from('events e');
+        $this->db->join('users u', 'e.user_id = u.id');
+        $this->db->join('event_users eu', 'eu.event_id = e.id and eu.user_id = ' . $logged_in_user, 'left');
+        $this->db->join('event_request er', 'er.event_id = e.id and er.user_id = ' . $logged_in_user, 'left');
+        $this->db->where('e.title like "%'.$keyword.'%"');
+        $this->db->order_by('e.start_time', 'desc');
+        $this->db->group_by('e.id');
+        $this->db->limit($limit, $start);
+
+        $post = $this->db->get()->result_array();
+        $event_ids = array_column($post, 'id');
+        if (count($event_ids) > 0) {
+            $this->db->where_in('event_id', $event_ids);
+            $media = $this->db->get('event_media')->result_array();
+            foreach ($media as $event_media) {
+                $post[array_search($event_media['event_id'], $event_ids)]['media'][] = $event_media;
+            }
+        }
+
+        return $post;
+    }
 }
 
 ?>

@@ -276,6 +276,7 @@ class Topichat extends CI_Controller {
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
         $grouplimit = $this->Topichat_model->is_group_limit_exceed($Id);
+        $this->data['is_subscribed'] = $this->Topichat_model->is_user_scubscribe_for_group($Id,$this->session->user['id']);
         $this->data['joined_user'] = $grouplimit['joined_user'];
         $this->data['recent_images'] = $this->Topichat_model->get_recent_images($Id, $image_limit = 8);
         $this->data['recent_videos'] = $this->Topichat_model->get_recent_videos($Id, $image_limit = 8);
@@ -496,4 +497,46 @@ class Topichat extends CI_Controller {
         }
     }
 
+    /* Phase 2 - changes
+     * 
+     * subscribe_topichat used to subscribe topic group. Normally called using ajax and parameter were passed using post
+     * 
+     * echo int     0      if, fail in updation
+     *              1      if, succesfully updated
+     *              2      if, any other condition
+     * 
+     * develop by : ar
+     */
+    public function subscribe_topichat()
+    {
+        $user_id = $this->input->post('user_id');
+        $group_id = $this->input->post('group_id');
+        $action = $this->input->post('action');
+        if($action == "subscribe")
+        {
+            if($this->Topichat_model->subscribe_topichat_group($group_id,$user_id))
+            {
+                echo "1";
+            }
+            else
+            {
+                echo "0";
+            }
+        }
+        else if($action == "unsubscribe")
+        {
+            if($this->Topichat_model->unsubscribe_topichat_group($group_id,$user_id))
+            {
+                echo "1";
+            }
+            else
+            {
+                echo "0";
+            }
+        }
+        else
+        {
+            echo "2";
+        }
+    }
 }

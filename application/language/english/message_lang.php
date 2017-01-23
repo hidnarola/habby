@@ -467,4 +467,16 @@ $lang["No saved post available."] = "No saved post available.";
 $lang["No post available."] = "No post available.";
 $lang["You havan't joined any challenge."] = "You havan't joined any challenge.";
 $lang[""] = "";
+
+// =================================================================================================
+// Phase - 2 changes
+// =================================================================================================
+$lang['Subscribe'] = "Subscribe";
+$lang['Unsubscribe'] = "Unsubscribe";
+$lang['Subscribed Groups'] = 'Subscribed Groups';
+$lang['No Subscribed Groups'] = 'No Subscribed Groups';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+
 ?>

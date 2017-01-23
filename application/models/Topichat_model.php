@@ -615,6 +615,98 @@ class Topichat_model extends CI_Model {
         return $this->db->get('topic_group tg')->row_array();
     }
 
-}
+    /* Phase 2 changes
+     * 
+     * subscribe_topichat_group is used to subscribe topichat group by user
 
+     * @param   $group_id      int      specify topi_group_id
+     *          $user_id       int      specify user_id, that is going to subscribe topichat group
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * 
+     * developed by : ar
+     */
+    public function subscribe_topichat_group($group_id,$user_id){
+        $this->db->where('topic_id', $group_id);
+        $this->db->where('user_id', $user_id);
+        $array['is_subscribed'] = "1";
+        if ($this->db->update('topic_group_user', $array)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /* Phase 2 changes
+     * 
+     * unsubscribe_topichat_group is used to unsubscribe topichat group by user
+
+     * @param   $group_id      int      specify topi_group_id
+     *          $user_id       int      specify user_id, that is going to unsubscribe topichat group
+     *
+     * return 	true, if success
+     * 		false, if fail
+     * 
+     * developed by : ar
+     */
+    public function unsubscribe_topichat_group($group_id,$user_id){
+        $this->db->where('topic_id', $group_id);
+        $this->db->where('user_id', $user_id);
+        $array['is_subscribed'] = "0";
+        if ($this->db->update('topic_group_user', $array)) {
+            return true;
+        }
+        return false;
+    }
+    
+    /* Phase 2 changes
+     * 
+     * is_user_scubscribe_for_group is used to idenitify that user is sbscriber of particular group or not
+
+     * @param   $group_id      int      specify topi_group_id
+     *          $user_id       int      specify user_id
+     *
+     * return 	true, if if user is subscriber of given group
+     * 		false, if user is not subscriber of given group
+     * 
+     * developed by : ar
+     */
+    public function is_user_scubscribe_for_group($group_id,$user_id){
+        try
+        {
+            $this->db->select('is_subscribed');
+            $this->db->where('topic_id',$group_id);
+            $this->db->where('user_id',$user_id);
+            return $this->db->get('topic_group_user')->row_array()['is_subscribed'];
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }
+    }
+    
+    
+    /* Phase 2 changes
+     * 
+     * is_user_scubscribe_for_group is used to idenitify that user is sbscriber of particular group or not
+
+     * @param   $group_id      int      specify topi_group_id
+     *          $user_id       int      specify user_id
+     *
+     * return 	true, if if user is subscriber of given group
+     * 		false, if user is not subscriber of given group
+     * 
+     * developed by : ar
+     */
+    public function get_subscribed_topichat_group($user_id){
+        $this->db->select('tg.*');
+        $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id.' and tt.is_subscribed = "1"');
+        $this->db->where('tg.is_blocked', '0');
+        $this->db->where('tg.is_deleted', '0');
+        $this->db->order_by('tg.created_date', 'DESC');
+        $this->db->group_by('tg.id');
+        $res_data = $this->db->get('topic_group tg')->result_array();
+        return $res_data;
+    }
+}
 ?>

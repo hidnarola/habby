@@ -1,19 +1,17 @@
-$(function () {
-    //set date and time picker for start time and end time
-    $('#start_time').datetimepicker({
-        locale: 'en'
+$('document').ready(function(){
+    
+    // On click of smile-share post tab, apply masonry effect to the smile-sharepost container
+    $('#load_post_tab').click(function(){
+        setTimeout(function () {
+            $('.post_masonry_article').each(function () {
+                if ($(this).offset().left > 250)
+                {
+                    $(this).addClass('right');
+                }
+            });
+        },1000);
     });
-    $('#end_time').datetimepicker({
-        locale: 'en'
-    });
-
-    $("#start_time").on("dp.hide", function (e) {
-        $('#end_time').data("DateTimePicker").minDate(e.date);
-    });
-    $("#end_time").on("dp.hide", function (e) {
-        $('#start_time').data("DateTimePicker").maxDate(e.date);
-    });
-
+    
     // Join event
     $('.event_container').on('click', '.event_join', function () {
         $this = $(this);
@@ -56,49 +54,56 @@ $(function () {
             }
         });
     });
-
-    // Lazy loading
-    var page = 2;
-    var load = true;
-    $('#loadMore').click(function () {
-        if (load)
+    
+    // To open popover of smile-share post for social sharing
+    $('.post_section').on('click', '.share-link', function () {
+        $popover = $(this).siblings('.popover-content-custom');
+        if ($popover.hasClass('hide'))
         {
-            loaddata();
+            $popover.removeClass('hide').addClass('show');
+        } else
+        {
+            $popover.removeClass('show').addClass('hide');
         }
     });
-
-    function loaddata()
+    
+    
+    // Lazy loading
+    
+    // Lazy loading for event
+    var event_page = 2;
+    var event_load = true;
+    $('.event_loadmore').click(function(){
+        if (event_load)
+        {
+            event_loaddata();
+        }
+    });
+    
+    function event_loaddata()
     {
         uri = window.location.href;
         console.log(uri);
-        var url;
-        if (uri.indexOf('filter_event') > -1)
-        {
-            url = base_url + 'events/filter_event/' + page;
-        }
-        else
-        {
-            url = base_url + 'events/' + page;
-        }
-
+        url = base_url + 'search';
         $.ajax({
             url: url,
-            method: 'get',
+            method: 'post',
+            data : 'is_ajax=yes&event_page='+event_page+'&search_keyword='+search_keyword,
             success: function (data) {
                 data = JSON.parse(data);
-                var cnt = data.cnt;
-                console.log(cnt);
                 if (data.status == 0)
                 {
-                    load = false;
+                    event_load = false;
                     $('.event_container').append("<div class='col-sm-12 alert alert-info text-center'>" + no_events + "</div>");
-                    $('#loadMore').remove();
-                } else
+                    $('.event_loadmore').remove();
+                }
+                else
                 {
+                    var cnt = data.cnt;
                     $('.event_container').append(data.view);
                     if (cnt < 2) {
-                        load = false;
-                        $('#loadMore').remove();
+                        event_load = false;
+                        $('.event_loadmore').remove();
                     }
                     setTimeout(function () {
                         $('.event_post').each(function () {
@@ -111,16 +116,6 @@ $(function () {
                 }
             }
         });
-        page++;
+        event_page++;
     }
-
-    // Set post in two column format
-    setTimeout(function () {
-        $('.event_post').each(function () {
-            if ($(this).offset().left > 250)
-            {
-                $(this).addClass('right');
-            }
-        });
-    }, 1200);
 });

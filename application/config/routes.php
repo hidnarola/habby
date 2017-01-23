@@ -58,6 +58,8 @@ $route['register'] = "login/register";
 $route["home"] = "user/home";
 $route["home/(:any)"] = "user/home/$1";
 
+$route["search"] = "user/home/search";
+
 $route["post"] = "user/post";
 $route["post/(:any)"] = "user/post/$1";
 $route["post/(:any)/(:any)"] = "user/post/$1/$2";

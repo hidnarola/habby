@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Open rank modal and display rank post in it
-    $('.challenge_container').on('click', '.others_rank', function () {
+    $('.challenge_container, #c_group').on('click', '.others_rank', function () {
         var t = $(this);
         var challenge_id = t.data('id');
 

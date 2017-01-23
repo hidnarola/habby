@@ -682,6 +682,91 @@ class Post_model extends CI_Model {
         return $post;
     }
 
-}
+    /*
+     * smileshare_post is used to display post that only having media according pagination
+     * @param $data 	array[]	specify where condition
+     * @param $logged_in_user int user_id of logged in user
+     * @param $start 	int 	specify start position for pagination
+     * @param $limit 	int 	specify page size
+     * 
+     * @return array[][] return found record as per condition
+     * developed by : ar
+     */
 
+    public function search_smileshare_post($keyword, $logged_in_user, $start = 0, $limit = 0) {
+        $this->db->select('p.*,u.name as post_user,u.user_image as post_user_profile,count(DISTINCT pc.id) as post_coin, count(DISTINCT pl.id) as post_like, count(DISTINCT pco.id) as post_comment, count(DISTINCT ps.id) as post_share, count(DISTINCT pcoin.id) as is_coined, count(DISTINCT pli.id) as is_liked, count(DISTINCT sp.id) as is_saved, pm.media');
+        $this->db->from('post p');
+        $this->db->join('users u', 'p.user_id = u.id');
+        $this->db->join('post_coin pc', 'p.id = pc.post_id', 'left');
+        $this->db->join('post_coin pcoin', 'p.id = pcoin.post_id and pcoin.user_id=' . $logged_in_user, 'left');
+        $this->db->join('post_like pl', 'p.id = pl.post_id and pl.is_liked=1', 'left');
+        $this->db->join('post_like pli', 'p.id = pli.post_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
+        $this->db->join('post_comments pco', 'p.id = pco.post_id', 'left');
+        $this->db->join('post_share ps', 'p.id = ps.post_id', 'left');
+        $this->db->join('saved_post sp', 'p.id = sp.post_id and sp.user_id=' . $logged_in_user, 'left');
+        $this->db->join('post_media pm', 'p.id = pm.post_id','left');
+        $this->db->where('p.is_block','0');
+        $this->db->where('p.is_deleted','0');
+        $this->db->where('p.description like "%'.$keyword.'%"');
+        $this->db->order_by('p.id', 'desc');
+        $this->db->group_by('p.id');
+        $this->db->limit($limit, $start);
+        $post = $this->db->get()->result_array();
+
+        $post_ids = array_column($post, 'id');
+
+        if (count($post_ids) > 0) {
+            $this->db->where_in('post_id', $post_ids);
+            $post_media = $this->db->get('post_media')->result_array();
+            $post_media_ids = array_column($post_media, 'post_id');
+
+            if (count($post_media_ids) > 0) {
+                for ($i = 0; $i < count($post); ++$i) {
+                    $post[$i]['media'] = '';
+                    if (in_array($post[$i]['id'], $post_media_ids)) {
+                        $posts = array();
+                        foreach ($post_media as $value) {
+                            if ($post[$i]['id'] == $value['post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post[$i]['media'] = $posts;
+                    }
+                }
+            }
+
+            // Post comments
+            $this->db->where_in('p.post_id', $post_ids);
+            $this->db->select('p.*, u.name, u.user_image, count(DISTINCT pl.id) as cnt_like, count(DISTINCT pr.id) as cnt_reply, count(pli.id) as is_liked');
+            $this->db->from('post_comments p');
+            $this->db->join('users u', 'p.user_id = u.id');
+            $this->db->join('post_comment_like pl', 'p.id = pl.post_comment_id and pl.is_liked=1', 'left');
+            $this->db->join('post_comment_like pli', 'p.id = pli.post_comment_id and pli.is_liked=1 and pli.user_id=' . $logged_in_user, 'left');
+            $this->db->join('post_comment_reply pr', 'p.id = pr.post_comment_id', 'left');
+            $this->db->order_by('p.created_date', 'desc');
+            $this->db->group_by('p.id');
+            //$this->db->join();
+
+            $post_comments = $this->db->get()->result_array();
+            //        echo $this->db->last_query();
+            $post_comments_ids = array_column($post_comments, 'post_id');
+            //        pr($post_comments,1);
+            if (count($post_comments_ids) > 0) {
+                for ($i = 0; $i < count($post); ++$i) {
+                    $post[$i]['comments'] = array();
+                    if (in_array($post[$i]['id'], $post_comments_ids)) {
+                        $posts = array();
+                        foreach ($post_comments as $value) {
+                            if ($post[$i]['id'] == $value['post_id']) {
+                                $posts[] = $value;
+                            }
+                        }
+                        $post[$i]['comments'] = $posts;
+                    }
+                }
+            }
+        }
+        return $post;
+    }
+}
 ?>

@@ -113,6 +113,42 @@
                                 }
                                 ?>
                             </div>
+                            
+                            <hr>
+                            <div class="row grp_3sec">
+                                <h2 class="subgroup"><?php echo lang('Subscribed Groups'); ?></h2>
+                                <?php
+                                if ($subscribed_group != null && !empty($subscribed_group)) {
+                                    foreach ($subscribed_group as $s_group) {
+                                        ?>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="grp_prsnl_innr">
+                                                <h2><?php echo $s_group['topic_name'] ?></h2>
+                                            </div>
+                                            <p class="enter_btn">
+                                                <?php
+                                                if ($user_data['id'] == $this->session->user['id']) {
+                                                    ?>
+                                                    <a href="<?php echo base_url() . "topichat/details/" . urlencode(base64_encode($s_group['id'])) ?>"><?php echo lang('Enter'); ?></a>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </p>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="alert alert-info text-center">
+                                            <?php echo lang('No Subscribed Groups'); ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

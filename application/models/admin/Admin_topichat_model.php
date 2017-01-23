@@ -131,7 +131,11 @@ class Admin_topichat_model extends CI_Model {
         $this->db->order_by('tg.id', 'desc');
         return $this->db->get('topic_group_chat tg')->result_array();
     }
-
+    
+    public function get_topichat_subscriber($group_id){
+        $this->db->select('u.id, u.name, u.user_image');
+        $this->db->join('topic_group_user tgu','tgu.user_id = u.id and tgu.topic_id = '.$group_id.' and is_subscribed = "1"');
+        return $this->db->get('users u')->result_array();
+    }
 }
-
 ?>

@@ -24,6 +24,8 @@
     var no_events ="<?php echo lang('No more event found'); ?>";
     var no_groups ="<?php echo lang('No more group found'); ?>";
     var no_content ="<?php echo lang('No contents available'); ?>";
+    var subscribe = "<?php echo lang('Subscribe'); ?>";
+    var unsubscribe = "<?php echo lang('Unsubscribe'); ?>";
 </script>
 <?php
 $language = $this->session->userdata('language');
@@ -128,11 +130,12 @@ $language = $this->session->userdata('language');
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="<?php echo DEFAULT_IMAGE_PATH . "search_icon.png" ?>" class="img-responsive center-block"></a>
                                         <ul class="dropdown-menu" role="menu" id="srchdrp">
                                             <li>
-                                                <div id="custom-search-input">
-                                                    <div class="input-group">
-                                                        <input type="text" class="  search-query form-control" placeholder="Search">
+                                                <form method="post" action="<?php echo base_url() ."search" ?>">
+                                                    <div id="custom-search-input" class="search-wrapper">
+                                                        <input type="text" class="form-control" placeholder="Search" name="search_keyword">
+                                                        <button type="submit"><i class="fa fa-search"></i></button>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </li>
                                         </ul>
                                     </li>

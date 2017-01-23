@@ -43,7 +43,7 @@ if ($this->session->flashdata('success')) {
         <div class="content pt0 flashmsg">
             <div class = "alert alert-danger">
                 <a class="close" data-dismiss="alert">X</a>
-                <strong><?php echo validation_errors(); ?></strong>       
+                <strong><?php echo validation_errors(); ?></strong>
             </div>
         </div>
         <?php
@@ -86,6 +86,24 @@ if ($this->session->flashdata('success')) {
                                                 <li class="media">
                                                     <div class="media-left">
                                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $joined_user['joined_user_image']; ?>" class="img-circle img-xs" alt=""> <?php echo $joined_user['joined_user_name'] ?>
+                                                    </div>
+                                                </li>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-semibold">Subscribed Users <span class="badge badge-success heading-text"><?php echo count($subscribe_user); ?></span></h4>
+                                    <ul class="media-list padding-15 challenge-accepted-user-list">
+                                        <?php
+                                        if (isset($subscribe_user) && !empty($subscribe_user)) {
+                                            foreach ($subscribe_user as $joined_user) {
+                                                ?>
+                                                <li class="media">
+                                                    <div class="media-left">
+                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $joined_user['user_image']; ?>" class="img-circle img-xs" alt=""> <?php echo $joined_user['name'] ?>
                                                     </div>
                                                 </li>
                                                 <?php

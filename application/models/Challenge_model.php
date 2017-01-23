@@ -825,6 +825,41 @@ class Challenge_model extends CI_Model {
         return false;
     }
 
+    /*
+     * 
+     */
+    public function search_challenges($start, $limit) {
+        $user_id = logged_in_user_id();
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank');
+        $this->db->join('users', 'users.id = ch.user_id');
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
+        $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
+        // $this->db->where('ch.user_id !=' . $user_id . ' AND cu.user_id IS NULL');
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
+        $this->db->where('ch.is_finished', 0);
+        $this->db->order_by('ch.created_date', 'DESC');
+        $this->db->group_by('ch.id');
+        $this->db->limit($limit, $start);
+        $res_data = $this->db->get('challanges ch')->result_array();
+        return $res_data;
+    }
+    
+    /*
+     * 
+     */
+    public function get_search_challenge_group($keyword,$user_id,$start,$limit){
+        $this->db->select('ch.*,users.name as display_name,users.user_image,count(distinct cu.id) as is_applied, count(distinct cr.id) as is_ranked,cr.rank as given_rank');
+        $this->db->join('users', 'users.id = ch.user_id');
+        $this->db->join('challange_user cu', 'cu.challange_id = ch.id AND cu.user_id =' . $user_id . ' AND cu.is_quit=0', 'left');
+        $this->db->join('challange_rank cr', 'cr.challange_id = ch.id and cr.user_id = ' . $user_id, 'left');
+        $this->db->where('ch.is_blocked != 1 and ch.is_deleted != 1');
+        $this->db->where('ch.is_finished', 0);
+        $this->db->where('ch.name like "%'.$keyword.'%" or ch.description like "%'.$keyword.'%"');
+        $this->db->order_by('ch.created_date', 'DESC');
+        $this->db->group_by('ch.id');
+        $this->db->limit($limit, $start);
+        $res_data = $this->db->get('challanges ch')->result_array();
+        return $res_data;
+    }
 }
-
 ?>

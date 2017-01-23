@@ -328,6 +328,7 @@ class Home extends CI_Controller {
         $this->data['all_countries'] = $this->Users_model->get_all_countries();
         $this->data['my_topichats'] = $this->Topichat_model->get_my_topichat_group($user_id);
         $this->data['joined_topichats'] = $this->Topichat_model->get_joined_topichat_group($user_id);
+        $this->data['subscribed_group'] = $this->Topichat_model->get_subscribed_topichat_group($user_id);
         $this->data['followers'] = $this->Users_model->get_user_follower($user_id);
         $this->data['followings'] = $this->Users_model->get_user_following($user_id);
         $this->template->load('front', 'user/topichat/home_topichat', $this->data);
@@ -519,6 +520,56 @@ class Home extends CI_Controller {
 
             $sun_info = date_sun_info(time(), $lat, $lon);
             print_r($sun_info);
+        }
+    }
+
+    public function search() {
+        $user_id = $this->session->user['id'];
+        $this->data['event_limit'] = 2;
+        $this->data['group_limit'] = 3;
+        
+        if ($this->input->post('is_ajax')) {
+            if($this->input->post('event_page'))
+            {
+                $search_keyword = $this->input->post('search_keyword');
+                $event_page = $this->input->post('event_page');
+                $event_start = ($event_page - 1) * $this->data['event_limit'];
+                $this->data['event_posts'] = $this->data['event_posts'] = $this->Event_model->search_event($search_keyword, $user_id, $this->data['event_limit'], $event_start);
+                $data = array();
+                if (count($this->data['event_posts']) > 0) {
+                    $data['view'] = $this->load->view('user/partial/events/display_events', $this->data, true);
+                    $data['status'] = 1;
+                    $data['cnt'] = count($this->data['event_posts']);
+                } else {
+                    $data['status'] = 0;
+                }
+                echo json_encode($data);
+                die;
+            }
+        } else {
+            $this->data['meta_data'] = $this->Seo_model->get_page_meta('search');
+            if ($this->input->post('search_keyword')) {
+                $event_page = 1;
+                $event_start = ($event_page - 1) * $this->data['event_limit'];
+
+                $group_page = 1;
+                $group_start = ($group_page - 1) * $this->data['group_limit'];
+
+                $challenge_page = 1;
+                $challenge_limit = 3;
+                $challenge_start = ($challenge_page - 1) * $challenge_limit;
+
+                $post_page = 1;
+                $post_limit = 2;
+                $post_start = ($post_page - 1) * $post_limit;
+
+                $this->data['search_keyword'] = $this->input->post('search_keyword');
+                $this->data['event_posts'] = $this->Event_model->search_event($this->data['search_keyword'], $user_id, $this->data['event_limit'], $event_start);
+                $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($this->data['search_keyword'], $filter = "", $group_start, $this->data['group_limit']);
+                $this->data['Challenges'] = $this->Challenge_model->get_search_challenge_group($this->data['search_keyword'], $user_id, $challenge_limit, $challenge_start);
+                $this->data['posts'] = $this->Post_model->search_smileshare_post($this->data['search_keyword'], $user_id, $post_start, $post_limit);
+            }
+            $this->template->load('front', 'user/search.php', $this->data);
         }
     }
 }

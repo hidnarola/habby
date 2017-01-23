@@ -443,6 +443,7 @@ $(document).ready(function () {
             return false;
         }
     });
+
     $('.mainchatarea').on('click', '.submit_btn', function (e) {
         msg = $('#message_div').html();
         if (msg.trim() != '')
@@ -454,6 +455,7 @@ $(document).ready(function () {
             $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
         }
     });
+
     $('#mediaModal').on('click', '.submit_btn', function () {
         msg1 = $('#mediaModal').find('#message_div').html();
         if (msg1.trim() != '')
@@ -465,6 +467,7 @@ $(document).ready(function () {
             $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
         }
     });
+
     $('#linkModal').on('click', '.submit_btn', function () {
         msg1 = $('#linkModal').find('#message_div').html();
         if (msg1.trim() != '')
@@ -652,4 +655,62 @@ $(document).ready(function () {
         $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
     });
     Server.connect();
+
+    // Other jquery
+    $('#topic_group_subscribe').click(function () {
+        var thi = $(this);
+        if(thi.data('is_subscribe') == 'no')
+        {
+            s_text = "You want to subscribe this group!";
+            s_confirm_button = "Yes, Subscribe it!";
+            s_action = "subscribe";
+            s_success_text = "Subscribed";
+            s_success_msg = "You have subscribed this group.";
+            s_after_btn_text = unsubscribe;
+        }
+        else if(thi.data('is_subscribe') == 'yes')
+        {
+            s_text = "You want to Unsubscribe this group!";
+            s_confirm_button = "Yes, Unsubscribe it!";
+            s_action = "unsubscribe";
+            s_success_text = "Unsubscribed";
+            s_success_msg = "You have unssubscribed this group.";
+            s_after_btn_text = subscribe;
+        }
+        swal({
+            title: "Are you sure?",
+            text: s_text,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: s_confirm_button,
+            closeOnConfirm: false
+        },
+        function () {
+            $.ajax({
+                url : base_url+'topichat/subscribe_topichat',
+                data : 'user_id='+data.id+"&group_id="+group_id+"&action="+s_action,
+                method : 'post',
+                success : function(resp){
+                    if(resp == "1")
+                    {
+                        if(thi.data('is_subscribe') == 'no')
+                        {
+                            thi.data('is_subscribe','yes');
+                        }
+                        else if(thi.data('is_subscribe') == 'yes')
+                        {
+                            thi.data('is_subscribe','no');
+                        }
+                        thi.html(s_after_btn_text);
+                        swal(s_success_text,s_success_msg,"success");
+                    }
+                    else
+                    {
+                        swal("failed","Your request has been denied due to some problem","error");
+                    }
+                }
+            });
+        });
+    });
 });
