@@ -527,6 +527,7 @@ class Home extends CI_Controller {
         $user_id = $this->session->user['id'];
         $this->data['event_limit'] = 2;
         $this->data['group_limit'] = 3;
+        $this->data['challenge_limit'] = 3;
         
         if ($this->input->post('is_ajax')) {
             if($this->input->post('event_page'))
@@ -534,12 +535,28 @@ class Home extends CI_Controller {
                 $search_keyword = $this->input->post('search_keyword');
                 $event_page = $this->input->post('event_page');
                 $event_start = ($event_page - 1) * $this->data['event_limit'];
-                $this->data['event_posts'] = $this->data['event_posts'] = $this->Event_model->search_event($search_keyword, $user_id, $this->data['event_limit'], $event_start);
+                $this->data['event_posts'] = $this->Event_model->search_event($search_keyword, $user_id, $this->data['event_limit'], $event_start);
                 $data = array();
                 if (count($this->data['event_posts']) > 0) {
                     $data['view'] = $this->load->view('user/partial/events/display_events', $this->data, true);
                     $data['status'] = 1;
                     $data['cnt'] = count($this->data['event_posts']);
+                } else {
+                    $data['status'] = 0;
+                }
+                echo json_encode($data);
+                die;
+            }
+            else if ($this->input->post('topic_page')){
+                $search_keyword = $this->input->post('search_keyword');
+                $topic_page = $this->input->post('topic_page');
+                $group_start = ($topic_page - 1) * $this->data['group_limit'];
+                $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($search_keyword, $filter = "", $group_start, $this->data['group_limit']);
+                $data = array();
+                if (count($this->data['topichat_groups']) > 0) {
+                    $data['view'] = $this->load->view('user/partial/topichat/display_topichat_group', $this->data, true);
+                    $data['status'] = 1;
+                    $data['cnt'] = count($this->data['topichat_groups']);
                 } else {
                     $data['status'] = 0;
                 }
@@ -556,8 +573,7 @@ class Home extends CI_Controller {
                 $group_start = ($group_page - 1) * $this->data['group_limit'];
 
                 $challenge_page = 1;
-                $challenge_limit = 3;
-                $challenge_start = ($challenge_page - 1) * $challenge_limit;
+                $challenge_start = ($challenge_page - 1) * $this->data['challenge_limit'];
 
                 $post_page = 1;
                 $post_limit = 2;
@@ -566,7 +582,7 @@ class Home extends CI_Controller {
                 $this->data['search_keyword'] = $this->input->post('search_keyword');
                 $this->data['event_posts'] = $this->Event_model->search_event($this->data['search_keyword'], $user_id, $this->data['event_limit'], $event_start);
                 $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($this->data['search_keyword'], $filter = "", $group_start, $this->data['group_limit']);
-                $this->data['Challenges'] = $this->Challenge_model->get_search_challenge_group($this->data['search_keyword'], $user_id, $challenge_limit, $challenge_start);
+                $this->data['Challenges'] = $this->Challenge_model->get_search_challenge_group($this->data['search_keyword'], $user_id, $this->data['challenge_limit'], $challenge_start);
                 $this->data['posts'] = $this->Post_model->search_smileshare_post($this->data['search_keyword'], $user_id, $post_start, $post_limit);
             }
             $this->template->load('front', 'user/search.php', $this->data);

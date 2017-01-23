@@ -82,8 +82,6 @@ $('document').ready(function(){
     
     function event_loaddata()
     {
-        uri = window.location.href;
-        console.log(uri);
         url = base_url + 'search';
         $.ajax({
             url: url,
@@ -117,5 +115,82 @@ $('document').ready(function(){
             }
         });
         event_page++;
+    }
+    
+    
+    // Lazy loading for topichat group
+    var topic_page = 2;
+    var topic_load = true;
+    $('.topic_loadmore').click(function(){
+        if (topic_load)
+        {
+            topic_loaddata();
+        }
+    });
+    
+    function topic_loaddata(){
+        url = base_url + 'search';
+        $.ajax({
+            url: url,
+            method: 'post',
+            data : 'is_ajax=yes&topic_page='+topic_page+'&search_keyword='+search_keyword,
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    topic_load = false;
+                    $('.group_container').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
+                    $('.topic_loadmore').remove();
+                }
+                else
+                {
+                    var cnt = data.cnt;
+                    $('.group_container').append(data.view);
+                    if (cnt < 3) {
+                        topic_load = false;
+                        $('.topic_loadmore').remove();
+                    }
+                }
+            }
+        });
+        topic_page++;
+    }
+    
+    // Lazy loading for challenge group
+    var challenge_page = 2;
+    var challenge_load = true;
+    $('.challenge_loadmore').click(function(){
+        if (challenge_load)
+        {
+            challenge_loaddata();
+        }
+    });
+    
+    function challenge_loaddata(){
+        url = base_url + 'search';
+        $.ajax({
+            url: url,
+            method: 'post',
+            data : 'is_ajax=yes&challenge_page='+challenge_page+'&search_keyword='+search_keyword,
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    challenge_load = false;
+                    $('.challenge_container').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
+                    $('.challenge_loadmore').remove();
+                }
+                else
+                {
+                    var cnt = data.cnt;
+                    $('.challenge_container').append(data.view);
+                    if (cnt < 3) {
+                        challenge_load = false;
+                        $('.challenge_loadmore').remove();
+                    }
+                }
+            }
+        });
+        topic_page++;
     }
 });

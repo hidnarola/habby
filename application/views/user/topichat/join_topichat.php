@@ -195,7 +195,7 @@
                                     ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                       ?>"-->
+                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                        ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
 
@@ -270,7 +270,7 @@
                             <div class="clearfix"></div>
                             <div class="tittl_sec2">
                                 <p class="topchat_p">
-                                    <a href="javascript:;" id="topic_group_subscribe" class="pstbtn" data-is_subscribe="<?php echo ($is_subscribed)?'yes':'no'; ?>"><?php echo ($is_subscribed)?lang('Unsubscribe'):lang('Subscribe'); ?></a>
+                                    <a href="javascript:;" id="topic_group_subscribe" class="pstbtn" data-is_subscribe="<?php echo ($is_subscribed) ? 'yes' : 'no'; ?>"><?php echo ($is_subscribed) ? lang('Unsubscribe') : lang('Subscribe'); ?></a>
                                 </p>
                             </div>
                         </div>
@@ -339,106 +339,10 @@
                                         </div>
                                     </div>
                                     <!-- //chat_area_updated_list -->
-                                    
-                                     <!-- chat_area_updated_list -->
-                                    <div class="chat_area_updated_list">
-                                        <div class="chat_area_updated_list_top">
-                                            <h4>Total x is Watching: </h4>
-                                            <div class="total_views_list">
-                                                <ul>
-                                                    <li>
-                                                        <a href="javascript:void(0);">A</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">B</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">C</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="more_views">3 More</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="chat_area_updated_list_middle">
-                                            <div class="chat_area_updated_list_middle_left">
-                                                <div class="topichat_media_thumb">
-                                                    <a href="javascript:void(0);">A</a>
-                                                </div>
-                                                <div class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="chat_area_updated_list_middle_right">
-                                                <div class="chat_area_updated_list_middle_head">
-                                                    <h4>Title/Description</h4>
-                                                </div>
-                                                <div class="chat_area_updated_list_middle_middle">
-                                                    POST/COMMENTS
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- //chat_area_updated_list -->
-                                    
-                                     <!-- chat_area_updated_list -->
-                                    <div class="chat_area_updated_list">
-                                        <div class="chat_area_updated_list_top">
-                                            <h4>Total x is Watching: </h4>
-                                            <div class="total_views_list">
-                                                <ul>
-                                                    <li>
-                                                        <a href="javascript:void(0);">A</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">B</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">C</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="more_views">3 More</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="chat_area_updated_list_middle">
-                                            <div class="chat_area_updated_list_middle_left">
-                                                <div class="topichat_media_thumb">
-                                                    <a href="javascript:void(0);">A</a>
-                                                </div>
-                                                <div class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="chat_area_updated_list_middle_right">
-                                                <div class="chat_area_updated_list_middle_head">
-                                                    <h4>Title/Description</h4>
-                                                </div>
-                                                <div class="chat_area_updated_list_middle_middle">
-                                                    POST/COMMENTS
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- //chat_area_updated_list -->
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- Chat area section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0 hidden">
@@ -486,54 +390,54 @@
                                     <div class="topic_prfle_icon_sec-bottom">
                                         <div class="chat-window-wrapper">
                                             <div class="fb-chat-window">
-                                                
+
                                                 <div class="panel panel-chat">
-        <div class="panel-heading">
-            <a href="#" class="chatMinimize" onclick="return false"><span>Chats</span></a>
-            <a href="#" class="chatClose" onclick="return false"><i class="glyphicon glyphicon-remove"></i></a>
-            <div class="clearFix"></div>
-        </div>
-        <div class="panel-body">
-            <div class="messageMe">
-                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
-                <div class="clearFix"></div>
-            </div>
-            <div class="messageHer">
-                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
-                <div class="clearFix"></div>
-            </div>
-            <div class="messageMe">
-                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
-                <div class="clearFix"></div>
-            </div>
-            <div class="messageHer">
-                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
-                <div class="clearFix"></div>
-            </div>
-            <div class="messageMe">
-                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
-                <div class="clearFix"></div>
-            </div>
-            <div class="messageHer">
-                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
-                <div class="clearFix"></div>
-            </div>
-            <div class="clearFix"></div>
-        </div>
-        <div class="panel-footer">
-            <textarea name="textMessage" cols="0" rows="0"></textarea>
-        </div>
-    </div>
-                                                 <a class="chat-window-link">Chats</a>
+                                                    <div class="panel-heading">
+                                                        <a href="#" class="chatMinimize" onclick="return false"><span>Chats</span></a>
+                                                        <a href="#" class="chatClose" onclick="return false"><i class="glyphicon glyphicon-remove"></i></a>
+                                                        <div class="clearFix"></div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="messageMe">
+                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
+                                                            <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
+                                                            <div class="clearFix"></div>
+                                                        </div>
+                                                        <div class="messageHer">
+                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
+                                                            <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
+                                                            <div class="clearFix"></div>
+                                                        </div>
+                                                        <div class="messageMe">
+                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
+                                                            <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
+                                                            <div class="clearFix"></div>
+                                                        </div>
+                                                        <div class="messageHer">
+                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
+                                                            <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
+                                                            <div class="clearFix"></div>
+                                                        </div>
+                                                        <div class="messageMe">
+                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
+                                                            <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
+                                                            <div class="clearFix"></div>
+                                                        </div>
+                                                        <div class="messageHer">
+                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
+                                                            <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
+                                                            <div class="clearFix"></div>
+                                                        </div>
+                                                        <div class="clearFix"></div>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                        <textarea name="textMessage" cols="0" rows="0"></textarea>
+                                                    </div>
+                                                </div>
+                                                <a class="chat-window-link">Chats</a>
                                             </div>
-                                           
-                                            
+
+
                                             <div class="topic_prfle_icon_sec-bottom-upload-control">
                                                 <input type="file">
                                                 <span class="">Upload Files</span>
@@ -545,45 +449,45 @@
                             <!-- Smily icon and profile secton end here -->
 
                             <!-- Type area start here -->
-                           <!--  <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="topic_textarea">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
-                                                <input type="hidden" id='message' name='message' class="form-control"/>
-                                                <!--<span class="input-group-btn upld_icnpad">
-                                                    <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
-                                                </span> - ->
-                                                <span class="input-group-btn upld_icnpad">
-                                                    <div class="fileUpload up_img btn">
-                                                        <span><img title="Upload image" src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
-                                                        <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
-                                                    </div>
-                                                </span>
-                                                <span class="input-group-btn upld_icnpad">
-                                                    <div class="fileUpload up_img btn">
-                                                        <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
-                                                        <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
-                                                    </div>
-                                                </span>
-                                                <span class="input-group-btn upld_icnpad">
-                                                    <div class="fileUpload up_img btn">
-                                                        <span><img title="Upload file" src="<?php echo DEFAULT_IMAGE_PATH; ?>upload.png"></span>
-                                                        <input type="file" name="upload_files" class="upload" id="upload_files"/>
-                                                    </div>
-                                                </span>
-                                                <span class="input-group-btn upld_icnpad">
-                                                    <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
-                                                </span>
-                                                <span class="input-group-btn">
-                                                    <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!--  <div class="row">
+                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                     <div class="topic_textarea">
+                                         <div class="form-group">
+                                             <div class="input-group">
+                                                 <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
+                                                 <input type="hidden" id='message' name='message' class="form-control"/>
+                                                 <!--<span class="input-group-btn upld_icnpad">
+                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
+                                                 </span> - ->
+                                                 <span class="input-group-btn upld_icnpad">
+                                                     <div class="fileUpload up_img btn">
+                                                         <span><img title="Upload image" src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
+                                                         <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                                     </div>
+                                                 </span>
+                                                 <span class="input-group-btn upld_icnpad">
+                                                     <div class="fileUpload up_img btn">
+                                                         <span><img title="Upload video" src="<?php echo DEFAULT_IMAGE_PATH; ?>video_record_img.png"></span>
+                                                         <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
+                                                     </div>
+                                                 </span>
+                                                 <span class="input-group-btn upld_icnpad">
+                                                     <div class="fileUpload up_img btn">
+                                                         <span><img title="Upload file" src="<?php echo DEFAULT_IMAGE_PATH; ?>upload.png"></span>
+                                                         <input type="file" name="upload_files" class="upload" id="upload_files"/>
+                                                     </div>
+                                                 </span>
+                                                 <span class="input-group-btn upld_icnpad">
+                                                     <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                 </span>
+                                                 <span class="input-group-btn">
+                                                     <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
+                                                 </span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
                             <!-- Type area end here -->
 
                         </div>

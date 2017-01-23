@@ -49,7 +49,7 @@
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="groups">
-                    <div class="panel-body">
+                    <div class="panel-body group_container">
                         <?php
                         if (isset($topichat_groups) && !empty($topichat_groups)) {
                             $cnt = count($topichat_groups);
@@ -103,6 +103,23 @@
                         }
                         ?>
                     </div>
+                    <?php
+                        if(isset($topichat_groups) && count($topichat_groups) >= $group_limit)
+                        {
+                            ?>
+                            <div class = "row">
+                                <div class = "container">
+                                    <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                                        <a id="loadMore" class="topic_loadmore" href = "javascript:;"><?php echo lang('Load More'); ?></a>
+                                        <p class="totop">
+                                            <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="c_group">
                     <div class="panel-body">
