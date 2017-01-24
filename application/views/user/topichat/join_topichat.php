@@ -362,7 +362,7 @@
                                                                 }
                                                                 ?>
                                                                         <a href="javascript:void(0);">
-                                                                            <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
+                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
                                                                         </a>
                                                                         <span><?php echo $msg['message']; ?></span>
                                                                         <div class="clearFix"></div>
