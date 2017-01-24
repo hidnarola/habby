@@ -280,6 +280,11 @@ class Topichat_model extends CI_Model {
         $this->db->limit($limit, 0);
         $this->db->order_by('tg.id', 'desc');
         $this->db->group_by('tg.id');
+        
+        // Changes for phase 2, to get only media post
+        $this->db->where('tg.media_type IS NOT NULL');
+        // Changes over
+        
         return $this->db->get('topic_group_chat tg')->result_array();
     }
 

@@ -270,7 +270,7 @@ class Topichat extends CI_Controller {
      */
 
     public function details($Id) {
-        $limit = 20;
+        $limit = 10;
         $this->data['Id'] = $Id;
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;

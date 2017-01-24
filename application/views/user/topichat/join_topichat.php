@@ -290,68 +290,14 @@
                                     <option>1</option>
                                 </select>
                             </div>
+                            
                             <div class="total_views_wrapper">
                                 <div class="total_views_inner">
-                                    <!-- chat_area_updated_list -->
-                                    <div class="chat_area_updated_list">
-                                        <div class="chat_area_updated_list_top">
-                                            <h4>Total x is Watching: </h4>
-                                            <div class="total_views_list">
-                                                <ul>
-                                                    <li>
-                                                        <a href="javascript:void(0);">A</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">B</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);">C</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0);" class="more_views">3 More</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="chat_area_updated_list_middle">
-                                            <div class="chat_area_updated_list_middle_left">
-                                                <div class="topichat_media_thumb">
-                                                    <a href="javascript:void(0);">A</a>
-                                                </div>
-                                                <div class="topichat_media_rank">
-                                                    <button type="button" id="add" class="add add_btn smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                    <span class="rank_rate">0</span>
-                                                    <button type="button" id="sub" class="sub smlr_btn">
-                                                        <img src="http://habby/public/front/img/challeng_arrow.png" class="rank_img_sec">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="chat_area_updated_list_middle_right">
-                                                <div class="chat_area_updated_list_middle_head">
-                                                    <h4>Title/Description</h4>
-                                                </div>
-                                                <div class="chat_area_updated_list_middle_middle">
-                                                    POST/COMMENTS
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- //chat_area_updated_list -->
+                                    <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <!-- Chat area section start here -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0 hidden">
-                        <div class="chat_area2 topichat_msg_sec">
-<!--                            <p class="notifctn"><b>Mike</b> Changed topic.</p> -->
-                            <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
-                        </div>
-                    </div>
-                    <!-- Chat area section end here -->
 
                     <!-- Type Chat section start here -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainchatarea">
@@ -779,6 +725,28 @@ $myuserdata = array(
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/topichat.js"></script>
 <script type="text/javascript">
     $('document').ready(function () {
+        
+        // Phase 2 changes for open and close chat window
+        $(".panel.panel-chat > .panel-heading > .chatMinimize").click(function(){
+            if($(this).parent().parent().hasClass('mini'))
+            {
+                $(this).parent().parent().removeClass('mini').addClass('normal');
+                $('.panel.panel-chat > .panel-body').animate({height: "250px"}, 500).show();
+                $('.panel.panel-chat > .panel-footer').animate({height: "75px"}, 500).show();
+            }
+            else
+            {
+                $(this).parent().parent().removeClass('normal').addClass('mini');
+                $('.panel.panel-chat > .panel-body').animate({height: "0"}, 500);
+                $('.panel.panel-chat > .panel-footer').animate({height: "0"}, 500);
+                setTimeout(function() {
+                    $('.panel.panel-chat > .panel-body').hide();
+                    $('.panel.panel-chat > .panel-footer').hide();
+                }, 500);
+            }
+        });
+        // Changes over
+        
         setTimeout(function () {
             $(".fancybox").fancybox({
                 'width': 300, // set the width
