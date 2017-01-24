@@ -339,7 +339,7 @@
                                                 <div class="panel panel-chat">
                                                     <div class="panel-heading">
                                                         <a href="#" class="chatMinimize" onclick="return false"><span>Chats</span></a>
-                                                        <a href="#" class="chatClose" onclick="return false"><i class="glyphicon glyphicon-remove"></i></a>
+                                                        <!--<a href="#" class="chatClose" onclick="return false"><i class="glyphicon glyphicon-remove"></i></a> -->
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-body">
@@ -373,7 +373,16 @@
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-footer">
-                                                        <textarea name="textMessage" cols="0" rows="0"></textarea>
+                                                        <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
+                                                 <input type="hidden" id='message' name='message' class="form-control"/>
+                                                 <span class="input-group-btn-span">
+                                                 <span class="input-group-btn upld_icnpad">
+                                                     <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                 </span>
+                                                 <span class="input-group-btn">
+                                                     <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
+                                                 </span>
+                                                 </span>
                                                     </div>
                                                 </div>
                                                 <!-- <a class="chat-window-link">Chats</a> -->
@@ -387,7 +396,7 @@
                             </div>
                             <!-- Smily icon and profile secton end here -->
 
-                            <!-- Type area start here -->
+                            <!-- Type area start here -- >
                             <div class="row">
                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                      <div class="topic_textarea">
@@ -395,9 +404,7 @@
                                              <div class="input-group">
                                                  <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
                                                  <input type="hidden" id='message' name='message' class="form-control"/>
-                                                 <!--<span class="input-group-btn upld_icnpad">
-                                                     <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
-                                                 </span> -->
+
                                                  <span class="input-group-btn upld_icnpad">
                                                      <div class="fileUpload up_img btn">
                                                          <span><img title="Upload image" src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>

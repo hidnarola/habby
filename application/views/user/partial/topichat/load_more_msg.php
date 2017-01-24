@@ -21,6 +21,7 @@ foreach ($messages as $message) {
                     </li>
                 </ul>
             </div>
+            <div class="clearfix"></div>
         </div>
         <div class="chat_area_updated_list_middle">
             <div class="chat_area_updated_list_middle_left">
@@ -47,7 +48,7 @@ foreach ($messages as $message) {
             </div>
             <div class="chat_area_updated_list_middle_right">
                 <div class="chat_area_updated_list_middle_head">
-                    <h4><?php echo $message['message']; ?></h4>
+                    <h4><?php echo 'title'.$message['message']; ?></h4>
                 </div>
                 <div class="chat_area_updated_list_middle_middle">
                     <?php
