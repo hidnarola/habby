@@ -122,7 +122,7 @@
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="c_group">
-                    <div class="panel-body">
+                    <div class="panel-body challenge_container">
                         <?php 
                             if(isset($Challenges) && !empty($Challenges))
                             {
@@ -138,6 +138,23 @@
                             }
                         ?>
                     </div>
+                    <?php
+                        if(isset($Challenges) && count($Challenges) >= $challenge_limit)
+                        {
+                            ?>
+                            <div class = "row">
+                                <div class = "container">
+                                    <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                                        <a id="loadMore" class="challenge_loadmore" href = "javascript:;"><?php echo lang('Load More'); ?></a>
+                                        <p class="totop">
+                                            <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="ss_post">
                     <div class="panel-body post_section">
@@ -156,6 +173,23 @@
                             }
                         ?>
                     </div>
+                    <?php
+                        if(isset($posts) && count($posts) >= $post_limit)
+                        {
+                            ?>
+                            <div class = "row">
+                                <div class = "container">
+                                    <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sm-offset-4">
+                                        <a id="loadMore" class="post_loadmore" href = "javascript:;"><?php echo lang('Load More'); ?></a>
+                                        <p class="totop">
+                                            <a href = "#top" style = "display: inline;"><img class = "img-responsive" src = "<?php echo DEFAULT_IMAGE_PATH . "upload.png" ?>"></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>

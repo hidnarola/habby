@@ -528,6 +528,7 @@ class Home extends CI_Controller {
         $this->data['event_limit'] = 2;
         $this->data['group_limit'] = 3;
         $this->data['challenge_limit'] = 3;
+        $this->data['post_limit'] = 2;
         
         if ($this->input->post('is_ajax')) {
             if($this->input->post('event_page'))
@@ -563,6 +564,38 @@ class Home extends CI_Controller {
                 echo json_encode($data);
                 die;
             }
+            else if ($this->input->post('challenge_page')){
+                $search_keyword = $this->input->post('search_keyword');
+                $challenge_page = $this->input->post('challenge_page');
+                $challenge_start = ($challenge_page - 1) * $this->data['group_limit'];
+                $this->data['Challenges'] = $this->Challenge_model->get_search_challenge_group($search_keyword, $user_id, $challenge_start,$this->data['challenge_limit']);
+                $data = array();
+                if (count($this->data['Challenges']) > 0) {
+                    $data['view'] = $this->load->view('user/partial/challenge/display_challenges', $this->data, true);
+                    $data['status'] = 1;
+                    $data['cnt'] = count($this->data['Challenges']);
+                } else {
+                    $data['status'] = 0;
+                }
+                echo json_encode($data);
+                die;
+            }
+            else if ($this->input->post('post_page')){
+                $search_keyword = $this->input->post('search_keyword');
+                $post_page = $this->input->post('post_page');
+                $post_start = ($post_page - 1) * $this->data['post_limit'];
+                $this->data['posts'] = $this->Post_model->search_smileshare_post($search_keyword, $user_id, $post_start, $this->data['post_limit']);
+                $data = array();
+                if (count($this->data['posts']) > 0) {
+                    $data['view'] = $this->load->view('user/partial/load_post_data', $this->data, true);
+                    $data['status'] = 1;
+                    $data['cnt'] = count($this->data['posts']);
+                } else {
+                    $data['status'] = 0;
+                }
+                echo json_encode($data);
+                die;
+            }
         } else {
             $this->data['meta_data'] = $this->Seo_model->get_page_meta('search');
             if ($this->input->post('search_keyword')) {
@@ -576,14 +609,13 @@ class Home extends CI_Controller {
                 $challenge_start = ($challenge_page - 1) * $this->data['challenge_limit'];
 
                 $post_page = 1;
-                $post_limit = 2;
-                $post_start = ($post_page - 1) * $post_limit;
+                $post_start = ($post_page - 1) * $this->data['post_limit'];
 
                 $this->data['search_keyword'] = $this->input->post('search_keyword');
                 $this->data['event_posts'] = $this->Event_model->search_event($this->data['search_keyword'], $user_id, $this->data['event_limit'], $event_start);
                 $this->data['topichat_groups'] = $this->Topichat_model->get_search_topichat_group($this->data['search_keyword'], $filter = "", $group_start, $this->data['group_limit']);
-                $this->data['Challenges'] = $this->Challenge_model->get_search_challenge_group($this->data['search_keyword'], $user_id, $this->data['challenge_limit'], $challenge_start);
-                $this->data['posts'] = $this->Post_model->search_smileshare_post($this->data['search_keyword'], $user_id, $post_start, $post_limit);
+                $this->data['Challenges'] = $this->Challenge_model->get_search_challenge_group($this->data['search_keyword'], $user_id, $challenge_start,$this->data['challenge_limit']);
+                $this->data['posts'] = $this->Post_model->search_smileshare_post($this->data['search_keyword'], $user_id, $post_start, $this->data['post_limit']);
             }
             $this->template->load('front', 'user/search.php', $this->data);
         }

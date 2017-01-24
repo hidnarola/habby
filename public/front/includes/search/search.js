@@ -191,6 +191,52 @@ $('document').ready(function(){
                 }
             }
         });
-        topic_page++;
+        challenge_page++;
+    }
+    
+    // Lazy loading for post group
+    var post_page = 2;
+    var post_load = true;
+    $('.post_loadmore').click(function(){
+        if (post_load)
+        {
+            post_loaddata();
+        }
+    });
+    
+    function post_loaddata(){
+        url = base_url + 'search';
+        $.ajax({
+            url: url,
+            method: 'post',
+            data : 'is_ajax=yes&post_page='+post_page+'&search_keyword='+search_keyword,
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status == 0)
+                {
+                    post_load = false;
+                    $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'>" + no_post + "</div>");
+                    $('.post_loadmore').remove();
+                }
+                else
+                {
+                    var cnt = data.cnt;
+                    $('.post_section').append(data.view);
+                    if (cnt < 2) {
+                        post_load = false;
+                        $('.post_loadmore').remove();
+                    }
+                    setTimeout(function () {
+                        $('.post_masonry_article').each(function () {
+                            if ($(this).offset().left > 250)
+                            {
+                                $(this).addClass('right');
+                            }
+                        });
+                    },500);
+                }
+            }
+        });
+        post_page++;
     }
 });
