@@ -1438,7 +1438,7 @@ h2.chlng_hdg ,
 }
 .panel.panel-chat .panel-footer #message_div{
     white-space: nowrap;
-    width: 240px;
+    width: 238px;
     overflow: hidden;
 }
 @media(min-width:1583px){
