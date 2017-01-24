@@ -290,6 +290,10 @@ class Topichat extends CI_Controller {
 //        pr($this->data['top_rank_post'],1);
         $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit);
         krsort($this->data['messages']); // Reverse array
+        
+        $this->data['text_messages'] = $this->Topichat_model->get_text_messages($Id, $this->session->user['id'], $limit);
+        krsort($this->data['text_messages']); // Reverse array
+        
         $this->template->load('join', 'user/topichat/join_topichat', $this->data);
     }
 
@@ -298,7 +302,7 @@ class Topichat extends CI_Controller {
         $last_msg_id = $this->input->post('last_msg');
         $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $this->session->user['id'], $limit, $last_msg_id);
         if (count($this->data['messages']) > 0) {
-            $data['query'] = $this->db->last_query();
+            //$data['query'] = $this->db->last_query();
             $data['status'] = 1;
             krsort($this->data['messages']); // Reverse array
             $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);

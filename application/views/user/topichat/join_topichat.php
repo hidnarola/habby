@@ -336,7 +336,6 @@
                                     <div class="topic_prfle_icon_sec-bottom">
                                         <div class="chat-window-wrapper">
                                             <div class="fb-chat-window">
-
                                                 <div class="panel panel-chat">
                                                     <div class="panel-heading">
                                                         <a href="#" class="chatMinimize" onclick="return false"><span>Chats</span></a>
@@ -344,48 +343,42 @@
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <div class="messageMe">
-                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                                                            <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
-                                                            <div class="clearFix"></div>
-                                                        </div>
-                                                        <div class="messageHer">
-                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                                                            <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
-                                                            <div class="clearFix"></div>
-                                                        </div>
-                                                        <div class="messageMe">
-                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                                                            <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
-                                                            <div class="clearFix"></div>
-                                                        </div>
-                                                        <div class="messageHer">
-                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                                                            <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
-                                                            <div class="clearFix"></div>
-                                                        </div>
-                                                        <div class="messageMe">
-                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                                                            <span>asdasdssadasdasdassssssssssssssssssssssssssssssssssssssssssdasdasd</span>
-                                                            <div class="clearFix"></div>
-                                                        </div>
-                                                        <div class="messageHer">
-                                                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" alt=""/>
-                                                            <span>asdasdsassssssssssssssssssssssssssssssssssssssss</span>
-                                                            <div class="clearFix"></div>
-                                                        </div>
+                                                        
+                                                        <?php
+                                                            foreach($text_messages as $msg){
+                                                                if($msg['user_id'] == $this->session->user['id'])
+                                                                {
+                                                                    // Display message on left side
+                                                                    ?>
+                                                                    <div class="messageHer">                                                                        
+                                                                    <?php
+                                                                }
+                                                                else
+                                                                {
+                                                                    // Display message on right side
+                                                                    ?>
+                                                                    <div class="messageMe">
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                                        <a href="javascript:void(0);">
+                                                                            <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'>
+                                                                        </a>
+                                                                        <span><?php echo $msg['message']; ?></span>
+                                                                        <div class="clearFix"></div>
+                                                                    </div>
+                                                                <?php
+                                                            }
+                                                        ?>
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-footer">
                                                         <textarea name="textMessage" cols="0" rows="0"></textarea>
                                                     </div>
                                                 </div>
-                                                <a class="chat-window-link">Chats</a>
+                                                <!-- <a class="chat-window-link">Chats</a> -->
                                             </div>
-
-
-                                            <div class="topic_prfle_icon_sec-bottom-upload-control">
-                                                <input type="file">
+                                            <div class="topic_prfle_icon_sec-bottom-upload-control" data-toggle="modal" data-target="#upload_file_section">
                                                 <span class="">Upload Files</span>
                                             </div>
                                         </div>
@@ -395,7 +388,7 @@
                             <!-- Smily icon and profile secton end here -->
 
                             <!-- Type area start here -->
-                            <!--  <div class="row">
+                            <div class="row">
                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                      <div class="topic_textarea">
                                          <div class="form-group">
@@ -404,7 +397,7 @@
                                                  <input type="hidden" id='message' name='message' class="form-control"/>
                                                  <!--<span class="input-group-btn upld_icnpad">
                                                      <a href="#"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol1.png"></a>
-                                                 </span> - ->
+                                                 </span> -->
                                                  <span class="input-group-btn upld_icnpad">
                                                      <div class="fileUpload up_img btn">
                                                          <span><img title="Upload image" src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol2.png"></span>
@@ -703,6 +696,76 @@
         </div>
     </div>
 </div>
+
+<!--  Post modal section start here -->
+<div class="modal upload-modal" id="upload_file_section">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="Profl_addsec home_post">
+                    <div class="row pst_here_sec">
+                        <!-- post start here -->
+                        <form method="post" action="home/add_post" enctype="multipart/form-data">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="panel panel-default">
+
+                                    <!-- tittle or short description section satrt here -->
+                                    <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                                        <div class="jst_txt usr_post_img">
+                                            <img class='img-circle' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] ?>"> <?php echo lang('title /short description'); ?> 
+                                        </div>
+                                        <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
+                                    </div>
+                                    <!-- tittle or short description section end here -->
+
+                                    <!-- Upload images or video section start here -->
+                                    <div class="panel-body">
+                                        <div class="message alert alert-danger" style="display:none"></div>
+                                        <div class="upld_sec">
+                                            <div class="fileUpload up_img btn">
+                                                <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
+                                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile" />
+                                            </div>
+                                            <div class="fileUpload up_img btn">
+                                                <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
+                                                <input type="file" name="videofile[]" id="uploadVideo" class="upload" />
+                                            </div>
+                                            <div class="fileUpload up_img btn">
+                                                <span><i class="fa fa-upload" aria-hidden="true"></i> <?php echo lang('Files'); ?></span>
+                                                <input type="file" name="uploadfile[]" id="uploadVideo" class="upload" />
+                                            </div>
+                                        </div>
+                                        <div class="image_wrapper" style="display:none">
+
+                                        </div>
+                                        <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
+
+                                        </div>
+                                    </div>
+                                    <!-- Upload images or video section end here -->
+
+                                    <!-- selectng "Post to" and Original section start here -->
+
+                                    <div class="panel-body pnl_ftr">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <button type="submit" class="pstbtn"><?php echo lang('Post'); ?></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- selectng "Post to" and Original section end here -->
+                                </div>
+                            </div>
+                        </form>
+                        <!-- post end here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  Post modal section end here -->
+
 <?php
 $myuserdata = array(
     'id' => $this->session->user['id'],

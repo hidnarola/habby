@@ -1289,7 +1289,7 @@ h2.chlng_hdg ,
         }
         .panel.panel-chat *
         {
-            background: none;
+            /*background: none;*/
             border: none;
         }
         .panel.panel-chat .panel-heading
@@ -1394,6 +1394,11 @@ h2.chlng_hdg ,
             position: absolute;
             right: 20px;
         }
+        
+        .upload-modal .modal-body{
+            padding:0px;
+        }
+        
 @media(min-width:1583px){
     .row.event_container
     {
