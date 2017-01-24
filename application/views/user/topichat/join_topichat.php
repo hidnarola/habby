@@ -336,13 +336,13 @@
                                     <div class="topic_prfle_icon_sec-bottom">
                                         <div class="chat-window-wrapper">
                                             <div class="fb-chat-window">
-                                                <div class="panel panel-chat">
+                                                <div class="panel panel-chat mini">
                                                     <div class="panel-heading">
                                                         <a href="#" class="chatMinimize" onclick="return false"><span>Chats</span></a>
                                                         <!--<a href="#" class="chatClose" onclick="return false"><i class="glyphicon glyphicon-remove"></i></a> -->
                                                         <div class="clearFix"></div>
                                                     </div>
-                                                    <div class="panel-body">
+                                                    <div class="panel-body" style="height:0;display: none">
                                                         
                                                         <?php
                                                             foreach($text_messages as $msg){
@@ -372,7 +372,7 @@
                                                         ?>
                                                         <div class="clearFix"></div>
                                                     </div>
-                                                    <div class="panel-footer">
+                                                    <div class="panel-footer" style="height:0;display: none">
                                                         <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
                                                  <input type="hidden" id='message' name='message' class="form-control"/>
                                                  <span class="input-group-btn-span">
