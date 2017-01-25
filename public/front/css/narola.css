@@ -1259,8 +1259,8 @@ h2.chlng_hdg ,
 .chat_area_updated_list_middle_middle .imagePreview.file_download,.chat_area_updated_list_middle_middle .imagePreview,
 #imagePreview_msg{
     display: block !important;
-    height: 125px !important;
-    width: 125px !important;
+    height: 185px !important;
+    width: 185px !important;
 }
 .topic_prfle_icon_sec-bottom-upload-control {
     display: inline-block;

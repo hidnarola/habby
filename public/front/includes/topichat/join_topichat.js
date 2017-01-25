@@ -427,11 +427,11 @@ $(document).ready(function () {
             if ($.trim($(this).html()) != '')
             {
                 msg = $(this).html();
-                $('.chat_area2,.topichat_msg_sec_modal').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg + "</span></span></div>");
+                $('.panel-body,.topichat_msg_sec_modal').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
                 $(this).html('');
                 $('#message').val('');
                 send(msg);
-                $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+                $(".panel-body,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this).html()) == '')

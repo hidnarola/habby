@@ -350,7 +350,13 @@
                                                                 {
                                                                     // Display message on left side
                                                                     ?>
-                                                                    <div class="messageHer">                                                                        
+                                                                    <div class="messageHer">
+                                                                        <!--<a href="javascript:void(0);">
+                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
+                                                                        </a> -->
+                                                                        <span><?php echo $msg['message']; ?></span>
+                                                                        <div class="clearFix"></div>
+                                                                    </div>
                                                                     <?php
                                                                 }
                                                                 else
@@ -358,16 +364,14 @@
                                                                     // Display message on right side
                                                                     ?>
                                                                     <div class="messageMe">
-                                                                    <?php
-                                                                }
-                                                                ?>
                                                                         <a href="javascript:void(0);">
                                                                             <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
                                                                         </a>
                                                                         <span><?php echo $msg['message']; ?></span>
                                                                         <div class="clearFix"></div>
                                                                     </div>
-                                                                <?php
+                                                                    <?php
+                                                                }
                                                             }
                                                         ?>
                                                         <div class="clearFix"></div>
