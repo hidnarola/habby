@@ -270,7 +270,7 @@ class Topichat extends CI_Controller {
      */
 
     public function details($Id) {
-        $limit = 15;
+        $limit = 10;
         $this->data['Id'] = $Id;
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
@@ -312,7 +312,26 @@ class Topichat extends CI_Controller {
         }
         echo json_encode($data);
     }
-
+    
+    /*
+     * ar
+     */
+    public function load_more_text_msg($group_id) {
+        $limit = 10;
+        $last_msg_id = $this->input->post('last_msg');
+        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $this->session->user['id'], $limit, $last_msg_id);
+        if (count($this->data['messages']) > 0) {
+            //$data['query'] = $this->db->last_query();
+            $data['status'] = 1;
+            krsort($this->data['messages']); // Reverse array
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
+            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
     /*
      * 
      */
