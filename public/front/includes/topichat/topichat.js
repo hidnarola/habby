@@ -27,7 +27,8 @@ $('document').ready(function () {
                     $('.total_views_inner').prepend(more.view);
                     last_msg = more.last_msg_id;
                     $(".total_views_inner").animate({scrollTop: 200}, 500);
-                } else
+                }
+                else
                 {
                     load = false;
                     $('.total_views_inner').prepend('<div class="text-center">' + no_message + '</div>');
