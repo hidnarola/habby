@@ -565,8 +565,10 @@ $(document).ready(function () {
         userdata = JSON.parse(payload);
         if (userdata.media_type == null)
         {
-            $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><span class="wdth_span"><span>' + userdata.message + '</span></div>');
-        } else
+            $('.panel-body').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
+            $(".panel-body").animate({scrollTop: $('.panel-body').prop("scrollHeight")}, 1000);
+        }
+        else
         {
             if (userdata.media_type == "image")
             {
@@ -651,8 +653,9 @@ $(document).ready(function () {
                 }
                 $('.topic_frame').prepend(left_link_html);
             }
+            $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         }
-        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        
     });
     Server.connect();
 
