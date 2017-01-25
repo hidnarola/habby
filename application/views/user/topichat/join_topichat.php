@@ -364,7 +364,7 @@
                                                                     // Display message on right side
                                                                     ?>
                                                                     <div class="messageMe">
-                                                                        <a href="javascript:void(0);">
+                                                                        <a href="<?php echo base_url().'user_profile/'.$msg['user_id']; ?>">
                                                                             <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
                                                                         </a>
                                                                         <span><?php echo $msg['message']; ?></span>
