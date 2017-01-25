@@ -566,7 +566,8 @@ $(document).ready(function () {
         if (userdata.media_type == null)
         {
             $('.panel-body').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
-            $(".panel-body").animate({scrollTop: $('.panel-body').prop("scrollHeight")}, 1000);
+            //$(".panel-body").animate({scrollTop: $('.panel-body').prop("scrollHeight")}, 1000);
+            $('.panel-body').scrollTop($('.panel-body')[0].scrollHeight);
         }
         else
         {
