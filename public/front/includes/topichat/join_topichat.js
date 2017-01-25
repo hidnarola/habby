@@ -427,11 +427,13 @@ $(document).ready(function () {
             if ($.trim($(this).html()) != '')
             {
                 msg = $(this).html();
-                $('.panel-body,.topichat_msg_sec_modal').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
+                //$('.panel-body,.topichat_msg_sec_modal').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
+                $('.panel-chat').find('.panel-body').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
                 $(this).html('');
                 $('#message').val('');
                 send(msg);
-                $(".panel-body,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+                //$(".panel-body,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+                $('.panel-chat').find('.panel-body').scrollTop($('.panel-body')[0].scrollHeight);
             }
             return false;
         } else if (e.charCode == 32 && $.trim($(this).html()) == '')
@@ -565,9 +567,9 @@ $(document).ready(function () {
         userdata = JSON.parse(payload);
         if (userdata.media_type == null)
         {
-            $('.panel-body').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
+            $('.panel-chat').find('.panel-body').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
             //$(".panel-body").animate({scrollTop: $('.panel-body').prop("scrollHeight")}, 1000);
-            $('.panel-body').scrollTop($('.panel-body')[0].scrollHeight);
+            $('.panel-chat').find('.panel-body').scrollTop($('.panel-body')[0].scrollHeight);
         }
         else
         {
