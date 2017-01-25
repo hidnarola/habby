@@ -295,12 +295,9 @@ class Topichat_model extends CI_Model {
      * developed by : ar
      */
     public function get_text_messages($group_id, $logged_in_user, $limit = null) {
-        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+        $this->db->select('tg.*,u.name,u.user_image');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->join('users u', 'tg.user_id = u.id');
-        $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
-        $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
-        $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->limit($limit, 0);
         $this->db->order_by('tg.id', 'desc');
         $this->db->group_by('tg.id');
@@ -322,9 +319,12 @@ class Topichat_model extends CI_Model {
      */
 
     public function load_messages($group_id, $logged_in_user, $limit, $last_msg_id) {
-        $this->db->select('tg.*,u.name,u.user_image');
+        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->where('tg.id < ', $last_msg_id);
+        $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
+        $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
+        $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->join('users u', 'tg.user_id = u.id');
         $this->db->limit($limit, 0);
         $this->db->order_by('tg.id', 'desc');

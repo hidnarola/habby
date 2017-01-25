@@ -24,14 +24,14 @@ $('document').ready(function () {
                 if (more.status)
                 {
 //                    console.log(more.view);
-                    $('.chat_area2').prepend(more.view);
+                    $('.total_views_inner').prepend(more.view);
                     last_msg = more.last_msg_id;
-                    $(".chat_area2").animate({scrollTop: 200}, 500);
+                    $(".total_views_inner").animate({scrollTop: 200}, 500);
                 } else
                 {
                     load = false;
-                    $('.chat_area2').prepend('<div class="text-center">' + no_message + '</div>');
-                    $(".chat_area2").animate({scrollTop: 0}, 500);
+                    $('.total_views_inner').prepend('<div class="text-center">' + no_message + '</div>');
+                    $(".total_views_inner").animate({scrollTop: 0}, 500);
                 }
                 in_progress = false;
             }
