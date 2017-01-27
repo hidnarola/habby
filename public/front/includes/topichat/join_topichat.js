@@ -33,6 +33,11 @@ function share_links(url) {
                 } else {
                     $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
 
+                    //$('.total_views_inner').append('<div class="chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"><h4>Total x is Watching</h4><div class="clearfix"></div></div></div>');
+
+                    
+                    //$('.total_views_inner').append('<div class="chat_area_updated_list"><div class="chat_area_updated_list_top"><h4>Total x is Watching</h4></div><div class="chat_area_updated_list_middle"><div class="chat_area_updated_list_middle_left"><div class="topichat_media_thumb"><a href="javascript:void(0);"><img class="user_chat_thumb" src="'+userimg+'" title='+username+'></a></div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div><div class="chat_area_updated_list_middle_right"><div class="chat_area_updated_list_middle_head"><h4>title goes here</h4></div><div class="chat_area_updated_list_middle_middle"><div class = "fileshare'+i+' fileshare"></div></div></div></div></div>');
+                    
                     left_link_html = '<div class="fileshare" id="fileshare' + i + '"><div class="">';
 
                     if ($.isEmptyObject(preview.media)) {
@@ -80,7 +85,8 @@ function share_links(url) {
                     {
                         // If two links are available then remove one
                         $('.topic_frame').find('.fileshare').last().remove();
-                    } else if ($('.topic_frame').find('.fileshare').length == 0)
+                    }
+                    else if ($('.topic_frame').find('.fileshare').length == 0)
                     {
                         $('.topic_frame').html('');
                     }
@@ -612,7 +618,8 @@ $(document).ready(function () {
                 $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'user/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
                 $('.imagePreview' + i).data('file', userdata.media);
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
-            } else if (userdata.media_type == "links") {
+            } 
+            else if (userdata.media_type == "links") {
                 userlink = JSON.parse(userdata.message);
 
                 left_link_html = '<div class="fileshare" id="fileshare' + i + '"><div class="">';
@@ -621,6 +628,8 @@ $(document).ready(function () {
                 var youtube_video = '<div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id=' + userdata.chat_id + '><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
                 if (userdata.youtube_video != null) {
                     $('.chat_area2').append('<div class="share_1 clearfix topichat_media_post youtube_video" data-chat_id="' + userdata.chat_id + '"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="fileshare">' + youtube_video + '<div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+
+                    //$('.total_views_inner').append('<div class="chat_area_updated_list" data-chat_id="' + userdata.chat_id + '><div class="chat_area_updated_list_top"><h4>Total x is Watching</h4></div><div class="chat_area_updated_list_middle"><div class="chat_area_updated_list_middle_left"><div class="topichat_media_thumb"><a href="javascript:void(0);"><img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH+'/'+userdata.user_image+'" title='+userdata.user+'></a></div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div><div class="chat_area_updated_list_middle_right"><div class="chat_area_updated_list_middle_head"><h4>title goes here</h4></div><div class="chat_area_updated_list_middle_middle"><div class = "fileshare'+i+' fileshare"></div></div></div></div></div>');
 
                     left_link_html += youtube_video;
                 } else {
