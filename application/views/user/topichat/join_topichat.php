@@ -344,36 +344,7 @@
                                                     </div>
                                                     <div class="panel-body" style="height:0;display: none">
                                                         
-                                                        <?php
-                                                            foreach($text_messages as $msg){
-                                                                if($msg['user_id'] == $this->session->user['id'])
-                                                                {
-                                                                    // Display message on left side
-                                                                    ?>
-                                                                    <div class="messageHer">
-                                                                        <!--<a href="javascript:void(0);">
-                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
-                                                                        </a> -->
-                                                                        <span><?php echo $msg['message']; ?></span>
-                                                                        <div class="clearFix"></div>
-                                                                    </div>
-                                                                    <?php
-                                                                }
-                                                                else
-                                                                {
-                                                                    // Display message on right side
-                                                                    ?>
-                                                                    <div class="messageMe">
-                                                                        <a href="<?php echo base_url().'user_profile/'.$msg['user_id']; ?>">
-                                                                            <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $msg['user_image']; ?>" title='<?php echo $msg['name'] ?>'>
-                                                                        </a>
-                                                                        <span><?php echo $msg['message']; ?></span>
-                                                                        <div class="clearFix"></div>
-                                                                    </div>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                        ?>
+                                                        <?php $this->load->view('user/partial/topichat/load_more_text_msg'); ?>
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-footer" style="height:0;display: none">
@@ -793,6 +764,7 @@ $myuserdata = array(
     DEFAULT_PROFILE_IMAGE_PATH = '<?php echo DEFAULT_PROFILE_IMAGE_PATH; ?>';
     DEFAULT_IMAGE_PATH = '<?php echo DEFAULT_IMAGE_PATH; ?>';
     last_msg = '<?php echo (count($messages) > 0) ? $messages[count($messages) - 1]['id'] : 0 ?>';
+    last_text_msg = '<?php echo (count($text_messages) > 0) ? $text_messages[count($text_messages) - 1]['id'] : 0 ?>';
     upload_path = '<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>';
 </script>
 <script type="text/javascript" src="<?php echo USER_JS ?>/topichat/join_topichat.js"></script>

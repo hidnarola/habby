@@ -318,14 +318,14 @@ class Topichat extends CI_Controller {
      */
     public function load_more_text_msg($group_id) {
         $limit = 10;
-        $last_msg_id = $this->input->post('last_msg');
-        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $this->session->user['id'], $limit, $last_msg_id);
-        if (count($this->data['messages']) > 0) {
+        $last_msg_id = $this->input->post('last_text_msg');
+        $this->data['text_messages'] = $this->Topichat_model->load_text_messages($group_id, $this->session->user['id'], $limit, $last_msg_id);
+        if (count($this->data['text_messages']) > 0) {
             //$data['query'] = $this->db->last_query();
             $data['status'] = 1;
-            krsort($this->data['messages']); // Reverse array
-            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
-            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+            krsort($this->data['text_messages']); // Reverse array
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_text_msg', $this->data, true);
+            $data['last_msg_id'] = $this->data['text_messages'][count($this->data['text_messages']) - 1]['id'];
         } else {
             $data['status'] = 0;
         }

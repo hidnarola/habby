@@ -41,7 +41,7 @@ $('document').ready(function () {
 
     var text_load = true;
     var text_in_progress = false;
-    $('.panel-chat').on('scroll','.panel-body',function () {
+    $('.panel-chat .panel-body').scroll(function () {
         var thi = $(this);
         if (text_load && !text_in_progress)
         {
@@ -55,24 +55,23 @@ $('document').ready(function () {
     function text_loaddata()
     {
         $.ajax({
-            url: base_url + 'topichat/load_more_msg/' + group_id,
+            url: base_url + 'topichat/load_more_text_msg/' + group_id,
             method: 'post',
             async: false,
-            data: 'last_msg=' + last_msg,
+            data: 'last_text_msg=' + last_text_msg,
             success: function (more) {
                 more = JSON.parse(more);
                 if (more.status)
                 {
-//                    console.log(more.view);
-                    $('.total_views_inner').prepend(more.view);
-                    last_msg = more.last_msg_id;
-                    $(".total_views_inner").animate({scrollTop: 200}, 500);
+                    $('.panel-chat').find('.panel-body').prepend(more.view);
+                    last_text_msg = more.last_msg_id;
+                    $('.panel-chat').find('.panel-body').animate({scrollTop: 200}, 500);
                 }
                 else
                 {
                     load = false;
-                    $('.total_views_inner').prepend('<div class="text-center">' + no_message + '</div>');
-                    $(".total_views_inner").animate({scrollTop: 0}, 500);
+                    $('.panel-chat').find('.panel-body').prepend('<div class="text-center">' + no_message + '</div>');
+                    $('.panel-chat').find('.panel-body').animate({scrollTop: 0}, 500);
                 }
                 in_progress = false;
             }
