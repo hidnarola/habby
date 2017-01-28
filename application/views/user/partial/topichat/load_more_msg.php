@@ -2,7 +2,7 @@
 foreach ($messages as $message) {
     ?>
     <!-- chat_area_updated_list -->
-    <div class="chat_area_updated_list">
+    <div class="topichat_media_post chat_area_updated_list">
         <div class="chat_area_updated_list_top">
             <h4>Total x is Watching</h4>
             <div class="total_views_list">
