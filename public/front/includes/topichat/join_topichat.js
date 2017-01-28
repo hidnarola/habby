@@ -31,21 +31,21 @@ function share_links(url) {
                     $('#url').prop('disabled', false);
                     return false;
                 } else {
-                    $('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
+                    //$('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
 
-                    //$('.total_views_inner').append('<div class="chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"><h4>Total x is Watching</h4><div class="clearfix"></div></div></div>');
+                    $('.total_views_inner').append('<div class="chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH+data.user_image+'" title="'+data.name+'"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow_ranked.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>title goes here</h4> </div> <div class="chat_area_updated_list_middle_middle"></div></div></div></div>');
 
-                    
-                    //$('.total_views_inner').append('<div class="chat_area_updated_list"><div class="chat_area_updated_list_top"><h4>Total x is Watching</h4></div><div class="chat_area_updated_list_middle"><div class="chat_area_updated_list_middle_left"><div class="topichat_media_thumb"><a href="javascript:void(0);"><img class="user_chat_thumb" src="'+userimg+'" title='+username+'></a></div><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="'+DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="'+DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div><div class="chat_area_updated_list_middle_right"><div class="chat_area_updated_list_middle_head"><h4>title goes here</h4></div><div class="chat_area_updated_list_middle_middle"><div class = "fileshare'+i+' fileshare"></div></div></div></div></div>');
-                    
                     left_link_html = '<div class="fileshare" id="fileshare' + i + '"><div class="">';
 
                     if ($.isEmptyObject(preview.media)) {
-                        var thumbnail_url = (preview.images.length > 0) ? '<div class="large-3 columns">' +
-                                '<img class="thumb" src="' + preview.images[0].url + '"></img>' +
-                                '</div>' : "";
+                        var thumbnail_url = (preview.images.length > 0) ? 
+                                                '<div class="large-3 columns">' +
+                                                    '<img class="thumb" src="' + preview.images[0].url + '"></img>' +
+                                                '</div>' : "";
+                                        
                         var title = (preview.title != null) ? preview.title : "";
                         var description = (preview.description != null) ? preview.description : "";
+                        
                         html = '<div class="">' + thumbnail_url +
                                 '<div class="large-9 column">' +
                                 '<a href="' + preview.url + '" target="_blank">' + title + '</a>' +
