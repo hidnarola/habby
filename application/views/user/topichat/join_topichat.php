@@ -306,7 +306,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="chat-area-text-box">
-                                        <input class="text" placeholder="type title description" class="form-control">
+                                        <input class="text" id="link_title" name="link_title" placeholder="type title description" class="form-control">
                                     </div>
                                     <div class="topic_prfle_icon_sec topc_link_sharesec">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topic_textarea pad_lft_rit0">

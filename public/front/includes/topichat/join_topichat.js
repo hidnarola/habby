@@ -15,6 +15,9 @@ function share_links(url) {
     var i = Math.random().toString(36).substring(7);
     var embedlyAPI = "https://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
     var youtube_video_html = null, html = '';
+    
+    var link_title = $('#link_title').val();
+    
     $(".loader").addClass('show');
     $.ajax({
         url: embedlyAPI,
