@@ -160,6 +160,8 @@ function upload_image(files) {
         $('.message').show();
         return; // no file selected, or no FileReader support
     }
+    
+    var i = 0;
     for (var key in files)
     {
         if (key != 'item' && key != 'length')
@@ -170,7 +172,10 @@ function upload_image(files) {
                 reader.readAsDataURL(files[key]); // read the local file
                 reader.onloadend = function () { // set image data as background of div
                     // $('#imagePreview').addClass('imagePreview');
-                    $('.message').hide();
+                    $('.image_wrapper').show();
+                    $('.image_wrapper').html("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                    ++i;
                    // $('.chat_area2,.topichat_msg_sec_modal').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="wdth_span media_wrapper"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="imagePreview' + i + '"  id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="" data-type="image"></span></div></div>');
                    
                    $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"/> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+image_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="imagePreview' + i + '" id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="" data-type="image"> </span> </div> </div> </div> </div> </div>');
