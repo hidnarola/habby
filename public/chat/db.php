@@ -120,6 +120,7 @@ function send_topic_media($group_id, $sender_id, $title, $msg, $media_type, $you
         {
             $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'".mysqli_real_escape_string($conn, $title)."','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL,'".$link_id."','" . date('Y-m-d H:i:s') . "')";
         }
+        // echo "\n\n Query ===> ".$query;
         if (mysqli_query($conn, $query)) {
             $id = mysqli_insert_id($conn);
             close_connection($conn);

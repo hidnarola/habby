@@ -107,6 +107,7 @@ function share_links(url) {
                         youtube_video: youtube_video_html,
                         link_id: i
                     }
+
                     Server.send('message', JSON.stringify(msg))
                     $('#url').val('');
                     $('#url').prop('disabled', false);

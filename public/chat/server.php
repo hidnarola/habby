@@ -30,6 +30,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             return;
         } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
+                // echo "\n\nMessage ====> \n\n";
+                // print_r($message);
                 $user_ids = get_topichat_users($message->group_id);
                 foreach($Server->wsClients as $id=>$client)
                 {
@@ -303,10 +305,10 @@ $Server->bind('close', 'wsOnClose');
 // for other computers to connect, you will probably need to change this to your LAN IP or external IP,
 // alternatively use: gethostbyaddr(gethostbyname($_SERVER['SERVER_NAME']))
 // $Server->wsStartServer('192.168.1.202', 9300);
-//$Server->wsStartServer('192.168.1.186', 9300);
+$Server->wsStartServer('192.168.1.186', 9300);
 //$Server->wsStartServer('172.31.47.209', 9300);
 //$Server->wsStartServer('192.168.1.143', 9300);
 //$Server->wsStartServer('123.201.110.194', 9300);
 //$Server->wsStartServer('203.109.68.198', 9300);
-$Server->wsStartServer('127.0.0.1', 9300);
+//$Server->wsStartServer('127.0.0.1', 9300);
 ?>
