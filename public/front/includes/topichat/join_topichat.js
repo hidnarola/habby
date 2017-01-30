@@ -16,8 +16,6 @@ function share_links(url) {
     var embedlyAPI = "https://api.embed.ly/1/extract?key=" + api_key + "&url=" + escape(url);
     var youtube_video_html = null, html = '';
     
-    var link_title = $('#link_title').val();
-    
     $(".loader").addClass('show');
     $.ajax({
         url: embedlyAPI,
@@ -34,9 +32,12 @@ function share_links(url) {
                     $('#url').prop('disabled', false);
                     return false;
                 } else {
+                    
+                    var link_title = $('#link_title').val();
+                    
                     //$('.chat_area2').append("<div class='share_2 clearfix topichat_media_post' data-chat_id=''><div id='field' class='topichat_media_rank'><button type='button' id='add' class='add add_btn smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button><span class='rank_rate'>0</span><button type='button' id='sub' class='sub smlr_btn'><img src='" + DEFAULT_IMAGE_PATH + "challeng_arrow.png' class='rank_img_sec'/></button></div><div class='fileshare" + i + " fileshare'></div></div>");
 
-                    $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH+data.user_image+'" title="'+data.name+'"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>title goes here</h4> </div> <div class="chat_area_updated_list_middle_middle"><div class="fileshare'+ i + ' fileshare"></div></div></div></div></div>');
+                    $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH+data.user_image+'" title="'+data.name+'"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+link_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"><div class="fileshare'+ i + ' fileshare"></div></div></div></div></div>');
 
                     left_link_html = '<div class="fileshare" id="fileshare' + i + '"><div class="">';
 
@@ -95,7 +96,6 @@ function share_links(url) {
                     }
                     $('.topic_frame').prepend(left_link_html);
 
-
                     // Send file using ajax
                     preview = JSON.stringify(preview);
                     var msg = {
@@ -103,6 +103,7 @@ function share_links(url) {
                         type: 'topic_msg',
                         group_id: group_id,
                         media: 'links',
+                        title:link_title,
                         youtube_video: youtube_video_html,
                         link_id: i
                     }
@@ -536,6 +537,11 @@ $(document).ready(function () {
     $('.share_btn').click(function () {
         if ($("#url").val() != "")
         {
+            if($('#link_title').val() == "")
+            {
+                swal(enter_title);
+                return false;
+            }
             var url = $("#url").val();
             $('#url').prop('disabled', true);
             share_links(url);
@@ -548,6 +554,10 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             if ($(this).val() != "")
             {
+                if($('#link_title').val() == ""){
+                    swal(enter_title);
+                    return false;
+                }
                 var url = $(this).val();
                 $('#url').prop('disabled', true);
                 share_links(url);

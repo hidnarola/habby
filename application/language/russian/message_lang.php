@@ -348,6 +348,7 @@ $lang["Please select proper Video"] = "Please select proper Video";
 $lang["Please select proper file"] = "Please select proper file";
 $lang["Fail to send message"] = "Fail to send message";
 $lang["Please Enter url."] = "Please Enter url.";
+$lang["Please Enter title"] = "Please Enter title";
 $lang["No more messages to show"] = "No more messages to show";
 $lang["saved"] = "saved";
 $lang["save failed"] = "save failed";

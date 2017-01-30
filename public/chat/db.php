@@ -104,16 +104,21 @@ function send_topic_msg($group_id, $sender_id, $msg) {
     return false;
 }
 
-function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_video=null,$link_id=null) {
+/*
+ * Modification by ar
+ * 
+ * Added title field, stored it in message field of database
+ */
+function send_topic_media($group_id, $sender_id, $title, $msg, $media_type, $youtube_video=null,$link_id=null) {
     $conn = open_connection();
     if ($media_type == 'links') {
         if( !is_null($youtube_video))
         {
-            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "','".$youtube_video."','".$link_id."','" . date('Y-m-d H:i:s') . "')";
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'".mysqli_real_escape_string($conn, $title)."','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "','".$youtube_video."','".$link_id."','" . date('Y-m-d H:i:s') . "')";
         }
         else
         {
-            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL,'".$link_id."','" . date('Y-m-d H:i:s') . "')";
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'".mysqli_real_escape_string($conn, $title)."','" . mysqli_real_escape_string($conn, $msg) . "','" . $media_type . "',NULL,'".$link_id."','" . date('Y-m-d H:i:s') . "')";
         }
         if (mysqli_query($conn, $query)) {
             $id = mysqli_insert_id($conn);
@@ -122,7 +127,7 @@ function send_topic_media($group_id, $sender_id, $msg, $media_type, $youtube_vid
         }
     } else {
         foreach ($msg as $media) {
-            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'','" . $media->media . "','" . $media_type . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
+            $query = "insert into topic_group_chat value(NULL,$group_id,$sender_id,'".mysqli_real_escape_string($conn, $title)."','" . $media->media . "','" . $media_type . "',NULL,NULL,'" . date('Y-m-d H:i:s') . "')";
             if (mysqli_query($conn, $query)) {
                 $id = mysqli_insert_id($conn);
                 close_connection($conn);

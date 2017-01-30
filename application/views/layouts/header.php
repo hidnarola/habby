@@ -7,6 +7,7 @@
     var proper_file ="<?php echo lang('Please select proper file'); ?>";
     var fail_message ="<?php echo lang('Fail to send message'); ?>";
     var enter_url ="<?php echo lang('Please Enter url.'); ?>";
+    var enter_title = "<?php echo lang('Please Enter title'); ?>";
     var no_message ="<?php echo lang('No more messages to show'); ?>";
     var saved ="<?php echo lang('saved'); ?>";
     var save_failed ="<?php echo lang('save failed'); ?>";
