@@ -687,58 +687,55 @@
                 <div class="Profl_addsec home_post">
                     <div class="row pst_here_sec">
                         <!-- post start here -->
-                        <form method="post" action="home/add_post" enctype="multipart/form-data">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="panel panel-default">
-
-                                    <!-- tittle or short description section satrt here -->
-                                    <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-                                        <div class="jst_txt usr_post_img">
-                                            <img class='img-circle' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] ?>"> <?php echo lang('title /short description'); ?> 
-                                        </div>
-                                        <textarea class="form-control" rows="3" id="description" name="description" required></textarea>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-default">
+                                <!-- tittle or short description section satrt here -->
+                                <div class="panel-heading"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                                    <div class="jst_txt usr_post_img">
+                                        <img class='img-circle' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] ?>"> <?php echo lang('title /short description'); ?> 
                                     </div>
-                                    <!-- tittle or short description section end here -->
-
-                                    <!-- Upload images or video section start here -->
-                                    <div class="panel-body">
-                                        <div class="message alert alert-danger" style="display:none"></div>
-                                        <div class="upld_sec">
-                                            <div class="fileUpload up_img btn">
-                                                <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                                <input type="file" name="uploadfile[]" class="upload" id="uploadFile" />
-                                            </div>
-                                            <div class="fileUpload up_img btn">
-                                                <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
-                                                <input type="file" name="videofile[]" id="uploadVideo" class="upload" />
-                                            </div>
-                                            <div class="fileUpload up_img btn">
-                                                <span><i class="fa fa-upload" aria-hidden="true"></i> <?php echo lang('Files'); ?></span>
-                                                <input type="file" name="uploadfile[]" id="uploadVideo" class="upload" />
-                                            </div>
-                                        </div>
-                                        <div class="image_wrapper" style="display:none">
-
-                                        </div>
-                                        <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
-
-                                        </div>
-                                    </div>
-                                    <!-- Upload images or video section end here -->
-
-                                    <!-- selectng "Post to" and Original section start here -->
-
-                                    <div class="panel-body pnl_ftr">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <button type="submit" class="pstbtn"><?php echo lang('Post'); ?></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- selectng "Post to" and Original section end here -->
+                                    <textarea class="form-control" rows="3" id="media_description" name="media_description" required></textarea>
                                 </div>
+                                <!-- tittle or short description section end here -->
+
+                                <!-- Upload images or video section start here -->
+                                <div class="panel-body">
+                                    <div class="message alert alert-danger" style="display:none"></div>
+                                    <div class="upld_sec">
+                                        <div class="fileUpload up_img btn">
+                                            <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
+                                            <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                        </div>
+                                        <div class="fileUpload up_img btn">
+                                            <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
+                                            <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
+                                        </div>
+                                        <div class="fileUpload up_img btn">
+                                            <span><i class="fa fa-upload" aria-hidden="true"></i> <?php echo lang('Files'); ?></span>
+                                            <input type="file" name="upload_files" class="upload" id="upload_files"/>
+                                        </div>
+                                    </div>
+                                    <div class="image_wrapper" style="display:none">
+
+                                    </div>
+                                    <div class="video_wrapper" style="display:none" data-default_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
+
+                                    </div>
+                                </div>
+                                <!-- Upload images or video section end here -->
+
+                                <!-- selectng "Post to" and Original section start here -->
+
+                                <div class="panel-body pnl_ftr">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <button type="button" id="topi_media_upload" class="pstbtn"><?php echo lang('Post'); ?></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- selectng "Post to" and Original section end here -->
                             </div>
-                        </form>
+                        </div>
                         <!-- post end here -->
                     </div>
                 </div>

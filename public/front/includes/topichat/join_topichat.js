@@ -1,6 +1,10 @@
 var Server;
 var url;
 data = JSON.parse(data);
+
+var file_flag = 0;
+var uploading_file = [];
+
 function send(text) {
     var msg = {
         message: text,
@@ -499,13 +503,17 @@ $(document).ready(function () {
     });
     // Image uploading script For POPUP
     $("#uploadFile").on("change", function () {
-        var files = !!this.files ? this.files : [];
-        upload_image(files);
+        file_flag = 1;
+        uploading_file  = !!this.files ? this.files : [];
+        //var files = !!this.files ? this.files : [];
+        //upload_image(files);
     });
     // Video uploading script
     $("#upload_video").on("change", function () {
-        var files = !!this.files ? this.files : [];
-        upload_video(files);
+        file_flag = 2;
+        uploading_file  = !!this.files ? this.files : [];
+        //var files = !!this.files ? this.files : [];
+        //upload_video(files);
     });
     // Video uploading script For POPUP
     $('#mediaModal').on('change', '#upload_video', function () {
@@ -515,8 +523,10 @@ $(document).ready(function () {
     // File uploading script
     $("#upload_files").on("change", function ()
     {
-        var files = !!this.files ? this.files : [];
-        upload_files(files);
+        file_flag = 3;
+        uploading_file  = !!this.files ? this.files : [];
+        //var files = !!this.files ? this.files : [];
+        //upload_files(files);
     });
     // Files uploading script For POPUP
     $('#mediaModal').on('change', '#upload_files', function () {
@@ -568,6 +578,35 @@ $(document).ready(function () {
             }
         }
     });
+    
+    // Phase 2 code for adding media (image, video and file) using modal
+    $('#topi_media_upload').click(function(){
+        if($('#media_description').val() != ""){
+            if(file_flag == 0)
+            {
+                swal('Please select media');
+                return false;
+            }
+            else if(file_flag == 1)
+            {
+                // Code to upload image
+            }
+            else if(file_flag == 2)
+            {
+                // Code to upload video
+            }
+            else if(file_flag == 3)
+            {
+                // Code to upload file
+            }
+        }
+        else
+        {
+            swal(enter_title);
+            return false;
+        }
+    });
+    
     //Let the user know we're connected
     Server.bind('open', function () {
         // Fire when user connect first time
