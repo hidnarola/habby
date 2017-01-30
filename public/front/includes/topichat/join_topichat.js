@@ -581,30 +581,37 @@ $(document).ready(function () {
     
     // Phase 2 code for adding media (image, video and file) using modal
     $('#topi_media_upload').click(function(){
+        console.log('Button called');
         if($('#media_description').val() != ""){
+            console.log('Description is not empty');
             if(file_flag == 0 && uploading_file.length != 0)
             {
+                console.log('file not selected');
                 swal('Please select media');
                 return false;
             }
             else if(file_flag == 1)
             {
+                console.log('Image uploading');
                 // Code to upload image
                 upload_image(uploading_file);
             }
             else if(file_flag == 2)
             {
+                console.log('Video uploading');
                 // Code to upload video
                 upload_video(uploading_file);
             }
             else if(file_flag == 3)
             {
+                console.log('File uploading');
                 // Code to upload file
                 upload_files(uploading_file);
             }
         }
         else
         {
+            console.log('Description is empty');
             swal(enter_title);
             return false;
         }
