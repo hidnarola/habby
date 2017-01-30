@@ -67,6 +67,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
                         $send_object['message'] = $message->message;
                         $send_object['media'] = (isset($message->media)?($message->media=='links')?$message->message :$message->message[0]->media:NULL);
+                        $send_object['title'] = (isset($message->title)?$message->title:NULL);
                         $send_object['chat_id'] = $chat_id;
                         $send_object['media_type'] = (isset($message->media)?$message->media:NULL);
                         $send_object['youtube_video'] = (isset($message->youtube_video) ? $message->youtube_video : NULL);
