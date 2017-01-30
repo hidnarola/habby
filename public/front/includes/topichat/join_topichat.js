@@ -502,14 +502,15 @@ $(document).ready(function () {
         upload_image(files);
     });
     // Image uploading script For POPUP
-    $("#uploadFile").on("change", function () {
+    $("#upload_file_section").on("change","#uploadFile", function () {
+        
         file_flag = 1;
         uploading_file  = !!this.files ? this.files : [];
         //var files = !!this.files ? this.files : [];
         //upload_image(files);
     });
     // Video uploading script
-    $("#upload_video").on("change", function () {
+    $("#upload_file_section").on("change","#upload_video", function () {
         file_flag = 2;
         uploading_file  = !!this.files ? this.files : [];
         //var files = !!this.files ? this.files : [];
@@ -521,7 +522,7 @@ $(document).ready(function () {
         upload_video(files);
     });
     // File uploading script
-    $("#upload_files").on("change", function ()
+    $("#upload_file_section").on("change","#upload_files", function ()
     {
         file_flag = 3;
         uploading_file  = !!this.files ? this.files : [];
@@ -583,8 +584,8 @@ $(document).ready(function () {
     $('#topi_media_upload').click(function(){
         console.log('Button called');
         if($('#media_description').val() != ""){
-            console.log('Description is not empty');
-            if(file_flag == 0 && uploading_file.length != 0)
+            console.log('Description is not empty, file flag = ',file_flag, ", upload file length = ",uploading_file.length);
+            if(file_flag == 0 && uploading_file.length == 0)
             {
                 console.log('file not selected');
                 swal('Please select media');
@@ -608,6 +609,7 @@ $(document).ready(function () {
                 // Code to upload file
                 upload_files(uploading_file);
             }
+            $('#upload_file_section').modal('hide');
         }
         else
         {
