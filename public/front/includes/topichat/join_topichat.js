@@ -582,7 +582,7 @@ $(document).ready(function () {
     // Phase 2 code for adding media (image, video and file) using modal
     $('#topi_media_upload').click(function(){
         if($('#media_description').val() != ""){
-            if(file_flag == 0)
+            if(file_flag == 0 && uploading_file.length != 0)
             {
                 swal('Please select media');
                 return false;
@@ -590,14 +590,17 @@ $(document).ready(function () {
             else if(file_flag == 1)
             {
                 // Code to upload image
+                upload_image(uploading_file);
             }
             else if(file_flag == 2)
             {
                 // Code to upload video
+                upload_video(uploading_file);
             }
             else if(file_flag == 3)
             {
                 // Code to upload file
+                upload_files(uploading_file);
             }
         }
         else
