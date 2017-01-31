@@ -1441,6 +1441,11 @@ h2.chlng_hdg ,
     width: 238px;
     overflow: hidden;
 }
+
+.upload_file_thumb{
+    width:180px !important;
+}
+
 @media(min-width:1583px){
     .row.event_container
     {

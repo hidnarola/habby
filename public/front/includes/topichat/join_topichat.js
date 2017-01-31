@@ -274,7 +274,7 @@ function upload_video(files) {
                 media_file = JSON.parse(str);
                 video_thumb = media_file[0].media.split('.')[0] + '_thumb.png';
                 
-                $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.user + '"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+video_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="' + display_file_class + ' video-w-icon" id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="'+media_file[0].media+'" data-type="video"> </span> </div> </div> </div> </div> </div>');
+                $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+video_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="' + display_file_class + ' video-w-icon" id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="'+media_file[0].media+'" data-type="video"> </span> </div> </div> </div> </div> </div>');
     
                 $('.' + display_file_class).css("background-image", "url(" + upload_path + video_thumb + ")");
                 $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
@@ -322,92 +322,80 @@ function upload_video(files) {
 function upload_files(files) {
     var i = Math.random().toString(36).substring(7);
     var display_file_class = '';
-    $('.message').html();
-    if (!files.length || !window.FileReader) {
-        $('.message').html(no_selected_file);
-        $('.message').show();
-        return; // no file selected, or no FileReader support
-    }
-    for (var key in files)
-    {
-        if (key != "length" && key != "item")
-        {
-            $(".loader").addClass('show');
-            if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type)) || /vnd.openxmlformats-officedocument.wordprocessingml.document$/.test(files[key].type) || /.docx$/.test(files[key].name) || /.doc$/.test(files[key].name) || /.xls$/.test(files[key].name) || /.xlsx$/.test(files[key].name)) { // only pdf and text files 
+    
+    var link_title = $('#media_description').val();
+    
+    $(".loader").addClass('show');
 //                var file_name = files[key].name;
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[key]); // read the local file
-                reader.onloadend = function () { // set image data as background of div
-                    display_file_class = 'imagePreview' + i;
-                    $('.message').hide();
-                    $('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
-                    $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
-                    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
-                    var form_data = new FormData();
-                    $.each(files, function (i, file) {
-                        form_data.append('files-' + i, file);
-                    });
-                    form_data.append("msg_files", files);
-                    // Send file using ajax
-                    var media_data;
-                    $.ajax({
-                        url: base_url + 'user/upload_chat_media',
-                        dataType: 'script',
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        data: form_data,
-                        type: 'post',
-                        async: false,
-                        error: function (textStatus, errorThrown) {
+    
+        display_file_class = 'imagePreview' + i;
+        $('.message').hide();
+        
+        //$('.chat_area2').append('<div class="chat_2 clearfix topichat_media_post" data-chat_id="" style="float:right;clear:right"><div class="media_wrapper" style="width: 250px"><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div><span class="' + display_file_class + ' file_download"  id=""></span><a href=""><span class="filename"></span></a></div></div>');
+        
+        $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"/> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+link_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="imagePreview imagePreview'+i+' file_download" style="" id="" data-file=""> </span> <a href=""> <span class="filename"> </span> </a> </div> </div> </div> </div> </div>');
+        
+        $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
+        
+        $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+        var form_data = new FormData();
+//        $.each(files, function (i, file) {
+//            form_data.append('files-' + i, file);
+//        });
+//        form_data.append("msg_files", files);
+        // Send file using ajax
+        form_data.append('files-0', files);
+        var media_data;
+        $.ajax({
+            url: base_url + 'user/upload_chat_media',
+            dataType: 'script',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            async: false,
+            error: function (textStatus, errorThrown) {
 
-                        },
-                        success: function (str)
-                        {
-                            if (str == "601")
-                            {
-                                var p = $('.' + display_file_class).parent().addClass('wdth_span');
-                                p.html('<span>' + fail_message + '</span>');
-                            } else if (str != 0)
-                            {
-                                var msg = {
-                                    message: str,
-                                    type: 'topic_msg',
-                                    group_id: group_id,
-                                    media: 'files'
-                                }
-                                str = JSON.parse(str);
-                                $('.' + display_file_class).siblings('a').attr('href', base_url + 'topichat/download_file/' + str[0].media);
-                                $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
-                                Server.send('message', JSON.stringify(msg));
-                                media_data = str;
-                            }
-                        },
-                        complete: function () {
-                            $.ajax({
-                                url: base_url + 'topichat/get_chat_id_from_media_name',
-                                method: 'post',
-                                async: false,
-                                data: 'media=' + media_data[0].media,
-                                success: function (resp) {
-                                    $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
-                                },
-                                complete: function (xhr, status) {
-                                    $(".loader").removeClass('show');
-                                }
-                            });
-                        }
-                    });
-                }
-            } else
+            },
+            success: function (str)
             {
-                //this.files = '';
-                swal(proper_file + " (pdf/txt/xls/doc)");
-                $(".loader").removeClass('show');
-                return;
+                if (str == "601")
+                {
+                    var p = $('.' + display_file_class).parent().addClass('wdth_span');
+                    p.html('<span>' + fail_message + '</span>');
+                } else if (str != 0)
+                {
+                    var msg = {
+                        message: str,
+                        type: 'topic_msg',
+                        group_id: group_id,
+                        media: 'files'
+                    }
+                    str = JSON.parse(str);
+                    $('.' + display_file_class).siblings('a').attr('href', base_url + 'topichat/download_file/' + str[0].media);
+                    $('.' + display_file_class).siblings('a').find('.filename').html(str[0].media);
+                    Server.send('message', JSON.stringify(msg));
+                    media_data = str;
+                }
+            },
+            complete: function () {
+                $.ajax({
+                    url: base_url + 'topichat/get_chat_id_from_media_name',
+                    method: 'post',
+                    async: false,
+                    data: 'media=' + media_data[0].media,
+                    success: function (resp) {
+                        $('.' + display_file_class).parents('.topichat_media_post').attr('data-chat_id', resp);
+                    },
+                    complete: function (xhr, status) {
+                        $(".loader").removeClass('show');
+                    }
+                });
             }
-        }
-    }
+        });
+    
+    $(".loader").removeClass('show');
 }
 
 $(document).ready(function () {
@@ -562,10 +550,34 @@ $(document).ready(function () {
     // File uploading script
     $("#upload_file_section").on("change","#upload_files", function ()
     {
-        file_flag = 3;
-        uploading_file  = !!this.files ? this.files : [];
-        //var files = !!this.files ? this.files : [];
-        //upload_files(files);
+        var files = !!this.files ? this.files : [];
+        $('.message').html();
+        if (!files.length || !window.FileReader) {
+            $('.message').html(no_selected_file);
+            $('.message').show();
+            return; // no file selected, or no FileReader support
+        }
+        
+        var i = 0;
+        for (var key in files)
+        {
+            if (key != "length" && key != "item")
+            {
+                if (!/^video/.test(files[key].type) && !/^image/.test(files[key].type) && (/pdf$/.test(files[key].type) || /plain$/.test(files[key].type) || /vnd.ms-excel$/.test(files[key].type) || /msword$/.test(files[key].type)) || /vnd.openxmlformats-officedocument.wordprocessingml.document$/.test(files[key].type) || /.docx$/.test(files[key].name) || /.doc$/.test(files[key].name) || /.xls$/.test(files[key].name) || /.xlsx$/.test(files[key].name)) { // only pdf and text files 
+                    file_flag = 3;
+                    uploading_file  = !!files[key]? files[key]: [];
+                    $('.upload_image_wrapper').show();
+                    $('.message').hide();
+                    $('.upload_image_wrapper').append("<div class='imagePreview" + i + " upload_file_thumb' id='imagePreview'></div>");
+                    $('.imagePreview' + i).css("background-image", "url(" + $('.upload_image_wrapper').data('file_image') + ")");
+                }
+                else
+                {
+                    swal(proper_file + " (pdf/txt/xls/doc)");
+                    return;
+                }
+            }
+        }
     });
     // Files uploading script For POPUP
     $('#mediaModal').on('change', '#upload_files', function () {
@@ -722,7 +734,10 @@ $(document).ready(function () {
             } else if (userdata.media_type == "files")
             {
                 var i = Math.random().toString(36).substring(7);
-                $('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'user/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                //$('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'user/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
+                
+                $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"/> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+userdata.title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="imagePreview' + i + ' file_download" id="" data-file=""></span> <a href="' + base_url + 'user/download_file/' + userdata.media + '"> <span class="filename">' + userdata.media + '</span> </a> </div> </div> </div> </div> </div>');
+                
                 $('.imagePreview' + i).data('file', userdata.media);
                 $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
             } 

@@ -715,7 +715,7 @@
                                             <input type="file" name="upload_files" class="upload" id="upload_files"/>
                                         </div>
                                     </div>
-                                    <div class="upload_image_wrapper" style="display:none" data-video_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>">
+                                    <div class="upload_image_wrapper" style="display:none" data-video_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>" data-file_image="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>">
 
                                     </div>
                                 </div>
