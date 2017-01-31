@@ -271,6 +271,8 @@ function upload_video(files) {
             }
             else if (str != 0)
             {
+                media_file = JSON.parse(str);
+                video_thumb = media_file[0].media.split('.')[0] + '_thumb.png';
                 
                 $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total x is Watching</h4> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.user + '"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+video_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="' + display_file_class + '" id="imagePreview_msg" data-toggle="modal" data-target="#mediaModal" data-image="" data-type="image"> </span> </div> </div> </div> </div> </div>');
     
@@ -283,8 +285,7 @@ function upload_video(files) {
                 } else if ($('.topichat_video_ul').find('li').length == 0) {
                     $('.topichat_video_ul').html('');
                 }
-                media_file = JSON.parse(str);
-                video_thumb = media_file[0].media.split('.')[0] + '_thumb.png';
+                
                 var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="' + media_file[0].media + '" data-type="video" > <img src="' + upload_path + video_thumb + '" class="img-responsive topi_image"> </a> </li>';
                 $('.topichat_video_ul').prepend(html);
 
