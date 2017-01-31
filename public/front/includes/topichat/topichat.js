@@ -342,11 +342,14 @@ $('document').ready(function () {
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
                 $('.topichat_media_rank_modal').html(rank);
-                var user = "";
-                users.forEach(function (data) {
-                    user += '<img class="img-circle img-responsive topichat_user" src="' + DEFAULT_PROFILE_IMAGE_PATH + data.user_image + '" title="' + data.display_name + '">';
-                });
-                $('.user_post_image_right').html(user);
+                if(users != null)
+                {
+                    var user = "";
+                    users.forEach(function (data) {
+                        user += '<img class="img-circle img-responsive topichat_user" src="' + DEFAULT_PROFILE_IMAGE_PATH + data.user_image + '" title="' + data.display_name + '">';
+                    });
+                    $('.user_post_image_right').html(user);
+                }
                 $('.topichat_msg_sec_modal').html(view).animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
                 return true;
             }
