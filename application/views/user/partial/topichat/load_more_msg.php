@@ -63,11 +63,15 @@ foreach ($messages as $message) {
                         }
                         else if ($message['media_type'] == "video") {
                             ?>
-                            <div class="media_wrapper" style="float: left">
+                            <div class="wdth_span media_wrapper img_media_wrapper">
+                                <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message_videos_thumb[$message['id']] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="video">
+                                </span>
+                            </div>
+<!--                        <div class="media_wrapper" style="float: left">
                                 <span class='imagePreview' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="video">
                                     <video controls="" src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>" style="height:180px;"></video>
                                 </span>
-                            </div>
+                            </div>-->
                             <?php
                         }
                         else if ($message['media_type'] == "files") {

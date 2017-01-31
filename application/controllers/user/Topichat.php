@@ -290,7 +290,13 @@ class Topichat extends CI_Controller {
 //        pr($this->data['top_rank_post'],1);
         $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit);
         krsort($this->data['messages']); // Reverse array
-        
+        $this->data['message_videos_thumb'] = array();
+        foreach ($this->data['messages'] as $msg) {
+            if($msg['media_type'] == "video")
+            {
+                $this->data['message_videos_thumb'][$msg['id']] = explode(".", $msg['media'])[0] . "_thumb.png";
+            }
+        }
         $this->data['text_messages'] = $this->Topichat_model->get_text_messages($Id, $this->session->user['id'], $limit);
         krsort($this->data['text_messages']); // Reverse array
         
