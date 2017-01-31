@@ -344,6 +344,7 @@ $('document').ready(function () {
                 $('.topichat_media_rank_modal').html(rank);
                 if(users != null)
                 {
+                    console.log(users);
                     var user = "";
                     users.forEach(function (data) {
                         user += '<img class="img-circle img-responsive topichat_user" src="' + DEFAULT_PROFILE_IMAGE_PATH + data.user_image + '" title="' + data.display_name + '">';
