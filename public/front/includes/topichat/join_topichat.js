@@ -501,12 +501,8 @@ $(document).ready(function () {
     });
     // Image uploading script For POPUP
     $("#upload_file_section").on("change","#uploadFile", function () {
-        
-        file_flag = 1;
-        uploading_file  = !!this.files ? this.files : [];
-        
         $('.message').html();
-        $('.image_wrapper').html('');
+        $('.upload_image_wrapper').html('');
         var files = !!this.files ? this.files : [];
         if (!files.length || !window.FileReader) {
             $('.message').html(no_selected_file);
@@ -524,14 +520,17 @@ $(document).ready(function () {
                     reader.readAsDataURL(files[key]); // read the local file
 
                     reader.onloadend = function () { // set image data as background of div
+                        file_flag = 1;
+                        uploading_file  = !!this.files ? this.files : [];
                         // $('#imagePreview').addClass('imagePreview');
-                        $('.image_wrapper').show();
+                        $('.upload_image_wrapper').show();
                         $('.message').hide();
-                        $('.image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                        $('.upload_image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
                         $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                         ++i;
                     }
-                } else
+                }
+                else
                 {
                     $('.message').html(proper_image);
                     $('.message').show();
@@ -539,16 +538,42 @@ $(document).ready(function () {
                 }
             }
         }
-        
+
         //var files = !!this.files ? this.files : [];
         //upload_image(files);
     });
     // Video uploading script
     $("#upload_file_section").on("change","#upload_video", function () {
-        file_flag = 2;
-        uploading_file  = !!this.files ? this.files : [];
-        //var files = !!this.files ? this.files : [];
-        //upload_video(files);
+        $('.message').html();
+        $('.upload_image_wrapper').html('');
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            $('.message').html(no_selected_file);
+            $('.message').show();
+            return; // no file selected, or no FileReader support
+        }
+
+        var i = 0;
+        for (var key in files)
+        {
+            if (key != "length" && key != "item")
+            {
+                if (/^video/.test(files[key].type)) // only video file
+                {
+                    file_flag = 2;
+                    uploading_file  = !!files[key] ? files[key] : [];
+                    $('.upload_image_wrapper').show();
+                    $('.message').hide();
+                    $('.upload_image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                    $('.imagePreview' + i).css("background-image", "url(" + $('.upload_image_wrapper').data('video_image') + ")");
+                }
+                else
+                {
+                    $('.message').html(proper_image);
+                    $('.message').show();
+                }
+            }
+        }
     });
     // Video uploading script For POPUP
     $('#mediaModal').on('change', '#upload_video', function () {
@@ -619,7 +644,7 @@ $(document).ready(function () {
         console.log('Button called');
         if($('#media_description').val() != ""){
             console.log('Description is not empty, file flag = ',file_flag, ", upload file length = ",uploading_file.length);
-            if(file_flag == 0 && uploading_file.length == 0)
+            if(file_flag == 0 || uploading_file.length == 0)
             {
                 console.log('file not selected');
                 swal('Please select media');

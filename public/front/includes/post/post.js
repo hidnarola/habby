@@ -102,7 +102,8 @@ $('document').ready(function () {
                         $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
                         ++i;
                     }
-                } else
+                }
+                else
                 {
                     $('.message').html(proper_image);
                     $('.message').show();
