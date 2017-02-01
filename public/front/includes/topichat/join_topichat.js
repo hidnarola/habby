@@ -421,29 +421,19 @@ $(document).ready(function () {
         }
     });
 
-    $('.mainchatarea').on('click', '.submit_btn', function (e) {
+    $('.fb-chat-window').on('click', '.submit_btn', function (e) {
         msg = $('#message_div').html();
         if (msg.trim() != '')
         {
-            $('.chat_area2,.topichat_msg_sec_modal').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg + "</span></span></div>");
+            $('.panel-chat').find('.panel-body').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
             $('#message_div').html('');
             $('#message').val('');
             send(msg);
-            $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+            var control = $('.panel-chat').find('.panel-body');
+            control.scrollTop(control[0].scrollHeight);
         }
     });
-
-    $('#mediaModal').on('click', '.submit_btn', function () {
-        msg1 = $('#mediaModal').find('#message_div').html();
-        if (msg1.trim() != '')
-        {
-            $('.chat_area2,.topichat_msg_sec_modal').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg1 + "</span></span></div>");
-            $('#mediaModal').find('#message_div').html('');
-            $('#mediaModal').find('#message').val('');
-            send(msg1);
-            $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
-        }
-    });
+    
 
     $('#linkModal').on('click', '.submit_btn', function () {
         msg1 = $('#linkModal').find('#message_div').html();
@@ -456,11 +446,34 @@ $(document).ready(function () {
             $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
         }
     });
+    
+    $('#mediaModal').on('click', '.submit_btn', function () {
+        msg1 = $('#mediaModal').find('#message_div').html();
+        if (msg1.trim() != '')
+        {
+            $('.chat_area2,.topichat_msg_sec_modal').append("<div class='chat_2 clearfix topichat_media_post' style='float:right;clear:right'><span class='wdth_span'><span>" + msg1 + "</span></span></div>");
+            $('#mediaModal').find('#message_div').html('');
+            $('#mediaModal').find('#message').val('');
+            send(msg1);
+            $(".chat_area2,.topichat_msg_sec_modal").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+        }
+    });
     // Image uploading script
     $('#mediaModal').on('change', '#uploadFile', function () {
         var files = !!this.files ? this.files : [];
         upload_image(files);
     });
+     // Video uploading script For POPUP
+    $('#mediaModal').on('change', '#upload_video', function () {
+        var files = !!this.files ? this.files : [];
+        upload_video(files);
+    });
+    // Files uploading script For POPUP
+    $('#mediaModal').on('change', '#upload_files', function () {
+        var files = !!this.files ? this.files : [];
+        upload_files(files);
+    });
+    
     // Image uploading script For POPUP
     $("#upload_file_section").on("change","#uploadFile", function () {
         $('.message').html();
@@ -537,11 +550,7 @@ $(document).ready(function () {
             }
         }
     });
-    // Video uploading script For POPUP
-    $('#mediaModal').on('change', '#upload_video', function () {
-        var files = !!this.files ? this.files : [];
-        upload_video(files);
-    });
+   
     // File uploading script
     $("#upload_file_section").on("change","#upload_files", function ()
     {
@@ -574,11 +583,7 @@ $(document).ready(function () {
             }
         }
     });
-    // Files uploading script For POPUP
-    $('#mediaModal').on('change', '#upload_files', function () {
-        var files = !!this.files ? this.files : [];
-        upload_files(files);
-    });
+    
     // Send update notification to other users
     $(".update_form").submit(function () {
         var msg = {

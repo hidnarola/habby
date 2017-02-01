@@ -548,7 +548,6 @@
                     <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
 
-
                         </div>
                         <div class="row">
 
@@ -606,7 +605,6 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
-
                     <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="usr_post_img usr_post_img_modal">
                             <img class="img-circle img-responsive topichat_media_user" src="">
@@ -674,10 +672,88 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo lang('Close') ?></button>
-            </div>   
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Topichat post modal -->
+<div class="modal fade in" id="postModal" role="dialog">
+    <div class="modal-dialog topichat_media_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                
+                <div class="row">
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                        <div class="usr_post_img usr_post_img_modal">
+                            <!-- User image comes here using jquery -->
+                            <img class="img-circle img-responsive topichat_media_user" src="">
+                        </div>
+                        <div class="topichat_media_details">
+                            <!-- User name comes here with shared title -->
+                        </div>
+                        <div class="event_media event_media_modal topichat_msg_sec">
+                            <div class="row topichat_media_post topichat_media_post_modal" data-chat_id="123">
+                                <div class="col-md-1 rank_button_modal">
+                                    <div id="field" class="topichat_media_rank topichat_media_rank_modal">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-11 topichat_media_popup">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        <div class="usr_post_img user_post_image_right">
+
+                        </div>
+                        <div class="row">
+                            <!-- Chat area section start here -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
+                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">                                    
+                                </div>
+                            </div>
+                            <!-- Chat area section end here -->
+
+                            <!-- Type Chat section start here -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="topich_chat_typesec topich_chat_typesec_modal">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="topic_textarea">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
+                                                        <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
+                                                        <input type="hidden" id="message" name="message" class="form-control">
+                                                        <span class="input-group-btn upld_icnpad">
+                                                            <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
+                                                        </span>
+                                                        <span class="input-group-btn">
+                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send') ?>">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Type area end here -->
+
+                                </div>
+                            </div>
+                            <!-- Type Chat section end here -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topichat post modal over-->
+
 
 <!--  Post modal section start here -->
 <div class="modal upload-modal" id="upload_file_section">
