@@ -707,7 +707,14 @@
                     </div>
                     <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
-
+                            <div class="col-sm-11">
+                                
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="row">
                             <!-- Chat area section start here -->
