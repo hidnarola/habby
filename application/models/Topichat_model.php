@@ -765,5 +765,27 @@ class Topichat_model extends CI_Model {
         $res_data = $this->db->get('topic_group tg')->result_array();
         return $res_data;
     }
+    
+    /* Phase 2 changes
+     * 
+     * get_topichat_media_details is used to fetch media details of topic post by id
+
+     * @param   $chat_id      int      specify topi_group_chat_id
+     *          $user_id       int      specify logged in user_id
+     *
+     * return 	array, having media details
+     * 
+     * developed by : ar
+     */
+    public function get_topichat_media_details($chat_id,$user_id){
+        $this->db->select('tc.id,tc.topic_group_id,tc.user_id,tc.message,tc.media,tc.media_type,tc.youtube_video,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+        $this->db->join('topic_group_chat_rank trp', 'tc.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
+        $this->db->join('topic_group_chat_rank trn', 'tc.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
+        $this->db->join('topic_group_chat_rank tru', 'tc.id = tru.topic_group_chat_id and tru.user_id = ' . $user_id, 'left');
+        $this->db->join('users u', 'u.id = tc.user_id');
+        $this->db->where('tc.id', $chat_id);
+        $res_data = $this->db->get('topic_group_chat tc')->row_array();
+        return $res_data;
+    }
 }
 ?>

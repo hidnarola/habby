@@ -56,7 +56,7 @@ foreach ($messages as $message) {
                             ?>
                             <div class="wdth_span media_wrapper img_media_wrapper">
 
-                                <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="image">
+                                <span class='imagePreview' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message['media'] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#postModal" data-image="<?php echo $message['media'] ?>" data-type="image">
                                 </span>
                             </div>
                             <?php
@@ -64,7 +64,7 @@ foreach ($messages as $message) {
                         else if ($message['media_type'] == "video") {
                             ?>
                             <div class="wdth_span media_wrapper img_media_wrapper">
-                                <span class='imagePreview video-w-icon' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message_videos_thumb[$message['id']] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $message['media'] ?>" data-type="video">
+                                <span class='imagePreview video-w-icon' style='background-image:url("<?php echo DEFAULT_CHAT_IMAGE_PATH . $message_videos_thumb[$message['id']] ?>")' id='imagePreview_msg' data-toggle="modal" data-target="#postModal" data-image="<?php echo $message['media'] ?>" data-type="video">
                                 </span>
                             </div>
 <!--                        <div class="media_wrapper" style="float: left">
@@ -95,7 +95,7 @@ foreach ($messages as $message) {
                                     <?php
                                         if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                             ?>
-                                            <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-id='<?php echo $message['id']; ?>'>
+                                            <div class="videoPreview" data-toggle="modal" data-target="#postModal" data-id='<?php echo $message['id']; ?>'>
                                                 <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                                 <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                             </div>

@@ -693,7 +693,7 @@
                             <!-- User name comes here with shared title -->
                         </div>
                         <div class="event_media event_media_modal topichat_msg_sec">
-                            <div class="row topichat_media_post topichat_media_post_modal" data-chat_id="123">
+                            <div class="row topichat_media_post topichat_media_post_modal" data-chat_id="">
                                 <div class="col-md-1 rank_button_modal">
                                     <div id="field" class="topichat_media_rank topichat_media_rank_modal">
 

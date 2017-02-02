@@ -180,6 +180,67 @@ $('document').ready(function () {
         });
     });
 
+    $('#postModal').on("show.bs.modal",function(e){
+        $('#emogis').popover('hide');
+
+        //get data-id attribute of the clicked element
+        var id = $(e.relatedTarget).parents('.topichat_media_post').data('chat_id');
+        $.ajax({
+            url : base_url + 'topichat/topichat_media_details',
+            method: 'post',
+            async: false,
+            data: 'id=' + id,
+            success : function(data){
+                console.log(data);
+                var data = JSON.parse(data);
+                var type = data.media_type;
+                var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;
+//                var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
+                var DEFAULT_IMAGE_PATH = data.DEFAULT_IMAGE_PATH;
+                var media_details = data['media_content'];
+                //var view = data['view'];
+                //var users = data['users'];
+                
+                $('.topichat_media_user').attr('src', DEFAULT_PROFILE_IMAGE_PATH + media_details.user_image);
+                $('.topichat_media_user').attr('title', media_details.name);
+                $('.topichat_media_details').html(media_details.message);
+                
+                if(type == "links"){
+                    if(media_details['youtube_video'] != null){
+                        $('.topichat_media_popup').html(media_details.youtube_video);
+                    }
+                }
+                else
+                {
+                    var media = '<a class="post_images" href="javascript:;">'
+                    if (type == 'image') {
+                        media += '<img src="' + DEFAULT_CHAT_IMAGE_PATH + media_details.media + '" class="img-responsive center-block">';
+                    } else {
+                        media += '<video controls="" src="' + DEFAULT_CHAT_IMAGE_PATH + media_details.media + '" style="height:180px;"></video>';
+                    }
+                    media += '</a>';
+                    $('.topichat_media_popup').html(media);
+                }
+                
+                $('.topichat_media_post_modal').attr('data-chat_id', media_details.id);
+                var rank_image = (media_details.is_ranked == 1 && media_details.rank == 1) ? DEFAULT_IMAGE_PATH + "challeng_arrow_ranked.png" : DEFAULT_IMAGE_PATH + "challeng_arrow.png";
+                var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
+                var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
+                $('.topichat_media_rank_modal').html(rank);
+                
+                
+                //var user = "";
+ //               users.forEach(function (data) {
+   //                 user += '<img class="img-circle img-responsive topichat_user" src="' + DEFAULT_PROFILE_IMAGE_PATH + data.user_image + '" title="' + data.display_name + '">';
+     //           });
+       //         $('.user_post_image_right').html(user);
+                //$('.topichat_msg_sec_modal').html(view).animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                
+                return true;
+            }
+        });
+    });
+
     // Add rank to the post
     $('.topichat_msg_sec').on('click', '.add', function () {
         var t = $(this);
