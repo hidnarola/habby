@@ -195,7 +195,7 @@ $('document').ready(function () {
                 var data = JSON.parse(data);
                 var type = data.media_type;
                 var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;
-//                var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
+                var DEFAULT_CHAT_IMAGE_PATH = data.DEFAULT_CHAT_IMAGE_PATH;
                 var DEFAULT_IMAGE_PATH = data.DEFAULT_IMAGE_PATH;
                 var media_details = data['media_content'];
                 //var view = data['view'];
