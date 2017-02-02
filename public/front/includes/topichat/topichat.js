@@ -185,6 +185,16 @@ $('document').ready(function () {
 
         //get data-id attribute of the clicked element
         var id = $(e.relatedTarget).parents('.topichat_media_post').data('chat_id');
+        
+        // Socket code for sending notification regarding this user is watching particular post
+        var msg = {
+            message: '',
+            type: 'post_view',
+            group_id: group_id,
+            post_id : id
+        }
+        Server.send('message', JSON.stringify(msg));
+        
         $.ajax({
             url : base_url + 'topichat/topichat_media_details',
             method: 'post',

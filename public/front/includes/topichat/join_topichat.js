@@ -686,6 +686,8 @@ $(document).ready(function () {
     //Log any messages sent from server
     Server.bind('message', function (payload) {
         userdata = JSON.parse(payload);
+        
+        
         if (userdata.media_type == null)
         {
             $('.panel-chat').find('.panel-body').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
@@ -711,7 +713,8 @@ $(document).ready(function () {
                 var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" data-image="' + userdata.media + '" data-type="image"> <img src="' + upload_path + userdata.media + '" class="img-responsive topi_image"> </a> </li>';
                 $('.topichat_image_ul').prepend(html);
 
-            } else if (userdata.media_type == "video")
+            } 
+            else if (userdata.media_type == "video")
             {
                 video_thumb = userdata.media.split('.')[0] + '_thumb.png';
                 var i = Math.random().toString(36).substring(7);
@@ -731,7 +734,8 @@ $(document).ready(function () {
                 var html = '<li class="topi_image_li"> <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="' + userdata.media + '" data-type="video" > <img src="' + upload_path + video_thumb + '" class="img-responsive topi_image"> </a> </li>';
                 $('.topichat_video_ul').prepend(html);
 
-            } else if (userdata.media_type == "files")
+            } 
+            else if (userdata.media_type == "files")
             {
                 var i = Math.random().toString(36).substring(7);
                 //$('.chat_area2').append('<div class="chat_1 clearfix topichat_media_post" data-chat_id="' + userdata.chat_id + '" style="float:left;clear:left"><img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"><div class="media_wrapper" style="width: 250px"><span class="imagePreview' + i + ' file_download" id="" data-file=""></span><a href="' + base_url + 'user/download_file/' + userdata.media + '"><span class="filename">' + userdata.media + '</span></a><div id="field" class="topichat_media_rank"><button type="button" id="add" class="add add_btn smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button><span class="rank_rate">0</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/></button></div></div></div>');
@@ -779,6 +783,10 @@ $(document).ready(function () {
                     $('.topic_frame').html('');
                 }
                 $('.topic_frame').prepend(left_link_html);
+            }
+            else if(userdata.media_type == "post_view_notification"){
+                // Code of add watching notification
+                console.log("someone viewing some post",userdata);
             }
             $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         }
