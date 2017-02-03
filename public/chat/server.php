@@ -276,6 +276,11 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             else if($message->type == 'post_view' ){
                 // Send notification to all user who is on the topichat page
                 
+                $Server->wsClients[$clientID]['viewing_post'][] = $message->post_id;
+                
+                $Server->log("wsClient : ");
+                print_r($Server->wsClients[$clientID]);
+                
                 $user_ids = get_topichat_users($message->group_id);
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {
@@ -308,17 +313,13 @@ function wsOnOpen($clientID)
     $ip = long2ip($Server->wsClients[$clientID][6]);
     //$Server->wsSend('client id = '.$clientID);
     $Server->log("$ip ($clientID) has connected.");
-    
 }
 
 // when a client closes or lost connection
 function wsOnClose($clientID, $status) {
     global $Server;
     $ip = long2ip($Server->wsClients[$clientID][6]);
-
     $Server->log("$ip ($clientID) has disconnected.");
-    
-    print_r($Server->wsClients[$clientID]);
 }
 
 // start the server
