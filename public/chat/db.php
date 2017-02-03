@@ -332,6 +332,7 @@ function get_topic_name($group_id) {
  * Developed by "ar"
  */
 function user_viewing_post($user_id,$post_id){
+    echo "user_viewing_post";
     try
     {
         $conn = open_connection();
@@ -339,6 +340,7 @@ function user_viewing_post($user_id,$post_id){
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0)
         {
+            echo "entry already exsist";
             // Set currently_viewing flag to 1
             if(update_user_viewing_post($user_id,$post_id,1))
             {
@@ -349,6 +351,7 @@ function user_viewing_post($user_id,$post_id){
         else
         {
             // Add new record
+            echo "insert new record";
             $query = "insert into topic_post_user_view value(NULL,$post_id,$user_id,'1','" . date('Y-m-d H:i:s') . "')";
             if (mysqli_query($conn, $query)) {
                 close_connection($conn);
@@ -379,14 +382,18 @@ function user_viewing_post($user_id,$post_id){
  * Developed by "ar"
  */
 function update_user_viewing_post($user_id,$post_id,$current_flag,$unset_all=false){
+    echo "In update_user_viewing_post";
+    
     try {
         if(!empty($user_id) && !empty($post_id))
         $conn = open_connection();
         if(!$unset_all){
+            echo "update single post";
             // Set currently_viewing flag to 1
             $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
         }
         else{
+            echo "update multiple post";
             // unset currently_viewing flag to $current_flag to all post
             $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id in (".implode(",",$post_id) .") and user_id = '".$user_id."'";
         }
