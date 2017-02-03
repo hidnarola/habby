@@ -317,6 +317,8 @@ function wsOnClose($clientID, $status) {
     $ip = long2ip($Server->wsClients[$clientID][6]);
 
     $Server->log("$ip ($clientID) has disconnected.");
+    
+    print_r($Server->wsClients[$clientID]);
 }
 
 // start the server
