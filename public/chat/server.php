@@ -322,17 +322,7 @@ function wsOnClose($clientID, $status) {
     if(isset($Server->wsClients[$clientID]['viewing_post']))
     {
         // Set is_current_watching field to 0 and notify all users that particular user is not watching any post now
-
-        echo "user data = ";
-        var_dump($Server->wsClients[$clientID]['user_data']);
-
-        echo "user_id = ";
-        var_dump($Server->wsClients[$clientID]['user_data']['id']);
-        
-        echo "\n\n  Post array = ";
-        var_dump($Server->wsClients[$clientID]['viewing_post']);
-        
-        update_user_viewing_post($Server->wsClients[$clientID]['user_data']['id'],$Server->wsClients[$clientID]['viewing_post'],0,true);
+        update_user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$Server->wsClients[$clientID]['viewing_post'],0,true);
     }
     
     $Server->log("$ip ($clientID) has disconnected.");
