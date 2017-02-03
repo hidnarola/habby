@@ -319,6 +319,11 @@ function wsOnOpen($clientID)
 function wsOnClose($clientID, $status) {
     global $Server;
     $ip = long2ip($Server->wsClients[$clientID][6]);
+    $Server->log("Before closing : status = ".$status);
+    print_r($Server->wsClients[$clientID]);
+    unset($Server->wsClients[$clientID]['viewing_post']);
+    $Server->log("After unset");
+    print_r($Server->wsClients[$clientID]);
     $Server->log("$ip ($clientID) has disconnected.");
 }
 
