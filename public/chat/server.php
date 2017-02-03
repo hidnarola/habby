@@ -278,8 +278,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 
                 $Server->wsClients[$clientID]['viewing_post'][] = $message->post_id;
                 
-                $Server->log("wsClient : ");
-                print_r($Server->wsClients[$clientID]);
+                // Database entry specify this user is watching particular post currently
+                user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$message->post_id);
                 
                 $user_ids = get_topichat_users($message->group_id);
                 if (count($user_ids) > 1) {
@@ -299,7 +299,6 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             }
-            
         } else {
             $Server->wsSend($clientID, "Invalid message sent");
         }
@@ -319,11 +318,13 @@ function wsOnOpen($clientID)
 function wsOnClose($clientID, $status) {
     global $Server;
     $ip = long2ip($Server->wsClients[$clientID][6]);
-    $Server->log("Before closing : status = ".$status);
-    print_r($Server->wsClients[$clientID]);
-    unset($Server->wsClients[$clientID]['viewing_post']);
-    $Server->log("After unset");
-    print_r($Server->wsClients[$clientID]);
+    
+    if(isset($Server->wsClients[$clientID]['viewing_post']))
+    {
+        // Set is_current_watching field to 0 and notify all users that particular user is not watching any post now
+        update_user_viewing_post($Server->wsClients[$clientID]['user_data']['id'],$Server->wsClients[$clientID]['viewing_post']);
+    }
+    
     $Server->log("$ip ($clientID) has disconnected.");
 }
 

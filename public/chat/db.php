@@ -316,4 +316,90 @@ function get_topic_name($group_id) {
         return 0;
     }
 }
+
+/* phase 2 changes
+ * 
+ * user_viewing_post checks that if user has already viewed particular post, 
+ *      if yes then it will set currently_viewing flag to 1
+ *      else add new entry in database table "topic_post_user_view" with currently_viewing flag 1
+ * 
+ * @params      int     $user_id        specify user_id
+ *              int     $post_id        specify post_id
+ * 
+ * @return      true,       if success
+ *              false,      if fail
+ * 
+ * Developed by "ar"
+ */
+function user_viewing_post($user_id,$post_id){
+    try
+    {
+        $conn = open_connection();
+        $query = "select count(id) from topic_post_user_view where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0)
+        {
+            // Set currently_viewing flag to 1
+            if(update_user_viewing_post($user_id,$post_id,1))
+            {
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            // Add new record
+            $query = "insert into topic_post_user_view value(NULL,$post_id,$user_id,'1','" . date('Y-m-d H:i:s') . "')";
+            if (mysqli_query($conn, $query)) {
+                close_connection($conn);
+                return true;
+            }
+            close_connection($conn);
+            return false;
+        }
+    }
+    catch(Exception $e){
+        echo "Exception occur in user_viewing_post having user id = ".$user_id. " and post id = ".$post_id;
+        return false;
+    }    
+}
+
+/* phase 2 changes
+ * 
+ * update_user_viewing_post used to change current flag value
+ *
+ * @params      int             $user_id        specify user_id
+ *              int/array       $post_id        specify post_id
+ *              boolean         $current_flag   specify current flag value (Value should be 0 or 1)
+ *              boolean         $unset_all      specify multiple post id need to unset from database
+ * 
+ * @return      true,       if success
+ *              false,      if fail
+ * 
+ * Developed by "ar"
+ */
+function update_user_viewing_post($user_id,$post_id,$current_flag,$unset_all=false){
+    try {
+        if(!empty($user_id) && !empty($post_id))
+        $conn = open_connection();
+        if(!$unset_all){
+            // Set currently_viewing flag to 1
+            $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
+        }
+        else{
+            // unset currently_viewing flag to $current_flag to all post
+            $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id in (".implode(",",$post_id) .") and user_id = '".$user_id."'";
+        }
+        if (mysqli_query($conn, $query)) {
+            close_connection($conn);
+            return true;
+        }
+        close_connection($conn);
+        return false;
+    }
+    catch(Exception $e){
+        echo "Exception occur in update_user_viewing_post having user id = ".$user_id. " and post id = ".$post_id;
+        return false;
+    }    
+}
 ?>
