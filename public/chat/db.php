@@ -336,7 +336,7 @@ function user_viewing_post($user_id,$post_id){
     try
     {
         $conn = open_connection();
-        $query = "select count(id) from topic_post_user_view where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
+        $query = "select * from topic_post_user_view where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0)
         {
