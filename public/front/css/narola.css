@@ -1495,3 +1495,7 @@ color: #76469e;
 font-weight: 700;
 font-size: 16px;
 }
+
+#postModal .topichat_media_popup video {
+    width:100% !important;
+}
