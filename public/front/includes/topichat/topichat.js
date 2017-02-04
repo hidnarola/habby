@@ -1,4 +1,8 @@
 $('document').ready(function () {
+    
+    // Set height of post section dynamically
+    $(".chat_area_updated").height($('.right_lg_sectopic').height() - (($('.tittl_sec_lg').height()) + $('.topich_chat_typesec').height()));
+    
     $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
     var load = true;
     var in_progress = false;
