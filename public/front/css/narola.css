@@ -731,7 +731,7 @@ img.file_icon {
 }
 .topich_chat_typesec_modal{
     bottom: 66px;
-    width: auto !important;
+    width: 38% !important;
 }
 .usr_post_img_modal.usr_post_img{   
     width: 60px;
@@ -1485,3 +1485,7 @@ h2.chlng_hdg ,
     height: 100%;
 }
 .topichat_media_popup iframe{width: 100% !important;}
+#postModal .topichat_media_details{
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+}
