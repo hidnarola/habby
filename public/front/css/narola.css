@@ -970,7 +970,6 @@ h2.chlng_hdg ,
     color: #76469e;
     font-weight: bold;
     margin-bottom: 15px;
-
 }
 .event_seat a.pstbtn {
     margin-top: -7px;
@@ -1484,7 +1483,7 @@ h2.chlng_hdg ,
 .topic_2cntnr{
     height: 100%;
 }
-.topichat_media_popup iframe{width: 100% !important;}
+#postModal .topichat_media_popup iframe{width: 100% !important;}
 #postModal .topichat_media_details{
     padding-bottom: 30px;
     margin-bottom: 10px;

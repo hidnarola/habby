@@ -721,7 +721,7 @@ $(document).ready(function () {
                     media += '</a>';
                     $('.topichat_media_popup').html(media);
                 }
-                
+                $('#postModal').attr('data-chat_id', media_details.id);
                 $('.topichat_media_post_modal').attr('data-chat_id', media_details.id);
                 var rank_image = (media_details.is_ranked == 1 && media_details.rank == 1) ? DEFAULT_IMAGE_PATH + "challeng_arrow_ranked.png" : DEFAULT_IMAGE_PATH + "challeng_arrow.png";
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
@@ -744,9 +744,7 @@ $(document).ready(function () {
     // Fired when post popup will close
     $('#postModal').on("hidden.bs.modal",function(e){
         $('#emogis').popover('hide');
-
-        //get data-id attribute of the clicked element
-        var id = $(e.relatedTarget).parents('.topichat_media_post').data('chat_id');
+        var id = $(e.currentTarget).data('chat_id');
         console.log("modal close : id = ",id);
     });
     
