@@ -221,7 +221,7 @@
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 0;
 }
 
 .txt_white{ color:white;font-size:20px;}
@@ -1488,4 +1488,10 @@ h2.chlng_hdg ,
 #postModal .topichat_media_details{
     padding-bottom: 30px;
     margin-bottom: 10px;
+}
+.chat_area_updated_list_top{background: #f6f6f6;}
+.chat_area_updated_list_top h4{
+color: #76469e;
+font-weight: 700;
+font-size: 16px;
 }
