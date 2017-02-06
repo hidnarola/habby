@@ -1160,7 +1160,7 @@ h2.chlng_hdg ,
     border-bottom: 1px solid #cccccc;
     border-top: 1px solid #cccccc;
     margin: 0 -20px;
-    padding: 0 20px 10px;
+    padding: 0 20px 0px;
 }
 .chat_area_updated_list_top > h4, .total_views_list, .total_views_list ul li {
     display: inline-block;

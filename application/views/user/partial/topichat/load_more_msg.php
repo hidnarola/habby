@@ -13,7 +13,7 @@ foreach ($messages as $message) {
                             foreach ($message['watching_users'] as $watching_user)
                             {
                                 ?>
-                                <li>
+                                <li data-watching_user_id="<?php echo $watching_user['id']; ?>">
                                     <a href="javascript:void(0);" title="<?php echo $watching_user['name'] ?>">
                                         <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $watching_user['user_image']; ?>" title='<?php echo $watching_user['name'] ?>' />
                                     </a>
