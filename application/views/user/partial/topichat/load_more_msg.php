@@ -4,30 +4,37 @@ foreach ($messages as $message) {
     <!-- chat_area_updated_list -->
     <div class="topichat_media_post chat_area_updated_list" data-chat_id="<?php echo $message['id']; ?>">
         <div class="chat_area_updated_list_top">
-            <h4>Total x is Watching</h4>
-            <div class="total_views_list">
-                <ul>
-                    <li>
-                        <a href="javascript:void(0);">A</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">B</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">C</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="more_views">3 More</a>
-                    </li>
-                </ul>
-            </div>
+            <h4>Total <?php echo (isset($message['watching_users'])?count($message['watching_users']):'0') ?> is Watching</h4>
+            <?php
+                if(isset($message['watching_users']) && count($message['watching_users']) > 0)
+                {
+                    ?>
+                    <div class="total_views_list">
+                        <ul>
+                            <?php
+                                foreach ($message['watching_users'] as $watching_user)
+                                {
+                                    ?>
+                                    <li>
+                                        <a href="javascript:void(0);" title="<?php echo $watching_user['name'] ?>">
+                                            <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $watching_user['user_image']; ?>" title='<?php echo $watching_user['name'] ?>' />
+                                        </a>
+                                    </li>
+                                    <?php
+                                }
+                            ?>
+                        </ul>
+                    </div>
+                    <?php
+                }
+            ?>
             <div class="clearfix"></div>
         </div>
         <div class="chat_area_updated_list_middle">
             <div class="chat_area_updated_list_middle_left">
                 <div class="topichat_media_thumb">
                     <a href="javascript:void(0);">
-                        <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>'>
+                        <img class='user_chat_thumb' src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $message['user_image']; ?>" title='<?php echo $message['name'] ?>' />
                     </a>
                 </div>
                 <div id="field" class="topichat_media_rank">

@@ -283,7 +283,25 @@ class Topichat_model extends CI_Model {
         // Changes for phase 2, to get only media post
         $this->db->where('tg.media_type IS NOT NULL');
         // Changes over
-        return $this->db->get('topic_group_chat tg')->result_array();
+        
+        $messages = $this->db->get('topic_group_chat tg')->result_array();
+        
+        // Phase 2 changes, retrive user who are currently watching post
+        $post_ids = array_column($messages,'id');
+        if(count($post_ids) > 0)
+        {
+            $this->db->select('pv.topic_group_chat_id as post_id,u.id,u.name,u.user_image');
+            $this->db->join('users u','pv.user_id = u.id and pv.currently_viewing = "1"');
+            $this->db->where_in('pv.topic_group_chat_id',$post_ids);
+            $this->db->from('topic_post_user_view pv');
+            $currently_viewing_users = $this->db->get()->result_array();
+            foreach($currently_viewing_users as $user){
+                // code to add user in message array
+                $key = array_search($user['post_id'], $post_ids);
+                $messages[$key]['watching_users'][] = $user;
+            }
+        }
+        return $messages;
     }
     
     /* changes of phase 2
