@@ -264,7 +264,14 @@
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                             <div class="tittl_sec2">
                                 <p class="topchat_p">
-                                    <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_grp"><?php echo lang('Edit'); ?></a>
+                                    <?php 
+                                        if($topichat['user_id'] == $this->session->user['id'])
+                                        {
+                                            ?>
+                                            <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_grp"><?php echo lang('Edit'); ?></a>
+                                            <?php
+                                        }
+                                    ?>
                                 </p>
                             </div>
                             <div class="clearfix"></div>
