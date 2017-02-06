@@ -875,7 +875,7 @@ $(document).ready(function () {
                 $('[data-chat_id="'+userdata.chat_id+'"]').each(function(){
                     console.log("total user = ",parseInt($(this).find('.watching_count').html()) + 1);
                     $(this).find('.watching_count').html(parseInt($(this).find('.watching_count').html()) + 1);
-                    $(this).find('total_views_list').find('ul').append('<li><a href="javascript:void(0);" title="'+userdata.user+'"><img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image+'" title="'+userdata.user+'" /></li>');
+                    $(this).find('.total_views_list').find('ul').append('<li><a href="javascript:void(0);" title="'+userdata.user+'"><img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image+'" title="'+userdata.user+'" /></li>');
                 });
             }
             $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
