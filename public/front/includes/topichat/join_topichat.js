@@ -869,9 +869,12 @@ $(document).ready(function () {
                 }
                 $('.topic_frame').prepend(left_link_html);
             }
-            else if(userdata.media_type == "post_view_notification"){
+            else if(userdata.media_type == "post_view"){
                 // Code of add watching notification
                 console.log("someone viewing some post",userdata);
+                
+                console.log($('[data-chat_id="'+userdata.chat_id+'"]').length);
+                
             }
             $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         }

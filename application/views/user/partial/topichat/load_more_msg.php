@@ -4,7 +4,7 @@ foreach ($messages as $message) {
     <!-- chat_area_updated_list -->
     <div class="topichat_media_post chat_area_updated_list" data-chat_id="<?php echo $message['id']; ?>">
         <div class="chat_area_updated_list_top">
-            <h4>Total <?php echo (isset($message['watching_users'])?count($message['watching_users']):'0') ?> is Watching</h4>
+            <h4>Total <span class="watching_count"><?php echo (isset($message['watching_users'])?count($message['watching_users']):'0') ?></span> is Watching</h4>
             <?php
                 if(isset($message['watching_users']) && count($message['watching_users']) > 0)
                 {
