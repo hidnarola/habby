@@ -1496,7 +1496,7 @@ h2.chlng_hdg ,
 }
 #postModal .topichat_media_popup iframe{width: 100% !important;}
 #postModal .topichat_media_details{
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     margin-bottom: 10px;
 }
 .chat_area_updated_list_top{background: #f6f6f6;}
