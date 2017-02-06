@@ -793,10 +793,10 @@
                                             <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
                                             <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
                                         </div>
-                                        <div class="fileUpload up_img btn">
+                                        <!--<div class="fileUpload up_img btn">
                                             <span><i class="fa fa-upload" aria-hidden="true"></i> <?php echo lang('Files'); ?></span>
                                             <input type="file" name="upload_files" class="upload" id="upload_files"/>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="upload_image_wrapper" style="display:none" data-video_image="<?php echo DEFAULT_IMAGE_PATH . "video_thumbnail.png" ?>" data-file_image="<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>">
 
