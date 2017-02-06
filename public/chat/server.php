@@ -28,7 +28,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 $Server->wsClients[$clientID]['room_id'] = $message->group_id;
             }
             return;
-        } else if (!empty($Server->wsClients[$clientID]['user_data'])) {
+        } 
+        else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
                 // echo "\n\nMessage ====> \n\n";
                 // print_r($message);
@@ -275,7 +276,6 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             }
             else if($message->type == 'post_view' ){
                 // Send notification to all user who is on the topichat page
-                
                 $Server->wsClients[$clientID]['viewing_post'][] = $message->post_id;
                 
                 // Database entry specify this user is watching particular post currently
@@ -299,7 +299,12 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             }
-        } else {
+            else if($message->type == 'post_close_view'){
+                // Unset is_current_watching field to 0 and notify all users that particular user is not watching this post now
+                update_user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$message->post_id,0);
+            }
+        }
+        else {
             $Server->wsSend($clientID, "Invalid message sent");
         }
     }

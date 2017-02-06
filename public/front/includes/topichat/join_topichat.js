@@ -433,7 +433,6 @@ $(document).ready(function () {
             control.scrollTop(control[0].scrollHeight);
         }
     });
-    
 
     $('#linkModal').on('click', '.submit_btn', function () {
         msg1 = $('#linkModal').find('#message_div').html();
@@ -745,7 +744,14 @@ $(document).ready(function () {
     $('#postModal').on("hidden.bs.modal",function(e){
         $('#emogis').popover('hide');
         var id = $(e.currentTarget).data('chat_id');
-        console.log("modal close : id = ",id);
+        // Socket code for sending notification regarding this user is not watching particular post
+        var msg = {
+            message: '',
+            type: 'post_close_view',
+            group_id: group_id,
+            post_id : id
+        }
+        Server.send('message', JSON.stringify(msg));
     });
     
     //Let the user know we're connected
