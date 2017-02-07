@@ -729,7 +729,6 @@ $(document).ready(function () {
             async: false,
             data: 'id=' + id,
             success : function(data){
-                console.log(data);
                 var data = JSON.parse(data);
                 var type = data.media_type;
                 var DEFAULT_PROFILE_IMAGE_PATH = data.DEFAULT_PROFILE_IMAGE_PATH;

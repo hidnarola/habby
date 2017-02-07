@@ -325,7 +325,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             {
                 // When user sends message from post chat
                 $user_ids = get_topichat_users($message->group_id);
-                send_post_message($message->post_id,$Server->wsClients[$id]['user_data']->id,$message->message);
+                send_post_message($message->post_id,$Server->wsClients[$clientID]['user_data']->id,$message->message);
                 if (count($user_ids) > 1) {
                     if (sizeof($Server->wsClients) != 1) {
                         // object that sent to recieving user
