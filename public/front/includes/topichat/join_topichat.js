@@ -647,6 +647,9 @@ $(document).ready(function () {
                     group_id: group_id,
                     post_id : $(this).parents('#postModal').data('chat_id')
                 };
+                
+                console.log("post msg = ",post_msg);
+                
                 Server.send('message', JSON.stringify(post_msg));
                 
                 var control = $('.post_messages');
