@@ -790,6 +790,10 @@ $(document).ready(function () {
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
                 $('.topichat_media_rank_modal').html(rank);
+                
+                var control = $('.post_messages');
+                control.scrollTop(control[0].scrollHeight);
+                
                 return true;
             }
         });
@@ -940,19 +944,21 @@ $(document).ready(function () {
                     $(this).find('.watching_count').html(parseInt($(this).find('.watching_count').html()) + 1);
                     $(this).find('.total_views_list').find('ul').append('<li data-watching_user_id="'+userdata.user_id+'"><a href="javascript:void(0);" title="'+userdata.user+'"><img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image+'" title="'+userdata.user+'" /></li>');
                 });
+                return;
             }
             else if(userdata.media_type == "post_close_view"){
                 // Code of remove watching notification
                 $('[data-chat_id="'+userdata.chat_id+'"]').each(function(){
                     $(this).find('.watching_count').html(parseInt($(this).find('.watching_count').html()) - 1);
                     $(this).find('[data-watching_user_id="'+userdata.user_id+'"]').remove();
-                    //$(this).find('.total_views_list').find('ul').append('<li><a href="javascript:void(0);" title="'+userdata.user+'"><img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image+'" title="'+userdata.user+'" /></li>');
                 });
+                return;
             }
             else if(userdata.media_type == "post_msg"){
                 $('.post_messages').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
                 var control = $('.post_messages');
                 control.scrollTop(control[0].scrollHeight);
+                return;
             }
             
             $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
