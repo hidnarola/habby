@@ -708,6 +708,32 @@ $(document).ready(function () {
                     if(media_details['youtube_video'] != null){
                         $('.topichat_media_popup').html(media_details.youtube_video);
                     }
+                    else
+                    {
+                        link_image = "";
+                        content = JSON.parse(media_details['media']);
+                        if(typeof(content) != "undefined" && typeof(content.images[0].url) != "undefined")
+                        {
+                            link_image = '<div class = "large-3 columns"><img class = "thumb" src = "'+content.images[0].url+'"></img></div>';
+                        }
+                                                
+                        var link_url = "";
+                        if(typeof(content.url) != "undefined")
+                        {
+                            link_url = content.url;
+                        }
+                        var link_title = "";
+                        if(typeof(content.title) != "undefined")
+                        {
+                            link_title = content.title;
+                        }
+                        var link_desc = "";
+                        if(typeof(content.description) != "undefined")
+                        {
+                            link_desc = content.description;
+                        }
+                        $('.topichat_media_popup').html('<div>'+link_image+'<div class = "large-9 column"><a href = "'+link_url+'" target="_blank">'+link_title+'</a><p>'+link_desc+'</p></div></div>');
+                    }
                 }
                 else
                 {

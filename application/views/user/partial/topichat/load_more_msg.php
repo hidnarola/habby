@@ -78,6 +78,7 @@ foreach ($messages as $message) {
                             <?php
                         }
                         else if ($message['media_type'] == "files") {
+                            // Client ask for remove file uploading
                             ?>
                             <div class="wdth_span media_wrapper img_media_wrapper">
                                 <span class='imagePreview file_download' style='background-image:url("<?php echo DEFAULT_IMAGE_PATH . "filedownload.jpg" ?>")' id='' data-file='<?php echo $message['media'] ?>'>
@@ -111,7 +112,7 @@ foreach ($messages as $message) {
                             else
                             {
                                 ?>
-                                <div class = "fileshare">
+                                <div class = "fileshare" data-toggle="modal" data-target="#postModal">
                                     <div class = "">
                                         <?php
                                             if (isset($media->images[0]->url) && $media->images[0]->url != null) {
