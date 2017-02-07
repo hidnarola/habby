@@ -791,7 +791,7 @@ $(document).ready(function () {
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
                 $('.topichat_media_rank_modal').html(rank);
                 
-                var control = $('.post_messages');
+                var control = $('.page_messages');
                 control.scrollTop(control[0].scrollHeight);
                 
                 return true;
