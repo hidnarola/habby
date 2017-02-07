@@ -1510,7 +1510,7 @@ font-size: 16px;
     width:100% !important;
 }
 
-.topichat_media_modal .user_post_image_right {border-bottom: 1px solid #ccc !important;padding-bottom: 5px;margin: 0 0 10px;}
+.topichat_media_modal .user_post_image_right {border-bottom: 1px solid #ccc !important;padding-bottom: 0px;margin: 0 0 10px;}
 .user_post_image_right .total_views_list{float: left;padding: 0;}
 .usr_post_img .total_views_list ul li > a{height: 38px;line-height: 38px;width: 38px;overflow: hidden;}
 .usr_post_img .total_views_list ul li > a img{height: 36px;width: 36px;display: block;}

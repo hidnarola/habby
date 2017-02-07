@@ -629,6 +629,42 @@ $(document).ready(function () {
         }
     });
     
+    // Post chat socket server request
+    $('#postModal').on('keypress','#post_message_div',function(e){
+        if (e.keyCode == 13)
+        {
+            if ($.trim($(this).html()) != '')
+            {
+                msg = $(this).html();
+                //$('.panel-body,.topichat_msg_sec_modal').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
+                $('.post_messages').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
+                $(this).html('');
+                $('#post_message').val('');
+                
+                var post_msg = {
+                    message: msg,
+                    type: 'post_chat_msg',
+                    group_id: group_id,
+                    post_id : $(this).parents('#postModal').data('chat_id')
+                };
+                Server.send('message', JSON.stringify(post_msg));
+                
+                var control = $('.post_messages');
+                control.scrollTop(control[0].scrollHeight);
+            }
+            return false;
+        }
+        else if (e.charCode == 32 && $.trim($(this).html()) == '')
+        {
+            return false;
+        }
+        else if ($.trim($(this).html()) == '&nbsp;' || $.trim($(this).html()) == '<br>')
+        {
+            $(this).html('');
+            return false;
+        }
+    });
+    
     // Phase 2 code for adding media (image, video and file) using modal
     $('#topi_media_upload').click(function(){
         console.log('Button called');
