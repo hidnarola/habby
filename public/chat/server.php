@@ -282,22 +282,20 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$message->post_id);
                 
                 $user_ids = get_topichat_users($message->group_id);
-                if (count($user_ids) > 1) {
-                    if (sizeof($Server->wsClients) != 1) {
-                        // object that sent to recieving user
-                        $send_object = array();
-                        $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
-                        $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
-                        $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
-                        $send_object['chat_id'] = $message->post_id;
-                        $send_object['media_type'] = 'post_view';
-                        foreach ($Server->wsClients as $id => $client) {
-                            if (in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == 'topic_msg') {
-                                $Server->wsSend($id, json_encode($send_object));
-                            }
-                        }
+                
+                // object that sent to recieving user
+                $send_object = array();
+                $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
+                $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
+                $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
+                $send_object['chat_id'] = $message->post_id;
+                $send_object['media_type'] = 'post_view';
+                foreach ($Server->wsClients as $id => $client) {
+                    if (in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == 'topic_msg') {
+                        $Server->wsSend($id, json_encode($send_object));
                     }
                 }
+                
             }
             else if($message->type == 'post_close_view'){
                 // Unset is_current_watching field to 0 and notify all users that particular user is not watching this post now
