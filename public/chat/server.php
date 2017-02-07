@@ -324,8 +324,9 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             else if($message->type == "post_chat_msg")
             {
                 // When user sends message from post chat
-                echo "post message sent";
+                echo "\n\npost message sent";
                 print_r($message);
+                print_r($Server->wsClients[$clientID]);
             }
         }
         else {
