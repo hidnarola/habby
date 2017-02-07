@@ -722,7 +722,8 @@ $(document).ready(function () {
         
         // Load page chat
         $('.page_messages').html($('.panel-chat').find('.panel-body').html());
-        
+        var control = $('.page_messages');
+        control.scrollTop(control[0].scrollHeight);
         $.ajax({
             url : base_url + 'topichat/topichat_media_details',
             method: 'post',
@@ -790,9 +791,6 @@ $(document).ready(function () {
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
                 $('.topichat_media_rank_modal').html(rank);
-                
-                var control = $('.page_messages');
-                control.scrollTop(control[0].scrollHeight);
                 
                 return true;
             }
