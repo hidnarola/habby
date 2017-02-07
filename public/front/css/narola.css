@@ -72,7 +72,7 @@
 .user_chat_thumb
 {
     height:25px;
-    width:25px;
+    width:25px;display: block;
 }
 
 .post_masonry_section{
@@ -751,7 +751,7 @@ img.file_icon {
     width: 90%;
     margin: 75px auto;
 }
-.modal-dialog.topichat_media_modal .modal-body{min-height: 430px;}
+.modal-dialog.topichat_media_modal .modal-body{min-height: 570px;}
 .col-md-11.topichat_media_popup .post_images video{
     height: 280px !important;
     margin-top: 20px;
@@ -1516,7 +1516,7 @@ font-size: 16px;
 .usr_post_img .total_views_list ul li > a img{height: 36px;width: 36px;display: block;}
 .topichat_msg_sec_modal{position: static;width: 100% !important;padding: 0;height: auto;overflow: visible;}
 .topichat_msg_sec_modal #page_chat{position: relative;}
-.topichat_msg_sec_modal .page_messages{height: 410px;overflow: auto;padding: 10px;border-left: solid 1px #ddd;border-right: solid 1px #ddd;background: #eee;}
+.topichat_msg_sec_modal .page_messages{height: 395px;overflow: auto;padding: 10px;border-left: solid 1px #ddd;border-right: solid 1px #ddd;background: #eee;}
 .topichat_msg_sec_modal .topich_chat_typesec_modal {bottom: -40px;width: auto !important;left: 0;right: 0;position: absolute;}
 .page_messages a img{max-width: 50px;max-height: 50px;}
 .page_messages .messageMe{text-align: left;padding: 7px;background: #fff;margin: 0 0 5px;margin-right: 60px;border-radius: 3px;}
