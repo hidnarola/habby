@@ -382,26 +382,26 @@ function user_viewing_post($user_id,$post_id){
  * Developed by "ar"
  */
 function update_user_viewing_post($user_id,$post_id,$current_flag,$unset_all=false){
-    echo "In update_user_viewing_post";
-    
     try {
         if(!empty($user_id) && !empty($post_id))
-        $conn = open_connection();
-        if(!$unset_all){
-            echo "update single post";
-            // Set currently_viewing flag to 1
-            $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
-        }
-        else{
-            echo "update multiple post";
-            // unset currently_viewing flag to $current_flag to all post
-            $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id in (".implode(",",$post_id) .") and user_id = '".$user_id."'";
-        }
-        if (mysqli_query($conn, $query)) {
+        {
+            $conn = open_connection();
+            if(!$unset_all){
+                echo "update single post";
+                // Set currently_viewing flag to 1
+                $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id = '".$post_id."' and user_id = '".$user_id."'";
+            }
+            else{
+                echo "update multiple post";
+                // unset currently_viewing flag to $current_flag to all post
+                $query = "update topic_post_user_view set currently_viewing = '".$current_flag."' where topic_group_chat_id in (".implode(",",$post_id) .") and user_id = '".$user_id."'";
+            }
+            if (mysqli_query($conn, $query)) {
+                close_connection($conn);
+                return true;
+            }
             close_connection($conn);
-            return true;
         }
-        close_connection($conn);
         return false;
     }
     catch(Exception $e){
