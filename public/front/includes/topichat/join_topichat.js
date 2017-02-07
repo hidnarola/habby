@@ -801,6 +801,7 @@ $(document).ready(function () {
         
         $('#post_emogis').popover('hide');
         $('.page_messages').html('');
+        $('.post_messages').html('');
         $('.topichat_media_user').attr('src','');
         $('.topichat_media_user').attr('title','');
         $('.topichat_media_details').html('');
