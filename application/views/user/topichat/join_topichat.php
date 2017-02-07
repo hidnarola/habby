@@ -903,7 +903,7 @@ $myuserdata = array(
 <script type="text/javascript">
     $('document').ready(function () {
         // Set height of chat section dynamically
-        //$(".chat_area_updated").height($('.right_lg_sectopic').height() - (($('.tittl_sec_lg').height()) + $('.topich_chat_typesec').height()));
+        $(".chat_area_updated").height($('.right_lg_sectopic').height() - (($('.tittl_sec_lg').height()) + $('.topich_chat_typesec').height()));
 
         // Phase 2 changes for open and close chat window
         $(".panel.panel-chat > .panel-heading > .chatMinimize").click(function () {
