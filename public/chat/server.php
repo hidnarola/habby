@@ -321,6 +321,10 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             }
+            else if($message->type == "post_chat_msg")
+            {
+                // When user sends message from post chat
+            }
         }
         else {
             $Server->wsSend($clientID, "Invalid message sent");
