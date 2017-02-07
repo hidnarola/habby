@@ -645,7 +645,7 @@ $(document).ready(function () {
                     message: msg,
                     type: 'post_chat_msg',
                     group_id: group_id,
-                    post_id : $(this).parents('#postModal').data('chat_id')
+                    post_id : $(this).parents('#postModal').attr('data-chat_id')
                 };
                 
                 console.log("post msg = ",post_msg);
