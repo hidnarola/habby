@@ -195,7 +195,7 @@
                                     ?>
                                     <li class="topi_image_li">
                                         <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
-                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                        ?>"-->
+                                            <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                         ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
 
@@ -264,13 +264,12 @@
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                             <div class="tittl_sec2">
                                 <p class="topchat_p">
-                                    <?php 
-                                        if($topichat['user_id'] == $this->session->user['id'])
-                                        {
-                                            ?>
-                                            <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_grp"><?php echo lang('Edit'); ?></a>
-                                            <?php
-                                        }
+                                    <?php
+                                    if ($topichat['user_id'] == $this->session->user['id']) {
+                                        ?>
+                                        <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_grp"><?php echo lang('Edit'); ?></a>
+                                        <?php
+                                    }
                                     ?>
                                 </p>
                             </div>
@@ -297,7 +296,7 @@
                                     <option>1</option>
                                 </select>
                             </div>
-                            
+
                             <div class="total_views_wrapper">
                                 <div class="total_views_inner">
                                     <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
@@ -350,21 +349,21 @@
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-body" style="height:0;display: none">
-                                                        
+
                                                         <?php $this->load->view('user/partial/topichat/load_more_text_msg'); ?>
                                                         <div class="clearFix"></div>
                                                     </div>
                                                     <div class="panel-footer" style="height:0;display: none">
                                                         <div contenteditable="true" id='message_div' hidefocus="true" class="form-control"></div>
-                                                 <input type="hidden" id='message' name='message' class="form-control"/>
-                                                 <span class="input-group-btn-span">
-                                                 <span class="input-group-btn upld_icnpad">
-                                                     <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
-                                                 </span>
-                                                 <span class="input-group-btn">
-                                                     <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
-                                                 </span>
-                                                 </span>
+                                                        <input type="hidden" id='message' name='message' class="form-control"/>
+                                                        <span class="input-group-btn-span">
+                                                            <span class="input-group-btn upld_icnpad">
+                                                                <a href="javascript:void(0);"  id="emogis" data-container="body" data-toggle="popover" data-placement="top"><img src="<?php echo DEFAULT_IMAGE_PATH; ?>type_symbol3.png"></a>
+                                                            </span>
+                                                            <span class="input-group-btn">
+                                                                <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send'); ?>">
+                                                            </span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <!-- <a class="chat-window-link">Chats</a> -->
@@ -479,7 +478,7 @@
                                     <div class = "upld_sec">
                                         <div class = "fileUpload up_img btn">
                                             <span><i class = "fa fa-picture-o" aria-hidden = "true"></i> <?php echo lang('Images');
-                            ?></span>
+                                                        ?></span>
                                             <input type="file" name="group_cover" class="upload" id="uploadFile"/>
                                         </div>
                                     </div>
@@ -689,7 +688,7 @@
     <div class="modal-dialog topichat_media_modal">
         <div class="modal-content">
             <div class="modal-body">
-                
+
                 <div class="row">
                     <div class="col-md-7 col-sm-7 col-xs-12">
                         <div class="usr_post_img usr_post_img_modal">
@@ -715,7 +714,7 @@
                     <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
                             <div class="col-sm-11">
-                                
+                                <!-- user's image comes here -->
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" class="close" aria-label="Close" data-dismiss="modal">
@@ -726,7 +725,19 @@
                         <div class="row">
                             <!-- Chat area section start here -->
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">                                    
+                                <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#page_chat">Page Chat</a></li>
+                                        <li><a data-toggle="tab" href="#post_chat">Post Chat</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="page_chat" class="tab-pane fade in active">
+                                            
+                                        </div>
+                                        <div id="post_chat" class="tab-pane fade">
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Chat area section end here -->
@@ -761,7 +772,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -857,10 +868,10 @@ $myuserdata = array(
     $('document').ready(function () {
         // Set height of chat section dynamically
         //$(".chat_area_updated").height($('.right_lg_sectopic').height() - (($('.tittl_sec_lg').height()) + $('.topich_chat_typesec').height()));
-        
+
         // Phase 2 changes for open and close chat window
-        $(".panel.panel-chat > .panel-heading > .chatMinimize").click(function(){
-            if($(this).parent().parent().hasClass('mini'))
+        $(".panel.panel-chat > .panel-heading > .chatMinimize").click(function () {
+            if ($(this).parent().parent().hasClass('mini'))
             {
                 $(this).parent().parent().removeClass('mini').addClass('normal');
                 $('.panel.panel-chat > .panel-body').animate({height: "250px"}, 500).show();
@@ -872,15 +883,15 @@ $myuserdata = array(
                 $(this).parent().parent().removeClass('normal').addClass('mini');
                 $('.panel.panel-chat > .panel-body').animate({height: "0"}, 500);
                 $('.panel.panel-chat > .panel-footer').animate({height: "0"}, 500);
-                
-                setTimeout(function() {
+
+                setTimeout(function () {
                     $('.panel.panel-chat > .panel-body').hide();
                     $('.panel.panel-chat > .panel-footer').hide();
                 }, 500);
             }
         });
         // Changes over
-        
+
         setTimeout(function () {
             $(".fancybox").fancybox({
                 'width': 300, // set the width
