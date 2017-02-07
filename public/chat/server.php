@@ -343,7 +343,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         print_r($send_object);
                         
                         echo "\n\nviewing post = ";
-                        print_r($Server->wsClients[$id]['viewing_post']);
+                        print_r($Server->wsClients[$clientID]['viewing_post']);
                         
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['viewing_post']) && in_array($message->post_id,$Server->wsClients[$id]['viewing_post'])) {
