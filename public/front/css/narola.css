@@ -1509,9 +1509,14 @@ font-size: 16px;
 #postModal .topichat_media_popup video {
     width:100% !important;
 }
+
+.topichat_media_modal .user_post_image_right {border-bottom: 1px solid #ccc !important;padding-bottom: 5px;margin: 0 0 10px;}
+.user_post_image_right .total_views_list{float: left;padding: 0;}
+.usr_post_img .total_views_list ul li > a{height: 38px;line-height: 38px;width: 38px;overflow: hidden;}
+.usr_post_img .total_views_list ul li > a img{height: 36px;width: 36px;display: block;}
 .topichat_msg_sec_modal{position: static;width: 100% !important;padding: 0;height: auto;overflow: visible;}
 .topichat_msg_sec_modal #page_chat{position: relative;}
-.topichat_msg_sec_modal .page_messages{height: 235px;overflow: auto;padding: 10px;border-left: solid 1px #ddd;border-right: solid 1px #ddd;background: #eee;}
+.topichat_msg_sec_modal .page_messages{height: 410px;overflow: auto;padding: 10px;border-left: solid 1px #ddd;border-right: solid 1px #ddd;background: #eee;}
 .topichat_msg_sec_modal .topich_chat_typesec_modal {bottom: -40px;width: auto !important;left: 0;right: 0;position: absolute;}
 .page_messages a img{max-width: 50px;max-height: 50px;}
 .page_messages .messageMe{text-align: left;padding: 7px;background: #fff;margin: 0 0 5px;margin-right: 60px;border-radius: 3px;}

@@ -713,6 +713,21 @@
                     </div>
                     <div class="col-md-5 col-sm-5 col-xs-12">
                         <div class="usr_post_img user_post_image_right">
+                            <div class="total_views_list">
+                                <ul>
+                                    <li data-watching_user_id="1"><a href="javascript:void(0);" title="Hemadri Parmar">
+                                    <img class="user_chat_thumb" src="https://www.habby-go.com/uploads/user_profile/ed18ae5e4d39c6c971d57bb8ede6d302.jpg" title="Hemadri Parmar"></a>
+                                    </li>
+                                    <li data-watching_user_id="1"><a href="javascript:void(0);" title="Hemadri Parmar">
+                                    <img class="user_chat_thumb" src="https://www.habby-go.com/uploads/user_profile/ed18ae5e4d39c6c971d57bb8ede6d302.jpg" title="Hemadri Parmar"></a>
+                                    </li>
+                                    <li data-watching_user_id="1"><a href="javascript:void(0);" title="Hemadri Parmar">
+                                    <img class="user_chat_thumb" src="https://www.habby-go.com/uploads/user_profile/ed18ae5e4d39c6c971d57bb8ede6d302.jpg" title="Hemadri Parmar"></a></li>
+                                    <li data-watching_user_id="1"><a href="javascript:void(0);" title="Hemadri Parmar">
+                                    <img class="user_chat_thumb" src="https://www.habby-go.com/uploads/user_profile/ed18ae5e4d39c6c971d57bb8ede6d302.jpg" title="Hemadri Parmar">
+                                    </a></li>
+                                </ul>
+                            </div>
                             <button type="button" class="close" aria-label="Close" data-dismiss="modal">
                                 <span aria-hidden="true">&times;</span>
                             </button><div class="clearfix"></div>
