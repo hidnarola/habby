@@ -338,23 +338,8 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         $send_object['chat_id'] = $message->post_id;
                         $send_object['message'] = $message->message;
                         $send_object['media_type'] = 'post_msg';
-                        
-                        echo "\n\nsend object = ";
-                        print_r($send_object);
-                        
-                        echo "\n\n\nwsclients = ";
-                        print_r($Server->wsClients);
-                        echo "\n\n\n";
-                        
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['viewing_post']) && in_array($message->post_id,$Server->wsClients[$id]['viewing_post'])) {
-                                
-                                echo "\n\npost id = ".$message->post_id;
-                                echo "\n\nviewing post = ";
-                                print_r($Server->wsClients[$id]['viewing_post']);
-                                
-                                echo "\n\n message sent to ";
-                                print_r($Server->wsClients[$id]['user_data']);
                                 $Server->wsSend($id, json_encode($send_object));
                             }
                         }
