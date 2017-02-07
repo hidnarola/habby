@@ -324,9 +324,25 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             else if($message->type == "post_chat_msg")
             {
                 // When user sends message from post chat
-                echo "\n\npost message sent";
-                print_r($message);
-                print_r($Server->wsClients[$clientID]);
+                $user_ids = get_topichat_users($message->group_id);
+                send_post_message($message->post_id,$Server->wsClients[$id]['user_data']->id,$message->message);
+                if (count($user_ids) > 1) {
+                    if (sizeof($Server->wsClients) != 1) {
+                        // object that sent to recieving user
+                        $send_object = array();
+                        $send_object['user'] = $Server->wsClients[$clientID]['user_data']->name;
+                        $send_object['user_id'] = $Server->wsClients[$clientID]['user_data']->id;
+                        $send_object['user_image'] = $Server->wsClients[$clientID]['user_data']->user_image;
+                        $send_object['chat_id'] = $message->post_id;
+                        $send_object['message'] = $message->message;
+                        $send_object['media_type'] = 'post_msg';
+                        foreach ($Server->wsClients as $id => $client) {
+                            if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['viewing_post']) && in_array($message->post_id,$Server->wsClients[$id]['viewing_post'])) {
+                                $Server->wsSend($id, json_encode($send_object));
+                            }
+                        }
+                    }
+                }
             }
         }
         else {

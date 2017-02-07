@@ -409,4 +409,31 @@ function update_user_viewing_post($user_id,$post_id,$current_flag,$unset_all=fal
         return false;
     }    
 }
+
+
+/* phase 2 changes
+ * 
+ * send_post_message used to add post messages in topic_post_chat table
+ * 
+ * @params      int             $post_id        specify post_id
+ *              int             $user_id        specify user_id
+ *              string          $msg            message title
+ * 
+ * @return      int,        last inserted id
+ *              false,      if fail
+ * 
+ * Developed by "ar"
+ */
+function send_post_message($post_id,$user_id,$msg){
+    $conn = open_connection();
+    $query = "insert into topic_post_chat value(NULL,$post_id,$user_id,'" . $msg . "','" . date('Y-m-d H:i:s') . "')";
+
+    if (mysqli_query($conn, $query)) {
+        $id = mysqli_insert_id($conn);
+        close_connection($conn);
+        return $id;
+    }
+    close_connection($conn);
+    return false;
+}
 ?>

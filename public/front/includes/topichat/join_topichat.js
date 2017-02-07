@@ -950,6 +950,12 @@ $(document).ready(function () {
                     //$(this).find('.total_views_list').find('ul').append('<li><a href="javascript:void(0);" title="'+userdata.user+'"><img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image+'" title="'+userdata.user+'" /></li>');
                 });
             }
+            else if(userdata.media_type == "post_msg"){
+                $('.post_messages').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
+                var control = $('.post_messages');
+                control.scrollTop(control[0].scrollHeight);
+            }
+            
             $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
         }
         
