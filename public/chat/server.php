@@ -298,7 +298,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
             }
             else if($message->type == 'post_close_view'){
                 if(($key = array_search($message->post_id, $Server->wsClients[$clientID]['viewing_post'])) !== false) {
-                    unset($messages[$key]);
+                    unset($Server->wsClients[$clientID]['viewing_post'][$key]);
                 }
                 
                 // Unset is_current_watching field to 0 and notify all users that particular user is not watching this post now
@@ -341,6 +341,9 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                         
                         echo "\n\nsend object = ";
                         print_r($send_object);
+                        
+                        echo "\n\nviewing post = ";
+                        print_r($Server->wsClients[$id]['viewing_post']);
                         
                         foreach ($Server->wsClients as $id => $client) {
                             if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['viewing_post']) && in_array($message->post_id,$Server->wsClients[$id]['viewing_post'])) {
