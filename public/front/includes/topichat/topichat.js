@@ -86,6 +86,14 @@ $('document').ready(function () {
         }
     });
     
+    $('#postModal').find('#post_emogis').popover({
+        html: true,
+        content: function () {
+            return $("#popover-content").html();
+        }
+    });
+    /*
+    
     $('#mediaModal').find('#emogis').popover({
         html: true,
         content: function () {
@@ -180,7 +188,7 @@ $('document').ready(function () {
             }
         });
     });
-
+*/
     // Add rank to the post
     $('.topichat_msg_sec').on('click', '.add', function () {
         var t = $(this);

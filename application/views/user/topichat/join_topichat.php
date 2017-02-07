@@ -733,42 +733,74 @@
                                     <div class="tab-content">
                                         <div id="page_chat" class="tab-pane fade in active">
                                             
+                                            <div class='page_messages'></div>
+                                            
+                                            <!-- Type Chat section start here -->
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="topich_chat_typesec topich_chat_typesec_modal">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="topic_textarea">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
+                                                                        <div contenteditable="true" id="page_message_div" hidefocus="true" class="form-control"></div>
+                                                                        <input type="hidden" id="page_message" name="page_message" class="form-control">
+                                                                        <span class="input-group-btn upld_icnpad">
+                                                                            <a href="javascript:void(0);" id="page_emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
+                                                                        </span>
+                                                                        <span class="input-group-btn">
+                                                                            <input class="page_submit_btn chat_btn" type="submit" value="<?php echo lang('Send') ?>">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Type area end here -->
+
+                                                </div>
+                                            </div>
+                                            <!-- Type Chat section end here -->
+                                            
                                         </div>
                                         <div id="post_chat" class="tab-pane fade">
+                                            
+                                            <div class='post_messages'></div>
+                                            
+                                            <!-- Type Chat section start here -->
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="topich_chat_typesec topich_chat_typesec_modal">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="topic_textarea">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
+                                                                        <div contenteditable="true" id="post_message_div" hidefocus="true" class="form-control"></div>
+                                                                        <input type="hidden" id="post_message" name="post_message" class="form-control">
+                                                                        <span class="input-group-btn upld_icnpad">
+                                                                            <a href="javascript:void(0);" id="post_emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
+                                                                        </span>
+                                                                        <span class="input-group-btn">
+                                                                            <input class="post_submit_btn chat_btn" type="submit" value="<?php echo lang('Send') ?>">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Type area end here -->
+
+                                                </div>
+                                            </div>
+                                            <!-- Type Chat section end here -->
                                             
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- Chat area section end here -->
-
-                            <!-- Type Chat section start here -->
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="topich_chat_typesec topich_chat_typesec_modal">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="topic_textarea">
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><a href="<?php echo base_url() . "home/profile" ?>"><img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $user_data['user_image'] ?>" class="user_chat_thumb"></a></span>
-                                                        <div contenteditable="true" id="message_div" hidefocus="true" class="form-control"></div>
-                                                        <input type="hidden" id="message" name="message" class="form-control">
-                                                        <span class="input-group-btn upld_icnpad">
-                                                            <a href="javascript:void(0);" id="emogis" data-container="body" data-toggle="popover" data-placement="top" data-original-title="" title=""><img src="<?php echo DEFAULT_IMAGE_PATH; ?>/type_symbol3.png"></a>
-                                                        </span>
-                                                        <span class="input-group-btn">
-                                                            <input class="submit_btn chat_btn" type="submit" value="<?php echo lang('Send') ?>">
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Type area end here -->
-
-                                </div>
-                            </div>
-                            <!-- Type Chat section end here -->
                         </div>
                     </div>
                 </div>

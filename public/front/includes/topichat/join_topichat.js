@@ -670,7 +670,7 @@ $(document).ready(function () {
     
     // Fired when user open post popup on topichat page
     $('#postModal').on("show.bs.modal",function(e){
-        $('#emogis').popover('hide');
+        $('#post_emogis').popover('hide');
 
         //get data-id attribute of the clicked element
         var id = $(e.relatedTarget).parents('.topichat_media_post').data('chat_id');
@@ -685,7 +685,7 @@ $(document).ready(function () {
         Server.send('message', JSON.stringify(msg));
         
         // Load page chat
-        $('#page_chat').html($('.panel-chat').find('.panel-body').html());
+        $('.page_messages').html($('.panel-chat').find('.panel-body').html());
         
         $.ajax({
             url : base_url + 'topichat/topichat_media_details',
@@ -771,7 +771,7 @@ $(document).ready(function () {
     
     // Fired when post popup will close
     $('#postModal').on("hidden.bs.modal",function(e){
-        $('#emogis').popover('hide');
+        $('#post_emogis').popover('hide');
         var id = $(e.currentTarget).data('chat_id');
         // Socket code for sending notification regarding this user is not watching particular post
         var msg = {
