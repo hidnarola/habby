@@ -735,8 +735,8 @@
                         <!-- Chat area section start here -->
                         <div class="chat_area2 topichat_msg_sec topichat_msg_sec_modal">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#page_chat">Page Chat</a></li>
                                 <li><a data-toggle="tab" href="#post_chat">Post Chat</a></li>
+                                <li class="active"><a data-toggle="tab" href="#page_chat">Page Chat</a></li>
                             </ul>
                             <div class="tab-content">
                                 <div id="page_chat" class="tab-pane fade in active">
