@@ -1,5 +1,7 @@
 $('document').ready(function () {
     
+    var available_msg = "";
+    var sort_val = "time";
     var load = true;
     var in_progress = false;
     $('.chat_area2').scroll(function () {
@@ -15,18 +17,35 @@ $('document').ready(function () {
 
     function loaddata()
     {
+        other_paramaeter = ""; // If sort_val is time then other_parameter will last_msg, otherwise available_msg
+        if(sort_val == "time")
+        {
+            other_paramaeter = last_msg;
+        }
+        else
+        {
+            other_paramaeter = available_msg;
+        }
+        
         $.ajax({
             url: base_url + 'topichat/load_more_msg/' + group_id,
             method: 'post',
             async: false,
-            data: 'last_msg=' + last_msg,
+            data: 'sort_opt=' + sort_val+"&other="+other_paramaeter,
             success: function (more) {
                 more = JSON.parse(more);
                 if (more.status)
                 {
 //                    console.log(more.view);
                     $('.total_views_inner').append(more.view);
-                    last_msg = more.last_msg_id;
+                    if(sort_val == "time")
+                    {
+                        last_msg = more.last_msg_id;
+                    }
+                    else
+                    {
+                        available_msg = available_msg+","+more.available_msg;
+                    }
                     //$(".total_views_inner").animate({scrollTop: 200}, 500);
                 }
                 else
@@ -409,6 +428,40 @@ $('document').ready(function () {
 ////                window.location.reload();
 //            }
 //        });
+    });
+    
+    // phase 2 changes
+    $('#sort_option').change(function(){
+        sort_val = $(this).val();
+        $.ajax({
+            url: base_url + 'topichat/change_sort_option/' + group_id,
+            method:'post',
+            data : 'sort_opt='+sort_val,
+            success: function (more) {
+                more = JSON.parse(more);
+                if (more.status)
+                {
+//                    console.log(more.view);
+                    $('.total_views_inner').html(more.view);
+                    if(sort_val == "time")
+                    {
+                        last_msg = more.last_msg_id;
+                    }
+                    else
+                    {
+                        available_msg = more.available_post;
+                    }
+                    //$(".total_views_inner").animate({scrollTop: 200}, 500);
+                }
+                else
+                {
+                    load = false;
+                    $('.total_views_inner').html('<div class="text-center">' + no_message + '</div>');
+                    //$(".total_views_inner").animate({scrollTop: 0}, 500);
+                }
+                in_progress = false;
+            }
+        });
     });
     
     /*setTimeout(function(){

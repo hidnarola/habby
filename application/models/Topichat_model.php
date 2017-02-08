@@ -276,7 +276,7 @@ class Topichat_model extends CI_Model {
         $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
         $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
         $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
-        $this->db->join('topic_post_user_view pv','pv.topic_group_chat_id = tg.id and pv.currently_viewing = "1"','left');
+        $this->db->join('topic_post_user_view pv','pv.topic_group_chat_id = tg.id and pv.currently_viewing = "1"','left');        
         $this->db->limit($limit, 0);
         if($sort != "time")
         {
@@ -343,21 +343,28 @@ class Topichat_model extends CI_Model {
      * developed by : ar
      */
 
-    public function load_messages($group_id, $logged_in_user, $limit, $last_msg_id) {
-        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+    public function load_messages($group_id, $logged_in_user, $limit, $sort, $other) {
+        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank, count(distinct pv.id) as watching_user');
         $this->db->where('tg.topic_group_id', $group_id);
-        $this->db->where('tg.id < ', $last_msg_id);
         $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
         $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
         $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
         $this->db->join('users u', 'tg.user_id = u.id');
+        $this->db->join('topic_post_user_view pv','pv.topic_group_chat_id = tg.id and pv.currently_viewing = "1"','left');
         $this->db->limit($limit, 0);
-        $this->db->order_by('tg.id', 'desc');
-        $this->db->group_by('tg.id');
         
-        // Changes for phase 2, to get only media post
+        $this->db->group_by('tg.id');
         $this->db->where('tg.media_type IS NOT NULL');
-        // Changes over
+        if($sort == "time")
+        {
+            $this->db->where('tg.id < ', $other);
+            $this->db->order_by('tg.id', 'desc');
+        }
+        else
+        {
+            $this->db->where_not_in('tg.id',$other);
+        }
+        $this->db->order_by('tg.id', 'desc');
         
         $messages = $this->db->get('topic_group_chat tg')->result_array();
         

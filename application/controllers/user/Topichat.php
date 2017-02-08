@@ -305,14 +305,22 @@ class Topichat extends CI_Controller {
 
     public function load_more_msg($group_id) {
         $limit = 10;
-        $last_msg_id = $this->input->post('last_msg');
-        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $this->session->user['id'], $limit, $last_msg_id);
+        $sort_val = $this->input->post('sort_opt');
+        $other = $this->input->post('other');
+        $this->data['messages'] = $this->Topichat_model->load_messages($group_id, $this->session->user['id'], $limit, $sort_val,$other);
         if (count($this->data['messages']) > 0) {
             //$data['query'] = $this->db->last_query();
             $data['status'] = 1;
             krsort($this->data['messages']); // Reverse array
             $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
-            $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+            if($sort_val == "time")
+            {
+                $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+            }
+            else
+            {
+                $data['available_msg'] = $data['available_post'] = implode(",",array_column($this->data['messages'],'id'));
+            }
         } else {
             $data['status'] = 0;
         }
@@ -610,6 +618,32 @@ class Topichat extends CI_Controller {
             krsort($this->data['text_messages']); // Reverse array
             $data['view'] = $this->load->view('user/partial/topichat/load_more_text_msg', $this->data, true);
             $data['last_msg_id'] = $this->data['text_messages'][count($this->data['text_messages']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
+    /*
+     * 
+     * developed by "ar"
+     */
+    public function change_sort_option($Id){
+        $sort_val = $this->input->post('sort_opt');
+        $limit = 10;
+        $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit, $sort_val);
+        if (count($this->data['messages']) > 0) {
+            //$data['query'] = $this->db->last_query();
+            $data['status'] = 1;
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $this->data, true);
+            if($sort_val == "time")
+            {
+                $data['last_msg_id'] = $this->data['messages'][count($this->data['messages']) - 1]['id'];
+            }
+            else
+            {
+                $data['available_post'] = implode(",",array_column($this->data['messages'],'id'));
+            }
         } else {
             $data['status'] = 0;
         }
