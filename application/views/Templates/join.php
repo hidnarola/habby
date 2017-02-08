@@ -416,9 +416,9 @@
                     });
                 });
                 $('.cbp-spmenu-push').on('click', '.emoticon', function () {
-                    if ($("#mediaModal").data('bs.modal') && $('#mediaModal').data('bs.modal').isShown) {
-                        $('#mediaModal').find('#message_div').append($.emoticons.replace($(this).html()));
-                        $('#mediaModal').find('#emogis').popover('hide');
+                    if ($("#postModal").data('bs.modal') && $('#postModal').data('bs.modal').isShown) {
+                        $('#postModal').find('#post_message_div').append($.emoticons.replace($(this).html()));
+                        $('#postModal').find('#post_emogis').popover('hide');
                     } else {
                         $('#message_div').append($.emoticons.replace($(this).html()));
                         $('#emogis').popover('hide');
