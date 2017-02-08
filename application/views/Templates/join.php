@@ -416,15 +416,23 @@
                     });
                 });
                 $('.cbp-spmenu-push').on('click', '.emoticon', function () {
-                    if ($("#postModal").data('bs.modal') && $('#postModal').data('bs.modal').isShown) {
+                    popover_id = $(this).parents('.popover').attr('id');
+                    if($('[aria-describedby="'+popover_id+'"]').is("#post_emogis"))
+                    {
                         $('#postModal').find('#post_message_div').append($.emoticons.replace($(this).html()));
                         $('#postModal').find('#post_emogis').popover('hide');
-                    } else {
+                    }
+                    else if($('[aria-describedby="'+popover_id+'"]').is("#page_emogis"))
+                    {
+                        $('#postModal').find('#page_message_div').append($.emoticons.replace($(this).html()));
+                        $('#postModal').find('#page_emogis').popover('hide');
+                    }
+                    else
+                    {
                         $('#message_div').append($.emoticons.replace($(this).html()));
                         $('#emogis').popover('hide');
                     }
                 });
-
             });
         </script>
 

@@ -92,6 +92,12 @@ $('document').ready(function () {
             return $("#popover-content").html();
         }
     });
+    $('#postModal').find('#page_emogis').popover({
+        html: true,
+        content: function () {
+            return $("#popover-content").html();
+        }
+    });
     /*
     
     $('#mediaModal').find('#emogis').popover({
