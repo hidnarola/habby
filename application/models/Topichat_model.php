@@ -825,5 +825,33 @@ class Topichat_model extends CI_Model {
         $res_data = $this->db->get('topic_group_chat tc')->row_array();
         return $res_data;
     }
+    
+    /* phase 2 changes
+     * 
+     * get_post_messages is used to retrive message from topic_post_chat
+     * 
+     * @param   $post_id        int         specify post id to which message will fetch
+     *          $msg_limit      int         specify number of message to be fetch
+     *          $last_msg_id    int         specify last message that displayed
+     * 
+     * @return  array[][]       message data
+     *          boolean false,  if fail
+     * 
+     * developed by "ar"
+     */
+    public function get_post_messages($post_id,$msg_limit,$last_msg_id) {
+        $this->db->select('tpc.*,u.name,u.user_image');
+        $this->db->where('tpc.topic_group_chat_id', $post_id);
+        if($last_msg_id != false)
+        {
+            $this->db->where('tpc.id < ', $last_msg_id);
+        }
+        $this->db->join('users u', 'tpc.user_id = u.id');
+        $this->db->limit($msg_limit, 0);
+        $this->db->order_by('tpc.id', 'desc');
+        $this->db->group_by('tpc.id');
+        $messages = $this->db->get('topic_post_chat tpc')->result_array();
+        return $messages;
+    }
 }
 ?>

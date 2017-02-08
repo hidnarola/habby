@@ -724,6 +724,8 @@ $(document).ready(function () {
         $('.page_messages').html($('.panel-chat').find('.panel-body').html());
         var control = $('.page_messages');
         control.scrollTop(control[0].scrollHeight);
+        
+        // Fetch Post data
         $.ajax({
             url : base_url + 'topichat/topichat_media_details',
             method: 'post',
@@ -785,6 +787,7 @@ $(document).ready(function () {
                     media += '</a>';
                     $('.topichat_media_popup').html(media);
                 }
+                
                 $('#postModal').attr('data-chat_id', media_details.id);
                 $('.topichat_media_post_modal').attr('data-chat_id', media_details.id);
                 var rank_image = (media_details.is_ranked == 1 && media_details.rank == 1) ? DEFAULT_IMAGE_PATH + "challeng_arrow_ranked.png" : DEFAULT_IMAGE_PATH + "challeng_arrow.png";
@@ -793,6 +796,29 @@ $(document).ready(function () {
                 $('.topichat_media_rank_modal').html(rank);
                 
                 return true;
+            }
+        });
+        
+        // Fetch Post chat
+        $.ajax({
+            url:base_url+'topichat/get_post_chat',
+            method:'post',
+            data:'id='+id,
+            success : function(more){
+                more = JSON.parse(more);
+                if (more.status)
+                {
+                    $('.post_messages').prepend(more.view);
+                    post_last_text_msg = more.last_msg_id;
+                    $('.post_messages').animate({scrollTop: 200}, 500);
+                }
+                else
+                {
+                    post_msg_load = false;
+                    $('.post_messages').prepend('<div class="text-center">' + no_message + '</div>');
+                    $('.post_messages').animate({scrollTop: 0}, 500);
+                }
+                post_msg_in_progress = false;
             }
         });
     });
@@ -820,6 +846,43 @@ $(document).ready(function () {
         }
         Server.send('message', JSON.stringify(msg));
     });
+    
+    var post_msg_load = true;
+    var post_msg_in_progress = false;
+    $('.panel-chat .panel-body').scroll(function () {
+        var thi = $(this);
+        if (post_msg_load && !post_msg_in_progress)
+        {
+            if (thi.scrollTop() == 0) {
+                post_loaddata();
+                post_msg_in_progress = true;
+            }
+        }
+    });
+    
+    function post_loaddata(){
+        $.ajax({
+            url:base_url+'topichat/get_post_chat',
+            method:'post',
+            data:'id='+id+'&last_text_msg='+post_last_text_msg,
+            success : function(more){
+                more = JSON.parse(more);
+                if (more.status)
+                {
+                    $('.post_messages').prepend(more.view);
+                    post_last_text_msg = more.last_msg_id;
+                    $('.post_messages').animate({scrollTop: 200}, 500);
+                }
+                else
+                {
+                    post_msg_load = false;
+                    $('.post_messages').prepend('<div class="text-center">' + no_message + '</div>');
+                    $('.post_messages').animate({scrollTop: 0}, 500);
+                }
+                post_msg_in_progress = false;
+            }
+        });
+    }
     
     //Let the user know we're connected
     Server.bind('open', function () {

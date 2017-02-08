@@ -593,4 +593,31 @@ class Topichat extends CI_Controller {
             exit;
         }
     }
+    
+    /* phase 2 changes
+     * 
+     * get_post_chat will used to fetch post messages
+     * 
+     * developed by "ar"
+     */
+    public function get_post_chat(){
+        $msg_limit = 20;
+        $post_id = $this->input->post('id');
+        $last_msg_id = false;
+        if($this->input->post('last_text_msg'))
+        {
+            $last_msg_id = $this->input->post('last_text_msg');
+        }
+        $this->data['text_messages'] = $this->Topichat_model->get_post_messages($post_id,$msg_limit,$last_msg_id);
+        if (count($this->data['text_messages']) > 0) {
+            //$data['query'] = $this->db->last_query();
+            $data['status'] = 1;
+            krsort($this->data['text_messages']); // Reverse array
+            $data['view'] = $this->load->view('user/partial/topichat/load_more_text_msg', $this->data, true);
+            $data['last_msg_id'] = $this->data['text_messages'][count($this->data['text_messages']) - 1]['id'];
+        } else {
+            $data['status'] = 0;
+        }
+        echo json_encode($data);
+    }
 }
