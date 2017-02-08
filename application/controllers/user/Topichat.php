@@ -319,7 +319,7 @@ class Topichat extends CI_Controller {
             }
             else
             {
-                $data['available_msg'] = $data['available_post'] = implode(",",array_column($this->data['messages'],'id'));
+                $data['available_msg'] = implode(",",array_column($this->data['messages'],'id'));
             }
         } else {
             $data['status'] = 0;
