@@ -288,8 +288,8 @@ class Topichat extends CI_Controller {
         $this->data['top_rank_post'] = $this->Topichat_model->get_top_rank_media($Id, $this->session->user['id'], $top_rank_limit = 3);
 //        $this->data['shared_links'] = $this->Topichat_model->get_shared_media($Id, $this->session->user['id'], $top_rank_limit = 3);
 //        pr($this->data['top_rank_post'],1);
-        $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit);
-        krsort($this->data['messages']); // Reverse array
+        $this->data['messages'] = $this->Topichat_model->get_messages($Id, $this->session->user['id'], $limit, $sort="time");
+        
         $this->data['message_videos_thumb'] = array();
         foreach ($this->data['messages'] as $msg) {
             if($msg['media_type'] == "video")
@@ -499,9 +499,9 @@ class Topichat extends CI_Controller {
             $this->data['DEFAULT_CHAT_IMAGE_PATH'] = DEFAULT_CHAT_IMAGE_PATH;
             $this->data['media_content'] = $this->Topichat_model->get_media_details($media, $type);
             $group_id = $this->data['media_content']['topic_group_id'];
-            $data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
+            //$data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
             $this->data['users'] = $this->Topichat_model->get_topichats_users($group_id);
-            krsort($data['messages']); // Reverse array
+            //krsort($data['messages']); // Reverse array
             $this->data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $data, true);
             echo json_encode($this->data);
             exit;
@@ -517,9 +517,9 @@ class Topichat extends CI_Controller {
             $this->data['DEFAULT_CHAT_IMAGE_PATH'] = DEFAULT_CHAT_IMAGE_PATH;
             $this->data['media_content'] = $this->Topichat_model->get_youtube_media_details($id);
             $group_id = $this->data['media_content']['topic_group_id'];
-            $data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
+            //$data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
             $this->data['users'] = $this->Topichat_model->get_topichats_users($group_id);
-            krsort($data['messages']); // Reverse array
+            //krsort($data['messages']); // Reverse array
             $this->data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $data, true);
             echo json_encode($this->data);
             exit;
@@ -584,11 +584,6 @@ class Topichat extends CI_Controller {
             $this->data['DEFAULT_CHAT_IMAGE_PATH'] = DEFAULT_CHAT_IMAGE_PATH;
             $this->data['media_content'] = $this->Topichat_model->get_topichat_media_details($id,$this->session->user['id']);
             $this->data['media_type'] = $this->data['media_content']['media_type'];
-            //$group_id = $this->data['media_content']['topic_group_id'];
-            //$data['messages'] = $this->Topichat_model->get_messages($group_id, $this->session->user['id'], $limit = 20);
-            //$this->data['users'] = $this->Topichat_model->get_topichats_users($group_id);
-            //krsort($data['messages']); // Reverse array
-            //$this->data['view'] = $this->load->view('user/partial/topichat/load_more_msg', $data, true);
             echo json_encode($this->data);
             exit;
         }

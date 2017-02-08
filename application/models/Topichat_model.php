@@ -269,15 +269,20 @@ class Topichat_model extends CI_Model {
      *          boolean false, if fail
      * developed by : ar
      */
-    public function get_messages($group_id, $logged_in_user, $limit = null) {
-        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank');
+    public function get_messages($group_id, $logged_in_user, $limit = null,$sort="time") {
+        $this->db->select('tg.*,u.name,u.user_image,count(DISTINCT trp.id) as positive_rank,count(DISTINCT trn.id) as negetive_rank,count(DISTINCT tru.id) is_ranked, tru.rank, count(distinct pv.id) as watching_user');
         $this->db->where('tg.topic_group_id', $group_id);
         $this->db->join('users u', 'tg.user_id = u.id');
         $this->db->join('topic_group_chat_rank trp', 'tg.id = trp.topic_group_chat_id and trp.rank = 1', 'left');
         $this->db->join('topic_group_chat_rank trn', 'tg.id = trn.topic_group_chat_id and trn.rank = 0', 'left');
         $this->db->join('topic_group_chat_rank tru', 'tg.id = tru.topic_group_chat_id and tru.user_id = ' . $logged_in_user, 'left');
+        $this->db->join('topic_post_user_view pv','pv.topic_group_chat_id = tg.id and pv.currently_viewing = "1"','left');
         $this->db->limit($limit, 0);
-        $this->db->order_by('tg.id', 'desc');
+        if($sort != "time")
+        {
+            $this->db->order_by('watching_user', 'desc');
+        }
+        $this->db->order_by('tg.id','desc');
         $this->db->group_by('tg.id');
         
         // Changes for phase 2, to get only media post

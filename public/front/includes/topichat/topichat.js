@@ -1,15 +1,15 @@
 $('document').ready(function () {
     
-    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
     var load = true;
     var in_progress = false;
     $('.chat_area2').scroll(function () {
         if (load && !in_progress)
         {
-            if ($('.chat_area2').scrollTop() == 0) {
+            if($(this)[0].scrollHeight - $(this).scrollTop() === $(this).outerHeight()) {
                 loaddata();
                 in_process = true;
             }
+            
         }
     });
 
@@ -25,15 +25,15 @@ $('document').ready(function () {
                 if (more.status)
                 {
 //                    console.log(more.view);
-                    $('.total_views_inner').prepend(more.view);
+                    $('.total_views_inner').append(more.view);
                     last_msg = more.last_msg_id;
-                    $(".total_views_inner").animate({scrollTop: 200}, 500);
+                    //$(".total_views_inner").animate({scrollTop: 200}, 500);
                 }
                 else
                 {
                     load = false;
-                    $('.total_views_inner').prepend('<div class="text-center">' + no_message + '</div>');
-                    $(".total_views_inner").animate({scrollTop: 0}, 500);
+                    $('.total_views_inner').append('<div class="text-center">' + no_message + '</div>');
+                    //$(".total_views_inner").animate({scrollTop: 0}, 500);
                 }
                 in_progress = false;
             }

@@ -287,16 +287,14 @@
                 <!-- Chat area and tupe section start here -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                        <div class="chat_area2 topichat_msg_sec chat_area_updated">
-                            <div class="text-right chat_area_updated-top">
-                                <label>Short By:</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>1</option>
-                                    <option>1</option>
+                        <div class="text-right chat_area_updated-top">
+                                <label>Sort By:</label>
+                                <select id="sort_option" class="form-control">
+                                    <option value="time" selected>By Time</option>
+                                    <option value="view">By View</option>
                                 </select>
                             </div>
-
+                        <div class="chat_area2 topichat_msg_sec chat_area_updated">
                             <div class="total_views_wrapper">
                                 <div class="total_views_inner">
                                     <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
