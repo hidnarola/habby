@@ -314,7 +314,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 $send_object['chat_id'] = $message->post_id;
                 $send_object['media_type'] = 'post_close_view';
                 foreach ($Server->wsClients as $id => $client) {
-                    if ($id != $clientID && in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == 'topic_msg') {
+                    if (in_array($Server->wsClients[$id]['user_data']->id, $user_ids) && isset($Server->wsClients[$id]['room_id']) && $Server->wsClients[$id]['room_id'] == $message->group_id && $Server->wsClients[$id]['room_type'] == 'topic_msg') {
                         $Server->wsSend($id, json_encode($send_object));
                     }
                 }
