@@ -220,7 +220,7 @@
                             if (count($recent_images) > 0) {
                                 foreach ($recent_images as $image) {
                                     ?>
-                                    <li class="topi_image_li" data-chat_id="<?php echo $image['id']; ?>">
+                                    <li class="topi_image_li topichat_media_post" data-chat_id="<?php echo $image['id']; ?>">
                                         <a data-toggle="modal" data-target="#postModal" data-image="<?php echo $image['media'] ?>" data-type="image" >
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image['media']; ?>" class="img-responsive topi_image">
                                         </a>
