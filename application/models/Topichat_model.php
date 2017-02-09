@@ -424,13 +424,14 @@ class Topichat_model extends CI_Model {
      */
 
     public function get_recent_images($group_id, $limit) {
-        $this->db->select('media');
+        $this->db->select('id,media');
         $this->db->where('media_type', 'image');
         $this->db->where('topic_group_id', $group_id);
         $this->db->limit($limit);
         $this->db->order_by('created_date', 'desc');
         $arr = $this->db->get('topic_group_chat')->result_array();
-        return array_column($arr, 'media');
+        return $arr;
+        //return array_column($arr, 'media');
     }
 
     /*
@@ -443,13 +444,14 @@ class Topichat_model extends CI_Model {
      */
 
     public function get_recent_videos($group_id, $limit) {
-        $this->db->select('media');
+        $this->db->select('id,media');
         $this->db->where('media_type', 'video');
         $this->db->where('topic_group_id', $group_id);
         $this->db->limit($limit);
         $this->db->order_by('created_date', 'desc');
         $arr = $this->db->get('topic_group_chat')->result_array();
-        return array_column($arr, 'media');
+        return $arr;
+        //return array_column($arr, 'media');
     }
 
     /*

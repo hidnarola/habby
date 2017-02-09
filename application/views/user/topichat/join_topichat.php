@@ -195,12 +195,11 @@
                             if (count($recent_videos) > 0) {
                                 foreach ($recent_videos_thumb as $key => $image) {
                                     ?>
-                                    <li class="topi_image_li">
-                                        <a data-toggle="modal" data-target="#postModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
+                                    <li class="topi_image_li topichat_media_post" data-chat_id="<?php echo $recent_videos[$key]['id'] ?>">
+                                        <a data-toggle="modal" data-target="#postModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key]['media'] ?>" data-type="video" >
                                             <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                         ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
-
                                     </li>
                                     <?php
                                 }
@@ -211,11 +210,8 @@
                             }
                             ?>
                         </ul>
-
                     </div>
-                    <?php ?>
-
-                    <?php ?>
+                    
                     <div class="panel-heading shrd_topc_sec brdr_top"><b><?php echo lang('Images'); ?></b> </div>
 
                     <div class="panel-body">
@@ -224,9 +220,9 @@
                             if (count($recent_images) > 0) {
                                 foreach ($recent_images as $image) {
                                     ?>
-                                    <li class="topi_image_li">
-                                        <a data-toggle="modal" data-target="#postModal" data-image="<?php echo $image ?>" data-type="image" >
-                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
+                                    <li class="topi_image_li" data-chat_id="<?php echo $image['id']; ?>">
+                                        <a data-toggle="modal" data-target="#postModal" data-image="<?php echo $image['media'] ?>" data-type="image" >
+                                            <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image['media']; ?>" class="img-responsive topi_image">
                                         </a>
                                     </li>
                                     <?php
@@ -426,6 +422,7 @@
         </div>
     </div>
 </div>
+
 <!--Topichat Popular section start here -->
 <div class = "modal" id = "edit_grp">
     <div class = "modal-dialog modal-lg">
@@ -804,7 +801,6 @@
     </div>
 </div>
 <!-- Topichat post modal over-->
-
 
 <!--  Post modal section start here -->
 <div class="modal upload-modal" id="upload_file_section">

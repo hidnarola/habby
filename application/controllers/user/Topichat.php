@@ -283,7 +283,7 @@ class Topichat extends CI_Controller {
         $this->data['recent_links'] = $this->Topichat_model->get_recent_links($Id, $image_limit = 2);
         $this->data['recent_videos_thumb'] = array();
         foreach ($this->data['recent_videos'] as $video) {
-            $this->data['recent_videos_thumb'][] = explode(".", $video)[0] . "_thumb.png";
+            $this->data['recent_videos_thumb'][] = explode(".", $video['media'])[0] . "_thumb.png";
         }
         $this->data['top_rank_post'] = $this->Topichat_model->get_top_rank_media($Id, $this->session->user['id'], $top_rank_limit = 3);
 //        $this->data['shared_links'] = $this->Topichat_model->get_shared_media($Id, $this->session->user['id'], $top_rank_limit = 3);
