@@ -362,11 +362,12 @@ class Topichat_model extends CI_Model {
         }
         else
         {
-            $this->db->where_not_in('tg.id',$other);
+            $this->db->where_not_in('tg.id',explode(",",$other));
         }
         $this->db->order_by('tg.id', 'desc');
-        
         $messages = $this->db->get('topic_group_chat tg')->result_array();
+        
+        echo $this->db->last_query();die;
         
         // Phase 2 changes, retrive user who are currently watching post
         $post_ids = array_column($messages,'id');
