@@ -367,8 +367,6 @@ class Topichat_model extends CI_Model {
         $this->db->order_by('tg.id', 'desc');
         $messages = $this->db->get('topic_group_chat tg')->result_array();
         
-        echo $this->db->last_query();die;
-        
         // Phase 2 changes, retrive user who are currently watching post
         $post_ids = array_column($messages,'id');
         if(count($post_ids) > 0)
