@@ -768,7 +768,7 @@ $(document).ready(function () {
                 $('.topichat_media_user').attr('src', DEFAULT_PROFILE_IMAGE_PATH + media_details.user_image);
                 $('.topichat_media_user').attr('title', media_details.name);
                 $('.topichat_media_details').html(media_details.message);
-                
+                $('#postModal').find('.total_views_list').find('ul').html($(e.relatedTarget).parents('.topichat_media_post').find('.total_views_list').find('ul').html());
                 if(type == "links"){
                     if(media_details['youtube_video'] != null){
                         $('.topichat_media_popup').html(media_details.youtube_video);
