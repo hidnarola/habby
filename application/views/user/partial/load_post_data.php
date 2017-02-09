@@ -61,9 +61,22 @@ if (count($posts) > 0) {
                             </div>
                             <div class="mov_sec mov_sec1">
                                 <div class="sav-n-orgnl clearfix">
-                                    <p class="sav_p">
+                                    <div class="sav_p">
                                         <a href="javascript:;" class="pstbtn"><?php echo ($post['is_saved']) ? lang('saved') : lang('save'); ?></a>
-                                    </p>
+                                        <?php 
+                                            if ($post['user_id'] == $this->session->user['id']) 
+                                            { 
+                                                ?>
+                                                <div class="dropdown pull-right">
+                                                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="javascript:;" class="delete_smileshare_post">Delete Post</a></li>
+                                                    </ul>
+                                                </div>
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
                                 </div>
 
                                 <p class="sml_txt">

@@ -267,6 +267,53 @@ $('document').ready(function () {
         });
     });
 
+    // Delete smileshare post
+    $('.post_section').on('click', '.delete_smileshare_post', function () {
+        var t = $(this);
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this post!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plz!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                delete_post_id = t.parents('.pst_full_sec').data('post_id');
+                $.ajax({
+                    url:base_url+'post/delete_post',
+                    data:'post_id='+delete_post_id,
+                    method:'post',
+                    success:function(status){
+                        if(status)
+                        {
+                            swal('Deleted!','Your post has been deleted.','success');
+                            t.parents('.pst_full_sec').remove();
+                            setTimeout(function () {
+                                $('.post_masonry_article').each(function () {
+                                    if ($(this).offset().left > 250)
+                                    {
+                                        $(this).addClass('right');
+                                    }
+                                });
+                            }, 1000);
+                        }
+                        else
+                        {
+                            swal('Not Deleted!','Something went wrong.','error');
+                        }
+                    }
+                });
+            } else {
+                swal("Cancelled", "Your Challenge Group is safe :)", "error");
+            }
+        });
+    });
+
     // Set post in two column format
     setTimeout(function () {
         $('.post_masonry_article').each(function () {

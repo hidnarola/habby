@@ -223,6 +223,30 @@ class Post extends CI_Controller {
         $this->load->view('user/post/display_single_post', $this->data);
     }
 
+    /* phase 2 changes
+     * 
+     * delete_post is used to delete post
+     * 
+     * @echo        boolean true,   if success
+     *              boolean false,  if fail
+     * 
+     * developed by "ar"
+     */
+    public function delete_post(){
+        if($this->input->post())
+        {
+            $post_id = $this->input->post('post_id');
+            if ($this->Post_model->delete_post($post_id)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+        else
+        {
+            echo '0';
+        }
+    }
 }
 
 ?>

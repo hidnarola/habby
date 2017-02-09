@@ -79,9 +79,24 @@
                                             </div>
                                             <div class="mov_sec mov_sec1">
                                                 <div class="sav-n-orgnl clearfix">
-                                                    <p class="sav_p">
-                                                        <a href="javascript:;" class="pstbtn"><?php echo ($post['is_saved']) ? lang('saved') : lang('save'); ?></a>
-                                                    </p>
+                                                    <div class="sav_p">
+                                                        <a href="javascript:;" class="pstbtn">
+                                                            <?php echo ($post['is_saved']) ? lang('saved') : lang('save'); ?>
+                                                        </a>
+                                                        <?php 
+                                                            if ($post['user_id'] == $this->session->user['id']) 
+                                                            { 
+                                                                ?>
+                                                                <div class="dropdown pull-right">
+                                                                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="javascript:;" class="delete_smileshare_post">Delete Post</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </div>
                                                 </div>
 
                                                 <p class="sml_txt">
@@ -147,8 +162,8 @@
                                                             <li>
                                                                 <a href="javascript:;" class="user_coin">
                                                                     <img class="img-coin" src="<?php
-                                                                    echo DEFAULT_IMAGE_PATH;
-                                                                    echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
+                                                            echo DEFAULT_IMAGE_PATH;
+                                                            echo ($post['is_coined']) ? 'coined_icon.png' : 'coin_icon.png';
                                                                     ?>"/><br>
                                                                     <span class="coin_cnt">
                                                                         <?php echo $post['post_coin'] ?>
@@ -170,9 +185,9 @@
                                                                 -->
                                                                 <a href="javascript:;" class="user_like">
                                                                     <img src="<?php
-                                                                    echo DEFAULT_IMAGE_PATH;
-                                                                    echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
-                                                                    ?>" class="like_img"><br>
+                                                                echo DEFAULT_IMAGE_PATH;
+                                                                echo ($post['is_liked']) ? 'liked_img.png' : 'like_img.png'
+                                                                ?>" class="like_img"><br>
                                                                     <span>
                                                                         <span class="like_cnt"><?php echo $post['post_like'] ?></span> <?php echo lang('Likes'); ?>
                                                                     </span>
@@ -190,7 +205,7 @@
                                                                 <a href="javascript:void(0);"  class="share-link" data-id="<?php echo $post['id'] ?>">
                                                                     <img src="<?php echo DEFAULT_IMAGE_PATH; ?>share_icon.png"><br>
                                                                     <span>
-                                                                        <?php // echo $post['post_share'] ?> <?php echo lang('Shares'); ?>
+                                                                        <?php // echo $post['post_share']  ?> <?php echo lang('Shares'); ?>
                                                                     </span>
                                                                 </a>
 

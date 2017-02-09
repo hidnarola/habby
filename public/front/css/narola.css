@@ -1522,3 +1522,5 @@ font-size: 16px;
 .page_messages a img,.post_messages a img{max-width: 50px;max-height: 50px;}
 .page_messages .messageMe,.post_messages .messageMe{text-align: left;padding: 7px;background: #fff;margin: 0 0 5px;margin-right: 60px;border-radius: 3px;}
 .page_messages .messageHer,.post_messages .messageHer{text-align: right;padding: 7px;background: #fff;margin: 0 0 5px;margin-left: 60px;border-radius: 3px;}
+
+.sav_p .dropdown {top:-7px;}
