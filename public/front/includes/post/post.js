@@ -309,7 +309,7 @@ $('document').ready(function () {
                     }
                 });
             } else {
-                swal("Cancelled", "Your Challenge Group is safe :)", "error");
+                swal("Cancelled", "Your post is safe :)", "error");
             }
         });
     });

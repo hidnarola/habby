@@ -50,14 +50,14 @@
                                         <?php
                                         if ($post['media_type'] == "image") {
                                             ?>
-                                            <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $post['media'] ?>" data-type="image" >
+                                            <a data-toggle="modal" data-target="#postModal" data-image="<?php echo $post['media'] ?>" data-type="image" >
                                                 <!--class="fancybox" href="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" data-fancybox-group="gallerytopichat1"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $post['media']; ?>" class="img-responsive center-block ">
                                             </a>
                                             <?php
                                         } else if ($post['media_type'] == "video") {
                                             ?>
-                                            <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $post['media'] ?>" data-type="video" >
+                                            <a data-toggle="modal" data-target="#postModal" class="video-w-icon" data-image="<?php echo $post['media'] ?>" data-type="video" >
                                                 <!--class="video-w-icon fancybox " target="_blank" href="<?php echo DEFAULT_CHAT_IMAGE_PATH; ?>" data-fancybox-group="gallerytopichat1"-->
                                                 <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . explode(".", $post['media'])[0] . "_thumb.png"; ?>" class="img-responsive center-block ">
                                             </a>
@@ -72,8 +72,8 @@
                                         } else if ($post['media_type'] == "links") {
                                             $media = json_decode($post['media']);
                                             ?>
-                                            <div class = "fileshare">
-                                                <div class = "">
+                                            <div class="fileshare" data-toggle="modal" data-target="#postModal">
+                                                <div class="">
                                                     <?php
                                                     if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                                         ?>
@@ -129,11 +129,11 @@
                                     $media = json_decode($recent_link['media']);
                                     if ($recent_link['youtube_video'] != null) {
                                         ?>
-                                        <div class = "fileshare">
+                                        <div class = "fileshare topichat_media_post" data-chat_id="<?php echo $recent_link['id']; ?>">
                                             <?php
                                             if (isset($media->images[0]->url) && $media->images[0]->url != null) {
                                                 ?>
-                                                <div class="videoPreview" data-toggle="modal" data-target="#linkModal" data-type="links" data-id='<?php echo $recent_link['id']; ?>'>
+                                                <div class="videoPreview" data-toggle="modal" data-target="#postModal" data-type="links" data-id='<?php echo $recent_link['id']; ?>'>
                                                     <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
                                                     <div class="youtube-icon"><img src="<?php echo DEFAULT_IMAGE_PATH ?>youtube-icon.png"/></div>
                                                 </div>
@@ -144,20 +144,22 @@
                                         <?php
                                     } else {
                                         ?>
-                                        <div class = "fileshare">
-                                            <div class = "">
-                                                <?php
-                                                if (isset($media->images[0]->url) && $media->images[0]->url != null) {
-                                                    ?>
-                                                    <div class = "large-3 columns">
-                                                        <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
-                                                    </div>
+                                        <div class="topichat_media_post" data-chat_id="<?php echo $recent_link['id']; ?>">
+                                            <div class = "fileshare" data-toggle="modal" data-target="#postModal">
+                                                <div class = "">
                                                     <?php
-                                                }
-                                                ?>
-                                                <div class = "large-9 column">
-                                                    <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
-                                                    <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
+                                                    if (isset($media->images[0]->url) && $media->images[0]->url != null) {
+                                                        ?>
+                                                        <div class = "large-3 columns">
+                                                            <img class = "thumb" src = "<?php echo $media->images[0]->url ?>"></img>
+                                                        </div>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <div class = "large-9 column">
+                                                        <a href = "<?php echo (isset($media->url)) ? $media->url : ""; ?>" target="_blank"><?php echo (isset($media->title)) ? $media->title : ""; ?></a>
+                                                        <!--<p><?php echo (isset($media->description)) ? $media->description : ""; ?></p>-->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,7 +196,7 @@
                                 foreach ($recent_videos_thumb as $key => $image) {
                                     ?>
                                     <li class="topi_image_li">
-                                        <a data-toggle="modal" data-target="#mediaModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
+                                        <a data-toggle="modal" data-target="#postModal" class="video-w-icon" data-image="<?php echo $recent_videos[$key] ?>" data-type="video" >
                                             <!--href="<?php // echo DEFAULT_CHAT_IMAGE_PATH . $recent_videos[$key];                                                         ?>"-->
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
@@ -223,7 +225,7 @@
                                 foreach ($recent_images as $image) {
                                     ?>
                                     <li class="topi_image_li">
-                                        <a data-toggle="modal" data-target="#mediaModal" data-image="<?php echo $image ?>" data-type="image" >
+                                        <a data-toggle="modal" data-target="#postModal" data-image="<?php echo $image ?>" data-type="image" >
                                             <img src="<?php echo DEFAULT_CHAT_IMAGE_PATH . $image; ?>" class="img-responsive topi_image">
                                         </a>
                                     </li>
