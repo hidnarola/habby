@@ -1524,3 +1524,4 @@ font-size: 16px;
 .page_messages .messageHer,.post_messages .messageHer{text-align: right;padding: 7px;background: #fff;margin: 0 0 5px;margin-left: 60px;border-radius: 3px;}
 
 .sav_p .dropdown {top:-7px;}
+.delete_topic_post{display: inline-block;top: 38px;position: relative;float: right;right: -20px;}

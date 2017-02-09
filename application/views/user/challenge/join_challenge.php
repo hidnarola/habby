@@ -346,6 +346,16 @@
                                                     </span>
                                                 </a>
                                             </li>
+                                            <?php
+                                                if($post['user_id'] == $this->session->user['id'])
+                                                {
+                                                    ?>
+                                                    <li class="pull-right">
+                                                        <button class="btn btn-default challenge_delete_btn">Delete this post</button>
+                                                    </li>
+                                                    <?php
+                                                }
+                                            ?>
                                         </ul>
                                         <div class="winner-comnt">
                                             <p class="cmn_txtnw"> <?php echo lang("Comment Here"); ?></p>

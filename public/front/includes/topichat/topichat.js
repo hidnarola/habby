@@ -464,6 +464,46 @@ $('document').ready(function () {
         });
     });
     
+    // Delete topic post
+    $('.topichat_msg_sec').on('click','.delete_topi_post',function(){
+        t = $(this);
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this post!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plz!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                var delete_post_id = t.parents('.topichat_media_post').data('chat_id');
+                $.ajax({
+                    url:base_url+'topichat/delete_post',
+                    data:'post_id='+delete_post_id,
+                    method:'post',
+                    success:function(status){
+                        if(status)
+                        {
+                            swal('Deleted!','Your post has been deleted.','success');
+                            t.parents('.topichat_media_post').remove();
+                        }
+                        else
+                        {
+                            swal('Not Deleted!','Something went wrong.','error');
+                        }
+                    }
+                });
+            } else {
+                swal("Cancelled", "Your Challenge Group is safe :)", "error");
+            }
+        });
+    });
+    
+    
     /*setTimeout(function(){
         // Set height of post section dynamically
         $(".chat_area_updated").height($('.right_lg_sectopic').height() - (($('.tittl_sec_lg').height()) + $('.topich_chat_typesec').height()));

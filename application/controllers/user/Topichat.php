@@ -649,4 +649,29 @@ class Topichat extends CI_Controller {
         }
         echo json_encode($data);
     }
+    
+    /* phase 2 changes
+     * 
+     * delete_post is used to delete post
+     * 
+     * @echo        boolean true,   if success
+     *              boolean false,  if fail
+     * 
+     * developed by "ar"
+     */
+    public function delete_post(){
+        if($this->input->post())
+        {
+            $post_id = $this->input->post('post_id');
+            if ($this->Topichat_model->delete_post($post_id)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+        else
+        {
+            echo '0';
+        }
+    }
 }

@@ -24,6 +24,16 @@ foreach ($messages as $message) {
                     ?>
                 </ul>
             </div>
+            <?php
+                if($message['user_id'] == $this->session->user['id'])
+                {
+                    ?>
+                    <div class="delete_topic_post">
+                        <button class="btn btn-default delete_topi_post" title="Delete this post">Delete</button>
+                    </div>
+                    <?php
+                }
+            ?>
             <div class="clearfix"></div>
         </div>
         <div class="chat_area_updated_list_middle">

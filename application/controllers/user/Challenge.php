@@ -175,7 +175,7 @@ class Challenge extends CI_Controller {
         $this->data['messages'] = $this->Challenge_model->get_messages($Id, $msg_limit);
 
         $this->data['challenge_post'] = $this->Challenge_model->get_challenge_posts($Id, $this->session->user['id'], 0, $post_limit);
-        //    pr($this->data['challenge_post'],1);
+        //pr($this->data['challenge_post'],1);
         krsort($this->data['messages']); // Reverse array
         $this->template->load('join', 'user/challenge/join_challenge', $this->data);
     }
@@ -601,5 +601,29 @@ class Challenge extends CI_Controller {
             redirect('challenge');
         }
     }
-
+    
+    /* phase 2 changes
+     * 
+     * delete_post is used to delete post
+     * 
+     * @echo        boolean true,   if success
+     *              boolean false,  if fail
+     * 
+     * developed by "ar"
+     */
+    public function delete_post(){
+        if($this->input->post())
+        {
+            $post_id = $this->input->post('post_id');
+            if ($this->Challenge_model->delete_post($post_id)) {
+                echo '1';
+            } else {
+                echo '0';
+            }
+        }
+        else
+        {
+            echo '0';
+        }
+    }
 }

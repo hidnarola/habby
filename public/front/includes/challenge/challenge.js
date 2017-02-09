@@ -271,6 +271,45 @@ $('document').ready(function () {
         });
     });
 
+    // Delete Challenge post
+    $('.chlng2_past_rank_sec').on('click','.challenge_delete_btn',function(){
+        t = $(this);
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this post!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plz!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function (isConfirm) {
+            if (isConfirm) {
+                var delete_post_id = t.parents('.rank_lg_sec').data('post_id');
+                $.ajax({
+                    url:base_url+'challenge/delete_post',
+                    data:'post_id='+delete_post_id,
+                    method:'post',
+                    success:function(status){
+                        if(status)
+                        {
+                            swal('Deleted!','Your post has been deleted.','success');
+                            t.parents('.rank_lg_sec').remove();
+                        }
+                        else
+                        {
+                            swal('Not Deleted!','Something went wrong.','error');
+                        }
+                    }
+                });
+            } else {
+                swal("Cancelled", "Your Challenge Group is safe :)", "error");
+            }
+        });
+    });
+
     // Emojies popover
     $('#emogis').popover({
         html: true,
