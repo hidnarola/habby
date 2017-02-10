@@ -892,6 +892,7 @@ $(document).ready(function () {
     });
     
     function post_loaddata(){
+        id = $('#postModal').data('chat_id');
         $.ajax({
             url:base_url+'topichat/get_post_chat',
             method:'post',
