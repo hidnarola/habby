@@ -28,7 +28,7 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                 $Server->wsClients[$clientID]['room_id'] = $message->group_id;
             }
             return;
-        } 
+        }
         else if (!empty($Server->wsClients[$clientID]['user_data'])) {
             if ($message->type == 'topic_msg') {
                 // echo "\n\nMessage ====> \n\n";

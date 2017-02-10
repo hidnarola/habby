@@ -746,8 +746,7 @@ $(document).ready(function () {
         
         // Load page chat
         $('.page_messages').html($('.panel-chat').find('.panel-body').html());
-        var control = $('.page_messages');
-        control.scrollTop(control[0].scrollHeight);
+        
         
         // Fetch Post data
         $.ajax({
@@ -818,8 +817,6 @@ $(document).ready(function () {
                 var givenrank = parseInt(media_details.positive_rank) - parseInt(media_details.negetive_rank);
                 var rank = '<button type="button" id="add" class="add add_btn smlr_btn"><img src="' + rank_image + '"/></button><span class="rank_rate">' + givenrank + '</span><button type="button" id="sub" class="sub smlr_btn"><img src="' + rank_image + '"/></button>';
                 $('.topichat_media_rank_modal').html(rank);
-                
-                return true;
             }
         });
         
@@ -847,6 +844,14 @@ $(document).ready(function () {
         });
     });
     
+    $('#postModal').on("shown.bs.modal",function(){
+        var control = $('.page_messages');
+        control.scrollTop(control[0].scrollHeight);
+        
+        var control = $('.post_messages');
+        control.scrollTop(control[0].scrollHeight);
+    })
+    
     // Fired when post popup will close
     $('#postModal').on("hidden.bs.modal",function(e){
         var id = $(e.currentTarget).attr('data-chat_id');
@@ -871,9 +876,11 @@ $(document).ready(function () {
         Server.send('message', JSON.stringify(msg));
     });
     
+    $('#postModal').on('')
+    
     var post_msg_load = true;
     var post_msg_in_progress = false;
-    $('.panel-chat .panel-body').scroll(function () {
+    $('.post_messages').scroll(function () {
         var thi = $(this);
         if (post_msg_load && !post_msg_in_progress)
         {

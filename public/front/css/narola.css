@@ -796,7 +796,7 @@ img.file_icon {
     padding-right: 10px;
 }
 .topichat_notes{
-    height: 55px;
+    height: 35px;
     overflow: auto;
 }
 
@@ -1525,3 +1525,4 @@ font-size: 16px;
 
 .sav_p .dropdown {top:-7px;}
 .delete_topic_post{display: inline-block;top: 38px;position: relative;float: right;right: -20px;}
+.tittl_sec2 p.topchat_p {padding-top:5px;}
