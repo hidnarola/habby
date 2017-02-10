@@ -1534,5 +1534,5 @@ font-size: 16px;
 .messageMe .messageMe-img img{-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;display:block;}
 .page_messages .messageMe{padding:7px 7px 7px 40px;position:relative;min-height:36px;  }
 .page_messages .messageMe a{position:absolute;top:7px;left:7px; }
-.img.emoticon{max-height:20px;max-width:20px;}
+img.emoticon{max-height:20px;max-width:20px;}
 .chat_area_updated_list_middle .topichat_media_thumb {border:0;}
