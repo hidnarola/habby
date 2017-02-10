@@ -790,7 +790,7 @@ $(document).ready(function () {
                     {
                         link_image = "";
                         content = JSON.parse(media_details['media']);
-                        if(typeof(content) != "undefined" && typeof(content.images[0].url) != "undefined")
+                        if(typeof(content) != "undefined" && typeof(content.images[0]) != "undefined" && typeof(content.images[0].url) != "undefined")
                         {
                             link_image = '<div class = "large-3 columns"><img class = "thumb" src = "'+content.images[0].url+'"></img></div>';
                         }
