@@ -965,7 +965,13 @@ $(document).ready(function () {
         
         if (userdata.media_type == null)
         {
-            $('.panel-chat').find('.panel-body').append("<div class='messageMe'><a href='javascript:;'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
+            $('.panel-chat').find('.panel-body').append("<div class='messageMe'><a href='javascript:;' class='messageMe-img'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
+            if($('#postModal').hasClass('in'))
+            {
+                $('.page_messages').append("<div class='messageMe'><a href='javascript:;' class='messageMe-img'><img src='" + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + "' title='"+userdata.user+"'></a><span>"+userdata.message+"</span><div class='clearFix'></div></div>");
+                var control = $('.page_messages').find('.panel-body');
+                control.scrollTop(control[0].scrollHeight);
+            }
             var control = $('.panel-chat').find('.panel-body');
             control.scrollTop(control[0].scrollHeight);
         }
