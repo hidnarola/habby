@@ -66,13 +66,25 @@ $('document').ready(function () {
         if (text_load && !text_in_progress)
         {
             if (thi.scrollTop() == 0) {
-                text_loaddata();
+                text_loaddata(false);
                 text_in_process = true;
             }
         }
     });
 
-    function text_loaddata()
+    $('.page_messages').scroll(function(){
+        var thi = $(this);
+        if (text_load && !text_in_progress)
+        {
+            if (thi.scrollTop() == 0) {
+                text_loaddata(true);
+                text_in_process = true;
+                
+            }
+        }
+    });
+
+    function text_loaddata(popup_open)
     {
         $.ajax({
             url: base_url + 'topichat/load_more_text_msg/' + group_id,
@@ -84,14 +96,21 @@ $('document').ready(function () {
                 if (more.status)
                 {
                     $('.panel-chat').find('.panel-body').prepend(more.view);
+                    if(popup_open)
+                    {
+                        $('.page_messages').prepend(more.view);
+                        $('.page_messages').animate({scrollTop: 200}, 500);
+                    }
                     last_text_msg = more.last_msg_id;
                     $('.panel-chat').find('.panel-body').animate({scrollTop: 200}, 500);
                 }
                 else
                 {
-                    load = false;
+                    text_load = false;
                     $('.panel-chat').find('.panel-body').prepend('<div class="text-center">' + no_message + '</div>');
                     $('.panel-chat').find('.panel-body').animate({scrollTop: 0}, 500);
+                    $('.page_messages').prepend('<div class="text-center">' + no_message + '</div>');
+                    $('.page_messages').animate({scrollTop: 0}, 500);
                 }
                 in_progress = false;
             }
@@ -502,8 +521,7 @@ $('document').ready(function () {
             }
         });
     });
-    
-    
+
     /*setTimeout(function(){
         // Set height of post section dynamically
         $(".chat_area_updated").height($('.right_lg_sectopic').height() - (($('.tittl_sec_lg').height()) + $('.topich_chat_typesec').height()));
