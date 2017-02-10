@@ -135,10 +135,10 @@ $method_name = $this->router->fetch_method(); //outputs index
                 if ($user_data['id'] == $this->session->user['id']) {
                     ?>
                     <li class="<?php echo ($controller == 'home' && $method_name == 'profile') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/profile" ?>"><?php echo lang('IP'); ?></a></li>
-                    <li class="<?php echo ($controller == 'home' && $method_name == 'topichat') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Topichat'); ?></a></li>
+                    <li class="<?php echo ($controller == 'home' && $method_name == 'topichat') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/topichat" ?>"><?php echo lang('Share & Chat'); ?></a></li>
     <!--                            <li><a href="<?php echo base_url() . "home/soulmate" ?>"><?php echo lang('Soulmate'); ?></a></li>
                     <li><a href="<?php echo base_url() . "home/groupplan" ?>"><?php echo lang('Group Plan'); ?></a></li>-->
-                    <li class="<?php echo ($controller == 'home' && $method_name == 'events') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/events" ?>"><?php echo lang('Events'); ?></a></li>
+                    <li class="<?php echo ($controller == 'home' && $method_name == 'events') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/events" ?>"><?php echo lang('Join me'); ?></a></li>
                     <li class="<?php echo ($controller == 'home' && $method_name == 'challenges') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/challenges" ?>"><?php echo lang('Challenge'); ?></a></li>
                     <!--<li class="<?php // echo ($controller == 'home' && $method_name == 'league') ? 'active' : ''; ?>"><a href="<?php echo base_url() . "home/league" ?>"><?php echo lang('League and alliance'); ?></a></li>-->
                     <?php

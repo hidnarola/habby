@@ -16,7 +16,7 @@ $search_data = $this->session->flashdata('event_filter');
     ?>
     <div class="new_grp">
         <!-- New Group button start-->
-        <a href="javascript:;" class="create_event_btn"><?php echo lang('New'); ?> <br><?php echo lang('Event'); ?></a>
+        <a href="javascript:;" class="create_event_btn"><?php echo lang('New'); ?> <br><?php echo lang('Join me'); ?></a>
         <!-- New Group button end-->
     </div>
 </div>
