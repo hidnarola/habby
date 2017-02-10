@@ -396,7 +396,7 @@ function upload_files(files) {
 $(document).ready(function () {
     Server = new FancyWebSocket(socket_server);
     // Send message to server
-    $(document).on('keypress', '#message_div', function (e) {
+    $(document).on('keypress', '#message_div,#page_message_div', function (e) {
         if (e.keyCode == 13)
         {
             if ($.trim($(this).html()) != '')
@@ -421,7 +421,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.fb-chat-window').on('click', '.submit_btn', function (e) {
+    $('.fb-chat-window').on('click', '.submit_btn', function () {
         msg = $('#message_div').html();
         if (msg.trim() != '')
         {
@@ -433,6 +433,20 @@ $(document).ready(function () {
             control.scrollTop(control[0].scrollHeight);
         }
     });
+    
+    $('#postModal').on('click','.page_submit_btn',function(){
+        msg = $('#page_message_div').html();
+        if (msg.trim() != '')
+        {
+            $('.panel-chat').find('.panel-body').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
+            $('.page_messages').append("<div class='messageHer'><span>"+msg+"</span><div class='clearFix'></div></div>");
+            $('#page_message_div').html('');
+            $('#page_message').val('');
+            send(msg);
+            var control = $('.page_messages');
+            control.scrollTop(control[0].scrollHeight);
+        }
+    })
 
     $('#linkModal').on('click', '.submit_btn', function () {
         msg1 = $('#linkModal').find('#message_div').html();
