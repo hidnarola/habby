@@ -1,3 +1,17 @@
+<style>
+    .row.cont_top_1{
+        bottom: 0;
+        left: 0;
+        position: relative;
+        right: 0;
+        top: 0;
+        padding-top: 0;
+    }
+    .topich_chat_typesec
+    {
+        position: relative !important;
+    }
+</style>
 <div class="row cont_top_1 join_topichat_unique">
     <div class="container topic_2cntnr mble_pd_0">
         <p class="mr_p visible-xs" >
