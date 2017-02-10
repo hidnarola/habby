@@ -1179,7 +1179,6 @@ h2.chlng_hdg ,
     float: right;
 }
 .total_views_list ul li > a,.topichat_media_thumb {
-    border: 1px solid #cccccc;
     border-radius: 50%;
     display: inline-block;
     height: 25px;
