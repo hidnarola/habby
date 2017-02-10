@@ -2,7 +2,7 @@
     <div class="row home_banner">
         <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
         <div class="home_banner-caption">
-            <h2>Caption cs</h2>
+            <h2>Share your happiness to the world</h2>
         </div>
     </div>
 <?php } ?>
