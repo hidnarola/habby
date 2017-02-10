@@ -251,8 +251,7 @@
                 }
                 ?>
                 <!-- Note and topic edit area start here -->
-                <div class="tittl_sec_lgrow">
-                    <div class="tittl_sec_lg">
+                <div class="tittl_sec_lg">
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                             <div class="tittl_sec">
                                 <p><?php echo $topichat['topic_name']; ?> <span></span></p>
@@ -278,32 +277,25 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <!-- Note and topic edit area end here -->
 
                 <!-- Chat area and tupe section start here -->
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mble_pd_0">
-                        <div class="text-right chat_area_updated-top">
-                                <label>Sort By:</label>
-                                <select id="sort_option" class="form-control">
-                                    <option value="time" selected>By Time</option>
-                                    <option value="view">By View</option>
-                                </select>
-                            </div>
-                        <div class="chat_area2 topichat_msg_sec chat_area_updated">
-                            <div class="total_views_wrapper">
-                                <div class="total_views_inner">
-                                    <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
-                                </div>
-                            </div>
+                <div class="text-right chat_area_updated-top">
+                    <label>Sort By:</label>
+                    <select id="sort_option" class="form-control">
+                        <option value="time" selected>By Time</option>
+                        <option value="view">By View</option>
+                    </select>
+                </div>
+                <div class="chat_area2 topichat_msg_sec chat_area_updated">
+                    <div class="total_views_wrapper">
+                        <div class="total_views_inner">
+                            <?php $this->load->view('user/partial/topichat/load_more_msg') ?>
                         </div>
                     </div>
-
-                    <!-- Type Chat section start here -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainchatarea">
-                        <div class="topich_chat_typesec">
+                </div>
+                <div class="topich_chat_typesec">
                             <!-- Smily icon and profile secton start here -->
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -414,9 +406,6 @@
                             <!-- Type area end here -->
 
                         </div>
-                    </div>
-                    <!-- Type Chat section end here -->
-                </div>
                 <!-- Chat area and tupe section end here -->
             </div>
         </div>

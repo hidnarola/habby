@@ -1,6 +1,9 @@
 <?php if ($banner_image != "" && $banner_image != null) { ?>
     <div class="row home_banner">
         <img src="<?php echo DEFAULT_BANNER_IMAGE_PATH . $banner_image; ?>" class="img-responsive center-block">
+        <div class="home_banner-caption">
+            <h2>Caption cs</h2>
+        </div>
     </div>
 <?php } ?>
 <div class="row cont_sec1">

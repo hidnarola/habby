@@ -1154,11 +1154,11 @@ h2.chlng_hdg ,
     padding: 10px 20px;
 }
 .total_views_wrapper{
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
 .chat_area_updated_list_top {
     border-bottom: 1px solid #cccccc;
-    border-top: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;position:relative; 
     margin: 0 -20px;
     padding: 0 20px 5px;
 }
@@ -1524,5 +1524,15 @@ font-size: 16px;
 .page_messages .messageHer,.post_messages .messageHer{text-align: right;padding: 7px;background: #fff;margin: 0 0 5px;margin-left: 60px;border-radius: 3px;}
 
 .sav_p .dropdown {top:-7px;}
-.delete_topic_post{display: inline-block;top: 38px;position: relative;float: right;right: -20px;}
+.delete_topic_post{display:inline-block;top:46px;position:absolute;right:6px;}
+.delete_topic_post .btn {display: inline-block;padding: 4px 6px;margin-bottom: 0;font-size: 12px;}
 .tittl_sec2 p.topchat_p {padding-top:5px;}
+.home_banner:after{background:rgba(0,0,0,.5);position:absolute;top:0;left:0;width:100%;height:100%;content:'';display:block;z-index:0; }
+.home_banner-caption{position:absolute;top:50%;-webkit-transform:translateY(-50%);-moz-transform:translateY(-50%);transform:translateY(-50%); text-align:center;width:100%;display:block;z-index:10; }
+.home_banner{position:relative;}
+.home_banner-caption h2{font-size:30px;color:#fff;line-height:34px;display:block;margin:0;padding:10px 0;text-transform:uppercase;} 
+.messageMe a.messageMe-img{display:block;}
+.messageMe .messageMe-img img{-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;display:block;}
+.page_messages .messageMe{padding:7px 7px 7px 40px;position:relative;min-height:36px;  }
+.page_messages .messageMe a{position:absolute;top:7px;left:7px; }
+.img.emoticon{max-height:20px;max-width:20px;}
