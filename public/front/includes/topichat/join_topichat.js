@@ -521,6 +521,7 @@ $(document).ready(function () {
                     reader.onloadend = function () { // set image data as background of div
                         file_flag = 1;
                         uploading_file  = !!this.files ? this.files : [];
+                        console.log("upload file = ",uploading_file);
                         // $('#imagePreview').addClass('imagePreview');
                         $('.upload_image_wrapper').show();
                         $('.message').hide();
