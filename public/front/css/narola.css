@@ -1244,7 +1244,7 @@ h2.chlng_hdg ,
 .chat-window-wrapper > .fb-chat-window, .chat-area-text-box > div {
     border-right: 1px solid #dddddd;
     display: inline-block;
-    height: 50px;
+    height: 42px;
     padding: 10px 15px;
     vertical-align: top;
 }
@@ -1270,7 +1270,7 @@ h2.chlng_hdg ,
     vertical-align: middle;
     position: relative;
     padding: 10px 15px;
-    height: 50px;
+    height: 42px;
     width: 140px;
 }
 .chat-window-wrapper > a {
