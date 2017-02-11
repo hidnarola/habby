@@ -1019,7 +1019,7 @@ $(document).ready(function () {
             else if (userdata.media_type == "links") {
                 userlink = JSON.parse(userdata.message);
 
-                left_link_html = '<div class="topichat_media_post" data-chat_id="'+userdata.chat_id+'"><div class="fileshare" id="fileshare' + i + '"><div class="">';
+                left_link_html = '<div class="topichat_media_post" data-chat_id="'+userdata.chat_id+'"><div class="fileshare" id="fileshare' + i + '" data-toggle="modal" data-target="#postModal"><div class="">';
 
                 var thumbnail_url = (userlink.images.length > 0) ? userlink.images[0].url : "";
                 
