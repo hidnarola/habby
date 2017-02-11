@@ -61,7 +61,7 @@ function share_links(url) {
                     } else {
                         if (preview.provider_name == "YouTube") {
                             var thumbnail_url = (preview.images.length > 0) ? preview.images[0].url : "";
-                            html = '<div class="videoPreview" data-toggle="modal" data-target="#postModal" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
+                            html = '<div class="videoPreview" data-id=""><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
                             left_link_html += html;
                             youtube_video_html = preview.media.html;
                             $('.fileshare' + i).parents('.topichat_media_post').addClass('youtube_video');
@@ -1025,7 +1025,7 @@ $(document).ready(function () {
                 
                 if (userdata.youtube_video != null) {
                     
-                    var youtube_video = '<div class="videoPreview" data-toggle="modal" data-target="#postModal" data-id=' + userdata.chat_id + '><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
+                    var youtube_video = '<div class="videoPreview" data-id=' + userdata.chat_id + '><img class="thumb" src="' + thumbnail_url + '"></img><div class="youtube-icon"><img src="' + DEFAULT_IMAGE_PATH + 'youtube-icon.png"/></div></div>';
 
                     $('.total_views_inner').prepend('<div class="topichat_media_post chat_area_updated_list" data-chat_id="' + userdata.chat_id + '"> <div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + userdata.user_image + '" title="' + userdata.user + '"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+userdata.title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class = "fileshare" data-toggle="modal" data-target="#postModal"> '+youtube_video+' </div> </div> </div> </div> </div>');
 
