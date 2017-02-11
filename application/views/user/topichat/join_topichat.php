@@ -827,11 +827,11 @@
                                     <div class="upld_sec">
                                         <div class="fileUpload up_img btn">
                                             <span><i class="fa fa-picture-o" aria-hidden="true"></i> <?php echo lang('Images'); ?></span>
-                                            <input type="file" name="uploadfile[]" class="upload" id="uploadFile"/>
+                                            <input type="file" name="uploadfile[]" class="upload" id="uploadimage"/>
                                         </div>
                                         <div class="fileUpload up_img btn">
                                             <span><i class="fa fa-video-camera" aria-hidden="true"></i> <?php echo lang('Videos'); ?></span>
-                                            <input type="file" id="upload_video" name="upload_video" class="upload" id="uploadFile"/>
+                                            <input type="file" id="upload_video" name="upload_video" class="upload" id="upload_video"/>
                                         </div>
                                         <!--<div class="fileUpload up_img btn">
                                             <span><i class="fa fa-upload" aria-hidden="true"></i> <?php echo lang('Files'); ?></span>

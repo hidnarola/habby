@@ -499,7 +499,7 @@ $(document).ready(function () {
     });
     
     // Image uploading script For POPUP
-    $("#upload_file_section").on("change","#uploadFile", function () {
+    $("#upload_file_section").on("change","#uploadimage", function () {
         $('.message').html();
         $('.upload_image_wrapper').html('');
         var files = !!this.files ? this.files : [];
