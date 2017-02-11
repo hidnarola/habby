@@ -37,9 +37,9 @@ function share_links(url) {
                     return false;
                 } else {
                     var link_title = $('#link_title').val();
-                    $('.total_views_inner').prepend('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div><div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH+data.user_image+'" title="'+data.name+'"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+link_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"><div class="fileshare'+ i + ' fileshare"></div></div></div></div></div>');
+                    $('.total_views_inner').prepend('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""><div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div><div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="'+DEFAULT_PROFILE_IMAGE_PATH+data.user_image+'" title="'+data.name+'"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="'+DEFAULT_IMAGE_PATH+'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+link_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"><div class="fileshare'+ i + ' fileshare" data-toggle="modal" data-target="#postModal"></div></div></div></div></div>');
 
-                    left_link_html = '<div class="fileshare" data-toggle="modal" data-target="#postModal" id="fileshare' + i + '"><div class="">';
+                    left_link_html = '<div class="topichat_media_post" data-chat_id=""><div class="fileshare" data-toggle="modal" data-target="#postModal" id="fileshare' + i + '"><div class="">';
 
                     if ($.isEmptyObject(preview.media)) {
                         var thumbnail_url = (preview.images.length > 0) ? 
@@ -80,7 +80,7 @@ function share_links(url) {
                             left_link_html += thumbnail_url + '<div class="large-9 column"><a href="' + preview.url + '" target="_blank">' + title + '</a></div>';
                         }
                     }
-                    left_link_html += '</div></div>';
+                    left_link_html += '</div></div></div>';
 
                     $('.fileshare' + i).append(html);
 
