@@ -515,15 +515,20 @@ $(document).ready(function () {
             if (key != "length" && key != "item")
             {
                 if (/^image/.test(files[key].type)) { // only image file
-                    file_flag = 1;
-                    uploading_file  = !!files[key] ? files[key] : [];
-                    console.log("upload file = ",uploading_file);
-                    // $('#imagePreview').addClass('imagePreview');
-                    $('.upload_image_wrapper').show();
-                    $('.message').hide();
-                    $('.upload_image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
-                    $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                    ++i;
+                    var reader = new FileReader(); // instance of the FileReader
+                    reader.readAsDataURL(files[key]); // read the local file
+
+                    reader.onloadend = function () { // set image data as background of div
+                        file_flag = 1;
+                        uploading_file  = !!this.files ? this.files : [];
+                        console.log("upload file = ",uploading_file);
+                        // $('#imagePreview').addClass('imagePreview');
+                        $('.upload_image_wrapper').show();
+                        $('.message').hide();
+                        $('.upload_image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
+                        $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
+                        ++i;
+                    }
                 }
                 else
                 {
