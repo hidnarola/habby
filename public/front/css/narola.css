@@ -1305,7 +1305,7 @@ h2.chlng_hdg ,
 }
 .fb-chat-window {
     position: relative;
-    z-index: 9999;
+    z-index: 999;
     width: 350px;
 }
 .panel.panel-chat
