@@ -123,9 +123,7 @@
                             <?php
                         }
                         ?>
-
                     </div>
-
                 </div>
             </div>
             <div style="float:right" class="close_info bg_image_close_info">
