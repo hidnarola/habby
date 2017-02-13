@@ -284,7 +284,7 @@ function upload_video(files) {
                     $('.topichat_video_ul').html('');
                 }
                 
-                var html = '<li class="topi_image_li topichat_media_post" data-chat_id=""> <a data-toggle="modal" data-target="#postModal" class="video-w-icon display_file_class" data-image="' + media_file[0].media + '" data-type="video" > <img src="' + upload_path + video_thumb + '" class="img-responsive topi_image"> </a> </li>';
+                var html = '<li class="topi_image_li topichat_media_post" data-chat_id=""> <a data-toggle="modal" data-target="#postModal" class="video-w-icon '+display_file_class+'" data-image="' + media_file[0].media + '" data-type="video" > <img src="' + upload_path + video_thumb + '" class="img-responsive topi_image"> </a> </li>';
                 $('.topichat_video_ul').prepend(html);
 
                 var msg = {
