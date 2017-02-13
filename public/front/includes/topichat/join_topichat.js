@@ -164,7 +164,7 @@ function upload_image(files) {
                    $('.total_views_inner').prepend('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div><div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"/> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+image_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="imagePreview' + i + '" id="imagePreview_msg" data-toggle="modal" data-target="#postModal" data-image="" data-type="image"> </span> </div> </div> </div> </div> </div>');
                    
                     $('.imagePreview' + i).css("background-image", "url(" + this.result + ")");
-                    $(".chat_area2").animate({scrollTop: $('.chat_area2,.topichat_msg_sec_modal').prop("scrollHeight")}, 1000);
+                    $(".chat_area2").animate({scrollTop: 0}, 1000);
 
                     var form_data = new FormData();
                     $.each(files, function (i, file) {
@@ -227,7 +227,8 @@ function upload_image(files) {
                         }
                     });
                 }
-            } else
+            }
+            else
             {
                 swal(proper_image);
                 $(".loader").removeClass('show');
@@ -274,7 +275,7 @@ function upload_video(files) {
                 $('.total_views_inner').prepend('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div> <div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+video_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="' + display_file_class + ' video-w-icon" id="imagePreview_msg" data-toggle="modal" data-target="#postModal" data-image="'+media_file[0].media+'" data-type="video"> </span> </div> </div> </div> </div> </div>');
     
                 $('.' + display_file_class).css("background-image", "url(" + upload_path + video_thumb + ")");
-                $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+                $(".chat_area2").animate({scrollTop: 0}, 1000);
                 
                 if ($('.topichat_video_ul').find('li').length == 8)
                 {
@@ -326,11 +327,11 @@ function upload_files(files) {
 
     display_file_class = 'imagePreview' + i;
     $('.message').hide();
-    $('.total_views_inner').append('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div><div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"/> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+link_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="imagePreview imagePreview'+i+' file_download" style="" id="" data-file=""> </span> <a href=""> <span class="filename"> </span> </a> </div> </div> </div> </div> </div>');
+    $('.total_views_inner').prepend('<div class="topichat_media_post chat_area_updated_list" data-chat_id=""> <div class="chat_area_updated_list_top"> <h4>Total <span class="watching_count">0</span> is Watching</h4><div class="total_views_list"><ul></ul></div><div class="clearfix"></div> </div> <div class="chat_area_updated_list_middle"> <div class="chat_area_updated_list_middle_left"> <div class="topichat_media_thumb"> <a href="javascript:void(0);"> <img class="user_chat_thumb" src="' + DEFAULT_PROFILE_IMAGE_PATH + "/" + data.user_image + '" title="' + data.name + '"/> </a> </div> <div id="field" class="topichat_media_rank"> <button type="button" id="add" class="add add_btn smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> <span class="rank_rate">0</span> <button type="button" id="sub" class="sub smlr_btn"> <img src="' + DEFAULT_IMAGE_PATH + 'challeng_arrow.png" class="rank_img_sec"/> </button> </div> </div> <div class="chat_area_updated_list_middle_right"> <div class="chat_area_updated_list_middle_head"> <h4>'+link_title+'</h4> </div> <div class="chat_area_updated_list_middle_middle"> <div class="wdth_span media_wrapper img_media_wrapper"> <span class="imagePreview imagePreview'+i+' file_download" style="" id="" data-file=""> </span> <a href=""> <span class="filename"> </span> </a> </div> </div> </div> </div> </div>');
 
     $('.imagePreview' + i).css("background-image", "url(" + DEFAULT_IMAGE_PATH + "filedownload.jpg)");
 
-    $(".chat_area2").animate({scrollTop: $('.chat_area2').prop("scrollHeight")}, 1000);
+    $(".chat_area2").animate({scrollTop: 0}, 1000);
     var form_data = new FormData();
 
     // Send file using ajax
@@ -515,14 +516,12 @@ $(document).ready(function () {
             if (key != "length" && key != "item")
             {
                 if (/^image/.test(files[key].type)) { // only image file
+                    uploading_file = files;
+                    file_flag = 1;
                     var reader = new FileReader(); // instance of the FileReader
                     reader.readAsDataURL(files[key]); // read the local file
 
                     reader.onloadend = function () { // set image data as background of div
-                        file_flag = 1;
-                        uploading_file  = !!this.files ? this.files : [];
-                        console.log("upload file = ",uploading_file);
-                        // $('#imagePreview').addClass('imagePreview');
                         $('.upload_image_wrapper').show();
                         $('.message').hide();
                         $('.upload_image_wrapper').append("<div class='imagePreview" + i + "' id='imagePreview'></div>");
