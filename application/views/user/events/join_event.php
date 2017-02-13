@@ -111,7 +111,7 @@
 <div class="row cont_top_1">
     <div class="row event-top-section">
         <div class="bg-image">
-            <img class="image-responsive" src="<?php echo 'public/timthumb.php?src='.(isset($event_media) && !empty($event_media) ? DEFAULT_EVENT_MEDIA_PATH . $event_media[0]['media'] : '').'&h=200&q=100' ?>">
+            <img class="image-responsive" src="<?php echo 'public/timthumb.php?src='.(isset($event_media) && !empty($event_media) ? DEFAULT_EVENT_MEDIA_PATH . $event_media[0]['media'] : '').'&h=200&q=100&w=1000' ?>">
             <div class="heading-section">
                 <div class-="row">
                     <div class="col-md-12">
