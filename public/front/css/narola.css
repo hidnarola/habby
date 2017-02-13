@@ -906,7 +906,7 @@ img.user_chat_thumb {
     position: absolute;
     top: 0;
     width: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.1);
     height: 100%;
     padding: 35px 30px;
     color: #fff;
