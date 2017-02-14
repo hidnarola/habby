@@ -436,4 +436,29 @@ function send_post_message($post_id,$user_id,$msg){
     close_connection($conn);
     return false;
 }
+
+/* phase 2 changes
+ * 
+ * unset_online_flag is used to remove user in online list of particular topichat group
+ * 
+ * @params      int     $group_id        specify id of topichat group
+ *              int     $user_id         specify user_id of the users who is going to offline
+ * 
+ * @return      boolean true            if success
+ *              boolean false           if fail
+ * 
+ * Developed by "ar"
+ */
+function unset_online_flag($group_id,$user_id){
+    $conn = open_connection();
+    $query = "update topic_group_user set is_online=false where topic_id = ".$group_id." and user_id = ".$user_id;
+
+    if (mysqli_query($conn, $query)) {
+        close_connection($conn);
+        return $id;
+    }
+    close_connection($conn);
+    return false;
+}
+
 ?>

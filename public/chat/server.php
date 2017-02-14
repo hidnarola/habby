@@ -346,10 +346,6 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             }
-            else if($message->type == "room_leave"){
-                echo "\n In room leave.";
-                $Server->wsClients[$clientID]['user_data'] = $message->message;
-            }
         }
         else {
             $Server->wsSend($clientID, "Invalid message sent");
@@ -377,10 +373,10 @@ function wsOnClose($clientID, $status) {
         update_user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$Server->wsClients[$clientID]['viewing_post'],0,true);
     }
     
-    /*if(isset())
+    if(isset($Server->wsClients[$clientID]['room_type']) && $Server->wsClients[$clientID]['room_type'] == "topic_msg")
     {
-        
-    }*/
+        unset_online_flag($Server->wsClients[$clientID]['room_id'],$Server->wsClients[$clientID]['user_data']->id);
+    }
     
     $Server->log("$ip ($clientID) has disconnected.");
 }
