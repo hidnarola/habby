@@ -130,7 +130,7 @@ $lang['Send'] = 'Send';
 $lang['Create'] = 'Create';
 $lang['Notes'] = 'Notes';
 $lang['Users'] = 'Users';
-$lang['Joining'] = 'Joining';
+$lang['Joining'] = 'joining';
 $lang['Interest/Hobby'] = 'Interest/Hobby';
 $lang['Self-introduction'] = 'Self-introduction';
 
