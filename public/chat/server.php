@@ -346,6 +346,10 @@ function wsOnMessage($clientID, $message, $messageLength, $binary) {
                     }
                 }
             }
+            else if($message->type == "room_leave"){
+                echo "\n In room leave.";
+                $Server->wsClients[$clientID]['user_data'] = $message->message;
+            }
         }
         else {
             $Server->wsSend($clientID, "Invalid message sent");
@@ -371,6 +375,11 @@ function wsOnClose($clientID, $status) {
     {
         // Set is_current_watching field to 0 and notify all users that particular user is not watching any post now
         update_user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$Server->wsClients[$clientID]['viewing_post'],0,true);
+    }
+    
+    if(isset())
+    {
+        
     }
     
     $Server->log("$ip ($clientID) has disconnected.");

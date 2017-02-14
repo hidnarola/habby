@@ -42,10 +42,13 @@ class Topichat_model extends CI_Model {
     /* v! Select newest topichat group from topic_group table 
      * develop by : HPA
      */
-
     public function get_topichat_group($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id) as Total_User,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
+        //$this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id) as Total_User,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
+        
+        // Changed by "ar" dated on 14th Feb based on client requirement to display number of online user
+        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id and tu.is_online = "1") as Total_User,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
+        
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
 //        $this->db->where('tg.user_id !=' . $user_id . ' AND tt.user_id IS NULL');
@@ -157,7 +160,11 @@ class Topichat_model extends CI_Model {
 
     public function fetch_topic_groups_by_ids($ids) {
         if (count($ids) > 0) {
-            $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.*,users.name as display_name,users.user_image');
+            // $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id ) as Total_User,tg.*,users.name as display_name,users.user_image');
+            
+            // Changed by "ar" dated on 14th Feb based on client requirement to display number of online user
+            $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id and tu.is_online = "1") as Total_User,tg.*,users.name as display_name,users.user_image');
+            
             $this->db->join('users', 'users.id = tg.user_id');
             $this->db->where_in('tg.id', $ids);
             $this->db->group_by('tg.id');
@@ -174,7 +181,7 @@ class Topichat_model extends CI_Model {
 
     public function get_popular_topichat_group($start, $limit) {
         $user_id = logged_in_user_id();
-        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id)as Total_User ,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
+        $this->db->select('(SELECT COUNT(tu.user_id) FROM `topic_group_user` tu WHERE tg.id=tu.topic_id tu.is_online="1")as Total_User ,tg.*,users.name as display_name,users.user_image,count(DISTINCT tt.id) as is_joined');
         $this->db->join('topic_group_user tt', 'tt.topic_id = tg.id AND tt.user_id =' . $user_id, 'left');
         $this->db->join('users', 'users.id = tg.user_id');
         //$this->db->where('tg.user_id !=' . $user_id . ' AND tt.user_id IS NULL');
@@ -881,6 +888,56 @@ class Topichat_model extends CI_Model {
     public function delete_post($post_id){
         try{
             $this->db->delete('topic_group_chat',array("id"=>$post_id));
+            return true;
+        }
+        catch(Exception $e){
+            return false;
+        }
+    }
+    
+    /* phase 2 changes
+     * 
+     * set_online_flag is used to add user in online list of particular topichat group
+     * 
+     * @params      int     $group_id        specify id of topichat group
+     *              int     $user_id         specify user_id of the users who is going to online
+     * 
+     * @return      boolean true            if success
+     *              boolean false           if fail
+     * 
+     * developed by "ar"
+     */
+    public function set_online_flag($group_id,$user_id){
+        try
+        {
+            $this->db->where('topic_id',$group_id);
+            $this->db->where('user_id',$user_id);
+            $this->db->update('topic_group_user',array("is_online"=>true));
+            return true;
+        }
+        catch(Exception $e){
+            return false;
+        }
+    }
+    
+    /* phase 2 changes
+     * 
+     * unset_online_flag is used to remove user in online list of particular topichat group
+     * 
+     * @params      int     $group_id        specify id of topichat group
+     *              int     $user_id         specify user_id of the users who is going to offline
+     * 
+     * @return      boolean true            if success
+     *              boolean false           if fail
+     * 
+     * developed by "ar"
+     */
+    public function unset_online_flag($group_id,$user_id){
+        try
+        {
+            $this->db->where('topic_id',$group_id);
+            $this->db->where('user_id',$user_id);
+            $this->db->update('topic_group_user',array("is_online"=>false));
             return true;
         }
         catch(Exception $e){

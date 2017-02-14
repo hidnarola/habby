@@ -92,7 +92,10 @@
                                         <p class="topichat_txt1"><?php echo $topichat_group['topic_name'] ?> </p>
                                         <?php echo ($topichat_group['notes'] != NULL) ? '<p class="topichat_txt2">' . $topichat_group['notes'] . '</p>' : ""; ?>
                                         <ul class="list-inline soulmate_ul">
-                                            <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> <?php echo lang('Users'); ?></span></li>
+                                            <!--<li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> <?php echo lang('Users'); ?></span></li> -->                                            
+                                            <!-- Changes made by "ar" dated on 14th Feb -->
+                                            <li><?php echo $topichat_group['Total_User']  ?><span> <?php echo lang('Users'); ?></span></li>
+                                            
                                             <li>
                                                 <?php
                                                 if (isset($topichat_group['is_joined']) && $topichat_group['is_joined']) {

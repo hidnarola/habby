@@ -953,6 +953,14 @@ $(document).ready(function () {
     });
     //OH NOES! Disconnection occurred.
     Server.bind('close', function (data) {
+        console.log("user is leaving the room");
+        var msg = {
+            type: 'room_leave',
+            message: data,
+            group_id: group_id,
+            room_type: 'topic_msg'
+        }
+        Server.send('message', JSON.stringify(msg));
     });
     //Log any messages sent from server
     Server.bind('message', function (payload) {

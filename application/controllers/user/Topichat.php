@@ -275,6 +275,12 @@ class Topichat extends CI_Controller {
         $Id = base64_decode(urldecode($Id));
         $this->data['group_id'] = $Id;
         $this->data['topichat'] = $this->Topichat_model->get_topichat_group_by_id($Id);
+        
+        // Phase 2 changes
+        // Changes to add online user for particular group
+        $this->Topichat_model->set_online_flag($Id,$this->session->user['id']);
+        // Phase 2 changes over
+        
         $grouplimit = $this->Topichat_model->is_group_limit_exceed($Id);
         $this->data['is_subscribed'] = $this->Topichat_model->is_user_scubscribe_for_group($Id,$this->session->user['id']);
         $this->data['joined_user'] = $grouplimit['joined_user'];
