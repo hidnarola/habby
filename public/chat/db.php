@@ -455,7 +455,7 @@ function unset_online_flag($group_id,$user_id){
 
     if (mysqli_query($conn, $query)) {
         close_connection($conn);
-        return $id;
+        return true;
     }
     close_connection($conn);
     return false;
