@@ -289,7 +289,7 @@
     </div>
 </div>
 <!-- Share this scripts -->
-<script type="text/javascript" onload="loaded=1" src="https://ws.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
 <!-- <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH."my_share_this_buttons.js" ?>"></script> -->
 <script type="text/javascript">
     stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
