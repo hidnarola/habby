@@ -22,7 +22,7 @@ if (isset($topichat_groups) && !empty($topichat_groups)) {
                         <!-- <li><?php echo ($topichat_group['person_limit'] == -1) ? $topichat_group['Total_User'] : "<span>" . $topichat_group['Total_User'] . "/" . $topichat_group['person_limit'] . "</span>"; ?><span> <?php echo lang('Users'); ?></span></li> -->
                         
                         <!-- Changes made by "ar" dated on 14th Feb -->
-                        <li><?php echo $topichat_group['Total_User']  ?><span> <?php echo lang('Users'); ?></span></li>
+                        <li><?php echo $topichat_group['Total_User']  ?><span> <?php echo lang('Users').lang('Joining'); ?></span></li>
                         
                         <li>
                             <?php
