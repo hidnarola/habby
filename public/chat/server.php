@@ -377,10 +377,10 @@ function wsOnClose($clientID, $status) {
         update_user_viewing_post($Server->wsClients[$clientID]['user_data']->id,$Server->wsClients[$clientID]['viewing_post'],0,true);
     }
     
-    if(isset())
+    /*if(isset())
     {
         
-    }
+    }*/
     
     $Server->log("$ip ($clientID) has disconnected.");
 }
