@@ -268,6 +268,7 @@ class Login extends CI_Controller {
                             redirect('login');
                         } else if ($result['is_deleted']) {
                             //$this->session->set_flashdata('message', ['message' => 'Your Account is deleted', 'class' => 'alert alert-danger']);
+                            $this->Users_model->delete_user_by_email($email);
                             $profile_image = $this->fetch_google_image($me['image']['url']);
 
                             $new_user = array(
