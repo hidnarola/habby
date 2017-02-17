@@ -320,8 +320,6 @@ class User extends CI_Controller {
             $res_data = $this->Users_model->check_if_user_exist(array('email' => $email), false,true);
             $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
 
-            pr($res_data);
-            pr($res_fb_account,1);
             //IF New User then it will enter all data into database otherwise it will create login-session for him/her
             if (($res_data == 0 && $res_fb_account == 0) || ($res_data == 801)) {
                 if($res_data == 801)
