@@ -142,6 +142,12 @@ class Login extends CI_Controller {
             redirect('home');
         }
         if ($this->input->post()) {
+            
+            $res_data = $this->Users_model->check_if_user_exist(array('email' => $this->input->post('email')), false,true);
+            if($res_data == 801)
+            {
+                $this->Users_model->delete_user_by_email($email);
+            }
             $this->form_validation->set_rules('name', lang('Name'), 'trim|required', array('required' => lang('Please fill the field') . ' %s .'));
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]', array('required' => lang('Please fill the field') . ' %s .', 'valid_email' => lang('Please enter valid E-mail'), 'is_unique' => lang('Email is already exists')));
             $this->form_validation->set_rules('password', lang('Password'), 'trim|required|min_length[6]|matches[re_password]', array('required' => lang('Please fill the field') . ' %s .', 'min_length' => lang('Please enter password min 6 letter'), 'matches' => lang('Please enter same password')));
