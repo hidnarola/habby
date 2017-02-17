@@ -317,7 +317,7 @@ class User extends CI_Controller {
             $email = $user_detail['email'];
             $facebook_id = $user_detail['id'];
 
-            $res_data = $this->Users_model->check_if_user_exist(array('email' => $email), true);
+            $res_data = $this->Users_model->check_if_user_exist(array('email' => $email), false,true);
             $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
 
             pr($res_data);
