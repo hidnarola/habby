@@ -289,6 +289,7 @@ class User extends CI_Controller {
 
     public function facebook_callback() {
         $user_detail = $this->facebook->get_user();
+        
         $sess_user_data = $this->session->userdata('user');
         if (!empty($user_detail)) {
             if (!empty($sess_user_data)) {
@@ -320,7 +321,11 @@ class User extends CI_Controller {
             $res_fb_account = $this->Users_model->check_fb_id_used($user_detail['id']);
 
             //IF New User then it will enter all data into database otherwise it will create login-session for him/her
-            if ($res_data == 0 && $res_fb_account == 0) {
+            if (($res_data == 0 && $res_fb_account == 0) || ($res_data == 801)) {
+                if($res_data == 801)
+                {
+                    $this->Users_model->delete_user_by_email($email);
+                }
                 $profile_image = $this->use_facebook_photo($user_detail['id']);
                 $ins_data = array(
                     'name' => $display_name,

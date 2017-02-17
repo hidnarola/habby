@@ -152,6 +152,27 @@ class Users_model extends CI_Model {
     public function fetch_user_by_email($email){
         return $this->db->get_where('users',['email'=>$email])->row_array();
     }
+    
+    /* delete_user_by_email is used to delete user from database by email id
+     * 
+     * @params      String      $email      specify email address
+     * 
+     * @return      boolean     true        if success
+     *                          false       if fail to delete
+     * 
+     * developed by "ar"
+     */
+    public function delete_user_by_email($email){
+        try
+        {
+            $this->db->where('email',$email);
+            $this->db->delete('users');
+            return true;
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }
+    }
 }
-
 ?>
