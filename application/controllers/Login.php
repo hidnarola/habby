@@ -263,40 +263,38 @@ class Login extends CI_Controller {
                     if ($email_exist) {
                         // User alerady available
                         $result = $this->fetch_user_by_email($email);
-                        if ($result['signup_type'] == '3') {
-                            if ($result['is_blocked']) {
-                                $this->session->set_flashdata('message', ['message' => 'Your Account is blocked', 'class' => 'alert alert-danger']);
-                                redirect('login');
-                            } else if ($result['is_deleted']) {
-                                //$this->session->set_flashdata('message', ['message' => 'Your Account is deleted', 'class' => 'alert alert-danger']);
-                                $profile_image = $this->fetch_google_image($me['image']['url']);
+                        if ($result['is_blocked']) {
+                            $this->session->set_flashdata('message', ['message' => 'Your Account is blocked', 'class' => 'alert alert-danger']);
+                            redirect('login');
+                        } else if ($result['is_deleted']) {
+                            //$this->session->set_flashdata('message', ['message' => 'Your Account is deleted', 'class' => 'alert alert-danger']);
+                            $profile_image = $this->fetch_google_image($me['image']['url']);
 
-                                $new_user = array(
-                                    'name' => $me['displayName'],
-                                    'role_id' => 2,
-                                    'email' => $me["emails"][0]["value"],
-                                    'gender' => $me['gender'],
-                                    'bio' => $me['skills'],
-                                    'external_id' => $me['id'],
-                                    'signup_type' => 3,
-                                    'user_image' => $profile_image,
-                                    'is_active' => 1
-                                );
-                                $last_user_id = $this->Users_model->insert_user_data($new_user);
-                                if ($last_user_id != null) {
-                                    $this->google_user_login($me["emails"][0]["value"]);
-                                } else {
-                                    $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
-                                    redirect("/login");
-                                }
-                            } else if (!$result['is_active']) {
-                                $this->session->set_flashdata('message', ['message' => 'Your Account is inactive', 'class' => 'alert alert-danger']);
-                                redirect('login');
+                            $new_user = array(
+                                'name' => $me['displayName'],
+                                'role_id' => 2,
+                                'email' => $me["emails"][0]["value"],
+                                'gender' => $me['gender'],
+                                'bio' => $me['skills'],
+                                'external_id' => $me['id'],
+                                'signup_type' => 3,
+                                'user_image' => $profile_image,
+                                'is_active' => 1
+                            );
+                            $last_user_id = $this->Users_model->insert_user_data($new_user);
+                            if ($last_user_id != null) {
+                                $this->google_user_login($me["emails"][0]["value"]);
+                            } else {
+                                $this->session->set_flashdata("message", ['message' => lang('Username and password are incorrect.'), 'class' => 'alert alert-danger'], "There was problem to login with Google. Please try again!");
+                                redirect("/login");
                             }
-                            else
-                            {
-                                $this->google_user_login($email);
-                            }
+                        } else if (!$result['is_active']) {
+                            $this->session->set_flashdata('message', ['message' => 'Your Account is inactive', 'class' => 'alert alert-danger']);
+                            redirect('login');
+                        }
+                        else
+                        {
+                            $this->google_user_login($email);
                         }
                     } else {
                         // New user // need to register
