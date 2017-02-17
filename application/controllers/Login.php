@@ -275,7 +275,7 @@ class Login extends CI_Controller {
                                 'name' => $me['displayName'],
                                 'role_id' => 2,
                                 'email' => $me["emails"][0]["value"],
-                                'gender' => $me['gender'],
+                                'gender' => ($me['gender']=="other")?NULL:$me['gender'],
                                 'bio' => $me['skills'],
                                 'external_id' => $me['id'],
                                 'signup_type' => 3,
