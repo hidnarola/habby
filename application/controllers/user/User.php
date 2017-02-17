@@ -309,7 +309,7 @@ class User extends CI_Controller {
             $fname = $user_detail['first_name'];
             $lname = $user_detail['last_name'];
             $display_name = $user_detail['name'];
-            $gender = 'Male';
+            $gender = NULL;
             if (!empty($user_detail['gender'])) {
                 $gender = ( strtolower($user_detail['gender']) == 'male') ? 'Male' : 'Female';
             }
