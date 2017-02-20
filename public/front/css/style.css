@@ -4370,7 +4370,7 @@ font-size: 13px;
     }
     .mov_sec.clicked2
     {
-        width: auto;
+        width: 100%;
     }
     .post_leftsec_hddn {
         position: static;
