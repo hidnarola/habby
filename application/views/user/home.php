@@ -343,10 +343,11 @@
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.post_section').append("<div class='col-sm-12 alert alert-info text-center'><?php echo lang('No more data found'); ?></div>");
-                } else
+                    $('.post_masonry_section').append("<div class='col-xs-12 alert alert-info text-center'><?php echo lang('No more data found'); ?></div>");
+                }
+                else
                 {
-                    $('.post_section').append(data.view);
+                    $('.post_masonry_section').append(data.view);
                 }
                 stButtons.locateElements();
                 if (window.stButtons) {

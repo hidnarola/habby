@@ -221,8 +221,9 @@ $('document').ready(function () {
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.post_masonry_section').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
-                } else
+                    $('.post_masonry_section').append("<div class='col-xs-12 alert alert-info text-center'>" + no_groups + "</div>");
+                }
+                else
                 {
                     $('.grid').append(data.view).masonry('reloadItems');
                     $('.grid').masonry();
