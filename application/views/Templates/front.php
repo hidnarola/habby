@@ -286,9 +286,6 @@
             }
 
         </script>
-        <script>
-            // $(".flexnav").flexNav();
-        </script>
         <script type="text/javascript">
             $(document).ready(function () {
                 /*
@@ -340,7 +337,9 @@
         <script>
 
             $('.post_section').on('click', '.chat1', function () {
-                $(this).parents(".post_leftsec").children(".post_leftsec_hddn1").toggleClass('clicked');
+                $(this).parents(".post_leftsec").find(".post_leftsec_hddn1").each(function(){
+                    $(this).toggleClass('clicked');
+                });
                 $(this).closest(".mov_sec1").toggleClass('clicked2');
             });
 

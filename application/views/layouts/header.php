@@ -1,36 +1,34 @@
 <!-- Mobile Toggle Menu start here -->
 <script>
-    var correct_link ="<?php echo lang("Please correct your Link."); ?>";
-    var no_selected_file ="<?php echo lang('No file selected.'); ?>";
-    var proper_image ="<?php echo lang('Please select proper image'); ?>";
-    var proper_video ="<?php echo lang('Please select proper Video'); ?>";
-    var proper_file ="<?php echo lang('Please select proper file'); ?>";
-    var fail_message ="<?php echo lang('Fail to send message'); ?>";
-    var enter_url ="<?php echo lang('Please Enter url.'); ?>";
+    var correct_link = "<?php echo lang("Please correct your Link."); ?>";
+    var no_selected_file = "<?php echo lang('No file selected.'); ?>";
+    var proper_image = "<?php echo lang('Please select proper image'); ?>";
+    var proper_video = "<?php echo lang('Please select proper Video'); ?>";
+    var proper_file = "<?php echo lang('Please select proper file'); ?>";
+    var fail_message = "<?php echo lang('Fail to send message'); ?>";
+    var enter_url = "<?php echo lang('Please Enter url.'); ?>";
     var enter_title = "<?php echo lang('Please Enter title'); ?>";
-    var no_message ="<?php echo lang('No more messages to show'); ?>";
-    var saved ="<?php echo lang('saved'); ?>";
-    var save_failed ="<?php echo lang('save failed'); ?>";
+    var no_message = "<?php echo lang('No more messages to show'); ?>";
+    var saved = "<?php echo lang('saved'); ?>";
+    var save_failed = "<?php echo lang('save failed'); ?>";
     var no_post = "<?php echo lang('No more post found'); ?>";
     var no_saved_post = "<?php echo lang('No more saved post found'); ?>";
     var cannot_take_back = "<?php echo lang("You can't take back given coin"); ?>";
     var enough_coin = "<?php echo lang("You don't have enough coin to give"); ?>";
-    var Enter ="<?php echo lang('Enter'); ?>";
-    var already_requested ="<?php echo lang('You have already requested for this event'); ?>";
-    var Requested ="<?php echo lang('Requested'); ?>";
-    var cant_join ="<?php echo lang("You can't join this event as event reached at its maximum limit"); ?>";
-    var wrong ="<?php echo lang('Something went wrong'); ?>";
-    var joined ="<?php echo lang('You have joined this event'); ?>";
-    var made_request ="<?php echo lang('You have made request for join this event'); ?>";
-    var no_events ="<?php echo lang('No more event found'); ?>";
-    var no_groups ="<?php echo lang('No more group found'); ?>";
-    var no_content ="<?php echo lang('No contents available'); ?>";
+    var Enter = "<?php echo lang('Enter'); ?>";
+    var already_requested = "<?php echo lang('You have already requested for this event'); ?>";
+    var Requested = "<?php echo lang('Requested'); ?>";
+    var cant_join = "<?php echo lang("You can't join this event as event reached at its maximum limit"); ?>";
+    var wrong = "<?php echo lang('Something went wrong'); ?>";
+    var joined = "<?php echo lang('You have joined this event'); ?>";
+    var made_request = "<?php echo lang('You have made request for join this event'); ?>";
+    var no_events = "<?php echo lang('No more event found'); ?>";
+    var no_groups = "<?php echo lang('No more group found'); ?>";
+    var no_content = "<?php echo lang('No contents available'); ?>";
     var subscribe = "<?php echo lang('Subscribe'); ?>";
     var unsubscribe = "<?php echo lang('Unsubscribe'); ?>";
 </script>
-<?php
-$language = $this->session->userdata('language');
-?>
+<?php $language = $this->session->userdata('language'); ?>
 <input type="hidden" id="location" name="location"/>
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left visible-xs" id="cbp-spmenu-s1">
     <div class="clearfix nav_logo">
@@ -39,9 +37,11 @@ $language = $this->session->userdata('language');
             <li class="pull-right "><button id="close_nav"> <img src="<?php echo DEFAULT_IMAGE_PATH . "nav-close-icon.png" ?>" class="cls_img"></button></li>
         </ul>
     </div>
-    <a href="smile-share.html"><?php echo lang('Smile Share'); ?></a>
-    <a href="home-challenge.html"><?php echo lang('Challenge'); ?></a>
-    <a href="treehole.html"><?php echo lang('Live life'); ?></a>
+    <a href="home/smile_share"><?php echo lang('Smile Share'); ?></a>
+    <a href="home/challenge"><?php echo lang('Challenge'); ?></a>
+    <a href="<?php echo base_url() . "topichat" ?>"><?php echo lang('Share & Chat'); ?></a>
+    <a href="<?php echo base_url() . "events" ?>"><?php echo lang('Join me'); ?></a>
+    <a href="<?php echo base_url() . "challenge" ?>"><?php echo lang('Challenge Group'); ?></a>
     <a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a>
 </nav>
 <!-- Mobile Toggle Menu end here -->
@@ -61,7 +61,8 @@ $language = $this->session->userdata('language');
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <span class="user-thumb-sm">
-                                        <img src="<?php echo ($this->session->user['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"></span>
+                                        <img src="<?php echo ($this->session->user['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>">
+                                    </span>
                                     <?php echo $this->session->user['name'] ?>
                                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
@@ -70,12 +71,6 @@ $language = $this->session->userdata('language');
                                     <li><a href="<?php echo base_url() . "home/log_out" ?>"><i class="fa fa-power-off" aria-hidden="true"></i> <?php echo lang('Log Out'); ?></a></li>
                                 </ul>
                             </li>
-                            <!--                            <li>
-                                                            <a href="#" data-toggle="modal" data-target="#msg_here">
-                                                                <img src="<?php echo DEFAULT_IMAGE_PATH . "chat_icon.png" ?>">
-                            <?php echo lang('Chat'); ?>
-                                                            </a>
-                                                        </li>-->
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#post_here">
                                     <img src="<?php echo DEFAULT_IMAGE_PATH . "pst_img.png" ?>">
@@ -130,7 +125,7 @@ $language = $this->session->userdata('language');
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="<?php echo DEFAULT_IMAGE_PATH . "search_icon.png" ?>" class="img-responsive center-block"></a>
                                         <ul class="dropdown-menu" role="menu" id="srchdrp">
                                             <li>
-                                                <form method="post" action="<?php echo base_url() ."search" ?>">
+                                                <form method="post" action="<?php echo base_url() . "search" ?>">
                                                     <div id="custom-search-input" class="search-wrapper">
                                                         <input type="text" class="form-control" placeholder="Search" name="search_keyword">
                                                         <button type="submit"><i class="fa fa-search"></i></button>
@@ -157,13 +152,17 @@ $language = $this->session->userdata('language');
                                 <section class="buttonset">
                                     <!-- Class "cbp-spmenu-open" gets applied to menu and "cbp-spmenu-push-toleft" or "cbp-spmenu-push-toright" to the body -->
                                     <ul Class="list-inline mobile_chatsec">
-                                        <li><a href="personal_account.html" class="pull-left personal_account_link"><img src="<?php echo DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>"> <br> Lorem Ipsum</a>
+                                        <li>
+                                            <a href="<?php echo base_url() . "home/profile" ?>" class="pull-left personal_account_link">
+                                                <img src="<?php echo ($this->session->user['user_image'] != null) ? DEFAULT_PROFILE_IMAGE_PATH . $this->session->user['user_image'] : DEFAULT_IMAGE_PATH . "nav_profile_img.png" ?>" class="user_chat_thumb img-circle">
+                                                <span><?php echo $this->session->user['name'] ?></span>
+                                            </a>
                                             <div class="inline-block lang_sec_mobile pull-right">
                                                 <div class="lang_sec lang-change">
-                                                    <select data-style="btn-info" class="selectpicker">
-                                                        <option selected="" value="eng">English</option>
-                                                        <option value="fr">French</option>
-                                                        <option value="ru">Russian</option>
+                                                    <select class="selectpicker" data-style="btn-info">
+                                                        <option value="eng" <?php echo ($language == 'english') ? 'selected' : "" ?>><?php echo lang('English') ?></option>
+                                                        <option value="fr" <?php echo ($language == 'french') ? 'selected' : "" ?>><?php echo lang('French') ?></option>
+                                                        <option value="ru" <?php echo ($language == 'russian') ? 'selected' : "" ?>><?php echo lang('Russian') ?></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -173,17 +172,7 @@ $language = $this->session->userdata('language');
                                     <ul Class="list-inline mobile_chatsec">
                                         <li><button id="showLeftPush"><i class="fa fa-bars" aria-hidden="true"></i>menu</button></li>
 
-                                        <li class="dropdown">
-                                            <a href="" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false">Social Network <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="topichat.html"><?php echo lang('Topichat'); ?></a></li>
-                                                <li><a href="soulmate.html"><?php echo lang('Soulmate'); ?></a></li>
-                                                <li><a href="group_plan.html"><?php echo lang('Group Plan'); ?></a></li>
-                                                <li><a href="challenge_1.html"><?php echo lang('Challenge'); ?></a></li>
-                                                <li><a href="league-and-alliance.html"><?php echo lang('League and Alliance'); ?></a></li>
-                                            </ul>
-                                        </li>
-
+                                        <li><a href="#" data-toggle="modal" data-target="#post_here"> <i class="fa fa-clipboard" aria-hidden="true"></i><?php echo lang('Post'); ?></a></li>
                                         <li class="dropdown dropdown3">
                                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="<?php echo DEFAULT_IMAGE_PATH . "search_icon.png" ?>" class="img-responsive center-block"></a>
                                             <ul class="dropdown-menu" role="menu" id="srchdrp2">
@@ -191,7 +180,13 @@ $language = $this->session->userdata('language');
                                                 <li>
                                                     <div id="custom-search-input">
                                                         <div class="input-group">
-                                                            <input type="text" class="search-query form-control" placeholder="Search">
+                                                            <!--<input type="text" class="search-query form-control" placeholder="Search">-->
+                                                            <form method="post" action="<?php echo base_url() . "search" ?>">
+                                                                <div id="custom-search-input" class="search-wrapper">
+                                                                    <input type="text" class="form-control" placeholder="Search" name="search_keyword">
+                                                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -204,20 +199,6 @@ $language = $this->session->userdata('language');
                         </div>
                         <!-- Mobile Header Section end here -->
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="empty_divrqrd">
-    </div>
-    <div class="row">
-        <div class="hdr_sec1">
-            <div class="container">
-                <div class="col-xs-12 visible-xs">
-                    <ul Class="list-inline mobile_chatsec">
-                        <li><a href="#" data-toggle="modal" data-target="#post_here"> <i class="fa fa-clipboard" aria-hidden="true"></i></a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#msg_here"> <i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                    </ul>
                 </div>
             </div>
         </div>

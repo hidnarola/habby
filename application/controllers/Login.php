@@ -142,7 +142,6 @@ class Login extends CI_Controller {
             redirect('home');
         }
         if ($this->input->post()) {
-            
             $res_data = $this->Users_model->check_if_user_exist(array('email' => $this->input->post('email')), false,true);
             if($res_data == 801)
             {

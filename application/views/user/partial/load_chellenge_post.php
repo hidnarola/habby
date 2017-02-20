@@ -6,10 +6,10 @@ foreach ($posts as $post) {
         <div class="cmnt_newsec_row">
             <div class="challange_info">
                 <div class="challenge_header row">
-                    <div class="col-lg-2">
+                    <div class="col-xs-2">
                         <img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['challange_user_image']; ?>" title="<?php echo $post['challange_user'] ?>">
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-xs-10">
                         <?php echo $post['name']; ?>
                     </div>
                 </div>

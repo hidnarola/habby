@@ -23,10 +23,10 @@
                             <div class="cmnt_newsec_row">
                                 <div class="challange_info">
                                     <div class="challenge_header row">
-                                        <div class="col-lg-2">
+                                        <div class="col-xs-2">
                                             <img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['challange_user_image']; ?>" title="<?php echo $post['challange_user'] ?>">
                                         </div>
-                                        <div class="col-lg-10">
+                                        <div class="col-xs-10">
                                             <?php echo $post['name']; ?>
                                         </div>
                                     </div>
@@ -39,10 +39,10 @@
                                 <div class="rank_box">
                                     <div class="row">
                                         <div class="text-center">
-                                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="col-xs-2">
                                                 <img class="img-circle user_chat_thumb" src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . '/' . $post['post_user_image']; ?>" title="<?php echo $post['post_user'] ?>">
                                             </div>
-                                            <div class="col-lg-8">
+                                            <div class="col-lg-8 col-sm-10 col-xs-10">
                                                 <?php echo lang('1st Rank'); ?>
                                             </div>
                                         </div>

@@ -393,6 +393,7 @@ $lang["Finish"] = "Finish";
 $lang["Challenge has been Finished."] = "Challenge has been Finished.";
 $lang["No media selected"] = "No media selected";
 $lang["Challenge"] = "Challenge";
+$lang["Challenge Group"] = "Challenge Group";
 $lang["Winners"] = "Winners";
 $lang["Winner"] = "Winner";
 $lang["No Newest Challenge."] = "No Newest Challenge.";

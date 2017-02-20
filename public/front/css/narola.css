@@ -1485,9 +1485,10 @@ h2.chlng_hdg ,
         position: relative;
         width: 100% !important;
     }
+    .rank_lg_sec.grid-item{ width:50% !important;}
 }
 @media(max-width:480px){
-
+    .rank_lg_sec.grid-item{ width:95% !important;}
 }
 .topic_2cntnr{
     height: 100%;

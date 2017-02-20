@@ -235,25 +235,42 @@
                                                     </div>
 
                                                     <div class="post_leftsec_hddn post_leftsec_hddn1 visible-xs">
-                                                        <p class="cmn_txtnw"> <?php echo lang('Comment Here') ?></p>
+                                                        <p class="cmn_txtnw"> <?php echo lang('Comment Here'); ?></p>
                                                         <textarea class="form-control comment" rows="3" id="comment"></textarea>
+                                                        <!-- Comment portion -->
                                                         <?php
                                                         if (isset($post['comments']) && count($post['comments']) > 0) {
                                                             foreach ($post['comments'] as $comment) {
                                                                 ?>
-                                                                <div class="commnt_visit_sec clearfix">
+                                                                <div class="commnt_visit_sec clearfix" data-post_comment_id="<?php echo $comment['id']; ?>">
                                                                     <div class="cmn_img">
-                                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive">
+                                                                        <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $comment['user_image']; ?>" class="img-responsive user_chat_thumb img-circle">
+                                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span></p>
                                                                     </div>
                                                                     <div class="cmn_dtl">
-                                                                        <p class="cmnt_txt1"><span><?php echo $comment['name']; ?></span> <?php echo lang('Interesting') ?></p>
-                                                                        <ul class="cmnt_p clearfix">
-                                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_like']; ?></span> <?php echo lang('Like') ?></a></li>
-                                                                            <li><a href="javascript:;"><span class="comment_like_cnt"><?php echo $comment['cnt_reply']; ?></span> <?php echo lang('Reply') ?></a></li>
-                                                                            <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
-                                                                            <li class="stlnon"><span><?php echo $comment['created_date'] ?></span></li>
-                                                                        </ul>
+
                                                                         <p class="cmmnt_para"><?php echo $comment['comment']; ?></p>
+                                                                        <p class=""><?php echo $comment['created_date'] ?></p>
+
+                                                                        <ul class="cmnt_p clearfix">
+                                                                            <li class="comment_like_cnt">
+                                                                                <a href="javascript:;">
+                                                                                    <span class="post_comment_like">
+                                                                                        <?php echo $comment['cnt_like']; ?>
+                                                                                    </span> 
+                                                                                    <span class="post_comment_text"><?php echo ($comment['is_liked']) ? lang('Unlike') : lang('Like'); ?></span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="post_comment_reply">
+                                                                                <a href="javascript:;">
+                                                                                    <span class="comment_reply_cnt">
+                                                                                        <?php echo $comment['cnt_reply']; ?>
+                                                                                    </span> <?php echo lang("Reply"); ?>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li><a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a></li>
+                                                                        </ul>
+                                                                        <div class="reply_dtl" style="display: none"></div>
                                                                     </div>
                                                                 </div>
                                                                 <?php
@@ -290,7 +307,6 @@
 </div>
 <!-- Share this scripts -->
 <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
-<!-- <script type="text/javascript" src="<?php echo DEFAULT_JS_PATH."my_share_this_buttons.js" ?>"></script> -->
 <script type="text/javascript">
     stLight.options({publisher: "9d14d1f6-a827-4af0-87fe-f41eaa3ce220", doNotHash: false, doNotCopy: false, hashAddressBar: false});
 </script>
