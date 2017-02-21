@@ -75,6 +75,7 @@ $this->load->view('layouts/profile_common');
                                     }
                                 } else {
                                     ?>
+                                    <div class="clearfix"></div>
                                     <div class="col-sm-12 alert alert-info">
                                         <?php echo lang('No Challenge notification available.') ?>
                                     </div>

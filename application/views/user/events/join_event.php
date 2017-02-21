@@ -115,7 +115,7 @@
             <div class="heading-section">
                 <div class-="row">
                     <div class="col-md-12">
-                        <h2 class="text-center"><?php echo $event['title']; ?></h2>
+                        <h3 class="text-center"><?php echo $event['title']; ?></h3>
                         <?php
                         if ($event['user_id'] == $this->session->user['id']) {
                             ?>
@@ -194,44 +194,44 @@
                                         ?>
                                         <div class="contact_ul" data-id="<?php echo $contact['id'] ?>">
                                             <div class="row">
-                                                <div class="col-md-1">
+                                                <div class="col-md-1 col-sm-1 col-xs-2">
                                                     <a href="javascript;">
                                                         <img src="<?php echo DEFAULT_PROFILE_IMAGE_PATH . $contact['user_image'] ?>" class="smlt_usrimg1 img-circle user_chat_thumb">
                                                     </a>
                                                 </div>
-                                                <span class="first_span col-md-9"><?php echo $contact['name']; ?></span>
+                                                <span class="first_span col-md-9 col-xs-8"><?php echo $contact['name']; ?></span>
                                                 <?php
                                                 if ($contact['contact_user_id'] == $this->session->user['id']) {
                                                     ?>
-                                                    <span class="col-md-2 contact-plus"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
+                                                    <span class="col-md-2 contact-plus col-xs-2"><button class="btn btn-icon"><i class="fa fa-edit"></i></button></span>
                                                     <?php
                                                 }
                                                 ?>
                                             </div>
                                             <div class="row">
-                                                <span class="first_span col-md-4 col-md-offset-1">
+                                                <span class="first_span col-md-4 col-xs-5 col-md-offset-1">
                                                     <a href="javascript;">
                                                         <?php echo lang("Phone Number"); ?>
                                                     </a>
                                                 </span>
-                                                <span class="col-md-5" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
+                                                <span class="col-md-7 col-xs-7" id="phone_no_info"><?php echo $contact['phone_no'] ?></span>
 
                                             </div>
                                             <div class="row">
-                                                <span class="first_span col-md-4 col-md-offset-1">
+                                                <span class="first_span col-md-4 col-md-offset-1 col-xs-5">
                                                     <a href="javascript;">
                                                         <?php echo lang("Email"); ?>
                                                     </a>
                                                 </span>
-                                                <span class="col-md-7" id="email_info"><?php echo $contact['email'] ?></span>
+                                                <span class="col-md-7 col-xs-7" id="email_info"><?php echo $contact['email'] ?></span>
                                             </div>
                                             <div class="row">
-                                                <span class="first_span col-md-4 col-md-offset-1">
+                                                <span class="first_span col-md-4 col-xs-5 col-md-offset-1">
                                                     <a href="javascript;">
                                                         <?php echo lang("Others"); ?>
                                                     </a>
                                                 </span>
-                                                <span class="col-md-7" id="others_info"><?php echo $contact['others'] ?></span>
+                                                <span class="col-md-7 col-xs-7" id="others_info"><?php echo $contact['others'] ?></span>
                                             </div>
                                         </div>
                                         <?php
