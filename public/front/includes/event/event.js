@@ -91,7 +91,7 @@ $(function () {
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.event_container').append("<div class='col-sm-12 alert alert-info text-center'>" + no_events + "</div>");
+                    $('.event_container').append("<div class='clearfix'></div><div class='col-sm-12 alert alert-info text-center'>" + no_events + "</div>");
                     $('#loadMore').remove();
                 } else
                 {
