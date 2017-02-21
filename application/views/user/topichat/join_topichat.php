@@ -15,7 +15,7 @@
 <div class="row cont_top_1 join_topichat_unique">
     <div class="container topic_2cntnr mble_pd_0">
         <p class="mr_p visible-xs" >
-            <a href="<?php echo base_url() . "topichat/media/" . $Id ?>" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
+            <a href="javascript:;" class="pstbtn" id="more_rate"><?php echo lang('Files'); ?></a>
         </p>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 topichat_left_sec">
             <div class="rate_lg_sec topichat_msg_sec">
@@ -266,31 +266,31 @@
                 ?>
                 <!-- Note and topic edit area start here -->
                 <div class="tittl_sec_lg">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                            <div class="tittl_sec">
-                                <p><?php echo $topichat['topic_name']; ?> <span></span></p>
-                                <p class="topichat_notes"><?php echo lang('Note') . " :" . $topichat['notes']; ?> </p>
-                            </div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                        <div class="tittl_sec">
+                            <p><?php echo $topichat['topic_name']; ?> <span></span></p>
+                            <p class="topichat_notes"><?php echo lang('Note') . " :" . $topichat['notes']; ?> </p>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                            <div class="tittl_sec2">
-                                <p class="topchat_p">
-                                    <?php
-                                    if ($topichat['user_id'] == $this->session->user['id']) {
-                                        ?>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <?php
+                            if ($topichat['user_id'] == $this->session->user['id']) {
+                                ?>
+                                <div class="tittl_sec2">
+                                    <p class="topchat_p">
                                         <a href="javascript:;" class="pstbtn" data-toggle="modal" data-target="#edit_grp"><?php echo lang('Edit'); ?></a>
-                                        <?php
-                                    }
-                                    ?>
-                                </p>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="tittl_sec2">
-                                <p class="topchat_p">
-                                    <a href="javascript:;" id="topic_group_subscribe" class="pstbtn" data-is_subscribe="<?php echo ($is_subscribed) ? 'yes' : 'no'; ?>"><?php echo ($is_subscribed) ? lang('Unsubscribe') : lang('Subscribe'); ?></a>
-                                </p>
-                            </div>
+                                    </p>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                        <div class="clearfix"></div>
+                        <div class="tittl_sec2">
+                            <p class="topchat_p">
+                                <a href="javascript:;" id="topic_group_subscribe" class="pstbtn" data-is_subscribe="<?php echo ($is_subscribed) ? 'yes' : 'no'; ?>"><?php echo ($is_subscribed) ? lang('Unsubscribe') : lang('Subscribe'); ?></a>
+                            </p>
                         </div>
+                    </div>
                 </div>
                 <!-- Note and topic edit area end here -->
 

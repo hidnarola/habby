@@ -1486,9 +1486,13 @@ h2.chlng_hdg ,
         width: 100% !important;
     }
     .rank_lg_sec.grid-item{ width:50% !important;}
+    .topichat_notes {height:20px !important}
 }
 @media(max-width:480px){
     .rank_lg_sec.grid-item{ width:95% !important;}
+    .custom_no_of_person{display:inline-block; width: 90%;}
+    #imagePreview {width:100%;}
+    .topichat_txtarea .radio{margin-left:0px !important;}
 }
 .topic_2cntnr{
     height: 100%;

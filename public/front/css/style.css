@@ -2435,10 +2435,11 @@ font-size: 13px;
 .rate_lg_sec
 {
     overflow: auto;
-    position: fixed;
+    /*position: fixed;*/
     width: 429px;
     top: 44px;
     bottom: 0;
+    height:767px;
 }
 
 
@@ -4515,7 +4516,8 @@ font-size: 13px;
     .mr_p
     {
         text-align: center;
-        padding-bottom: 24px;
+        padding-bottom: 7px;
+        padding-top:7px;
     }
     .review_row
     {

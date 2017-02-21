@@ -20,7 +20,7 @@
 <div class="row filter_row">
     <div class="container grp_pnl_container">
         <form class="" role="form" method="get" action="<?php echo base_url() . "topichat" ?>" id="filterby_form">
-            <div class="col-lg-6 col-md-6 col-sm-6 ">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <div class="lang_sec">
                     <select class="selectpicker filterby" data-style="btn-info" name="filterby">
                         <option value="newest" <?php echo (isset($filterby) && $filterby == 'newest') ? "selected" : "" ?>><?php echo lang('Newest'); ?></option>
@@ -29,7 +29,7 @@
                     </select>
                 </div>
             </div>
-            <div class="clearfix-mobile"></div>
+            
         </form>
         <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="topichat_search_sec">
@@ -169,8 +169,8 @@
                                         <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class = "row">
                                                 <div class = "form-group clearfix">
-                                                    <label for = "select" class = "col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Topic'); ?> : </label>
-                                                    <div class = "col-lg-11 col-md-11 col-sm-10 col-xs-9">
+                                                    <label for = "select" class = "col-lg-1 col-md-1 col-sm-2 col-xs-12 control-label"><?php echo lang('Topic'); ?> : </label>
+                                                    <div class = "col-lg-11 col-md-11 col-sm-10 col-xs-12">
                                                         <textarea class = "form-control topichat_txtarea" rows = "3" id = "topic_name" placeholder = "#<?php echo lang('Topic'); ?>" name = "topic_name" required = "required"></textarea>
                                                     </div>
                                                 </div>
@@ -179,8 +179,8 @@
                                         <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class = "row">
                                                 <div class = "form-group clearfix">
-                                                    <label class = "col-lg-2 col-md-2 col-sm-2 col-xs-5 control-label"><?php echo lang('Number of People'); ?> :</label>
-                                                    <div class = "col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                    <label class = "col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label"><?php echo lang('Number of People'); ?> :</label>
+                                                    <div class = "col-lg-7 col-md-7 col-sm-7 col-xs-12">
                                                         <div class = "radio topchat_1_rdo">
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "no_limit" value = "-1" checked = "">
@@ -188,7 +188,7 @@
                                                             </label>
                                                             <label>
                                                                 <input type = "radio" name = "person_limit" id = "No_of_person" value = "Yes" >
-                                                                <input type = "number" min="1" class = "form-control" id = "txt_No_of_person" name = "No_of_person" placeholder = "<?php echo lang('customise'); ?>" disabled>
+                                                                <input type = "number" min="1" class = "custom_no_of_person form-control" id = "txt_No_of_person" name = "No_of_person" placeholder = "<?php echo lang('customise'); ?>" disabled>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -219,8 +219,8 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="row">
                                                 <div class="form-group clearfix">
-                                                    <label for="select" class="col-lg-1 col-md-1 col-sm-2 col-xs-3 control-label"><?php echo lang('Note'); ?> :</label>
-                                                    <div class="col-lg-11 col-md-11 col-sm-10 col-xs-9">
+                                                    <label for="select" class="col-lg-1 col-md-1 col-sm-2 col-xs-12 control-label"><?php echo lang('Note'); ?> :</label>
+                                                    <div class="col-lg-11 col-md-11 col-sm-10 col-xs-12">
                                                         <textarea class="form-control topichat_txtarea" rows="3" id="note_textArea" name="notes"></textarea>
                                                     </div>
                                                 </div>
