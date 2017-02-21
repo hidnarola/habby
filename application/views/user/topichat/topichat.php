@@ -365,7 +365,7 @@
                 if (data.status == 0)
                 {
                     load = false;
-                    $('.topichat_groups').append("<div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
+                    $('.topichat_groups').append("<div class='clearfix'></div><div class='col-sm-12 alert alert-info text-center'>" + no_groups + "</div>");
                     $('#loadMore').remove();
                 } else
                 {
