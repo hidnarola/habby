@@ -317,4 +317,9 @@ $('document').ready(function () {
             return $("#popover-content").html();
         }
     });
+    
+    $('#more_rate').click(function(){
+        $(".bdr-right-clng").slideToggle("");
+        $(".pd-right-chlng-0").slideToggle("");
+    });
 });

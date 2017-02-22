@@ -1120,9 +1120,10 @@ h2.chlng_hdg ,
 .solmate_lg_row_custom .chat_area_chalnge2{
     max-height: 455px;
     min-height: 455px;
-    overflow: auto;
+    overflow-y: auto;
     top: 0;
     width: 651px;
+    overflow-x: hidden;
 }
 .solmate_lg_row_custom .soulmate_past_due_sec2 {margin-bottom: 0px;}
 
@@ -1557,6 +1558,9 @@ img.emoticon{max-height:20px;max-width:20px;}
      .event-chat-start .chat_area2, .event-chat-start .topich_chat_typesec {
     width: 100%;
 }
+.media_name.select_file_name{
+        width:170px;
+    }
 }
 @media(max-width:767px){
      .event_seat > span{display: block;}
@@ -1574,6 +1578,7 @@ img.emoticon{max-height:20px;max-width:20px;}
     padding: 15px;
     overflow-x: hidden;
 }
+    
 .chalng_lg_lft_sec .topic_textarea #message_div {
     width: 97%;
 }
