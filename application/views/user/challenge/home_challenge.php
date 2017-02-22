@@ -171,7 +171,7 @@ $this->load->view('layouts/profile_common');
                             if ($joined_challenges != null && !empty($joined_challenges)) {
                                 foreach ($joined_challenges as $joined_challenge) {
                                     ?>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <div class="grp_prsnl_innr">
                                             <h2><?php echo $joined_challenge['name'] ?></h2>
                                         </div>

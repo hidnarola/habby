@@ -1545,3 +1545,36 @@ img.emoticon{max-height:20px;max-width:20px;}
 .chat_area_updated_list_middle .topichat_media_thumb {border:0;}
 .right_lg_sectopic .tittl_sec_lg{ margin-bottom: 5px;}
 .right_lg_sectopic .tittl_sec_lg .topichat_notes {padding-bottom: 0px;}
+@media(max-width:1200px){.solmate_lg_row_custom .chat_area_chalnge2{width: 100%;}}
+@media(max-width:1024px){.sav_p {
+    right: 0;
+}
+.post_section{padding-right: 0px;padding-left: 0px;}
+.post_masonry_article .cmnt_newsec{padding: 0px;}
+.rank_lg_sec.grid-item{width:48%;}
+.event_seat > span{display: block;}
+     .event_seat a.pstbtn{float: none;line-height: 40px;}
+     .event-chat-start .chat_area2, .event-chat-start .topich_chat_typesec {
+    width: 100%;
+}
+}
+@media(max-width:767px){
+     .event_seat > span{display: block;}
+     .event_seat a.pstbtn{float: none;line-height: 40px;}
+     .event-chat-start .chat_area2, .event-chat-start .topich_chat_typesec {
+    width: 100% !important;
+}
+     .topic_textarea .input-group{display: block;}
+     .solmate_lg_row_custom .chat_area_chalnge2 {
+    max-height: 455px;
+    min-height: 455px;
+    overflow: auto;
+    top: 0;
+    width: 100%;
+    padding: 15px;
+    overflow-x: hidden;
+}
+.chalng_lg_lft_sec .topic_textarea #message_div {
+    width: 97%;
+}
+}

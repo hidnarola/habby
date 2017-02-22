@@ -150,7 +150,7 @@
     </div>
     <section class="event-page">
         <div class="event-bottom-section">
-            <div class="col-md-5 event-left-section">
+            <div class="col-md-5 col-sm-6 event-left-section">
                 <div class="event_content">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#notes"><?php echo lang("Notes"); ?></a></li>
@@ -371,7 +371,7 @@
                     ?>
                 </div>
             </div>
-            <div class="col-md-7 event-right-section">
+            <div class="col-md-7 col-sm-6 event-right-section">
                 <div class="details">
                     <div class="event-detail-content">
                         <label class="control-label"><?php echo lang("Details"); ?> :  <span><?php echo $event['details'] ?></span></label>
