@@ -265,13 +265,15 @@ $search_data = $this->session->flashdata('event_filter');
 <script>
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(showPosition,function(){
+                swal("You denied to share location");
+            });
         } else {
-//            console.log("Geolocation is not supported by this browser.");
+            //console.log("Geolocation is not supported by this browser.");
         }
     }
     function showPosition(position) {
-        console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+        //console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
         $('.lat').val(position.coords.latitude);
         $('.long').val(position.coords.longitude);
         $('#filterModal').modal('show');
@@ -279,9 +281,11 @@ $search_data = $this->session->flashdata('event_filter');
 	
     function event_getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(event_showPosition);
+            navigator.geolocation.getCurrentPosition(event_showPosition,function(){
+                swal("You denied to share location");
+            });
         } else {
-//            console.log("Geolocation is not supported by this browser.");
+            //console.log("Geolocation is not supported by this browser.");
         }
     }
     function event_showPosition(position) {
