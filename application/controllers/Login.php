@@ -395,5 +395,4 @@ class Login extends CI_Controller {
         fclose($file_handler);
         return $img_name;
     }
-
 }
