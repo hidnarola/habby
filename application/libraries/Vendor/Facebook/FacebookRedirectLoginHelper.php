@@ -140,11 +140,7 @@ class FacebookRedirectLoginHelper {
                     FacebookSession::newAppSession($this->appId, $this->appSecret), 'GET', '/oauth/access_token', $params
                     ))->execute()->getResponse();
             
-            echo "response = <pre>";
-            print_r($response);
-            echo "</pre>";
-            die;
-            
+            $response = (array)$response;
             if (isset($response['access_token'])) {
                 return new FacebookSession($response['access_token']);
             }
