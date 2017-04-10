@@ -5,16 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <?php
-            if(isset($meta_data) && count($meta_data) > 0)
-            {
-                ?>
-                <meta name='title' content="<?php echo $meta_data['meta_title'] ?>">
-                <meta name='keywords' content="<?php echo $meta_data['meta_keyword'] ?>">
-                <meta name='description' content="<?php echo $meta_data['meta_description'] ?>">
-                <?php
-            }
+        if (isset($meta_data) && count($meta_data) > 0) {
+            ?>
+            <meta name='title' content="<?php echo $meta_data['meta_title'] ?>">
+            <meta name='keywords' content="<?php echo $meta_data['meta_keyword'] ?>">
+            <meta name='description' content="<?php echo $meta_data['meta_description'] ?>">
+            <title><?php echo $meta_data['meta_title'] ?></title>
+            <?php
+        }
+        else
+        {
+            ?>
+            <title>Habby</title>
+            <?php
+        }
         ?>
-        <title>Habby</title>
+
         <link rel="stylesheet" type="text/css" href="<?php echo DEFAULT_CSS_PATH . "bootstrap.css" ?>"/>
 <!--        <link href="<?php echo DEFAULT_CSS_PATH . "font-awesome.min.css" ?>" media="screen, projection" rel="stylesheet" type="text/css">-->
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Roboto+Mono" rel="stylesheet">
